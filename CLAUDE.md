@@ -246,7 +246,7 @@ barboard-space/
 
 ## Barvision 2026 关键信息
 
-- **届次**：第十六届　**主办**：@williw　**主题语**：声汇两江 · Echoing Confluence
+- **届次**：第十六届　**主办**：@williw_　**主题语**：声汇两江 · Echoing Confluence
 - **主办城市**：重庆（Chongqing）
 - **赛程**：
   - 歌曲提交：6/1 — 7/19
@@ -292,7 +292,7 @@ barboard-space/
 12. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染
 13. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
 14. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号
-15. **成员提及**：榜吧成员名（如 `@williw`、`@SeafishYANG`）统一用 `<span class="member">` 包裹（`color: rgba(240,238,255,0.62); font-weight:500`），预留日后改 `<a>` 跳转成员主页
+15. **成员提及**：榜吧成员名（如 `@williw_`、`@SeafishYANG`）统一用 `<span class="member">` 包裹（`color: rgba(240,238,255,0.62); font-weight:500`），预留日后改 `<a>` 跳转成员主页
 16. **移动端 Nav**：`nav--open` class 加在 `<nav>` 上控制 `.nav__drawer` 显隐；按钮双图标（`.icon-menu` / `.icon-close`）CSS 切换；打开时锁定 `body overflow`
 17. **Hero 移动端**：`height: 100vh` 在移动端改为 `height: auto; min-height: 100svh; overflow: visible`，避免单栏堆叠时内容被裁切
 18. **返回顶部按钮**：`.back-to-top`，固定右下角，滚动 320px 后显示，紫色（`--clr-violet-light`）风格
