@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 API_URL = "https://6api.musictrack.cn/api/charts/3045"
 OUTPUT_FILE = "data/bbl-latest.json"
 
-LABEL_MAP = {"3": "new", "4": "re-entry", "6": "peak"}
+LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}
 
 def parse_issue(summary):
     m = re.search(r'Vol\.\s*(\d+)', summary or '')
@@ -46,6 +46,7 @@ def main():
         code   = str(item.get("label") or "0")
         label  = LABEL_MAP.get(code, None)
         change = str(item.get("change") or "0")
+        pts = item.get("point")
         tracks.append({
             "rank":   item["rank"],
             "title":  item["item_name"],
@@ -54,6 +55,7 @@ def main():
             "change": change,
             "peak":   item.get("peak"),
             "weeks":  item.get("weeks"),
+            "points": round(pts) if pts is not None else None,
             "cover":  item.get("cover", ""),
         })
 
