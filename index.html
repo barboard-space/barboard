@@ -23,13 +23,29 @@
         <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
         <li><a href="barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名通道</span></a></li>
       </ul>
-      <button class="nav__menu-btn" aria-label="打开菜单">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+      <button class="nav__menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false">
+        <svg class="icon-menu" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
           <line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           <line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
           <line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
+        <svg class="icon-close" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
+          <line x1="4" y1="4" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <line x1="18" y1="4" x2="4" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
       </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="nav__drawer" id="navDrawer" aria-hidden="true">
+      <ul class="nav__drawer-links">
+        <li><a href="about.html">About</a></li>
+        <li><a href="barvision.html">Barvision</a></li>
+        <li><a href="barboardlab.html">BarboardLab</a></li>
+        <li><a href="archive.html">Archive</a></li>
+        <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack</a></li>
+        <li><a href="barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名通道</span></a></li>
+      </ul>
     </div>
   </nav>
 
@@ -44,18 +60,18 @@
 
     <!-- TICKER — hero 底部 -->
     <div class="hero__ticker-wrap">
-      <div class="ticker" role="marquee" aria-label="最新动态">
+      <div class="ticker" role="marquee" aria-label="榜吧动态">
         <div class="ticker__label">WHAT'S NOW</div>
         <div class="ticker__track">
 
       <span class="ticker__item">Barvision 2026 歌曲提交通道将于 6 月 1 日开启</span>
-      <span class="ticker__item">BarboardLab 第 124 期已更新 — 本周冠军：Linda Lampenius《Liekinheitin》</span>
+      <span class="ticker__item" data-bbl-ticker>BarboardLab 第 124 期已更新 — 本周冠军：Linda Lampenius & Pete Parkkonen — Liekinheitin</span>
       <span class="ticker__item">BBL 每周六更新 · 完整榜单见 Musictrack</span>
       <span class="ticker__item">Barvision Chongqing 2026 · Echoing Confluence</span>
       <span class="ticker__item">歌曲提交截止：2026 年 7 月 19 日</span>
       <span class="ticker__item">Grand Final 直播定于 2026 年 8 月 22 日晚</span>
       <span class="ticker__item">Barvision 2026 歌曲提交通道将于 6 月 1 日开启</span>
-      <span class="ticker__item">BarboardLab 第 124 期已更新 — 本周冠军：Linda Lampenius《Liekinheitin》</span>
+      <span class="ticker__item" data-bbl-ticker>BarboardLab 第 124 期已更新 — 本周冠军：Linda Lampenius & Pete Parkkonen — Liekinheitin</span>
       <span class="ticker__item">BBL 每周六更新 · 完整榜单见 Musictrack</span>
       <span class="ticker__item">Barvision Chongqing 2026 · Echoing Confluence</span>
       <span class="ticker__item">歌曲提交截止：2026 年 7 月 19 日</span>
@@ -73,7 +89,7 @@
           <span class="hero__title-board">BOARD</span>
         </h1>
         <p class="hero__desc">
-          2013年，一群欧美音乐爱好者在贴吧自发聚集，从此以榜会友<br>
+          2013年，一群欧美音乐爱好者在贴吧聚集起来，从此以榜会友<br>
           UNITED BY MUSIC
         </p>
         <div class="hero__actions">
@@ -85,47 +101,47 @@
       <!-- 右：Updates -->
       <div class="hero__right">
         <div class="hero__updates-block">
-        <p class="section-label">最新动态</p>
+        <p class="section-label">榜吧动态</p>
         <h2 class="hero__updates-title">UPDATES</h2>
         <div class="hero__update-list" role="feed">
 
           <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2026-05-26">2026/05/26</time>
+            <time class="hero__update-date" datetime="2026-05-30">2026/05/30</time>
             <div>
-              <div class="hero__update-title">Barvision 2026 赛程公布</div>
-              <div class="hero__update-desc">第十六届 Barvision 赛程正式发布，歌曲提交通道于 6 月 1 日开启，Grand Final 直播定于 8 月 22 日晚。</div>
+              <div class="hero__update-title">Barvision Chongqing 2026 赛程公布</div>
+              <div class="hero__update-desc">Barvision Chongqing 2026 赛程正式发布。歌曲提交通道于 6 月 1 日开启，Grand Final 将于 8 月 22 日晚现场直播。</div>
             </div>
           </article>
 
           <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2026-05-15">2026/05/15</time>
+            <time class="hero__update-date" datetime="2026-05-15" id="bblHeroTime">2026/05/15</time>
             <div>
-              <div class="hero__update-title">BBL 第 124 期已更新</div>
-              <div class="hero__update-desc">本周冠军为 Linda Lampenius & Pete Parkkonen 的《Liekinheitin》，Holly Humberstone 本周贡献多首入榜歌曲。</div>
+              <div class="hero__update-title" id="bblHeroTitle">BBL 第 124 期已更新</div>
+              <div class="hero__update-desc" id="bblHeroDesc">本周冠军：Linda Lampenius & Pete Parkkonen — Liekinheitin。</div>
             </div>
           </article>
 
           <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2026-05-01">2026/05/01</time>
+            <time class="hero__update-date" datetime="2026-03-13">2026/03/13</time>
             <div>
-              <div class="hero__update-title">Barvision 2026 主办确认</div>
-              <div class="hero__update-desc">@williw 确认出任 Barvision 2026 主办，赛事筹备工作正式启动。</div>
+              <div class="hero__update-title">BarboardLab 成立两周年</div>
+              <div class="hero__update-desc">BBL 创立于 2024 年 3 月 13 日，现已更新至第 124 期。特别感谢 <span class="member">@SeafishYANG</span> 的发起与持续贡献，以及两年来所有参与的成员。</div>
             </div>
           </article>
 
           <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2025-08-22">2025/08/22</time>
+            <time class="hero__update-date" datetime="2025-09-05">2025/09/05</time>
             <div>
-              <div class="hero__update-title">Barvision 2025（XV）决赛直播圆满结束</div>
-              <div class="hero__update-desc">Barvision Jinzhong 2025 第十五届圆满落幕，完整赛果存档已发布。</div>
+              <div class="hero__update-title">Barvision Chongqing 2026 主办确认</div>
+              <div class="hero__update-desc"><span class="member">@williw</span> 确认主办 Barvision Chongqing 2026，大赛筹备工作正式启动。</div>
             </div>
           </article>
 
           <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2025-03-13">2025/03/13</time>
+            <time class="hero__update-date" datetime="2025-08-23">2025/08/23</time>
             <div>
-              <div class="hero__update-title">BarboardLab 创立一周年</div>
-              <div class="hero__update-desc">BBL 于 2024 年 3 月 13 日创立，现已出至第 124 期，感谢所有参与成员。</div>
+              <div class="hero__update-title">Barvision Jinzhong 2025 圆满落幕</div>
+              <div class="hero__update-desc"><span class="member">@williw</span> 选送的 Elliot James Reay — Boy In Love 以 357 分夺得 Barvision 2025 冠军。完整赛果存档已发布。</div>
             </div>
           </article>
 
@@ -152,7 +168,7 @@
           <div class="barvision__layout">
 
             <div class="barvision__info">
-              <p class="section-label fade-up">年度音乐大赛</p>
+              <p class="section-label fade-up">年度歌曲大赛</p>
               <h2 class="section__title fade-up" style="transition-delay:0.1s;">Bar<span class="bv-accent">vision</span></h2>
               <p class="barvision__subtitle fade-up" style="transition-delay:0.2s;">
                 Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。始于 2019 年，现已举办至第十六届。
@@ -180,17 +196,17 @@
                 <div class="season-card__banner">
                   <div class="season-card__edition">BARVISION CHONGQING 2026</div>
                   <div class="season-card__name">Echoing Confluence</div>
-                  <div style="font-size:11px;color:var(--clr-text-3);margin-top:6px;letter-spacing:0.06em;line-height:1.7;">第十六届 · 欧美流行音乐个人榜吧音乐大赛<br>主办：@williw</div>
+                  <div style="font-size:11px;color:var(--clr-text-3);margin-top:6px;letter-spacing:0.06em;line-height:1.7;"><strong>第十六届 · 欧美流行歌曲个人榜吧歌曲大赛</strong><br>主办：<span class="member">@williw</span></div>
                 </div>
                 <div class="season-card__body">
                   <div class="season-status">
                     <div class="season-status__dot"></div>
                     歌曲征集即将开启
                   </div>
-                  <p style="font-size:13px;color:var(--clr-text-2);line-height:1.7;margin-top:8px;">
+                  <p style="font-size:13px;color:var(--clr-text-2);line-height:1.6;margin-top:2px;">
                     歌曲提交通道将于 <strong style="color:var(--clr-accent);">2026 年 6 月 1 日 00:00</strong> 正式开启。
                   </p>
-                  <div style="margin-top:16px;padding:14px;background:var(--clr-bg-2);border-radius:4px;border:1px solid var(--clr-border);text-align:center;">
+                  <div style="margin-top:14px;padding:14px;background:var(--clr-bg-2);border-radius:4px;border:1px solid var(--clr-border);text-align:center;">
                     <div style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离提交通道开启还有</div>
                     <div id="countdown" style="font-family:var(--font-display);font-size:32px;color:var(--clr-accent);line-height:1;">— 天</div>
                   </div>
@@ -240,7 +256,7 @@
                   </div>
                 </div>
                 <div class="season-card__footer">
-                  <a href="barvision/2026/events.html" class="btn btn--primary" style="flex:1;justify-content:center;">提交歌曲</a>
+                  <a href="barvision/2026/events.html" class="btn btn--primary" style="flex:1;justify-content:center;">歌曲报名</a>
                   <a href="barvision/2026/events.html" class="btn btn--outline">比赛详情</a>
                 </div>
               </div>
@@ -265,9 +281,9 @@
                 <span class="lab__meta-item">每周六更新</span>
               </div>
               <div style="display:flex;flex-direction:column;gap:10px;margin-top:28px;transition-delay:0.4s;" class="fade-up">
-                <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener" class="btn btn--primary" style="display:flex;align-items:center;">BarboardLab 本周单曲榜<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-left:auto;"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a>
-                <a href="https://space.bilibili.com/11254817/lists" target="_blank" rel="noopener" class="btn btn--outline" style="display:flex;align-items:center;">历史榜单视频<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-left:auto;"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a>
-                <a href="barboardlab.html" class="btn btn--outline">关于 BarboardLab</a>
+                <a href="barboardlab.html" class="btn btn--primary">关于BarboardLab</a>
+                <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener" class="btn btn--outline" style="display:flex;align-items:center;">本周单曲合榜<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-left:auto;"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a>
+                <a href="https://space.bilibili.com/11254817/lists" target="_blank" rel="noopener" class="btn btn--outline" style="display:flex;align-items:center;">历史榜单视频回顾<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="margin-left:auto;"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a>
               </div>
             </div>
 
@@ -294,10 +310,10 @@
             <div>
               <div class="footer__col-title">BarboardLab</div>
               <ul class="footer__links">
-                <li><a href="barboardlab.html">活动介绍</a></li>
-                <li><a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener">BBL #124 榜单<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
+                <li><a href="barboardlab.html">关于BarboardLab</a></li>
                 <li><a href="barboardlab/hall-of-fame.html">Hall of Fame</a></li>
-                <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
+                <li><a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener">本周单曲合榜<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
+                <li><a href="https://space.bilibili.com/11254817/lists" target="_blank" rel="noopener">历史榜单视频<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
               </ul>
             </div>
             <div>
@@ -305,16 +321,16 @@
               <ul class="footer__links">
                 <li><a href="barvision/2026/events.html">Barvision 2026</a></li>
                 <li><a href="barvision/2025/events.html">Barvision 2025</a></li>
-                <li><a href="barvision.html">历届存档</a></li>
                 <li><a href="barvision.html">Hall of Fame</a></li>
+                <li><a href="barvision.html">历届回顾</a></li>
               </ul>
             </div>
             <div>
               <div class="footer__col-title">更多</div>
               <ul class="footer__links">
-                <li><a href="about.html">关于榜吧</a></li>
-                <li><a href="archive.html">存档中心</a></li>
-                <li><a href="archive/barammy.html">吧莱美存档</a></li>
+                <li><a href="about.html">关于Barboard</a></li>
+                <li><a href="archive.html">Archive</a></li>
+                <li><a href="about.html#members">榜吧成员</a></li>
               </ul>
             </div>
           </div>
@@ -358,14 +374,44 @@
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
 
-    function chartBadge(track) {
-      if (track.label === 'peak')     return '<span class="chart-badge chart-badge--peak">PEAK</span>';
-      if (track.label === 'new')      return '<span class="chart-badge chart-badge--new">NEW</span>';
-      if (track.label === 're-entry') return '<span class="chart-badge chart-badge--new">RE</span>';
-      const n = parseInt(track.change);
-      if (n > 0) return '<span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>';
-      if (n < 0) return '<span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↓</span>';
-      return '<span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">—</span>';
+    const _svgUp   = '<svg width="7" height="5" viewBox="0 0 7 5" fill="currentColor" aria-hidden="true"><path d="M3.5 0L7 5H0z"/></svg>';
+    const _svgDown = '<svg width="7" height="5" viewBox="0 0 7 5" fill="currentColor" aria-hidden="true"><path d="M3.5 5L0 0H7z"/></svg>';
+
+    function chartChange(t) {
+      if (t.label === 'new' || t.change === 'NEW') return '<span class="chart-change chart-change--new">NEW</span>';
+      if (t.label === 're-entry')                  return '<span class="chart-change chart-change--re">RE</span>';
+      const n = parseInt(t.change);
+      if (n > 0) return '<span class="chart-change chart-change--up">'   + _svgUp   + n           + '</span>';
+      if (n < 0) return '<span class="chart-change chart-change--down">' + _svgDown + Math.abs(n) + '</span>';
+      return '<span class="chart-change chart-change--same">—</span>';
+    }
+
+    function chartStats(t) {
+      const notTop1  = t.rank !== 1;
+      const atPeak   = notTop1 && t.peak != null && t.rank === t.peak;
+      const wasTop1  = notTop1 && t.peak === 1;
+      const rows = [];
+      if (t.peak  != null) rows.push({label: '最高排名', val: t.peak,  violet: atPeak, pink: wasTop1});
+      if (t.weeks != null) rows.push({label: '在榜周数', val: t.weeks, violet: false,   pink: false});
+      if (!rows.length) return '';
+      return '<div class="chart-stats">' +
+        rows.map(r => {
+          const cls = r.violet ? ' chart-stat__label--violet' : r.pink ? ' chart-stat__label--pink' : '';
+          const vcls = r.violet ? ' chart-stat__val--violet'  : r.pink ? ' chart-stat__val--pink'  : '';
+          return '<div class="chart-stat">' +
+            '<span class="chart-stat__label' + cls  + '">' + r.label + '</span>' +
+            '<span class="chart-stat__val'   + vcls + '">' + r.val   + '</span>' +
+          '</div>';
+        }).join('') +
+      '</div>';
+    }
+
+    function fmtWeekRange(dateStr) {
+      const end = new Date(dateStr + 'T12:00:00');
+      const start = new Date(end);
+      start.setDate(start.getDate() - 6);
+      const opt = { month: 'short', day: 'numeric' };
+      return start.toLocaleDateString('en-US', opt) + ' – ' + end.toLocaleDateString('en-US', opt) + ', ' + end.getFullYear();
     }
 
     async function loadChart() {
@@ -382,26 +428,62 @@
           titleEl.innerHTML = '<strong style="color:rgba(240,238,255,0.8);">#' + data.issue + '</strong> · BARBOARDLAB SINGLES CHART';
         }
         if (dateEl && data.date) {
-          const d = new Date(data.date + 'T12:00:00');
-          dateEl.textContent = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+          dateEl.textContent = fmtWeekRange(data.date);
         }
+
+        // Update ticker items
+        const top = data.tracks && data.tracks[0];
+        if (data.issue && top) {
+          const tickerText = 'BarboardLab 第 ' + data.issue + ' 期已更新 — 本周冠军：' + top.artist + ' — ' + top.title;
+          document.querySelectorAll('[data-bbl-ticker]').forEach(el => { el.textContent = tickerText; });
+        }
+
+        // Update hero BBL update card
+        if (data.issue && data.date) {
+          const d = new Date(data.date + 'T12:00:00');
+          const pad = n => String(n).padStart(2, '0');
+          const timeEl = document.getElementById('bblHeroTime');
+          if (timeEl) { timeEl.setAttribute('datetime', data.date); timeEl.textContent = d.getFullYear() + '/' + pad(d.getMonth() + 1) + '/' + pad(d.getDate()); }
+          const titleHeroEl = document.getElementById('bblHeroTitle');
+          if (titleHeroEl) titleHeroEl.textContent = 'BBL 第 ' + data.issue + ' 期已更新';
+          const descHeroEl = document.getElementById('bblHeroDesc');
+          if (descHeroEl && top) descHeroEl.textContent = '本周冠军为 ' + top.artist + ' 的《' + top.title + '》。';
+        }
+
+        // Update footer link label
+        const footerLabelEl = document.getElementById('bblFooterLabel');
+        if (footerLabelEl && data.issue) footerLabelEl.textContent = 'BBL #' + data.issue + ' 榜单';
+
         if (!listEl || !data.tracks) return;
 
-        listEl.innerHTML = data.tracks.slice(0, 10).map(t =>
-          '<div class="chart-item ' + (t.rank === 1 ? 'chart-item--top ' : '') + 'fade-up">' +
-            '<div class="chart-rank">' + t.rank + '</div>' +
+        listEl.innerHTML = data.tracks.slice(0, 10).map(t => {
+          const cover = t.cover
+            ? '<img class="chart-cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
+            : '<div class="chart-cover"></div>';
+          return '<div class="chart-item ' + (t.rank === 1 ? 'chart-item--top ' : '') + 'fade-up">' +
+            '<div class="chart-rank-col">' +
+              '<div class="chart-rank">' + t.rank + '</div>' +
+              chartChange(t) +
+            '</div>' +
+            cover +
             '<div class="chart-song">' +
               '<div class="chart-song__title">' + esc(t.title) + '</div>' +
               '<div class="chart-song__artist">' + esc(t.artist) + '</div>' +
             '</div>' +
-            chartBadge(t) +
-          '</div>'
-        ).join('');
+            chartStats(t) +
+          '</div>';
+        }).join('');
 
-        listEl.querySelectorAll('.fade-up').forEach(el => {
-          if (fadeObserver) fadeObserver.observe(el);
-          else el.classList.add('visible');
+        listEl.querySelectorAll('.fade-up').forEach((el, i) => {
+          el.style.transitionDelay = (i * 0.05) + 's';
         });
+        const listObserver = new IntersectionObserver(entries => {
+          if (entries[0].isIntersecting) {
+            listEl.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+            listObserver.disconnect();
+          }
+        }, { threshold: 0.05 });
+        listObserver.observe(listEl);
       } catch(e) {
         console.warn('BBL chart load failed:', e);
       }
@@ -425,6 +507,45 @@
     }
     updateCountdown();
     setInterval(updateCountdown, 1000);
+  </script>
+
+  <script>
+    (function () {
+      var nav = document.getElementById('nav');
+      var btn = document.getElementById('navMenuBtn');
+      var drawer = document.getElementById('navDrawer');
+      btn.addEventListener('click', function () {
+        var open = nav.classList.toggle('nav--open');
+        btn.setAttribute('aria-expanded', open);
+        drawer.setAttribute('aria-hidden', !open);
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
+      drawer.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          nav.classList.remove('nav--open');
+          btn.setAttribute('aria-expanded', 'false');
+          drawer.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        });
+      });
+    })();
+  </script>
+
+  <button class="back-to-top" id="backToTop" aria-label="返回顶部">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M3 10L8 5L13 10"/>
+    </svg>
+  </button>
+  <script>
+    (function () {
+      var btn = document.getElementById('backToTop');
+      window.addEventListener('scroll', function () {
+        btn.classList.toggle('visible', window.scrollY > 320);
+      }, { passive: true });
+      btn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+    })();
   </script>
 </body>
 </html>
