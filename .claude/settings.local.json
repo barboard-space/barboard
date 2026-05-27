@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(Get-Content \"D:\\\\Genius\\\\barboard-space\\\\style.css\")",
+      "Bash(Measure-Object -Line)",
+      "Bash(Select-Object -ExpandProperty Lines)",
+      "Bash(python3 *)",
+      "Bash(node *)",
+      "PowerShell(\\(Get-Content \"D:\\\\Genius\\\\barboard-space\\\\style.css\" | Measure-Object -Line\\).Lines)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
