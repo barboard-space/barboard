@@ -273,91 +273,10 @@
 
             <div class="lab__chart">
               <div class="chart-header fade-up">
-                <span class="chart-header__title"><strong style="color:rgba(240,238,255,0.8);">#124</strong> · BARBOARDLAB SINGLES CHART</span>
-                <span class="chart-header__week">May 15, 2026</span>
+                <span class="chart-header__title" id="chartTitle">— · BARBOARDLAB SINGLES CHART</span>
+                <span class="chart-header__week" id="chartDate">—</span>
               </div>
-              <div class="chart-list">
-                <div class="chart-item chart-item--top fade-up">
-                  <div class="chart-rank">1</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">Liekinheitin</div>
-                    <div class="chart-song__artist">Linda Lampenius, Pete Parkkonen</div>
-                  </div>
-                  <span class="chart-badge chart-badge--peak">PEAK</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">2</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">To Love Somebody</div>
-                    <div class="chart-song__artist">Holly Humberstone</div>
-                  </div>
-                  <span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">3</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">Drop Dead</div>
-                    <div class="chart-song__artist">Olivia Rodrigo</div>
-                  </div>
-                  <span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">4</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">FEVER DREAM</div>
-                    <div class="chart-song__artist">Alex Warren</div>
-                  </div>
-                  <span class="chart-badge chart-badge--new">NEW</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">5</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">Ride</div>
-                    <div class="chart-song__artist">Jessie Ware</div>
-                  </div>
-                  <span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">6</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">Dinner Party</div>
-                    <div class="chart-song__artist">Niall Horan</div>
-                  </div>
-                  <span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">7</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">Opalite</div>
-                    <div class="chart-song__artist">Taylor Swift</div>
-                  </div>
-                  <span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↓</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">8</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">I Could Get Used To This</div>
-                    <div class="chart-song__artist">Jessie Ware</div>
-                  </div>
-                  <span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">9</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">Elizabeth Taylor</div>
-                    <div class="chart-song__artist">Taylor Swift</div>
-                  </div>
-                  <span class="chart-badge chart-badge--new">NEW</span>
-                </div>
-                <div class="chart-item fade-up">
-                  <div class="chart-rank">10</div>
-                  <div class="chart-song">
-                    <div class="chart-song__title">Choke Me</div>
-                    <div class="chart-song__artist">Alexandra Căpitănescu</div>
-                  </div>
-                  <span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>
-                </div>
-              </div>
+              <div class="chart-list" id="chartList"></div>
             </div>
           </div>
         </div>
@@ -424,14 +343,71 @@
     }, { passive: true });
 
     // Fade-up
+    let fadeObserver;
     if ('IntersectionObserver' in window) {
-      const observer = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+      fadeObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
       }, { threshold: 0.1 });
-      document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
     } else {
       document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
     }
+
+    // BBL Chart
+    function esc(s) {
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    }
+
+    function chartBadge(track) {
+      if (track.label === 'peak')     return '<span class="chart-badge chart-badge--peak">PEAK</span>';
+      if (track.label === 'new')      return '<span class="chart-badge chart-badge--new">NEW</span>';
+      if (track.label === 're-entry') return '<span class="chart-badge chart-badge--new">RE</span>';
+      const n = parseInt(track.change);
+      if (n > 0) return '<span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↑</span>';
+      if (n < 0) return '<span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">↓</span>';
+      return '<span class="tag tag--dim" style="font-size:10px;padding:2px 7px;">—</span>';
+    }
+
+    async function loadChart() {
+      try {
+        const res = await fetch('data/bbl-latest.json');
+        if (!res.ok) return;
+        const data = await res.json();
+
+        const titleEl = document.getElementById('chartTitle');
+        const dateEl  = document.getElementById('chartDate');
+        const listEl  = document.getElementById('chartList');
+
+        if (titleEl && data.issue) {
+          titleEl.innerHTML = '<strong style="color:rgba(240,238,255,0.8);">#' + data.issue + '</strong> · BARBOARDLAB SINGLES CHART';
+        }
+        if (dateEl && data.date) {
+          const d = new Date(data.date + 'T12:00:00');
+          dateEl.textContent = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+        if (!listEl || !data.tracks) return;
+
+        listEl.innerHTML = data.tracks.slice(0, 10).map(t =>
+          '<div class="chart-item ' + (t.rank === 1 ? 'chart-item--top ' : '') + 'fade-up">' +
+            '<div class="chart-rank">' + t.rank + '</div>' +
+            '<div class="chart-song">' +
+              '<div class="chart-song__title">' + esc(t.title) + '</div>' +
+              '<div class="chart-song__artist">' + esc(t.artist) + '</div>' +
+            '</div>' +
+            chartBadge(t) +
+          '</div>'
+        ).join('');
+
+        listEl.querySelectorAll('.fade-up').forEach(el => {
+          if (fadeObserver) fadeObserver.observe(el);
+          else el.classList.add('visible');
+        });
+      } catch(e) {
+        console.warn('BBL chart load failed:', e);
+      }
+    }
+
+    loadChart();
 
     // Countdown
     function updateCountdown() {
