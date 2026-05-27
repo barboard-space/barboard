@@ -152,29 +152,24 @@
           <div class="barvision__layout">
 
             <div class="barvision__info">
-              <p class="section-label">Annual Song Contest</p>
+              <p class="section-label">年度音乐大赛</p>
               <h2 class="section__title">Bar<span class="bv-accent">vision</span></h2>
               <p class="barvision__subtitle">
-                <span class="bv-theme">声汇两江 · Echoing Confluence</span>
-                Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。成员自行选送小众参赛歌曲，经半决赛与决赛投票决出年度冠军。始于 2019 年，现已举办至第十六届。
+                Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。始于 2019 年，现已举办至第十六届。
               </p>
 
               <div style="margin-top:32px;">
                 <p class="section-label" style="margin-bottom:14px;">历届大赛</p>
                 <div class="editions-grid">
-                  <div class="edition-card fade-up"><div class="edition-card__num">I–V</div><div class="edition-card__year">2019</div><div class="edition-card__winner">5届</div></div>
-                  <div class="edition-card fade-up"><div class="edition-card__num">VI–XII</div><div class="edition-card__year">2020</div><div class="edition-card__winner">7届</div></div>
-                  <div class="edition-card fade-up"><div class="edition-card__num">XIII</div><div class="edition-card__year">2023</div><div class="edition-card__winner">恢复</div></div>
-                  <div class="edition-card fade-up"><div class="edition-card__num">XIV</div><div class="edition-card__year">2024</div><div class="edition-card__winner">Tonghua</div></div>
+                  <div class="edition-card edition-card--active fade-up"><div class="edition-card__num">XVI</div><div class="edition-card__year">2026</div><div class="edition-card__winner">Chongqing</div></div>
                   <div class="edition-card fade-up"><div class="edition-card__num">XV</div><div class="edition-card__year">2025</div><div class="edition-card__winner">Jinzhong</div></div>
-                  <div class="edition-card edition-card--active fade-up">
-                    <div class="edition-card__num">XVI</div>
-                    <div class="edition-card__year">2026</div>
-                    <div class="edition-card__winner" style="font-size:10px;">筹备中</div>
-                  </div>
+                  <div class="edition-card fade-up"><div class="edition-card__num">XIV</div><div class="edition-card__year">2024</div><div class="edition-card__winner">Tonghua</div></div>
+                  <div class="edition-card fade-up"><div class="edition-card__num">XIII</div><div class="edition-card__year">2023</div><div class="edition-card__winner">Qiqihar</div></div>
+                  <div class="edition-card fade-up"><div class="edition-card__num">VI–XII</div><div class="edition-card__year">2020</div><div class="edition-card__winner"></div></div>
+                  <div class="edition-card fade-up"><div class="edition-card__num">I–V</div><div class="edition-card__year">2019</div><div class="edition-card__winner"></div></div>
                 </div>
-                <div style="margin-top:8px;text-align:right;">
-                  <a href="barvision.html" class="link-subtle">查看完整 Barvision 存档</a>
+                <div style="margin-top:8px;">
+                  <a href="barvision.html" class="bv-archive-link">完整 Barvision 存档<svg class="bv-chevrons" width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="1,1 6,5 1,9"/><polyline points="6,1 11,5 6,9"/></svg></a>
                 </div>
               </div>
             </div>
@@ -183,9 +178,9 @@
             <div class="barvision__card">
               <div class="season-card">
                 <div class="season-card__banner">
-                  <div class="season-card__edition">BARVISION<br>2026</div>
-                  <div class="season-card__name">声汇两江 · Echoing Confluence</div>
-                  <div style="font-size:11px;color:var(--clr-text-3);margin-top:4px;letter-spacing:0.06em;">第十六届 · Chongqing 2026 · 主办：@williw</div>
+                  <div class="season-card__edition">BARVISION CHONGQING 2026</div>
+                  <div class="season-card__name">Echoing Confluence</div>
+                  <div style="font-size:11px;color:var(--clr-text-3);margin-top:6px;letter-spacing:0.06em;line-height:1.7;">第十六届 · 欧美流行音乐个人榜吧音乐大赛<br>主办：@williw</div>
                 </div>
                 <div class="season-card__body">
                   <div class="season-status">
@@ -196,40 +191,57 @@
                     歌曲提交通道将于 <strong style="color:var(--clr-accent);">2026 年 6 月 1 日 00:00</strong> 正式开启。
                   </p>
                   <div style="margin-top:16px;padding:14px;background:var(--clr-bg-2);border-radius:4px;border:1px solid var(--clr-border);text-align:center;">
-                    <div style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离提交通道开启</div>
+                    <div style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离提交通道开启还有</div>
                     <div id="countdown" style="font-family:var(--font-display);font-size:32px;color:var(--clr-accent);line-height:1;">— 天</div>
                   </div>
                   <div class="season-phases" style="margin-top:16px;">
                     <div class="phase phase--active">
                       <span class="phase__name">歌曲提交阶段</span>
                       <span class="phase__status">即将开启</span>
+                      <span class="phase__badge" aria-hidden="true" style="visibility:hidden;">投票</span>
                       <span class="phase__date">6/1 — 7/19</span>
                     </div>
                     <div class="phase">
-                      <span class="phase__name">Semi-Final 1</span>
-                      <span class="phase__date">7/25 — 7/31</span>
-                    </div>
-                    <div class="phase">
-                      <span class="phase__name">附加赛</span>
+                      <span class="phase__name">附加赛资格赛</span>
+                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__badge phase__badge--vote">投票</span>
                       <span class="phase__date">7/25 — 8/7</span>
                     </div>
                     <div class="phase">
-                      <span class="phase__name">Semi-Final 2</span>
+                      <span class="phase__name">Semi Final 1</span>
+                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__badge phase__badge--vote">投票</span>
+                      <span class="phase__date">7/25 — 7/31</span>
+                    </div>
+                    <div class="phase">
+                      <span class="phase__name">Semi Final 2</span>
+                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__badge phase__badge--vote">投票</span>
                       <span class="phase__date">8/1 — 8/7</span>
                     </div>
                     <div class="phase">
-                      <span class="phase__name">SF 直播</span>
+                      <span class="phase__name">Semi Final 暨附加赛</span>
+                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__badge phase__badge--live">直播</span>
                       <span class="phase__date">8/8 晚</span>
                     </div>
                     <div class="phase">
                       <span class="phase__name">Grand Final</span>
+                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__badge phase__badge--vote">投票</span>
+                      <span class="phase__date">8/8 — 8/16</span>
+                    </div>
+                    <div class="phase">
+                      <span class="phase__name">Grand Final</span>
+                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__badge phase__badge--live">直播</span>
                       <span class="phase__date" style="color:var(--clr-gold);">8/22 晚</span>
                     </div>
                   </div>
                 </div>
                 <div class="season-card__footer">
-                  <a href="barvision/2026/events.html" class="btn btn--primary" style="flex:1;justify-content:center;">了解详情</a>
-                  <a href="barvision.html" class="btn btn--outline">历届存档</a>
+                  <a href="barvision/2026/events.html" class="btn btn--primary" style="flex:1;justify-content:center;">提交歌曲</a>
+                  <a href="barvision/2026/events.html" class="btn btn--outline">比赛详情</a>
                 </div>
               </div>
             </div>
@@ -243,7 +255,7 @@
         <div class="section__inner">
           <div class="lab__layout">
             <div class="lab__intro">
-              <p class="section-label">Weekly Chart</p>
+              <p class="section-label">单曲合榜</p>
               <h2 class="section__title">Barboard<br>Lab</h2>
               <p class="lab__description">
                 BarboardLab 由一批保持规律更新个人周榜的榜吧成员组成。成员提交各自的完整周榜，合并点数后得出当周单曲合榜，并通过 Bilibili 展播。
@@ -427,11 +439,16 @@
       const diff = target - new Date();
       const el = document.getElementById('countdown');
       if (!el) return;
-      if (diff <= 0) { el.textContent = '通道已开启'; return; }
-      el.textContent = Math.ceil(diff / 86400000) + ' 天';
+      if (diff <= 0) { el.innerHTML = '通道已开启'; return; }
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      const pad = n => String(n).padStart(2, '0');
+      el.innerHTML = `${d}<span style="font-size:16px;opacity:0.5;margin:0 2px;">天</span>${pad(h)}<span style="font-size:16px;opacity:0.5;margin:0 2px;">时</span>${pad(m)}<span style="font-size:16px;opacity:0.5;margin:0 2px;">分</span>${pad(s)}<span style="font-size:16px;opacity:0.5;margin:0 2px;">秒</span>`;
     }
     updateCountdown();
-    setInterval(updateCountdown, 60000);
+    setInterval(updateCountdown, 1000);
   </script>
 </body>
 </html>
