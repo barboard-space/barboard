@@ -21,18 +21,32 @@ def parse_date(date_str):
 
 def main():
     headers = {
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36",
-        "Accept": "application/json",
-        "Referer": "https://musictrack.cn/",
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36",
+        "Accept": "application/json, text/plain, */*",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
+        "Accept-Encoding": "gzip, deflate, br",
+        "Referer": "https://musictrack.cn/chart/3045/",
+        "Origin": "https://musictrack.cn",
+        "sec-ch-ua": '"Chromium";v="136", "Google Chrome";v="136", "Not.A/Brand";v="99"',
+        "sec-ch-ua-mobile": "?0",
+        "sec-ch-ua-platform": '"Windows"',
+        "sec-fetch-dest": "empty",
+        "sec-fetch-mode": "cors",
+        "sec-fetch-site": "same-site",
     }
 
     try:
         resp = requests.get(API_URL, headers=headers, timeout=30)
+        if resp.status_code == 403:
+            print("API returned 403 (anti-crawler). Keeping existing data.", file=sys.stderr)
+            sys.exit(0)
         resp.raise_for_status()
         data = resp.json()
+    except SystemExit:
+        raise
     except Exception as e:
         print(f"Error fetching API: {e}", file=sys.stderr)
-        sys.exit(1)
+        sys.exit(0)
 
     record  = data.get("record", {})
     details = data.get("details", [])
