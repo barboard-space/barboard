@@ -6,6 +6,7 @@
 **性质**：欧美流行音乐个人榜吧（简称榜吧）社区官网，前端静态部署（HTML/CSS/JS），无自建后端，交互功能通过前端 JS + 第三方服务实现
 **主要受众**：社区内部成员（中国大陆为主）+ 对欧美音乐感兴趣的外部访客
 **部署**：GitHub Pages（barboard-space/barboard），自定义域名 barboard.space，HTTPS 已启用
+**Git remote**：`git push origin main` → `https://github.com/barboard-space/barboard.git`（推送后 Pages 自动重新部署）
 
 ---
 
