@@ -179,7 +179,7 @@ barboard-space/
 ### 间距系统
 ```css
 --gap-xs:8px  --gap-sm:16px  --gap-md:32px  --gap-lg:64px  --gap-xl:96px
---max-width:1200px  --nav-h:72px
+--max-width:1200px  --nav-h:72px  /* 移动端 @media(max-width:768px) 覆盖为 56px */
 ```
 
 ### 主题语（Barvision 2026）
@@ -212,7 +212,7 @@ barboard-space/
 | 元素 | ID / 选择器 | 更新内容 |
 |------|------------|---------|
 | chart header 期号 | `#chartTitle` | `#124 · BARBOARDLAB SINGLES CHART` |
-| chart header 日期 | `#chartDate` | 周期区间，如 `May 9 – May 15, 2026` |
+| chart header 日期 | `#chartDate` | 周期区间，同月如 `May 9–15, 2026`，跨月如 `May 30–Jun 5, 2026` |
 | ticker 字幕条 | `[data-bbl-ticker]`（×2份） | `BarboardLab 第 N 期已更新 — 本周冠军：艺人 — 歌名` |
 | hero 动态时间 | `#bblHeroTime` | `datetime` 属性 + 显示文本 |
 | hero 动态标题 | `#bblHeroTitle` | `BBL 第 N 期已更新` |
@@ -279,25 +279,29 @@ barboard-space/
 ## 开发注意事项
 
 1. **响应式原则**：**PC 优先**——先实现桌面端完整效果，移动端自然继承；之后再针对移动端做局部微调（`@media (max-width: 768px)` override）。不要为了移动端一致性反过来影响桌面端默认值。
-3. **字体**：本地 `fonts.css` 加载，禁止使用 Google Fonts CDN
-4. **图片路径**：`logo_center.png` 全小写，GitHub Pages（Linux）大小写敏感，HTML 里必须用小写
-5. **CSS 变量**：所有颜色/间距用变量，不硬编码；Nav logo Bebas Neue 通过 `!important` 强制指定（正式方案）
-6. **中国用户**：避免所有 Google 服务（Analytics/Fonts/reCAPTCHA）；表单用国内替代；数据可视化用 ECharts
-7. **Nav Logo HTML 结构**：`<span>BAR<span class="nav__logo-board">BOARD</span></span>` 单 span 包裹防止 flex 间距问题
-8. **字幕条（Ticker）**：2份内容拼接，`translateX(-50%)` 无缝滚动，`will-change: transform` GPU 加速
-9. **Phase 行布局**：CSS grid `1fr auto auto 76px`（名称/状态/标签/日期四列），空状态用 `visibility:hidden` 占位 badge 保持列宽
-10. **BBL 数据自动化**：GitHub Actions 每周六抓取，`[skip ci]` 防止循环触发；前端 `loadChart()` 异步 fetch JSON 渲染，所有硬编码 BBL 引用均已动态化
-11. **SEO**：每个页面需独立 `<title>` 和 `<meta description>`
-12. **Section 锚点定位**：`.section` 统一设置 `scroll-margin-top: var(--nav-h)`，防止固定 nav 遮挡锚点目标
-13. **Section 高度**：`.barvision` 和 `.lab` 设置 `min-height: calc(100vh - 2 * var(--gap-xl))`，使 section 总高度约为 100vh（padding 由 `.section` 类统一提供，上下各 `var(--gap-xl)`）
-14. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染
-15. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
-16. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号
-17. **成员提及**：榜吧成员名（如 `@williw_`、`@SeafishYANG`）统一用 `<span class="member">` 包裹（`color: rgba(240,238,255,0.62); font-weight:500`），预留日后改 `<a>` 跳转成员主页
-18. **移动端 Nav**：`nav--open` class 加在 `<nav>` 上控制 `.nav__drawer` 显隐；按钮双图标（`.icon-menu` / `.icon-close`）CSS 切换；打开时锁定 `body overflow`；drawer 用 `opacity/visibility/transform` 过渡动画（不用 display 切换）
-19. **Nav scrolled backdrop-filter 陷阱**：`.nav.scrolled` 的毛玻璃效果必须用 `::before` 伪元素实现，不能直接在 `.nav` 上写 `backdrop-filter`——否则 nav 建立新 stacking context，内部 `position:fixed` 的 drawer 会相对 nav 而非 viewport 定位，导致滚动后无法正确展开
-20. **Hero 移动端**：`height: auto; min-height: 100svh; overflow-x: clip`（clip 只裁横向，不影响纵向 ticker 显示）；`html` 和 `body` 都设 `overflow-x: hidden` 防横向滚动
-21. **返回顶部按钮**：`.back-to-top`，固定右下角，滚动 320px 后显示，紫色（`--clr-violet-light`）风格，`background: rgba(20,20,34,0.5)` + `backdrop-filter: blur(12px)`
-22. **标题 accent**：Barvision 标题用 `.bv-accent`（violet），BarboardLab 标题「Lab」用 `.lab-accent`（pink-light）
-23. **Ticker 移动端**：隐藏 `.ticker__label`（WHAT'S NOW），动画时长从 28s 改为 55s；桌面端 42s
-24. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
+2. **字体**：本地 `fonts.css` 加载，禁止使用 Google Fonts CDN
+3. **图片路径**：`logo_center.png` 全小写，GitHub Pages（Linux）大小写敏感，HTML 里必须用小写
+4. **CSS 变量**：所有颜色/间距用变量，不硬编码；Nav logo Bebas Neue 通过 `!important` 强制指定（正式方案）
+5. **中国用户**：避免所有 Google 服务（Analytics/Fonts/reCAPTCHA）；表单用国内替代；数据可视化用 ECharts
+6. **Nav Logo HTML 结构**：`<span>BAR<span class="nav__logo-board">BOARD</span></span>` 单 span 包裹防止 flex 间距问题
+7. **字幕条（Ticker）**：2份内容拼接，`translateX(-50%)` 无缝滚动，`will-change: transform` GPU 加速
+8. **Phase 行布局**：CSS grid `1fr auto auto 76px`（名称/状态/标签/日期四列），空状态用 `visibility:hidden` 占位 badge 保持列宽
+9. **BBL 数据自动化**：GitHub Actions 每周六抓取，`[skip ci]` 防止循环触发；前端 `loadChart()` 异步 fetch JSON 渲染，所有硬编码 BBL 引用均已动态化
+10. **SEO**：每个页面需独立 `<title>` 和 `<meta description>`
+11. **Section 锚点定位**：`.section` 统一设置 `scroll-margin-top: var(--nav-h)`，防止固定 nav 遮挡锚点目标
+12. **Section 高度**：`.barvision` 和 `.lab` 设置 `min-height: calc(100vh - 2 * var(--gap-xl))`，使 section 总高度约为 100vh（padding 由 `.section` 类统一提供，上下各 `var(--gap-xl)`）
+13. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染
+14. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
+15. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号
+16. **成员提及**：榜吧成员名（如 `@williw_`、`@SeafishYANG`）统一用 `<span class="member">` 包裹（`color: rgba(240,238,255,0.62); font-weight:500`），预留日后改 `<a>` 跳转成员主页
+17. **移动端 Nav**：`nav--open` class 加在 `<nav>` 上控制 `.nav__drawer` 显隐；汉堡/X 图标用 `opacity + transform` 过渡（不用 `display:none/block`），两图标均 `position:absolute`，按钮设 `width:30px; height:30px` 撑容器；drawer 用 `opacity/visibility/transform` 过渡（0.32s）
+18. **Nav scrolled backdrop-filter 陷阱**：`.nav.scrolled` 的毛玻璃效果必须用 `::before` 伪元素实现，不能直接在 `.nav` 上写 `backdrop-filter`——否则 nav 建立新 stacking context，内部 `position:fixed` 的 drawer 会相对 nav 而非 viewport 定位，导致滚动后无法正确展开
+19. **back-to-top Z 轴陷阱**：`.nav`（`position:fixed; z-index:100`）建立独立 stacking context，drawer（z-index:1000）在全局层级等同 z-index:100；`.back-to-top`（z-index:200）全局高于 nav，drawer 无法直接遮盖它。解法：`body:has(.nav--open) .back-to-top { opacity:0; visibility:hidden }`
+20. **Touch hover 抑制**：用 `@media (hover: none), (pointer: coarse)` 双条件（不只 `hover: none`，因部分 Android Chrome 误报 `hover: hover`）重置所有 `:hover` 样式
+21. **Hero 移动端**：`height: auto; min-height: 100svh; overflow-x: clip`（clip 只裁横向，不影响纵向 ticker 显示）；`html` 和 `body` 都设 `overflow-x: hidden` 防横向滚动
+22. **返回顶部按钮**：`.back-to-top`，固定右下角，滚动 320px 后显示，紫色（`--clr-violet-light`）风格，`background: rgba(20,20,34,0.5)` + `backdrop-filter: blur(12px)`；移动端 `bottom:16px; right:20px`
+23. **标题 accent**：Barvision 标题用 `.bv-accent`（violet），BarboardLab 标题「Lab」用 `.lab-accent`（pink-light）
+24. **Ticker 入场动画**：必须用纯 opacity（`@keyframes ticker-fade-in`），不能带 `translateY`——`.hero` 有 `overflow:hidden`，ticker 在 `bottom:0`，translateY 初始位置会被裁出边界，动画不可见
+25. **Ticker 移动端**：隐藏 `.ticker__label`（WHAT'S NOW），动画时长从 42s 改为 55s
+26. **BBL 日期格式**：`fmtWeekRange()` 同月输出 `May 9–15, 2026`，跨月输出 `May 30–Jun 5, 2026`（省略重复月份）
+27. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
