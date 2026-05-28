@@ -103,49 +103,7 @@
         <div class="hero__updates-block">
         <p class="section-label">榜吧动态</p>
         <h2 class="hero__updates-title">UPDATES</h2>
-        <div class="hero__update-list" role="feed">
-
-          <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2026-05-30">2026/05/30</time>
-            <div>
-              <div class="hero__update-title">Barvision Chongqing 2026 赛程公布</div>
-              <div class="hero__update-desc">Barvision Chongqing 2026 赛程正式发布。歌曲提交通道于 6 月 1 日开启，Grand Final 将于 8 月 22 日晚现场直播。</div>
-            </div>
-          </article>
-
-          <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2026-05-15" id="bblHeroTime">2026/05/15</time>
-            <div>
-              <div class="hero__update-title" id="bblHeroTitle">BBL 第 124 期已更新</div>
-              <div class="hero__update-desc" id="bblHeroDesc">本周冠军：Linda Lampenius & Pete Parkkonen — Liekinheitin。</div>
-            </div>
-          </article>
-
-          <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2026-03-13">2026/03/13</time>
-            <div>
-              <div class="hero__update-title">BarboardLab 成立两周年</div>
-              <div class="hero__update-desc">BarboardLab 榜吧实验室创立于 2024 年 3 月 13 日，现已诞生 114 期周榜。特别感谢 <span class="member">@SeafishYANG</span> 的发起与持续贡献，以及两年来所有参与的成员。</div>
-            </div>
-          </article>
-
-          <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2025-09-05">2025/09/05</time>
-            <div>
-              <div class="hero__update-title">Barvision Chongqing 2026 主办确认</div>
-              <div class="hero__update-desc"><span class="member">@williw_</span> 确认主办 Barvision Chongqing 2026，大赛筹备工作正式启动。</div>
-            </div>
-          </article>
-
-          <article class="hero__update-item">
-            <time class="hero__update-date" datetime="2025-08-23">2025/08/23</time>
-            <div>
-              <div class="hero__update-title">Barvision Jinzhong 2025 圆满落幕</div>
-              <div class="hero__update-desc"><span class="member">@williw_</span> 选送的 Elliot James Reay — Boy In Love 以 357 分夺得 Barvision 2025 冠军。完整赛果已发布。</div>
-            </div>
-          </article>
-
-        </div>
+        <div class="hero__update-list" role="feed" id="updateList"></div>
         </div><!-- /hero__updates-block -->
       </div>
 
@@ -350,11 +308,7 @@
       const y = window.scrollY;
       nav.classList.toggle('scrolled', y > 40);
       if (scrollHint) {
-        if (y > 30) {
-          scrollHint.classList.add('hidden');
-        } else {
-          scrollHint.classList.remove('hidden');
-        }
+        scrollHint.classList.toggle('hidden', y > 30);
       }
     }, { passive: true });
 
@@ -369,7 +323,7 @@
       document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
     }
 
-    // BBL Chart
+    // Utilities
     function esc(s) {
       return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
     }
@@ -419,6 +373,72 @@
       return start.toLocaleDateString('en-US', opt) + '–' + end.toLocaleDateString('en-US', opt) + ', ' + year;
     }
 
+    function fmtWeekRangeCN(dateStr) {
+      const end = new Date(dateStr + 'T12:00:00');
+      const start = new Date(end);
+      start.setDate(start.getDate() - 6);
+      const y = end.getFullYear();
+      const sm = start.getMonth() + 1, sd = start.getDate();
+      const em = end.getMonth() + 1,   ed = end.getDate();
+      if (sm === em) return y + '年' + sm + '月' + sd + '日-' + ed + '日';
+      return y + '年' + sm + '月' + sd + '日-' + em + '月' + ed + '日';
+    }
+
+    // ── UPDATES ────────────────────────────────────────────
+    const STATIC_UPDATES = [
+      { date: '2026-05-30', title: 'Barvision Chongqing 2026 赛程公布',
+        desc: 'Barvision Chongqing 2026 赛程正式发布。歌曲提交通道于 6 月 1 日开启，Grand Final 将于 8 月 22 日晚现场直播。' },
+      { date: '2026-03-13', title: 'BarboardLab 成立两周年',
+        desc: '榜吧实验室 BarboardLab 创立于 2024 年 3 月 13 日，现已诞生 114 期周榜。特别感谢 <span class="member">@SeafishYANG</span> 的发起与持续贡献，以及两年来所有参与的成员。' },
+      { date: '2025-09-05', title: 'Barvision Chongqing 2026 主办确认',
+        desc: '<span class="member">@williw_</span> 确认主办 Barvision Chongqing 2026，大赛筹备工作正式启动。' },
+      { date: '2025-08-23', title: 'Barvision Jinzhong 2025 圆满落幕',
+        desc: '<span class="member">@williw_</span> 选送的 Elliot James Reay — Boy In Love 以 357 分夺得 Barvision 2025 冠军。完整赛果已发布。' }
+    ];
+
+    // Barvision 里程碑：日期到达后自动出现
+    const BV_MILESTONES = [
+      { date: '2026-06-01', title: 'Barvision 2026 歌曲提交通道开启',
+        desc: '第十六届 Barvision Chongqing 2026 歌曲提交通道已正式开启，截止日期 2026 年 7 月 19 日。' },
+      { date: '2026-07-19', title: 'Barvision 2026 歌曲提交截止',
+        desc: '第十六届 Barvision Chongqing 2026 歌曲提交阶段正式截止，参赛歌曲确认。' },
+      { date: '2026-08-08', title: 'Barvision 2026 Semi Final 直播结束',
+        desc: 'Barvision Chongqing 2026 Semi Final 暨附加赛直播结束，Grand Final 名单确认，投票通道开启。' },
+      { date: '2026-08-22', title: 'Barvision Chongqing 2026 Grand Final 圆满落幕',
+        desc: '第十六届 Barvision Chongqing 2026 Grand Final 直播结束，年度冠军揭晓。' }
+    ];
+
+    function renderUpdates(bblUpdate) {
+      const listEl = document.getElementById('updateList');
+      if (!listEl) return;
+      const now = new Date();
+      const oneYearAgo = new Date(now);
+      oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
+
+      const all = [...STATIC_UPDATES];
+      BV_MILESTONES.forEach(m => { if (new Date(m.date + 'T00:00:00') <= now) all.push(m); });
+      if (bblUpdate) all.push(bblUpdate);
+
+      const pad = n => String(n).padStart(2, '0');
+      const updates = all
+        .filter(u => new Date(u.date + 'T00:00:00') >= oneYearAgo)
+        .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
+        .slice(0, 5);
+
+      listEl.innerHTML = updates.map(u => {
+        const d = new Date(u.date + 'T12:00:00');
+        const dateStr = d.getFullYear() + '/' + pad(d.getMonth() + 1) + '/' + pad(d.getDate());
+        return '<article class="hero__update-item">' +
+          '<time class="hero__update-date" datetime="' + u.date + '">' + dateStr + '</time>' +
+          '<div>' +
+            '<div class="hero__update-title">' + u.title + '</div>' +
+            '<div class="hero__update-desc">' + u.desc + '</div>' +
+          '</div>' +
+        '</article>';
+      }).join('');
+    }
+
+    // ── BBL Chart ──────────────────────────────────────────
     async function loadChart() {
       try {
         const res = await fetch('data/bbl-latest.json');
@@ -436,28 +456,20 @@
           dateEl.textContent = fmtWeekRange(data.date);
         }
 
-        // Update ticker items
         const top = data.tracks && data.tracks[0];
         if (data.issue && top) {
           const tickerText = 'BarboardLab 第 ' + data.issue + ' 期已更新 · 本周冠军：' + top.artist + ' — ' + top.title;
           document.querySelectorAll('[data-bbl-ticker]').forEach(el => { el.textContent = tickerText; });
+          if (window._tickerUpdateHalfWidth) window._tickerUpdateHalfWidth();
         }
 
-        // Update hero BBL update card
-        if (data.issue && data.date) {
-          const d = new Date(data.date + 'T12:00:00');
-          const pad = n => String(n).padStart(2, '0');
-          const timeEl = document.getElementById('bblHeroTime');
-          if (timeEl) { timeEl.setAttribute('datetime', data.date); timeEl.textContent = d.getFullYear() + '/' + pad(d.getMonth() + 1) + '/' + pad(d.getDate()); }
-          const titleHeroEl = document.getElementById('bblHeroTitle');
-          if (titleHeroEl) titleHeroEl.textContent = 'BBL 第 ' + data.issue + ' 期已更新';
-          const descHeroEl = document.getElementById('bblHeroDesc');
-          if (descHeroEl && top) descHeroEl.textContent = '本周冠军为 ' + top.artist + ' — ' + top.title + '。';
+        if (data.issue && data.date && top) {
+          renderUpdates({
+            date: data.date,
+            title: 'BarboardLab 单曲合榜第 ' + data.issue + ' 期已更新',
+            desc: '本周榜单统计周期为' + fmtWeekRangeCN(data.date) + '。本周冠军为 ' + esc(top.artist) + ' — ' + esc(top.title) + '。'
+          });
         }
-
-        // Update footer link label
-        const footerLabelEl = document.getElementById('bblFooterLabel');
-        if (footerLabelEl && data.issue) footerLabelEl.textContent = 'BBL #' + data.issue + ' 榜单';
 
         if (!listEl || !data.tracks) return;
 
@@ -494,6 +506,7 @@
       }
     }
 
+    renderUpdates(null);
     loadChart();
 
     // Countdown
@@ -519,19 +532,35 @@
       var nav = document.getElementById('nav');
       var btn = document.getElementById('navMenuBtn');
       var drawer = document.getElementById('navDrawer');
+      var savedScrollY = 0;
+
+      function openDrawer() {
+        savedScrollY = window.scrollY;
+        nav.classList.add('nav--open');
+        btn.setAttribute('aria-expanded', 'true');
+        drawer.setAttribute('aria-hidden', 'false');
+        document.body.style.position = 'fixed';
+        document.body.style.top = '-' + savedScrollY + 'px';
+        document.body.style.width = '100%';
+        document.body.style.overflow = 'hidden';
+      }
+
+      function closeDrawer() {
+        nav.classList.remove('nav--open');
+        btn.setAttribute('aria-expanded', 'false');
+        drawer.setAttribute('aria-hidden', 'true');
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        document.body.style.overflow = '';
+        window.scrollTo(0, savedScrollY);
+      }
+
       btn.addEventListener('click', function () {
-        var open = nav.classList.toggle('nav--open');
-        btn.setAttribute('aria-expanded', open);
-        drawer.setAttribute('aria-hidden', !open);
-        document.body.style.overflow = open ? 'hidden' : '';
+        if (nav.classList.contains('nav--open')) { closeDrawer(); } else { openDrawer(); }
       });
       drawer.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', function () {
-          nav.classList.remove('nav--open');
-          btn.setAttribute('aria-expanded', 'false');
-          drawer.setAttribute('aria-hidden', 'true');
-          document.body.style.overflow = '';
-        });
+        a.addEventListener('click', closeDrawer);
       });
     })();
   </script>
@@ -550,6 +579,51 @@
       btn.addEventListener('click', function () {
         window.scrollTo({ top: 0, behavior: 'smooth' });
       });
+    })();
+  </script>
+
+  <script>
+    // JS-driven ticker — eliminates CSS animation restart flash
+    (function () {
+      var track = document.querySelector('.ticker__track');
+      if (!track) return;
+
+      var x = 0;
+      var halfWidth = 0;
+      var lastTime = null;
+
+      function getHalfWidth() {
+        return track.scrollWidth / 2;
+      }
+
+      function getSpeed() {
+        // px/ms — matches original CSS durations (desktop 42s, mobile 55s)
+        var dur = window.innerWidth <= 768 ? 55000 : 42000;
+        return halfWidth / dur;
+      }
+
+      function tick(now) {
+        if (lastTime === null) { lastTime = now; }
+        var dt = now - lastTime;
+        lastTime = now;
+        if (halfWidth > 0) {
+          x += getSpeed() * dt;
+          if (x >= halfWidth) x -= halfWidth;
+          track.style.transform = 'translateX(-' + x.toFixed(2) + 'px)';
+        }
+        requestAnimationFrame(tick);
+      }
+
+      // Wait one frame for layout to settle before measuring
+      requestAnimationFrame(function () {
+        halfWidth = getHalfWidth();
+        requestAnimationFrame(tick);
+      });
+
+      // Re-measure when ticker content updates (e.g. BBL data loaded)
+      window._tickerUpdateHalfWidth = function () {
+        requestAnimationFrame(function () { halfWidth = getHalfWidth(); });
+      };
     })();
   </script>
 </body>

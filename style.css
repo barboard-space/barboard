@@ -365,7 +365,7 @@ img {
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: 8px;
+  gap: 7px;
 }
 
 .nav__drawer-links .nav__cta-title {
@@ -584,7 +584,6 @@ img {
 .ticker__track {
   display: flex;
   gap: 0;
-  animation: ticker-scroll 42s linear infinite;
   will-change: transform;
 }
 
@@ -1755,7 +1754,7 @@ body:has(.nav--open) .back-to-top {
   }
 
   .ticker__track {
-    animation-duration: 55s;
+    /* speed controlled by JS */
   }
 
   .hero {
