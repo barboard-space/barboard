@@ -1710,6 +1710,7 @@ body:has(.nav--open) .back-to-top {
 
 @media (max-width: 768px) {
   .chart-list { gap: 6px; }
+  .hero__title-board { text-shadow: 0 0 22px rgba(192,132,252,0.15); }
 
   :root {
     --nav-h:  56px;
