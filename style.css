@@ -1712,6 +1712,7 @@ body:has(.nav--open) .back-to-top {
   .chart-list { gap: 6px; }
 
   :root {
+    --nav-h:  56px;
     --gap-md: 20px;
     --gap-lg: 48px;
     --gap-xl: 64px;
