@@ -305,3 +305,39 @@ barboard-space/
 25. **Ticker 移动端**：隐藏 `.ticker__label`（WHAT'S NOW），动画时长从 42s 改为 55s
 26. **BBL 日期格式**：`fmtWeekRange()` 同月输出 `May 9–15, 2026`，跨月输出 `May 30–Jun 5, 2026`（省略重复月份）
 27. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
+
+---
+
+## 对话交接工作流
+
+**触发时机**：每次对话即将被 compact（上下文压缩）之前，或用户主动要求生成交接 prompt 时。
+
+### 执行步骤
+
+1. **更新 CLAUDE.md**
+   - 将本次对话中完成的页面/功能追加到「已完成」列表
+   - 将本次对话中发现的新技术要点追加到「开发注意事项」（编号续接）
+   - 更新「待建页面」优先级列表（移除已完成项，调整顺序）
+   - 若有新的设计决策或约定，更新对应章节
+
+2. **生成交接 Prompt**
+   输出一段可直接粘贴到下一个 session 开头的 prompt，格式如下：
+
+   ```
+   继续 Barboard 官网（barboard.space）开发。项目在 D:\Genius\barboard-space，请先读取 CLAUDE.md 了解完整背景。
+
+   当前状态（截至 YYYY-MM-DD，本 session 已完成）：
+   [本次 session 完成的工作，逐条列出，含关键实现细节和踩坑记录]
+
+   下一步优先任务（按优先级）：
+   [待办事项，最多5条，附简要说明]
+
+   设计原则：PC 优先，移动端继承后单独微调。所有新页面复用 style.css 设计系统（CSS 变量、字体、组件类），参考 index.html 的 nav/footer/section 结构。
+
+   阅读完成后请先告知理解情况，不要自行开始任务。
+   ```
+
+### 注意事项
+- CLAUDE.md 只记录**跨 session 有价值**的信息（技术约定、已知陷阱、设计决策）；单次 session 的临时调试过程不写入
+- 交接 prompt 的「已完成」部分要写**足够细节**，让下一个 session 无需重读代码即可理解上下文
+- 若某个技术问题在本次 session 反复出现，必须在「开发注意事项」中新增一条，防止下次重踩
