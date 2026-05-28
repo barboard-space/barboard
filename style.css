@@ -173,8 +173,19 @@ img {
   height: var(--nav-h);
   display: flex;
   align-items: center;
-  transition: background 0.3s, border-color 0.3s;
   border-bottom: 1px solid transparent;
+  transition: border-color 0.4s ease;
+}
+
+.nav::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(8, 8, 18, 0.48);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: -1;
+  transition: background 0.4s ease;
 }
 
 .nav.scrolled {
@@ -182,12 +193,7 @@ img {
 }
 
 .nav.scrolled::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(10, 10, 11, 0.92);
-  backdrop-filter: blur(16px);
-  z-index: -1;
+  background: rgba(8, 8, 18, 0.92);
 }
 
 .nav__inner {
@@ -616,7 +622,7 @@ img {
    SECTION TITLE ACCENTS
    ============================================= */
 .lab-accent {
-  color: var(--clr-pink-light);
+  color: var(--clr-violet-light);
 }
 
 /* =============================================
@@ -1559,6 +1565,10 @@ img {
   margin-top: 24px;
 }
 
+.footer__tagline span {
+  display: block;
+}
+
 .footer__col-title {
   font-size: 11px;
   font-weight: 700;
@@ -1745,6 +1755,13 @@ body:has(.nav--open) .back-to-top {
     gap: var(--gap-md);
   }
 
+  .footer__tagline span {
+    display: inline;
+  }
+  .footer__tagline span + span::before {
+    content: ' · ';
+  }
+
   .hero__title {
     font-size: 64px;
   }
@@ -1779,18 +1796,25 @@ body:has(.nav--open) .back-to-top {
 /* =============================================
    ANIMATIONS
    ============================================= */
+@keyframes nav-enter {
+  from { opacity: 0; transform: translateY(-16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes hero-fade-in {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
 @media (prefers-reduced-motion: no-preference) {
+  .nav                 { animation: nav-enter 0.45s ease both; }
   .hero__eyebrow       { animation: hero-fade-in 0.6s ease both; }
   .hero__title         { animation: hero-fade-in 0.6s 0.1s ease both; }
   .hero__desc          { animation: hero-fade-in 0.6s 0.2s ease both; }
   .hero__actions       { animation: hero-fade-in 0.6s 0.3s ease both; }
   .hero__updates-block { animation: hero-fade-in 0.7s 0.15s ease both; }
   .hero__ticker-wrap   { animation: ticker-fade-in 0.9s 0.55s ease both; }
+  .hero__scroll-hint   { animation: hero-fade-in 0.7s 1.2s ease both; }
 }
 
 @keyframes ticker-fade-in {
@@ -1799,13 +1823,13 @@ body:has(.nav--open) .back-to-top {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .fade-up {
+  .fade-up, .fade-up-right {
     opacity: 0;
     transform: translateY(24px);
     transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
-  .fade-up.visible {
+  .fade-up.visible, .fade-up-right.visible {
     opacity: 1;
     transform: translateY(0);
   }

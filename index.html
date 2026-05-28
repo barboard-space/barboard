@@ -149,7 +149,7 @@
             </div>
 
             <!-- 2026 赛事卡片 -->
-            <div class="barvision__card fade-up" style="transition-delay:0.15s;">
+            <div class="barvision__card fade-up-right" style="transition-delay:0.15s;">
               <div class="season-card">
                 <div class="season-card__banner">
                   <div class="season-card__edition">BARVISION CHONGQING 2026</div>
@@ -246,7 +246,7 @@
             </div>
 
             <div class="lab__chart">
-              <div class="chart-header fade-up">
+              <div class="chart-header fade-up-right">
                 <span class="chart-header__title" id="chartTitle">— · BARBOARDLAB SINGLES CHART</span>
                 <span class="chart-header__week" id="chartDate">—</span>
               </div>
@@ -263,7 +263,7 @@
             <div>
               <a href="/" class="nav__logo footer__logo"><img src="assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" /><span>BAR<span class="nav__logo-board">BOARD</span></span></a>
               <p style="font-size:12px;color:var(--clr-text);margin-bottom:8px;">欧美流行音乐个人榜吧</p>
-              <p class="footer__tagline">成立于2013年5月21日 · UNITED BY MUSIC</p>
+              <p class="footer__tagline"><span>成立于2013年5月21日</span><span>UNITED BY MUSIC</span></p>
             </div>
             <div>
               <div class="footer__col-title">BarboardLab</div>
@@ -293,8 +293,8 @@
             </div>
           </div>
           <div class="footer__bottom">
-            <span class="footer__copy">© 2013–2026 Barboard. All rights reserved.</span>
-            <span class="footer__notice">Designed & built by @williw_</span>
+            <span class="footer__copy">© 2013–2026 Barboard. All Rights Reserved.</span>
+            <span class="footer__notice">Designed & Built by @williw_</span>
           </div>
         </div>
       </footer>
@@ -319,8 +319,13 @@
         entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); } });
       }, { threshold: 0.1 });
       document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+      // Right-column cards trigger when more of the element is in view
+      const rightObserver = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); rightObserver.unobserve(e.target); } });
+      }, { threshold: 0.1, rootMargin: '0px 0px -80px 0px' });
+      document.querySelectorAll('.fade-up-right').forEach(el => rightObserver.observe(el));
     } else {
-      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+      document.querySelectorAll('.fade-up, .fade-up-right').forEach(el => el.classList.add('visible'));
     }
 
     // Utilities
