@@ -75,6 +75,10 @@ html {
   scroll-behavior: smooth;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 body {
   background: var(--clr-bg);
   color: var(--clr-text);
@@ -1872,6 +1876,13 @@ img {
     height: auto;
     min-height: 100svh;
     overflow: visible;
+    overflow-x: clip;
+  }
+
+  .hero__bg-logo {
+    width: 280px;
+    height: 280px;
+    right: -40px;
   }
 
   .hero__split {
