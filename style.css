@@ -181,12 +181,11 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(8, 8, 18, 0.88);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: rgba(8, 8, 18, 0);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   z-index: -1;
-  opacity: 0;
-  transition: opacity 0.4s ease;
+  transition: background 0.4s ease;
 }
 
 .nav.scrolled {
@@ -194,7 +193,7 @@ img {
 }
 
 .nav.scrolled::before {
-  opacity: 1;
+  background: rgba(8, 8, 18, 0.88);
 }
 
 .nav__inner {
@@ -627,7 +626,7 @@ img {
 }
 
 .bbl-board-accent {
-  color: var(--clr-accent);
+  color: #6F9EC3;
 }
 
 /* =============================================
@@ -1760,6 +1759,10 @@ body:has(.nav--open) .back-to-top {
     gap: var(--gap-md);
   }
 
+  .nav.scrolled::before {
+    background: rgba(8, 8, 18, 0.72);
+  }
+
   .footer__tagline span {
     display: inline;
   }
@@ -1802,8 +1805,8 @@ body:has(.nav--open) .back-to-top {
    ANIMATIONS
    ============================================= */
 @keyframes nav-enter {
-  from { opacity: 0; transform: translateY(-16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes hero-fade-in {
