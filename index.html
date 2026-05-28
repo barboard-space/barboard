@@ -539,10 +539,12 @@
         nav.classList.add('nav--open');
         btn.setAttribute('aria-expanded', 'true');
         drawer.setAttribute('aria-hidden', 'false');
-        document.body.style.position = 'fixed';
-        document.body.style.top = '-' + savedScrollY + 'px';
-        document.body.style.width = '100%';
-        document.body.style.overflow = 'hidden';
+        requestAnimationFrame(function() {
+          document.body.style.position = 'fixed';
+          document.body.style.top = '-' + savedScrollY + 'px';
+          document.body.style.width = '100%';
+          document.body.style.overflow = 'hidden';
+        });
       }
 
       function closeDrawer() {
@@ -553,7 +555,9 @@
         document.body.style.top = '';
         document.body.style.width = '';
         document.body.style.overflow = '';
+        document.documentElement.style.scrollBehavior = 'auto';
         window.scrollTo(0, savedScrollY);
+        document.documentElement.style.scrollBehavior = '';
       }
 
       btn.addEventListener('click', function () {

@@ -2127,7 +2127,6 @@ body:has(.nav--open) .back-to-top {
 .nav__logo-img {
   width: 26px;
   height: 26px;
-  mix-blend-mode: screen;
   opacity: 0.92;
   flex-shrink: 0;
   display: inline-block;
