@@ -1710,7 +1710,7 @@ body:has(.nav--open) .back-to-top {
   .footer__links {
     display: grid;
     grid-template-columns: auto;
-    gap: 6px;
+    gap: 10px;
   }
 }
 
