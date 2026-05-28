@@ -6,19 +6,39 @@
 
 ## [2026-05-28]
 
+### Added
+- 移动端 drawer Musictrack 条目加外链箭头 SVG
+- 智能 UPDATES 系统：`STATIC_UPDATES` 静态数组 + `BV_MILESTONES`（赛程里程碑日期到达后自动出现）+ BBL fetch 动态条目，合并排序取前 5、过滤 1 年前内容
+- `fmtWeekRangeCN()` 函数：BBL 周期中文格式（同月 `5月9日-15日`，跨月 `5月30日-6月5日`）
+- `CHANGELOG.md` 版本更新日志文件
+- Nav 入场动画 `nav-enter`（纯 opacity，0.45s）；Hero scroll-hint 延迟 1.2s 淡入
+- `fade-up-right` class：右列大卡片专属 IntersectionObserver（`rootMargin -80px`），触发更晚
+- `.bbl-board-accent` (#6F9EC3)：BarboardLab 标题「board」与 nav logo BOARD 同色
+
 ### Changed
-- BarboardLab 版块 section-label：单曲合榜 → 榜吧实验室
+- BarboardLab section-label：单曲合榜 → 榜吧实验室
 - 按钮文案：历史榜单视频回顾 → 历史榜单视频
 - Footer「更多」列：榜吧成员 → 成员名录
-- Ticker 连接符：`已更新 — 本周冠军` → `已更新 · 本周冠军`（静态占位文本 × 2 + JS 动态生成同步修改）
-- UPDATES「BarboardLab 成立两周年」文案：BBL → BarboardLab 榜吧实验室，"现已更新至第124期" → "现已诞生114期周榜"
-- 移动端 drawer：`nav__cta-sub`（歌曲报名通道）opacity 0.55 → 1，与标题亮度一致
+- Ticker 连接符：`已更新 — 本周冠军` → `已更新 · 本周冠军`
+- UPDATES「BarboardLab 成立两周年」文案更新（榜吧实验室 BarboardLab，114期周榜）
+- 移动端 drawer `nav__cta-sub` opacity 0.55 → 1；CTA gap 8px → 7px
+- BBL 榜单更新标题格式："BarboardLab 单曲合榜第 N 期已更新"，描述含中文统计周期
+- UPDATES 由静态 HTML 改为 JS 数据驱动（可扩展，自动排序）
+- BarboardLab 标题「Lab」accent：pink-light → violet-light
+- BBL 榜单条目动画：容器级批量触发 → 逐条 `fadeObserver`，`transitionDelay: 0s`
+- Nav 毛玻璃：background 过渡（`rgba 0→0.88`），blur 增至 24px；scroll-only（不再常驻）
+- 移动端 nav scrolled 背景 alpha 0.88 → 0.72（更透明）
+- Footer tagline：PC 两行排列，移动端 CSS 伪元素恢复 ` · ` 分隔
+- Footer copyright：Title Case（All Rights Reserved. / Designed & Built by @williw_）
 
-### Added
-- 移动端 drawer Musictrack 条目加外链箭头 SVG（与 PC nav 保持一致）
+### Fixed
+- Ticker 无缝循环闪烁：CSS `animation` 全部替换为 JS `requestAnimationFrame` 驱动，循环点瞬移无渲染帧间隙
+- 移动端抽屉打开时底层页面仍可滚动：改用 `position:fixed + top:-scrollY`（iOS 兼容）
+- `@keyframes nav-enter` 移除 `transform`：原末态 `translateY(0)` 经 `fill-mode:both` 永久残留，导致 `.nav__drawer` 相对 nav 定位而非 viewport，抽屉永久无法正常展开
 
 ### Docs
-- CLAUDE.md 新增「对话交接工作流」章节（compact 前更新文档 + 生成交接 prompt 的标准流程）
+- CLAUDE.md 新增「对话交接工作流」章节
+- CLAUDE.md 补充技术注意事项 #28–35
 
 ---
 

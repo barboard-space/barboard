@@ -24,9 +24,10 @@
 ## 当前网站状态
 
 ### 已完成
-- `index.html` — 首页（完成，BBL 数据全动态，移动端响应式已修复）
+- `index.html` — 首页（完成，经过多轮 session 深度打磨，详见开发注意事项）
 - `style.css` — 全站样式（含完整设计系统）
 - `fonts.css` — 本地字体声明
+- `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，`const FORM_URL = ''` 待填入）
 - `data/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
@@ -305,6 +306,14 @@ barboard-space/
 25. **Ticker 移动端**：隐藏 `.ticker__label`（WHAT'S NOW），动画时长从 42s 改为 55s
 26. **BBL 日期格式**：`fmtWeekRange()` 同月输出 `May 9–15, 2026`，跨月输出 `May 30–Jun 5, 2026`（省略重复月份）
 27. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
+28. **nav-enter 动画禁用 transform**：`@keyframes nav-enter` 只能用 `opacity` 过渡，不能含 `transform`。因为 `animation-fill-mode: both` 会使末态 `transform: translateY(0)` 永久保留在 `.nav` 上，nav 成为 fixed 子元素的 containing block，`.nav__drawer` 从此相对 nav 而非 viewport 定位，永久无法正常展开
+29. **backdrop-filter 激活陷阱**：`::before` 的毛玻璃过渡必须用 `background` 属性过渡（`rgba(x,x,x,0)→rgba(x,x,x,0.88)`），不能用 `opacity: 0→1`——部分浏览器在 `opacity:0` 时完全不激活 `backdrop-filter`
+30. **Ticker JS 化**：`.ticker__track` 不再使用 CSS `animation`，改由 JS `requestAnimationFrame` 驱动（每帧 `x += speed * dt; if (x >= halfWidth) x -= halfWidth`）。BBL 数据更新后须调用 `window._tickerUpdateHalfWidth()` 重新计算 `halfWidth`
+31. **UPDATES 动态系统**：`STATIC_UPDATES` 数组 + `BV_MILESTONES`（日期到达后自动出现）+ BBL fetch 后生成动态条目，合并排序取前 5、过滤超 1 年内容。`renderUpdates(null)` 在页面加载时立即同步调用；`loadChart()` 成功后再次调用传入 BBL update
+32. **fade-up-right**：右列大卡片（`.barvision__card`、`.chart-header`）使用专属 class，对应 `rightObserver`（`rootMargin: '0px 0px -80px 0px'`），触发时机晚于普通 `.fade-up`
+33. **移动端抽屉滚动锁**：`openDrawer()` 保存 `scrollY`，设 `body { position:fixed; top:-scrollY; width:100%; overflow:hidden }`；`closeDrawer()` 还原并 `window.scrollTo(0, scrollY)`。纯 `overflow:hidden` 在 iOS 无效
+34. **BarboardLab 标题三段配色**：`Bar`（白色）+ `board`（`#6F9EC3`，`.bbl-board-accent`，与 nav logo BOARD 一致）+ `Lab`（`var(--clr-violet-light)`，`.lab-accent`）
+35. **BBL 榜单条目动画**：不使用容器级 `listObserver`，改为逐条接入全局 `fadeObserver`，`transitionDelay: 0s`，随滚动自然逐一触发
 
 ---
 
