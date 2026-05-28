@@ -1589,7 +1589,7 @@ img {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--clr-surface);
+  background: rgba(20,20,34,0.5);
   border: 1px solid var(--clr-border-2);
   border-radius: 4px;
   color: rgba(192,132,252,0.65);
