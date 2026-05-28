@@ -70,8 +70,14 @@
     navEl    ? fetch('/partials/nav.html').then(function (r) { return r.text(); }).catch(function () { return ''; }) : Promise.resolve(''),
     footerEl ? fetch('/partials/footer.html').then(function (r) { return r.text(); }).catch(function () { return ''; }) : Promise.resolve('')
   ]).then(function (results) {
-    if (navEl    && results[0]) { navEl.outerHTML    = results[0]; }
-    if (footerEl && results[1]) { footerEl.outerHTML = results[1]; }
+    if (navEl && results[0]) {
+      navEl.insertAdjacentHTML('afterend', results[0]);
+      navEl.remove();
+    }
+    if (footerEl && results[1]) {
+      footerEl.insertAdjacentHTML('afterend', results[1]);
+      footerEl.remove();
+    }
     initNav();
     initBackToTop();
   });
