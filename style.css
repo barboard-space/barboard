@@ -371,12 +371,16 @@ img {
 }
 
 .nav__drawer-links .nav__cta-sub {
-  display: block;
-  font-size: 12px;
+  display: inline;
+  font-size: 15px;
   font-weight: 400;
-  letter-spacing: 0.02em;
-  opacity: 0.6;
-  margin-top: 1px;
+  letter-spacing: 0;
+  opacity: 0.55;
+}
+
+.nav__drawer-links .nav__cta-sub::before {
+  content: " · ";
+  opacity: 1;
 }
 
 /* hamburger → X when open */
@@ -1561,7 +1565,7 @@ img {
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.65);
-  margin-bottom: var(--gap-sm);
+  margin-bottom: 8px;
 }
 
 .footer__links {
