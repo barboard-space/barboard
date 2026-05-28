@@ -1709,6 +1709,8 @@ body:has(.nav--open) .back-to-top {
 }
 
 @media (max-width: 768px) {
+  .chart-list { gap: 6px; }
+
   :root {
     --gap-md: 20px;
     --gap-lg: 48px;
