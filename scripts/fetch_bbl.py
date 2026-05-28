@@ -2,10 +2,12 @@ import json
 import re
 import sys
 import requests
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 API_URL = "https://6api.musictrack.cn/api/charts/3045"
-OUTPUT_FILE = "data/bbl-latest.json"
+OUTPUT_FILE  = "data/bbl-latest.json"
+TICKER_FILE  = "data/ticker.json"
+UPDATES_FILE = "data/updates.json"
 
 LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}
 
@@ -18,6 +20,42 @@ def parse_date(date_str):
         return datetime.strptime(str(date_str), "%Y%m%d").strftime("%Y-%m-%d")
     except Exception:
         return str(date_str)
+
+def fmt_week_range_cn(date_str):
+    start = datetime.strptime(date_str, "%Y-%m-%d")
+    end = start + timedelta(days=6)
+    return f"{start.year}年{start.month}月{start.day}日—{end.month}月{end.day}日"
+
+def update_ticker(issue, artist, title):
+    try:
+        with open(TICKER_FILE, "r", encoding="utf-8") as f:
+            items = json.load(f)
+    except Exception:
+        items = []
+    bbl_text = f"BarboardLab 第 {issue} 期已更新 · 本周冠军：{artist} — {title}"
+    # 移除旧 BBL 条目，将新条目置顶（最新在左）
+    items = [t for t in items if not t.startswith("BarboardLab 第")]
+    items.insert(0, bbl_text)
+    with open(TICKER_FILE, "w", encoding="utf-8") as f:
+        json.dump(items, f, ensure_ascii=False, indent=2)
+
+def update_updates(issue, date, artist, title):
+    try:
+        with open(UPDATES_FILE, "r", encoding="utf-8") as f:
+            items = json.load(f)
+    except Exception:
+        items = []
+    bbl_entry = {
+        "date":  date,
+        "title": f"BarboardLab 单曲合榜第 {issue} 期已更新",
+        "desc":  f"本周榜单统计周期为{fmt_week_range_cn(date)}。本周冠军为 {artist} — {title}。"
+    }
+    # 移除旧 BBL 条目，加入新条目，按日期从新到旧排序
+    items = [u for u in items if not u.get("title", "").startswith("BarboardLab 单曲合榜第")]
+    items.append(bbl_entry)
+    items.sort(key=lambda u: u.get("date", ""), reverse=True)
+    with open(UPDATES_FILE, "w", encoding="utf-8") as f:
+        json.dump(items, f, ensure_ascii=False, indent=2)
 
 def main():
     headers = {
@@ -85,6 +123,12 @@ def main():
         json.dump(output, f, ensure_ascii=False, indent=2)
 
     print(f"Saved BBL #{issue} ({date}), {len(tracks)} tracks")
+
+    if issue and tracks:
+        top = tracks[0]
+        update_ticker(issue, top["artist"], top["title"])
+        update_updates(issue, date, top["artist"], top["title"])
+        print(f"Updated ticker.json and updates.json with BBL #{issue}")
 
 if __name__ == "__main__":
     main()

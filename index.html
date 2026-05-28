@@ -11,43 +11,7 @@
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="/" class="nav__logo"><img src="assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" /><span>BAR<span class="nav__logo-board">BOARD</span></span></a>
-      <ul class="nav__links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="barvision.html">Barvision</a></li>
-        <li><a href="barboardlab.html">BarboardLab</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
-        <li><a href="barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名通道</span></a></li>
-      </ul>
-      <button class="nav__menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false">
-        <svg class="icon-menu" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-        <svg class="icon-close" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true">
-          <line x1="4" y1="4" x2="18" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="18" y1="4" x2="4" y2="18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-
-    <!-- Mobile drawer -->
-    <div class="nav__drawer" id="navDrawer" aria-hidden="true">
-      <ul class="nav__drawer-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="barvision.html">Barvision</a></li>
-        <li><a href="barboardlab.html">BarboardLab</a></li>
-        <li><a href="archive.html">Archive</a></li>
-        <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
-        <li><a href="barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名通道</span></a></li>
-      </ul>
-    </div>
-  </nav>
+  <div id="site-nav"></div>
 
   <!-- HERO：第一屏，左右分栏，共享背景 -->
   <section class="hero" id="hero">
@@ -62,21 +26,7 @@
     <div class="hero__ticker-wrap">
       <div class="ticker" role="marquee" aria-label="榜吧动态">
         <div class="ticker__label">WHAT'S NOW</div>
-        <div class="ticker__track">
-
-      <span class="ticker__item">Barvision 2026 歌曲提交通道将于 6 月 1 日开启</span>
-      <span class="ticker__item" data-bbl-ticker>BarboardLab 第 124 期已更新 · 本周冠军：Linda Lampenius & Pete Parkkonen — Liekinheitin</span>
-      <span class="ticker__item">BBL 每周六更新 · 完整榜单见 Musictrack</span>
-      <span class="ticker__item">Barvision Chongqing 2026 · Echoing Confluence</span>
-      <span class="ticker__item">歌曲提交截止：2026 年 7 月 19 日</span>
-      <span class="ticker__item">Grand Final 直播定于 2026 年 8 月 22 日晚</span>
-      <span class="ticker__item">Barvision 2026 歌曲提交通道将于 6 月 1 日开启</span>
-      <span class="ticker__item" data-bbl-ticker>BarboardLab 第 124 期已更新 · 本周冠军：Linda Lampenius & Pete Parkkonen — Liekinheitin</span>
-      <span class="ticker__item">BBL 每周六更新 · 完整榜单见 Musictrack</span>
-      <span class="ticker__item">Barvision Chongqing 2026 · Echoing Confluence</span>
-      <span class="ticker__item">歌曲提交截止：2026 年 7 月 19 日</span>
-      <span class="ticker__item">Grand Final 直播定于 2026 年 8 月 22 日晚</span>
-            </div>
+        <div class="ticker__track"></div>
       </div>
     </div>
     <div class="hero__split">
@@ -256,60 +206,18 @@
         </div>
       </section>
 
-      <!-- FOOTER -->
-      <footer class="footer">
-        <div class="section__inner">
-          <div class="footer__grid">
-            <div>
-              <a href="/" class="nav__logo footer__logo"><img src="assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" /><span>BAR<span class="nav__logo-board">BOARD</span></span></a>
-              <p style="font-size:12px;color:var(--clr-text);margin-bottom:8px;">欧美流行音乐个人榜吧</p>
-              <p class="footer__tagline"><span>成立于2013年5月21日</span><span>UNITED BY MUSIC</span></p>
-            </div>
-            <div>
-              <div class="footer__col-title">BarboardLab</div>
-              <ul class="footer__links">
-                <li><a href="barboardlab.html">关于BarboardLab</a></li>
-                <li><a href="barboardlab/hall-of-fame.html">Hall of Fame</a></li>
-                <li><a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener">本周单曲合榜<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
-                <li><a href="https://space.bilibili.com/11254817/lists" target="_blank" rel="noopener">历史榜单视频<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
-              </ul>
-            </div>
-            <div>
-              <div class="footer__col-title">Barvision</div>
-              <ul class="footer__links">
-                <li><a href="barvision/2026/events.html">Barvision 2026</a></li>
-                <li><a href="barvision/2025/events.html">Barvision 2025</a></li>
-                <li><a href="barvision.html">Hall of Fame</a></li>
-                <li><a href="barvision.html">历届回顾</a></li>
-              </ul>
-            </div>
-            <div>
-              <div class="footer__col-title">更多</div>
-              <ul class="footer__links">
-                <li><a href="about.html">关于Barboard</a></li>
-                <li><a href="archive.html">Archive</a></li>
-                <li><a href="about.html#members">成员名录</a></li>
-              </ul>
-            </div>
-          </div>
-          <div class="footer__bottom">
-            <span class="footer__copy">© 2013–2026 Barboard. All Rights Reserved.</span>
-            <span class="footer__notice">Designed & Built by @williw_</span>
-          </div>
-        </div>
-      </footer>
+      <div id="site-footer"></div>
 
 
+  <script src="/scripts/nav.js"></script>
   <script>
-    // Nav scroll + scroll hint fade
-    const nav = document.getElementById('nav');
+    // Scroll hint fade
     const scrollHint = document.getElementById('scrollHint');
-    window.addEventListener('scroll', () => {
-      const y = window.scrollY;
-      nav.classList.toggle('scrolled', y > 40);
-      if (scrollHint) {
-        scrollHint.classList.toggle('hidden', y > 30);
-      }
+    if (scrollHint) {
+      window.addEventListener('scroll', () => {
+        scrollHint.classList.toggle('hidden', window.scrollY > 30);
+      }, { passive: true });
+    }
     }, { passive: true });
 
     // Fade-up
@@ -390,39 +298,31 @@
     }
 
     // ── UPDATES ────────────────────────────────────────────
-    const STATIC_UPDATES = [
-      { date: '2026-05-30', title: 'Barvision Chongqing 2026 赛程公布',
-        desc: 'Barvision Chongqing 2026 赛程正式发布。歌曲提交通道于 6 月 1 日开启，Grand Final 将于 8 月 22 日晚现场直播。' },
-      { date: '2026-03-13', title: 'BarboardLab 成立两周年',
-        desc: '榜吧实验室 BarboardLab 创立于 2024 年 3 月 13 日，现已诞生 114 期周榜。特别感谢 <span class="member">@SeafishYANG</span> 的发起与持续贡献，以及两年来所有参与的成员。' },
-      { date: '2025-09-05', title: 'Barvision Chongqing 2026 主办确认',
-        desc: '<span class="member">@williw_</span> 确认主办 Barvision Chongqing 2026，大赛筹备工作正式启动。' },
-      { date: '2025-08-23', title: 'Barvision Jinzhong 2025 圆满落幕',
-        desc: '<span class="member">@williw_</span> 选送的 Elliot James Reay — Boy In Love 以 357 分夺得 Barvision 2025 冠军。完整赛果已发布。' }
-    ];
+    // 数据从 data/updates.json 和 data/ticker.json 异步加载
+    var _staticUpdates = [];
 
-    // Barvision 里程碑：日期到达后自动出现
-    const BV_MILESTONES = [
-      { date: '2026-06-01', title: 'Barvision 2026 歌曲提交通道开启',
-        desc: '第十六届 Barvision Chongqing 2026 歌曲提交通道已正式开启，截止日期 2026 年 7 月 19 日。' },
-      { date: '2026-07-19', title: 'Barvision 2026 歌曲提交截止',
-        desc: '第十六届 Barvision Chongqing 2026 歌曲提交阶段正式截止，参赛歌曲确认。' },
-      { date: '2026-08-08', title: 'Barvision 2026 Semi Final 直播结束',
-        desc: 'Barvision Chongqing 2026 Semi Final 暨附加赛直播结束，Grand Final 名单确认，投票通道开启。' },
-      { date: '2026-08-22', title: 'Barvision Chongqing 2026 Grand Final 圆满落幕',
-        desc: '第十六届 Barvision Chongqing 2026 Grand Final 直播结束，年度冠军揭晓。' }
-    ];
+    function buildTicker(items) {
+      var track = document.querySelector('.ticker__track');
+      if (!track) return;
+      var escT = function(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+      var half = items.map(function(t) {
+        return '<span class="ticker__item">' + escT(t) + '</span>';
+      }).join('');
+      track.innerHTML = half + half;
+      if (window._tickerUpdateHalfWidth) window._tickerUpdateHalfWidth();
+    }
 
-    function renderUpdates(bblUpdate) {
+    function renderUpdates() {
       const listEl = document.getElementById('updateList');
       if (!listEl) return;
       const now = new Date();
       const oneYearAgo = new Date(now);
       oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
 
-      const all = [...STATIC_UPDATES];
-      BV_MILESTONES.forEach(m => { if (new Date(m.date + 'T00:00:00') <= now) all.push(m); });
-      if (bblUpdate) all.push(bblUpdate);
+      const all = _staticUpdates.filter(u => {
+        if (!u.show_after) return true;
+        return new Date(u.show_after + 'T00:00:00') <= now;
+      });
 
       const pad = n => String(n).padStart(2, '0');
       const updates = all
@@ -461,21 +361,6 @@
           dateEl.textContent = fmtWeekRange(data.date);
         }
 
-        const top = data.tracks && data.tracks[0];
-        if (data.issue && top) {
-          const tickerText = 'BarboardLab 第 ' + data.issue + ' 期已更新 · 本周冠军：' + top.artist + ' — ' + top.title;
-          document.querySelectorAll('[data-bbl-ticker]').forEach(el => { el.textContent = tickerText; });
-          if (window._tickerUpdateHalfWidth) window._tickerUpdateHalfWidth();
-        }
-
-        if (data.issue && data.date && top) {
-          renderUpdates({
-            date: data.date,
-            title: 'BarboardLab 单曲合榜第 ' + data.issue + ' 期已更新',
-            desc: '本周榜单统计周期为' + fmtWeekRangeCN(data.date) + '。本周冠军为 ' + esc(top.artist) + ' — ' + esc(top.title) + '。'
-          });
-        }
-
         if (!listEl || !data.tracks) return;
 
         listEl.innerHTML = data.tracks.slice(0, 10).map(t => {
@@ -507,8 +392,15 @@
       }
     }
 
-    renderUpdates(null);
-    loadChart();
+    Promise.all([
+      fetch('data/ticker.json').then(r => r.json()).catch(() => []),
+      fetch('data/updates.json').then(r => r.json()).catch(() => [])
+    ]).then(([tickerItems, updatesData]) => {
+      buildTicker(tickerItems);
+      _staticUpdates = updatesData;
+      renderUpdates();
+      loadChart();
+    });
 
     // Countdown
     function updateCountdown() {
@@ -528,64 +420,6 @@
     setInterval(updateCountdown, 1000);
   </script>
 
-  <script>
-    (function () {
-      var nav = document.getElementById('nav');
-      var btn = document.getElementById('navMenuBtn');
-      var drawer = document.getElementById('navDrawer');
-      var savedScrollY = 0;
-
-      function openDrawer() {
-        savedScrollY = window.scrollY;
-        nav.classList.add('nav--open');
-        btn.setAttribute('aria-expanded', 'true');
-        drawer.setAttribute('aria-hidden', 'false');
-        requestAnimationFrame(function() {
-          document.body.style.position = 'fixed';
-          document.body.style.top = '-' + savedScrollY + 'px';
-          document.body.style.width = '100%';
-          document.body.style.overflow = 'hidden';
-        });
-      }
-
-      function closeDrawer() {
-        nav.classList.remove('nav--open');
-        btn.setAttribute('aria-expanded', 'false');
-        drawer.setAttribute('aria-hidden', 'true');
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
-        document.body.style.overflow = '';
-        document.documentElement.style.scrollBehavior = 'auto';
-        window.scrollTo(0, savedScrollY);
-        document.documentElement.style.scrollBehavior = '';
-      }
-
-      btn.addEventListener('click', function () {
-        if (nav.classList.contains('nav--open')) { closeDrawer(); } else { openDrawer(); }
-      });
-      drawer.querySelectorAll('a').forEach(function (a) {
-        a.addEventListener('click', closeDrawer);
-      });
-    })();
-  </script>
-
-  <button class="back-to-top" id="backToTop" aria-label="返回顶部">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-      <path d="M3 10L8 5L13 10"/>
-    </svg>
-  </button>
-  <script>
-    (function () {
-      var btn = document.getElementById('backToTop');
-      window.addEventListener('scroll', function () {
-        btn.classList.toggle('visible', window.scrollY > 320);
-      }, { passive: true });
-      btn.addEventListener('click', function () {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      });
-    })();
-  </script>
 
   <script>
     // JS-driven ticker — eliminates CSS animation restart flash
