@@ -160,8 +160,8 @@ barboard-space/
 --clr-pink-light:   #f060b8;
 --clr-violet:       #a855f7;   /* 软紫 */
 --clr-violet-light: #c084fc;
---clr-gold:       #c8982a;
---clr-gold-light: #e0b040;
+--clr-gold:       #d4a832;
+--clr-gold-light: #f5c840;
 --clr-text:       #f0eeff;
 --clr-text-2:     #8880a8;
 --clr-text-3:     #8880a8;
@@ -293,6 +293,10 @@ barboard-space/
 13. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
 14. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号
 15. **成员提及**：榜吧成员名（如 `@williw_`、`@SeafishYANG`）统一用 `<span class="member">` 包裹（`color: rgba(240,238,255,0.62); font-weight:500`），预留日后改 `<a>` 跳转成员主页
-16. **移动端 Nav**：`nav--open` class 加在 `<nav>` 上控制 `.nav__drawer` 显隐；按钮双图标（`.icon-menu` / `.icon-close`）CSS 切换；打开时锁定 `body overflow`
-17. **Hero 移动端**：`height: 100vh` 在移动端改为 `height: auto; min-height: 100svh; overflow: visible`，避免单栏堆叠时内容被裁切
-18. **返回顶部按钮**：`.back-to-top`，固定右下角，滚动 320px 后显示，紫色（`--clr-violet-light`）风格
+16. **移动端 Nav**：`nav--open` class 加在 `<nav>` 上控制 `.nav__drawer` 显隐；按钮双图标（`.icon-menu` / `.icon-close`）CSS 切换；打开时锁定 `body overflow`；drawer 用 `opacity/visibility/transform` 过渡动画（不用 display 切换）
+17. **Nav scrolled backdrop-filter 陷阱**：`.nav.scrolled` 的毛玻璃效果必须用 `::before` 伪元素实现，不能直接在 `.nav` 上写 `backdrop-filter`——否则 nav 建立新 stacking context，内部 `position:fixed` 的 drawer 会相对 nav 而非 viewport 定位，导致滚动后无法正确展开
+18. **Hero 移动端**：`height: auto; min-height: 100svh; overflow-x: clip`（clip 只裁横向，不影响纵向 ticker 显示）；`html` 和 `body` 都设 `overflow-x: hidden` 防横向滚动
+19. **返回顶部按钮**：`.back-to-top`，固定右下角，滚动 320px 后显示，紫色（`--clr-violet-light`）风格，`background: rgba(20,20,34,0.5)` + `backdrop-filter: blur(12px)`
+20. **标题 accent**：Barvision 标题用 `.bv-accent`（violet），BarboardLab 标题「Lab」用 `.lab-accent`（pink-light）
+21. **Ticker 移动端**：隐藏 `.ticker__label`（WHAT'S NOW），动画时长从 28s 改为 55s；桌面端 42s
+22. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
