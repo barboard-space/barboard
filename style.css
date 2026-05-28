@@ -181,7 +181,7 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(8, 8, 18, 0);
+  background: rgba(14, 8, 28, 0);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   z-index: -1;
@@ -193,7 +193,7 @@ img {
 }
 
 .nav.scrolled::before {
-  background: rgba(8, 8, 18, 0.95);
+  background: rgba(14, 8, 28, 0.95);
 }
 
 .nav__inner {
@@ -885,12 +885,12 @@ img {
 }
 
 .chart-item--silver .chart-song__artist {
-  color: rgba(120,168,196,0.8);
+  color: rgba(148,196,220,0.85);
 }
 
 .chart-item--silver .chart-stat__label,
 .chart-item--silver .chart-stat__val {
-  color: rgba(120,168,196,0.8);
+  color: rgba(148,196,220,0.85);
 }
 
 /* Bronze — Rank 3 */
@@ -1810,7 +1810,7 @@ body:has(.nav--open) .back-to-top {
   }
 
   .nav.scrolled::before {
-    background: rgba(8, 8, 18, 0.72);
+    background: rgba(14, 8, 28, 0.72);
   }
 
   .footer__tagline span {
