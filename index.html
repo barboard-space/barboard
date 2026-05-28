@@ -230,7 +230,7 @@
           <div class="lab__layout">
             <div class="lab__intro">
               <p class="section-label fade-up">榜吧实验室</p>
-              <h2 class="section__title fade-up" style="transition-delay:0.1s;">Barboard<span class="lab-accent">Lab</span></h2>
+              <h2 class="section__title fade-up" style="transition-delay:0.1s;">Bar<span class="bbl-board-accent">board</span><span class="lab-accent">Lab</span></h2>
               <p class="lab__description fade-up" style="transition-delay:0.2s;">
                 BarboardLab 由一批保持规律更新个人周榜的榜吧成员组成。成员提交各自的完整周榜，合并点数后得出当周单曲合榜，并通过 Bilibili 展播。
               </p>
@@ -496,16 +496,11 @@
           '</div>';
         }).join('');
 
-        listEl.querySelectorAll('.fade-up').forEach((el, i) => {
-          el.style.transitionDelay = (i * 0.05) + 's';
+        listEl.querySelectorAll('.fade-up').forEach((el) => {
+          el.style.transitionDelay = '0s';
+          if (fadeObserver) { fadeObserver.observe(el); }
+          else { el.classList.add('visible'); }
         });
-        const listObserver = new IntersectionObserver(entries => {
-          if (entries[0].isIntersecting) {
-            listEl.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
-            listObserver.disconnect();
-          }
-        }, { threshold: 0.05 });
-        listObserver.observe(listEl);
       } catch(e) {
         console.warn('BBL chart load failed:', e);
       }

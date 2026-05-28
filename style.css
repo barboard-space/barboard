@@ -181,11 +181,12 @@ img {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(8, 8, 18, 0.48);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
+  background: rgba(8, 8, 18, 0.88);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: -1;
-  transition: background 0.4s ease;
+  opacity: 0;
+  transition: opacity 0.4s ease;
 }
 
 .nav.scrolled {
@@ -193,7 +194,7 @@ img {
 }
 
 .nav.scrolled::before {
-  background: rgba(8, 8, 18, 0.92);
+  opacity: 1;
 }
 
 .nav__inner {
@@ -623,6 +624,10 @@ img {
    ============================================= */
 .lab-accent {
   color: var(--clr-violet-light);
+}
+
+.bbl-board-accent {
+  color: var(--clr-accent);
 }
 
 /* =============================================
