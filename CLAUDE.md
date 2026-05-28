@@ -314,11 +314,12 @@ barboard-space/
 
 ### 执行步骤
 
-1. **更新 CLAUDE.md**
+1. **更新 CLAUDE.md 和 CHANGELOG.md**
    - 将本次对话中完成的页面/功能追加到「已完成」列表
    - 将本次对话中发现的新技术要点追加到「开发注意事项」（编号续接）
    - 更新「待建页面」优先级列表（移除已完成项，调整顺序）
    - 若有新的设计决策或约定，更新对应章节
+   - 在 `CHANGELOG.md` 顶部追加本次改动（`## [YYYY-MM-DD]`，按 Added / Changed / Fixed / Style / Content / Docs 分类）
 
 2. **生成交接 Prompt**
    输出一段可直接粘贴到下一个 session 开头的 prompt，格式如下：
