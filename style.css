@@ -1780,7 +1780,12 @@ body:has(.nav--open) .back-to-top {
   .hero__desc          { animation: hero-fade-in 0.6s 0.2s ease both; }
   .hero__actions       { animation: hero-fade-in 0.6s 0.3s ease both; }
   .hero__updates-block { animation: hero-fade-in 0.7s 0.15s ease both; }
-  .hero__ticker-wrap   { animation: hero-fade-in 0.7s 0.55s ease both; }
+  .hero__ticker-wrap   { animation: ticker-fade-in 0.9s 0.55s ease both; }
+}
+
+@keyframes ticker-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @media (prefers-reduced-motion: no-preference) {
