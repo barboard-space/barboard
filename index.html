@@ -482,7 +482,8 @@
           const cover = t.cover
             ? '<img class="chart-cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
             : '<div class="chart-cover"></div>';
-          return '<div class="chart-item ' + (t.rank === 1 ? 'chart-item--top ' : '') + 'fade-up">' +
+          const medalClass = t.rank === 1 ? 'chart-item--top' : t.rank === 2 ? 'chart-item--silver' : t.rank === 3 ? 'chart-item--bronze' : '';
+          return '<div class="chart-item ' + (medalClass ? medalClass + ' ' : '') + 'fade-up">' +
             '<div class="chart-rank-col">' +
               '<div class="chart-rank">' + t.rank + '</div>' +
               chartChange(t) +

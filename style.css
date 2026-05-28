@@ -193,7 +193,7 @@ img {
 }
 
 .nav.scrolled::before {
-  background: rgba(8, 8, 18, 0.88);
+  background: rgba(8, 8, 18, 0.95);
 }
 
 .nav__inner {
@@ -642,7 +642,7 @@ img {
    ============================================= */
 .section {
   padding: var(--gap-xl) 0;
-  scroll-margin-top: var(--nav-h);
+  scroll-margin-top: calc(var(--nav-h) - 1px);
 }
 
 .section--bordered {
@@ -866,6 +866,56 @@ img {
 .chart-item--top .chart-stat__label,
 .chart-item--top .chart-stat__val {
   color: rgba(224,176,64,0.85);
+}
+
+/* Silver — Rank 2 */
+.chart-item--silver {
+  border-color: rgba(140,168,188,0.28);
+  background: linear-gradient(90deg, rgba(110,150,178,0.15) 0%, rgba(110,150,178,0.05) 50%, transparent 85%);
+  box-shadow: inset 3px 0 0 #7ea4bc, 0 0 28px rgba(110,150,178,0.10);
+}
+
+.chart-item--silver .chart-rank {
+  color: #90b8d0;
+  text-shadow: 0 0 18px rgba(110,170,204,0.5);
+}
+
+.chart-item--silver .chart-song__title {
+  color: #ccdde8;
+}
+
+.chart-item--silver .chart-song__artist {
+  color: rgba(120,168,196,0.8);
+}
+
+.chart-item--silver .chart-stat__label,
+.chart-item--silver .chart-stat__val {
+  color: rgba(120,168,196,0.8);
+}
+
+/* Bronze — Rank 3 */
+.chart-item--bronze {
+  border-color: rgba(196,128,74,0.32);
+  background: linear-gradient(90deg, rgba(196,120,68,0.18) 0%, rgba(196,120,68,0.06) 50%, transparent 85%);
+  box-shadow: inset 3px 0 0 #d09068, 0 0 28px rgba(196,120,68,0.12);
+}
+
+.chart-item--bronze .chart-rank {
+  color: #e0a870;
+  text-shadow: 0 0 18px rgba(224,148,84,0.6);
+}
+
+.chart-item--bronze .chart-song__title {
+  color: #fde8d0;
+}
+
+.chart-item--bronze .chart-song__artist {
+  color: rgba(224,160,100,0.8);
+}
+
+.chart-item--bronze .chart-stat__label,
+.chart-item--bronze .chart-stat__val {
+  color: rgba(224,160,100,0.8);
 }
 
 .chart-rank-col {
@@ -1822,7 +1872,12 @@ body:has(.nav--open) .back-to-top {
   .hero__actions       { animation: hero-fade-in 0.6s 0.3s ease both; }
   .hero__updates-block { animation: hero-fade-in 0.7s 0.15s ease both; }
   .hero__ticker-wrap   { animation: ticker-fade-in 0.9s 0.55s ease both; }
-  .hero__scroll-hint   { animation: hero-fade-in 0.7s 1.2s ease both; }
+  .hero__scroll-hint   { animation: scroll-hint-enter 0.7s 0.65s ease both; }
+}
+
+@keyframes scroll-hint-enter {
+  from { opacity: 0; transform: translateX(-50%) translateY(-12px); }
+  to   { opacity: 1; transform: translateX(-50%) translateY(0); }
 }
 
 @keyframes ticker-fade-in {
