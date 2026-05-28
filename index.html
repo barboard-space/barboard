@@ -410,8 +410,13 @@
       const end = new Date(dateStr + 'T12:00:00');
       const start = new Date(end);
       start.setDate(start.getDate() - 6);
+      const year = end.getFullYear();
       const opt = { month: 'short', day: 'numeric' };
-      return start.toLocaleDateString('en-US', opt) + ' – ' + end.toLocaleDateString('en-US', opt) + ', ' + end.getFullYear();
+      if (start.getMonth() === end.getMonth()) {
+        const mo = start.toLocaleDateString('en-US', { month: 'short' });
+        return mo + ' ' + start.getDate() + '–' + end.getDate() + ', ' + year;
+      }
+      return start.toLocaleDateString('en-US', opt) + '–' + end.toLocaleDateString('en-US', opt) + ', ' + year;
     }
 
     async function loadChart() {
