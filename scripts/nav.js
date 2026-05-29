@@ -70,7 +70,7 @@
     '        <ul class="footer__links">',
     '          <li><a href="/about.html">关于Barboard</a></li>',
     '          <li><a href="/archive.html">Archive</a></li>',
-    '          <li><a href="/about.html#members">成员名录</a></li>',
+    '          <li><a href="/about.html#members">Members</a></li>',
     '        </ul>',
     '      </div>',
     '    </div>',
@@ -153,6 +153,36 @@
     });
   }
 
+  /* ── Member tooltip ───────────────────────────────────────────────────── */
+  function initMemberTooltips() {
+    var tip = document.createElement('div');
+    tip.className = 'member-tooltip';
+    tip.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(tip);
+
+    function show(el) {
+      var nickname = el.getAttribute('data-nickname');
+      if (!nickname) return;
+      tip.textContent = nickname;
+      var r = el.getBoundingClientRect();
+      tip.style.left = Math.round(r.left + r.width / 2) + 'px';
+      tip.style.top  = Math.round(r.top) + 'px';
+      tip.classList.add('member-tooltip--visible');
+    }
+
+    function hide() {
+      tip.classList.remove('member-tooltip--visible');
+    }
+
+    document.querySelectorAll('.member[data-nickname]').forEach(function(el) {
+      el.addEventListener('mouseenter', function() { show(el); });
+      el.addEventListener('mouseleave', hide);
+      el.addEventListener('focus',      function() { show(el); });
+      el.addEventListener('blur',       hide);
+    });
+  }
+
   initNav();
   initBackToTop();
+  initMemberTooltips();
 })();

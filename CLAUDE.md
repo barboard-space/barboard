@@ -28,16 +28,19 @@
 - `style.css` — 全站样式（含完整设计系统）
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
-- `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，`const FORM_URL = ''` 待填入）
+- `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入）
+- `member/7.html` — @williw_（威妈）成员主页（头像占位、标签、外链、代表榜单 TODO 区，作为成员页模板）
 - `data/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
+- `member.html` — Members 总览页（成员列表，链接到各 `member/数字.html`）
+- 其余成员主页 — `member/1.html`…`member/10.html` 预留，其他成员从 11 开始；@williw_ = 7
 - `barvision.html` — Barvision 总览 + Hall of Fame
 - `barboardlab.html` — BBL 活动介绍
-- `about.html` — 关于榜吧完整历史（含 `#members` 锚点，供 footer 链接跳转）
+- `about.html` — 关于榜吧完整历史
 - `archive.html` — 存档中心总览
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -81,9 +84,13 @@ barboard-space/
 │   ├── hall-of-fame.html
 │   └── charts/
 │
+├── member/
+│   ├── 7.html              ← @williw_（威妈）成员主页（已完成，含 TODO 占位）
+│   └── …                   ← 其他成员页（1-10 预留，其余从 11 起）
+│
 ├── barvision/
 │   ├── 2026/
-│   │   ├── events.html     ← 已完成，待填表单 URL
+│   │   ├── events.html     ← 已完成，已接入 nav.js，待填表单 URL
 │   │   ├── results.html
 │   │   └── news.html
 │   └── 2025/
@@ -313,7 +320,7 @@ barboard-space/
 13. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染
 14. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
 15. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号
-16. **成员提及**：榜吧成员名（如 `@williw_`、`@SeafishYANG`）统一用 `<span class="member">` 包裹（`color: rgba(240,238,255,0.62); font-weight:500`），预留日后改 `<a>` 跳转成员主页
+16. **成员提及**：榜吧成员名统一用 `<a class="member" href="[相对路径]/member/7.html" data-nickname="昵称">@username</a>`。href 用**相对路径**（file:// 兼容），不用绝对路径（绝对路径在 file:// 下解析到磁盘根）。`data-nickname` 由 nav.js 的 `initMemberTooltips()` 读取，显示 JS tooltip（挂在 `<body>`，`position:fixed`，`transform:translate(-50%,calc(-100% - 7px))`，opacity fade 0.18s）。PC hover 色变 `--clr-violet-light`，移动端点击跳转。当前成员：`@williw_`（威妈）→ `member/7.html`
 17. **移动端 Nav**：`nav--open` class 加在 `<nav>` 上控制 `.nav__drawer` 显隐；汉堡/X 图标用 `opacity + transform` 过渡（不用 `display:none/block`），两图标均 `position:absolute`，按钮设 `width:30px; height:30px` 撑容器；drawer 用 `opacity/visibility/transform` 过渡（0.32s）
 18. **Nav scrolled backdrop-filter 陷阱**：`.nav.scrolled` 的毛玻璃效果必须用 `::before` 伪元素实现，不能直接在 `.nav` 上写 `backdrop-filter`——否则 nav 建立新 stacking context，内部 `position:fixed` 的 drawer 会相对 nav 而非 viewport 定位，导致滚动后无法正确展开
 19. **back-to-top Z 轴陷阱**：`.nav`（`position:fixed; z-index:100`）建立独立 stacking context，drawer（z-index:1000）在全局层级等同 z-index:100；`.back-to-top`（z-index:200）全局高于 nav，drawer 无法直接遮盖它。解法：`body:has(.nav--open) .back-to-top { opacity:0; visibility:hidden }`
@@ -340,6 +347,9 @@ barboard-space/
 40. **共享 nav/footer 方案**：`scripts/nav.js` 内嵌 `NAV_HTML` / `FOOTER_HTML` 字符串，同步调用 `inject()` (`insertAdjacentHTML('afterend',...) + remove()`) 替换占位符。不用 `fetch` 是因为 Chrome/Edge 在 `file://` 协议下 CORS 屏蔽跨文件 fetch，本地开发无需起 server。新页面模板：`<div id="site-nav"></div>`…内容…`<div id="site-footer"></div><script src="../scripts/nav.js"></script>`（路径按层级调整）
 41. **nav.js 中的链接用绝对路径**：`/about.html`、`/barvision.html` 等，在 GitHub Pages 自定义域名下从根解析，子目录页面（如 `barvision/2026/events.html`）也能正确跳转
 42. **updates.json show_after 字段**：BV 里程碑条目加 `"show_after":"YYYY-MM-DD"`，JS 过滤 `new Date(show_after) <= now`；普通条目不加此字段（始终显示）；文件整体按 `date` 降序排列
+43. **装饰性 `::before`/`::after` overlay 必须加 `pointer-events: none`**：`position:absolute; inset:0` 的伪元素在 z-order 上覆盖内容区，若无 `pointer-events:none` 会拦截所有点击（包括子元素的 `<a>` 链接）。典型案例：`.season-card__banner::before` 网格层漏掉此属性，导致 `.member` 链接无法点击
+44. **Member tooltip 用 JS 而非 CSS `::before`**：CSS 伪元素受父容器 `overflow:hidden` 裁剪，无法逃脱；JS tooltip 挂在 `<body>` 末端（`position:fixed`），用 `transform:translate(-50%,calc(-100%-7px))` 定位，无需测量 `offsetWidth/offsetHeight`（opacity:0 时测量可能返回 0）
+45. **成员页编号规则**：`member/数字.html`，1–10 为预留位，其他成员从 11 起；当前已建：`member/7.html`（@williw_）。`member.html` 为总览入口（待建）
 
 ---
 

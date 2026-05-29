@@ -472,29 +472,7 @@
 <body>
 
   <!-- NAV -->
-  <nav class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="../../" class="nav__logo">
-        <img src="../../assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" />
-        <span>BAR<span class="nav__logo-board">BOARD</span></span>
-      </a>
-      <ul class="nav__links">
-        <li><a href="../../about.html">About</a></li>
-        <li><a href="../../barvision.html">Barvision</a></li>
-        <li><a href="../../barboardlab.html">BarboardLab</a></li>
-        <li><a href="../../archive.html">Archive</a></li>
-        <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
-        <li><a href="events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名通道</span></a></li>
-      </ul>
-      <button class="nav__menu-btn" aria-label="打开菜单">
-        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
-          <line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-          <line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-        </svg>
-      </button>
-    </div>
-  </nav>
+  <div id="site-nav"></div>
 
   <!-- HERO -->
   <section class="ev-hero">
@@ -514,7 +492,7 @@
       <h1 class="ev-title">Bar<span class="bv-accent">vision</span></h1>
       <div class="ev-edition">CHONGQING 2026</div>
       <div class="ev-tagline">Echoing Confluence · 声汇两江</div>
-      <div class="ev-meta">主办：<span class="member">@williw_</span> &nbsp;·&nbsp; 重庆</div>
+      <div class="ev-meta">主办：<a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a> &nbsp;·&nbsp; 重庆</div>
 
       <div class="ev-hero__bottom">
         <div class="ev-countdown" id="heroCountdownWrap">
@@ -810,57 +788,10 @@
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
-    <div class="section__inner">
-      <div class="footer__grid">
-        <div>
-          <a href="../../" class="nav__logo footer__logo">
-            <img src="../../assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" />
-            <span>BAR<span class="nav__logo-board">BOARD</span></span>
-          </a>
-          <p style="font-size:12px;color:var(--clr-text);margin-bottom:8px;">欧美流行音乐个人榜吧</p>
-          <p class="footer__tagline">成立于2013年5月21日<br>UNITED BY MUSIC</p>
-        </div>
-        <div>
-          <div class="footer__col-title">BarboardLab</div>
-          <ul class="footer__links">
-            <li><a href="../../barboardlab.html">活动介绍</a></li>
-            <li><a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener">BBL 本期榜单<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>
-            <li><a href="../../barboardlab/hall-of-fame.html">Hall of Fame</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">Barvision 2026</div>
-          <ul class="footer__links">
-            <li><a href="events.html">赛事详情</a></li>
-            <li><a href="#submit">歌曲报名</a></li>
-            <li><a href="#schedule">赛程</a></li>
-            <li><a href="#rules">参赛规则</a></li>
-          </ul>
-        </div>
-        <div>
-          <div class="footer__col-title">更多</div>
-          <ul class="footer__links">
-            <li><a href="../../barvision.html">历届 Barvision</a></li>
-            <li><a href="../../about.html">关于榜吧</a></li>
-            <li><a href="../../archive.html">存档中心</a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="footer__bottom">
-        <span class="footer__copy">© 2013–2026 Barboard. All rights reserved.</span>
-        <span class="footer__notice">Designed & built by @williw_</span>
-      </div>
-    </div>
-  </footer>
+  <div id="site-footer"></div>
 
+  <script src="../../scripts/nav.js"></script>
   <script>
-    // Nav scroll
-    const nav = document.getElementById('nav');
-    window.addEventListener('scroll', () => {
-      nav.classList.toggle('scrolled', window.scrollY > 40);
-    }, { passive: true });
-
     // Fade-up (shared)
     if ('IntersectionObserver' in window) {
       const obs = new IntersectionObserver((entries) => {
