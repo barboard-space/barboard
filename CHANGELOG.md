@@ -4,6 +4,21 @@
 
 ---
 
+## [2026-05-29] — 成员主页系统完整实现
+
+### Added
+- **`scripts/member-render.js`**：成员页共享模板，统一管理所有 CSS 与 HTML 渲染逻辑；读取 `window.MEMBER_DATA` 动态生成 hero（头像、昵称、handle、team 标签、外链）+ Works 区（Works label / 代表成绩标题 / 即将上线占位，三元素各自 fade-up 带阶梯 delay 0.05/0.15/0.25s）
+- **`scripts/gen_member_pages.py`**：批量生成脚本，读取 `data/barboard_members.csv` 生成全部 117 个 `member/N.html`（每页仅含 MEMBER_DATA 数据壳）
+- **`member/7.html … member/770.html`**：全体117位成员个人主页（含 `member/7.html` 重构）
+
+### Changed
+- **`member/7.html`**：大幅精修——填入真实 Bilibili（6594528）/ Musictrack（chart/25）链接；team 标签改为 BarboardLab（紫）+ 村摇欧共体（金棕，新增 `.mp-tag--cun`）；外链移至右上角三列网格竖排等宽；图标统一 13×13px（Bilibili fill、Musictrack stroke-width 2.5）；头像占位改为"威"（CJK 用 body font）、向下移 8px；按钮字号 12px + padding 3px；移除 `MEMBER · #007` 和 `Barvision 主办` 标签；"代表榜单"→"代表成绩"，占位文字"即将上线"
+- **`member.html`**：`BUILT_PAGES` 从 `Set([7])` 更新为全部117个 space_id，所有成员卡片均可点击跳转
+- **`index.html` MEMBER_MAP**：从2条扩展至全量（75+ 条），覆盖所有有 ASCII handle 的成员及所有中文 handle 成员；`SeafishYANG` href 从 `member.html` 修正为 `member/100.html`
+- **`index.html` parseMentions**：正则从 `[\w]+` 升级为 `[\p{L}\p{N}_-]+`（`u` flag），原生支持 Unicode 字母数字；含尾部连字符 handle（`健Jian-`）通过 `.replace(/-+$/, '')` 截断后查表；中文 handle（`哈哈哈时光机` 等）以完整字符串为 key 直接命中
+
+---
+
 ## [2026-05-29] — member.html 链接 hover
 
 ### Style

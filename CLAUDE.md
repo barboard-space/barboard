@@ -30,7 +30,10 @@
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入）
 - `member.html` — Members 总览页（117位成员，**动态 fetch `data/barboard_members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
-- `member/7.html` — @williw_（威妈）成员主页（头像占位、标签、外链、代表榜单 TODO 区，作为成员页模板）
+- `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
+- `member/N.html`（117个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
+- `scripts/member-render.js` — 成员页共享模板：注入 CSS、读取 `window.MEMBER_DATA`、渲染 hero+Works 两节、处理 CJK/ASCII 头像字体、设置 fade-up 动画
+- `scripts/gen_member_pages.py` — 成员页批量生成脚本：读 CSV → 输出 117 个 `member/N.html`；数据变动时重新运行
 - `data/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
 - `data/barboard_members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
@@ -39,7 +42,6 @@
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
-- 其余成员主页 — `member/1.html`…`member/10.html` 预留，其他从 11 起；@williw_ = 7，其余编号待定；建好后将 `space_id` 加入 `member.html` 的 `BUILT_PAGES` Set，并在 `index.html` MEMBER_MAP 同步更新 `page` 字段和 href
 - `barvision.html` — Barvision 总览 + Hall of Fame
 - `barboardlab.html` — BBL 活动介绍
 - `about.html` — 关于榜吧完整历史
@@ -71,7 +73,9 @@ barboard-space/
 │
 ├── scripts/
 │   ├── fetch_bbl.py        ← BBL 抓取脚本（同时更新 ticker.json / updates.json）
-│   └── nav.js              ← 全站共享 nav/footer 组件 + 所有 nav JS
+│   ├── nav.js              ← 全站共享 nav/footer 组件 + 所有 nav JS
+│   ├── member-render.js    ← 成员页共享模板（CSS注入 + HTML渲染 + 动画）
+│   └── gen_member_pages.py ← 批量生成 member/N.html（读CSV，运行一次）
 │
 ├── partials/
 │   ├── nav.html            ← nav HTML 可读备份（与 nav.js 内容同步）
@@ -87,8 +91,9 @@ barboard-space/
 │   └── charts/
 │
 ├── member/
-│   ├── 7.html              ← @williw_（威妈）成员主页（已完成，含 TODO 占位）
-│   └── …                   ← 其他成员页（1-10 预留，其余从 11 起）
+│   ├── 7.html              ← @williw_（威妈）成员主页（已完成）
+│   ├── 12.html … 770.html  ← 全部117位成员主页（gen_member_pages.py 生成）
+│   └── …
 │
 ├── barvision/
 │   ├── 2026/
@@ -351,14 +356,14 @@ barboard-space/
 42. **updates.json show_after 字段**：BV 里程碑条目加 `"show_after":"YYYY-MM-DD"`，JS 过滤 `new Date(show_after) <= now`；普通条目不加此字段（始终显示）；文件整体按 `date` 降序排列
 43. **装饰性 `::before`/`::after` overlay 必须加 `pointer-events: none`**：`position:absolute; inset:0` 的伪元素在 z-order 上覆盖内容区，若无 `pointer-events:none` 会拦截所有点击（包括子元素的 `<a>` 链接）。典型案例：`.season-card__banner::before` 网格层漏掉此属性，导致 `.member` 链接无法点击
 44. **Member tooltip 用 JS 事件委托**：`initMemberTooltips()` 监听 `document` 的 `mouseover/mousemove/mouseout`，用 `e.target.closest('.member[data-nickname]')` 匹配；tooltip div 挂在 `<body>`，`position:fixed`，跟随鼠标坐标 `(e.clientX+16, e.clientY)`，opacity 0.85，10px 字体；事件委托自动覆盖动态渲染元素，无需重新绑定
-45. **成员页编号规则**：`member/数字.html`，1–10 为预留位，其他成员从 11 起；当前已建：`member/7.html`（@williw_）。`member.html` 为总览入口（已完成）
-46. **`@username` 自动解析**：`index.html` 中 `MEMBER_MAP`（键为 handle/B站ID，值为 `{nickname, href}`）+ `parseMentions(raw)` 函数；`buildTicker()` 和 `renderUpdates()` 均调用，JSON 文件只需写纯文本 `@username`，在 MEMBER_MAP 中的自动转为带 tooltip 的 `.member` 链接，不在则保留纯文本。新增成员时在 MEMBER_MAP 和 `member.html` 的 MEMBERS 数组里各加一行即可
+45. **成员页编号规则**：`member/space_id.html`，与 CSV 的 `space_id` 字段一一对应；全部117个已由 `gen_member_pages.py` 生成。`member.html` 为总览入口（已完成）
+46. **`@username` 自动解析**：`index.html` 中 `MEMBER_MAP`（键为完整 handle，值为 `{nickname, href}`）+ `parseMentions(raw)` 函数；正则 `/@([\p{L}\p{N}_-]+)/gu` 支持 Unicode 字母数字、下划线、连字符；含尾部连字符的 handle（如 `健Jian-`）用 `.replace(/-+$/, '')` 截断后查表；含中文的 handle（如 `哈哈哈时光机`）直接以完整 handle 为 key；不在 MEMBER_MAP 的保留纯文本
 47. **`member.html` 数据维护**：成员数据从 `data/barboard_members.csv` 动态加载（已废弃硬编码 MEMBERS 数组）。新增/修改成员只需编辑 CSV；建好个人主页后将对应 `space_id` 加入 `BUILT_PAGES` Set（见 #52），对应卡片自动变为可点击链接。
 48. **Dev Gate 开关**：`scripts/nav.js` 第8行 `var DEV_GATE = true`，上线时改为 `false` 即完全关闭（无需删代码）。各页面 `<head>` 含防闪内联脚本（sessionStorage key `barboard_dev`，值 `'1'` 表示已通过，关 tab 失效）。gate CSS/HTML/JS 全部封装在 `initDevGate()` 函数内
 49. **Dev Gate `visibility` 继承陷阱**：防闪脚本设 `document.documentElement.style.visibility='hidden'`（作用于 `<html>`），子元素全部继承，包括 gate overlay 本身。`initDevGate()` 注入 overlay 后必须立即调用 `document.documentElement.style.visibility=''` 还原，否则 overlay 也不可见
 50. **新页面接入 Dev Gate**：新建 HTML 页在 `<meta name="viewport">` 后加一行：`<script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>`；nav.js 已自动处理后续逻辑，无需其他改动
 51. **member.html CSV 动态加载**：页面通过 `fetch('data/barboard_members.csv')` 运行时读取成员数据，JS 解析 CSV（含带引号字段处理）。新增/修改成员只需编辑 CSV，无需动 HTML。`parseCSVLine()` 处理引号内逗号；多个 bilibili_id 取第一个；空字段安全跳过。
-52. **BUILT_PAGES Set 管理成员页链接**：`member.html` 顶部 `var BUILT_PAGES = new Set([7])` 存放已建成员页的 `space_id`。新建 `member/N.html` 后将 `N` 加入此 Set，对应卡片自动变为可点击链接，其余卡片保持不可点击。无需改动 CSV 或其他逻辑。
+52. **BUILT_PAGES Set 管理成员页链接**：`member.html` 顶部 `var BUILT_PAGES = new Set([...])` 存放已建成员页的 `space_id`，当前已包含全部117个。运行 `gen_member_pages.py` 后脚本会打印最新 Set 内容，复制粘贴到 member.html 即可。
 53. **嵌套锚点陷阱**：卡片外层若为 `<a>`，内部不能再有 `<a>`（Musictrack/Bilibili 链接），浏览器会自动断开外层锚点导致游离元素出现在 grid 中。解法：外层一律用 `<div>` + `onclick="location.href='...'"` 处理导航，内部链接加 `onclick="event.stopPropagation()"` 防冒泡。
 54. **member.html 小组色彩系统**：筛选按钮与成员标签 badge 颜色一一对应——全部/无分组：榜吧蓝 `#6F9EC3`；BBL：紫色 `--clr-violet-light`；村摇欧：棕黄 `#D49840`；Indienation：粉色 `--clr-pink-light`。badge 简称：BBL / 村摇欧 / Indie。
 55. **member.html 入场动画架构**：hero 元素用 CSS `@keyframes ml-hero-in`（eyebrow 0.05s → 标题 0.16s → 筛选按钮 0.28–0.46s → 搜索框 0.52s）；卡片用自定义 `ml-card-enter`（`opacity:0; translateY(12px); cubic-bezier(0.22,1,0.36,1)`）+ IntersectionObserver。首屏卡片：850ms 后再注册 observer（通过 `getBoundingClientRect().top < vh` 判断）；屏外卡片：立即注册，滚入时触发。计数器：函数顶部 `transition:none; opacity:0` 禁用过渡静默写入内容，双 rAF 后重启过渡，550ms 后淡入。
@@ -367,6 +372,9 @@ barboard-space/
 58. **member.html 成员排序架构**：CSV 加载完成后按三级键排序——主键 `getRowScore`（0–7，信息行数：有handle+team+foot=7，有handle+foot=6，有handle+team=5，有foot+team=4，仅handle=3，仅foot=2，仅team=1，仅昵称=0），次键 `getMemberScore`（字段完善度各+1），三键 `getTeamPriority`（BBL=4/村摇欧=2/Indie=1 叠加）。`PINNED_NAMES=['雨妈','威妈','羊妈','S妈']` 先提取后置顶，不参与排序。筛选时 hidden class 控制显隐，排序顺序不变。
 59. **member.html 计数器 label 动画**：`transform: translateX` 绝对不能直接作用在 flex item 的 label span 本身——会使整个元素偏移压入数字区域。最终方案：旧文字 `transition opacity+transform` 向左滑出淡出（120ms），`setTimeout` 内换文字、snap 到右侧（双 rAF），再 `transition` 向左滑入归位（200ms）。
 60. **member.html 计数器数字固定宽度**：`.ml-count__num` 加 `min-width: 3ch; text-align: right`，Bebas Neue 数字宽度一致，3ch 足够容纳最大三位数（117），切换时右侧 label 位置不跳变。
+61. **成员页共享模板架构**：CSS 与 HTML 结构统一在 `scripts/member-render.js` 管理；每个 `member/N.html` 仅含 `<head>` 基础引用 + `var MEMBER_DATA = {...}` + 两行 `<script>` 引用（member-render.js 先于 nav.js）。改标题、样式等只需改 member-render.js 一处，所有117页自动更新。`mp-tag--indie` 样式也定义在此文件。
+62. **成员页 CJK 头像字体处理**：`member-render.js` 中检测 placeholder 首字符 `charCodeAt(0) > 127`，CJK 字符用 `var(--font-body)` + `font-size:42px; font-weight:700`，ASCII 字符用 `var(--font-display)` + `font-size:48px`，防止 Bebas Neue 无法渲染汉字。
+63. **成员页外链按钮布局**：`.mp-card` 三列网格 `auto 1fr auto`；链接列（第三列）`flex-direction:column`，上下等宽排列（width:100%），Bilibili 在上；移动端 `grid-column:1/-1` 跨行横排。
 
 ---
 

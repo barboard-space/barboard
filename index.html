@@ -290,15 +290,91 @@
     // 数据从 data/updates.json 和 data/ticker.json 异步加载
     var _staticUpdates = [];
 
-    // 成员映射表（成员名录页建好后统一更新 href）
     var MEMBER_MAP = {
-      'williw_':    { nickname: '威妈', href: 'member/7.html' },
-      'SeafishYANG':{ nickname: '羊妈', href: 'member.html'  }
+      'williw_':        { nickname: '威妈', href: 'member/7.html'   },
+      'WillKris锴':      { nickname: '锴妈', href: 'member/12.html'  },
+      'PRONGS':          { nickname: '叉妈', href: 'member/13.html'  },
+      'Lee翼雨':         { nickname: '雨妈', href: 'member/17.html'  },
+      'Voiiz':           { nickname: '猴妈', href: 'member/18.html'  },
+      'LemonSheeran':    { nickname: '柠妈', href: 'member/19.html'  },
+      'Jeremy_BAg':      { nickname: '包妈', href: 'member/20.html'  },
+      '哈哈哈时光机':    { nickname: 'S妈',  href: 'member/27.html'  },
+      'DuncanLee':       { nickname: '邓妈', href: 'member/31.html'  },
+      '吃辣喝香':        { nickname: '笃妈', href: 'member/33.html'  },
+      'ChArLiE':         { nickname: '猹妈', href: 'member/40.html'  },
+      '白矮星爱吃东西':  { nickname: '星妈', href: 'member/45.html'  },
+      'SouthkoreaBall':  { nickname: '韩妈', href: 'member/67.html'  },
+      '不动团子':        { nickname: '团妈', href: 'member/68.html'  },
+      '白哼唧':          { nickname: '白妈', href: 'member/77.html'  },
+      'xjebs':           { nickname: 'X妈',  href: 'member/88.html'  },
+      'SeafishYANG':     { nickname: '羊妈', href: 'member/100.html' },
+      'ww_micro_微波':   { nickname: '波妈', href: 'member/101.html' },
+      '奶儿少爷':        { nickname: '奶妈', href: 'member/102.html' },
+      'Hg':              { nickname: '汞妈', href: 'member/103.html' },
+      'PROKING':         { nickname: 'P妈',  href: 'member/104.html' },
+      'Squirrel松鼠':    { nickname: '松妈', href: 'member/105.html' },
+      '杰克甲':          { nickname: '甲妈', href: 'member/106.html' },
+      'Lone':            { nickname: 'L妈',  href: 'member/107.html' },
+      'TimCircles6':     { nickname: '圈妈', href: 'member/108.html' },
+      'Sprite':          { nickname: '雪妈', href: 'member/109.html' },
+      'Stephen':         { nickname: '芬妈', href: 'member/110.html' },
+      '老白虎qwq':       { nickname: '虎妈', href: 'member/111.html' },
+      '健Jian':          { nickname: '健妈', href: 'member/112.html' },
+      'Vivienne-Eliza':  { nickname: '布妈', href: 'member/157.html' },
+      'Aaowu_':          { nickname: '狼妈', href: 'member/113.html' },
+      'Blackout':        { nickname: '黑妈', href: 'member/114.html' },
+      'iTAP_II':         { nickname: 'T妈',  href: 'member/115.html' },
+      'SummertimeDawns': { nickname: '文妈', href: 'member/116.html' },
+      'dizzyhugh':       { nickname: '晕妈', href: 'member/117.html' },
+      'Razbit':          { nickname: '兔妈', href: 'member/118.html' },
+      'Ocean':           { nickname: '海妈', href: 'member/119.html' },
+      'MarekTotti':      { nickname: '城妈', href: 'member/120.html' },
+      'inje白霜':        { nickname: '霜妈', href: 'member/121.html' },
+      'wokwen':          { nickname: '温妈', href: 'member/122.html' },
+      '曹可可KE':        { nickname: '可妈', href: 'member/123.html' },
+      'Lolo_sara':       { nickname: '洛妈', href: 'member/124.html' },
+      '绿荫夏语':        { nickname: '萌妈', href: 'member/125.html' },
+      '能吃的莉莉丝':    { nickname: '吃妈', href: 'member/126.html' },
+      '莫扎特_伦苏':     { nickname: '苏妈', href: 'member/127.html' },
+      'Burke':           { nickname: '克妈', href: 'member/128.html' },
+      'fire_storm':      { nickname: '火妈', href: 'member/129.html' },
+      'Tandiny':         { nickname: '麦妈', href: 'member/130.html' },
+      '泰坦crazy':       { nickname: '泰妈', href: 'member/131.html' },
+      'AloneAlien_':     { nickname: 'A妈',  href: 'member/132.html' },
+      'rihanavy':        { nickname: 'N妈',  href: 'member/133.html' },
+      '柠檬辉光':        { nickname: '光妈', href: 'member/134.html' },
+      'Jefferyat19':     { nickname: '瑞妈', href: 'member/135.html' },
+      '_Yuckduckylli':   { nickname: 'Y妈',  href: 'member/136.html' },
+      'LEEROY':          { nickname: '利妈', href: 'member/137.html' },
+      'lovezedd':        { nickname: 'Z妈',  href: 'member/138.html' },
+      'Maisema':         { nickname: '龙妈', href: 'member/139.html' },
+      'SuperModel':      { nickname: '超妈', href: 'member/140.html' },
+      'Twentee':         { nickname: '草妈', href: 'member/141.html' },
+      'Victor':          { nickname: 'V妈',  href: 'member/142.html' },
+      'Jeoli音乐':       { nickname: '小妈', href: 'member/153.html' },
+      'Durden':          { nickname: '风妈', href: 'member/154.html' },
+      'TONY顺仔':        { nickname: '顺妈', href: 'member/155.html' },
+      'jh201013':        { nickname: '杰妈', href: 'member/156.html' },
+      '漫画小鸣':        { nickname: '鸣妈', href: 'member/158.html' },
+      'Phoerienies':     { nickname: '鸽妈', href: 'member/160.html' },
+      'Stoney':          { nickname: '石妈', href: 'member/162.html' },
+      'zrybenny':        { nickname: '渣妈', href: 'member/163.html' },
+      '郑志宽额':        { nickname: '亮妈', href: 'member/164.html' },
+      'Leevai':          { nickname: '鹿妈', href: 'member/165.html' },
+      'Mylo_Xyloto':     { nickname: '梦妈', href: 'member/166.html' },
+      'DDDDDope':        { nickname: '嘟妈', href: 'member/190.html' },
+      'LUKY':            { nickname: '米妈', href: 'member/256.html' },
+      'FREEMAN':         { nickname: '田妈', href: 'member/295.html' },
+      '天神院院长':      { nickname: '院妈', href: 'member/326.html' },
+      '醉の蒲公英':      { nickname: '醉妈', href: 'member/614.html' },
+      'Echoes':          { nickname: 'E妈',  href: 'member/659.html' },
+      '环球颖音':        { nickname: '音妈', href: 'member/770.html' }
     };
 
     function parseMentions(raw) {
-      return raw.replace(/@([\w]+)/g, function(match, name) {
-        var m = MEMBER_MAP[name];
+      return raw.replace(/@([\p{L}\p{N}_-]+)/gu, function(match, name) {
+        var key = name.replace(/-+$/, '');
+        var m = MEMBER_MAP[key] || MEMBER_MAP[name];
         if (!m) return esc(match);
         return '<a class="member" href="' + m.href + '" data-nickname="' + m.nickname + '">' + esc(match) + '</a>';
       });
