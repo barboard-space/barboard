@@ -300,12 +300,26 @@
     // 数据从 data/updates.json 和 data/ticker.json 异步加载
     var _staticUpdates = [];
 
+    // 成员映射表（成员名录页建好后统一更新 href）
+    var MEMBER_MAP = {
+      'williw_':    { nickname: '威妈', href: 'member/7.html' },
+      'SeafishYANG':{ nickname: '羊妈', href: 'member.html'  }
+    };
+
+    function parseMentions(raw) {
+      var esc = function(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
+      return raw.replace(/@([\w]+)/g, function(match, name) {
+        var m = MEMBER_MAP[name];
+        if (!m) return esc(match);
+        return '<a class="member" href="' + m.href + '" data-nickname="' + m.nickname + '">' + esc(match) + '</a>';
+      });
+    }
+
     function buildTicker(items) {
       var track = document.querySelector('.ticker__track');
       if (!track) return;
-      var escT = function(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
       var half = items.map(function(t) {
-        return '<span class="ticker__item">' + escT(t) + '</span>';
+        return '<span class="ticker__item">' + parseMentions(t) + '</span>';
       }).join('');
       track.innerHTML = half + half;
       if (window._tickerUpdateHalfWidth) window._tickerUpdateHalfWidth();
@@ -336,7 +350,7 @@
           '<time class="hero__update-date" datetime="' + u.date + '">' + dateStr + '</time>' +
           '<div>' +
             '<div class="hero__update-title">' + u.title + '</div>' +
-            '<div class="hero__update-desc">' + u.desc + '</div>' +
+            '<div class="hero__update-desc">' + parseMentions(u.desc) + '</div>' +
           '</div>' +
         '</article>';
       }).join('');

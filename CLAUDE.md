@@ -29,15 +29,16 @@
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入）
+- `member.html` — Members 总览页（117位成员，JS 渲染 + 4档过滤，数据来自 `data/barboard_members.csv`）
 - `member/7.html` — @williw_（威妈）成员主页（头像占位、标签、外链、代表榜单 TODO 区，作为成员页模板）
 - `data/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
+- `data/barboard_members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
-- `member.html` — Members 总览页（成员列表，链接到各 `member/数字.html`）
-- 其余成员主页 — `member/1.html`…`member/10.html` 预留，其他成员从 11 开始；@williw_ = 7
+- 其余成员主页 — `member/1.html`…`member/10.html` 预留，其他从 11 起；@williw_ = 7，其余编号待定；建好后在 `member.html` MEMBERS 数组和 `index.html` MEMBER_MAP 同步更新 `page` 字段和 href
 - `barvision.html` — Barvision 总览 + Hall of Fame
 - `barboardlab.html` — BBL 活动介绍
 - `about.html` — 关于榜吧完整历史
@@ -348,8 +349,10 @@ barboard-space/
 41. **nav.js 中的链接用绝对路径**：`/about.html`、`/barvision.html` 等，在 GitHub Pages 自定义域名下从根解析，子目录页面（如 `barvision/2026/events.html`）也能正确跳转
 42. **updates.json show_after 字段**：BV 里程碑条目加 `"show_after":"YYYY-MM-DD"`，JS 过滤 `new Date(show_after) <= now`；普通条目不加此字段（始终显示）；文件整体按 `date` 降序排列
 43. **装饰性 `::before`/`::after` overlay 必须加 `pointer-events: none`**：`position:absolute; inset:0` 的伪元素在 z-order 上覆盖内容区，若无 `pointer-events:none` 会拦截所有点击（包括子元素的 `<a>` 链接）。典型案例：`.season-card__banner::before` 网格层漏掉此属性，导致 `.member` 链接无法点击
-44. **Member tooltip 用 JS 而非 CSS `::before`**：CSS 伪元素受父容器 `overflow:hidden` 裁剪，无法逃脱；JS tooltip 挂在 `<body>` 末端（`position:fixed`），用 `transform:translate(-50%,calc(-100%-7px))` 定位，无需测量 `offsetWidth/offsetHeight`（opacity:0 时测量可能返回 0）
-45. **成员页编号规则**：`member/数字.html`，1–10 为预留位，其他成员从 11 起；当前已建：`member/7.html`（@williw_）。`member.html` 为总览入口（待建）
+44. **Member tooltip 用 JS 事件委托**：`initMemberTooltips()` 监听 `document` 的 `mouseover/mousemove/mouseout`，用 `e.target.closest('.member[data-nickname]')` 匹配；tooltip div 挂在 `<body>`，`position:fixed`，跟随鼠标坐标 `(e.clientX+16, e.clientY)`，opacity 0.85，10px 字体；事件委托自动覆盖动态渲染元素，无需重新绑定
+45. **成员页编号规则**：`member/数字.html`，1–10 为预留位，其他成员从 11 起；当前已建：`member/7.html`（@williw_）。`member.html` 为总览入口（已完成）
+46. **`@username` 自动解析**：`index.html` 中 `MEMBER_MAP`（键为 handle/B站ID，值为 `{nickname, href}`）+ `parseMentions(raw)` 函数；`buildTicker()` 和 `renderUpdates()` 均调用，JSON 文件只需写纯文本 `@username`，在 MEMBER_MAP 中的自动转为带 tooltip 的 `.member` 链接，不在则保留纯文本。新增成员时在 MEMBER_MAP 和 `member.html` 的 MEMBERS 数组里各加一行即可
+47. **`member.html` 数据维护**：成员数据硬编码在 `member.html` 的 MEMBERS JS 数组（源自 `data/barboard_members.csv`），格式 `[nickname, handle, groups[], mt_path, page]`；建好个人主页后将对应条目第 5 项从 `null` 改为路径（如 `'member/7.html'`）
 
 ---
 

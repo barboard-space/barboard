@@ -70,13 +70,13 @@
     '        <ul class="footer__links">',
     '          <li><a href="/about.html">关于Barboard</a></li>',
     '          <li><a href="/archive.html">Archive</a></li>',
-    '          <li><a href="/about.html#members">Members</a></li>',
+    '          <li><a href="/member.html">Members</a></li>',
     '        </ul>',
     '      </div>',
     '    </div>',
     '    <div class="footer__bottom">',
     '      <span class="footer__copy">© 2013–2026 Barboard. All Rights Reserved.</span>',
-    '      <span class="footer__notice">Designed & Built by @williw_</span>',
+    '      <span class="footer__notice">Designed & Built by <a class="member" href="/member/7.html" data-nickname="威妈">@williw_</a></span>',
     '    </div>',
     '  </div>',
     '</footer>'
@@ -153,32 +153,39 @@
     });
   }
 
-  /* ── Member tooltip ───────────────────────────────────────────────────── */
+  /* ── Member tooltip (event delegation — works on dynamic content) ──────── */
   function initMemberTooltips() {
     var tip = document.createElement('div');
     tip.className = 'member-tooltip';
     tip.setAttribute('aria-hidden', 'true');
     document.body.appendChild(tip);
 
-    function show(el) {
-      var nickname = el.getAttribute('data-nickname');
-      if (!nickname) return;
-      tip.textContent = nickname;
-      var r = el.getBoundingClientRect();
-      tip.style.left = Math.round(r.left + r.width / 2) + 'px';
-      tip.style.top  = Math.round(r.top) + 'px';
+    function pos(e) {
+      tip.style.left = (e.clientX + 16) + 'px';
+      tip.style.top  = e.clientY + 'px';
+    }
+
+    function nearest(t) {
+      return t.closest ? t.closest('.member[data-nickname]') : null;
+    }
+
+    document.addEventListener('mouseover', function(e) {
+      var el = nearest(e.target);
+      if (!el) return;
+      tip.textContent = el.getAttribute('data-nickname');
+      pos(e);
       tip.classList.add('member-tooltip--visible');
-    }
+    });
 
-    function hide() {
+    document.addEventListener('mousemove', function(e) {
+      if (tip.classList.contains('member-tooltip--visible')) pos(e);
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      if (!nearest(e.target)) return;
+      var rel = e.relatedTarget;
+      if (rel && nearest(rel)) return;
       tip.classList.remove('member-tooltip--visible');
-    }
-
-    document.querySelectorAll('.member[data-nickname]').forEach(function(el) {
-      el.addEventListener('mouseenter', function() { show(el); });
-      el.addEventListener('mouseleave', hide);
-      el.addEventListener('focus',      function() { show(el); });
-      el.addEventListener('blur',       hide);
     });
   }
 

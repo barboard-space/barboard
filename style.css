@@ -645,13 +645,12 @@ img {
 .member-tooltip {
   position: fixed;
   z-index: 9999;
-  transform: translate(-50%, calc(-100% - 7px));
   background: var(--clr-surface-2);
   color: var(--clr-text);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 500;
   font-family: var(--font-body);
-  padding: 4px 10px;
+  padding: 2px 7px;
   border-radius: 5px;
   white-space: nowrap;
   border: 1px solid var(--clr-border-2);
@@ -661,7 +660,7 @@ img {
   transition: opacity 0.18s ease;
 }
 .member-tooltip--visible {
-  opacity: 1;
+  opacity: 0.85;
 }
 
 @media (hover: hover) and (pointer: fine) {
