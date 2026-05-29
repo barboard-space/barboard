@@ -39,7 +39,7 @@
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
-- `barboardlab.html` — BBL 专题页（已完成，含 hero + Bilibili 视频 + 亮点 sticky 侧栏 + 完整榜单，详见开发注意事项 #64–66）
+- `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频 + 亮点 JS-sticky 侧栏 + 完整榜单，详见开发注意事项 #64–66, #67–69）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -63,7 +63,7 @@ barboard-space/
 ├── fonts.css               ← 本地字体 @font-face
 ├── CNAME                   ← barboard.space
 ├── about.html
-├── barboardlab.html
+├── bbl.html
 ├── barvision.html
 ├── archive.html
 │
@@ -378,6 +378,9 @@ barboard-space/
 64. **fade-up 与按钮 hover transition 冲突**：`.fade-up` 的 `transition` 规则在 CSS 文件中晚于 `.btn`/`.btn--primary`，同特异度下后者覆盖前者，导致按钮 hover 的 background-position/color/border-color 动画消失。修复：在 media query 内加 `.btn.fade-up.visible { transition: all 0.2s }` 和 `.btn--primary.fade-up.visible { transition: background-position 0.35s ease, box-shadow 0.35s ease }`（三类选择器特异度 30 > 单类 10，精准还原）。
 65. **fade-up 入场 transition-delay 污染 hover**：按钮上的 inline `style="transition-delay:0.4s"` 用于入场错排，`.visible` 添加后 delay 持续存在，每次 hover 都要等 0.4–0.6s 才开始动。修复：在 IntersectionObserver 回调中加 `e.target.addEventListener('transitionend', () => { e.target.style.transitionDelay = ''; }, { once: true })`，入场动画结束后立即清除 delay。rightObserver 同理。
 66. **sticky sidebar 必须用 align-self: stretch**：sticky 元素的活动范围由其**所在列的高度**决定。若对 grid 列设 `align-self: start`，列高 = 内容高，sticky 元素无活动空间，看起来完全不跟随视口。必须保持默认 `align-self: stretch` 使列高 = grid 行高（= 另一列高度），sticky 才能在整个行范围内跟随滚动。
+67. **CSS sticky 在 grid cell 子元素上不可靠**：部分浏览器计算子 sticky 的 scroll range 时，使用父 grid item 的**内容高度**（而非 stretch 后的实际高度），导致 range ≈ 0，sticky 完全失效。`bbl.html` 亮点侧栏改为 JS 实现：`align-self: start` + `will-change: transform`，scroll/resize/ResizeObserver 触发 `computeTarget()` 更新目标位移，rAF + lerp 循环（因子 0.22，`|diff| < 0.5px` 时停止）平滑写入 `transform: translateY`。
+68. **`getBoundingClientRect()` 含 CSS transform 偏移**：对有 `fade-up`（`transform: translateY(24px)`）的元素调用 `getBoundingClientRect().bottom`，返回的是视觉位置（含 transform），比布局位置低 24px。用此值计算 sticky 上限，会在 IntersectionObserver 触发 `.visible`（移除 transform）时产生 24px 跳变回弹。**修复**：改用容器 `#bblFullList.getBoundingClientRect().bottom`——容器自身无 transform，返回纯布局底边，稳定不受子条目 fade-up 影响。
+69. **bbl.html sticky sidebar 行为设计**：bottom-sticky（`past = (window.innerHeight - 24) − (gr.top + sh)`），sidebar 底边对齐视窗底端 24px 处；上限 `maxTY = listEl.bottom − gr.top − sh + 1`，确保 sidebar 底边不超过 `#bblFullList` 布局底边 +1px；lerp 因子 0.22，rAF 循环仅在有差值时运行，ResizeObserver 监听 grid 高度变化（点击"显示全部"后自动扩展上限）。
 
 ---
 

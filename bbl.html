@@ -218,14 +218,11 @@
       align-items: stretch;
     }
     .bbl-hl-sidebar {
-      /* align-self: stretch（默认），列高 = 榜单列高，sticky 才有活动范围 */
-    }
-    .bbl-hl-sticky {
-      position: sticky;
-      top: calc(var(--nav-h) + 24px);
+      align-self: start;
       display: flex;
       flex-direction: column;
       gap: 8px;
+      will-change: transform;
     }
     .bbl-hl-sidebar__label {
       font-size: 11px;
@@ -420,7 +417,7 @@
       .bbl-hero__layout   { grid-template-columns: 1fr; gap: var(--gap-md); }
       .bbl-video          { position: static; }
       .bbl-chart-layout   { grid-template-columns: 1fr; }
-      .bbl-hl-sidebar     { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
+      .bbl-hl-sidebar     { transform: none !important; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
       .bbl-hl-card        { flex: 1 1 calc(50% - 4px); min-width: 140px; }
       .bbl-chart-header   { flex-direction: column; align-items: flex-start; gap: 12px; }
       .bbl-stat:last-child { display: none; }
@@ -544,12 +541,10 @@
         </div>
       </div>
 
-      <!-- 右列：本期亮点（随视窗底部 sticky） -->
+      <!-- 右列：本期亮点 -->
       <div class="bbl-hl-sidebar">
-        <div class="bbl-hl-sticky">
-          <p class="bbl-hl-sidebar__label fade-up">本期亮点</p>
-          <div id="bblHighlights" style="display:flex;flex-direction:column;gap:8px;"></div>
-        </div>
+        <p class="bbl-hl-sidebar__label fade-up">本期亮点</p>
+        <div id="bblHighlights" style="display:flex;flex-direction:column;gap:8px;"></div>
       </div>
 
     </div>
@@ -819,6 +814,51 @@
     }
   }
 
+  // ── Sticky highlights sidebar（rAF + lerp 丝滑跟随）──────────
+  function initStickyHighlights() {
+    var sidebar = document.querySelector('.bbl-hl-sidebar');
+    var grid    = document.querySelector('.bbl-chart-layout');
+    if (!sidebar || !grid) return;
+
+    var cur = 0, tgt = 0, raf = null;
+
+    function computeTarget() {
+      if (window.innerWidth <= 768) return 0;
+      var gr     = grid.getBoundingClientRect();
+      var sh     = sidebar.offsetHeight;
+      var listEl = document.getElementById('bblFullList');
+      var maxTY  = listEl
+        ? listEl.getBoundingClientRect().bottom - gr.top - sh + 1
+        : grid.offsetHeight - sh + 1;
+      if (maxTY <= 0) return 0;
+      var past = (window.innerHeight - 24) - (gr.top + sh);
+      return past <= 0 ? 0 : Math.min(past, maxTY);
+    }
+
+    function tick() {
+      var diff = tgt - cur;
+      if (Math.abs(diff) < 0.5) {
+        cur = tgt;
+        raf = null;
+      } else {
+        cur += diff * 0.22;
+        raf = requestAnimationFrame(tick);
+      }
+      sidebar.style.transform = cur > 0.05 ? 'translateY(' + cur.toFixed(2) + 'px)' : '';
+    }
+
+    function update() {
+      tgt = computeTarget();
+      if (raf === null) raf = requestAnimationFrame(tick);
+    }
+
+    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    if (window.ResizeObserver) new ResizeObserver(update).observe(grid);
+    update();
+  }
+
+  initStickyHighlights();
   loadBBL();
 </script>
 </body>

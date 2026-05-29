@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-05-29] — bbl.html 重命名 & sticky sidebar 完整修复
+
+### Changed
+- **`barboardlab.html` → `bbl.html`**：文件重命名，全站链接同步更新（`nav.js` 3处、`index.html`、`partials/footer.html`、`partials/nav.html`）
+- **`partials/footer.html`**：与 `nav.js` 统一，使用"始于2013年5月21日"
+
+### Fixed
+- **`bbl.html` 本期亮点 sticky 失效**：CSS `position: sticky` 在 grid cell 子元素上部分浏览器不可靠（scroll range 按内容高度而非 stretch 高度计算）→ 改为 JS rAF + lerp 实现（`align-self: start` + `will-change: transform`，scroll/resize/ResizeObserver 三路触发）
+- **sticky 方向**：从顶端（`top: navH+24`）改为底端（`past = (innerHeight−24) − (gr.top+sh)`）
+- **sticky 上限超出回弹**：原用 `lastItem.getBoundingClientRect().bottom` 作上限，该值含 fade-up `translateY(24px)` 偏移，IntersectionObserver 触发后突变导致回弹 → 改用 `#bblFullList.getBoundingClientRect().bottom`（容器无 transform，纯布局底边）
+- **丝滑动画**：从直接写 transform 改为 rAF + lerp（因子 0.22），`|diff| < 0.5px` 时停止循环，ResizeObserver 处理"显示全部"后的高度扩展
+
+---
+
 ## [2026-05-29] — barboardlab.html 创建 & 首页杂项修复
 
 ### Added
