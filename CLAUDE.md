@@ -29,7 +29,7 @@
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入）
-- `member.html` — Members 总览页（117位成员，JS 渲染 + 4档过滤，数据来自 `data/barboard_members.csv`）
+- `member.html` — Members 总览页（117位成员，**动态 fetch `data/barboard_members.csv`** 渲染，4档过滤，卡片含 Bilibili/Musictrack 外链，hover 紫色光效）
 - `member/7.html` — @williw_（威妈）成员主页（头像占位、标签、外链、代表榜单 TODO 区，作为成员页模板）
 - `data/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
 - `data/barboard_members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
@@ -39,7 +39,7 @@
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
-- 其余成员主页 — `member/1.html`…`member/10.html` 预留，其他从 11 起；@williw_ = 7，其余编号待定；建好后在 `member.html` MEMBERS 数组和 `index.html` MEMBER_MAP 同步更新 `page` 字段和 href
+- 其余成员主页 — `member/1.html`…`member/10.html` 预留，其他从 11 起；@williw_ = 7，其余编号待定；建好后将 `space_id` 加入 `member.html` 的 `BUILT_PAGES` Set，并在 `index.html` MEMBER_MAP 同步更新 `page` 字段和 href
 - `barvision.html` — Barvision 总览 + Hall of Fame
 - `barboardlab.html` — BBL 活动介绍
 - `about.html` — 关于榜吧完整历史
@@ -357,6 +357,10 @@ barboard-space/
 48. **Dev Gate 开关**：`scripts/nav.js` 第8行 `var DEV_GATE = true`，上线时改为 `false` 即完全关闭（无需删代码）。各页面 `<head>` 含防闪内联脚本（sessionStorage key `barboard_dev`，值 `'1'` 表示已通过，关 tab 失效）。gate CSS/HTML/JS 全部封装在 `initDevGate()` 函数内
 49. **Dev Gate `visibility` 继承陷阱**：防闪脚本设 `document.documentElement.style.visibility='hidden'`（作用于 `<html>`），子元素全部继承，包括 gate overlay 本身。`initDevGate()` 注入 overlay 后必须立即调用 `document.documentElement.style.visibility=''` 还原，否则 overlay 也不可见
 50. **新页面接入 Dev Gate**：新建 HTML 页在 `<meta name="viewport">` 后加一行：`<script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>`；nav.js 已自动处理后续逻辑，无需其他改动
+51. **member.html CSV 动态加载**：页面通过 `fetch('data/barboard_members.csv')` 运行时读取成员数据，JS 解析 CSV（含带引号字段处理）。新增/修改成员只需编辑 CSV，无需动 HTML。`parseCSVLine()` 处理引号内逗号；多个 bilibili_id 取第一个；空字段安全跳过。
+52. **BUILT_PAGES Set 管理成员页链接**：`member.html` 顶部 `var BUILT_PAGES = new Set([7])` 存放已建成员页的 `space_id`。新建 `member/N.html` 后将 `N` 加入此 Set，对应卡片自动变为可点击链接，其余卡片保持不可点击。无需改动 CSV 或其他逻辑。
+53. **嵌套锚点陷阱**：卡片外层若为 `<a>`，内部不能再有 `<a>`（Musictrack/Bilibili 链接），浏览器会自动断开外层锚点导致游离元素出现在 grid 中。解法：外层一律用 `<div>` + `onclick="location.href='...'"` 处理导航，内部链接加 `onclick="event.stopPropagation()"` 防冒泡。
+54. **member.html 小组色彩系统**：筛选按钮与成员标签 badge 颜色一一对应——全部/无分组：榜吧蓝 `#6F9EC3`；BBL：紫色 `--clr-violet-light`；村摇欧：棕黄 `#D49840`；Indienation：粉色 `--clr-pink-light`。badge 简称：BBL / 村摇欧 / Indie。
 
 ---
 

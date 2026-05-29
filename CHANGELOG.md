@@ -4,6 +4,23 @@
 
 ---
 
+## [2026-05-29] — member.html 重构 & CSV 动态加载
+
+### Changed
+- **`member.html` 数据层**：MEMBERS 硬编码数组改为运行时 `fetch('data/barboard_members.csv')` 动态加载，`parseCSVLine()` 处理带引号字段；`BUILT_PAGES = new Set([7])` 控制哪些 space_id 有成员页链接，新建页面只需往 Set 里加数字
+- **`data/barboard_members.csv`**：更新至完整 117 位成员，新增 bilibili_id 字段，修正多处 barboard_id 拼写（Lee冀雨→Lee翼雨、iTAP II→iTAP_II 等）
+
+### Fixed
+- 嵌套锚点 bug：威妈卡片外层 `<a>` 内含 Musictrack/Bilibili `<a>` 导致浏览器拆解元素、出现残缺游离 grid item；改为外层统一 `<div>` + `onclick`，内部链接加 `stopPropagation`
+
+### Style
+- 卡片大字显示 space_name（威妈），小字显示 `@barboard_id`；新增 Bilibili 外链（排在 Musictrack 前），移除丑陋箭头图标，链接字号统一 11px
+- 全卡片 hover 效果：紫色边框 + 光晕 `box-shadow` + 上浮 2px
+- Hero 标题：MEMBERS 纯白 `#fff`，字间距收至 `0.01em`，移除 `<span>` 紫色；「榜吧成员名录」eyebrow 移至标题上方，样式与首页 hero__eyebrow 一致（紫色光晕 + `0.32em` 字间距）
+- 筛选按钮与成员 badge 色彩统一：全部=榜吧蓝 `#6F9EC3`，BBL=紫色，村摇欧=棕黄 `#D49840`，Indie=粉色；「村摇欧共体」简称改为「村摇欧」
+
+---
+
 ## [2026-05-29] — Dev Gate & Refactor
 
 ### Added

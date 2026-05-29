@@ -30,18 +30,19 @@
       font-family: var(--font-display);
       font-size: clamp(56px, 8vw, 96px);
       line-height: 0.95;
-      letter-spacing: 0.04em;
-      color: var(--clr-text);
-      margin-bottom: 12px;
+      letter-spacing: 0.01em;
+      color: #fff;
+      margin-bottom: 36px;
     }
-    .ml-title span { color: var(--clr-violet-light); }
 
     .ml-meta {
-      font-family: var(--font-mono);
+      font-family: var(--font-body);
       font-size: 12px;
-      color: var(--clr-text-3);
-      letter-spacing: 0.18em;
+      font-weight: 600;
+      letter-spacing: 0.32em;
       text-transform: uppercase;
+      color: var(--clr-violet-light);
+      text-shadow: 0 0 14px rgba(192,132,252,0.5);
       margin-bottom: 36px;
     }
 
@@ -56,7 +57,7 @@
       font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      padding: 7px 16px;
+      padding: 6px 16px 8px 18px;
       border-radius: 4px;
       border: 1px solid var(--clr-border);
       background: transparent;
@@ -65,10 +66,10 @@
       transition: border-color 0.18s, color 0.18s, background 0.18s;
     }
     .ml-filter:hover { border-color: var(--clr-border-2); color: var(--clr-text); }
-    .ml-filter.active { border-color: var(--clr-violet-light); color: var(--clr-violet-light); background: var(--clr-violet-dim); }
-    .ml-filter[data-filter="bbl"].active   { border-color: var(--clr-accent); color: var(--clr-accent); background: var(--clr-accent-dim); }
-    .ml-filter[data-filter="cun"].active   { border-color: rgba(212,168,50,0.6); color: var(--clr-gold-light); background: rgba(212,168,50,0.08); }
-    .ml-filter[data-filter="indie"].active { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
+    .ml-filter.active                        { border-color: rgba(111,158,195,0.7); color: #6F9EC3; background: rgba(111,158,195,0.1); }
+    .ml-filter[data-filter="bbl"].active    { border-color: var(--clr-violet-light); color: var(--clr-violet-light); background: var(--clr-violet-dim); }
+    .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: #D49840; background: rgba(180,120,45,0.1); }
+    .ml-filter[data-filter="indie"].active  { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
 
     /* ── Grid ── */
     .ml-section {
@@ -90,14 +91,15 @@
       flex-direction: column;
       gap: 6px;
       text-decoration: none;
-      transition: border-color 0.18s, background 0.18s, transform 0.18s;
+      transition: border-color 0.18s, background 0.18s, transform 0.18s, box-shadow 0.18s;
       cursor: default;
     }
     .ml-card--link { cursor: pointer; }
-    .ml-card--link:hover {
-      border-color: var(--clr-border-2);
+    .ml-card:hover {
+      border-color: var(--clr-violet);
       background: var(--clr-surface-2);
       transform: translateY(-2px);
+      box-shadow: 0 0 0 1px rgba(168,85,247,0.25), 0 0 18px rgba(168,85,247,0.18), 0 6px 20px rgba(0,0,0,0.35);
     }
     .ml-card.hidden { display: none; }
 
@@ -129,8 +131,8 @@
       border-radius: 3px;
       border: 1px solid currentColor;
     }
-    .ml-badge--bbl   { color: var(--clr-accent);      background: var(--clr-accent-dim); }
-    .ml-badge--cun   { color: var(--clr-gold-light);  background: rgba(212,168,50,0.08); }
+    .ml-badge--bbl   { color: var(--clr-violet-light); background: var(--clr-violet-dim); }
+    .ml-badge--cun   { color: #D49840;                background: rgba(180,120,45,0.1); }
     .ml-badge--indie { color: var(--clr-pink-light);  background: var(--clr-pink-dim); }
 
     .ml-card__foot {
@@ -140,7 +142,7 @@
       gap: 8px;
     }
     .ml-card__mt {
-      font-size: 10px;
+      font-size: 11px;
       color: var(--clr-text-3);
       text-decoration: none;
       display: inline-flex;
@@ -173,12 +175,12 @@
   <section class="ml-hero">
     <div class="ml-hero__glow" aria-hidden="true"></div>
     <div class="ml-hero__inner section__inner">
-      <div class="ml-title">MEM<span>BERS</span></div>
       <div class="ml-meta" id="mlMeta">榜吧成员名录</div>
+      <div class="ml-title">MEMBERS</div>
       <div class="ml-filters">
         <button class="ml-filter active" data-filter="all">全部</button>
         <button class="ml-filter" data-filter="bbl">BarboardLab</button>
-        <button class="ml-filter" data-filter="cun">村摇欧共体</button>
+        <button class="ml-filter" data-filter="cun">村摇欧</button>
         <button class="ml-filter" data-filter="indie">Indienation</button>
       </div>
     </div>
@@ -194,138 +196,161 @@
   <div id="site-footer"></div>
   <script src="scripts/nav.js"></script>
   <script>
+    /* 已废弃：成员数据现从 data/barboard_members.csv 动态加载
     var MEMBERS = [
-      // [nickname, handle, groups('bbl','cun','indie'), mt_path, page]
-      ['猹妈','ChArLiE',[],'musictrack.cn/chart/4/',null],
-      ['雨妈','Lee冀雨',['bbl','cun'],'musictrack.cn/chart/11/',null],
-      ['锴妈','WillKris锴',['bbl'],'musictrack.cn/chart/12/',null],
-      ['柠妈','LemonSheeran',['bbl','cun'],'musictrack.cn/chart/13/',null],
-      ['猴妈','Voiiz',['bbl','cun'],'musictrack.cn/chart/18/',null],
-      ['嘟妈','DDDDDope',[],'musictrack.cn/chart/19/',null],
-      ['包妈','Jeremy_BAg',['bbl','cun','indie'],'musictrack.cn/chart/20/',null],
-      ['威妈','williw',['bbl','cun'],'musictrack.cn/chart/25/','member/7.html'],
-      ['音妈','环球颖音',['indie'],'musictrack.cn/chart/77/',null],
-      ['P妈','PROKING',['bbl','indie'],'musictrack.cn/chart/104/',null],
-      ['泰妈','泰坦crazy',['bbl','cun'],'musictrack.cn/chart/131/',null],
-      ['米妈','LUKY',['bbl'],'musictrack.cn/chart/256/',null],
-      ['田妈','FREEMAN',['cun'],'musictrack.cn/chart/295/',null],
-      ['院妈','天神院院长',[],'musictrack.cn/chart/326/',null],
-      ['醉妈','醉の蒲公英',['bbl'],'musictrack.cn/chart/614/',null],
-      ['E妈','Echoes',['indie'],'musictrack.cn/chart/659/',null],
-      ['波妈','ww_micro_微波',['bbl'],'musictrack.cn/chart/1178/',null],
-      ['奶妈','奶儿少爷',[],'musictrack.cn/chart/1200/',null],
-      ['汞妈','Hg',['cun'],'musictrack.cn/chart/1331/',null],
-      ['松妈','Squirrel松鼠',['bbl','cun'],'musictrack.cn/chart/1648/',null],
-      ['团妈','不动团子',['bbl','indie'],'musictrack.cn/chart/1696/',null],
-      ['甲妈','杰克甲',['indie'],'musictrack.cn/chart/1949/',null],
-      ['L妈','Lone',['cun'],'musictrack.cn/chart/1966/',null],
-      ['圈妈','TimCircles6',['bbl'],'musictrack.cn/chart/2089/',null],
-      ['雪妈','Sprite',['indie'],'musictrack.cn/chart/2189/',null],
-      ['芬妈','Stephen',['cun'],'musictrack.cn/chart/2193/',null],
-      ['虎妈','老白虎qwq',['indie'],'musictrack.cn/chart/2218/',null],
-      ['星妈','白矮星爱吃东西',['bbl','indie'],'musictrack.cn/chart/2392/',null],
-      ['健妈','健Jian-',['bbl','indie'],'musictrack.cn/chart/2420/',null],
-      ['S妈','哈哈哈时光机',['bbl','cun'],'musictrack.cn/chart/2511/',null],
-      ['狼妈','Aaowu_',['cun'],'musictrack.cn/chart/2537/',null],
-      ['羊妈','SeafishYANG',['bbl','cun','indie'],'musictrack.cn/chart/2757/',null],
-      ['黑妈','Blackout',[],'musictrack.cn/chart/2861/',null],
-      ['T妈','iTAP II',['bbl','indie'],'musictrack.cn/chart/2869/',null],
-      ['文妈','SummertimeDawns',['bbl'],'musictrack.cn/chart/2906/',null],
-      ['晕妈','dizzyhugh',['bbl'],'musictrack.cn/chart/3046/',null],
-      ['韩妈','SouthkoreaBall',['bbl','cun'],'musictrack.cn/chart/3047/',null],
-      ['邓妈','DuncanLee',['bbl','cun'],'musictrack.cn/chart/3082/',null],
-      ['兔妈','Razbit',['bbl','cun'],'musictrack.cn/chart/3083/',null],
-      ['海妈','Ocean',['bbl','indie'],'musictrack.cn/chart/3097/',null],
-      ['X妈','xjebs',['bbl','cun'],'musictrack.cn/chart/3108/',null],
-      ['笃妈','吃辣喝香',['bbl'],'musictrack.cn/chart/3138/',null],
-      ['叉妈','PRONGS',['bbl'],'musictrack.cn/chart/3139/',null],
-      ['白妈','白哼唧',['bbl'],'musictrack.cn/chart/3155/',null],
-      ['梦妈','Mylo Xyloto',[],null,null],
-      ['萌妈','绿荫夏语',['cun'],null,null],
-      ['鸣妈','漫画小鸣',['bbl'],null,null],
-      ['光妈','柠檬辉光',['indie'],null,null],
-      ['瑞妈','Jefferyat19',['indie'],null,null],
-      ['亮妈','郑志宽额',[],null,null],
-      ['可妈','曹可可KE',['cun'],null,null],
-      ['A妈','AloneAlien_',['indie'],null,null],
-      ['霜妈','inje白霜',['cun'],null,null],
-      ['小妈','Jeoli音乐',['bbl','indie'],null,null],
-      ['杰妈','jh201013',['bbl'],null,null],
-      ['峰妈','Joe_zn',[],null,null],
-      ['城妈','MarekTotti',['cun','indie'],null,null],
-      ['N妈','rihanavy',['indie'],null,null],
-      ['石妈','Stoney',[],null,null],
-      ['布妈','Vivienne-Eliza',['bbl'],null,null],
-      ['温妈','wokwen',['cun'],null,null],
-      ['渣妈','zrybenny',[],null,null],
-      ['Y妈','_Yuckduckylli',['indie'],null,null],
-      ['森妈','陈先森Qq',[],null,null],
-      ['胖妈','风宇凌胖',[],null,null],
-      ['霍妈','霍蓝Horan',[],null,null],
-      ['季妈','季风',[],null,null],
-      ['蓝妲','蓝靛之光',[],null,null],
-      ['苏妈','莫扎特_伦苏',['cun'],null,null],
-      ['吃妈','能吃的莉莉丝',['cun'],null,null],
-      ['清妈','清清Ghonwx1012',[],null,null],
-      ['牙妈','牙',['bbl'],null,null],
-      ['俗妈','雅俗的老巢',[],null,null],
-      ['肥妈','AzarathTrainor',[],null,null],
-      ['盲妈','blindinglights',[],null,null],
-      ['克妈','Burke',['cun'],null,null],
-      ['乐妈','Coke',[],null,null],
-      ['风妈','Durden',['bbl','indie'],null,null],
-      ['砸妈','ekaz',[],null,null],
-      ['火妈','fire_storm',['cun'],null,null],
-      ['黄妈','HWA',[],null,null],
-      ['嘎妈','JackeL',[],null,null],
-      ['乔妈','John snow',[],null,null],
-      ['利妈','LEEROY',['indie'],null,null],
-      ['洛妈','Lolo sara',['cun'],null,null],
-      ['Z妈','lovezedd',['indie'],null,null],
-      ['鲤妈','ly_dly',[],null,null],
-      ['龙妈','Maisema',['indie'],null,null],
-      ['贾妈','Makeroco',[],null,null],
-      ['鸽妈','Phoerienies',[],null,null],
-      ['超妈','SuperModel',['indie'],null,null],
-      ['麦妈','Tandiny',['cun'],null,null],
-      ['顺妈','TONY顺仔',['bbl','indie'],null,null],
-      ['草妈','Twentee',['indie'],null,null],
-      ['V妈','Victor',['indie'],null,null],
-      ['W妈','W.L.N.',['indie'],null,null],
-      ['艾妈','',[],null,null],
-      ['饼妈','',['indie'],null,null],
-      ['插妈','',['indie'],null,null],
-      ['宠妈','',['indie'],null,null],
-      ['床妈','',[],null,null],
-      ['蛋妈','',[],null,null],
-      ['放妈','',['indie'],null,null],
-      ['金妈','',['indie'],null,null],
-      ['樂妈','',[],null,null],
-      ['聪妈','',[],null,null],
-      ['鹿妈','',[],null,null],
-      ['伦妈','',[],null,null],
-      ['雀妈','',[],null,null],
-      ['薯妈','',[],null,null],
-      ['树妈','',[],null,null],
-      ['袜妈','',['indie'],null,null],
-      ['吸妈','',[],null,null],
-      ['香妈','',['indie'],null,null],
-      ['柚妈','',['indie'],null,null],
-      ['纸妈','',[],null,null],
-      ['F妈','',['indie'],null,null]
-    ];
+      ['威妈','williw_',['bbl','cun'],25,6594528,'member/7.html'],
+      ['锴妈','WillKris锴',['bbl'],12,22061562,null],
+      ['叉妈','PRONGS',['bbl','indie'],3139,345327392,null],
+      ['雨妈','Lee翼雨',['bbl','cun'],11,2519003,null],
+      ['猴妈','Voiiz',['bbl','cun'],18,3493557,null],
+      ['柠妈','LemonSheeran',['bbl','cun'],13,6853403,null],
+      ['包妈','Jeremy_BAg',['bbl','cun','indie'],20,39448909,null],
+      ['S妈','哈哈哈时光机',['bbl','cun'],2511,1377148207,null],
+      ['邓妈','DuncanLee',['bbl','cun'],3082,38609426,null],
+      ['笃妈','吃辣喝香',['bbl'],3138,10126698,null],
+      ['猹妈','ChArLiE',[],4,null,null],
+      ['星妈','白矮星爱吃东西',['bbl','indie'],2392,1098017777,null],
+      ['韩妈','SouthkoreaBall',['bbl','cun'],3047,123079383,null],
+      ['团妈','不动团子',['bbl','indie'],1696,14745732,null],
+      ['白妈','白哼唧',['bbl'],3155,92909617,null],
+      ['X妈','xjebs',['bbl','cun'],3108,25157238,null],
+      ['羊妈','SeafishYANG',['bbl','cun','indie'],2757,11254817,null],
+      ['波妈','ww_micro_微波',['bbl'],1178,631917101,null],
+      ['奶妈','奶儿少爷',[],1200,22131405,null],
+      ['汞妈','Hg',['cun'],1331,352353515,null],
+      ['P妈','PROKING',['bbl','indie'],104,158058457,null],
+      ['松妈','Squirrel松鼠',['bbl','cun'],1648,20531380,null],
+      ['甲妈','杰克甲',['indie'],1949,354502867,null],
+      ['L妈','Lone',['cun'],1966,620764570,null],
+      ['圈妈','TimCircles6',['bbl'],2089,475243221,null],
+      ['雪妈','Sprite',['indie'],2189,285061537,null],
+      ['芬妈','Stephen',['cun'],2193,470864039,null],
+      ['虎妈','老白虎qwq',['indie'],2218,319499933,null],
+      ['健妈','健Jian-',['bbl','indie'],2420,331215924,null],
+      ['狼妈','Aaowu_',['cun'],2537,291215885,null],
+      ['黑妈','Blackout',[],2861,null,null],
+      ['T妈','iTAP_II',['bbl','indie'],2869,519447508,null],
+      ['文妈','SummertimeDawns',['bbl'],2906,87113186,null],
+      ['晕妈','dizzyhugh',['bbl'],3046,22784144,null],
+      ['兔妈','Razbit',['bbl','cun'],3083,17094429,null],
+      ['海妈','Ocean',['bbl','indie'],3097,353919978,null],
+      ['城妈','MarekTotti',['cun','indie'],null,2430673,null],
+      ['霜妈','inje白霜',['cun'],null,7816824,null],
+      ['温妈','wokwen',['cun'],null,504575620,null],
+      ['可妈','曹可可KE',['cun'],null,32641904,null],
+      ['洛妈','Lolo_sara',['cun'],null,74534306,null],
+      ['萌妈','绿荫夏语',['cun'],null,282434233,null],
+      ['吃妈','能吃的莉莉丝',['cun'],null,266614464,null],
+      ['苏妈','莫扎特_伦苏',['cun'],null,null,null],
+      ['克妈','Burke',['cun'],null,null,null],
+      ['火妈','fire_storm',['cun'],null,null,null],
+      ['麦妈','Tandiny',['cun'],null,null,null],
+      ['泰妈','泰坦crazy',['bbl','cun'],131,5946595,null],
+      ['A妈','AloneAlien_',['indie'],null,12892864,null],
+      ['N妈','rihanavy',['indie'],null,3494368415582827,null],
+      ['光妈','柠檬辉光',['indie'],null,11156849,null],
+      ['瑞妈','Jefferyat19',['indie'],null,36803708,null],
+      ['Y妈','_Yuckduckylli',['indie'],null,null,null],
+      ['利妈','LEEROY',['indie'],null,null,null],
+      ['Z妈','lovezedd',['indie'],null,null,null],
+      ['龙妈','Maisema',['indie'],null,null,null],
+      ['超妈','SuperModel',['indie'],null,null,null],
+      ['草妈','Twentee',['indie'],null,null,null],
+      ['V妈','Victor',['indie'],null,null,null],
+      ['W妈','W.L.N.',['indie'],null,null,null],
+      ['饼妈','',['indie'],null,null,null],
+      ['插妈','',['indie'],null,null,null],
+      ['宠妈','',['indie'],null,null,null],
+      ['放妈','',['indie'],null,null,null],
+      ['金妈','',['indie'],null,null,null],
+      ['袜妈','',['indie'],null,null,null],
+      ['香妈','',['indie'],null,null,null],
+      ['柚妈','',['indie'],null,null,null],
+      ['F妈','',['indie'],null,null,null],
+      ['小妈','Jeoli音乐',['bbl','indie'],null,32782567,null],
+      ['风妈','Durden',['bbl','indie'],null,null,null],
+      ['顺妈','TONY顺仔',['bbl','indie'],null,null,null],
+      ['杰妈','jh201013',['bbl'],null,36120776,null],
+      ['布妈','Vivienne-Eliza',['bbl'],null,3795134,null],
+      ['鸣妈','漫画小鸣',['bbl'],null,87850321,null],
+      ['牙妈','牙',['bbl'],null,null,null],
+      ['鸽妈','Phoerienies',[],null,132639477,null],
+      ['峰妈','Joe_zn',[],null,400124559,null],
+      ['石妈','Stoney',[],null,95346668,null],
+      ['渣妈','zrybenny',[],null,26692274,null],
+      ['亮妈','郑志宽额',[],null,6081736,null],
+      ['鹿妈','Leevai',[],null,98826281,null],
+      ['梦妈','Mylo_Xyloto',[],null,88022221,null],
+      ['森妈','陈先森Qq',[],null,null,null],
+      ['胖妈','风宇凌胖',[],null,null,null],
+      ['霍妈','霍蓝Horan',[],null,null,null],
+      ['季妈','季风',[],null,null,null],
+      ['蓝妲','蓝靛之光',[],null,null,null],
+      ['清妈','清清Ghonwx1012',[],null,null,null],
+      ['俗妈','雅俗的老巢',[],null,null,null],
+      ['肥妈','AzarathTrainor',[],null,null,null],
+      ['盲妈','blindinglights',[],null,null,null],
+      ['乐妈','Coke',[],null,null,null],
+      ['砸妈','ekaz',[],null,null,null],
+      ['黄妈','HWA',[],null,null,null],
+      ['嘎妈','JackeL',[],null,null,null],
+      ['乔妈','John snow',[],null,null,null],
+      ['鲤妈','ly_dly',[],null,null,null],
+      ['贾妈','Makeroco',[],null,null,null],
+      ['艾妈','',[],null,null,null],
+      ['床妈','',[],null,null,null],
+      ['蛋妈','',[],null,null,null],
+      ['樂妈','',[],null,null,null],
+      ['聪妈','',[],null,null,null],
+      ['伦妈','',[],null,null,null],
+      ['雀妈','',[],null,null,null],
+      ['嘟妈','DDDDDope',[],19,4265585,null],
+      ['薯妈','',[],null,null,null],
+      ['树妈','',[],null,null,null],
+      ['吸妈','',[],null,null,null],
+      ['纸妈','',[],null,null,null],
+      ['米妈','LUKY',['bbl'],256,25899828,null],
+      ['田妈','FREEMAN',['cun'],295,36712256,null],
+      ['院妈','天神院院长',[],326,9057551,null],
+      ['醉妈','醉の蒲公英',['bbl'],614,22131440,null],
+      ['E妈','Echoes',['indie'],659,349625313,null],
+      ['音妈','环球颖音',['indie'],77,null,null],
+    ]; */
 
-    var EXT_SVG = '<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg>';
+    var BUILT_PAGES = new Set([7]);
 
-    var BADGE_LABEL = { bbl: 'BBL', cun: '村摇', indie: 'Indie' };
+    var BADGE_LABEL = { bbl: 'BBL', cun: '村摇欧', indie: 'Indie' };
 
-    function buildGrid(filter) {
+    function parseGroups(team) {
+      var g = [];
+      if (team.indexOf('BarboardLab') !== -1) g.push('bbl');
+      if (team.indexOf('村摇欧共体') !== -1) g.push('cun');
+      if (team.indexOf('Indienation') !== -1) g.push('indie');
+      return g;
+    }
+
+    function parseCSVLine(line) {
+      var fields = [], field = '', inQ = false;
+      for (var i = 0; i < line.length; i++) {
+        var c = line[i];
+        if (c === '"') { inQ = !inQ; }
+        else if (c === ',' && !inQ) { fields.push(field.trim()); field = ''; }
+        else { field += c; }
+      }
+      fields.push(field.trim());
+      return fields;
+    }
+
+    var allMembers = [];
+    var currentFilter = 'all';
+
+    function buildGrid(members, filter) {
       var grid = document.getElementById('mlGrid');
       var count = document.getElementById('mlCount');
       var visible = 0;
 
-      grid.innerHTML = MEMBERS.map(function(m) {
-        var nickname = m[0], handle = m[1], groups = m[2], mt = m[3], page = m[4];
+      grid.innerHTML = members.map(function(m) {
+        var name = m[0], bId = m[1], groups = m[2], mtId = m[3], biliId = m[4], page = m[5];
         var show = filter === 'all' || groups.indexOf(filter) !== -1;
         if (show) visible++;
 
@@ -333,24 +358,24 @@
           return '<span class="ml-badge ml-badge--' + g + '">' + BADGE_LABEL[g] + '</span>';
         }).join('');
 
-        var foot = mt
-          ? '<a class="ml-card__mt" href="https://' + mt + '" target="_blank" rel="noopener">Musictrack' + EXT_SVG + '</a>'
-          : '';
+        var foot = '';
+        if (biliId) foot += '<a class="ml-card__mt" href="https://space.bilibili.com/' + biliId + '/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Bilibili</a>';
+        if (mtId) foot += '<a class="ml-card__mt" href="https://musictrack.cn/chart/' + mtId + '/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Musictrack</a>';
 
-        var tag = page ? 'a' : 'div';
-        var attrs = page ? ' href="' + page + '"' : '';
+        var tag = 'div';
+        var attrs = page ? ' onclick="location.href=\'' + page + '\'" tabindex="0" role="link"' : '';
         var cls = 'ml-card' + (page ? ' ml-card--link' : '') + (show ? '' : ' hidden');
 
         return '<' + tag + ' class="' + cls + '"' + attrs + '>' +
-          '<div class="ml-card__nickname">' + nickname + '</div>' +
-          '<div class="ml-card__handle">' + (handle ? handle : '') + '</div>' +
+          '<div class="ml-card__nickname">' + name + '</div>' +
+          '<div class="ml-card__handle">' + (bId ? '@' + bId : '') + '</div>' +
           '<div class="ml-card__badges">' + badges + '</div>' +
           (foot ? '<div class="ml-card__foot">' + foot + '</div>' : '') +
           '</' + tag + '>';
       }).join('');
 
-      var label = filter === 'all' ? '· ' + MEMBERS.length + ' 位成员'
-                : '· 显示 ' + visible + ' / ' + MEMBERS.length + ' 位';
+      var label = filter === 'all' ? '· ' + members.length + ' 位成员'
+                : '· 显示 ' + visible + ' / ' + members.length + ' 位';
       count.textContent = label;
     }
 
@@ -358,11 +383,30 @@
       btn.addEventListener('click', function() {
         document.querySelectorAll('.ml-filter').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
-        buildGrid(btn.dataset.filter);
+        currentFilter = btn.dataset.filter;
+        buildGrid(allMembers, currentFilter);
       });
     });
 
-    buildGrid('all');
+    fetch('data/barboard_members.csv')
+      .then(function(r) { return r.text(); })
+      .then(function(text) {
+        var lines = text.trim().split('\n');
+        for (var i = 1; i < lines.length; i++) {
+          var row = parseCSVLine(lines[i]);
+          if (row.length < 2 || !row[1]) continue;
+          var spaceId = parseInt(row[0]);
+          var name = row[1];
+          var bId = row[2] || '';
+          var groups = parseGroups(row[3] || '');
+          var biliRaw = row[4] ? row[4].split(',')[0].trim() : '';
+          var biliId = biliRaw || null;
+          var mtId = row[6] ? parseInt(row[6]) || null : null;
+          var page = BUILT_PAGES.has(spaceId) ? 'member/' + spaceId + '.html' : null;
+          allMembers.push([name, bId, groups, mtId, biliId, page]);
+        }
+        buildGrid(allMembers, currentFilter);
+      });
   </script>
 </body>
 </html>
