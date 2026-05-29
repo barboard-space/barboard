@@ -4,6 +4,27 @@
 
 ---
 
+## [2026-05-29] — barboardlab.html 创建 & 首页杂项修复
+
+### Added
+- **`barboardlab.html`**：BBL 专题页，含三大板块：
+  - **Hero**：大标题 + 介绍文字 + BBL Hall of Fame / 完整历史榜单按钮；右侧 sticky Bilibili 视频嵌入窗口（从 `data/bbl-latest.json` 读 `bilibili` 字段填入 iframe）
+  - **本期亮点**（右侧 sticky 侧栏）：4 张竖排卡片，数据全部客户端计算——最高空降（NEW 条目最低 rank）/ 最长在榜（max weeks）/ 最大涨幅（max positive change）/ 最大跌幅（max negative change）；颜色紫/金/绿/红
+  - **本期完整榜单**：默认显示前 50，"显示全部 N 首"按钮展开全部；每条三列横排统计（最高排名 / 在榜周数 / 本周点数，各 72px 等宽，10px label + 12px val，border-left 分隔）；medal 色覆盖、峰值高亮（紫/粉）
+  - 双列布局：左榜单自由滚动，右亮点 `position: sticky; top: calc(var(--nav-h) + 24px)` 吸顶跟随
+
+### Changed
+- **`.github/workflows/update-bbl.yml`**：新增周一 12:00 BJ 备用抓取（`0 4 * * 1`）；备用触发时先 `git log --since="2 days ago"` 判断主抓是否已提交，成功则跳过，避免羊妈延迟更新后漏抓
+- **`scripts/nav.js` footer**："成立于2013年5月21日" → "始于2013年5月21日"
+- **`index.html`** BarboardLab meta："成立于2024年3月13日" → "创立于2024年3月13日"
+- **`index.html`** BarboardLab 按钮："关于BarboardLab" → "关于 BarboardLab"（中英文间加空格）
+
+### Fixed
+- **BarboardLab 三按钮 hover 动画消失**：`.fade-up` 的 `transition` 规则晚于 `.btn`/`.btn--primary`，覆盖了按钮的 transition 属性，导致 hover 无动画 → 在 `.btn.fade-up.visible` / `.btn--primary.fade-up.visible` 加更高特异度规则还原正确 transition
+- **BarboardLab 三按钮 hover 延迟约 0.5s**：按钮的 inline `style="transition-delay:0.4–0.6s"` 用于入场错排，`.visible` 添加后这个 delay 一直保留影响 hover → 在 fadeObserver 回调中用 `transitionend` 事件清除 `style.transitionDelay`
+
+---
+
 ## [2026-05-29] — 成员主页系统完整实现
 
 ### Added

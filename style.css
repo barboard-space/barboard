@@ -1915,12 +1915,20 @@ body:has(.nav--open) .back-to-top {
   .fade-up, .fade-up-right {
     opacity: 0;
     transform: translateY(24px);
-    transition: opacity 0.6s ease, transform 0.6s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
   .fade-up.visible, .fade-up-right.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+
+  /* 按钮 fade-in 完成后还原 hover 过渡，与 hero 区同款按钮完全一致 */
+  .btn.fade-up.visible {
+    transition: all 0.2s;
+  }
+  .btn--primary.fade-up.visible {
+    transition: background-position 0.35s ease, box-shadow 0.35s ease;
   }
 
   .fade-up:nth-child(2) { transition-delay: 0.1s; }

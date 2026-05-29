@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>BarboardLab · 单曲周榜 | Barboard</title>
+  <meta name="description" content="BarboardLab 是榜吧成员每周合并个人周榜积分得出的单曲合榜，创立于 2024 年 3 月 13 日，每周六更新。" />
+  <link rel="icon" type="image/png" href="assets/images/logo_center.png" />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="style.css?v=2" />
+  <style>
+    /* ── Hero ── */
+    .bbl-hero {
+      position: relative;
+      padding: calc(var(--nav-h) + 64px) 0 72px;
+      overflow: hidden;
+    }
+    .bbl-hero__glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 80% 70% at 60% 0%,   rgba(168,85,247,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 0%  80%,  rgba(224,64,160,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 100% 50%, rgba(0,180,255,0.06)  0%, transparent 50%);
+      pointer-events: none;
+    }
+    .bbl-hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .bbl-hero__watermark {
+      position: absolute;
+      right: -20px;
+      bottom: -10px;
+      font-family: var(--font-display);
+      font-size: 220px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.022);
+      pointer-events: none;
+      user-select: none;
+    }
+    .bbl-hero__inner {
+      position: relative;
+      z-index: 2;
+    }
+    .bbl-hero__layout {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: var(--gap-xl);
+      align-items: start;
+      margin-top: 40px;
+    }
+
+    .breadcrumb {
+      font-size: 12px;
+      color: var(--clr-text-3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      letter-spacing: 0.04em;
+    }
+    .breadcrumb a { color: var(--clr-text-3); transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--clr-text-2); }
+    .breadcrumb__sep { opacity: 0.35; }
+
+    .bbl-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--clr-violet-light);
+      text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 32px;
+      margin-bottom: 14px;
+    }
+    .bbl-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--clr-pink) 0%, var(--clr-violet) 90%);
+      flex-shrink: 0;
+    }
+
+    .bbl-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 8vw, 108px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .bbl-board-accent { color: #6F9EC3; }
+    .bbl-lab-accent   { color: var(--clr-violet-light); }
+
+    .bbl-hero__meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 18px;
+      margin-top: 16px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--clr-text-2);
+      letter-spacing: 0.04em;
+    }
+    .bbl-hero__meta span::before {
+      content: '·';
+      margin-right: 8px;
+      opacity: 0.4;
+    }
+    .bbl-hero__meta span:first-child::before { display: none; }
+
+    .bbl-hero__desc {
+      margin-top: 20px;
+      font-size: 15px;
+      color: var(--clr-text-2);
+      line-height: 1.75;
+      max-width: 520px;
+    }
+    .bbl-hero__actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    /* ── Video Player ── */
+    .bbl-video {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border-2);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 0 40px rgba(168,85,247,0.10), 0 4px 24px rgba(0,0,0,0.4);
+      position: sticky;
+      top: calc(var(--nav-h) + 20px);
+    }
+    .bbl-video__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--clr-border);
+      background: var(--clr-surface-2);
+    }
+    .bbl-video__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clr-text-2);
+    }
+    .bbl-video__issue {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--clr-violet-light);
+    }
+    .bbl-video__frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+    .bbl-video__frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .bbl-video__placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--clr-text-2);
+      font-size: 13px;
+    }
+    .bbl-video__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 16px;
+      border-top: 1px solid var(--clr-border);
+    }
+    .bbl-video__date {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--clr-text-2);
+    }
+    .bbl-video__link {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--clr-text-2);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+    }
+    .bbl-video__link:hover { color: var(--clr-text); }
+
+    /* ── Chart + Highlights 双列布局 ── */
+    .bbl-chart-section { background: var(--clr-bg); }
+    .bbl-chart-layout {
+      display: grid;
+      grid-template-columns: 1fr 236px;
+      gap: var(--gap-md);
+      align-items: stretch;
+    }
+    .bbl-hl-sidebar {
+      /* align-self: stretch（默认），列高 = 榜单列高，sticky 才有活动范围 */
+    }
+    .bbl-hl-sticky {
+      position: sticky;
+      top: calc(var(--nav-h) + 24px);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .bbl-hl-sidebar__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--clr-violet-light);
+      text-shadow: 0 0 10px rgba(192,132,252,0.45);
+      margin-bottom: 4px;
+    }
+
+    /* ── Highlight cards ── */
+    .bbl-hl-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .bbl-hl-card:hover {
+      border-color: var(--clr-border-2);
+      box-shadow: 0 0 20px rgba(168,85,247,0.08);
+    }
+    .bbl-hl-card__type {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .bbl-hl-card__type--new    { color: var(--clr-violet-light); }
+    .bbl-hl-card__type--weeks  { color: var(--clr-gold-light); }
+    .bbl-hl-card__type--up     { color: #4ade80; }
+    .bbl-hl-card__type--down   { color: #f87171; }
+    .bbl-hl-card__val {
+      font-family: var(--font-display);
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      margin-bottom: 8px;
+    }
+    .bbl-hl-card__val--new   { color: var(--clr-violet-light); }
+    .bbl-hl-card__val--weeks { color: var(--clr-gold-light);   text-shadow: 0 0 20px rgba(245,200,64,0.3); }
+    .bbl-hl-card__val--up    { color: #4ade80; }
+    .bbl-hl-card__val--down  { color: #f87171; }
+    .bbl-hl-card__cover-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .bbl-hl-card__cover {
+      width: 36px;
+      height: 36px;
+      border-radius: 3px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--clr-surface-2);
+    }
+    .bbl-hl-card__song { min-width: 0; }
+    .bbl-hl-card__title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .bbl-hl-card__artist {
+      font-size: 11px;
+      color: var(--clr-text-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 2px;
+    }
+
+    /* ── Full Chart ── */
+    .bbl-chart-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--gap-md);
+      margin-bottom: var(--gap-md);
+    }
+    .bbl-chart-title {
+      font-family: var(--font-display);
+      font-size: clamp(18px, 2.4vw, 28px);
+      letter-spacing: 0.06em;
+      margin-top: 8px;
+    }
+    .bbl-chart-date {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--clr-text-2);
+      display: block;
+      margin-top: 4px;
+    }
+    .bbl-chart-mt-link {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--clr-text-2);
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: color 0.2s;
+      flex-shrink: 0;
+      margin-bottom: 4px;
+    }
+    .bbl-chart-mt-link:hover { color: var(--clr-text); }
+
+    /* ── 榜单三列横排统计 ── */
+    .bbl-chart-list .chart-item {
+      grid-template-columns: 44px 42px 1fr auto;
+    }
+    .bbl-item-stats {
+      display: flex;
+      align-self: center;
+    }
+    .bbl-stat {
+      width: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      text-align: center;
+      padding: 0 8px;
+    }
+    .bbl-stat + .bbl-stat {
+      border-left: 1px solid var(--clr-border);
+    }
+    .bbl-stat__label {
+      font-family: var(--font-body);
+      font-size: 10px;
+      color: var(--clr-text-2);
+    }
+    .bbl-stat__val {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(240, 238, 255, 0.85);
+    }
+    /* peak 高亮（非 medal 条目） */
+    .bbl-stat--violet .bbl-stat__label,
+    .bbl-stat--violet .bbl-stat__val { color: var(--clr-violet-light); }
+    .bbl-stat--pink .bbl-stat__label,
+    .bbl-stat--pink .bbl-stat__val   { color: rgba(240,96,184,0.95); }
+    /* medal 覆盖 */
+    .chart-item--top    .bbl-stat__label,
+    .chart-item--top    .bbl-stat__val    { color: rgba(224,176,64,0.85); }
+    .chart-item--silver .bbl-stat__label,
+    .chart-item--silver .bbl-stat__val    { color: rgba(148,196,220,0.85); }
+    .chart-item--bronze .bbl-stat__label,
+    .chart-item--bronze .bbl-stat__val    { color: rgba(224,160,100,0.8); }
+
+    .bbl-showmore {
+      text-align: center;
+      padding: 32px 0 8px;
+    }
+    .bbl-showmore__btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid var(--clr-border-2);
+      color: var(--clr-text-2);
+      font-family: var(--font-body);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      padding: 10px 24px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .bbl-showmore__btn:hover {
+      color: var(--clr-text);
+      border-color: var(--clr-text);
+    }
+    .bbl-showmore--hidden { display: none; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .bbl-chart-layout { grid-template-columns: 1fr 210px; }
+    }
+    @media (max-width: 768px) {
+      .bbl-hero__layout   { grid-template-columns: 1fr; gap: var(--gap-md); }
+      .bbl-video          { position: static; }
+      .bbl-chart-layout   { grid-template-columns: 1fr; }
+      .bbl-hl-sidebar     { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
+      .bbl-hl-card        { flex: 1 1 calc(50% - 4px); min-width: 140px; }
+      .bbl-chart-header   { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .bbl-stat:last-child { display: none; }
+    }
+    @media (max-width: 480px) {
+      .bbl-hl-card { flex: 1 1 100%; }
+    }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="bbl-hero">
+  <div class="bbl-hero__glow"></div>
+  <div class="bbl-hero__grid"></div>
+  <div class="bbl-hero__watermark" aria-hidden="true">BBL</div>
+
+  <div class="section__inner bbl-hero__inner">
+    <nav class="breadcrumb" aria-label="面包屑">
+      <a href="/">Barboard</a>
+      <span class="breadcrumb__sep" aria-hidden="true">›</span>
+      <span>BarboardLab</span>
+    </nav>
+
+    <div class="bbl-hero__layout">
+      <!-- 左列：标题 + 简介 + 按钮 -->
+      <div class="bbl-hero__info">
+        <p class="bbl-eyebrow">榜吧实验室</p>
+        <h1 class="bbl-hero__title">
+          Bar<span class="bbl-board-accent">board</span><span class="bbl-lab-accent">Lab</span>
+        </h1>
+        <div class="bbl-hero__meta">
+          <span>创立于2024年3月13日</span>
+          <span>每周六更新</span>
+          <span id="bblIssueLabel">当前第 — 期</span>
+        </div>
+        <p class="bbl-hero__desc">
+          BarboardLab 由一批保持规律更新个人周榜的榜吧成员组成。成员提交各自的完整周榜，
+          合并点数后得出当周单曲合榜，并通过 Bilibili 视频展播。
+          完整榜单存档于 Musictrack，每期精选 Top 100。
+        </p>
+        <div class="bbl-hero__actions">
+          <a href="barboardlab/hall-of-fame.html" class="btn btn--primary">BBL Hall of Fame</a>
+          <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener"
+             class="btn btn--outline" style="display:inline-flex;align-items:center;gap:8px;">
+            完整历史榜单
+            <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                 viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 8L8 2M8 2H4M8 2v4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- 右列：本期视频 -->
+      <div class="bbl-video fade-up-right" style="transition-delay:0.15s;">
+        <div class="bbl-video__header">
+          <span class="bbl-video__label">本期视频</span>
+          <span class="bbl-video__issue" id="bblVideoIssue">—</span>
+        </div>
+        <div class="bbl-video__frame">
+          <div class="bbl-video__placeholder" id="bblVideoPlaceholder">加载中…</div>
+          <iframe id="bblVideoIframe" src="" frameborder="0"
+                  allow="fullscreen" scrolling="no"
+                  style="display:none;"></iframe>
+        </div>
+        <div class="bbl-video__footer">
+          <span class="bbl-video__date" id="bblVideoDate">—</span>
+          <a class="bbl-video__link" id="bblVideoLink" href="#" target="_blank" rel="noopener">
+            在 Bilibili 观看
+            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"
+                 viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 8L8 2M8 2H4M8 2v4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHART + HIGHLIGHTS ═══ -->
+<section class="section section--bordered bbl-chart-section" id="chart">
+  <div class="section__inner">
+    <!-- chart header 在 grid 外，独占一行 -->
+    <div class="bbl-chart-header fade-up">
+      <div>
+        <p class="section-label" style="margin-bottom:8px;">本期完整榜单</p>
+        <h2 class="bbl-chart-title" id="bblChartTitle">— · BARBOARDLAB SINGLES CHART</h2>
+        <span class="bbl-chart-date" id="bblChartDate">—</span>
+      </div>
+      <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener"
+         class="bbl-chart-mt-link">
+        在 Musictrack 查看
+        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"
+             viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M2 8L8 2M8 2H4M8 2v4"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="bbl-chart-layout">
+
+      <!-- 左列：榜单列表 -->
+      <div class="bbl-chart-col">
+        <div class="chart-list bbl-chart-list" id="bblFullList"></div>
+
+        <div class="bbl-showmore" id="bblShowMore">
+          <button class="bbl-showmore__btn" id="bblShowMoreBtn">
+            显示全部 100 首
+            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
+                 viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M1 3l4 4 4-4"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- 右列：本期亮点（随视窗底部 sticky） -->
+      <div class="bbl-hl-sidebar">
+        <div class="bbl-hl-sticky">
+          <p class="bbl-hl-sidebar__label fade-up">本期亮点</p>
+          <div id="bblHighlights" style="display:flex;flex-direction:column;gap:8px;"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="scripts/nav.js"></script>
+<script>
+  // ── Utilities ──────────────────────────────────────────────
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function fmtWeekRange(dateStr) {
+    const end = new Date(dateStr + 'T12:00:00');
+    const start = new Date(end);
+    start.setDate(start.getDate() - 6);
+    const year = end.getFullYear();
+    const opt = { month: 'short', day: 'numeric' };
+    if (start.getMonth() === end.getMonth()) {
+      const mo = start.toLocaleDateString('en-US', { month: 'short' });
+      return mo + ' ' + start.getDate() + '–' + end.getDate() + ', ' + year;
+    }
+    return start.toLocaleDateString('en-US', opt) + '–' + end.toLocaleDateString('en-US', opt) + ', ' + year;
+  }
+
+  const _svgUp   = '<svg width="7" height="5" viewBox="0 0 7 5" fill="currentColor" aria-hidden="true"><path d="M3.5 0L7 5H0z"/></svg>';
+  const _svgDown = '<svg width="7" height="5" viewBox="0 0 7 5" fill="currentColor" aria-hidden="true"><path d="M3.5 5L0 0H7z"/></svg>';
+
+  function chartChange(t) {
+    if (t.label === 'new' || t.change === 'NEW') return '<span class="chart-change chart-change--new">NEW</span>';
+    if (t.label === 're-entry')                  return '<span class="chart-change chart-change--re">RE</span>';
+    const n = parseInt(t.change);
+    if (n > 0) return '<span class="chart-change chart-change--up">'   + _svgUp   + n           + '</span>';
+    if (n < 0) return '<span class="chart-change chart-change--down">' + _svgDown + Math.abs(n) + '</span>';
+    return '<span class="chart-change chart-change--same">—</span>';
+  }
+
+  function chartStats(t) {
+    const notTop1 = t.rank !== 1;
+    const atPeak  = notTop1 && t.peak != null && t.rank === t.peak;
+    const wasTop1 = notTop1 && t.peak === 1;
+    const rows = [];
+    if (t.peak  != null) rows.push({ label: '最高排名', val: t.peak,  violet: atPeak, pink: wasTop1 });
+    if (t.weeks != null) rows.push({ label: '在榜周数', val: t.weeks, violet: false,  pink: false   });
+    if (!rows.length) return '';
+    return '<div class="chart-stats">' +
+      rows.map(r => {
+        const cls  = r.violet ? ' chart-stat__label--violet' : r.pink ? ' chart-stat__label--pink' : '';
+        const vcls = r.violet ? ' chart-stat__val--violet'   : r.pink ? ' chart-stat__val--pink'   : '';
+        return '<div class="chart-stat">' +
+          '<span class="chart-stat__label' + cls  + '">' + r.label + '</span>' +
+          '<span class="chart-stat__val'   + vcls + '">' + r.val   + '</span>' +
+        '</div>';
+      }).join('') +
+    '</div>';
+  }
+
+  function buildChartItem(t) {
+    const cover = t.cover
+      ? '<img class="chart-cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
+      : '<div class="chart-cover"></div>';
+    const medalClass = t.rank === 1 ? 'chart-item--top' : t.rank === 2 ? 'chart-item--silver' : t.rank === 3 ? 'chart-item--bronze' : '';
+    const notTop1 = t.rank !== 1;
+    const atPeak  = notTop1 && t.peak != null && t.rank === t.peak;
+    const wasTop1 = notTop1 && t.peak === 1;
+    const peakCls = atPeak ? ' bbl-stat--violet' : wasTop1 ? ' bbl-stat--pink' : '';
+    const stats =
+      '<div class="bbl-item-stats">' +
+        (t.peak  != null ? '<div class="bbl-stat' + peakCls + '"><span class="bbl-stat__label">最高排名</span><span class="bbl-stat__val">' + t.peak + '</span></div>' : '') +
+        (t.weeks != null ? '<div class="bbl-stat"><span class="bbl-stat__label">在榜周数</span><span class="bbl-stat__val">' + t.weeks + '</span></div>' : '') +
+        (t.points != null ? '<div class="bbl-stat"><span class="bbl-stat__label">本周点数</span><span class="bbl-stat__val">' + t.points + '</span></div>' : '') +
+      '</div>';
+    return '<div class="chart-item ' + (medalClass ? medalClass + ' ' : '') + 'fade-up">' +
+      '<div class="chart-rank-col">' +
+        '<div class="chart-rank">' + t.rank + '</div>' +
+        chartChange(t) +
+      '</div>' +
+      cover +
+      '<div class="chart-song">' +
+        '<div class="chart-song__title">' + esc(t.title) + '</div>' +
+        '<div class="chart-song__artist">' + esc(t.artist) + '</div>' +
+      '</div>' +
+      stats +
+    '</div>';
+  }
+
+  // ── Fade observer ──────────────────────────────────────────
+  let fadeObserver, rightObserver;
+  if ('IntersectionObserver' in window) {
+    fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          fadeObserver.unobserve(e.target);
+          e.target.addEventListener('transitionend', () => { e.target.style.transitionDelay = ''; }, { once: true });
+        }
+      });
+    }, { threshold: 0.08 });
+    rightObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          rightObserver.unobserve(e.target);
+          e.target.addEventListener('transitionend', () => { e.target.style.transitionDelay = ''; }, { once: true });
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObserver.observe(el));
+    document.querySelectorAll('.fade-up-right').forEach(el => rightObserver.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up, .fade-up-right').forEach(el => el.classList.add('visible'));
+  }
+
+  function observeNewItems(container) {
+    if (!fadeObserver) { container.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible')); return; }
+    container.querySelectorAll('.fade-up').forEach(el => { el.style.transitionDelay = '0s'; fadeObserver.observe(el); });
+  }
+
+  // ── Highlights ─────────────────────────────────────────────
+  function computeHighlights(tracks) {
+    const newTracks  = tracks.filter(t => t.label === 'new' || t.change === 'NEW');
+    const riseList   = tracks.filter(t => { const n = parseInt(t.change); return !isNaN(n) && n > 0; });
+    const dropList   = tracks.filter(t => { const n = parseInt(t.change); return !isNaN(n) && n < 0; });
+
+    const bestNew    = newTracks.length  ? newTracks.reduce((a, b) => a.rank < b.rank ? a : b)                  : null;
+    const longestOn  = tracks.length     ? tracks.reduce((a, b) => a.weeks > b.weeks ? a : b)                   : null;
+    const biggestUp  = riseList.length   ? riseList.reduce((a, b) => parseInt(a.change) > parseInt(b.change) ? a : b) : null;
+    const biggestDn  = dropList.length   ? dropList.reduce((a, b) => parseInt(a.change) < parseInt(b.change) ? a : b) : null;
+
+    return [
+      {
+        key:   'new',
+        type:  '最高空降',
+        track: bestNew,
+        val:   bestNew  ? '#' + bestNew.rank                 : '—',
+        empty: '本期无新入榜'
+      },
+      {
+        key:   'weeks',
+        type:  '最长在榜',
+        track: longestOn,
+        val:   longestOn ? longestOn.weeks + ' 周'           : '—',
+        empty: '—'
+      },
+      {
+        key:   'up',
+        type:  '最大涨幅',
+        track: biggestUp,
+        val:   biggestUp ? '+' + parseInt(biggestUp.change)  : '—',
+        empty: '本期无上升'
+      },
+      {
+        key:   'down',
+        type:  '最大跌幅',
+        track: biggestDn,
+        val:   biggestDn ? parseInt(biggestDn.change)        : '—',
+        empty: '本期无下降'
+      }
+    ];
+  }
+
+  function renderHighlights(tracks) {
+    const container = document.getElementById('bblHighlights');
+    if (!container) return;
+    const items = computeHighlights(tracks);
+    container.innerHTML = items.map((item, i) => {
+      const t = item.track;
+      const delay = (i * 0.08).toFixed(2);
+      const cover = t && t.cover
+        ? '<img class="bbl-hl-card__cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
+        : (t ? '<div class="bbl-hl-card__cover"></div>' : '');
+      const songInfo = t
+        ? '<div class="bbl-hl-card__cover-row">' +
+            cover +
+            '<div class="bbl-hl-card__song">' +
+              '<div class="bbl-hl-card__title">' + esc(t.title) + '</div>' +
+              '<div class="bbl-hl-card__artist">' + esc(t.artist) + '</div>' +
+            '</div>' +
+          '</div>'
+        : '<div class="bbl-hl-card__artist" style="margin-top:8px;">' + item.empty + '</div>';
+      return '<div class="bbl-hl-card fade-up" style="transition-delay:' + delay + 's;">' +
+        '<div class="bbl-hl-card__type bbl-hl-card__type--' + item.key + '">' + item.type + '</div>' +
+        '<div class="bbl-hl-card__val bbl-hl-card__val--' + item.key + '">' + item.val + '</div>' +
+        songInfo +
+      '</div>';
+    }).join('');
+    observeNewItems(container);
+  }
+
+  // ── Full chart ─────────────────────────────────────────────
+  let _allTracks = [];
+  const INITIAL_COUNT = 50;
+
+  function renderChartItems(tracks) {
+    const listEl = document.getElementById('bblFullList');
+    if (!listEl) return;
+    listEl.innerHTML = tracks.map(buildChartItem).join('');
+    observeNewItems(listEl);
+  }
+
+  function initShowMore() {
+    const btn    = document.getElementById('bblShowMoreBtn');
+    const wrap   = document.getElementById('bblShowMore');
+    if (!btn || !wrap) return;
+    if (_allTracks.length <= INITIAL_COUNT) { wrap.classList.add('bbl-showmore--hidden'); return; }
+    btn.textContent = '显示全部 ' + _allTracks.length + ' 首';
+    btn.addEventListener('click', () => {
+      renderChartItems(_allTracks);
+      wrap.classList.add('bbl-showmore--hidden');
+    });
+  }
+
+  // ── Main fetch ─────────────────────────────────────────────
+  async function loadBBL() {
+    try {
+      const res = await fetch('data/bbl-latest.json');
+      if (!res.ok) throw new Error('fetch failed');
+      const data = await res.json();
+
+      // Hero meta
+      if (data.issue) {
+        const label = document.getElementById('bblIssueLabel');
+        if (label) label.textContent = '当前第 ' + data.issue + ' 期';
+      }
+
+      // Chart header
+      const titleEl = document.getElementById('bblChartTitle');
+      const dateEl  = document.getElementById('bblChartDate');
+      if (titleEl && data.issue) {
+        titleEl.innerHTML = '<strong style="color:rgba(240,238,255,0.8);">#' + data.issue + '</strong> · BARBOARDLAB SINGLES CHART';
+      }
+      if (dateEl && data.date) {
+        dateEl.textContent = fmtWeekRange(data.date);
+      }
+
+      // Video
+      const iframe  = document.getElementById('bblVideoIframe');
+      const ph      = document.getElementById('bblVideoPlaceholder');
+      const issueEl = document.getElementById('bblVideoIssue');
+      const linkEl  = document.getElementById('bblVideoLink');
+      const dateVid = document.getElementById('bblVideoDate');
+      if (data.bilibili) {
+        const bvUrl = 'https://www.bilibili.com/video/' + data.bilibili;
+        const embedUrl = 'https://player.bilibili.com/player.html?bvid=' + data.bilibili + '&page=1&high_quality=1&danmaku=0';
+        if (iframe) { iframe.src = embedUrl; iframe.style.display = ''; }
+        if (ph)     ph.style.display = 'none';
+        if (linkEl) linkEl.href = bvUrl;
+      } else {
+        if (ph) ph.textContent = '本期视频暂未发布';
+      }
+      if (issueEl && data.issue) issueEl.textContent = 'Vol. ' + data.issue;
+      if (dateVid && data.date)  dateVid.textContent = fmtWeekRange(data.date);
+
+      // Highlights + chart
+      if (data.tracks && data.tracks.length) {
+        renderHighlights(data.tracks);
+        _allTracks = data.tracks;
+        renderChartItems(_allTracks.slice(0, INITIAL_COUNT));
+        initShowMore();
+      }
+    } catch(e) {
+      console.warn('BBL data load failed:', e);
+      const ph = document.getElementById('bblVideoPlaceholder');
+      if (ph) ph.textContent = '数据加载失败';
+    }
+  }
+
+  loadBBL();
+</script>
+</body>
+</html>

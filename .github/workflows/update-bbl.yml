@@ -2,8 +2,8 @@ name: Update BBL Chart Data
 
 on:
   schedule:
-    - cron: '0 16 * * 6'  # Saturday 16:00 UTC = Sunday 00:00 Beijing
-    - cron: '0 4  * * 0'  # Sunday 04:00 UTC = Sunday 12:00 Beijing (backup)
+    - cron: '0 16 * * 6'  # 主抓：Saturday 16:00 UTC = Sunday 00:00 Beijing
+    - cron: '0 4  * * 1'  # 备用：Monday 04:00 UTC = Monday 12:00 Beijing
   workflow_dispatch:       # Manual trigger
 
 env:
@@ -16,19 +16,40 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4.2.2
+        with:
+          fetch-depth: 5   # 取近 5 条提交，足够判断本周是否已更新
+
+      - name: Check if backup run should be skipped
+        id: check_skip
+        if: github.event.schedule == '0 4 * * 1'
+        run: |
+          # 若 bbl-latest.json 在过去 2 天内有提交，说明主抓已成功，备用跳过
+          # 主抓在 Saturday 16:00 UTC，备用在 Monday 04:00 UTC，间隔 36h，"2 days ago" 可覆盖
+          RECENT=$(git log --since="2 days ago" --format="%H" -- data/bbl-latest.json | head -1)
+          if [ -n "$RECENT" ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "Primary run already succeeded this week — skipping backup."
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+            echo "No recent update found — running backup fetch."
+          fi
 
       - name: Set up Python
+        if: steps.check_skip.outputs.skip != 'true'
         uses: actions/setup-python@v5.6.0
         with:
           python-version: '3.12'
 
       - name: Install dependencies
+        if: steps.check_skip.outputs.skip != 'true'
         run: pip install requests
 
       - name: Fetch BBL data
+        if: steps.check_skip.outputs.skip != 'true'
         run: python scripts/fetch_bbl.py
 
       - name: Commit and push if changed
+        if: steps.check_skip.outputs.skip != 'true'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"

@@ -39,11 +39,11 @@
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
+- `barboardlab.html` — BBL 专题页（已完成，含 hero + Bilibili 视频 + 亮点 sticky 侧栏 + 完整榜单，详见开发注意事项 #64–66）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
 - `barvision.html` — Barvision 总览 + Hall of Fame
-- `barboardlab.html` — BBL 活动介绍
 - `about.html` — 关于榜吧完整历史
 - `archive.html` — 存档中心总览
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
@@ -123,7 +123,7 @@ barboard-space/
 
 - **API**：`https://6api.musictrack.cn/api/charts/3045`（React SPA 后端接口，直接返回 JSON）
 - **注意**：有反爬限制（X-Anticrawler-Limit: 420），每周只抓一次，不要频繁请求
-- **workflow 触发时间**：周六 16:00 UTC（北京时间 00:00）+ 周日 04:00 UTC 备用
+- **workflow 触发时间**：周六 16:00 UTC（北京时间周日 00:00）主抓 + 周一 04:00 UTC（北京时间 12:00）备用；备用触发时先检查 `git log --since="2 days ago"` 判断主抓是否已提交，成功则跳过
 - **前端渲染**：`loadChart()` 函数 fetch `data/bbl-latest.json`，动态生成 Top 10 列表并更新所有相关 UI
 
 ### API 顶层字段
@@ -375,6 +375,9 @@ barboard-space/
 61. **成员页共享模板架构**：CSS 与 HTML 结构统一在 `scripts/member-render.js` 管理；每个 `member/N.html` 仅含 `<head>` 基础引用 + `var MEMBER_DATA = {...}` + 两行 `<script>` 引用（member-render.js 先于 nav.js）。改标题、样式等只需改 member-render.js 一处，所有117页自动更新。`mp-tag--indie` 样式也定义在此文件。
 62. **成员页 CJK 头像字体处理**：`member-render.js` 中检测 placeholder 首字符 `charCodeAt(0) > 127`，CJK 字符用 `var(--font-body)` + `font-size:42px; font-weight:700`，ASCII 字符用 `var(--font-display)` + `font-size:48px`，防止 Bebas Neue 无法渲染汉字。
 63. **成员页外链按钮布局**：`.mp-card` 三列网格 `auto 1fr auto`；链接列（第三列）`flex-direction:column`，上下等宽排列（width:100%），Bilibili 在上；移动端 `grid-column:1/-1` 跨行横排。
+64. **fade-up 与按钮 hover transition 冲突**：`.fade-up` 的 `transition` 规则在 CSS 文件中晚于 `.btn`/`.btn--primary`，同特异度下后者覆盖前者，导致按钮 hover 的 background-position/color/border-color 动画消失。修复：在 media query 内加 `.btn.fade-up.visible { transition: all 0.2s }` 和 `.btn--primary.fade-up.visible { transition: background-position 0.35s ease, box-shadow 0.35s ease }`（三类选择器特异度 30 > 单类 10，精准还原）。
+65. **fade-up 入场 transition-delay 污染 hover**：按钮上的 inline `style="transition-delay:0.4s"` 用于入场错排，`.visible` 添加后 delay 持续存在，每次 hover 都要等 0.4–0.6s 才开始动。修复：在 IntersectionObserver 回调中加 `e.target.addEventListener('transitionend', () => { e.target.style.transitionDelay = ''; }, { once: true })`，入场动画结束后立即清除 delay。rightObserver 同理。
+66. **sticky sidebar 必须用 align-self: stretch**：sticky 元素的活动范围由其**所在列的高度**决定。若对 grid 列设 `align-self: start`，列高 = 内容高，sticky 元素无活动空间，看起来完全不跟随视口。必须保持默认 `align-self: stretch` 使列高 = grid 行高（= 另一列高度），sticky 才能在整个行范围内跟随滚动。
 
 ---
 
