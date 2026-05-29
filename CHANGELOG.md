@@ -4,6 +4,28 @@
 
 ---
 
+## [2026-05-29] — Dev Gate & Refactor
+
+### Added
+- **Dev Gate 密码保护系统**（`scripts/nav.js`）：顶部 `DEV_GATE = true` / `DEV_PASS = 'waitaminute'`，上线改 `false` 即关闭，无需删代码
+- 各 HTML `<head>` 加防闪内联脚本：`if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'`（4个页面：index / member / member/7 / barvision/2026/events）
+- Gate UI：BARBOARD 大字 logo（BAR 白 / BOARD `#6F9EC3`）+ 「敬请期待 / STAY TUNED」+ 密码输入框 + ENTER 按钮；颜色全部使用 `#6F9EC3`（`.bbl-board-accent` 同色）
+- sessionStorage 持久化：同 tab session 内跳转页面无需重复输入，关闭 tab 后失效
+
+### Changed
+- Gate 卡片改为 flexbox column + `align-items:center`，确保内容真正居中（原 `text-align:center` 对 flex 子元素无效）
+- 输入框与 ENTER 按钮改为上下堆叠布局；按钮居中，`padding:0 28px`，`align-self:center`
+- Gate 整体加 `padding-top:10vh`，视觉重心略低于几何中心
+
+### Fixed
+- `visibility:hidden` 设在 `<html>` 上时 gate overlay 继承了隐藏不可见；`initDevGate()` 注入 overlay 后立即还原 `document.documentElement.style.visibility=''`
+
+### Refactor
+- `style.css`：合并两个独立 `html {}` 规则块；删除空 `.ticker__track {}` 规则（仅注释无 CSS）；清理多余空行
+- `index.html`：删除 `parseMentions` 内重复声明的 `esc` 函数（复用外部全局版本）；删除未被调用的 `fmtWeekRangeCN` 函数
+
+---
+
 ## [2026-05-29]
 
 ### Added

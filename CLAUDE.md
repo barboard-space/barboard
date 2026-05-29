@@ -35,6 +35,7 @@
 - `data/barboard_members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
+- **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -353,6 +354,9 @@ barboard-space/
 45. **成员页编号规则**：`member/数字.html`，1–10 为预留位，其他成员从 11 起；当前已建：`member/7.html`（@williw_）。`member.html` 为总览入口（已完成）
 46. **`@username` 自动解析**：`index.html` 中 `MEMBER_MAP`（键为 handle/B站ID，值为 `{nickname, href}`）+ `parseMentions(raw)` 函数；`buildTicker()` 和 `renderUpdates()` 均调用，JSON 文件只需写纯文本 `@username`，在 MEMBER_MAP 中的自动转为带 tooltip 的 `.member` 链接，不在则保留纯文本。新增成员时在 MEMBER_MAP 和 `member.html` 的 MEMBERS 数组里各加一行即可
 47. **`member.html` 数据维护**：成员数据硬编码在 `member.html` 的 MEMBERS JS 数组（源自 `data/barboard_members.csv`），格式 `[nickname, handle, groups[], mt_path, page]`；建好个人主页后将对应条目第 5 项从 `null` 改为路径（如 `'member/7.html'`）
+48. **Dev Gate 开关**：`scripts/nav.js` 第8行 `var DEV_GATE = true`，上线时改为 `false` 即完全关闭（无需删代码）。各页面 `<head>` 含防闪内联脚本（sessionStorage key `barboard_dev`，值 `'1'` 表示已通过，关 tab 失效）。gate CSS/HTML/JS 全部封装在 `initDevGate()` 函数内
+49. **Dev Gate `visibility` 继承陷阱**：防闪脚本设 `document.documentElement.style.visibility='hidden'`（作用于 `<html>`），子元素全部继承，包括 gate overlay 本身。`initDevGate()` 注入 overlay 后必须立即调用 `document.documentElement.style.visibility=''` 还原，否则 overlay 也不可见
+50. **新页面接入 Dev Gate**：新建 HTML 页在 `<meta name="viewport">` 后加一行：`<script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>`；nav.js 已自动处理后续逻辑，无需其他改动
 
 ---
 
