@@ -65,10 +65,17 @@ barboard-space/
 │       └── update-bbl.yml  ← 每周六自动抓取 BBL 数据
 │
 ├── scripts/
-│   └── fetch_bbl.py        ← BBL 抓取脚本
+│   ├── fetch_bbl.py        ← BBL 抓取脚本（同时更新 ticker.json / updates.json）
+│   └── nav.js              ← 全站共享 nav/footer 组件 + 所有 nav JS
+│
+├── partials/
+│   ├── nav.html            ← nav HTML 可读备份（与 nav.js 内容同步）
+│   └── footer.html         ← footer HTML 可读备份（与 nav.js 内容同步）
 │
 ├── data/
-│   └── bbl-latest.json     ← BBL 最新榜单（自动更新，含真实数据）
+│   ├── bbl-latest.json     ← BBL 最新榜单（自动更新，含真实数据）
+│   ├── ticker.json         ← 字幕条目（字符串数组，BBL条目由fetch_bbl.py维护）
+│   └── updates.json        ← 动态条目（对象数组，BBL条目由fetch_bbl.py维护）
 │
 ├── barboardlab/
 │   ├── hall-of-fame.html
@@ -206,20 +213,27 @@ barboard-space/
   列3：更多（关于Barboard / Archive / 榜吧成员）
 ```
 
-### BBL 动态更新（loadChart() 驱动的 DOM 元素）
+### BBL 动态更新架构
 
-`loadChart()` fetch JSON 后更新以下所有元素，**无需每周手动改 HTML**：
+**职责分离**：Python 脚本写数据，浏览器只读渲染。
 
-| 元素 | ID / 选择器 | 更新内容 |
-|------|------------|---------|
+| 文件 | 更新者 | 内容 |
+|------|--------|------|
+| `data/bbl-latest.json` | fetch_bbl.py | 完整榜单（100首） |
+| `data/ticker.json` | fetch_bbl.py | BBL 字幕条目自动置顶（`BarboardLab 第 N 期已更新 · 本周冠军：...`） |
+| `data/updates.json` | fetch_bbl.py | BBL 动态条目自动替换并按日期排序 |
+
+**页面加载流程**：
+1. `Promise.all([fetch ticker.json, fetch updates.json])` → `buildTicker()` + `renderUpdates()`
+2. `loadChart()` → 只更新 `#chartTitle`、`#chartDate`、`#chartList`（不再触及 ticker/updates）
+
+**`loadChart()` 更新的 DOM 元素**：
+
+| 元素 | ID | 更新内容 |
+|------|----|---------|
 | chart header 期号 | `#chartTitle` | `#124 · BARBOARDLAB SINGLES CHART` |
-| chart header 日期 | `#chartDate` | 周期区间，同月如 `May 9–15, 2026`，跨月如 `May 30–Jun 5, 2026` |
-| ticker 字幕条 | `[data-bbl-ticker]`（×2份） | `BarboardLab 第 N 期已更新 — 本周冠军：艺人 — 歌名` |
-| hero 动态时间 | `#bblHeroTime` | `datetime` 属性 + 显示文本 |
-| hero 动态标题 | `#bblHeroTitle` | `BBL 第 N 期已更新` |
-| hero 动态描述 | `#bblHeroDesc` | `本周冠军：艺人 — 歌名。` |
-
-**注意**：`#bblFooterLabel` 已移除，footer BBL 链接文字固定为「本周单曲合榜」。
+| chart header 日期 | `#chartDate` | 周期区间，如 `May 9–15, 2026` |
+| 榜单列表 | `#chartList` | Top 10 条目（含金/银/铜 medal 样式） |
 
 ### BBL chart item 渲染逻辑
 
@@ -236,12 +250,17 @@ barboard-space/
 - 下降：红色 `chart-change--down` + SVG 三角箭头
 - 持平：`—` 符号
 
+**Medal 样式**（金/银/铜，class 加在 `.chart-item` 上）：
+- rank = 1：`.chart-item--top`（金色，`--clr-gold-light`，歌名 `#fff4d6`）
+- rank = 2：`.chart-item--silver`（冷蓝，rank `#90b8d0`，艺人/stat `rgba(148,196,220,0.85)`）
+- rank = 3：`.chart-item--bronze`（暖橙，rank `#e0a870`，艺人/stat `rgba(224,160,100,0.8)`）
+
 **统计栏高亮逻辑**（基于 `rank === peak` 直接判断，不信任 API label）：
-- rank = 1：整条目金色（`.chart-item--top` 全覆盖，歌名 `#fff4d6`）
 - rank > 1 且 `rank === peak`（本周新高）：亮紫 `chart-stat__label--violet` / `--val--violet`
 - rank > 1 且 `peak === 1`（曾登顶）：粉色 `chart-stat__label--pink` / `--val--pink`（`rgba(240,96,184,0.95)`）
+- Medal 样式的 stat 颜色覆盖上述高亮，rank 1/2/3 使用各自 medal 色
 
-**加载动画**：不用全局 fadeObserver 逐条观察，改为观察 `#chartList` 容器，容器进入视口时批量给所有条目加 `visible`，每条 `transition-delay: index × 0.05s`。
+**加载动画**：逐条接入全局 `fadeObserver`，`transitionDelay: 0s`，随滚动自然逐一触发。
 
 ---
 
@@ -287,9 +306,9 @@ barboard-space/
 6. **Nav Logo HTML 结构**：`<span>BAR<span class="nav__logo-board">BOARD</span></span>` 单 span 包裹防止 flex 间距问题
 7. **字幕条（Ticker）**：2份内容拼接，`translateX(-50%)` 无缝滚动，`will-change: transform` GPU 加速
 8. **Phase 行布局**：CSS grid `1fr auto auto 76px`（名称/状态/标签/日期四列），空状态用 `visibility:hidden` 占位 badge 保持列宽
-9. **BBL 数据自动化**：GitHub Actions 每周六抓取，`[skip ci]` 防止循环触发；前端 `loadChart()` 异步 fetch JSON 渲染，所有硬编码 BBL 引用均已动态化
+9. **BBL 数据自动化**：GitHub Actions 每周六抓取，`[skip ci]` 防止循环触发；`fetch_bbl.py` 同时更新 `data/bbl-latest.json`、`data/ticker.json`（BBL条目置顶）、`data/updates.json`（BBL条目替换并按date排序）；前端只读不写
 10. **SEO**：每个页面需独立 `<title>` 和 `<meta description>`
-11. **Section 锚点定位**：`.section` 统一设置 `scroll-margin-top: var(--nav-h)`，防止固定 nav 遮挡锚点目标
+11. **Section 锚点定位**：`.section` 统一设置 `scroll-margin-top: calc(var(--nav-h) - 2px)`，`-2px` 使 nav 完全覆盖 `.section--bordered` 的 `border-top: 1px`（nav 自身含 border-box 内的 border-bottom，两条线完全重合）
 12. **Section 高度**：`.barvision` 和 `.lab` 设置 `min-height: calc(100vh - 2 * var(--gap-xl))`，使 section 总高度约为 100vh（padding 由 `.section` 类统一提供，上下各 `var(--gap-xl)`）
 13. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染
 14. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
@@ -308,12 +327,19 @@ barboard-space/
 27. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
 28. **nav-enter 动画禁用 transform**：`@keyframes nav-enter` 只能用 `opacity` 过渡，不能含 `transform`。因为 `animation-fill-mode: both` 会使末态 `transform: translateY(0)` 永久保留在 `.nav` 上，nav 成为 fixed 子元素的 containing block，`.nav__drawer` 从此相对 nav 而非 viewport 定位，永久无法正常展开
 29. **backdrop-filter 激活陷阱**：`::before` 的毛玻璃过渡必须用 `background` 属性过渡（`rgba(x,x,x,0)→rgba(x,x,x,0.88)`），不能用 `opacity: 0→1`——部分浏览器在 `opacity:0` 时完全不激活 `backdrop-filter`
-30. **Ticker JS 化**：`.ticker__track` 不再使用 CSS `animation`，改由 JS `requestAnimationFrame` 驱动（每帧 `x += speed * dt; if (x >= halfWidth) x -= halfWidth`）。BBL 数据更新后须调用 `window._tickerUpdateHalfWidth()` 重新计算 `halfWidth`
-31. **UPDATES 动态系统**：`STATIC_UPDATES` 数组 + `BV_MILESTONES`（日期到达后自动出现）+ BBL fetch 后生成动态条目，合并排序取前 5、过滤超 1 年内容。`renderUpdates(null)` 在页面加载时立即同步调用；`loadChart()` 成功后再次调用传入 BBL update
+30. **Ticker JS 化**：`.ticker__track` 由 JS `requestAnimationFrame` 驱动（每帧 `x += speed * dt; if (x >= halfWidth) x -= halfWidth`）。`buildTicker(items)` 从 `data/ticker.json` 读取条目，生成 ×2 复制后写入 track，调用 `_tickerUpdateHalfWidth()` 更新宽度
+31. **UPDATES 数据来源**：`data/updates.json` 含静态条目 + BV里程碑（`show_after` 字段）+ BBL条目（fetch_bbl.py自动维护）。`renderUpdates()` 过滤 `show_after` 和1年前内容，排序取前5。不再有 `STATIC_UPDATES`/`BV_MILESTONES` 硬编码数组
 32. **fade-up-right**：右列大卡片（`.barvision__card`、`.chart-header`）使用专属 class，对应 `rightObserver`（`rootMargin: '0px 0px -80px 0px'`），触发时机晚于普通 `.fade-up`
 33. **移动端抽屉滚动锁**：`openDrawer()` 保存 `scrollY`，设 `body { position:fixed; top:-scrollY; width:100%; overflow:hidden }`；`closeDrawer()` 还原并 `window.scrollTo(0, scrollY)`。纯 `overflow:hidden` 在 iOS 无效
 34. **BarboardLab 标题三段配色**：`Bar`（白色）+ `board`（`#6F9EC3`，`.bbl-board-accent`，与 nav logo BOARD 一致）+ `Lab`（`var(--clr-violet-light)`，`.lab-accent`）
 35. **BBL 榜单条目动画**：不使用容器级 `listObserver`，改为逐条接入全局 `fadeObserver`，`transitionDelay: 0s`，随滚动自然逐一触发
+36. **Scroll hint CSS 顺序陷阱**：`.hero__scroll-hint` 基础样式（含 `display:flex`）必须放在 `@media (max-width:768px)` 块之前；若放在其后，媒体查询的 `display:none` 被层叠覆盖，移动端无法隐藏
+37. **Nav logo mix-blend-mode 移除**：`.nav__logo-img` 曾有 `mix-blend-mode:screen`，`openDrawer()` 时 `body{position:fixed}` 触发全页 reflow，GPU 合成层重建导致 logo 闪烁；PNG 已有透明背景，直接移除 mix-blend-mode 无视觉影响
+38. **openDrawer() rAF 分帧**：body scroll lock (`position:fixed` 等) 包入 `requestAnimationFrame`，与 `nav--open` class 切换分帧执行，防止同帧 reflow 导致视觉闪烁
+39. **closeDrawer() scrollBehavior 陷阱**：`html { scroll-behavior:smooth }` 全局生效，`window.scrollTo(0, savedScrollY)` 会触发平滑动画造成页面跳滚；还原前须临时设 `document.documentElement.style.scrollBehavior = 'auto'`，还原后清除
+40. **共享 nav/footer 方案**：`scripts/nav.js` 内嵌 `NAV_HTML` / `FOOTER_HTML` 字符串，同步调用 `inject()` (`insertAdjacentHTML('afterend',...) + remove()`) 替换占位符。不用 `fetch` 是因为 Chrome/Edge 在 `file://` 协议下 CORS 屏蔽跨文件 fetch，本地开发无需起 server。新页面模板：`<div id="site-nav"></div>`…内容…`<div id="site-footer"></div><script src="../scripts/nav.js"></script>`（路径按层级调整）
+41. **nav.js 中的链接用绝对路径**：`/about.html`、`/barvision.html` 等，在 GitHub Pages 自定义域名下从根解析，子目录页面（如 `barvision/2026/events.html`）也能正确跳转
+42. **updates.json show_after 字段**：BV 里程碑条目加 `"show_after":"YYYY-MM-DD"`，JS 过滤 `new Date(show_after) <= now`；普通条目不加此字段（始终显示）；文件整体按 `date` 降序排列
 
 ---
 
