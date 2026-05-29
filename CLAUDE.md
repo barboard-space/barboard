@@ -29,7 +29,7 @@
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入）
-- `member.html` — Members 总览页（117位成员，**动态 fetch `data/barboard_members.csv`** 渲染，4档过滤，卡片含 Bilibili/Musictrack 外链，hover 紫色光效）
+- `member.html` — Members 总览页（117位成员，**动态 fetch `data/barboard_members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像占位、标签、外链、代表榜单 TODO 区，作为成员页模板）
 - `data/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
 - `data/barboard_members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
@@ -353,7 +353,7 @@ barboard-space/
 44. **Member tooltip 用 JS 事件委托**：`initMemberTooltips()` 监听 `document` 的 `mouseover/mousemove/mouseout`，用 `e.target.closest('.member[data-nickname]')` 匹配；tooltip div 挂在 `<body>`，`position:fixed`，跟随鼠标坐标 `(e.clientX+16, e.clientY)`，opacity 0.85，10px 字体；事件委托自动覆盖动态渲染元素，无需重新绑定
 45. **成员页编号规则**：`member/数字.html`，1–10 为预留位，其他成员从 11 起；当前已建：`member/7.html`（@williw_）。`member.html` 为总览入口（已完成）
 46. **`@username` 自动解析**：`index.html` 中 `MEMBER_MAP`（键为 handle/B站ID，值为 `{nickname, href}`）+ `parseMentions(raw)` 函数；`buildTicker()` 和 `renderUpdates()` 均调用，JSON 文件只需写纯文本 `@username`，在 MEMBER_MAP 中的自动转为带 tooltip 的 `.member` 链接，不在则保留纯文本。新增成员时在 MEMBER_MAP 和 `member.html` 的 MEMBERS 数组里各加一行即可
-47. **`member.html` 数据维护**：成员数据硬编码在 `member.html` 的 MEMBERS JS 数组（源自 `data/barboard_members.csv`），格式 `[nickname, handle, groups[], mt_path, page]`；建好个人主页后将对应条目第 5 项从 `null` 改为路径（如 `'member/7.html'`）
+47. **`member.html` 数据维护**：成员数据从 `data/barboard_members.csv` 动态加载（已废弃硬编码 MEMBERS 数组）。新增/修改成员只需编辑 CSV；建好个人主页后将对应 `space_id` 加入 `BUILT_PAGES` Set（见 #52），对应卡片自动变为可点击链接。
 48. **Dev Gate 开关**：`scripts/nav.js` 第8行 `var DEV_GATE = true`，上线时改为 `false` 即完全关闭（无需删代码）。各页面 `<head>` 含防闪内联脚本（sessionStorage key `barboard_dev`，值 `'1'` 表示已通过，关 tab 失效）。gate CSS/HTML/JS 全部封装在 `initDevGate()` 函数内
 49. **Dev Gate `visibility` 继承陷阱**：防闪脚本设 `document.documentElement.style.visibility='hidden'`（作用于 `<html>`），子元素全部继承，包括 gate overlay 本身。`initDevGate()` 注入 overlay 后必须立即调用 `document.documentElement.style.visibility=''` 还原，否则 overlay 也不可见
 50. **新页面接入 Dev Gate**：新建 HTML 页在 `<meta name="viewport">` 后加一行：`<script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>`；nav.js 已自动处理后续逻辑，无需其他改动
@@ -361,6 +361,9 @@ barboard-space/
 52. **BUILT_PAGES Set 管理成员页链接**：`member.html` 顶部 `var BUILT_PAGES = new Set([7])` 存放已建成员页的 `space_id`。新建 `member/N.html` 后将 `N` 加入此 Set，对应卡片自动变为可点击链接，其余卡片保持不可点击。无需改动 CSV 或其他逻辑。
 53. **嵌套锚点陷阱**：卡片外层若为 `<a>`，内部不能再有 `<a>`（Musictrack/Bilibili 链接），浏览器会自动断开外层锚点导致游离元素出现在 grid 中。解法：外层一律用 `<div>` + `onclick="location.href='...'"` 处理导航，内部链接加 `onclick="event.stopPropagation()"` 防冒泡。
 54. **member.html 小组色彩系统**：筛选按钮与成员标签 badge 颜色一一对应——全部/无分组：榜吧蓝 `#6F9EC3`；BBL：紫色 `--clr-violet-light`；村摇欧：棕黄 `#D49840`；Indienation：粉色 `--clr-pink-light`。badge 简称：BBL / 村摇欧 / Indie。
+55. **member.html 入场动画架构**：hero 元素用 CSS `@keyframes ml-hero-in`（eyebrow 0.05s → 标题 0.16s → 筛选按钮 0.28–0.46s → 搜索框 0.52s）；卡片用自定义 `ml-card-enter`（`opacity:0; translateY(12px); cubic-bezier(0.22,1,0.36,1)`）+ IntersectionObserver。首屏卡片：850ms 后再注册 observer（通过 `getBoundingClientRect().top < vh` 判断）；屏外卡片：立即注册，滚入时触发。计数器：函数顶部 `transition:none; opacity:0` 禁用过渡静默写入内容，双 rAF 后重启过渡，550ms 后淡入。
+56. **CSV 异步加载期间 footer 上浮问题**：`fetch('data/barboard_members.csv')` 为异步操作，加载完成前 `#mlGrid` 为空，页面高度极短，footer 出现在视口内。解法：给 `.ml-section` 加 `min-height: 80vh`，确保 grid 区域未填充时也足够高，footer 始终在视口外。
+57. **member.html 搜索框**：`.ml-search` 置于 `.ml-filters` 末尾，`margin-left: auto` 推到行右侧；初始宽 180px，focus 扩展至 220px（`transition: width 0.25s ease`）；placeholder focus 时 `opacity:0` 淡出，光标颜色 `caret-color: var(--clr-violet)`；搜索与分组筛选取交集，`currentSearch` 全局状态与 `currentFilter` 联动，`buildGrid(members, filter, search)` 三参数调用。移动端 `width:100%; margin-left:0`。
 
 ---
 

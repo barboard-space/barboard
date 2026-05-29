@@ -4,6 +4,31 @@
 
 ---
 
+## [2026-05-29] — member.html UI 精修 & 动画系统
+
+### Added
+- **成员名称搜索框**（`member.html`）：与分组筛选联动，同时匹配昵称和 barboard_id，`margin-left:auto` 右对齐，focus 展开 180→220px，placeholder 淡出，光标紫色
+- **member.html 完整入场动画序列**：eyebrow(0.05s)→标题(0.16s)→筛选按钮4个(0.28–0.46s)→搜索框(0.52s)→计数器(0.55s)→首屏卡片(0.85s起按列错位)；自定义 `ml-card-enter` class（`cubic-bezier(0.22,1,0.36,1)`，`translateY(12px)`），`getBoundingClientRect` 判断首屏/屏外分开处理
+- **`section-label` 横线**：`榜吧成员名录` eyebrow 加 `section-label` class，与首页各 section label 保持一致
+
+### Changed
+- **Nav 顺序**（`scripts/nav.js`）：移除 About，加入 Members；新顺序 Barvision → BarboardLab → Archive → Members → Musictrack → 报名通道（桌面+移动抽屉同步）
+- **Footer 文案**：`关于BarboardLab` / `关于Barboard` 中英文中间加空格
+- **index.html BarboardLab 三按钮**：从容器整体 fade-up 改为各自独立 fade-up，delay 0.4s / 0.5s / 0.6s 按序触发
+- **member.html badge 样式**：对齐 `phase__badge`（`border-radius:2px`、`padding:4px 5px 3px 6px`、`letter-spacing:0.08em`、border 用 `rgba(color,0.4)`）
+- **Bilibili·Musictrack 分隔**：两个链接之间加 `·`（`.ml-card__sep`），gap 调整为 6px
+- **计数器样式**：Bebas 42px 白色 + 13px 小字，opacity 0.85，`117位成员` / `X / 117 位成员` 格式
+- **卡片 handle 颜色**：`--clr-text-3` → `#a8a3c8`（调亮）
+- **卡片 grid gap**：12px → 8px
+- **背景蓝色辉光**：位置 `80%80%` → `80%62%`，opacity 0.04，transparent 扩至 75%
+
+### Fixed
+- **footer 上浮闪现**：CSV 异步加载期间 grid 为空导致 footer 在视口内；`ml-section` 加 `min-height:80vh` 修复
+- **计数器动画闪烁**：先出现再消失再出现的问题；改为函数顶部 `transition:none; opacity:0` 静默写入内容，双 rAF 后重启过渡
+- **卡片动画只有两排**：`i < 12` 硬编码改为 `getBoundingClientRect().top < vh` 动态判断，所有首屏卡片均延迟 850ms observe
+
+---
+
 ## [2026-05-29] — member.html 重构 & CSV 动态加载
 
 ### Changed

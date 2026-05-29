@@ -21,7 +21,7 @@
       inset: 0;
       background:
         radial-gradient(ellipse 80% 60% at 20% 0%, rgba(168,85,247,0.14) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0,180,255,0.06) 0%, transparent 55%);
+        radial-gradient(ellipse 60% 50% at 80% 62%, rgba(0,180,255,0.04) 0%, transparent 75%);
       pointer-events: none;
     }
     .ml-hero__inner { position: relative; z-index: 1; }
@@ -71,14 +71,34 @@
     .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: #D49840; background: rgba(180,120,45,0.1); }
     .ml-filter[data-filter="indie"].active  { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
 
+    .ml-search {
+      margin-left: auto;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      padding: 6px 14px 8px 14px;
+      border-radius: 4px;
+      border: 1px solid var(--clr-border);
+      background: transparent;
+      color: var(--clr-text);
+      outline: none;
+      width: 180px;
+      transition: border-color 0.18s, width 0.25s ease;
+    }
+    .ml-search::placeholder { color: var(--clr-text-3); font-weight: 400; transition: opacity 0.18s; }
+    .ml-search:focus::placeholder { opacity: 0; }
+    .ml-search:focus { border-color: var(--clr-violet); width: 220px; caret-color: var(--clr-violet); }
+
     /* ── Grid ── */
     .ml-section {
       padding: 40px 0 80px;
+      min-height: 80vh;
     }
     .ml-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-      gap: 12px;
+      gap: 8px;
     }
 
     /* ── Card ── */
@@ -112,34 +132,43 @@
     }
     .ml-card__handle {
       font-size: 11px;
-      color: var(--clr-text-3);
+      color: #a8a3c8;
       letter-spacing: 0.04em;
       min-height: 15px;
+      margin-top: -2px;
     }
     .ml-card__badges {
       display: flex;
       flex-wrap: wrap;
       gap: 4px;
       min-height: 20px;
+      margin-top: 4px;
     }
     .ml-badge {
+      font-family: var(--font-body);
       font-size: 9px;
       font-weight: 700;
-      letter-spacing: 0.12em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 2px 6px;
-      border-radius: 3px;
-      border: 1px solid currentColor;
+      padding: 5px 5px 3px 6px;
+      border-radius: 2px;
+      white-space: nowrap;
+      line-height: 1;
     }
-    .ml-badge--bbl   { color: var(--clr-violet-light); background: var(--clr-violet-dim); }
-    .ml-badge--cun   { color: #D49840;                background: rgba(180,120,45,0.1); }
-    .ml-badge--indie { color: var(--clr-pink-light);  background: var(--clr-pink-dim); }
+    .ml-badge--bbl   { color: var(--clr-violet-light); background: var(--clr-violet-dim);    border: 1px solid rgba(192,132,252,0.4); }
+    .ml-badge--cun   { color: #D49840;                 background: rgba(180,120,45,0.1);      border: 1px solid rgba(212,152,64,0.4); }
+    .ml-badge--indie { color: var(--clr-pink-light);   background: var(--clr-pink-dim);       border: 1px solid rgba(240,96,184,0.4); }
 
     .ml-card__foot {
       margin-top: 4px;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
+    }
+    .ml-card__sep {
+      font-size: 11px;
+      color: var(--clr-text-3);
+      user-select: none;
     }
     .ml-card__mt {
       font-size: 11px;
@@ -154,17 +183,76 @@
 
     /* counter */
     #mlCount {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--clr-text-3);
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
       margin-bottom: 16px;
-      display: block;
+      opacity: 0.85;
+      transition: opacity 0.4s ease, transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .ml-count__num {
+      font-family: var(--font-display);
+      font-size: 42px;
+      line-height: 1;
+      color: var(--clr-text);
+      letter-spacing: 0.02em;
+    }
+    .ml-count__label {
+      font-family: var(--font-body);
+      font-size: 13px;
+      color: var(--clr-text);
+      letter-spacing: 0.06em;
     }
 
     @media (max-width: 600px) {
       .ml-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
       .ml-card { padding: 14px 12px 12px; }
       .ml-card__nickname { font-size: 22px; }
+      .ml-search { margin-left: 0; width: 100%; }
+      .ml-search:focus { width: 100%; }
+    }
+
+    /* ── Card entrance ── */
+    @media (prefers-reduced-motion: no-preference) {
+      .ml-card-enter {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+                    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      .ml-card-enter.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Hero entrance animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes ml-hero-in {
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .ml-meta, .ml-title {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: ml-hero-in 0.55s ease forwards;
+      }
+      .ml-meta  { animation-delay: 0.05s; }
+      .ml-title { animation-delay: 0.16s; }
+      .ml-filters .ml-filter {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: ml-hero-in 0.45s ease forwards;
+      }
+      .ml-filters .ml-filter:nth-child(1) { animation-delay: 0.28s; }
+      .ml-filters .ml-filter:nth-child(2) { animation-delay: 0.34s; }
+      .ml-filters .ml-filter:nth-child(3) { animation-delay: 0.40s; }
+      .ml-filters .ml-filter:nth-child(4) { animation-delay: 0.46s; }
+      .ml-filters .ml-search {
+        opacity: 0;
+        transform: translateY(14px);
+        animation: ml-hero-in 0.45s ease forwards;
+        animation-delay: 0.52s;
+      }
     }
   </style>
 </head>
@@ -175,13 +263,14 @@
   <section class="ml-hero">
     <div class="ml-hero__glow" aria-hidden="true"></div>
     <div class="ml-hero__inner section__inner">
-      <div class="ml-meta" id="mlMeta">榜吧成员名录</div>
+      <div class="ml-meta section-label" id="mlMeta">榜吧成员名录</div>
       <div class="ml-title">MEMBERS</div>
       <div class="ml-filters">
         <button class="ml-filter active" data-filter="all">全部</button>
         <button class="ml-filter" data-filter="bbl">BarboardLab</button>
         <button class="ml-filter" data-filter="cun">村摇欧</button>
         <button class="ml-filter" data-filter="indie">Indienation</button>
+        <input class="ml-search" type="text" id="mlSearch" placeholder="搜索成员…" autocomplete="off" />
       </div>
     </div>
   </section>
@@ -319,6 +408,16 @@
 
     var BUILT_PAGES = new Set([7]);
 
+    var mlObserver = 'IntersectionObserver' in window
+      ? new IntersectionObserver(function(entries) {
+          entries.forEach(function(e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); mlObserver.unobserve(e.target); }
+          });
+        }, { threshold: 0.05 })
+      : null;
+
+    var firstLoad = true;
+
     var BADGE_LABEL = { bbl: 'BBL', cun: '村摇欧', indie: 'Indie' };
 
     function parseGroups(team) {
@@ -343,15 +442,22 @@
 
     var allMembers = [];
     var currentFilter = 'all';
+    var currentSearch = '';
 
-    function buildGrid(members, filter) {
+    function buildGrid(members, filter, search) {
       var grid = document.getElementById('mlGrid');
       var count = document.getElementById('mlCount');
       var visible = 0;
+      var isFirst = firstLoad;
+      if (firstLoad) firstLoad = false;
+      if (isFirst) { count.style.transition = 'none'; count.style.opacity = '0'; count.style.transform = 'translateY(8px)'; }
 
       grid.innerHTML = members.map(function(m) {
         var name = m[0], bId = m[1], groups = m[2], mtId = m[3], biliId = m[4], page = m[5];
-        var show = filter === 'all' || groups.indexOf(filter) !== -1;
+        var q = search ? search.toLowerCase() : '';
+        var matchGroup = filter === 'all' || groups.indexOf(filter) !== -1;
+        var matchSearch = !q || name.toLowerCase().indexOf(q) !== -1 || bId.toLowerCase().indexOf(q) !== -1;
+        var show = matchGroup && matchSearch;
         if (show) visible++;
 
         var badges = groups.map(function(g) {
@@ -360,11 +466,12 @@
 
         var foot = '';
         if (biliId) foot += '<a class="ml-card__mt" href="https://space.bilibili.com/' + biliId + '/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Bilibili</a>';
+        if (biliId && mtId) foot += '<span class="ml-card__sep">·</span>';
         if (mtId) foot += '<a class="ml-card__mt" href="https://musictrack.cn/chart/' + mtId + '/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Musictrack</a>';
 
         var tag = 'div';
         var attrs = page ? ' onclick="location.href=\'' + page + '\'" tabindex="0" role="link"' : '';
-        var cls = 'ml-card' + (page ? ' ml-card--link' : '') + (show ? '' : ' hidden');
+        var cls = 'ml-card ml-card-enter' + (page ? ' ml-card--link' : '') + (show ? '' : ' hidden');
 
         return '<' + tag + ' class="' + cls + '"' + attrs + '>' +
           '<div class="ml-card__nickname">' + name + '</div>' +
@@ -374,9 +481,34 @@
           '</' + tag + '>';
       }).join('');
 
-      var label = filter === 'all' ? '· ' + members.length + ' 位成员'
-                : '· 显示 ' + visible + ' / ' + members.length + ' 位';
-      count.textContent = label;
+      var showAll = filter === 'all' && !search;
+      var label = showAll
+        ? '<span class="ml-count__num">' + members.length + '</span><span class="ml-count__label">位成员</span>'
+        : '<span class="ml-count__num">' + visible + '</span><span class="ml-count__label">/ ' + members.length + ' 位成员</span>';
+      count.innerHTML = label;
+
+      // 计数器：首次加载在函数顶部已禁用过渡+隐藏，双 rAF 后重启过渡，870ms 延迟展开
+      if (isFirst) {
+        var _c = count;
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() {
+            _c.style.transition = '';
+            setTimeout(function() { _c.style.opacity = ''; _c.style.transform = ''; }, 550);
+          });
+        });
+      }
+
+      // 卡片动画：getBoundingClientRect 判断首屏，首屏内延迟 1s 再 observe；屏外立即 observe
+      var vh = window.innerHeight;
+      grid.querySelectorAll('.ml-card:not(.hidden)').forEach(function(card, i) {
+        card.style.transitionDelay = ((i % 6) * 0.05).toFixed(2) + 's';
+        if (!mlObserver) { card.classList.add('visible'); return; }
+        if (isFirst && card.getBoundingClientRect().top < vh) {
+          setTimeout(function() { mlObserver.observe(card); }, 850);
+        } else {
+          mlObserver.observe(card);
+        }
+      });
     }
 
     document.querySelectorAll('.ml-filter').forEach(function(btn) {
@@ -384,8 +516,13 @@
         document.querySelectorAll('.ml-filter').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         currentFilter = btn.dataset.filter;
-        buildGrid(allMembers, currentFilter);
+        buildGrid(allMembers, currentFilter, currentSearch);
       });
+    });
+
+    document.getElementById('mlSearch').addEventListener('input', function() {
+      currentSearch = this.value.trim();
+      buildGrid(allMembers, currentFilter, currentSearch);
     });
 
     fetch('data/barboard_members.csv')
@@ -405,7 +542,7 @@
           var page = BUILT_PAGES.has(spaceId) ? 'member/' + spaceId + '.html' : null;
           allMembers.push([name, bId, groups, mtId, biliId, page]);
         }
-        buildGrid(allMembers, currentFilter);
+        buildGrid(allMembers, currentFilter, currentSearch);
       });
   </script>
 </body>
