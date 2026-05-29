@@ -179,7 +179,7 @@
       gap: 3px;
       transition: color 0.18s;
     }
-    .ml-card__mt:hover { color: var(--clr-text-2); }
+    .ml-card__mt:hover { color: var(--clr-violet-light); }
 
     /* counter */
     #mlCount {
@@ -463,11 +463,8 @@
 
     function getMemberScore(m) {
       var s = 0;
-      if (m[0]) s++; // barboard_name
-      if (m[1]) s++; // space_name
-      if (m[4]) s++; // bilibili_id
-      if (m[3]) s++; // chart_id
-      s += m[2].length; // teams
+      if (m[0]) s++; if (m[1]) s++; if (m[4]) s++; if (m[3]) s++;
+      s += m[2].length;
       return s;
     }
 
@@ -480,9 +477,7 @@
     }
 
     function getRowScore(m) {
-      var hasHandle = !!m[1];
-      var hasTeam   = m[2].length > 0;
-      var hasFoot   = !!(m[3] || m[4]);
+      var hasHandle = !!m[1], hasTeam = m[2].length > 0, hasFoot = !!(m[3] || m[4]);
       if (hasHandle && hasTeam && hasFoot) return 7;
       if (hasHandle && hasFoot)            return 6;
       if (hasHandle && hasTeam)            return 5;
@@ -522,16 +517,15 @@
         if (biliId && mtId) foot += '<span class="ml-card__sep">·</span>';
         if (mtId) foot += '<a class="ml-card__mt" href="https://musictrack.cn/chart/' + mtId + '/" target="_blank" rel="noopener" onclick="event.stopPropagation()">Musictrack</a>';
 
-        var tag = 'div';
         var attrs = page ? ' onclick="location.href=\'' + page + '\'" tabindex="0" role="link"' : '';
         var cls = 'ml-card ml-card-enter' + (page ? ' ml-card--link' : '') + (show ? '' : ' hidden');
 
-        return '<' + tag + ' class="' + cls + '"' + attrs + '>' +
+        return '<div class="' + cls + '"' + attrs + '>' +
           '<div class="ml-card__nickname">' + name + '</div>' +
           '<div class="ml-card__handle">' + (bId ? '@' + bId : '') + '</div>' +
           (badges ? '<div class="ml-card__badges">' + badges + '</div>' : '') +
           (foot ? '<div class="ml-card__foot">' + foot + '</div>' : '') +
-          '</' + tag + '>';
+          '</div>';
       }).join('');
 
       var showAll = filter === 'all' && !search;
@@ -578,7 +572,7 @@
         prevCountNum = targetNum;
       }
 
-      // 卡片动画：getBoundingClientRect 判断首屏，首屏内延迟 1s 再 observe；屏外立即 observe
+      // 卡片动画：getBoundingClientRect 判断首屏，首屏内延迟 850ms 再 observe；屏外立即 observe
       var vh = window.innerHeight;
       grid.querySelectorAll('.ml-card:not(.hidden)').forEach(function(card, i) {
         card.style.transitionDelay = ((i % 6) * 0.05).toFixed(2) + 's';
@@ -622,7 +616,7 @@
           var page = BUILT_PAGES.has(spaceId) ? 'member/' + spaceId + '.html' : null;
           allMembers.push([name, bId, groups, mtId, biliId, page]);
         }
-        // 固定前四：威妈-雨妈-羊妈-S妈，其余按完善度得分排序
+        // 固定前四：雨妈-威妈-羊妈-S妈，其余按完善度得分排序
         var pinned = [];
         PINNED_NAMES.forEach(function(pName) {
           for (var j = 0; j < allMembers.length; j++) {

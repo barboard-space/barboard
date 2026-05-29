@@ -4,6 +4,13 @@
 
 ---
 
+## [2026-05-29] — member.html 链接 hover
+
+### Style
+- **member.html**：`.ml-card__mt`（Bilibili / Musictrack 链接）hover 颜色改为 `--clr-violet-light`（`#c084fc`）
+
+---
+
 ## [2026-05-30] — member.html 排序系统 & 计数器动画
 
 ### Added
