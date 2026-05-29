@@ -12,7 +12,7 @@
   <style>
     /* ── Page hero ── */
     .ml-hero {
-      padding: calc(var(--nav-h) + 48px) 0 40px;
+      padding: calc(var(--nav-h) + 48px) 0 25px;
       position: relative;
       overflow: hidden;
     }
@@ -92,7 +92,7 @@
 
     /* ── Grid ── */
     .ml-section {
-      padding: 40px 0 80px;
+      padding: 25px 0 80px;
       min-height: 80vh;
     }
     .ml-grid {
@@ -196,6 +196,8 @@
       line-height: 1;
       color: var(--clr-text);
       letter-spacing: 0.02em;
+      min-width: 3ch;
+      text-align: right;
     }
     .ml-count__label {
       font-family: var(--font-body);
@@ -268,7 +270,7 @@
       <div class="ml-filters">
         <button class="ml-filter active" data-filter="all">全部</button>
         <button class="ml-filter" data-filter="bbl">BarboardLab</button>
-        <button class="ml-filter" data-filter="cun">村摇欧</button>
+        <button class="ml-filter" data-filter="cun">村摇欧共体</button>
         <button class="ml-filter" data-filter="indie">Indienation</button>
         <input class="ml-search" type="text" id="mlSearch" placeholder="搜索成员…" autocomplete="off" />
       </div>
@@ -417,6 +419,23 @@
       : null;
 
     var firstLoad = true;
+    var prevCountNum = 0;
+    var _countAnimId = null;
+
+    function animateCounterTo(el, from, to, onDone) {
+      if (_countAnimId) { cancelAnimationFrame(_countAnimId); _countAnimId = null; }
+      var dur = Math.min(480, 100 + Math.abs(to - from) * 5);
+      var t0 = null;
+      function tick(ts) {
+        if (!t0) t0 = ts;
+        var p = Math.min((ts - t0) / dur, 1);
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(from + (to - from) * e);
+        if (p < 1) { _countAnimId = requestAnimationFrame(tick); }
+        else { el.textContent = to; _countAnimId = null; if (onDone) onDone(); }
+      }
+      _countAnimId = requestAnimationFrame(tick);
+    }
 
     var BADGE_LABEL = { bbl: 'BBL', cun: '村摇欧', indie: 'Indie' };
 
@@ -438,6 +457,40 @@
       }
       fields.push(field.trim());
       return fields;
+    }
+
+    var PINNED_NAMES = ['雨妈', '威妈', '羊妈', 'S妈'];
+
+    function getMemberScore(m) {
+      var s = 0;
+      if (m[0]) s++; // barboard_name
+      if (m[1]) s++; // space_name
+      if (m[4]) s++; // bilibili_id
+      if (m[3]) s++; // chart_id
+      s += m[2].length; // teams
+      return s;
+    }
+
+    function getTeamPriority(groups) {
+      var p = 0;
+      if (groups.indexOf('bbl') !== -1) p += 4;
+      if (groups.indexOf('cun') !== -1) p += 2;
+      if (groups.indexOf('indie') !== -1) p += 1;
+      return p;
+    }
+
+    function getRowScore(m) {
+      var hasHandle = !!m[1];
+      var hasTeam   = m[2].length > 0;
+      var hasFoot   = !!(m[3] || m[4]);
+      if (hasHandle && hasTeam && hasFoot) return 7;
+      if (hasHandle && hasFoot)            return 6;
+      if (hasHandle && hasTeam)            return 5;
+      if (hasTeam   && hasFoot)            return 4;
+      if (hasHandle)                       return 3;
+      if (hasFoot)                         return 2;
+      if (hasTeam)                         return 1;
+      return 0;
     }
 
     var allMembers = [];
@@ -476,19 +529,18 @@
         return '<' + tag + ' class="' + cls + '"' + attrs + '>' +
           '<div class="ml-card__nickname">' + name + '</div>' +
           '<div class="ml-card__handle">' + (bId ? '@' + bId : '') + '</div>' +
-          '<div class="ml-card__badges">' + badges + '</div>' +
+          (badges ? '<div class="ml-card__badges">' + badges + '</div>' : '') +
           (foot ? '<div class="ml-card__foot">' + foot + '</div>' : '') +
           '</' + tag + '>';
       }).join('');
 
       var showAll = filter === 'all' && !search;
-      var label = showAll
-        ? '<span class="ml-count__num">' + members.length + '</span><span class="ml-count__label">位成员</span>'
-        : '<span class="ml-count__num">' + visible + '</span><span class="ml-count__label">/ ' + members.length + ' 位成员</span>';
-      count.innerHTML = label;
+      var targetNum = showAll ? members.length : visible;
+      var newLabelText = showAll ? '位成员' : '/ ' + members.length + ' 位成员';
 
-      // 计数器：首次加载在函数顶部已禁用过渡+隐藏，双 rAF 后重启过渡，870ms 延迟展开
       if (isFirst) {
+        count.innerHTML = '<span class="ml-count__num">' + targetNum + '</span><span class="ml-count__label">' + newLabelText + '</span>';
+        prevCountNum = targetNum;
         var _c = count;
         requestAnimationFrame(function() {
           requestAnimationFrame(function() {
@@ -496,6 +548,34 @@
             setTimeout(function() { _c.style.opacity = ''; _c.style.transform = ''; }, 550);
           });
         });
+      } else {
+        var numEl = count.querySelector('.ml-count__num');
+        var labelEl = count.querySelector('.ml-count__label');
+        animateCounterTo(numEl, prevCountNum, targetNum, null);
+        if (labelEl && labelEl.textContent !== newLabelText) {
+          var _nlt = newLabelText;
+          labelEl.style.transition = 'opacity 0.12s ease, transform 0.14s ease';
+          labelEl.style.opacity = '0';
+          labelEl.style.transform = 'translateX(-10px)';
+          setTimeout(function() {
+            labelEl.textContent = _nlt;
+            labelEl.style.transition = 'none';
+            labelEl.style.transform = 'translateX(10px)';
+            requestAnimationFrame(function() {
+              requestAnimationFrame(function() {
+                labelEl.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+                labelEl.style.opacity = '1';
+                labelEl.style.transform = 'translateX(0)';
+                setTimeout(function() {
+                  labelEl.style.transition = '';
+                  labelEl.style.transform = '';
+                  labelEl.style.opacity = '';
+                }, 220);
+              });
+            });
+          }, 140);
+        }
+        prevCountNum = targetNum;
       }
 
       // 卡片动画：getBoundingClientRect 判断首屏，首屏内延迟 1s 再 observe；屏外立即 observe
@@ -542,6 +622,22 @@
           var page = BUILT_PAGES.has(spaceId) ? 'member/' + spaceId + '.html' : null;
           allMembers.push([name, bId, groups, mtId, biliId, page]);
         }
+        // 固定前四：威妈-雨妈-羊妈-S妈，其余按完善度得分排序
+        var pinned = [];
+        PINNED_NAMES.forEach(function(pName) {
+          for (var j = 0; j < allMembers.length; j++) {
+            if (allMembers[j][0] === pName) { pinned.push(allMembers[j]); break; }
+          }
+        });
+        var rest = allMembers.filter(function(m) { return PINNED_NAMES.indexOf(m[0]) === -1; });
+        rest.sort(function(a, b) {
+          var rd = getRowScore(b) - getRowScore(a);
+          if (rd !== 0) return rd;
+          var sd = getMemberScore(b) - getMemberScore(a);
+          if (sd !== 0) return sd;
+          return getTeamPriority(b[2]) - getTeamPriority(a[2]);
+        });
+        allMembers = pinned.concat(rest);
         buildGrid(allMembers, currentFilter, currentSearch);
       });
   </script>

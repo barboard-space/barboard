@@ -4,6 +4,21 @@
 
 ---
 
+## [2026-05-30] — member.html 排序系统 & 计数器动画
+
+### Added
+- **成员名片排序系统**：`PINNED_NAMES`（雨妈→威妈→羊妈→S妈）固定前四位；`getRowScore`（0–7分，按信息行数完善度）为主键，`getMemberScore`（字段完善度）为次键，`getTeamPriority`（BBL>村摇欧>Indie）为三级打破平局
+- **计数器数字动画**：`animateCounterTo` ease-out cubic 曲线，时长按差值动态调整（最长480ms）；支持 `onDone` 回调
+- **计数器文字动画**：筛选切换时旧文字向左滑出+淡出（120ms），新文字从右侧滑入+淡入（200ms）
+- **数字固定宽度**：`.ml-count__num` 加 `min-width: 3ch; text-align: right`，防止两位数↔三位数切换时右侧文字位置跳变
+
+### Changed
+- **筛选按钮**："村摇欧" → "村摇欧共体"
+- **hero/section 间距**：`.ml-hero` 底部 padding 40→25px，`.ml-section` 顶部 padding 40→25px
+- **成员卡片 badges div**：只在有 team 时渲染，无 team 不渲染空 div（原 `min-height:20px` 空 div 导致"大字+小字+foot"卡片比"大字+小字+team"高）
+
+---
+
 ## [2026-05-29] — member.html UI 精修 & 动画系统
 
 ### Added
