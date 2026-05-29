@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barboard | 欧美流行音乐个人榜吧</title>
   <meta name="description" content="欧美流行音乐个人榜吧（Barboard），成立于2013年的欧美流行音乐爱好者社区。旗下设有 BarboardLab 每周合榜活动与 Barvision 年度歌曲大赛。" />
   <link rel="icon" type="image/png" href="assets/images/logo_center.png" />
@@ -285,17 +286,6 @@
       return start.toLocaleDateString('en-US', opt) + '–' + end.toLocaleDateString('en-US', opt) + ', ' + year;
     }
 
-    function fmtWeekRangeCN(dateStr) {
-      const end = new Date(dateStr + 'T12:00:00');
-      const start = new Date(end);
-      start.setDate(start.getDate() - 6);
-      const y = end.getFullYear();
-      const sm = start.getMonth() + 1, sd = start.getDate();
-      const em = end.getMonth() + 1,   ed = end.getDate();
-      if (sm === em) return y + '年' + sm + '月' + sd + '日-' + ed + '日';
-      return y + '年' + sm + '月' + sd + '日-' + em + '月' + ed + '日';
-    }
-
     // ── UPDATES ────────────────────────────────────────────
     // 数据从 data/updates.json 和 data/ticker.json 异步加载
     var _staticUpdates = [];
@@ -307,7 +297,6 @@
     };
 
     function parseMentions(raw) {
-      var esc = function(s) { return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); };
       return raw.replace(/@([\w]+)/g, function(match, name) {
         var m = MEMBER_MAP[name];
         if (!m) return esc(match);

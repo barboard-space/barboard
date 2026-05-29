@@ -1,6 +1,18 @@
 (function () {
   'use strict';
 
+  /* ══════════════════════════════════════════════════════════════════════════
+     DEV GATE ─ 开发期密码保护
+     上线时将 DEV_GATE 改为 false 即可完全关闭，无需删除任何代码
+     ══════════════════════════════════════════════════════════════════════════ */
+  var DEV_GATE = true;
+  var DEV_PASS  = 'waitaminute';
+
+  /* 若守门已关 或 本 session 已通过 → 立即还原 <html> 可见性（配合各页面 head 内联脚本） */
+  if (!DEV_GATE || sessionStorage.getItem('barboard_dev') === '1') {
+    document.documentElement.style.visibility = '';
+  }
+
   /* ── Shared HTML ─────────────────────────────────────────────────────────
      修改 nav 或 footer 样式时，在此处统一编辑，所有页面自动生效。
      同步更新 partials/nav.html 和 partials/footer.html 作为可读备份。
@@ -91,6 +103,88 @@
 
   inject(document.getElementById('site-nav'),    NAV_HTML);
   inject(document.getElementById('site-footer'), FOOTER_HTML);
+
+  /* ── Dev Gate ───────────────────────────────────────────────────────────── */
+  function initDevGate() {
+    if (!DEV_GATE) return;
+    if (sessionStorage.getItem('barboard_dev') === '1') return;
+
+    var st = document.createElement('style');
+    st.textContent = [
+      '#dev-gate{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;padding-top:10vh;background:var(--clr-bg);transition:opacity .45s ease;}',
+      '#dev-gate.dg-out{opacity:0;pointer-events:none;}',
+      '.dg-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 70% 55% at 50% 38%,rgba(0,180,255,.07) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 80% 70%,rgba(168,85,247,.05) 0%,transparent 60%);}',
+      '.dg-card{position:relative;display:flex;flex-direction:column;align-items:center;width:min(380px,90vw);padding:0 0 8px;}',
+      '.dg-logo{font-family:var(--font-display);font-size:54px;letter-spacing:.04em;line-height:1;color:var(--clr-text);margin-bottom:10px;}',
+      '.dg-logo-b{color:#6F9EC3;}',
+      '.dg-notice{font-family:var(--font-body);font-size:13px;color:var(--clr-text-2);margin:10px 0 3px;}',
+      '.dg-sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.14em;color:var(--clr-text-2);opacity:.65;margin:0 0 40px;}',
+      '.dg-row{display:flex;flex-direction:column;gap:10px;width:100%;}',
+      '.dg-inp{width:100%;height:44px;background:var(--clr-surface);border:1px solid var(--clr-border-2);border-radius:4px;color:var(--clr-text);font-family:var(--font-mono);font-size:14px;padding:0 14px;outline:none;-webkit-appearance:none;appearance:none;box-sizing:border-box;transition:border-color .2s,box-shadow .2s;}',
+      '.dg-inp:focus{border-color:#6F9EC3;box-shadow:0 0 0 2px rgba(111,158,195,.18);}',
+      '.dg-inp.dg-shake{animation:dg-shake .35s ease;border-color:#e04060;}',
+      '.dg-btn{align-self:center;height:44px;padding:0 22px;background:#6F9EC3;color:#000;border:none;border-radius:4px;cursor:pointer;font-family:var(--font-display);font-size:15px;letter-spacing:.06em;transition:background .2s;}',
+      '.dg-btn:hover{background:#8ab4d4;}',
+      '.dg-err{min-height:20px;margin:10px 0 0;font-family:var(--font-body);font-size:12px;color:#e04060;}',
+      '@keyframes dg-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}',
+      '@media(max-width:400px){.dg-logo{font-size:46px;}}'
+    ].join('\n');
+    document.head.appendChild(st);
+
+    var ov = document.createElement('div');
+    ov.id = 'dev-gate';
+    ov.innerHTML = [
+      '<div class="dg-bg"></div>',
+      '<div class="dg-card">',
+      '  <div class="dg-logo">BAR<span class="dg-logo-b">BOARD</span></div>',
+      '  <p class="dg-notice">敬请期待</p>',
+      '  <p class="dg-sub">STAY TUNED</p>',
+      '  <div class="dg-row">',
+      '    <input class="dg-inp" id="dgInp" type="password" placeholder="Access code" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />',
+      '    <button class="dg-btn" id="dgBtn">ENTER</button>',
+      '  </div>',
+      '  <p class="dg-err" id="dgErr"></p>',
+      '</div>'
+    ].join('\n');
+    document.body.insertBefore(ov, document.body.firstChild);
+    /* restore html visibility now that the gate covers the page */
+    document.documentElement.style.visibility = '';
+
+    document.body.style.overflow = 'hidden';
+
+    var inp = document.getElementById('dgInp');
+    var btn = document.getElementById('dgBtn');
+    var err = document.getElementById('dgErr');
+
+    function unlock() {
+      sessionStorage.setItem('barboard_dev', '1');
+      document.body.style.overflow = '';
+      document.documentElement.style.visibility = '';
+      ov.classList.add('dg-out');
+      setTimeout(function () { ov.remove(); }, 500);
+    }
+
+    function fail() {
+      err.textContent = '密码错误 · Wrong access code';
+      inp.classList.remove('dg-shake');
+      void inp.offsetWidth;
+      inp.classList.add('dg-shake');
+      inp.value = '';
+      setTimeout(function () { err.textContent = ''; inp.classList.remove('dg-shake'); }, 2000);
+    }
+
+    function attempt() {
+      if (inp.value === DEV_PASS) { unlock(); } else { fail(); }
+    }
+
+    btn.addEventListener('click', attempt);
+    inp.addEventListener('keydown', function (e) { if (e.key === 'Enter') attempt(); });
+
+    /* auto-focus only on desktop (avoids keyboard popup on mobile) */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+      setTimeout(function () { inp.focus(); }, 80);
+    }
+  }
 
   /* ── Nav 初始化 ────────────────────────────────────────────────────────── */
   function initNav() {
@@ -189,6 +283,7 @@
     });
   }
 
+  initDevGate();
   initNav();
   initBackToTop();
   initMemberTooltips();
