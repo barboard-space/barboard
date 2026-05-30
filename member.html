@@ -622,7 +622,7 @@
       buildGrid(allMembers, currentFilter, currentSearch);
     });
 
-    fetch('data/barboard_members.csv')
+    fetch('data/members/members.csv')
       .then(function(r) { return r.text(); })
       .then(function(text) {
         var lines = text.trim().split('\n');

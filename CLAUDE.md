@@ -29,18 +29,19 @@
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入）
-- `member.html` — Members 总览页（117位成员，**动态 fetch `data/barboard_members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
+- `member.html` — Members 总览页（117位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
 - `member/N.html`（117个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
 - `scripts/member-render.js` — 成员页共享模板：注入 CSS、读取 `window.MEMBER_DATA`、渲染 hero+Works 两节、处理 CJK/ASCII 头像字体、设置 fade-up 动画
 - `scripts/gen_member_pages.py` — 成员页批量生成脚本：读 CSV → 输出 117 个 `member/N.html`；数据变动时重新运行
-- `data/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
-- `data/barboard_members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
+- `data/bbl/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
+- `data/bbl/bbl-vol-index.json` — Vol.1–124 期号→日期索引（对象格式，`{"1":"2024-01-05",...}`，供 bbl/charts 等页面引用）
+- `data/members/members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
-- `barboardlab/hall-of-fame.html` — BBL 荣誉殿堂（已完成，5大板块：20冠军排行/驻榜纪录6组/艺人版图/上榜专辑/未冠之最，数据硬编码 JS 常量数组直接渲染）
+- `bbl/hof.html` — BBL 荣誉殿堂（已完成，5大板块：冠军名录31首/驻榜纪录6组/艺人版图/上榜专辑/未冠之最，数据截至第124期，数据硬编码 JS 常量数组直接渲染；含 `VOL_DATES` 内联索引；eyebrow 链回 `/bbl.html`）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -83,12 +84,21 @@ barboard-space/
 │   └── footer.html         ← footer HTML 可读备份（与 nav.js 内容同步）
 │
 ├── data/
-│   ├── bbl-latest.json     ← BBL 最新榜单（自动更新，含真实数据）
-│   ├── ticker.json         ← 字幕条目（字符串数组，BBL条目由fetch_bbl.py维护）
-│   └── updates.json        ← 动态条目（对象数组，BBL条目由fetch_bbl.py维护）
+│   ├── bbl/
+│   │   ├── bbl-latest.json     ← BBL 最新榜单（自动更新，含真实数据）
+│   │   ├── bbl-vol-index.json  ← Vol.1–124 期号→日期索引
+│   │   └── bbl-record/         ← BBL 原始数据文件（CSV 等）
+│   ├── main-page/
+│   │   ├── ticker.json         ← 字幕条目（字符串数组，BBL条目由fetch_bbl.py维护）
+│   │   └── updates.json        ← 动态条目（对象数组，BBL条目由fetch_bbl.py维护）
+│   ├── members/
+│   │   └── members.csv         ← 全体成员信息
+│   └── barvision/
+│       ├── barvision-archive/  ← Barvision 历届存档
+│       └── barvision-record/   ← Barvision 原始数据
 │
-├── barboardlab/
-│   └── hall-of-fame.html   ← BBL 荣誉殿堂（已完成）
+├── bbl/
+│   └── hof.html            ← BBL 荣誉殿堂（已完成）
 │
 ├── member/
 │   ├── 7.html              ← @williw_（威妈）成员主页（已完成）
@@ -124,7 +134,7 @@ barboard-space/
 - **API**：`https://6api.musictrack.cn/api/charts/3045`（React SPA 后端接口，直接返回 JSON）
 - **注意**：有反爬限制（X-Anticrawler-Limit: 420），每周只抓一次，不要频繁请求
 - **workflow 触发时间**：周六 16:00 UTC（北京时间周日 00:00）主抓 + 周一 04:00 UTC（北京时间 12:00）备用；备用触发时先检查 `git log --since="2 days ago"` 判断主抓是否已提交，成功则跳过
-- **前端渲染**：`loadChart()` 函数 fetch `data/bbl-latest.json`，动态生成 Top 10 列表并更新所有相关 UI
+- **前端渲染**：`loadChart()` 函数 fetch `data/bbl/bbl-latest.json`，动态生成 Top 10 列表并更新所有相关 UI
 
 ### API 顶层字段
 - `record`：当期元信息
@@ -233,9 +243,9 @@ barboard-space/
 
 | 文件 | 更新者 | 内容 |
 |------|--------|------|
-| `data/bbl-latest.json` | fetch_bbl.py | 完整榜单（100首） |
-| `data/ticker.json` | fetch_bbl.py | BBL 字幕条目自动置顶（`BarboardLab 第 N 期已更新 · 本周冠军：...`） |
-| `data/updates.json` | fetch_bbl.py | BBL 动态条目自动替换并按日期排序 |
+| `data/bbl/bbl-latest.json` | fetch_bbl.py | 完整榜单（100首） |
+| `data/main-page/ticker.json` | fetch_bbl.py | BBL 字幕条目自动置顶（`BarboardLab 第 N 期已更新 · 本周冠军：...`） |
+| `data/main-page/updates.json` | fetch_bbl.py | BBL 动态条目自动替换并按日期排序 |
 
 **页面加载流程**：
 1. `Promise.all([fetch ticker.json, fetch updates.json])` → `buildTicker()` + `renderUpdates()`
@@ -321,7 +331,7 @@ barboard-space/
 6. **Nav Logo HTML 结构**：`<span>BAR<span class="nav__logo-board">BOARD</span></span>` 单 span 包裹防止 flex 间距问题
 7. **字幕条（Ticker）**：2份内容拼接，`translateX(-50%)` 无缝滚动，`will-change: transform` GPU 加速
 8. **Phase 行布局**：CSS grid `1fr auto auto 76px`（名称/状态/标签/日期四列），空状态用 `visibility:hidden` 占位 badge 保持列宽
-9. **BBL 数据自动化**：GitHub Actions 每周六抓取，`[skip ci]` 防止循环触发；`fetch_bbl.py` 同时更新 `data/bbl-latest.json`、`data/ticker.json`（BBL条目置顶）、`data/updates.json`（BBL条目替换并按date排序）；前端只读不写
+9. **BBL 数据自动化**：GitHub Actions 每周六抓取，`[skip ci]` 防止循环触发；`fetch_bbl.py` 同时更新 `data/bbl/bbl-latest.json`、`data/main-page/ticker.json`（BBL条目置顶）、`data/main-page/updates.json`（BBL条目替换并按date排序）；前端只读不写
 10. **SEO**：每个页面需独立 `<title>` 和 `<meta description>`
 11. **Section 锚点定位**：`.section` 统一设置 `scroll-margin-top: calc(var(--nav-h) - 2px)`，`-2px` 使 nav 完全覆盖 `.section--bordered` 的 `border-top: 1px`（nav 自身含 border-box 内的 border-bottom，两条线完全重合）
 12. **Section 高度**：`.barvision` 和 `.lab` 设置 `min-height: calc(100vh - 2 * var(--gap-xl))`，使 section 总高度约为 100vh（padding 由 `.section` 类统一提供，上下各 `var(--gap-xl)`）
@@ -342,8 +352,8 @@ barboard-space/
 27. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
 28. **nav-enter 动画禁用 transform**：`@keyframes nav-enter` 只能用 `opacity` 过渡，不能含 `transform`。因为 `animation-fill-mode: both` 会使末态 `transform: translateY(0)` 永久保留在 `.nav` 上，nav 成为 fixed 子元素的 containing block，`.nav__drawer` 从此相对 nav 而非 viewport 定位，永久无法正常展开
 29. **backdrop-filter 激活陷阱**：`::before` 的毛玻璃过渡必须用 `background` 属性过渡（`rgba(x,x,x,0)→rgba(x,x,x,0.88)`），不能用 `opacity: 0→1`——部分浏览器在 `opacity:0` 时完全不激活 `backdrop-filter`
-30. **Ticker JS 化**：`.ticker__track` 由 JS `requestAnimationFrame` 驱动（每帧 `x += speed * dt; if (x >= halfWidth) x -= halfWidth`）。`buildTicker(items)` 从 `data/ticker.json` 读取条目，生成 ×2 复制后写入 track，调用 `_tickerUpdateHalfWidth()` 更新宽度
-31. **UPDATES 数据来源**：`data/updates.json` 含静态条目 + BV里程碑（`show_after` 字段）+ BBL条目（fetch_bbl.py自动维护）。`renderUpdates()` 过滤 `show_after` 和1年前内容，排序取前5。不再有 `STATIC_UPDATES`/`BV_MILESTONES` 硬编码数组
+30. **Ticker JS 化**：`.ticker__track` 由 JS `requestAnimationFrame` 驱动（每帧 `x += speed * dt; if (x >= halfWidth) x -= halfWidth`）。`buildTicker(items)` 从 `data/main-page/ticker.json` 读取条目，生成 ×2 复制后写入 track，调用 `_tickerUpdateHalfWidth()` 更新宽度
+31. **UPDATES 数据来源**：`data/main-page/updates.json` 含静态条目 + BV里程碑（`show_after` 字段）+ BBL条目（fetch_bbl.py自动维护）。`renderUpdates()` 过滤 `show_after` 和1年前内容，排序取前5。不再有 `STATIC_UPDATES`/`BV_MILESTONES` 硬编码数组
 32. **fade-up-right**：右列大卡片（`.barvision__card`、`.chart-header`）使用专属 class，对应 `rightObserver`（`rootMargin: '0px 0px -80px 0px'`），触发时机晚于普通 `.fade-up`
 33. **移动端抽屉滚动锁**：`openDrawer()` 保存 `scrollY`，设 `body { position:fixed; top:-scrollY; width:100%; overflow:hidden }`；`closeDrawer()` 还原并 `window.scrollTo(0, scrollY)`。纯 `overflow:hidden` 在 iOS 无效
 34. **BarboardLab 标题三段配色**：`Bar`（白色）+ `board`（`#6F9EC3`，`.bbl-board-accent`，与 nav logo BOARD 一致）+ `Lab`（`var(--clr-violet-light)`，`.lab-accent`）
@@ -359,16 +369,16 @@ barboard-space/
 44. **Member tooltip 用 JS 事件委托**：`initMemberTooltips()` 监听 `document` 的 `mouseover/mousemove/mouseout`，用 `e.target.closest('.member[data-nickname]')` 匹配；tooltip div 挂在 `<body>`，`position:fixed`，跟随鼠标坐标 `(e.clientX+16, e.clientY)`，opacity 0.85，10px 字体；事件委托自动覆盖动态渲染元素，无需重新绑定
 45. **成员页编号规则**：`member/space_id.html`，与 CSV 的 `space_id` 字段一一对应；全部117个已由 `gen_member_pages.py` 生成。`member.html` 为总览入口（已完成）
 46. **`@username` 自动解析**：`index.html` 中 `MEMBER_MAP`（键为完整 handle，值为 `{nickname, href}`）+ `parseMentions(raw)` 函数；正则 `/@([\p{L}\p{N}_-]+)/gu` 支持 Unicode 字母数字、下划线、连字符；含尾部连字符的 handle（如 `健Jian-`）用 `.replace(/-+$/, '')` 截断后查表；含中文的 handle（如 `哈哈哈时光机`）直接以完整 handle 为 key；不在 MEMBER_MAP 的保留纯文本
-47. **`member.html` 数据维护**：成员数据从 `data/barboard_members.csv` 动态加载（已废弃硬编码 MEMBERS 数组）。新增/修改成员只需编辑 CSV；建好个人主页后将对应 `space_id` 加入 `BUILT_PAGES` Set（见 #52），对应卡片自动变为可点击链接。
+47. **`member.html` 数据维护**：成员数据从 `data/members/members.csv` 动态加载（已废弃硬编码 MEMBERS 数组）。新增/修改成员只需编辑 CSV；建好个人主页后将对应 `space_id` 加入 `BUILT_PAGES` Set（见 #52），对应卡片自动变为可点击链接。
 48. **Dev Gate 开关**：`scripts/nav.js` 第8行 `var DEV_GATE = true`，上线时改为 `false` 即完全关闭（无需删代码）。各页面 `<head>` 含防闪内联脚本（sessionStorage key `barboard_dev`，值 `'1'` 表示已通过，关 tab 失效）。gate CSS/HTML/JS 全部封装在 `initDevGate()` 函数内
 49. **Dev Gate `visibility` 继承陷阱**：防闪脚本设 `document.documentElement.style.visibility='hidden'`（作用于 `<html>`），子元素全部继承，包括 gate overlay 本身。`initDevGate()` 注入 overlay 后必须立即调用 `document.documentElement.style.visibility=''` 还原，否则 overlay 也不可见
 50. **新页面接入 Dev Gate**：新建 HTML 页在 `<meta name="viewport">` 后加一行：`<script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>`；nav.js 已自动处理后续逻辑，无需其他改动
-51. **member.html CSV 动态加载**：页面通过 `fetch('data/barboard_members.csv')` 运行时读取成员数据，JS 解析 CSV（含带引号字段处理）。新增/修改成员只需编辑 CSV，无需动 HTML。`parseCSVLine()` 处理引号内逗号；多个 bilibili_id 取第一个；空字段安全跳过。
+51. **member.html CSV 动态加载**：页面通过 `fetch('data/members/members.csv')` 运行时读取成员数据，JS 解析 CSV（含带引号字段处理）。新增/修改成员只需编辑 CSV，无需动 HTML。`parseCSVLine()` 处理引号内逗号；多个 bilibili_id 取第一个；空字段安全跳过。
 52. **BUILT_PAGES Set 管理成员页链接**：`member.html` 顶部 `var BUILT_PAGES = new Set([...])` 存放已建成员页的 `space_id`，当前已包含全部117个。运行 `gen_member_pages.py` 后脚本会打印最新 Set 内容，复制粘贴到 member.html 即可。
 53. **嵌套锚点陷阱**：卡片外层若为 `<a>`，内部不能再有 `<a>`（Musictrack/Bilibili 链接），浏览器会自动断开外层锚点导致游离元素出现在 grid 中。解法：外层一律用 `<div>` + `onclick="location.href='...'"` 处理导航，内部链接加 `onclick="event.stopPropagation()"` 防冒泡。
 54. **member.html 小组色彩系统**：筛选按钮与成员标签 badge 颜色一一对应——全部/无分组：榜吧蓝 `#6F9EC3`；BBL：紫色 `--clr-violet-light`；村摇欧：棕黄 `#D49840`；Indienation：粉色 `--clr-pink-light`。badge 简称：BBL / 村摇欧 / Indie。
 55. **member.html 入场动画架构**：hero 元素用 CSS `@keyframes ml-hero-in`（eyebrow 0.05s → 标题 0.16s → 筛选按钮 0.28–0.46s → 搜索框 0.52s）；卡片用自定义 `ml-card-enter`（`opacity:0; translateY(12px); cubic-bezier(0.22,1,0.36,1)`）+ IntersectionObserver。首屏卡片：850ms 后再注册 observer（通过 `getBoundingClientRect().top < vh` 判断）；屏外卡片：立即注册，滚入时触发。计数器：函数顶部 `transition:none; opacity:0` 禁用过渡静默写入内容，双 rAF 后重启过渡，550ms 后淡入。
-56. **CSV 异步加载期间 footer 上浮问题**：`fetch('data/barboard_members.csv')` 为异步操作，加载完成前 `#mlGrid` 为空，页面高度极短，footer 出现在视口内。解法：给 `.ml-section` 加 `min-height: 80vh`，确保 grid 区域未填充时也足够高，footer 始终在视口外。
+56. **CSV 异步加载期间 footer 上浮问题**：`fetch('data/members/members.csv')` 为异步操作，加载完成前 `#mlGrid` 为空，页面高度极短，footer 出现在视口内。解法：给 `.ml-section` 加 `min-height: 80vh`，确保 grid 区域未填充时也足够高，footer 始终在视口外。
 57. **member.html 搜索框**：`.ml-search` 置于 `.ml-filters` 末尾，`margin-left: auto` 推到行右侧；初始宽 180px，focus 扩展至 220px（`transition: width 0.25s ease`）；placeholder focus 时 `opacity:0` 淡出，光标颜色 `caret-color: var(--clr-violet)`；搜索与分组筛选取交集，`currentSearch` 全局状态与 `currentFilter` 联动，`buildGrid(members, filter, search)` 三参数调用。移动端 `width:100%; margin-left:0`。
 58. **member.html 成员排序架构**：CSV 加载完成后按三级键排序——主键 `getRowScore`（0–7，信息行数：有handle+team+foot=7，有handle+foot=6，有handle+team=5，有foot+team=4，仅handle=3，仅foot=2，仅team=1，仅昵称=0），次键 `getMemberScore`（字段完善度各+1），三键 `getTeamPriority`（BBL=4/村摇欧=2/Indie=1 叠加）。`PINNED_NAMES=['雨妈','威妈','羊妈','S妈']` 先提取后置顶，不参与排序。筛选时 hidden class 控制显隐，排序顺序不变。
 59. **member.html 计数器 label 动画**：`transform: translateX` 绝对不能直接作用在 flex item 的 label span 本身——会使整个元素偏移压入数字区域。最终方案：旧文字 `transition opacity+transform` 向左滑出淡出（120ms），`setTimeout` 内换文字、snap 到右侧（双 rAF），再 `transition` 向左滑入归位（200ms）。
@@ -392,7 +402,7 @@ barboard-space/
 77. **`.btn--primary.fade-up.visible` 必须包含 opacity/transform**：该规则只写 `background-position` 和 `box-shadow` 时，会以相同特异度覆盖 `.btn.fade-up.visible { transition: all 0.2s }` 中的 opacity/transform，导致 `.btn--primary` 入场动画瞬间跳变而非渐显。必须完整写为 `transition: opacity 0.2s ease, transform 0.2s ease, background-position 0.35s ease, box-shadow 0.35s ease`。
 78. **bbl.html 视频框自适应宽高**：`alignVideo()` 用 `getDocTop(el)`（遍历 `offsetTop` 链，不受 CSS transform 影响）测量 h1 顶到 actions 底的高度作为视频框 `height`；再用 `frameH * 16/9 - 4px` 更新 `layout.style.gridTemplateColumns`（`-4px` 补偿视频播放器内部黑边偏差）；`window.load` + `resize` 时触发；768px 以下跳过。
 79. **Bilibili iframe 权限与默认静音**：`allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; gyroscope; accelerometer" allowfullscreen`；embed URL 加 `&muted=1` 默认静音。跨域限制下无法从父页面 JS 控制音量/进度，这是平台侧设计，前端无法突破。
-80. **HOF 页面数据不 fetch，直接硬编码**：`barboardlab/hall-of-fame.html` 的5大板块数据（冠军/纪录/艺人/专辑/未冠）以 JS 常量数组写在 `<script>` 内，无需 fetch CSV，加载即渲染。新页路径层级：`../scripts/nav.js`，`../fonts.css`，`../style.css`。
+80. **HOF 页面数据不 fetch，直接硬编码**：`bbl/hof.html` 的5大板块数据（冠军/纪录/艺人/专辑/未冠）以 JS 常量数组写在 `<script>` 内，无需 fetch CSV，加载即渲染。新页路径层级：`../scripts/nav.js`，`../fonts.css`，`../style.css`。冠军名录含 `VOL_DATES` 内联常量（Vol.1–124 期号→日期），外部索引见 `data/bbl/bbl-vol-index.json`（JSON 对象格式，供 bbl/charts 等页面 fetch）。
 81. **文件清理记录**：本次清除 61 个未声明的冗余字体文件（DM Sans 18pt/24pt/36pt 光学尺寸变体、DM Mono 斜体/Light/Medium 变体），`assets/fonts/` 目录从 82 个文件精简至 6 个；同时清除 `about/`、`archive/`、`charts/`、`barboardlab/`（当时空目录）等空目录；清除 `bbl.html` 遗留的 `.breadcrumb` CSS（HTML 已早前移除）。
 
 ---

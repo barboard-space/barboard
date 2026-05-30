@@ -440,7 +440,7 @@
     // ── BBL Chart ──────────────────────────────────────────
     async function loadChart() {
       try {
-        const res = await fetch('data/bbl-latest.json');
+        const res = await fetch('data/bbl/bbl-latest.json');
         if (!res.ok) return;
         const data = await res.json();
 
@@ -487,8 +487,8 @@
     }
 
     Promise.all([
-      fetch('data/ticker.json').then(r => r.json()).catch(() => []),
-      fetch('data/updates.json').then(r => r.json()).catch(() => [])
+      fetch('data/main-page/ticker.json').then(r => r.json()).catch(() => []),
+      fetch('data/main-page/updates.json').then(r => r.json()).catch(() => [])
     ]).then(([tickerItems, updatesData]) => {
       buildTicker(tickerItems);
       _staticUpdates = updatesData;

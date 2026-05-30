@@ -4,6 +4,29 @@
 
 ---
 
+## [2026-05-29] — bbl/hof.html 精修 + 数据更新至第124期 + data/ 目录重组
+
+### Added
+- **`data/bbl/bbl-vol-index.json`**：Vol.1–124 期号→日期索引（JSON 对象格式），供未来 `bbl/charts` 等页面 fetch 引用
+- **`bbl/hof.html`**（原 `barboardlab/hall-of-fame.html`）：HOF 页面重命名移位，eyebrow「BarboardLab」加链接返回 `/bbl.html`
+
+### Changed
+- **bbl/hof.html Hero 间距**：对齐 bbl.html hero 结构——padding-bottom 80px→72px，content margin-top 加 40px，标题 `clamp(56px,8vw,108px)`，stats margin-top 36px→32px
+- **bbl/hof.html Hero 细节**：「of」opacity 0.65；背景水印 HOF→BARBOARDLAB；描述文字换行，更新为「数据截至第 124 期」
+- **bbl/hof.html 冠军名录**：标题字号缩小为 `clamp(18px,2.4vw,28px)`；歌曲/艺人顺序改为上歌曲下艺人；描述文字字号 13px；首次登顶日期显示完整日期（Jan 5, 2024）；表头「艺人 — 歌曲」→「歌曲 — 艺人」
+- **bbl/hof.html 未冠之最**：同步歌曲/艺人顺序为上歌曲下艺人，表头同步更新
+- **bbl/hof.html 数据全量更新至第 124 期**：冠军单曲 20→31 首，新增 Taylor Swift — The Fate of Ophelia（10周/peak 3081.23）、Olivia Dean、Taylor Swift — Opalite、Alex Warren、Olivia Rodrigo、Sabrina Carpenter Tears、Doja Cat、RAYE、After、Harry Styles、Linda Lampenius & Pete Parkkonen；Mariah Carey weeks 1→2（Vol.104 二度登顶）；Hero stats：期数 89→124，冠军单曲 20→31，最高参榜人数 28→29
+- **`data/` 目录重组**：
+  - `data/bbl/`：`bbl-latest.json`、`bbl-vol-index.json`、`bbl-record/`（原 `bbl-hall-of-fame/`）
+  - `data/main-page/`：`ticker.json`、`updates.json`
+  - `data/members/`：`members.csv`（原 `barboard_members.csv`）
+  - `data/barvision/`：`barvision-archive/`、`barvision-record/`（原 `barvision-hall-of-fame/`）
+
+### Fixed
+- 所有受数据目录重组影响的路径同步更新：`index.html`、`bbl.html`、`member.html`、`scripts/fetch_bbl.py`、`scripts/gen_member_pages.py`、`.github/workflows/update-bbl.yml`（3处）
+
+---
+
 ## [2026-05-29] — BBL Hall of Fame + bbl.html 视频区精修 + 动画修复 + 项目清理
 
 ### Added

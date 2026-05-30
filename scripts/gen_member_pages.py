@@ -49,7 +49,7 @@ def parse_bilibili_id(raw):
 
 def main():
     base = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    csv_path = os.path.join(base, "data", "barboard_members.csv")
+    csv_path = os.path.join(base, "data", "members", "members.csv")
     member_dir = os.path.join(base, "member")
     os.makedirs(member_dir, exist_ok=True)
 

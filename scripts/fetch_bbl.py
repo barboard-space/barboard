@@ -5,9 +5,9 @@ import requests
 from datetime import datetime, timedelta, timezone
 
 API_URL = "https://6api.musictrack.cn/api/charts/3045"
-OUTPUT_FILE  = "data/bbl-latest.json"
-TICKER_FILE  = "data/ticker.json"
-UPDATES_FILE = "data/updates.json"
+OUTPUT_FILE  = "data/bbl/bbl-latest.json"
+TICKER_FILE  = "data/main-page/ticker.json"
+UPDATES_FILE = "data/main-page/updates.json"
 
 LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}
 

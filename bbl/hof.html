@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>BBL Hall of Fame · BarboardLab | Barboard</title>
-  <meta name="description" content="BarboardLab 荣誉殿堂 — 历届冠军单曲、在榜纪录、艺人成就与专辑上榜记录，数据覆盖 Vol.1—89。" />
+  <meta name="description" content="BarboardLab 荣誉殿堂 — 历届冠军单曲、在榜纪录、艺人成就与专辑上榜记录，数据截至第 124 期。" />
   <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
   <link rel="stylesheet" href="../fonts.css" />
   <link rel="stylesheet" href="../style.css?v=2" />
@@ -13,7 +13,7 @@
     /* ── Hero ── */
     .hof-hero {
       position: relative;
-      padding: var(--nav-h) 0 80px;
+      padding: var(--nav-h) 0 72px;
       overflow: hidden;
     }
     .hof-hero__glow {
@@ -49,6 +49,7 @@
     .hof-hero__inner {
       position: relative;
       z-index: 2;
+      margin-top: 40px;
     }
     .hof-eyebrow {
       font-size: 11px;
@@ -61,7 +62,7 @@
     }
     .hof-hero__title {
       font-family: var(--font-display);
-      font-size: clamp(52px, 7.5vw, 100px);
+      font-size: clamp(56px, 8vw, 108px);
       line-height: 1;
       letter-spacing: 0.02em;
       text-transform: uppercase;
@@ -77,7 +78,7 @@
     .hof-hero__stats {
       display: flex;
       gap: var(--gap-lg);
-      margin-top: 36px;
+      margin-top: 32px;
       flex-wrap: wrap;
     }
     .hof-stat { display: flex; flex-direction: column; gap: 4px; }
@@ -95,9 +96,13 @@
       color: var(--clr-text-2);
     }
 
+    /* ── Section header spacing — matches bbl chart header ── */
+    .section--bordered .section-label { margin-bottom: 16px; }
+    .section--bordered .section__title { margin-top: 24px; }
+
     /* ── Champion Roll ── */
     .hof-section-desc {
-      margin-top: 12px;
+      margin-top: 16px;
       font-size: 15px;
       color: var(--clr-text-2);
       line-height: 1.75;
@@ -439,22 +444,22 @@
 <section class="hof-hero">
   <div class="hof-hero__glow"></div>
   <div class="hof-hero__grid"></div>
-  <div class="hof-hero__watermark" aria-hidden="true">HOF</div>
+  <div class="hof-hero__watermark" aria-hidden="true">BARBOARDLAB</div>
   <div class="section__inner hof-hero__inner">
-    <p class="hof-eyebrow fade-up">BarboardLab</p>
+    <p class="hof-eyebrow fade-up"><a href="/bbl.html" style="color:inherit;text-decoration:none;">BarboardLab</a></p>
     <h1 class="hof-hero__title fade-up" style="transition-delay:0.1s;">
-      Hall of <span class="hof-accent">Fame</span>
+      Hall <span style="opacity:0.65;">of</span> <span class="hof-accent">Fame</span>
     </h1>
     <p class="hof-hero__desc fade-up" style="transition-delay:0.2s;">
-      BarboardLab 自第 1 期起的历届冠军、在榜纪录与艺人成就全览。数据覆盖 Vol.1—89，持续更新。
+      BarboardLab 自第 1 期起的周榜冠军，在榜纪录与艺人成就全览。<br>数据截至第 124 期，持续更新。
     </p>
     <div class="hof-hero__stats fade-up" style="transition-delay:0.3s;">
       <div class="hof-stat">
-        <span class="hof-stat__val">89</span>
+        <span class="hof-stat__val">124</span>
         <span class="hof-stat__label">期数</span>
       </div>
       <div class="hof-stat">
-        <span class="hof-stat__val">20</span>
+        <span class="hof-stat__val">31</span>
         <span class="hof-stat__label">冠军单曲</span>
       </div>
       <div class="hof-stat">
@@ -462,7 +467,7 @@
         <span class="hof-stat__label">最长冠军连续周</span>
       </div>
       <div class="hof-stat">
-        <span class="hof-stat__val">28</span>
+        <span class="hof-stat__val">29</span>
         <span class="hof-stat__label">最高参榜人数</span>
       </div>
     </div>
@@ -473,13 +478,13 @@
 <section class="section section--bordered" id="champions" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
     <p class="section-label fade-up">夺冠纪录</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;">冠军名录</h2>
-    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">历届 #1 单曲按夺冠周数排列，共 <strong>20</strong> 首冠军单曲，<strong>89</strong> 期。</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">冠军名录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s; font-size:13px;"><strong>124</strong> 期冠军单曲按夺冠周数排列，共 <strong>31</strong> 首。</p>
     <div class="fade-up" style="transition-delay:0.3s;">
       <div class="hof-roll">
         <div class="hof-roll-header">
           <span></span>
-          <span>艺人 — 歌曲</span>
+          <span>歌曲 — 艺人</span>
           <span style="text-align:right;">冠军周</span>
           <span style="text-align:right;">首次登顶</span>
         </div>
@@ -528,7 +533,7 @@
       <div class="hof-uncrowned" id="hofUncrowned">
         <div class="hof-uncrowned-header">
           <span></span>
-          <span>艺人 — 歌曲</span>
+          <span>歌曲 — 艺人</span>
           <span>最高位</span>
           <span style="text-align:right;">积分</span>
         </div>
@@ -542,27 +547,67 @@
 <script>
   /* ─────────────────────────── DATA ──────────────────────────────────── */
 
+  /* Vol.1–124 日期索引（index = Vol. 期号） */
+  const VOL_DATES = ['',
+    '2024-01-05','2024-01-12','2024-01-19','2024-01-26','2024-02-02',
+    '2024-02-09','2024-02-16','2024-02-23','2024-03-01','2024-03-08',
+    '2024-03-15','2024-03-22','2024-03-29','2024-04-05','2024-04-12',
+    '2024-04-19','2024-04-26','2024-05-03','2024-05-10','2024-05-17',
+    '2024-05-24','2024-05-31','2024-06-07','2024-06-14','2024-06-21',
+    '2024-06-28','2024-07-05','2024-07-12','2024-07-19','2024-07-26',
+    '2024-08-02','2024-08-09','2024-08-16','2024-08-23','2024-08-30',
+    '2024-09-06','2024-09-13','2024-09-20','2024-09-27','2024-10-04',
+    '2024-10-11','2024-10-18','2024-10-25','2024-11-01','2024-11-08',
+    '2024-11-15','2024-11-22','2024-11-29','2024-12-06','2024-12-13',
+    '2024-12-20','2024-12-27','2025-01-03','2025-01-10','2025-01-17',
+    '2025-01-24','2025-01-31','2025-02-07','2025-02-14','2025-02-21',
+    '2025-02-28','2025-03-07','2025-03-14','2025-03-21','2025-03-28',
+    '2025-04-04','2025-04-11','2025-04-18','2025-04-25','2025-05-02',
+    '2025-05-09','2025-05-16','2025-05-23','2025-05-30','2025-06-06',
+    '2025-06-13','2025-06-20','2025-06-27','2025-07-04','2025-07-11',
+    '2025-07-18','2025-07-25','2025-08-01','2025-08-08','2025-08-15',
+    '2025-08-22','2025-08-29','2025-09-05','2025-09-12','2025-09-19',
+    '2025-09-26','2025-10-03','2025-10-10','2025-10-17','2025-10-24',
+    '2025-10-31','2025-11-07','2025-11-14','2025-11-21','2025-11-28',
+    '2025-12-05','2025-12-12','2025-12-19','2025-12-26','2026-01-02',
+    '2026-01-09','2026-01-16','2026-01-23','2026-01-30','2026-02-06',
+    '2026-02-13','2026-02-20','2026-02-27','2026-03-06','2026-03-13',
+    '2026-03-20','2026-03-27','2026-04-03','2026-04-10','2026-04-17',
+    '2026-04-24','2026-05-01','2026-05-08','2026-05-15',
+  ];
+
   const CHAMPIONS = [
-    { weeks:15, artist:'HAIM',                       song:'Relationships',                   vol:64,  date:'2025-03-21', peak:2423.69 },
-    { weeks:11, artist:'Ariana Grande',               song:'yes, and?',                       vol:3,   date:'2024-01-19', peak:2092.15 },
-    { weeks:10, artist:'Sabrina Carpenter',           song:'Espresso',                        vol:23,  date:'2024-06-07', peak:2040.79 },
-    { weeks:8,  artist:'ROSÉ & Bruno Mars',           song:'APT.',                            vol:43,  date:'2024-10-25', peak:2569.79 },
-    { weeks:7,  artist:'Lady Gaga & Bruno Mars',      song:'Die With A Smile',                vol:34,  date:'2024-08-23', peak:2823.11 },
-    { weeks:6,  artist:'Chappell Roan',               song:'The Subway',                      vol:84,  date:'2025-08-08', peak:2638.26 },
-    { weeks:4,  artist:'Twenty One Pilots',           song:'Overcompensate',                  vol:14,  date:'2024-04-05', peak:1992.02 },
-    { weeks:4,  artist:'Taylor Swift & Post Malone', song:'Fortnight',                       vol:17,  date:'2024-04-26', peak:2501.86 },
-    { weeks:4,  artist:'Kendrick Lamar & SZA',        song:'luther',                          vol:53,  date:'2025-01-03', peak:1604.71 },
-    { weeks:4,  artist:'Lady Gaga',                   song:'Abracadabra',                     vol:58,  date:'2025-02-07', peak:2597.96 },
-    { weeks:3,  artist:'Billie Eilish',               song:'BIRDS OF A FEATHER',              vol:28,  date:'2024-07-12', peak:2109.72 },
-    { weeks:3,  artist:'Tate McRae',                  song:'Sports car',                      vol:61,  date:'2025-02-28', peak:2626.32 },
-    { weeks:2,  artist:'Dua Lipa',                    song:'Houdini',                         vol:1,   date:'2024-01-05', peak:1159.82 },
-    { weeks:2,  artist:'Kali Uchis',                  song:'sunshine & rain...',              vol:72,  date:'2025-05-16', peak:2315.25 },
-    { weeks:1,  artist:'Baby Lasagna',                song:'Rim Tim Tagi Dim',                vol:20,  date:'2024-05-17', peak:1940.76 },
-    { weeks:1,  artist:'Lady Gaga',                   song:'Disease',                         vol:51,  date:'2024-12-20', peak:1313.97 },
-    { weeks:1,  artist:'Mariah Carey',                song:'All I Want for Christmas Is You', vol:52,  date:'2024-12-27', peak:1251.03 },
-    { weeks:1,  artist:'Sam Fender',                  song:'People Watching',                 vol:54,  date:'2025-01-10', peak:1437.04 },
-    { weeks:1,  artist:'Lorde',                       song:'What Was That',                   vol:70,  date:'2025-05-02', peak:2291.17 },
-    { weeks:1,  artist:'Sabrina Carpenter',           song:'Manchild',                        vol:76,  date:'2025-06-13', peak:1858.44 },
+    { weeks:15, artist:'HAIM',                            song:'Relationships',                   vol:64,  date:'2025-03-21', peak:2423.69 },
+    { weeks:11, artist:'Ariana Grande',                   song:'yes, and?',                       vol:3,   date:'2024-01-19', peak:2092.15 },
+    { weeks:10, artist:'Sabrina Carpenter',               song:'Espresso',                        vol:23,  date:'2024-06-07', peak:2040.79 },
+    { weeks:10, artist:'Taylor Swift',                    song:'The Fate of Ophelia',             vol:93,  date:'2025-10-10', peak:3081.23 },
+    { weeks:8,  artist:'ROSÉ & Bruno Mars',               song:'APT.',                            vol:43,  date:'2024-10-25', peak:2569.79 },
+    { weeks:7,  artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',                vol:34,  date:'2024-08-23', peak:2823.11 },
+    { weeks:6,  artist:'Chappell Roan',                   song:'The Subway',                      vol:84,  date:'2025-08-08', peak:2638.26 },
+    { weeks:5,  artist:'Olivia Dean',                     song:'Man I Need',                      vol:105, date:'2026-01-02', peak:1688.56 },
+    { weeks:5,  artist:'Taylor Swift',                    song:'Opalite',                         vol:111, date:'2026-02-13', peak:1896.27 },
+    { weeks:4,  artist:'Twenty One Pilots',               song:'Overcompensate',                  vol:14,  date:'2024-04-05', peak:1992.02 },
+    { weeks:4,  artist:'Taylor Swift & Post Malone',      song:'Fortnight',                       vol:17,  date:'2024-04-26', peak:2501.86 },
+    { weeks:4,  artist:'Kendrick Lamar & SZA',            song:'luther',                          vol:53,  date:'2025-01-03', peak:1604.71 },
+    { weeks:4,  artist:'Lady Gaga',                       song:'Abracadabra',                     vol:58,  date:'2025-02-07', peak:2597.96 },
+    { weeks:4,  artist:'Alex Warren',                     song:'FEVER DREAM',                     vol:117, date:'2026-03-27', peak:2019.15 },
+    { weeks:3,  artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER',              vol:28,  date:'2024-07-12', peak:2109.72 },
+    { weeks:3,  artist:'Tate McRae',                      song:'Sports car',                      vol:61,  date:'2025-02-28', peak:2626.32 },
+    { weeks:3,  artist:'Olivia Rodrigo',                  song:'drop dead',                       vol:121, date:'2026-04-24', peak:1982.51 },
+    { weeks:2,  artist:'Dua Lipa',                        song:'Houdini',                         vol:1,   date:'2024-01-05', peak:1159.82 },
+    { weeks:2,  artist:'Mariah Carey',                    song:'All I Want for Christmas Is You', vol:52,  date:'2024-12-27', peak:1328.66 },
+    { weeks:2,  artist:'Kali Uchis',                      song:'sunshine & rain...',              vol:72,  date:'2025-05-16', peak:2315.25 },
+    { weeks:2,  artist:'Sabrina Carpenter',               song:'Tears',                           vol:90,  date:'2025-09-19', peak:1669.42 },
+    { weeks:1,  artist:'Baby Lasagna',                    song:'Rim Tim Tagi Dim',                vol:20,  date:'2024-05-17', peak:1940.76 },
+    { weeks:1,  artist:'Lady Gaga',                       song:'Disease',                         vol:51,  date:'2024-12-20', peak:1313.97 },
+    { weeks:1,  artist:'Sam Fender',                      song:'People Watching',                 vol:54,  date:'2025-01-10', peak:1437.04 },
+    { weeks:1,  artist:'Lorde',                           song:'What Was That',                   vol:70,  date:'2025-05-02', peak:2291.17 },
+    { weeks:1,  artist:'Sabrina Carpenter',               song:'Manchild',                        vol:76,  date:'2025-06-13', peak:1858.44 },
+    { weeks:1,  artist:'Doja Cat',                        song:'Jealous Type',                    vol:92,  date:'2025-10-03', peak:2010.88 },
+    { weeks:1,  artist:'RAYE',                            song:'WHERE IS MY HUSBAND!',            vol:99,  date:'2025-11-21', peak:1793.27 },
+    { weeks:1,  artist:'After',                           song:'Outbound',                        vol:109, date:'2026-01-30', peak:1338.59 },
+    { weeks:1,  artist:'Harry Styles',                    song:'Aperture',                        vol:115, date:'2026-03-13', peak:1897.10 },
+    { weeks:1,  artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',                    vol:124, date:'2026-05-15', peak:1509.37 },
   ];
 
   const RECORDS = [
@@ -675,9 +720,9 @@
   /* ─────────────────────────── RENDER ────────────────────────────────── */
 
   function fmtDebutDate(d) {
-    const [y, m] = d.split('-');
+    const [y, m, day] = d.split('-');
     const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return months[parseInt(m) - 1] + ' ' + y;
+    return months[parseInt(m) - 1] + ' ' + parseInt(day) + ', ' + y;
   }
 
   function getChampRank(idx) {
@@ -695,8 +740,8 @@
         <div class="hof-roll-row ${cls}">
           <div class="hof-roll__rank">${rank}</div>
           <div class="hof-roll__song">
-            <div class="hof-roll__artist">${c.artist}</div>
-            <div class="hof-roll__title">${c.song}</div>
+            <div class="hof-roll__artist">${c.song}</div>
+            <div class="hof-roll__title">${c.artist}</div>
           </div>
           <div class="hof-roll__weeks">
             <div class="hof-roll__weeks-num">${c.weeks}</div>
@@ -781,8 +826,8 @@
       <div class="hof-uncrowned-row">
         <span class="hof-uncrowned__idx">${i + 1}</span>
         <div class="hof-uncrowned__info">
-          <div class="hof-uncrowned__artist">${u.artist}</div>
-          <div class="hof-uncrowned__song">${u.song}</div>
+          <div class="hof-uncrowned__artist">${u.song}</div>
+          <div class="hof-uncrowned__song">${u.artist}</div>
         </div>
         <span class="hof-uncrowned__badge">#${u.rank}</span>
         <span class="hof-uncrowned__pts">${u.pts.toFixed(2)}</span>

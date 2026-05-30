@@ -63,7 +63,7 @@
     '        <div class="footer__col-title">BarboardLab</div>',
     '        <ul class="footer__links">',
     '          <li><a href="/bbl.html">关于 BarboardLab</a></li>',
-    '          <li><a href="/barboardlab/hall-of-fame.html">Hall of Fame</a></li>',
+    '          <li><a href="/bbl/hof.html">Hall of Fame</a></li>',
     '          <li><a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener">本周单曲合榜<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>',
     '          <li><a href="https://space.bilibili.com/11254817/lists" target="_blank" rel="noopener">历史榜单视频<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>',
     '        </ul>',

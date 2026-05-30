@@ -518,7 +518,7 @@
           完整榜单存档于 Musictrack，每期精选 Top 100。
         </p>
         <div class="bbl-hero__actions">
-          <a href="barboardlab/hall-of-fame.html" class="btn btn--primary">BBL Hall of Fame</a>
+          <a href="bbl/hof.html" class="btn btn--primary">BBL Hall of Fame</a>
           <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener"
              class="btn btn--outline" style="display:inline-flex;align-items:center;gap:4px;padding-right:18px;">
             完整历史榜单
@@ -961,7 +961,7 @@
   // ── Main fetch ─────────────────────────────────────────────
   async function loadBBL() {
     try {
-      const res = await fetch('data/bbl-latest.json');
+      const res = await fetch('data/bbl/bbl-latest.json');
       if (!res.ok) throw new Error('fetch failed');
       const data = await res.json();
 
