@@ -13,7 +13,7 @@
     /* ── Hero ── */
     .bbl-hero {
       position: relative;
-      padding: calc(var(--nav-h) + 64px) 0 72px;
+      padding: var(--nav-h) 0 72px;
       overflow: hidden;
     }
     .bbl-hero__glow {
@@ -80,17 +80,10 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      margin-top: 32px;
-      margin-bottom: 14px;
+      margin-top: 0;
+      margin-bottom: 24px;
     }
-    .bbl-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--clr-pink) 0%, var(--clr-violet) 90%);
-      flex-shrink: 0;
-    }
+    .bbl-eyebrow::before { display: none; }
 
     .bbl-hero__title {
       font-family: var(--font-display);
@@ -102,22 +95,7 @@
     .bbl-board-accent { color: #6F9EC3; }
     .bbl-lab-accent   { color: var(--clr-violet-light); }
 
-    .bbl-hero__meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 18px;
-      margin-top: 16px;
-      font-size: 12px;
-      font-family: var(--font-mono);
-      color: var(--clr-text-2);
-      letter-spacing: 0.04em;
-    }
-    .bbl-hero__meta span::before {
-      content: '·';
-      margin-right: 8px;
-      opacity: 0.4;
-    }
-    .bbl-hero__meta span:first-child::before { display: none; }
+    .bbl-hero__meta { margin-top: 16px; }
 
     .bbl-hero__desc {
       margin-top: 20px;
@@ -210,7 +188,7 @@
     .bbl-video__link:hover { color: var(--clr-text); }
 
     /* ── Chart + Highlights 双列布局 ── */
-    .bbl-chart-section { background: var(--clr-bg); }
+    .bbl-chart-section { background: var(--clr-bg); padding-top: 64px; }
     .bbl-chart-layout {
       display: grid;
       grid-template-columns: 1fr 236px;
@@ -224,6 +202,60 @@
       gap: 8px;
       will-change: transform;
     }
+    /* ── Sidebar search ── */
+    .bbl-search { margin-bottom: 16px; }
+    .bbl-search__field { position: relative; }
+    .bbl-search__input {
+      width: 100%;
+      box-sizing: border-box;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 4px;
+      padding: 7px 30px 7px 14px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.03em;
+      color: var(--clr-text);
+      outline: none;
+      transition: border-color 0.18s;
+    }
+    .bbl-search__input::placeholder { color: var(--clr-text-3); font-weight: 400; transition: opacity 0.18s; }
+    .bbl-search__input:focus::placeholder { opacity: 0; }
+    .bbl-search__input:focus { border-color: var(--clr-violet); caret-color: var(--clr-violet); }
+    .bbl-search__icon,
+    .bbl-search__clear {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--clr-text-2);
+      line-height: 1;
+      display: flex;
+      align-items: center;
+    }
+    .bbl-search__clear {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 2px;
+      font-size: 14px;
+      display: none;
+      transition: color 0.15s;
+    }
+    .bbl-search__clear:hover { color: var(--clr-text); }
+    .bbl-search--active .bbl-search__icon  { display: none; }
+    .bbl-search--active .bbl-search__clear { display: flex; }
+    .bbl-search__count {
+      font-size: 10px;
+      font-family: var(--font-body);
+      color: var(--clr-text-2);
+      margin-top: 4px;
+      height: 14px;
+      line-height: 14px;
+      overflow: hidden;
+    }
+
     .bbl-hl-sidebar__label {
       font-size: 11px;
       font-weight: 600;
@@ -239,7 +271,7 @@
       background: var(--clr-surface);
       border: 1px solid var(--clr-border);
       border-radius: 6px;
-      padding: 14px 16px;
+      padding: 10px 14px;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
     .bbl-hl-card:hover {
@@ -251,31 +283,36 @@
       font-weight: 700;
       letter-spacing: 0.14em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 7px;
       display: flex;
       align-items: center;
       gap: 6px;
+      justify-content: space-between;
+    }
+    .bbl-hl-card__rank {
+      font-size: 10px;
+      margin-left: auto;
     }
     .bbl-hl-card__type--new    { color: var(--clr-violet-light); }
-    .bbl-hl-card__type--weeks  { color: var(--clr-gold-light); }
+    .bbl-hl-card__type--weeks  { color: #D49840; }
     .bbl-hl-card__type--up     { color: #4ade80; }
     .bbl-hl-card__type--down   { color: #f87171; }
     .bbl-hl-card__val {
       font-family: var(--font-display);
-      font-size: 30px;
+      font-size: 26px;
       line-height: 1;
       letter-spacing: 0.02em;
-      margin-bottom: 8px;
+      margin-bottom: 5px;
     }
     .bbl-hl-card__val--new   { color: var(--clr-violet-light); }
-    .bbl-hl-card__val--weeks { color: var(--clr-gold-light);   text-shadow: 0 0 20px rgba(245,200,64,0.3); }
+    .bbl-hl-card__val--weeks { color: #D49840; text-shadow: 0 0 20px rgba(212,152,64,0.3); }
     .bbl-hl-card__val--up    { color: #4ade80; }
     .bbl-hl-card__val--down  { color: #f87171; }
     .bbl-hl-card__cover-row {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-top: 4px;
+      margin-top: 2px;
     }
     .bbl-hl-card__cover {
       width: 36px;
@@ -300,7 +337,7 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      margin-top: 2px;
+      margin-top: 0px;
     }
 
     /* ── Full Chart ── */
@@ -310,34 +347,36 @@
       justify-content: space-between;
       gap: var(--gap-md);
       margin-bottom: var(--gap-md);
+      padding-right: calc(236px + var(--gap-md));
     }
     .bbl-chart-title {
       font-family: var(--font-display);
       font-size: clamp(18px, 2.4vw, 28px);
       letter-spacing: 0.06em;
-      margin-top: 8px;
+      margin-top: 14px;
     }
     .bbl-chart-date {
       font-family: var(--font-mono);
       font-size: 12px;
       color: var(--clr-text-2);
       display: block;
-      margin-top: 4px;
+      margin-top: 8px;
     }
     .bbl-chart-mt-link {
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.06em;
       color: var(--clr-text-2);
+      opacity: 0.65;
       white-space: nowrap;
       display: flex;
       align-items: center;
       gap: 4px;
-      transition: color 0.2s;
+      transition: color 0.2s, opacity 0.2s;
       flex-shrink: 0;
       margin-bottom: 4px;
     }
-    .bbl-chart-mt-link:hover { color: var(--clr-text); }
+    .bbl-chart-mt-link:hover { color: var(--clr-violet-light); opacity: 1; }
 
     /* ── 榜单三列横排统计 ── */
     .bbl-chart-list .chart-item {
@@ -346,7 +385,9 @@
     .bbl-item-stats {
       display: flex;
       align-self: center;
+      margin-top: 1px;
     }
+    .bbl-chart-list .chart-item { padding-right: 8px; }
     .bbl-stat {
       width: 72px;
       display: flex;
@@ -409,9 +450,26 @@
     }
     .bbl-showmore--hidden { display: none; }
 
+    /* ── Highlight card click-to-scroll ── */
+    .bbl-hl-card--clickable { cursor: pointer; }
+    .bbl-hl-card--clickable:active { transform: scale(0.98); }
+    .bbl-rank-active {
+      background: rgba(168,85,247,0.13) !important;
+      box-shadow: inset 0 0 0 1px rgba(168,85,247,0.35),
+                  0 0 18px rgba(168,85,247,0.22),
+                  0 0 40px rgba(168,85,247,0.10) !important;
+      transition: none !important;
+    }
+    .bbl-rank-active.bbl-rank-fading {
+      background: transparent !important;
+      box-shadow: none !important;
+      transition: background 0.8s ease, box-shadow 0.8s ease !important;
+    }
+
     /* ── Responsive ── */
     @media (max-width: 1024px) {
       .bbl-chart-layout { grid-template-columns: 1fr 210px; }
+      .bbl-chart-header { padding-right: calc(210px + var(--gap-md)); }
     }
     @media (max-width: 768px) {
       .bbl-hero__layout   { grid-template-columns: 1fr; gap: var(--gap-md); }
@@ -419,7 +477,7 @@
       .bbl-chart-layout   { grid-template-columns: 1fr; }
       .bbl-hl-sidebar     { transform: none !important; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
       .bbl-hl-card        { flex: 1 1 calc(50% - 4px); min-width: 140px; }
-      .bbl-chart-header   { flex-direction: column; align-items: flex-start; gap: 12px; }
+      .bbl-chart-header   { flex-direction: column; align-items: flex-start; gap: 12px; padding-right: 0; }
       .bbl-stat:last-child { display: none; }
     }
     @media (max-width: 480px) {
@@ -437,11 +495,7 @@
   <div class="bbl-hero__watermark" aria-hidden="true">BBL</div>
 
   <div class="section__inner bbl-hero__inner">
-    <nav class="breadcrumb" aria-label="面包屑">
-      <a href="/">Barboard</a>
-      <span class="breadcrumb__sep" aria-hidden="true">›</span>
-      <span>BarboardLab</span>
-    </nav>
+
 
     <div class="bbl-hero__layout">
       <!-- 左列：标题 + 简介 + 按钮 -->
@@ -450,10 +504,10 @@
         <h1 class="bbl-hero__title">
           Bar<span class="bbl-board-accent">board</span><span class="bbl-lab-accent">Lab</span>
         </h1>
-        <div class="bbl-hero__meta">
-          <span>创立于2024年3月13日</span>
-          <span>每周六更新</span>
-          <span id="bblIssueLabel">当前第 — 期</span>
+        <div class="bbl-hero__meta lab__meta">
+          <span class="lab__meta-item" id="bblIssueLabel">已更新 — 期</span>
+          <span class="lab__meta-item">每周六更新</span>
+          <span class="lab__meta-item">创立于2024年3月13日</span>
         </div>
         <p class="bbl-hero__desc">
           BarboardLab 由一批保持规律更新个人周榜的榜吧成员组成。成员提交各自的完整周榜，
@@ -490,7 +544,7 @@
           <span class="bbl-video__date" id="bblVideoDate">—</span>
           <a class="bbl-video__link" id="bblVideoLink" href="#" target="_blank" rel="noopener">
             在 Bilibili 观看
-            <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"
+            <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8"
                  viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M2 8L8 2M8 2H4M8 2v4"/>
@@ -509,13 +563,13 @@
     <div class="bbl-chart-header fade-up">
       <div>
         <p class="section-label" style="margin-bottom:8px;">本期完整榜单</p>
-        <h2 class="bbl-chart-title" id="bblChartTitle">— · BARBOARDLAB SINGLES CHART</h2>
+        <h2 class="bbl-chart-title" id="bblChartTitle">BAR<span class="bbl-board-accent">BOARD</span><span class="bbl-lab-accent">LAB</span> SINGLES CHART</h2>
         <span class="bbl-chart-date" id="bblChartDate">—</span>
       </div>
       <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener"
          class="bbl-chart-mt-link">
         在 Musictrack 查看
-        <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9"
+        <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8"
              viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M2 8L8 2M8 2H4M8 2v4"/>
@@ -543,6 +597,19 @@
 
       <!-- 右列：本期亮点 -->
       <div class="bbl-hl-sidebar">
+        <div class="bbl-search fade-up">
+          <div class="bbl-search__field">
+            <input class="bbl-search__input" type="text" id="bblSearch"
+                   placeholder="搜索本期…" autocomplete="off" spellcheck="false" />
+            <svg class="bbl-search__icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+            </svg>
+            <button class="bbl-search__clear" id="bblSearchClear" aria-label="清除搜索">×</button>
+          </div>
+          <div class="bbl-search__count" id="bblSearchCount"></div>
+        </div>
         <p class="bbl-hl-sidebar__label fade-up">本期亮点</p>
         <div id="bblHighlights" style="display:flex;flex-direction:column;gap:8px;"></div>
       </div>
@@ -616,10 +683,10 @@
     const stats =
       '<div class="bbl-item-stats">' +
         (t.peak  != null ? '<div class="bbl-stat' + peakCls + '"><span class="bbl-stat__label">最高排名</span><span class="bbl-stat__val">' + t.peak + '</span></div>' : '') +
-        (t.weeks != null ? '<div class="bbl-stat"><span class="bbl-stat__label">在榜周数</span><span class="bbl-stat__val">' + t.weeks + '</span></div>' : '') +
+        (t.weeks != null ? '<div class="bbl-stat' + (t.rank === _longestOnRank ? ' bbl-stat--pink' : '') + '"><span class="bbl-stat__label">在榜周数</span><span class="bbl-stat__val">' + t.weeks + '</span></div>' : '') +
         (t.points != null ? '<div class="bbl-stat"><span class="bbl-stat__label">本周点数</span><span class="bbl-stat__val">' + t.points + '</span></div>' : '') +
       '</div>';
-    return '<div class="chart-item ' + (medalClass ? medalClass + ' ' : '') + 'fade-up">' +
+    return '<div class="chart-item ' + (medalClass ? medalClass + ' ' : '') + 'fade-up" data-rank="' + t.rank + '">' +
       '<div class="chart-rank-col">' +
         '<div class="chart-rank">' + t.rank + '</div>' +
         chartChange(t) +
@@ -633,15 +700,30 @@
     '</div>';
   }
 
+  // ── Scroll direction ───────────────────────────────────────
+  let _lastScrollY = window.scrollY, _scrollingDown = true;
+  window.addEventListener('scroll', () => {
+    _scrollingDown = window.scrollY >= _lastScrollY;
+    _lastScrollY = window.scrollY;
+  }, { passive: true });
+
   // ── Fade observer ──────────────────────────────────────────
   let fadeObserver, rightObserver;
   if ('IntersectionObserver' in window) {
     fadeObserver = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
+          if (!_scrollingDown) {
+            e.target.style.transition = 'none';
+            e.target.style.transitionDelay = '';
+          }
           e.target.classList.add('visible');
           fadeObserver.unobserve(e.target);
-          e.target.addEventListener('transitionend', () => { e.target.style.transitionDelay = ''; }, { once: true });
+          if (!_scrollingDown) {
+            requestAnimationFrame(() => { e.target.style.transition = ''; });
+          } else {
+            e.target.addEventListener('transitionend', () => { e.target.style.transitionDelay = ''; }, { once: true });
+          }
         }
       });
     }, { threshold: 0.08 });
@@ -727,8 +809,13 @@
             '</div>' +
           '</div>'
         : '<div class="bbl-hl-card__artist" style="margin-top:8px;">' + item.empty + '</div>';
-      return '<div class="bbl-hl-card fade-up" style="transition-delay:' + delay + 's;">' +
-        '<div class="bbl-hl-card__type bbl-hl-card__type--' + item.key + '">' + item.type + '</div>' +
+      const rankSuffix = (item.key === 'weeks' || item.key === 'up' || item.key === 'down') && t
+        ? '<span class="bbl-hl-card__rank">#' + t.rank + '</span>'
+        : '';
+      const clickAttr = t ? ' onclick="scrollToRank(' + t.rank + ')"' : '';
+      const clickClass = t ? ' bbl-hl-card--clickable' : '';
+      return '<div class="bbl-hl-card' + clickClass + ' fade-up" style="transition-delay:' + delay + 's;"' + clickAttr + '>' +
+        '<div class="bbl-hl-card__type bbl-hl-card__type--' + item.key + '">' + item.type + rankSuffix + '</div>' +
         '<div class="bbl-hl-card__val bbl-hl-card__val--' + item.key + '">' + item.val + '</div>' +
         songInfo +
       '</div>';
@@ -738,6 +825,8 @@
 
   // ── Full chart ─────────────────────────────────────────────
   let _allTracks = [];
+  let _longestOnRank = null;
+  let _trackByRank = {};
   const INITIAL_COUNT = 50;
 
   function renderChartItems(tracks) {
@@ -759,6 +848,113 @@
     });
   }
 
+  var _activeRankEl = null;
+  var _rankListenerAdded = false;
+
+  function onDocClickClearHighlight(e) {
+    // Clicks on highlight cards are handled by scrollToRank — skip here
+    if (e.target.closest && e.target.closest('.bbl-hl-card--clickable')) return;
+    document.removeEventListener('click', onDocClickClearHighlight);
+    _rankListenerAdded = false;
+    if (!_activeRankEl) return;
+    var el = _activeRankEl;
+    _activeRankEl = null;
+    el.classList.add('bbl-rank-fading');
+    el.addEventListener('transitionend', function() {
+      el.classList.remove('bbl-rank-active', 'bbl-rank-fading');
+    }, { once: true });
+  }
+
+  function scrollToRank(rank) {
+    var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+    var wrap = document.getElementById('bblShowMore');
+    var needExpand = rank > INITIAL_COUNT && wrap && !wrap.classList.contains('bbl-showmore--hidden');
+
+    function doScroll() {
+      var el = document.querySelector('[data-rank="' + rank + '"]');
+      if (!el) return;
+      // Force visible: removes transform:translateY(24px) so getBoundingClientRect is accurate
+      if (!el.classList.contains('visible')) {
+        el.style.transition = 'none';
+        el.style.transitionDelay = '';
+        el.classList.add('visible');
+        void el.offsetWidth;
+        el.style.transition = '';
+      }
+      var visibleH = window.innerHeight - navH;
+      var top = el.getBoundingClientRect().top + window.scrollY - navH - (visibleH - el.offsetHeight) / 2;
+      window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      // Clear previous highlight immediately (no fade)
+      if (_activeRankEl && _activeRankEl !== el) {
+        _activeRankEl.classList.remove('bbl-rank-active', 'bbl-rank-fading');
+      }
+      // Apply persistent highlight (cancel any in-progress fade first)
+      _activeRankEl = el;
+      el.classList.remove('bbl-rank-fading');
+      void el.offsetWidth;
+      el.classList.add('bbl-rank-active');
+      // Register doc listener once; reuse if already present
+      if (!_rankListenerAdded) {
+        _rankListenerAdded = true;
+        document.addEventListener('click', onDocClickClearHighlight);
+      }
+    }
+
+    if (needExpand) {
+      renderChartItems(_allTracks);
+      wrap.classList.add('bbl-showmore--hidden');
+      requestAnimationFrame(function() { requestAnimationFrame(doScroll); });
+    } else {
+      doScroll();
+    }
+  }
+
+  // ── Search ─────────────────────────────────────────────────
+  function filterChart(query) {
+    const q = query.trim().toLowerCase();
+    const wrap   = document.getElementById('bblShowMore');
+    const listEl = document.getElementById('bblFullList');
+    const countEl = document.getElementById('bblSearchCount');
+    if (!listEl) return;
+    if (q && wrap && !wrap.classList.contains('bbl-showmore--hidden')) {
+      renderChartItems(_allTracks);
+      wrap.classList.add('bbl-showmore--hidden');
+    }
+    const items = listEl.querySelectorAll('.chart-item');
+    if (!q) {
+      items.forEach(el => { el.style.display = ''; });
+      if (countEl) countEl.textContent = '';
+      return;
+    }
+    let matched = 0;
+    items.forEach(el => {
+      const t = _trackByRank[parseInt(el.dataset.rank)];
+      const hit = t && (t.title.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
+      el.style.display = hit ? '' : 'none';
+      if (hit) matched++;
+    });
+    if (countEl) countEl.textContent = matched ? matched + ' 个结果' : '无匹配结果';
+  }
+
+  function initSearch() {
+    const input   = document.getElementById('bblSearch');
+    const clearBtn = document.getElementById('bblSearchClear');
+    if (!input) return;
+    input.addEventListener('input', () => {
+      const q = input.value;
+      input.parentElement.parentElement.classList.toggle('bbl-search--active', q.length > 0);
+      filterChart(q);
+    });
+    if (clearBtn) {
+      clearBtn.addEventListener('click', () => {
+        input.value = '';
+        input.parentElement.parentElement.classList.remove('bbl-search--active');
+        filterChart('');
+        input.focus();
+      });
+    }
+  }
+
   // ── Main fetch ─────────────────────────────────────────────
   async function loadBBL() {
     try {
@@ -769,14 +965,14 @@
       // Hero meta
       if (data.issue) {
         const label = document.getElementById('bblIssueLabel');
-        if (label) label.textContent = '当前第 ' + data.issue + ' 期';
+        if (label) label.textContent = '已更新 ' + data.issue + ' 期';
       }
 
       // Chart header
       const titleEl = document.getElementById('bblChartTitle');
       const dateEl  = document.getElementById('bblChartDate');
       if (titleEl && data.issue) {
-        titleEl.innerHTML = '<strong style="color:rgba(240,238,255,0.8);">#' + data.issue + '</strong> · BARBOARDLAB SINGLES CHART';
+        titleEl.innerHTML = 'BAR<span class="bbl-board-accent">BOARD</span><span class="bbl-lab-accent">LAB</span><span style="color:rgba(240,238,255,0.85);"> SINGLES CHART</span><span style="font-family:var(--font-body);font-size:0.75em;font-weight:600;letter-spacing:0.04em;color:rgba(240,238,255,0.85);margin-left:calc(0.5em + 4px);position:relative;top:1px;vertical-align:middle;">第' + data.issue + '期</span>';
       }
       if (dateEl && data.date) {
         dateEl.textContent = fmtWeekRange(data.date);
@@ -804,8 +1000,12 @@
       if (data.tracks && data.tracks.length) {
         renderHighlights(data.tracks);
         _allTracks = data.tracks;
+        _allTracks.forEach(t => { _trackByRank[t.rank] = t; });
+        const _lo = _allTracks.reduce((a, b) => a.weeks > b.weeks ? a : b);
+        _longestOnRank = _lo ? _lo.rank : null;
         renderChartItems(_allTracks.slice(0, INITIAL_COUNT));
         initShowMore();
+        initSearch();
       }
     } catch(e) {
       console.warn('BBL data load failed:', e);

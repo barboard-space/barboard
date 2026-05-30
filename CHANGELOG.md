@@ -4,6 +4,31 @@
 
 ---
 
+## [2026-05-29] — bbl.html 大量 UI 精修 & 功能新增
+
+### Added
+- **亮点卡片点击定位**：点击本期亮点任意卡片 → 平滑滚动至对应榜单条目并垂直居中；rank > 50 自动展开完整榜单；定位前强制 `.visible` 消除 transform 偏移；持久高亮（`bbl-rank-active` + 紫色辉光），下次任意点击 0.8s 渐出
+- **本期亮点 #N 名次显示**：最长在榜/最大涨幅/最大跌幅三条标题行右侧展示当前排名
+- **侧栏搜索框**：支持歌名/歌手实时过滤，有输入时自动展开全 100 首，固定高度 count 提示防抖动；样式与 member.html 搜索框统一
+- **member.html 搜索框放大镜**：与 bbl.html 同款，wrapper 独立定位防 count 干扰
+- **向上回滚取消动画**：`_scrollingDown` 标志，向上滚动时条目直接显示不播入场动画
+- **"在 Musictrack 查看" 对齐榜单右边界**：`bbl-chart-header` 加 `padding-right: calc(236px + var(--gap-md))`，响应式断点同步
+
+### Changed
+- **本期亮点卡片**：padding/间距/字号压缩；最长在榜改为棕黄色 `#D49840`；最长在榜条目「在榜周数」stat 加 `bbl-stat--pink` 高亮
+- **榜单 stats 右移**：`bbl-chart-list .chart-item` `padding-right: 8px`（原 14px），整体右移 6px
+- **榜单标题重构**：`BAR`（白）+`BOARD`（`#6F9EC3`）+`LAB`（紫）三段配色；`SINGLES CHART` + `第N期`（`font-body 0.75em`）分段样式；期数/日期动态 fetch
+- **Meta 信息**：改用 `lab__meta` / `lab__meta-item` 全局样式（圆点前缀），文案改为「已更新 N 期 · 每周六更新 · 创立于2024年3月13日」
+- **Hero 布局**：`padding-top: var(--nav-h)`，eyebrow `margin-top: 0`，chart section `padding-top: 64px`
+- **外链箭头统一**：「在 Bilibili 观看」「在 Musictrack 查看」改为 `width="8" height="8" class="ext-icon"`
+- **「在 Musictrack 查看」**：`opacity: 0.65`，hover 时 `--clr-violet-light`
+- **去除**：面包屑导航、eyebrow 横线装饰
+
+### Style
+- **设计原则更新**：跨页面样式一致性原则（含排版间距）写入 CLAUDE.md；eyebrow → 标题间距统一 24px；搜索框规范统一；auto 列 margin-left 无效陷阱记录
+
+---
+
 ## [2026-05-29] — bbl.html 重命名 & sticky sidebar 完整修复
 
 ### Changed

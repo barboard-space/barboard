@@ -24,7 +24,7 @@ space_id,barboard_name,space_name,team,bilibili_id,bilibili_name,chart_id
 106,甲妈,杰克甲,"All, Indienation",354502867,seigfried_ocean,1949
 107,L妈,Lone,"All, 村摇欧共体",620764570,Christy5614,1966
 108,圈妈,TimCircles6,"All, BarboardLab",475243221,TimCircles6,2089
-109,雪妈,Sprite,"All, Indienation",285061537,John_Snow雪,2189
+109,雪妈,Sprite,"All, Indienation",,,2189
 110,芬妈,Stephen,"All, 村摇欧共体",470864039,Fanta_Stephen,2193
 111,虎妈,老白虎qwq,"All, Indienation",319499933,想玩动物森友会,2218
 112,健妈,健Jian-,"All, Indienation, BarboardLab",331215924,健Jian-,2420
@@ -47,7 +47,7 @@ space_id,barboard_name,space_name,team,bilibili_id,bilibili_name,chart_id
 129,火妈,fire_storm,"All, 村摇欧共体",,,
 130,麦妈,Tandiny,"All, 村摇欧共体",,,
 131,泰妈,泰坦crazy,"All, BarboardLab, 村摇欧共体",5946595,泰坦crazy,131
-132,A妈,AloneAlien_,"All, Indienation","12892864, 510975846","Al_口NEAliEn_, 不许吃草莓鱼-",
+132,A妈,AloneAlien_,"All, Indienation","510975846, 12892864","不许吃草莓鱼-, Al_口NEAliEn_",
 133,N妈,rihanavy,"All, Indienation",3494368415582827,N妈妈妈,
 134,光妈,柠檬辉光,"All, Indienation",11156849,柠檬辉光,
 135,瑞妈,Jefferyat19,"All, Indienation",36803708,王子爱吃士力架,
@@ -95,7 +95,7 @@ space_id,barboard_name,space_name,team,bilibili_id,bilibili_name,chart_id
 177,砸妈,ekaz,All,,,
 178,黄妈,HWA,All,,,
 179,嘎妈,JackeL,All,,,
-180,乔妈,John snow,All,,,
+180,乔妈,John_snow,All,285061537,John_Snow雪,
 181,鲤妈,ly_dly,All,,,
 182,贾妈,Makeroco,All,,,
 183,艾妈,,All,,,

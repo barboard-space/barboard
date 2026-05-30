@@ -313,6 +313,7 @@ barboard-space/
 ## 开发注意事项
 
 1. **响应式原则**：**PC 优先**——先实现桌面端完整效果，移动端自然继承；之后再针对移动端做局部微调（`@media (max-width: 768px)` override）。不要为了移动端一致性反过来影响桌面端默认值。
+0. **跨页面样式一致性**：可复用元素（搜索框、按钮、标签、卡片等）在多处出现时，必须保持样式完全统一。新增或修改某处组件时，主动检查全站其他使用同类组件的页面并同步更新，不允许同一组件在不同页面有差异样式。**排版间距同理**：eyebrow → 标题、标题 → 描述等层级间距，全站所有 hero/section 头部保持一致（eyebrow `margin-bottom: 24px`，参考 `style.css .hero__eyebrow`）。
 2. **字体**：本地 `fonts.css` 加载，禁止使用 Google Fonts CDN
 3. **图片路径**：`logo_center.png` 全小写，GitHub Pages（Linux）大小写敏感，HTML 里必须用小写
 4. **CSS 变量**：所有颜色/间距用变量，不硬编码；Nav logo Bebas Neue 通过 `!important` 强制指定（正式方案）
@@ -381,6 +382,12 @@ barboard-space/
 67. **CSS sticky 在 grid cell 子元素上不可靠**：部分浏览器计算子 sticky 的 scroll range 时，使用父 grid item 的**内容高度**（而非 stretch 后的实际高度），导致 range ≈ 0，sticky 完全失效。`bbl.html` 亮点侧栏改为 JS 实现：`align-self: start` + `will-change: transform`，scroll/resize/ResizeObserver 触发 `computeTarget()` 更新目标位移，rAF + lerp 循环（因子 0.22，`|diff| < 0.5px` 时停止）平滑写入 `transform: translateY`。
 68. **`getBoundingClientRect()` 含 CSS transform 偏移**：对有 `fade-up`（`transform: translateY(24px)`）的元素调用 `getBoundingClientRect().bottom`，返回的是视觉位置（含 transform），比布局位置低 24px。用此值计算 sticky 上限，会在 IntersectionObserver 触发 `.visible`（移除 transform）时产生 24px 跳变回弹。**修复**：改用容器 `#bblFullList.getBoundingClientRect().bottom`——容器自身无 transform，返回纯布局底边，稳定不受子条目 fade-up 影响。
 69. **bbl.html sticky sidebar 行为设计**：bottom-sticky（`past = (window.innerHeight - 24) − (gr.top + sh)`），sidebar 底边对齐视窗底端 24px 处；上限 `maxTY = listEl.bottom − gr.top − sh + 1`，确保 sidebar 底边不超过 `#bblFullList` 布局底边 +1px；lerp 因子 0.22，rAF 循环仅在有差值时运行，ResizeObserver 监听 grid 高度变化（点击"显示全部"后自动扩展上限）。
+70. **bbl.html 亮点卡片点击定位**：`scrollToRank(rank)` 函数——rank > 50 时先展开完整榜单再定位；定位前强制给目标元素加 `.visible`（`transition:none`）以消除 `translateY(24px)` 对 `getBoundingClientRect` 的影响，并确保首次点击 flash 可见；滚动目标 = `el.getBoundingClientRect().top + scrollY - navH`，将条目置于视窗垂直中央（`- (visibleH - el.offsetHeight) / 2`）。
+71. **bbl.html 亮点卡片持久高亮**：点击后条目保持高亮（`bbl-rank-active`），下次点击任意处渐出（`bbl-rank-fading` 0.8s）。用持久 document click 监听器 `onDocClickClearHighlight`，在回调里判断 `e.target.closest('.bbl-hl-card--clickable')` 跳过亮点卡自身点击；`_rankListenerAdded` 标志防重复注册；切换不同卡片时旧高亮立即清除（`transition:none`），同一卡片重复点击稳定。
+72. **bbl.html 搜索功能**：侧栏顶部搜索框过滤榜单条目（歌名/歌手），`_trackByRank` 映射 O(1) 查找；有输入时自动展开完整 100 首；固定高度 `#bblSearchCount`（`height:14px`）防抖动；DM Mono 无 CJK，count 提示文字必须用 `font-body`。
+73. **bbl.html 向上滚动取消动画**：`_scrollingDown` 标志追踪滚动方向，IntersectionObserver 回调中若向上滚则对目标元素 `transition:none` + 强制 `.visible`，rAF 后清除 `transition`，避免向上回滚时条目重新播放入场动画。
+74. **全站搜索框统一规范**：`padding: 7px 30px 7px 14px`、`font-weight:500`、`letter-spacing:0.03em`、`border-radius:4px`、focus 时 `border-color: var(--clr-violet)` + `caret-color: var(--clr-violet)`、placeholder focus 时 `opacity:0`。放大镜图标须包在独立 `position:relative` 的 wrapper div 内（而非搜索容器），避免 count/label 子元素影响 `top:50%` 定位。
+75. **auto 列中 margin-left 无效**：grid `1fr auto` 中，对 auto 列的 grid item 加 `margin-left` 不会使内容视觉右移——auto 列宽随 margin 同步缩小，内容位置不变。要右移，应减小 chart-item 的 `padding-right`。
 
 ---
 

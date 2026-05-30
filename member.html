@@ -71,13 +71,28 @@
     .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: #D49840; background: rgba(180,120,45,0.1); }
     .ml-filter[data-filter="indie"].active  { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
 
-    .ml-search {
+    .ml-search-wrap {
+      position: relative;
       margin-left: auto;
+    }
+    .ml-search-wrap .ml-search-icon {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--clr-text-2);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      transition: opacity 0.15s;
+    }
+    .ml-search-wrap.has-value .ml-search-icon { opacity: 0; }
+    .ml-search {
       font-family: var(--font-body);
       font-size: 12px;
       font-weight: 500;
       letter-spacing: 0.03em;
-      padding: 6px 14px 8px 14px;
+      padding: 7px 30px 7px 14px;
       border-radius: 4px;
       border: 1px solid var(--clr-border);
       background: transparent;
@@ -210,8 +225,8 @@
       .ml-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
       .ml-card { padding: 14px 12px 12px; }
       .ml-card__nickname { font-size: 22px; }
-      .ml-search { margin-left: 0; width: 100%; }
-      .ml-search:focus { width: 100%; }
+      .ml-search-wrap { margin-left: 0; width: 100%; }
+      .ml-search, .ml-search:focus { width: 100%; }
     }
 
     /* ── Card entrance ── */
@@ -249,7 +264,7 @@
       .ml-filters .ml-filter:nth-child(2) { animation-delay: 0.34s; }
       .ml-filters .ml-filter:nth-child(3) { animation-delay: 0.40s; }
       .ml-filters .ml-filter:nth-child(4) { animation-delay: 0.46s; }
-      .ml-filters .ml-search {
+      .ml-filters .ml-search-wrap {
         opacity: 0;
         transform: translateY(14px);
         animation: ml-hero-in 0.45s ease forwards;
@@ -272,7 +287,14 @@
         <button class="ml-filter" data-filter="bbl">BarboardLab</button>
         <button class="ml-filter" data-filter="cun">村摇欧共体</button>
         <button class="ml-filter" data-filter="indie">Indienation</button>
-        <input class="ml-search" type="text" id="mlSearch" placeholder="搜索成员…" autocomplete="off" />
+        <div class="ml-search-wrap">
+          <input class="ml-search" type="text" id="mlSearch" placeholder="搜索成员…" autocomplete="off" />
+          <svg class="ml-search-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -596,6 +618,7 @@
 
     document.getElementById('mlSearch').addEventListener('input', function() {
       currentSearch = this.value.trim();
+      this.closest('.ml-search-wrap').classList.toggle('has-value', currentSearch.length > 0);
       buildGrid(allMembers, currentFilter, currentSearch);
     });
 
