@@ -103,7 +103,7 @@
     /* ── Champion Roll ── */
     .hof-section-desc {
       margin-top: 16px;
-      font-size: 15px;
+      font-size: 13px;
       color: var(--clr-text-2);
       line-height: 1.75;
       max-width: 600px;
@@ -139,6 +139,9 @@
     .hof-group--gold   .hof-group__num   { color: var(--clr-gold-light); }
     .hof-group--silver .hof-group__num   { color: #90b8d0; }
     .hof-group--bronze .hof-group__num   { color: #e0a870; }
+    .hof-group--gold   .hof-group__count { color: var(--clr-gold-light); }
+    .hof-group--silver .hof-group__count { color: #90b8d0; }
+    .hof-group--bronze .hof-group__count { color: #e0a870; }
     .hof-group--gold   .hof-group__label { color: var(--clr-gold-light); opacity: 0.75; }
     .hof-group--silver .hof-group__label { color: #90b8d0; opacity: 0.75; }
     .hof-group--bronze .hof-group__label { color: #e0a870; opacity: 0.75; }
@@ -214,7 +217,7 @@
       white-space: nowrap;
     }
     .hof-group-song__vol {
-      font-family: var(--font-mono);
+      font-family: var(--font-body);
       font-size: 10px;
       color: var(--clr-text-3);
       margin-top: 2px;
@@ -436,6 +439,58 @@
       text-align: right;
     }
 
+    /* ── Weekly No.1 ── */
+    .hof-no1-wrap { margin-top: var(--gap-md); columns: 2; column-gap: 6px; }
+    .hof-no1-group { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 8px; overflow: hidden; break-inside: avoid; margin-bottom: 6px; }
+    .hof-no1-group__head { display: flex; align-items: baseline; gap: 8px; padding: 12px 20px; background: var(--clr-surface-2); border-bottom: 1px solid var(--clr-border); }
+    .hof-no1-group__cnt { font-family: var(--font-display); font-size: 26px; line-height: 1; }
+    .hof-no1-group__label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clr-text-3); }
+    .hof-no1-entry { border-bottom: 1px solid var(--clr-border); padding: 10px 0 8px; }
+    .hof-no1-entry:last-child { border-bottom: none; }
+    .hof-no1-entry__head { padding: 0 20px 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .hof-no1__song { font-size: 13px; font-weight: 600; color: var(--clr-text); }
+    .hof-no1__artist { font-size: 12px; color: var(--clr-text-2); }
+    .hof-no1-entry__occ {
+      display: grid; grid-template-columns: 172px 1fr;
+      gap: 2px 10px; padding: 1px 20px; align-items: start;
+    }
+    .hof-no1-entry__occ + .hof-no1-entry__occ { padding-top: 2px; }
+    .hof-no1__when { position: relative; top: -4px; }
+    .hof-no1__date { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--clr-text-2); white-space: nowrap; }
+    .hof-no1__vol { font-family: var(--font-body); font-size: 11px; color: var(--clr-text-3); }
+    .hof-no1__owners { font-size: 11px; color: var(--clr-text-2); white-space: normal; line-height: 1.75; margin-left: -30px; }
+
+    /* ── Page TOC ── */
+    .hof-toc {
+      position: fixed; right: 19px; bottom: 90px; z-index: 90;
+      display: flex; flex-direction: column; gap: 1px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .hof-toc--visible { opacity: 1; visibility: visible; }
+    .hof-toc__item {
+      font-family: var(--font-body); font-size: 11px;
+      color: var(--clr-text-3); cursor: pointer;
+      padding: 3px 13px 3px 0;
+      position: relative;
+      transition: color 0.15s;
+      line-height: 1.5; white-space: nowrap; user-select: none;
+      text-align: right;
+    }
+    .hof-toc__item::after {
+      content: ''; position: absolute; right: 3px; top: 50%;
+      transform: translateY(-50%); width: 5px; height: 5px;
+      border-radius: 50%; background: var(--clr-violet-light);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .hof-toc__item:not(.hof-toc__item--active):hover { color: var(--clr-text); }
+    .hof-toc__item--active { color: var(--clr-violet-light); }
+    .hof-toc__item--active::after { opacity: 1; animation: toc-breathe 3s ease-in-out infinite; }
+    @keyframes toc-breathe {
+      0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+      50%       { opacity: 0.35; transform: translateY(-50%) scale(0.65); }
+    }
+
     /* ── Mobile ── */
     @media (max-width: 768px) {
       .hof-hero__stats { gap: var(--gap-md); }
@@ -443,10 +498,13 @@
       .hof-records-grid { grid-template-columns: 1fr 1fr; }
       .hof-two-col { grid-template-columns: 1fr; }
       .hof-roll { columns: 1; }
+      .hof-no1-wrap { columns: 1; }
       .hof-group-song__debut { display: none; }
+      .hof-no1-entry__occ { grid-template-columns: 1fr; gap: 1px; }
       .hof-uncrowned-header,
       .hof-uncrowned-row { grid-template-columns: 28px 1fr auto; }
       .hof-uncrowned__pts { display: none; }
+      .hof-toc { display: none; }
     }
     @media (max-width: 540px) {
       .hof-records-grid { grid-template-columns: 1fr; }
@@ -496,7 +554,7 @@
   <div class="section__inner">
     <p class="section-label fade-up">夺冠纪录</p>
     <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">冠军名录</h2>
-    <p class="hof-section-desc fade-up" style="transition-delay:0.2s; font-size:13px;"><strong>124</strong> 期冠军单曲按夺冠周数排列，共 <strong>31</strong> 首。</p>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;"><strong>124</strong> 期冠军单曲按夺冠周数排列，共 <strong>31</strong> 首。首次夺冠日期 / 期数已标注。</p>
     <div class="fade-up" style="transition-delay:0.3s;">
       <div class="hof-roll" id="hofChampionRoll"></div>
     </div>
@@ -507,9 +565,19 @@
 <section class="section section--bordered" id="records" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
     <p class="section-label fade-up">在榜纪录</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;">驻榜韧性</h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">驻榜韧性</h2>
     <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">各榜位长期驻榜纪录持有者，每组展示前五。</p>
-    <div class="hof-records-grid fade-up" style="transition-delay:0.3s;" id="hofRecordsGrid"></div>
+    <div class="hof-records-grid" id="hofRecordsGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ WEEKLY NO.1 ═══ -->
+<section class="section section--bordered" id="weekly-no1" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">合榜纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">单周个人榜冠军数</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">同一周内，被最多成员同时列为个人榜冠军的单曲纪录。</p>
+    <div class="hof-no1-wrap" id="hofNo1Groups"></div>
   </div>
 </section>
 
@@ -517,7 +585,7 @@
 <section class="section section--bordered" id="artists" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
     <p class="section-label fade-up">艺人成就</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;">艺人版图</h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">艺人版图</h2>
     <div class="hof-two-col fade-up" style="transition-delay:0.2s;" id="hofArtistCols"></div>
   </div>
 </section>
@@ -526,7 +594,7 @@
 <section class="section section--bordered" id="albums" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
     <p class="section-label fade-up">专辑成就</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;">上榜专辑</h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">上榜专辑</h2>
     <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">上榜歌曲最多的专辑（至少 6 首上榜），括号内为上榜率。</p>
     <div class="hof-two-col hof-album-wrap fade-up" style="transition-delay:0.3s;" id="hofAlbums"></div>
   </div>
@@ -536,7 +604,7 @@
 <section class="section section--bordered" id="uncrowned" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
     <p class="section-label fade-up">珍贵纪录</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;">未冠之最</h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">未冠之最</h2>
     <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">从未登顶但当周积分最高的单曲记录，括注为该周最终排名。</p>
     <div class="fade-up" style="transition-delay:0.3s;">
       <div class="hof-uncrowned" id="hofUncrowned">
@@ -550,6 +618,15 @@
     </div>
   </div>
 </section>
+
+<nav id="hofToc" class="hof-toc" aria-label="页内目录">
+  <div class="hof-toc__item" data-target="champions">冠军名录</div>
+  <div class="hof-toc__item" data-target="records">驻榜韧性</div>
+  <div class="hof-toc__item" data-target="weekly-no1">单周冠军纪录</div>
+  <div class="hof-toc__item" data-target="artists">艺人版图</div>
+  <div class="hof-toc__item" data-target="albums">上榜专辑</div>
+  <div class="hof-toc__item" data-target="uncrowned">未冠之最</div>
+</nav>
 
 <div id="site-footer"></div>
 <script src="../scripts/nav.js"></script>
@@ -773,12 +850,12 @@
   }
 
   function buildRecordsGrid() {
-    document.getElementById('hofRecordsGrid').innerHTML = RECORDS.map(r => `
-      <div class="hof-record-card">
+    document.getElementById('hofRecordsGrid').innerHTML = RECORDS.map((r, i) => `
+      <div class="hof-record-card fade-up" style="transition-delay:${(i * 0.07).toFixed(2)}s;">
         <div class="hof-record-card__title">${r.title}</div>
-        ${r.items.map((it, i) => `
-          <div class="hof-record-entry ${i === 0 ? 'hof-record-entry--top' : ''}">
-            <span class="hof-record-entry__rank">${i + 1}</span>
+        ${r.items.map((it, j) => `
+          <div class="hof-record-entry ${j === 0 ? 'hof-record-entry--top' : ''}">
+            <span class="hof-record-entry__rank">${j + 1}</span>
             <div class="hof-record-entry__song">
               <div class="hof-record-entry__artist">${it.artist}</div>
               <div class="hof-record-entry__name">${it.song}</div>
@@ -851,11 +928,172 @@
       </div>`).join('');
   }
 
+  const OWNER_MAP = {
+    '邓': { id:31,  handle:'DuncanLee',       nickname:'邓妈' },
+    '笃': { id:33,  handle:'吃辣喝香',         nickname:'笃妈' },
+    '韩': { id:67,  handle:'SouthkoreaBall',   nickname:'韩妈' },
+    'S':  { id:27,  handle:'哈哈哈时光机',     nickname:'S妈'  },
+    '雨': { id:17,  handle:'Lee翼雨',          nickname:'雨妈' },
+    '团': { id:68,  handle:'不动团子',         nickname:'团妈' },
+    '威': { id:7,   handle:'williw_',          nickname:'威妈' },
+    '柠': { id:19,  handle:'LemonSheeran',     nickname:'柠妈' },
+    'T':  { id:115, handle:'iTAP_II',          nickname:'T妈'  },
+    '包': { id:20,  handle:'Jeremy_BAg',       nickname:'包妈' },
+    '醉': { id:614, handle:'醉の蒲公英',       nickname:'醉妈' },
+    '文': { id:116, handle:'SummertimeDawns',  nickname:'文妈' },
+    '圈': { id:108, handle:'TimCircles6',      nickname:'圈妈' },
+    '兔': { id:118, handle:'Razbit',           nickname:'兔妈' },
+    '晕': { id:117, handle:'dizzyhugh',        nickname:'晕妈' },
+    '锴': { id:12,  handle:'WillKris锴',       nickname:'锴妈' },
+    '鸣': { id:158, handle:'漫画小鸣',         nickname:'鸣妈' },
+    'X':  { id:88,  handle:'xjebs',            nickname:'X妈'  },
+    '泰': { id:131, handle:'泰坦crazy',        nickname:'泰妈' },
+    '海': { id:119, handle:'Ocean',            nickname:'海妈' },
+    '杰': { id:156, handle:'jh201013',         nickname:'杰妈' },
+    '星': { id:45,  handle:'白矮星爱吃东西',   nickname:'星妈' },
+    '羊': { id:100, handle:'SeafishYANG',      nickname:'羊妈' },
+    '布': { id:157, handle:'Vivienne-Eliza',   nickname:'布妈' },
+    '米': { id:256, handle:'LUKY',             nickname:'米妈' },
+    '波': { id:101, handle:'ww_micro_微波',    nickname:'波妈' },
+    'P':  { id:104, handle:'PROKING',          nickname:'P妈'  },
+    '叉': { id:13,  handle:'PRONGS',           nickname:'叉妈' },
+  };
+
+  function fmtOwners(str) {
+    return str.split(' ').map(k => {
+      const m = OWNER_MAP[k];
+      if (!m) return '@' + k;
+      return `<a class="member" href="../member/${m.id}.html" data-nickname="${m.nickname}">@${m.handle}</a>`;
+    }).join(' ');
+  }
+
+  const NO1_RECORDS = [
+    { n:5, artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',        date:'2026-05-15', owners:'邓 笃 韩 S 雨' },
+    { n:4, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-06-21', owners:'团 威 柠 T' },
+    { n:4, artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',   date:'2024-09-06', owners:'团 威 包 醉' },
+    { n:4, artist:'Tate McRae',                      song:'Sports car',         date:'2025-03-07', owners:'S 文 圈 韩' },
+    { n:4, artist:'Lady Gaga',                       song:'Shadow of a Man',    date:'2025-03-14', owners:'醉 威 兔 柠' },
+    { n:4, artist:'Taylor Swift',                    song:'The Fate of Ophelia',date:'2025-10-17', owners:'晕 文 锴 柠' },
+    { n:4, artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',        date:'2026-03-06', owners:'韩 鸣 X 雨' },
+    { n:4, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-24', owners:'韩 柠 泰 雨' },
+    { n:4, artist:'Olivia Rodrigo',                  song:'drop dead',          date:'2026-04-24', owners:'S 海 杰 文' },
+    { n:3, artist:'Ariana Grande',                   song:'yes, and?',          date:'2024-01-19', owners:'S 团 锴' },
+    { n:3, artist:'Baby Lasagna',                    song:'Rim Tim Tagi Dim',   date:'2024-05-17', owners:'S 韩 雨' },
+    { n:3, artist:'Baby Lasagna',                    song:'Rim Tim Tagi Dim',   date:'2024-05-24', owners:'S 韩 雨' },
+    { n:3, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-06-14', owners:'威 柠 团' },
+    { n:3, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-07-05', owners:'威 柠 星' },
+    { n:3, artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',   date:'2024-08-30', owners:'威 团 醉' },
+    { n:3, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-09-27', owners:'威 柠 韩' },
+    { n:3, artist:'Chappell Roan',                   song:'Pink Pony Club',     date:'2025-02-07', owners:'羊 柠 文' },
+    { n:3, artist:'Lady Gaga',                       song:'Abracadabra',        date:'2025-02-14', owners:'威 团 星' },
+    { n:3, artist:'Lady Gaga',                       song:'Abracadabra',        date:'2025-02-21', owners:'威 团 柠' },
+    { n:3, artist:'Kendrick Lamar & SZA',            song:'luther',             date:'2025-02-21', owners:'醉 兔 布' },
+    { n:3, artist:'Kendrick Lamar & SZA',            song:'luther',             date:'2025-02-28', owners:'醉 兔 米' },
+    { n:3, artist:'Tate McRae',                      song:'Sports car',         date:'2025-02-28', owners:'文 圈 韩' },
+    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-03-21', owners:'羊 杰 波' },
+    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-04-25', owners:'团 T P' },
+    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-05-02', owners:'团 T P' },
+    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-05-23', owners:'团 T P' },
+    { n:3, artist:'Chappell Roan',                   song:'The Subway',         date:'2025-08-08', owners:'文 威 海' },
+    { n:3, artist:'ROSALÍA',                         song:'Reliquia',           date:'2025-11-14', owners:'T 杰 海' },
+    { n:3, artist:'Taylor Swift',                    song:'Opalite',            date:'2026-02-06', owners:'波 叉 文' },
+    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-03-20', owners:'邓 柠 雨' },
+    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-03', owners:'泰 柠 雨' },
+    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-10', owners:'叉 柠 雨' },
+    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-17', owners:'邓 柠 雨' },
+  ];
+
+  function buildNo1Groups() {
+    const groups = {};
+    NO1_RECORDS.forEach(r => { if (!groups[r.n]) groups[r.n] = []; groups[r.n].push(r); });
+    const ns = Object.keys(groups).map(Number).sort((a, b) => b - a);
+    const maxN = ns[0];
+    const cntColors = { 5: 'var(--clr-gold-light)' };
+    document.getElementById('hofNo1Groups').innerHTML = ns.map((n, gi) => {
+      const color = cntColors[n] || 'var(--clr-text-2)';
+
+      const songMap = new Map();
+      groups[n].forEach(r => {
+        const key = r.artist + '|||' + r.song;
+        if (!songMap.has(key)) songMap.set(key, { artist: r.artist, song: r.song, occs: [] });
+        songMap.get(key).occs.push({ date: r.date, owners: r.owners });
+      });
+
+      const entries = [...songMap.values()].map((s, ei) => {
+        const delay = (ei * 0.06).toFixed(2);
+        const occs = s.occs.map(o => {
+          const vol = VOL_DATES.indexOf(o.date);
+          const volStr = vol > 0 ? ` · 第 ${vol} 期` : '';
+          return `
+            <div class="hof-no1-entry__occ">
+              <div class="hof-no1__when"><span class="hof-no1__date">${fmtDebutDate(o.date)}</span><span class="hof-no1__vol">${volStr}</span></div>
+              <div class="hof-no1__owners">${fmtOwners(o.owners)}</div>
+            </div>`;
+        }).join('');
+        return `
+          <div class="hof-no1-entry fade-up" style="transition-delay:${delay}s;">
+            <div class="hof-no1-entry__head">
+              <span class="hof-no1__song">${s.song}</span><span class="hof-no1__artist">　${s.artist}</span>
+            </div>
+            ${occs}
+          </div>`;
+      }).join('');
+
+      return `
+        <div class="hof-no1-group fade-up" style="transition-delay:${(gi * 0.12).toFixed(2)}s;">
+          <div class="hof-no1-group__head">
+            <span class="hof-no1-group__cnt" style="color:${color}">${n}</span>
+            <span class="hof-no1-group__label">位成员同冠</span>
+          </div>
+          ${entries}
+        </div>`;
+    }).join('');
+  }
+
   buildChampionRoll();
+  buildNo1Groups();
   buildRecordsGrid();
   buildArtistCols();
   buildAlbums();
   buildUncrowned();
+
+  /* ─────────────────────────── TOC ───────────────────────────────────── */
+  (function initHofToc() {
+    const toc = document.getElementById('hofToc');
+    const items = Array.from(toc.querySelectorAll('.hof-toc__item'));
+    const navH = 72;
+    let suppressIO = false;
+    let suppressTimer = null;
+
+    window.addEventListener('scroll', () => {
+      toc.classList.toggle('hof-toc--visible', window.scrollY > 200);
+      if (suppressIO) {
+        clearTimeout(suppressTimer);
+        suppressTimer = setTimeout(() => { suppressIO = false; }, 200);
+      }
+    }, { passive: true });
+
+    const obs = new IntersectionObserver(entries => {
+      if (suppressIO) return;
+      entries.forEach(e => {
+        if (e.isIntersecting)
+          items.forEach(it => it.classList.toggle('hof-toc__item--active', it.dataset.target === e.target.id));
+      });
+    }, { rootMargin: `-${navH}px 0px -55% 0px` });
+
+    items.forEach(item => {
+      const el = document.getElementById(item.dataset.target);
+      if (el) obs.observe(el);
+      item.addEventListener('click', () => {
+        const el = document.getElementById(item.dataset.target);
+        if (!el) return;
+        suppressIO = true;
+        clearTimeout(suppressTimer);
+        items.forEach(it => it.classList.toggle('hof-toc__item--active', it === item));
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+      });
+    });
+  })();
 
   /* ─────────────────────────── FADE-UP ───────────────────────────────── */
   function clearDelayAfterAnim(el) {

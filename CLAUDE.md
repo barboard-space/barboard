@@ -41,7 +41,7 @@
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
-- `bbl/hof.html` — BBL 荣誉殿堂（已完成，5大板块：冠军名录31首/驻榜纪录6组/艺人版图/上榜专辑/未冠之最，数据截至第124期，数据硬编码 JS 常量数组直接渲染；含 `VOL_DATES` 内联索引；eyebrow 链回 `/bbl.html`；冠军名录已重设计为按冠军周数分组卡片 + CSS `columns:3` 三列布局，详见开发注意事项 #82–83）
+- `bbl/hof.html` — BBL 荣誉殿堂（已完成，**6大板块**：冠军名录/单周个人榜冠军数/驻榜韧性/艺人版图/上榜专辑/未冠之最，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–88）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -405,7 +405,12 @@ barboard-space/
 80. **HOF 页面数据不 fetch，直接硬编码**：`bbl/hof.html` 的5大板块数据（冠军/纪录/艺人/专辑/未冠）以 JS 常量数组写在 `<script>` 内，无需 fetch CSV，加载即渲染。新页路径层级：`../scripts/nav.js`，`../fonts.css`，`../style.css`。冠军名录含 `VOL_DATES` 内联常量（Vol.1–124 期号→日期），外部索引见 `data/bbl/bbl-vol-index.json`（JSON 对象格式，供 bbl/charts 等页面 fetch）。
 81. **文件清理记录**：本次清除 61 个未声明的冗余字体文件（DM Sans 18pt/24pt/36pt 光学尺寸变体、DM Mono 斜体/Light/Medium 变体），`assets/fonts/` 目录从 82 个文件精简至 6 个；同时清除 `about/`、`archive/`、`charts/`、`barboardlab/`（当时空目录）等空目录；清除 `bbl.html` 遗留的 `.breadcrumb` CSS（HTML 已早前移除）。
 82. **bbl.html hero CSS animation**：hero 区元素始终在视口内，用 CSS `@keyframes`（非 IntersectionObserver）驱动入场。`cubic-bezier(0.22,1,0.36,1)` 快进慢出，比 `ease` 更有质感。`.bbl-video` 已从 `fade-up-right` 改为 CSS animation，移除了 inline `transition-delay`。各元素延迟：eyebrow 0s → 标题 0.08s → meta 0.18s → 描述 0.26s → 按钮 0.35s → 视频卡 0.20s → 水印 0.30s（1.4s）。
-83. **CSS `columns` 多列瀑布流**：`columns: N; column-gap: Xpx` 实现类瀑布流布局，浏览器自动平衡各列高度。子卡片必须加 `break-inside: avoid` 防止跨列截断；子卡片间距用 `margin-bottom`（不能用父容器 `gap`，`columns` 不支持）。移动端用 `columns: 1` 回退。已用于 `bbl/hof.html` 冠军名录三列布局。
+83. **CSS `columns` 多列瀑布流**：`columns: N; column-gap: Xpx` 实现类瀑布流布局，浏览器自动平衡各列高度。子卡片必须加 `break-inside: avoid` 防止跨列截断；子卡片间距用 `margin-bottom`（不能用父容器 `gap`，`columns` 不支持）。移动端用 `columns: 1` 回退。已用于 `bbl/hof.html` 冠军名录三列布局、单周个人榜冠军数双列布局。
+84. **HOF 金银铜配色系统**：全站约定金 `var(--clr-gold-light)`、银 `#90b8d0`、铜 `#e0a870`。在 `bbl/hof.html` 中冠军名录前三组（15/11/10周）及对应的 `.hof-group--gold/silver/bronze` class 应用此色系；`hof-group__num` 和 `hof-group__count`（X首）均随 tier 变色；无 tier 的组默认 `var(--clr-text-2)`。
+85. **动态渲染元素的 fade-up 错落方案**：`hof.html` build 函数（`buildRecordsGrid`/`buildNo1Groups` 等）在页面底部 `fadeObserver` 设置之前运行，因此在 build 函数内为动态生成的元素加 `class="fade-up"` + inline `transition-delay`，`document.querySelectorAll('.fade-up')` 调用时已能抓到这些元素。容器级 `fade-up` 移除，改为逐条目 `i * 0.06s` 或 `i * 0.07s` 错排，参考 member.html 的 `ml-card-enter` 卡片动画风格（`cubic-bezier(0.22,1,0.36,1)`）。
+86. **HOF 页内 TOC 设计**：`bbl/hof.html` 专属，固定右下角 `right: 19px; bottom: 90px`（back-to-top 上方），文字右对齐，`border: none`，active 状态用 5px 紫色呼吸圆点（`::after` 伪元素，`animation: toc-breathe 3s ease-in-out infinite`，scale 0.65→1 + opacity 0.35→1）；非 active hover 变 `--clr-text`；**IO suppression**：点击时立即高亮目标项并设 `suppressIO = true`，scroll 事件停止 200ms 后自动清除，防止滚动途经其他 section 时高亮跳动；移动端隐藏。
+87. **hof.html OWNER_MAP**：`bbl_02_most_weekly_no1.csv` 中 owners 字段使用成员昵称首字（如"邓"/"S"/"T"），在 hof.html `<script>` 内定义 `OWNER_MAP` 常量映射至 `{id, handle, nickname}`，渲染时通过 `fmtOwners()` 输出 `<a class="member" href="../member/ID.html" data-nickname="昵称">@handle</a>` 链接，享受 nav.js tooltip 支持。
+88. **hof.html section 标题字号统一**：所有 `.section__title` 在 hof.html 内统一加 inline `font-size:clamp(18px, 2.4vw, 28px)`，覆盖 style.css 默认值，保持 HOF 页内各 section 视觉一致。
 
 ---
 

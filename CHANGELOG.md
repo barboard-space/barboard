@@ -4,6 +4,25 @@
 
 ---
 
+## [2026-05-30] — bbl/hof.html 新板块 + 页内 TOC + 全局动画精修
+
+### Added
+- **bbl/hof.html 单周个人榜冠军数板块**：新增第2板块（冠军名录之后，驻榜韧性之前），基于 `data/bbl/bbl-record/bbl_02_most_weekly_no1.csv`；按同周冠君人数（5/4/3）分三个卡片组，双列 `columns:2` 瀑布流布局；同一首歌的多次记录自动聚合，多次出现显示合并头行 + 缩进子行（日期 · 第N期 | @成员列表）；`OWNER_MAP` 常量映射28位成员简称→`{id, handle, nickname}`，owners 渲染为 `<a class="member">` 链接享受 tooltip；5人组金色，4/3人组 `--clr-text-2`
+- **bbl/hof.html 页内 TOC**：右下角固定导航，文字右对齐，active 状态紫色呼吸圆点（`animation: toc-breathe 3s ease-in-out infinite`）；点击立即高亮目标并抑制 IntersectionObserver 更新（防止滚动途经中间 section 时高亮跳动），滚动停止 200ms 后自动恢复；移动端隐藏
+
+### Changed
+- **bbl/hof.html 全板块 section title 字号统一**：所有 `h2.section__title` 加 `font-size:clamp(18px, 2.4vw, 28px)`，hof 页内视觉一致
+- **bbl/hof.html hof-section-desc 字号统一**：CSS 类默认改为 13px，移除各处冗余 inline override
+- **bbl/hof.html 驻榜韧性动画**：6张记录卡片改为逐一错排 `fade-up`（每卡 0.07s 间隔），不再整体同时出现
+- **bbl/hof.html 单周个人榜冠军数动画**：组级 0.12s 间隔 + 组内每条 entry 0.06s 间隔错排 `fade-up`，参考 member.html 卡片动画风格
+- **bbl/hof.html 冠军名录**：`columns:3` → 保持三列；`hof-group__count`（X首）随金/银/铜 tier 变色，与组内数字色一致；描述文字补充「首次夺冠日期 / 期数已标注。」
+- **bbl/hof.html `hof-group-song__vol`**：`font-family` 从 `--font-mono` 改为 `--font-body`，修复 DM Mono 无法渲染「第」「期」中文字符的问题
+
+### Style
+- **bbl/hof.html section 顺序调整**：冠军名录 → 单周个人榜冠军数 → 驻榜韧性 → 艺人版图 → 上榜专辑 → 未冠之最
+
+---
+
 ## [2026-05-29] — bbl.html hero 动画 + bbl/hof.html 冠军名录重设计
 
 ### Changed
