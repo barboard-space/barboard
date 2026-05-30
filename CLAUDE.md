@@ -41,7 +41,7 @@
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
-- `bbl/hof.html` — BBL 荣誉殿堂（已完成，**6大板块**：冠军名录/单周个人榜冠军数/驻榜韧性/艺人版图/上榜专辑/未冠之最，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–88）
+- `bbl/hof.html` — BBL 荣誉殿堂（已完成，**6大板块**（顺序）：冠单名录 → 在榜周数纪录 → 无冕高分 → 单周个人榜冠军数 → 艺人版图 → 上榜专辑，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–92）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -335,7 +335,7 @@ barboard-space/
 10. **SEO**：每个页面需独立 `<title>` 和 `<meta description>`
 11. **Section 锚点定位**：`.section` 统一设置 `scroll-margin-top: calc(var(--nav-h) - 2px)`，`-2px` 使 nav 完全覆盖 `.section--bordered` 的 `border-top: 1px`（nav 自身含 border-box 内的 border-bottom，两条线完全重合）
 12. **Section 高度**：`.barvision` 和 `.lab` 设置 `min-height: calc(100vh - 2 * var(--gap-xl))`，使 section 总高度约为 100vh（padding 由 `.section` 类统一提供，上下各 `var(--gap-xl)`）
-13. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染
+13. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染。同一父元素内若 ASCII 行用 DM Mono、中文行需另指定字体，在中文子元素加 inline style：`<div style="font-family:var(--font-body);">第 N 期</div>`
 14. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
 15. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号
 16. **成员提及**：榜吧成员名统一用 `<a class="member" href="[相对路径]/member/7.html" data-nickname="昵称">@username</a>`。href 用**相对路径**（file:// 兼容），不用绝对路径（绝对路径在 file:// 下解析到磁盘根）。`data-nickname` 由 nav.js 的 `initMemberTooltips()` 读取，显示 JS tooltip（挂在 `<body>`，`position:fixed`，`transform:translate(-50%,calc(-100% - 7px))`，opacity fade 0.18s）。PC hover 色变 `--clr-violet-light`，移动端点击跳转。当前成员：`@williw_`（威妈）→ `member/7.html`
@@ -409,8 +409,12 @@ barboard-space/
 84. **HOF 金银铜配色系统**：全站约定金 `var(--clr-gold-light)`、银 `#90b8d0`、铜 `#e0a870`。在 `bbl/hof.html` 中冠军名录前三组（15/11/10周）及对应的 `.hof-group--gold/silver/bronze` class 应用此色系；`hof-group__num` 和 `hof-group__count`（X首）均随 tier 变色；无 tier 的组默认 `var(--clr-text-2)`。
 85. **动态渲染元素的 fade-up 错落方案**：`hof.html` build 函数（`buildRecordsGrid`/`buildNo1Groups` 等）在页面底部 `fadeObserver` 设置之前运行，因此在 build 函数内为动态生成的元素加 `class="fade-up"` + inline `transition-delay`，`document.querySelectorAll('.fade-up')` 调用时已能抓到这些元素。容器级 `fade-up` 移除，改为逐条目 `i * 0.06s` 或 `i * 0.07s` 错排，参考 member.html 的 `ml-card-enter` 卡片动画风格（`cubic-bezier(0.22,1,0.36,1)`）。
 86. **HOF 页内 TOC 设计**：`bbl/hof.html` 专属，固定右下角 `right: 19px; bottom: 90px`（back-to-top 上方），文字右对齐，`border: none`，active 状态用 5px 紫色呼吸圆点（`::after` 伪元素，`animation: toc-breathe 3s ease-in-out infinite`，scale 0.65→1 + opacity 0.35→1）；非 active hover 变 `--clr-text`；**IO suppression**：点击时立即高亮目标项并设 `suppressIO = true`，scroll 事件停止 200ms 后自动清除，防止滚动途经其他 section 时高亮跳动；移动端隐藏。
-87. **hof.html OWNER_MAP**：`bbl_02_most_weekly_no1.csv` 中 owners 字段使用成员昵称首字（如"邓"/"S"/"T"），在 hof.html `<script>` 内定义 `OWNER_MAP` 常量映射至 `{id, handle, nickname}`，渲染时通过 `fmtOwners()` 输出 `<a class="member" href="../member/ID.html" data-nickname="昵称">@handle</a>` 链接，享受 nav.js tooltip 支持。
+87. **hof.html OWNER_MAP**：`bbl_07_most_weekly_no1.csv` 中 owners 字段使用成员昵称首字（如"邓"/"S"/"T"），在 hof.html `<script>` 内定义 `OWNER_MAP` 常量映射至 `{id, handle, nickname}`，渲染时通过 `fmtOwners()` 输出 `<a class="member" href="../member/ID.html" data-nickname="昵称">@handle</a>` 链接，享受 nav.js tooltip 支持。
 88. **hof.html section 标题字号统一**：所有 `.section__title` 在 hof.html 内统一加 inline `font-size:clamp(18px, 2.4vw, 28px)`，覆盖 style.css 默认值，保持 HOF 页内各 section 视觉一致。
+89. **在榜周数纪录布局设计**：左列（`1.65fr`）为完整总在榜周数排行（`CHARTED_FULL`，12条），前三名金银铜配色；右列（`2fr`）为 `hof-records-right` 2×2 网格（Top3/5/10/50 四张卡片，`show:false` 保留 Top20 数据但不渲染）。左侧主卡片 `.hof-record-card--full`：紫色边框（`rgba(168,85,247,0.38)`）+ 渐变底色 + 外发光 + `overflow:hidden`；行背景全宽通过 `margin: 0 -20px; padding: 9px 20px` 实现（需卡片有 `overflow:hidden`）。周数相同的条目用 `computeRanks()` 计算并列名次。val 末尾 `*` 通过检测 `hasAst` 剥离后以 `<span class="hof-record-ast">` 加到歌名末尾。
+90. **data-tooltip 条目级注释**：在数据对象加 `note` 字段，渲染时写入 `data-tooltip` 属性，页底用 IIFE 事件委托实现 tooltip（复用 `.member-tooltip` / `.member-tooltip--visible` CSS）。与 nav.js member tooltip 完全同款，follow 鼠标 `(clientX+16, clientY)`，opacity 0.18s fade。
+91. **无冕高分（未夺冠单曲单周点数纪录）板块设计**：`UNCROWNED`（15条）含 `artist/song/pts/rank/vol` 五字段，vol 通过 `VOL_DATES` 查日期再 `fmtDebutDate()` 格式化；双列 `.hof-uncrowned-grid`（`1fr 1fr`，左8右7），各自独立卡片含 border 与 overflow:hidden；行网格 `22px auto 1fr auto auto`（排名/点数/歌曲/日期期数/位次）；点数整数 24px Bebas + 小数 13px 0.6透明；日期两行（ASCII 用 mono，中文「第N期」加 `font-family:var(--font-body)` inline style）；位次标签 `#2` 银色、`#3` 铜色、其余默认。移动端隐藏点数和日期列。
+92. **bbl-record CSV 编号规范**（截至当前）：`bbl_01` 冠单名录 / `bbl_02` 在榜周数纪录（合并版，含 Category 列）/ `bbl_03` 2000点以上单曲 / `bbl_04` 无冕高分点数 / `bbl_05` 最多上榜次数（16期+）/ `bbl_06` 单期最强榜 / `bbl_07` 单周个人榜冠军数 / `bbl_08` 专辑上榜 / `bbl_09` 艺人峰值歌曲数 / `bbl_10` 艺人总上榜歌曲数 / `bbl_11` 艺人总在榜周数。
 
 ---
 
