@@ -4,6 +4,31 @@
 
 ---
 
+## [2026-05-30 session 2] — barvision.html 全面重设计 + barvision/hof.html 新建
+
+### Added
+- **`barvision/hof.html`**（新页面）：从 `barvision.html` 迁出 Hall of Fame 板块，独立成页；含 hero（breadcrumb + 标题 + 描述）+ 先驱奖 + 数据纪录（6卡三列）+ 特别奖项（6卡三列）；接入 `../scripts/nav.js`
+- **`assets/images/barvision_logo_2023/2024/2025.svg`**：确认已入库，用于历届存档卡首排
+
+### Changed
+- **`barvision.html` hero 右列**：近三届冠单卡 → `barvision_logo_2026.svg`（465px，深紫辉光，`align-items:stretch` 垂直居中）
+- **`barvision.html` XVI 当届卡**：重设计为 `1fr auto` 网格；左列用 `season-card__edition/name` 文字样式；右列放 logo；背景换深紫渐变+方格纹；紫色多层发光边框；padding 48px；去掉按钮；整卡可点击跳转 events.html
+- **`barvision.html` 历届大赛**：2023–2025 独立首排含各年 logo（opacity 0.85，深紫背景，edition-card 样式信息）；2020 及之前 + Unplugged 全部改为 `edition-card` 类，不显示冠单结果；删除 `buildMatchHtml/buildArchCard` 等已废弃函数
+- **`barvision.html` HOF**：板块完全移除，按钮 href 改为 `/barvision/hof.html`
+- **`barvision/2026/events.html` hero**：eyebrow+h1+edition+tagline 替换为 `barvision_logo_2026.svg`（460px）
+- **主题语**：全站「声汇两江」→「重声交响 Echoing Confluence」（无分隔符）
+- **`barvision.html` eyebrow**：改为「欧美流行歌曲个人榜吧歌曲大赛」
+- **`barvision.html` hero meta**：改为「第十六届即将开赛 / 始于 2019 年 / 已举办十五届」
+- **`barvision.html` hero desc**：萌妈改为 `@绿荫夏语` member link（space_id:125）
+- **`barvision.html` hero 按钮**：「Barvision 2026 大赛」→「Barvision Chongqing 2026」；「荣誉殿堂」→「Barvision Hall of Fame」
+- **`index.html` XVI edition-card**：绑定点击跳转 `/barvision/2026/events.html`
+
+### Content
+- Barvision 中文简称确认为「吧视」
+- `barvision.html` Unplugged 标题简化为「Barvision 娱乐版」
+
+---
+
 ## [2026-05-30] — barvision.html 新建 + 零散文案/功能修订
 
 ### Added

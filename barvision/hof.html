@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>Barvision Hall of Fame | Barboard</title>
+  <meta name="description" content="Barvision 荣誉殿堂——先驱奖、历届数据纪录与特别奖项，记录 Barvision 年度歌曲大赛的高光时刻。" />
+  <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../fonts.css" />
+  <link rel="stylesheet" href="../style.css" />
+  <style>
+    /* ── Page hero ── */
+    .hof-hero {
+      position: relative;
+      padding: calc(var(--nav-h) + 64px) 0 72px;
+      overflow: hidden;
+    }
+    .hof-hero__glow {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(168,85,247,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 5% 100%, rgba(0,180,255,0.06) 0%, transparent 55%);
+      pointer-events: none;
+    }
+    .hof-hero__grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .hof-hero__inner { position: relative; z-index: 2; }
+    .breadcrumb {
+      font-size: 12px; color: var(--clr-text-3);
+      display: flex; align-items: center; gap: 6px;
+      margin-bottom: 36px;
+    }
+    .breadcrumb a { color: var(--clr-text-3); transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--clr-text-2); }
+    .breadcrumb__sep { opacity: 0.35; }
+    .hof-eyebrow {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--clr-violet-light);
+      text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      margin-bottom: 16px;
+    }
+    .hof-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 7vw, 96px);
+      line-height: 1; letter-spacing: 0.02em; text-transform: uppercase;
+    }
+    .hof-title .bv-accent { color: var(--clr-violet-light); }
+    .hof-desc {
+      font-size: 15px; color: var(--clr-text-2); line-height: 1.7;
+      margin-top: 20px; max-width: 560px;
+    }
+
+    /* ── Pioneer ── */
+    .bv-pioneer {
+      background: linear-gradient(135deg, rgba(168,85,247,0.11) 0%, rgba(224,64,160,0.05) 100%);
+      border: 1px solid rgba(168,85,247,0.28);
+      border-radius: 8px; padding: 28px 32px;
+      display: flex; align-items: center; gap: 24px;
+      position: relative; overflow: hidden;
+      margin-top: var(--gap-md);
+    }
+    .bv-pioneer::after {
+      content: '🎖️'; position: absolute; right: 28px; top: 50%;
+      transform: translateY(-50%); font-size: 80px; opacity: 0.1;
+      pointer-events: none; user-select: none;
+    }
+    .bv-pioneer__icon { font-size: 34px; line-height: 1; flex-shrink: 0; }
+    .bv-pioneer__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--clr-violet-light); margin-bottom: 6px;
+    }
+    .bv-pioneer__name {
+      font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--clr-text);
+    }
+    .bv-pioneer__desc {
+      font-size: 13px; color: var(--clr-text-2); line-height: 1.65;
+      margin-top: 8px; max-width: 620px;
+    }
+
+    /* ── Records ── */
+    .bv-records-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 14px;
+    }
+    .bv-rec {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px; padding: 16px 18px;
+    }
+    .bv-rec__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--clr-text-3); margin-bottom: 8px;
+    }
+    .bv-rec__val {
+      font-family: var(--font-display); font-size: 34px; line-height: 1;
+      color: var(--clr-violet-light); text-shadow: 0 0 20px rgba(192,132,252,0.22);
+    }
+    .bv-rec__who { font-size: 13px; font-weight: 600; color: var(--clr-text); margin-top: 6px; }
+    .bv-rec__note { font-size: 11px; color: var(--clr-text-2); margin-top: 3px; line-height: 1.5; }
+
+    /* ── Awards ── */
+    .bv-awards-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 14px;
+    }
+    .bv-award {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px; padding: 16px 18px;
+      transition: border-color 0.2s;
+    }
+    .bv-award:hover { border-color: var(--clr-border-2); }
+    .bv-award__title { font-size: 13px; font-weight: 700; color: var(--clr-text); margin-bottom: 3px; }
+    .bv-award__metric { font-size: 10px; color: var(--clr-text-3); letter-spacing: 0.04em; margin-bottom: 10px; }
+    .bv-award__winners { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 8px; }
+    .bv-award__w { font-size: 13px; font-weight: 600; color: var(--clr-violet-light); }
+    .bv-award__detail { font-size: 11px; color: var(--clr-text-2); line-height: 1.55; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .bv-records-grid { grid-template-columns: repeat(2, 1fr); }
+      .bv-awards-grid  { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .bv-records-grid { grid-template-columns: repeat(2, 1fr); }
+      .bv-awards-grid  { grid-template-columns: 1fr; }
+      .bv-pioneer      { flex-direction: column; align-items: flex-start; }
+      .bv-pioneer::after { display: none; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .bv-award:hover { border-color: var(--clr-border); }
+    }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hof-hero">
+  <div class="hof-hero__glow" aria-hidden="true"></div>
+  <div class="hof-hero__grid" aria-hidden="true"></div>
+  <div class="hof-hero__inner section__inner">
+
+    <nav class="breadcrumb" aria-label="导航路径">
+      <a href="../../">Barboard</a>
+      <span class="breadcrumb__sep">/</span>
+      <a href="../barvision.html">Barvision</a>
+      <span class="breadcrumb__sep">/</span>
+      <span>Hall of Fame</span>
+    </nav>
+
+    <p class="hof-eyebrow">Barvision</p>
+    <h1 class="hof-title">Hall of <span class="bv-accent">Fame</span></h1>
+    <p class="hof-desc">记录 Barvision 年度歌曲大赛历届的高光时刻——先驱者、数据纪录与特别奖项。</p>
+
+  </div>
+</section>
+
+<!-- ═══ 先驱奖 ═══ -->
+<section class="section section--bordered" id="pioneer">
+  <div class="section__inner">
+
+    <p class="section-label fade-up">先驱奖</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Pioneer <span class="bv-accent">Award</span></h2>
+
+    <div class="bv-pioneer fade-up" style="transition-delay:0.16s;">
+      <div class="bv-pioneer__icon" aria-hidden="true">🏆</div>
+      <div>
+        <div class="bv-pioneer__label">先驱奖 · Pioneer Award</div>
+        <div class="bv-pioneer__name">绿荫夏语（萌妈）</div>
+        <p class="bv-pioneer__desc">2019 年，绿荫夏语在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ 数据纪录 ═══ -->
+<section class="section section--bordered" id="records">
+  <div class="section__inner">
+
+    <p class="section-label fade-up">数据纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Records</h2>
+    <div class="bv-records-grid" id="bvRecordsGrid"></div>
+
+  </div>
+</section>
+
+<!-- ═══ 特别奖项 ═══ -->
+<section class="section section--bordered" id="awards">
+  <div class="section__inner">
+
+    <p class="section-label fade-up">特别奖项</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Special <span class="bv-accent">Awards</span></h2>
+    <div class="bv-awards-grid" id="bvAwardsGrid"></div>
+
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="../scripts/nav.js"></script>
+<script>
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  const RECORDS = [
+    { label:'最多参与场数', val:'28',  who:'雨妈 · 锴妈', note:'第 1 届至第 15 届全程参与' },
+    { label:'最多冠军选送', val:'4',   who:'雨妈',         note:'4 首单曲夺得场次冠军' },
+    { label:'最高单届得分', val:'357', who:'威妈',         note:'第十五届 · Elliot James Reay — Boy In Love' },
+    { label:'最高单场支持率', val:'100%', who:'草妈 · 羊妈', note:'草妈第 4 届 A 场 · 羊妈第十三届' },
+    { label:'最长连续前十', val:'8场', who:'雨妈',         note:'第 1 届至第 5 届 A 场连续进入前十' },
+    { label:'最长连续参赛', val:'12届',who:'锴妈',         note:'第 4 届至第 15 届连续参赛' },
+  ];
+
+  const AWARDS = [
+    {
+      title:'出道即巅峰', metric:'首秀即夺冠',
+      winners:['猴妈','瑞妈','A妈','羊妈'],
+      detail:'猴妈（第 1 届）· 瑞妈（3B）· A妈（11B）· 羊妈（第 13 届）'
+    },
+    {
+      title:'实红艺人', metric:'连续两届夺冠',
+      winners:['包妈','雨妈'],
+      detail:'包妈连冠第 5–6 届（5A · 6C）· 雨妈连冠第 7–8 届（7A · 8A）'
+    },
+    {
+      title:'卧薪尝胆', metric:'花费最长时间夺首冠',
+      winners:['锴妈'],
+      detail:'第 1 届首次参赛，历经 21 组赛事，终于第 10 届 A 场首度夺冠'
+    },
+    {
+      title:'雨露均沾', metric:'最长连续参赛届数',
+      winners:['锴妈'],
+      detail:'第 4 届至第 15 届，连续 12 届保持参赛'
+    },
+    {
+      title:'全世界都在讲中国话', metric:'最多华语歌曲选送',
+      winners:['院妈'],
+      detail:'累计选送 13 首华语单曲参赛'
+    },
+    {
+      title:'喜获双学位', metric:'在常规版和娱乐版均夺冠',
+      winners:['瑞妈','包妈','雨妈','小妈'],
+      detail:'在 Barvision 常规赛与 Barvision Unplugged 各至少夺冠一次'
+    },
+  ];
+
+  function buildRecords() {
+    var el = document.getElementById('bvRecordsGrid');
+    if (!el) return;
+    el.innerHTML = RECORDS.map(function(r, i) {
+      return '<div class="bv-rec fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
+        '<div class="bv-rec__label">' + esc(r.label) + '</div>' +
+        '<div class="bv-rec__val">' + esc(r.val) + '</div>' +
+        '<div class="bv-rec__who">' + esc(r.who) + '</div>' +
+        '<div class="bv-rec__note">' + esc(r.note) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function buildAwards() {
+    var el = document.getElementById('bvAwardsGrid');
+    if (!el) return;
+    el.innerHTML = AWARDS.map(function(a, i) {
+      var winnersHtml = a.winners.map(function(w) {
+        return '<span class="bv-award__w">' + esc(w) + '</span>';
+      }).join('');
+      return '<div class="bv-award fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
+        '<div class="bv-award__title">' + esc(a.title) + '</div>' +
+        '<div class="bv-award__metric">' + esc(a.metric) + '</div>' +
+        '<div class="bv-award__winners">' + winnersHtml + '</div>' +
+        '<div class="bv-award__detail">' + esc(a.detail) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  buildRecords();
+  buildAwards();
+
+  if ('IntersectionObserver' in window) {
+    var fadeObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          fadeObserver.unobserve(e.target);
+          e.target.addEventListener('transitionend', function() {
+            e.target.style.transitionDelay = '';
+          }, { once: true });
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(function(el) { fadeObserver.observe(el); });
+  } else {
+    document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('visible'); });
+  }
+</script>
+</body>
+</html>

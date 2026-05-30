@@ -47,47 +47,13 @@
     .breadcrumb a:hover { color: var(--clr-text-2); }
     .breadcrumb__sep { opacity: 0.35; }
 
-    .ev-eyebrow {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.32em;
-      text-transform: uppercase;
-      color: var(--clr-violet-light);
-      text-shadow: 0 0 12px rgba(192,132,252,0.4);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+    .ev-logo {
+      width: clamp(280px, 32vw, 460px);
+      height: auto;
+      display: block;
       margin-bottom: 16px;
-    }
-    .ev-eyebrow::before {
-      content: '';
-      display: inline-block;
-      width: 20px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--clr-accent) 0%, var(--clr-violet) 90%);
-      flex-shrink: 0;
-    }
-    .ev-title {
-      font-family: var(--font-display);
-      font-size: clamp(56px, 9vw, 120px);
-      line-height: 1;
-      letter-spacing: 0.02em;
-      text-transform: uppercase;
-    }
-    .ev-title .bv-accent { color: var(--clr-violet-light); }
-    .ev-edition {
-      font-family: var(--font-display);
-      font-size: clamp(16px, 2.2vw, 26px);
-      letter-spacing: 0.2em;
-      color: var(--clr-accent);
-      text-shadow: 0 0 24px rgba(0,180,255,0.4);
-      margin-top: 4px;
-    }
-    .ev-tagline {
-      font-size: clamp(14px, 1.6vw, 18px);
-      color: var(--clr-text-2);
-      margin-top: 4px;
-      letter-spacing: 0.04em;
+      filter: drop-shadow(0 0 32px rgba(192,132,252,0.18));
+      max-width: 100%;
     }
     .ev-meta {
       font-size: 12px;
@@ -489,10 +455,7 @@
         <span>2026</span>
       </nav>
 
-      <p class="ev-eyebrow">年度歌曲大赛 · 第十六届</p>
-      <h1 class="ev-title">Bar<span class="bv-accent">vision</span></h1>
-      <div class="ev-edition">CHONGQING 2026</div>
-      <div class="ev-tagline">Echoing Confluence · 声汇两江</div>
+      <img src="../../assets/images/barvision_logo_2026.svg" class="ev-logo" alt="Barvision Chongqing 2026">
       <div class="ev-meta">主办：<a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a> &nbsp;·&nbsp; 重庆</div>
 
       <div class="ev-hero__bottom">
@@ -778,7 +741,7 @@
         </p>
         <p class="section__subtitle" style="max-width:100%;margin-top:16px;">
           Barvision 始于 2019 年，现已举办至第十六届。本届 Barvision Chongqing 2026 以重庆为举办城市，
-          主题语为「声汇两江 · Echoing Confluence」。
+          主题语为「重声交响 Echoing Confluence」。
         </p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
           <a href="../../barvision.html" class="btn btn--outline">完整 Barvision 存档</a>
