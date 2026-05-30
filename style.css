@@ -1681,6 +1681,14 @@ img {
   color: var(--clr-text);
 }
 
+.footer__link--disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+}
+.footer__link--disabled:hover {
+  color: var(--clr-text-2) !important;
+}
+
 .footer__bottom {
   padding-top: var(--gap-md);
   border-top: 1px solid var(--clr-border);

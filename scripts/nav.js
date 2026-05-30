@@ -72,7 +72,7 @@
     '        <div class="footer__col-title">Barvision</div>',
     '        <ul class="footer__links">',
     '          <li><a href="/barvision/2026/events.html">Barvision 2026</a></li>',
-    '          <li><a href="/barvision/2025/events.html">Barvision 2025</a></li>',
+    '          <li><a href="#" class="footer__link--disabled" data-tooltip="暂不可用" onclick="return false">Barvision 2025</a></li>',
     '          <li><a href="/barvision.html">Hall of Fame</a></li>',
     '          <li><a href="/barvision.html">历届回顾</a></li>',
     '        </ul>',
@@ -283,8 +283,45 @@
     });
   }
 
+  /* ── Generic data-tooltip (event delegation) ──────────────────────────── */
+  function initDataTooltips() {
+    var tip = document.createElement('div');
+    tip.className = 'member-tooltip';
+    tip.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(tip);
+
+    function pos(e) {
+      tip.style.left = (e.clientX + 16) + 'px';
+      tip.style.top  = e.clientY + 'px';
+    }
+
+    function nearest(t) {
+      return t.closest ? t.closest('[data-tooltip]') : null;
+    }
+
+    document.addEventListener('mouseover', function(e) {
+      var el = nearest(e.target);
+      if (!el) return;
+      tip.textContent = el.getAttribute('data-tooltip');
+      pos(e);
+      tip.classList.add('member-tooltip--visible');
+    });
+
+    document.addEventListener('mousemove', function(e) {
+      if (tip.classList.contains('member-tooltip--visible')) pos(e);
+    });
+
+    document.addEventListener('mouseout', function(e) {
+      if (!nearest(e.target)) return;
+      var rel = e.relatedTarget;
+      if (rel && nearest(rel)) return;
+      tip.classList.remove('member-tooltip--visible');
+    });
+  }
+
   initDevGate();
   initNav();
   initBackToTop();
   initMemberTooltips();
+  initDataTooltips();
 })();

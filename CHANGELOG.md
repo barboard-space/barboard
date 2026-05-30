@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-05-30] — barvision.html 新建 + 零散文案/功能修订
+
+### Added
+- **`barvision.html`**（新页面）：Barvision 总览 + Hall of Fame。三大板块：Hero（全白大标题 + 右列近三届冠单卡）、历届大赛（XVI 当届大卡 + I–XV 四列存档格 + Unplugged 四列）、荣誉殿堂（先驱奖 + 数据纪录 + 特别奖项）；所有数据硬编码 JS 常量数组
+- **`nav.js` `initDataTooltips()`**：通用 `[data-tooltip]` JS tooltip，复用 `.member-tooltip` 样式，与 member tooltip 并列独立运行
+- **footer `.footer__link--disabled`**（style.css）：禁用链接样式，`opacity:0.38 + cursor:not-allowed`；当前用于 Barvision 2025 链接，配合 `data-tooltip="暂不可用"` 显示 tooltip
+
+### Content
+- `index.html` Barvision 赛事卡：「距离提交通道开启还有」→「距离**歌曲**提交通道开启还有」
+- `index.html` 赛事卡描述文案：`2026 年 6 月 1 日 00:00` → `北京时间 2026 年 6 月 1 日 12:00`（「北京时间」同步变蓝）
+- `index.html` 倒计时目标时间：`T00:00:00+08:00` → `T12:00:00+08:00`
+
+---
+
 ## [2026-05-30] — bbl/hof.html 专辑 + 艺人两大板块重做
 
 ### Changed

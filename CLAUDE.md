@@ -42,10 +42,11 @@
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
 - `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 单周专辑进榜纪录 → 艺人进榜纪录，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–97）
+- `barvision.html` — Barvision 总览 + Hall of Fame（已完成，详见开发注意事项 #100）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
-- `barvision.html` — Barvision 总览 + Hall of Fame
+- `barvision_logo_2026.svg` 三处放置 — **待完成**（见开发注意事项 #101）
 - `about.html` — 关于榜吧完整历史
 - `archive.html` — 存档中心总览
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
@@ -293,7 +294,7 @@ barboard-space/
 - **届次**：第十六届　**主办**：@williw_　**主题语**：声汇两江 · Echoing Confluence
 - **主办城市**：重庆（Chongqing）
 - **赛程**：
-  - 歌曲提交：6/1 — 7/19
+  - 歌曲提交：6/1（北京时间 12:00 开启）— 7/19
   - 附加赛资格赛投票：7/25 — 8/7
   - Semi Final 1 投票：7/25 — 7/31
   - Semi Final 2 投票：8/1 — 8/7
@@ -420,6 +421,10 @@ barboard-space/
 95. **hof.html 最强N榜（buildSingleChart）**：复用 hof-uncrowned 样式，但 badge（「N榜」）移至第一列、去掉序号列，用 `#hofSingleChart .hof-uncrowned-row { grid-template-columns: auto auto 1fr auto }` 覆盖默认 5 列 grid；移动端覆盖为 `auto 1fr`；无金银铜配色；N=17 行 CSV 空白已补填为 Taylor Swift — The Fate of Ophelia（据 pts/date 核实）；QWER 曲目韩文因终端编码乱码，暂用英文副标题「My Name is Malguem」，需核实后更新。
 96. **hof.html 单周专辑进榜纪录（buildAlbums）**：数据来自 `bbl_08_albums_most_charted.csv`（35条，7首以上），改用 `hof-group` 瀑布流（容器 `hof-roll`，`columns:3`）而非旧的双列表格；按进榜单曲数分组（共9组，降序），前三组金银铜；卡头显示「X首」（Bebas Neue 数字 + `hof-group__label` 「首」），每行：专辑名 + 歌手（`hof-group-song__title/artist`）+ 进榜率（`hof-group-song__rate`，mono 11px，金/银/铜行各自 rgba 0.65 配色）；`hof-group-song__rate` 为 HOF 专属新类，定义于 `<style>` 块内。
 97. **hof.html 艺人进榜纪录（buildArtistCols）**：三列 `.hof-three-col`（`1fr 1fr 1fr`，`align-items:start`，移动端折叠为单列），动画错排 `0s / 0.12s / 0.24s`。列1「单周进榜单曲数」：`.hof-peak-card`，数据来自 `bbl_09`（23条，艺人+峰值+日期），用 `hof-table-row--3col` 行（22px / 1fr / auto / auto），日期+期数合并为单行 `hof-table__rate`（ASCII mono + 中文 font-body span），移动端隐藏日期列；列2「累计进榜单曲数」（`bbl_10`，13条）+ 列3「累计在榜周数」（`bbl_11`，11条）均用 `hof-table-row--2col`。金银铜通过 `hof-table-card .hof-table-row:nth-child(2/3/4)` 实现（`hof-table-card__head` 占 child(1)，数据行从 nth-child(2) 起），覆盖行背景、分隔线色、idx/name/val 三元素颜色。
+98. **`initDataTooltips()` 通用 data-tooltip**：`nav.js` 中新增独立函数（与 `initMemberTooltips` 并列，各自创建独立 `.member-tooltip` div），事件委托监听所有 `[data-tooltip]` 元素（`closest('[data-tooltip]')` 匹配），复用完全相同的样式与行为（`position:fixed`，`clientX+16` 跟随，0.18s fade）。两个 tooltip 使用各自独立的 div 实例互不干扰。
+99. **`.footer__link--disabled` 禁用链接模式**：`href="#"` + `onclick="return false"` 禁止跳转，加 `data-tooltip="暂不可用"` 配合 `initDataTooltips()` 显示 tooltip；CSS 只需 `opacity:0.38; cursor:not-allowed` + hover 颜色锁定不变。当前用于 footer Barvision 2025 链接。
+100. **`barvision.html` 页面结构**：三大板块——① Hero（同 bbl.html 模式，大标题全白，右列近三届冠单卡）；② 历届大赛（XVI 当届大卡含进行中脉冲徽章 + I–XV 四列存档格 + Unplugged 四列子节）；③ 荣誉殿堂（先驱奖全宽卡 + 数据纪录三列 + 特别奖项三列）。所有数据硬编码 JS 常量数组（同 hof.html 模式），`buildRecentCard/buildArchiveGrid/buildUnpluggedGrid/buildRecords/buildAwards` 五个构建函数在 `fadeObserver` 设置前运行。存档格多场次版（VI–XII）显示各场冠军，GF 徽章金色，B场取消特殊标注。
+101. **`barvision_logo_2026.svg` 待放置**：文件在 `assets/images/barvision_logo_2026.svg`，1557×660px（比例 2.36:1），全白路径 + 蓝渐变六角钻石徽章，完整包含 BARVISION / SONG CONTEST 2026 / CHONGQING 2026 三层文字。待放置于三处：① `barvision.html` XVI 当届卡左列（替换纯文字"XVI"，给左列固定宽度容纳 logo）；② `barvision/2026/events.html` hero 区（大号展示，替换文字标题）；③ `index.html` season-card banner（替换文字内容）。本 session 因中断未完成。
 
 ---
 

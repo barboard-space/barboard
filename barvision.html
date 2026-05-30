@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>Barvision · 年度歌曲大赛 | Barboard</title>
+  <meta name="description" content="Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。自 2019 年创立，成员选送小众歌曲参赛，现已举办至第十六届。" />
+  <link rel="icon" type="image/png" href="assets/images/logo_center.png" />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Hero ── */
+    .bv-hero {
+      position: relative;
+      padding: var(--nav-h) 0 72px;
+      overflow: hidden;
+    }
+    .bv-hero__glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 70% at 65% 0%,  rgba(168,85,247,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 0% 100%, rgba(224,64,160,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 100% 50%, rgba(0,180,255,0.05) 0%, transparent 50%);
+    }
+    .bv-hero__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .bv-hero__watermark {
+      position: absolute; right: -20px; bottom: -10px;
+      font-family: var(--font-display); font-size: 220px; line-height: 1;
+      letter-spacing: -0.02em; color: rgba(255,255,255,0.022);
+      pointer-events: none; user-select: none;
+    }
+    .bv-hero__inner { position: relative; z-index: 2; }
+    .bv-hero__layout {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: var(--gap-xl);
+      align-items: start;
+      margin-top: 40px;
+    }
+    .bv-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--clr-violet-light);
+      text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      display: flex; align-items: center; gap: 8px;
+      margin-bottom: 24px;
+    }
+    .bv-eyebrow::before { display: none; }
+    .bv-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 8vw, 108px);
+      line-height: 1; letter-spacing: 0.02em; text-transform: uppercase;
+    }
+    .bv-accent { color: var(--clr-violet-light); }
+    .bv-hero__meta { margin-top: 18px; }
+    .bv-hero__desc {
+      margin-top: 24px; font-size: 15px;
+      color: var(--clr-text-2); line-height: 1.75; max-width: 520px;
+    }
+    .bv-hero__actions {
+      display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px;
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes bv-hero-in {
+        from { opacity: 0; transform: translateY(22px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .bv-eyebrow        { animation: bv-hero-in 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+      .bv-hero__title    { animation: bv-hero-in 0.70s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+      .bv-hero__meta     { animation: bv-hero-in 0.50s 0.18s cubic-bezier(0.22,1,0.36,1) both; }
+      .bv-hero__desc     { animation: bv-hero-in 0.55s 0.26s cubic-bezier(0.22,1,0.36,1) both; }
+      .bv-hero__actions  { animation: bv-hero-in 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+      .bv-recent-card    { animation: bv-hero-in 0.70s 0.20s cubic-bezier(0.22,1,0.36,1) both; }
+      .bv-hero__watermark { animation: bv-hero-in 1.4s 0.30s ease both; }
+    }
+
+    /* ── Recent Champions Card ── */
+    .bv-recent-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border-2);
+      border-radius: 8px; overflow: hidden;
+      box-shadow: 0 0 40px rgba(168,85,247,0.10), 0 4px 24px rgba(0,0,0,0.4);
+    }
+    .bv-recent-card__header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 16px;
+      border-bottom: 1px solid var(--clr-border);
+      background: var(--clr-surface-2);
+    }
+    .bv-recent-card__label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--clr-text-2);
+    }
+    .bv-recent-card__sub {
+      font-size: 11px; color: var(--clr-text-2); opacity: 0.6;
+    }
+    .bv-recent-item {
+      display: grid; grid-template-columns: 60px 1fr;
+      align-items: stretch;
+      border-bottom: 1px solid var(--clr-border);
+      transition: background 0.15s;
+    }
+    .bv-recent-item:last-child { border-bottom: none; }
+    .bv-recent-item:hover { background: var(--clr-surface-2); }
+    .bv-recent-item__ed {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 14px 8px;
+      border-right: 1px solid var(--clr-border);
+      background: var(--clr-bg-2);
+    }
+    .bv-recent-item__roman {
+      font-family: var(--font-display); font-size: 18px;
+      color: var(--clr-violet-light); line-height: 1;
+    }
+    .bv-recent-item__year {
+      font-family: var(--font-mono); font-size: 9px;
+      color: var(--clr-text-3); margin-top: 3px;
+    }
+    .bv-recent-item__info { padding: 12px 14px; min-width: 0; }
+    .bv-recent-item__city {
+      font-size: 10px; color: var(--clr-text-3);
+      letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .bv-recent-item__member {
+      font-size: 12px; font-weight: 700; color: var(--clr-text); margin-bottom: 3px;
+    }
+    .bv-recent-item__track {
+      font-size: 11px; color: var(--clr-text-2);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .bv-recent-card__footer {
+      display: flex; align-items: center; justify-content: flex-end;
+      padding: 8px 16px; border-top: 1px solid var(--clr-border);
+    }
+    .bv-recent-card__link {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      color: var(--clr-text-2); opacity: 0.65;
+      display: flex; align-items: center;
+      transition: color 0.2s, opacity 0.2s;
+    }
+    .bv-recent-card__link:hover { color: var(--clr-violet-light); opacity: 0.75; }
+
+    /* ── Current Edition (XVI) Featured Card ── */
+    .bv-current-card {
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 36px;
+      background: var(--clr-surface);
+      border: 1px solid rgba(168,85,247,0.45);
+      border-radius: 8px;
+      padding: 28px 32px;
+      position: relative; overflow: hidden;
+      box-shadow: 0 0 48px rgba(168,85,247,0.10);
+      margin-top: var(--gap-md);
+      margin-bottom: var(--gap-md);
+    }
+    .bv-current-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(168,85,247,0.08) 0%, rgba(0,180,255,0.02) 100%);
+      pointer-events: none;
+    }
+    .bv-current-card__left {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
+    }
+    .bv-live-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--clr-violet-light);
+      margin-bottom: 8px;
+    }
+    .bv-live-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--clr-violet-light);
+      animation: bv-dot-pulse 2s ease-in-out infinite;
+    }
+    @keyframes bv-dot-pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.7); }
+    }
+    .bv-current-roman {
+      font-family: var(--font-display);
+      font-size: clamp(72px, 9vw, 112px); line-height: 1;
+      color: var(--clr-violet-light);
+      text-shadow: 0 0 60px rgba(192,132,252,0.22);
+    }
+    .bv-current-card__right {
+      position: relative; z-index: 1;
+      display: flex; flex-direction: column; justify-content: center; gap: 6px; min-width: 0;
+    }
+    .bv-current-label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--clr-text-3);
+    }
+    .bv-current-title {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 3vw, 38px); line-height: 1.1; color: var(--clr-text);
+    }
+    .bv-current-theme { font-size: 14px; color: var(--clr-text-2); }
+    .bv-current-meta {
+      font-size: 12px; color: var(--clr-text-3); line-height: 1.7; margin-top: 4px;
+    }
+    .bv-current-actions { display: flex; gap: 10px; margin-top: 10px; flex-wrap: wrap; }
+
+    /* ── Edition Archive Grid ── */
+    .bv-archive-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; align-items: start;
+    }
+    .bv-arch-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px; overflow: hidden;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .bv-arch-card:hover {
+      border-color: var(--clr-border-2);
+      box-shadow: 0 0 16px rgba(168,85,247,0.07);
+    }
+    .bv-arch-card__head {
+      display: flex; align-items: baseline; justify-content: space-between;
+      padding: 12px 14px 8px;
+      border-bottom: 1px solid var(--clr-border);
+      background: var(--clr-bg-2);
+    }
+    .bv-arch-roman {
+      font-family: var(--font-display); font-size: 24px;
+      line-height: 1; letter-spacing: 0.02em; color: var(--clr-text);
+    }
+    .bv-arch-card__meta { text-align: right; }
+    .bv-arch-year {
+      font-family: var(--font-mono); font-size: 11px;
+      color: var(--clr-text-3); display: block;
+    }
+    .bv-arch-city {
+      font-size: 10px; color: var(--clr-violet-light);
+      font-weight: 600; letter-spacing: 0.05em; display: block; margin-top: 2px;
+    }
+    .bv-arch-card__body {
+      padding: 10px 14px 12px;
+      display: flex; flex-direction: column; gap: 9px;
+    }
+    .bv-arch-match { display: flex; flex-direction: column; gap: 2px; }
+    .bv-arch-badge {
+      display: inline-block;
+      font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.1em; text-transform: uppercase; color: var(--clr-text-3);
+      background: var(--clr-bg); border: 1px solid var(--clr-border);
+      padding: 1px 5px; border-radius: 2px; margin-bottom: 3px;
+    }
+    .bv-arch-badge--gf {
+      color: var(--clr-gold-light);
+      border-color: rgba(212,168,50,0.3);
+      background: rgba(212,168,50,0.06);
+    }
+    .bv-arch-member { font-size: 12px; font-weight: 600; color: var(--clr-text); }
+    .bv-arch-track {
+      font-size: 11px; color: var(--clr-text-2);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .bv-arch-canceled { font-size: 11px; color: var(--clr-text-3); font-style: italic; }
+
+    /* Unplugged subsection */
+    .bv-unplugged-hdr {
+      display: flex; align-items: center; gap: 14px;
+      margin-top: 48px; margin-bottom: 14px;
+    }
+    .bv-unplugged-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 12px; align-items: start;
+    }
+
+    /* ── HOF: Pioneer ── */
+    .bv-pioneer {
+      background: linear-gradient(135deg, rgba(168,85,247,0.11) 0%, rgba(224,64,160,0.05) 100%);
+      border: 1px solid rgba(168,85,247,0.28);
+      border-radius: 8px; padding: 28px 32px;
+      display: flex; align-items: center; gap: 24px;
+      position: relative; overflow: hidden;
+      margin-top: var(--gap-md);
+    }
+    .bv-pioneer::after {
+      content: '🎖️'; position: absolute; right: 28px; top: 50%;
+      transform: translateY(-50%); font-size: 80px; opacity: 0.1;
+      pointer-events: none; user-select: none;
+    }
+    .bv-pioneer__icon { font-size: 34px; line-height: 1; flex-shrink: 0; }
+    .bv-pioneer__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--clr-violet-light); margin-bottom: 6px;
+    }
+    .bv-pioneer__name {
+      font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--clr-text);
+    }
+    .bv-pioneer__desc {
+      font-size: 13px; color: var(--clr-text-2); line-height: 1.65;
+      margin-top: 8px; max-width: 620px;
+    }
+
+    /* ── HOF: Records ── */
+    .bv-records-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 14px;
+    }
+    .bv-rec {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px; padding: 16px 18px;
+    }
+    .bv-rec__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--clr-text-3); margin-bottom: 8px;
+    }
+    .bv-rec__val {
+      font-family: var(--font-display); font-size: 34px; line-height: 1;
+      color: var(--clr-violet-light); text-shadow: 0 0 20px rgba(192,132,252,0.22);
+    }
+    .bv-rec__who { font-size: 13px; font-weight: 600; color: var(--clr-text); margin-top: 6px; }
+    .bv-rec__note { font-size: 11px; color: var(--clr-text-2); margin-top: 3px; line-height: 1.5; }
+
+    /* ── HOF: Awards ── */
+    .bv-awards-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 14px;
+    }
+    .bv-award {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 6px; padding: 16px 18px;
+      transition: border-color 0.2s;
+    }
+    .bv-award:hover { border-color: var(--clr-border-2); }
+    .bv-award__title { font-size: 13px; font-weight: 700; color: var(--clr-text); margin-bottom: 3px; }
+    .bv-award__metric { font-size: 10px; color: var(--clr-text-3); letter-spacing: 0.04em; margin-bottom: 10px; }
+    .bv-award__winners { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 8px; }
+    .bv-award__w { font-size: 13px; font-weight: 600; color: var(--clr-violet-light); }
+    .bv-award__detail { font-size: 11px; color: var(--clr-text-2); line-height: 1.55; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .bv-hero__layout { grid-template-columns: 1fr 280px; }
+      .bv-archive-grid { grid-template-columns: repeat(3, 1fr); }
+      .bv-records-grid { grid-template-columns: repeat(2, 1fr); }
+      .bv-awards-grid  { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      .bv-hero__layout       { grid-template-columns: 1fr; gap: var(--gap-md); }
+      .bv-recent-card        { display: none; }
+      .bv-current-card       { grid-template-columns: 1fr; gap: var(--gap-sm); }
+      .bv-archive-grid       { grid-template-columns: repeat(2, 1fr); }
+      .bv-unplugged-grid     { grid-template-columns: repeat(2, 1fr); }
+      .bv-records-grid       { grid-template-columns: repeat(2, 1fr); }
+      .bv-awards-grid        { grid-template-columns: 1fr; }
+      .bv-pioneer            { flex-direction: column; align-items: flex-start; }
+      .bv-pioneer::after     { display: none; }
+    }
+    @media (max-width: 480px) {
+      .bv-archive-grid   { grid-template-columns: 1fr; }
+      .bv-unplugged-grid { grid-template-columns: 1fr; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .bv-arch-card:hover  { border-color: var(--clr-border); box-shadow: none; }
+      .bv-award:hover      { border-color: var(--clr-border); }
+      .bv-recent-item:hover { background: transparent; }
+      .bv-recent-card__link:hover { color: var(--clr-text-2); opacity: 0.65; }
+    }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="bv-hero">
+  <div class="bv-hero__glow"></div>
+  <div class="bv-hero__grid"></div>
+  <div class="bv-hero__watermark" aria-hidden="true">BV</div>
+  <div class="section__inner bv-hero__inner">
+    <div class="bv-hero__layout">
+
+      <!-- 左列 -->
+      <div class="bv-hero__info">
+        <p class="bv-eyebrow">年度歌曲大赛</p>
+        <h1 class="bv-hero__title">Barvision</h1>
+        <div class="bv-hero__meta lab__meta">
+          <span class="lab__meta-item">已举办 15 届</span>
+          <span class="lab__meta-item">始于 2019 年</span>
+          <span class="lab__meta-item">第十六届进行中</span>
+        </div>
+        <p class="bv-hero__desc">
+          Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。榜吧成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。2019 年由萌妈（绿荫夏语）创立，历经数年停办后于 2023 年恢复，现已举办至第十六届。
+        </p>
+        <div class="bv-hero__actions">
+          <a href="barvision/2026/events.html" class="btn btn--primary">Barvision 2026 大赛</a>
+          <a href="#hof" class="btn btn--outline">荣誉殿堂</a>
+        </div>
+      </div>
+
+      <!-- 右列：近三届冠单 -->
+      <div class="bv-recent-card">
+        <div class="bv-recent-card__header">
+          <span class="bv-recent-card__label">历届冠单</span>
+          <span class="bv-recent-card__sub">近三届</span>
+        </div>
+        <div id="bvRecentBody"></div>
+        <div class="bv-recent-card__footer">
+          <a class="bv-recent-card__link" href="#editions">
+            查看全部历届大赛
+            <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                 viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 8L8 2M8 2H4M8 2v4"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 历届大赛 ═══ -->
+<section class="section section--bordered" id="editions" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+
+    <p class="section-label fade-up">历届大赛</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Barvision 大赛存档</h2>
+
+    <!-- XVI 当届卡片 -->
+    <div class="bv-current-card fade-up" style="transition-delay:0.16s;">
+      <div class="bv-current-card__left">
+        <div class="bv-live-badge"><div class="bv-live-dot"></div>进行中</div>
+        <div class="bv-current-roman">XVI</div>
+      </div>
+      <div class="bv-current-card__right">
+        <div class="bv-current-label">Barvision Chongqing 2026</div>
+        <div class="bv-current-title">声汇两江 · Echoing Confluence</div>
+        <div class="bv-current-theme">第十六届 · 主办：<a class="member" href="member/7.html" data-nickname="威妈">@williw_</a></div>
+        <div class="bv-current-meta">
+          歌曲提交：6/1 — 7/19　·　Semi Finals 投票：7/25 — 8/7<br>
+          Grand Final 投票：8/8 — 8/16　·　Grand Final 直播：8/22 晚
+        </div>
+        <div class="bv-current-actions">
+          <a href="barvision/2026/events.html" class="btn btn--primary" style="font-size:12px;padding-top:7px;padding-bottom:7px;">歌曲报名 &amp; 比赛详情</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- I–XV 存档格 -->
+    <div class="bv-archive-grid" id="bvArchiveGrid"></div>
+
+    <!-- Unplugged -->
+    <div class="bv-unplugged-hdr fade-up">
+      <p class="section-label" style="margin-bottom:0;">Barvision Unplugged</p>
+      <span style="font-size:12px;color:var(--clr-text-3);">娱乐版 · 4 届 · 2019–2020</span>
+    </div>
+    <div class="bv-unplugged-grid" id="bvUnpluggedGrid"></div>
+
+  </div>
+</section>
+
+<!-- ═══ 荣誉殿堂 ═══ -->
+<section class="section section--bordered" id="hof" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+
+    <p class="section-label fade-up">荣誉殿堂</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Hall of <span class="bv-accent">Fame</span></h2>
+
+    <!-- 先驱奖 -->
+    <div class="bv-pioneer fade-up" style="transition-delay:0.16s;">
+      <div class="bv-pioneer__icon" aria-hidden="true">🏆</div>
+      <div>
+        <div class="bv-pioneer__label">先驱奖 · Pioneer Award</div>
+        <div class="bv-pioneer__name">绿荫夏语（萌妈）</div>
+        <p class="bv-pioneer__desc">2019 年，绿荫夏语在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。</p>
+      </div>
+    </div>
+
+    <!-- 数据纪录 -->
+    <p class="section-label fade-up" style="margin-top:48px;">数据纪录</p>
+    <div class="bv-records-grid" id="bvRecordsGrid"></div>
+
+    <!-- 特别奖项 -->
+    <p class="section-label fade-up" style="margin-top:48px;">特别奖项</p>
+    <div class="bv-awards-grid" id="bvAwardsGrid"></div>
+
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="scripts/nav.js"></script>
+<script>
+  function esc(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── Data ──────────────────────────────────────────────────────
+  const RECENT = [
+    { roman:'XV',  year:2025, city:'Jinzhong', member:'威妈', artist:'Elliot James Reay',      song:'Boy In Love' },
+    { roman:'XIV', year:2024, city:'Tonghua',  member:'S妈',  artist:'Bennett Coast',          song:'Pretender'   },
+    { roman:'XIII',year:2023, city:'Qiqihar',  member:'羊妈', artist:'Best Frenz & Joywave',   song:'Flatline'    },
+  ];
+
+  const EDITIONS = [
+    { roman:'XV',  year:2025, city:'Jinzhong', matches:[{m:'威妈', a:'Elliot James Reay',    s:'Boy In Love'}] },
+    { roman:'XIV', year:2024, city:'Tonghua',  matches:[{m:'S妈',  a:'Bennett Coast',         s:'Pretender'}] },
+    { roman:'XIII',year:2023, city:'Qiqihar',  matches:[{m:'羊妈', a:'Best Frenz & Joywave',  s:'Flatline'}] },
+    { roman:'XII', year:2020, city:null, matches:[
+      { label:'A', m:'城妈', a:'The Magic Gang',             s:'Take Back The Track' },
+      { label:'B', canceled:true },
+    ]},
+    { roman:'XI',  year:2020, city:null, matches:[
+      { label:'A', m:'匿名', a:'Róisín Murphy',              s:"Murphy's Law" },
+      { label:'B', m:'A妈',  a:'Phoebe Bridgers',            s:'Kyoto' },
+    ]},
+    { roman:'X',   year:2020, city:null, matches:[
+      { label:'A', m:'锴妈', a:'Morgan Sulele & Mans Zelmerlow', s:'Gamle Dager' },
+      { label:'B', m:'匿名', a:'The BossHoss & Mimi＆Josy',  s:'Little Help' },
+    ]},
+    { roman:'IX',  year:2020, city:null, matches:[
+      { label:'A', m:'布妈', a:'knxwledge & Durand Bernarr & RoseGold', s:'minding_my business' },
+      { label:'B', m:'柠妈', a:'Isaac Dunbar',                s:'comme des garcons' },
+    ]},
+    { roman:'VIII',year:2020, city:null, matches:[
+      { label:'A', m:'雨妈', a:'Dorian Electra',              s:'Man to Man' },
+      { label:'B', m:'小妈', a:'Jessie Ware',                 s:'Spotlight' },
+    ]},
+    { roman:'VII', year:2020, city:null, matches:[
+      { label:'A', m:'雨妈', a:'Indochine',                   s:'Station 13' },
+      { label:'B', m:'城妈', a:'Dardust',                     s:'Sublime' },
+      { label:'C', m:'猴妈', a:'Matt Gresham',                s:'Highwire' },
+    ]},
+    { roman:'VI',  year:2020, city:null, matches:[
+      { label:'A', m:'萌妈', a:'Everyone You Know',           s:"She Don't Dance" },
+      { label:'B', m:'麦妈', a:'Miya Folick',                 s:'Thingamajig' },
+      { label:'C', m:'包妈', a:'The Glorious Sons',           s:'Closer to the Sky' },
+    ]},
+    { roman:'V',   year:2019, city:null, matches:[
+      { label:'A', m:'包妈', a:'SIRUP',                       s:'Evergreen' },
+      { label:'B', m:'猴妈', a:'Naika',                       s:'déjà vu' },
+      { label:'C', m:'雨妈', a:'K. Michelle',                 s:'Not A Little Bit' },
+    ]},
+    { roman:'IV',  year:2019, city:null, matches:[
+      { label:'A', m:'草妈', a:'Hatchie',                     s:'Stay With Me' },
+      { label:'B', m:'杰妈', a:'Aurora',                      s:'The River' },
+    ]},
+    { roman:'III', year:2019, city:null, matches:[
+      { label:'A', m:'包妈', a:'Bob Moses',                   s:'Selling Me Sympathy' },
+      { label:'B', m:'瑞妈', a:'Tame Impala',                 s:'Borderline' },
+    ]},
+    { roman:'II',  year:2019, city:null, matches:[
+      { label:'GF', m:'田妈', a:'The Brummies & Kacey Musgraves', s:'Drive Away' },
+    ]},
+    { roman:'I',   year:2019, city:null, matches:[
+      { m:'猴妈', a:'Parachute', s:'Had It All' },
+    ]},
+  ];
+
+  const UNPLUGGED = [
+    { roman:'IV',  year:2020, matches:[
+      { m:'小妈', a:'Lana Del Rey', s:'West Coast' },
+    ]},
+    { roman:'III', year:2020, matches:[
+      { label:'E',    m:'雨妈', a:'Free-Out',  s:'Free-Out 2019 Cypher' },
+      { label:'Mini', m:'泰妈', a:'许巍',       s:'蓝莲花' },
+    ]},
+    { roman:'II',  year:2019, matches:[
+      { m:'包妈', a:'Markus Feehily', s:'Butterfly' },
+    ]},
+    { roman:'I',   year:2019, matches:[
+      { m:'瑞妈', a:'Charli XCX', s:'Boom Clap' },
+    ]},
+  ];
+
+  const RECORDS = [
+    { label:'最多参与场数', val:'28',  who:'雨妈 · 锴妈', note:'第 1 届至第 15 届全程参与' },
+    { label:'最多冠军选送', val:'4',   who:'雨妈',         note:'4 首单曲夺得场次冠军' },
+    { label:'最高单届得分', val:'357', who:'威妈',         note:'第十五届 · Elliot James Reay — Boy In Love' },
+    { label:'最高单场支持率', val:'100%', who:'草妈 · 羊妈', note:'草妈第 4 届 A 场 · 羊妈第十三届' },
+    { label:'最长连续前十', val:'8场', who:'雨妈',         note:'第 1 届至第 5 届 A 场连续进入前十' },
+    { label:'最长连续参赛', val:'12届',who:'锴妈',         note:'第 4 届至第 15 届连续参赛' },
+  ];
+
+  const AWARDS = [
+    {
+      title:'出道即巅峰', metric:'首秀即夺冠',
+      winners:['猴妈','瑞妈','A妈','羊妈'],
+      detail:'猴妈（第 1 届）· 瑞妈（3B）· A妈（11B）· 羊妈（第 13 届）'
+    },
+    {
+      title:'实红艺人', metric:'连续两届夺冠',
+      winners:['包妈','雨妈'],
+      detail:'包妈连冠第 5–6 届（5A · 6C）· 雨妈连冠第 7–8 届（7A · 8A）'
+    },
+    {
+      title:'卧薪尝胆', metric:'花费最长时间夺首冠',
+      winners:['锴妈'],
+      detail:'第 1 届首次参赛，历经 21 组赛事，终于第 10 届 A 场首度夺冠'
+    },
+    {
+      title:'雨露均沾', metric:'最长连续参赛届数',
+      winners:['锴妈'],
+      detail:'第 4 届至第 15 届，连续 12 届保持参赛'
+    },
+    {
+      title:'全世界都在讲中国话', metric:'最多华语歌曲选送',
+      winners:['院妈'],
+      detail:'累计选送 13 首华语单曲参赛'
+    },
+    {
+      title:'喜获双学位', metric:'在常规版和娱乐版均夺冠',
+      winners:['瑞妈','包妈','雨妈','小妈'],
+      detail:'在 Barvision 常规赛与 Barvision Unplugged 各至少夺冠一次'
+    },
+  ];
+
+  // ── Build functions ──────────────────────────────────────────
+  function buildRecentCard() {
+    var el = document.getElementById('bvRecentBody');
+    if (!el) return;
+    el.innerHTML = RECENT.map(function(r) {
+      return '<div class="bv-recent-item">' +
+        '<div class="bv-recent-item__ed">' +
+          '<div class="bv-recent-item__roman">' + esc(r.roman) + '</div>' +
+          '<div class="bv-recent-item__year">' + r.year + '</div>' +
+        '</div>' +
+        '<div class="bv-recent-item__info">' +
+          '<div class="bv-recent-item__city">' + esc(r.city) + '</div>' +
+          '<div class="bv-recent-item__member">' + esc(r.member) + '</div>' +
+          '<div class="bv-recent-item__track">' + esc(r.artist) + ' — ' + esc(r.song) + '</div>' +
+        '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function buildMatchHtml(m) {
+    if (m.canceled) {
+      return '<div class="bv-arch-match">' +
+        (m.label ? '<span class="bv-arch-badge">' + esc(m.label) + '</span>' : '') +
+        '<div class="bv-arch-canceled">赛事取消</div>' +
+      '</div>';
+    }
+    var badgeCls = m.label === 'GF' ? ' bv-arch-badge--gf' : '';
+    var badgeHtml = m.label ? '<span class="bv-arch-badge' + badgeCls + '">' + esc(m.label) + '</span>' : '';
+    return '<div class="bv-arch-match">' +
+      badgeHtml +
+      '<div class="bv-arch-member">' + esc(m.m) + '</div>' +
+      '<div class="bv-arch-track">' + esc(m.a) + ' — ' + esc(m.s) + '</div>' +
+    '</div>';
+  }
+
+  function buildArchCard(ed, delay) {
+    var cityHtml = ed.city ? '<span class="bv-arch-city">' + esc(ed.city) + '</span>' : '';
+    var matchesHtml = ed.matches.map(buildMatchHtml).join('');
+    return '<div class="bv-arch-card fade-up" style="transition-delay:' + delay.toFixed(2) + 's;">' +
+      '<div class="bv-arch-card__head">' +
+        '<span class="bv-arch-roman">' + esc(ed.roman) + '</span>' +
+        '<div class="bv-arch-card__meta">' +
+          '<span class="bv-arch-year">' + ed.year + '</span>' +
+          cityHtml +
+        '</div>' +
+      '</div>' +
+      '<div class="bv-arch-card__body">' + matchesHtml + '</div>' +
+    '</div>';
+  }
+
+  function buildArchiveGrid() {
+    var el = document.getElementById('bvArchiveGrid');
+    if (!el) return;
+    el.innerHTML = EDITIONS.map(function(ed, i) {
+      return buildArchCard(ed, Math.min(i, 7) * 0.05);
+    }).join('');
+  }
+
+  function buildUnpluggedGrid() {
+    var el = document.getElementById('bvUnpluggedGrid');
+    if (!el) return;
+    el.innerHTML = UNPLUGGED.map(function(ed, i) {
+      return buildArchCard(ed, i * 0.06);
+    }).join('');
+  }
+
+  function buildRecords() {
+    var el = document.getElementById('bvRecordsGrid');
+    if (!el) return;
+    el.innerHTML = RECORDS.map(function(r, i) {
+      return '<div class="bv-rec fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
+        '<div class="bv-rec__label">' + esc(r.label) + '</div>' +
+        '<div class="bv-rec__val">' + esc(r.val) + '</div>' +
+        '<div class="bv-rec__who">' + esc(r.who) + '</div>' +
+        '<div class="bv-rec__note">' + esc(r.note) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  function buildAwards() {
+    var el = document.getElementById('bvAwardsGrid');
+    if (!el) return;
+    el.innerHTML = AWARDS.map(function(a, i) {
+      var winnersHtml = a.winners.map(function(w) {
+        return '<span class="bv-award__w">' + esc(w) + '</span>';
+      }).join('');
+      return '<div class="bv-award fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
+        '<div class="bv-award__title">' + esc(a.title) + '</div>' +
+        '<div class="bv-award__metric">' + esc(a.metric) + '</div>' +
+        '<div class="bv-award__winners">' + winnersHtml + '</div>' +
+        '<div class="bv-award__detail">' + esc(a.detail) + '</div>' +
+      '</div>';
+    }).join('');
+  }
+
+  // Run builds before observer setup so querySelectorAll catches dynamic elements
+  buildRecentCard();
+  buildArchiveGrid();
+  buildUnpluggedGrid();
+  buildRecords();
+  buildAwards();
+
+  // ── Fade observer ─────────────────────────────────────────────
+  if ('IntersectionObserver' in window) {
+    var fadeObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          fadeObserver.unobserve(e.target);
+          e.target.addEventListener('transitionend', function() {
+            e.target.style.transitionDelay = '';
+          }, { once: true });
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(function(el) { fadeObserver.observe(el); });
+  } else {
+    document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('visible'); });
+  }
+</script>
+</body>
+</html>
