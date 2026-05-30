@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Hall of Fame | Barboard</title>
-  <meta name="description" content="Barvision 荣誉殿堂——先驱奖、历届数据纪录与特别奖项，记录 Barvision 年度歌曲大赛的高光时刻。" />
+  <meta name="description" content="Barvision 荣誉殿堂——吧视先锋奖、历届数据纪录与特别奖项，记录 Barvision 年度歌曲大赛的高光时刻。" />
   <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
   <link rel="stylesheet" href="../fonts.css" />
   <link rel="stylesheet" href="../style.css" />
@@ -13,14 +13,15 @@
     /* ── Page hero ── */
     .hof-hero {
       position: relative;
-      padding: calc(var(--nav-h) + 64px) 0 72px;
+      padding: var(--nav-h) 0 72px;
       overflow: hidden;
     }
     .hof-hero__glow {
       position: absolute; inset: 0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(168,85,247,0.22) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 5% 100%, rgba(0,180,255,0.06) 0%, transparent 55%);
+        radial-gradient(ellipse 80% 60% at 50% 0%,  rgba(212,168,50,0.22)  0%, transparent 60%),
+        radial-gradient(ellipse 45% 45% at 0%  95%, rgba(168,85,247,0.08)  0%, transparent 55%),
+        radial-gradient(ellipse 30% 30% at 100% 40%,rgba(0,180,255,0.05)   0%, transparent 50%);
       pointer-events: none;
     }
     .hof-hero__grid {
@@ -31,31 +32,28 @@
       background-size: 48px 48px;
       pointer-events: none;
     }
-    .hof-hero__inner { position: relative; z-index: 2; }
-    .breadcrumb {
-      font-size: 12px; color: var(--clr-text-3);
-      display: flex; align-items: center; gap: 6px;
-      margin-bottom: 36px;
-    }
-    .breadcrumb a { color: var(--clr-text-3); transition: color 0.2s; }
-    .breadcrumb a:hover { color: var(--clr-text-2); }
-    .breadcrumb__sep { opacity: 0.35; }
+    .hof-hero__inner { position: relative; z-index: 2; margin-top: 40px; }
     .hof-eyebrow {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--clr-violet-light);
-      text-shadow: 0 0 12px rgba(192,132,252,0.4);
-      margin-bottom: 16px;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.32em;
+      text-transform: uppercase; color: var(--clr-gold-light);
+      text-shadow: 0 0 10px rgba(245,200,64,0.7), 0 0 32px rgba(245,200,64,0.28);
+      margin-bottom: 24px;
     }
     .hof-title {
       font-family: var(--font-display);
-      font-size: clamp(48px, 7vw, 96px);
+      font-size: clamp(56px, 8vw, 108px);
       line-height: 1; letter-spacing: 0.02em; text-transform: uppercase;
     }
-    .hof-title .bv-accent { color: var(--clr-violet-light); }
+    .bv-accent { color: var(--clr-violet-light); }
+    .hof-title .bv-accent { color: var(--clr-gold-light); }
     .hof-desc {
-      font-size: 15px; color: var(--clr-text-2); line-height: 1.7;
-      margin-top: 20px; max-width: 560px;
+      font-size: 15px; color: rgba(245,200,64,0.85); line-height: 1.7;
+      margin-top: 24px; max-width: 560px;
     }
+
+    /* ── Section header spacing ── */
+    .section--bordered .section-label { margin-bottom: 16px; }
+    .section--bordered .section__title { margin-top: 24px; }
 
     /* ── Pioneer ── */
     .bv-pioneer {
@@ -71,11 +69,6 @@
       transform: translateY(-50%); font-size: 80px; opacity: 0.1;
       pointer-events: none; user-select: none;
     }
-    .bv-pioneer__icon { font-size: 34px; line-height: 1; flex-shrink: 0; }
-    .bv-pioneer__label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.28em;
-      text-transform: uppercase; color: var(--clr-violet-light); margin-bottom: 6px;
-    }
     .bv-pioneer__name {
       font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--clr-text);
     }
@@ -87,7 +80,7 @@
     /* ── Records ── */
     .bv-records-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-top: 14px;
+      gap: 12px; margin-top: var(--gap-md);
     }
     .bv-rec {
       background: var(--clr-surface);
@@ -108,19 +101,18 @@
     /* ── Awards ── */
     .bv-awards-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-top: 14px;
+      gap: 12px; margin-top: var(--gap-md);
     }
     .bv-award {
       background: var(--clr-surface);
       border: 1px solid var(--clr-border);
       border-radius: 6px; padding: 16px 18px;
-      transition: border-color 0.2s;
+      transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s;
     }
     .bv-award:hover { border-color: var(--clr-border-2); }
-    .bv-award__title { font-size: 13px; font-weight: 700; color: var(--clr-text); margin-bottom: 3px; }
+    .bv-award__title { font-size: 13px; font-weight: 700; color: var(--clr-violet-light); margin-bottom: 3px; }
     .bv-award__metric { font-size: 10px; color: var(--clr-text-3); letter-spacing: 0.04em; margin-bottom: 10px; }
-    .bv-award__winners { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 8px; }
-    .bv-award__w { font-size: 13px; font-weight: 600; color: var(--clr-violet-light); }
+    .bv-award__winners { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 8px; font-size: 13px; }
     .bv-award__detail { font-size: 11px; color: var(--clr-text-2); line-height: 1.55; }
 
     /* ── Responsive ── */
@@ -137,6 +129,37 @@
     @media (hover: none), (pointer: coarse) {
       .bv-award:hover { border-color: var(--clr-border); }
     }
+
+    /* ── Page TOC ── */
+    .hof-toc {
+      position: fixed; right: 19px; bottom: 90px; z-index: 90;
+      display: flex; flex-direction: column; gap: 1px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .hof-toc--visible { opacity: 1; visibility: visible; }
+    .hof-toc__item {
+      font-family: var(--font-body); font-size: 11px;
+      color: var(--clr-text-3); cursor: pointer;
+      padding: 3px 13px 3px 0; position: relative;
+      transition: color 0.15s;
+      line-height: 1.5; white-space: nowrap; user-select: none;
+      text-align: right;
+    }
+    .hof-toc__item::after {
+      content: ''; position: absolute; right: 3px; top: 50%;
+      transform: translateY(-50%); width: 5px; height: 5px;
+      border-radius: 50%; background: var(--clr-violet-light);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .hof-toc__item:not(.hof-toc__item--active):hover { color: var(--clr-text); }
+    .hof-toc__item--active { color: var(--clr-violet-light); }
+    .hof-toc__item--active::after { opacity: 1; animation: toc-breathe 3s ease-in-out infinite; }
+    @keyframes toc-breathe {
+      0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+      50%       { opacity: 0.35; transform: translateY(-50%) scale(0.65); }
+    }
+    @media (max-width: 768px) { .hof-toc { display: none; } }
   </style>
 </head>
 <body>
@@ -148,33 +171,23 @@
   <div class="hof-hero__grid" aria-hidden="true"></div>
   <div class="hof-hero__inner section__inner">
 
-    <nav class="breadcrumb" aria-label="导航路径">
-      <a href="../../">Barboard</a>
-      <span class="breadcrumb__sep">/</span>
-      <a href="../barvision.html">Barvision</a>
-      <span class="breadcrumb__sep">/</span>
-      <span>Hall of Fame</span>
-    </nav>
-
-    <p class="hof-eyebrow">Barvision</p>
-    <h1 class="hof-title">Hall of <span class="bv-accent">Fame</span></h1>
-    <p class="hof-desc">记录 Barvision 年度歌曲大赛历届的高光时刻——先驱者、数据纪录与特别奖项。</p>
+    <p class="hof-eyebrow fade-up"><a href="/barvision.html" style="color:inherit;text-decoration:none;">Barvision</a></p>
+    <h1 class="hof-title fade-up" style="transition-delay:0.1s;">Hall <span style="opacity:0.65;">of</span> <span class="bv-accent">Fame</span></h1>
+    <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届的高光时刻。<br><span style="font-size:12px;opacity:0.45;">*本页正在更新中</span></p>
 
   </div>
 </section>
 
-<!-- ═══ 先驱奖 ═══ -->
-<section class="section section--bordered" id="pioneer">
+<!-- ═══ 吧视先锋奖 ═══ -->
+<section class="section section--bordered" id="pioneer" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
 
-    <p class="section-label fade-up">先驱奖</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Pioneer <span class="bv-accent">Award</span></h2>
+    <p class="section-label fade-up">吧视先锋奖</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Pioneer <span class="bv-accent">Award</span></h2>
 
-    <div class="bv-pioneer fade-up" style="transition-delay:0.16s;">
-      <div class="bv-pioneer__icon" aria-hidden="true">🏆</div>
+    <div class="bv-pioneer fade-up" style="transition-delay:0.2s;">
       <div>
-        <div class="bv-pioneer__label">先驱奖 · Pioneer Award</div>
-        <div class="bv-pioneer__name">绿荫夏语（萌妈）</div>
+        <div class="bv-pioneer__name"><a class="member" href="../member/125.html" data-nickname="萌妈" style="color:var(--clr-text);">@绿荫夏语</a></div>
         <p class="bv-pioneer__desc">2019 年，绿荫夏语在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。</p>
       </div>
     </div>
@@ -183,32 +196,68 @@
 </section>
 
 <!-- ═══ 数据纪录 ═══ -->
-<section class="section section--bordered" id="records">
+<section class="section section--bordered" id="records" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
 
     <p class="section-label fade-up">数据纪录</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Records</h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Records</h2>
     <div class="bv-records-grid" id="bvRecordsGrid"></div>
 
   </div>
 </section>
 
 <!-- ═══ 特别奖项 ═══ -->
-<section class="section section--bordered" id="awards">
+<section class="section section--bordered" id="awards" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
 
     <p class="section-label fade-up">特别奖项</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.08s;font-size:clamp(18px,2.4vw,28px);">Special <span class="bv-accent">Awards</span></h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Special <span class="bv-accent">Awards</span></h2>
     <div class="bv-awards-grid" id="bvAwardsGrid"></div>
 
   </div>
 </section>
+
+<nav id="bvHofToc" class="hof-toc" aria-label="页内目录">
+  <div class="hof-toc__item" data-target="pioneer">吧视先锋奖</div>
+  <div class="hof-toc__item" data-target="records">数据纪录</div>
+  <div class="hof-toc__item" data-target="awards">特别奖项</div>
+</nav>
 
 <div id="site-footer"></div>
 <script src="../scripts/nav.js"></script>
 <script>
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  const MEMBER_MAP = {
+    '威妈': { id:7,   handle:'williw_' },
+    '锴妈': { id:12,  handle:'WillKris锴' },
+    '雨妈': { id:17,  handle:'Lee翼雨' },
+    '猴妈': { id:18,  handle:'Voiiz' },
+    '柠妈': { id:19,  handle:'LemonSheeran' },
+    '包妈': { id:20,  handle:'Jeremy_BAg' },
+    'S妈':  { id:27,  handle:'哈哈哈时光机' },
+    '羊妈': { id:100, handle:'SeafishYANG' },
+    '城妈': { id:120, handle:'MarekTotti' },
+    '萌妈': { id:125, handle:'绿荫夏语' },
+    '麦妈': { id:130, handle:'Tandiny' },
+    '泰妈': { id:131, handle:'泰坦crazy' },
+    'A妈':  { id:132, handle:'AloneAlien_' },
+    '瑞妈': { id:135, handle:'Jefferyat19' },
+    '草妈': { id:141, handle:'Twentee' },
+    '小妈': { id:153, handle:'Jeoli音乐' },
+    '布妈': { id:157, handle:'Vivienne-Eliza' },
+    '田妈': { id:295, handle:'FREEMAN' },
+    '院妈': { id:326, handle:'天神院院长' },
+  };
+  function fmtMember(nickname) {
+    var m = MEMBER_MAP[nickname.trim()];
+    if (!m) return esc(nickname);
+    return '<a class="member" href="../member/' + m.id + '.html" data-nickname="' + esc(nickname) + '">@' + esc(m.handle) + '</a>';
+  }
+  function fmtWho(who) {
+    return who.split(' · ').map(fmtMember).join('<span style="opacity:0.35"> · </span>');
   }
 
   const RECORDS = [
@@ -260,7 +309,7 @@
       return '<div class="bv-rec fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
         '<div class="bv-rec__label">' + esc(r.label) + '</div>' +
         '<div class="bv-rec__val">' + esc(r.val) + '</div>' +
-        '<div class="bv-rec__who">' + esc(r.who) + '</div>' +
+        '<div class="bv-rec__who">' + fmtWho(r.who) + '</div>' +
         '<div class="bv-rec__note">' + esc(r.note) + '</div>' +
       '</div>';
     }).join('');
@@ -270,9 +319,7 @@
     var el = document.getElementById('bvAwardsGrid');
     if (!el) return;
     el.innerHTML = AWARDS.map(function(a, i) {
-      var winnersHtml = a.winners.map(function(w) {
-        return '<span class="bv-award__w">' + esc(w) + '</span>';
-      }).join('');
+      var winnersHtml = a.winners.map(fmtMember).join('');
       return '<div class="bv-award fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
         '<div class="bv-award__title">' + esc(a.title) + '</div>' +
         '<div class="bv-award__metric">' + esc(a.metric) + '</div>' +
@@ -285,15 +332,17 @@
   buildRecords();
   buildAwards();
 
+  function clearDelayAfterAnim(el) {
+    var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+    setTimeout(function() { el.style.transitionDelay = '0s'; }, ms);
+  }
   if ('IntersectionObserver' in window) {
     var fadeObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
           fadeObserver.unobserve(e.target);
-          e.target.addEventListener('transitionend', function() {
-            e.target.style.transitionDelay = '';
-          }, { once: true });
+          clearDelayAfterAnim(e.target);
         }
       });
     }, { threshold: 0.08 });
@@ -301,6 +350,44 @@
   } else {
     document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('visible'); });
   }
+
+  /* ── TOC ── */
+  (function() {
+    var toc = document.getElementById('bvHofToc');
+    var items = Array.from(toc.querySelectorAll('.hof-toc__item'));
+    var navH = 72;
+    var suppressIO = false;
+    var suppressTimer = null;
+
+    window.addEventListener('scroll', function() {
+      toc.classList.toggle('hof-toc--visible', window.scrollY > 400);
+      if (suppressIO) {
+        clearTimeout(suppressTimer);
+        suppressTimer = setTimeout(function() { suppressIO = false; }, 200);
+      }
+    }, { passive: true });
+
+    var obs = new IntersectionObserver(function(entries) {
+      if (suppressIO) return;
+      entries.forEach(function(e) {
+        if (e.isIntersecting)
+          items.forEach(function(it) { it.classList.toggle('hof-toc__item--active', it.dataset.target === e.target.id); });
+      });
+    }, { rootMargin: '-' + navH + 'px 0px -55% 0px' });
+
+    items.forEach(function(item) {
+      var el = document.getElementById(item.dataset.target);
+      if (el) obs.observe(el);
+      item.addEventListener('click', function() {
+        var el = document.getElementById(item.dataset.target);
+        if (!el) return;
+        suppressIO = true;
+        clearTimeout(suppressTimer);
+        items.forEach(function(it) { it.classList.toggle('hof-toc__item--active', it === item); });
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+      });
+    });
+  })();
 </script>
 </body>
 </html>

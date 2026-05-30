@@ -71,7 +71,7 @@
     .hof-hero__desc {
       margin-top: 24px;
       font-size: 15px;
-      color: var(--clr-text-2);
+      color: rgba(245,200,64,0.85);
       line-height: 1.75;
       max-width: 560px;
     }
@@ -1469,7 +1469,7 @@
     let suppressTimer = null;
 
     window.addEventListener('scroll', () => {
-      toc.classList.toggle('hof-toc--visible', window.scrollY > 200);
+      toc.classList.toggle('hof-toc--visible', window.scrollY > 400);
       if (suppressIO) {
         clearTimeout(suppressTimer);
         suppressTimer = setTimeout(() => { suppressIO = false; }, 200);

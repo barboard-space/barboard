@@ -30,12 +30,6 @@
         linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
       background-size: 48px 48px;
     }
-    .bv-hero__watermark {
-      position: absolute; right: -20px; bottom: -10px;
-      font-family: var(--font-display); font-size: 220px; line-height: 1;
-      letter-spacing: -0.02em; color: rgba(255,255,255,0.022);
-      pointer-events: none; user-select: none;
-    }
     .bv-hero__inner { position: relative; z-index: 2; }
     .bv-hero__layout {
       display: grid;
@@ -77,7 +71,6 @@
       .bv-hero__desc     { animation: bv-hero-in 0.55s 0.26s cubic-bezier(0.22,1,0.36,1) both; }
       .bv-hero__actions  { animation: bv-hero-in 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both; }
       .bv-recent-card    { animation: bv-hero-in 0.70s 0.20s cubic-bezier(0.22,1,0.36,1) both; }
-      .bv-hero__watermark { animation: bv-hero-in 1.4s 0.30s ease both; }
     }
 
     /* ── Right column logo ── */
@@ -143,8 +136,8 @@
 
     /* ── Edition Archive Grid ── */
     .bv-archive-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 8px; align-items: start;
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 12px; align-items: start;
     }
 
     /* ── Recent editions row (2023–2025) ── */
@@ -184,13 +177,14 @@
     }
 
     /* Unplugged subsection */
+    .bv-unplugged-grid .edition-card__num { color: var(--clr-violet-light); }
     .bv-unplugged-hdr {
       display: flex; align-items: center; gap: 14px;
       margin-top: 48px; margin-bottom: 14px;
     }
     .bv-unplugged-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 8px; align-items: start;
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 12px; align-items: start;
     }
 
 
@@ -204,10 +198,10 @@
       .bv-recent-card        { display: none; }
       .bv-current-card       { grid-template-columns: 1fr; gap: var(--gap-sm); }
       .bv-recent-archive-grid { grid-template-columns: repeat(3, 1fr); }
-      .bv-unplugged-grid      { grid-template-columns: repeat(2, 1fr); }
+      .bv-unplugged-grid      { grid-template-columns: repeat(4, 1fr); }
     }
     @media (max-width: 465px) {
-      .bv-archive-grid   { grid-template-columns: 1fr; }
+      .bv-archive-grid   { grid-template-columns: repeat(4, 1fr); }
       .bv-unplugged-grid { grid-template-columns: 1fr; }
     }
     @media (hover: none), (pointer: coarse) {
@@ -224,7 +218,6 @@
 <section class="bv-hero">
   <div class="bv-hero__glow"></div>
   <div class="bv-hero__grid"></div>
-  <div class="bv-hero__watermark" aria-hidden="true">BV</div>
   <div class="section__inner bv-hero__inner">
     <div class="bv-hero__layout">
 
@@ -262,14 +255,14 @@
     <p class="section-label fade-up">历届大赛</p>
 
     <!-- XVI 当届卡片 -->
-    <div class="bv-current-card fade-up" style="transition-delay:0.16s;cursor:pointer;" onclick="location.href='/barvision/2026/events.html'">
-      <div class="bv-current-card__left">
+    <div class="bv-current-card" style="cursor:pointer;" onclick="location.href='/barvision/2026/events.html'">
+      <div class="bv-current-card__left fade-up" style="transition-delay:0.06s;">
         <div class="bv-live-badge"><div class="bv-live-dot"></div>进行中</div>
         <div class="season-card__edition">BARVISION CHONGQING 2026</div>
         <div class="season-card__name">重声交响 Echoing Confluence</div>
         <div style="font-size:11px;color:var(--clr-text-3);margin-top:6px;letter-spacing:0.06em;line-height:1.7;position:relative;z-index:1;"><strong>第十六届 · 欧美流行歌曲个人榜吧歌曲大赛</strong><br>主办：<a class="member" href="member/7.html" data-nickname="威妈" onclick="event.stopPropagation()">@williw_</a></div>
       </div>
-      <div class="bv-current-card__right">
+      <div class="bv-current-card__right fade-up" style="transition-delay:0.20s;">
         <img src="assets/images/barvision_logo_2026.svg" class="bv-current-logo" alt="Barvision Chongqing 2026">
       </div>
     </div>
@@ -377,13 +370,13 @@
     el.innerHTML = recent.map(function(ed, i) {
       var logoSrc = 'assets/images/barvision_logo_' + ed.year + '.svg';
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';
-      return '<div class="bv-arch-card bv-arch-card--recent fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
+      return '<div class="bv-arch-card bv-arch-card--recent fade-up" style="transition-delay:' + (i * 0.10).toFixed(2) + 's;">' +
         '<div class="bv-arch-card__logo">' +
           '<img src="' + logoSrc + '" alt="Barvision ' + ed.year + '">' +
         '</div>' +
         '<div style="text-align:center;padding:14px 16px;">' +
           '<div class="edition-card__num">' + esc(ed.roman) + '</div>' +
-          '<div class="edition-card__year">' + ed.year + '</div>' +
+          '<div class="edition-card__year" style="font-family:var(--font-body);font-weight:700;color:var(--clr-text);">Barvision ' + ed.year + '</div>' +
           cityHtml +
         '</div>' +
       '</div>';
@@ -396,7 +389,7 @@
     var older = EDITIONS.filter(function(ed) { return ed.year <= 2020; });
     el.innerHTML = older.map(function(ed, i) {
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';
-      return '<div class="edition-card fade-up" style="transition-delay:' + (Math.min(i, 7) * 0.05).toFixed(2) + 's;">' +
+      return '<div class="edition-card fade-up" style="transition-delay:' + (Math.min(i, 6) * 0.06).toFixed(2) + 's;">' +
         '<div class="edition-card__num">' + esc(ed.roman) + '</div>' +
         '<div class="edition-card__year">' + ed.year + '</div>' +
         cityHtml +
@@ -408,7 +401,7 @@
     var el = document.getElementById('bvUnpluggedGrid');
     if (!el) return;
     el.innerHTML = UNPLUGGED.map(function(ed, i) {
-      return '<div class="edition-card fade-up" style="transition-delay:' + (i * 0.06).toFixed(2) + 's;">' +
+      return '<div class="edition-card fade-up" style="transition-delay:' + (0.14 + i * 0.08).toFixed(2) + 's;">' +
         '<div class="edition-card__num">' + esc(ed.roman) + '</div>' +
         '<div class="edition-card__year">' + ed.year + '</div>' +
       '</div>';
@@ -421,15 +414,17 @@
   buildUnpluggedGrid();
 
   // ── Fade observer ─────────────────────────────────────────────
+  function clearDelayAfterAnim(el) {
+    var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+    setTimeout(function() { el.style.transitionDelay = '0s'; }, ms);
+  }
   if ('IntersectionObserver' in window) {
     var fadeObserver = new IntersectionObserver(function(entries) {
       entries.forEach(function(e) {
         if (e.isIntersecting) {
           e.target.classList.add('visible');
           fadeObserver.unobserve(e.target);
-          e.target.addEventListener('transitionend', function() {
-            e.target.style.transitionDelay = '';
-          }, { once: true });
+          clearDelayAfterAnim(e.target);
         }
       });
     }, { threshold: 0.08 });

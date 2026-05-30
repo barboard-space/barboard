@@ -43,10 +43,10 @@
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
 - `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 单周专辑进榜纪录 → 艺人进榜纪录，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–97）
 - `barvision.html` — Barvision 总览（已完成，大幅重设计，详见开发注意事项 #100–102）
-- `barvision/hof.html` — Barvision Hall of Fame（新建，从 barvision.html 迁出；先驱奖 + 数据纪录 + 特别奖项；hero+breadcrumb+三 section；接入 `../scripts/nav.js`）
+- `barvision/hof.html` — Barvision Hall of Fame（深度打磨完成；hero 金色主题（glow/eyebrow/title accent/desc 均用 gold）+ 三 section；eyebrow 为跳回 barvision.html 的链接；MEMBER_MAP + fmtMember/fmtWho 将成员名渲染为 `@handle` 链接；页内 TOC（紫色，三项，IO suppression，阈值 > 400 晚于 back-to-top）；动画全面对标 bbl/hof.html；接入 `../scripts/nav.js`）
 
 ### 待建页面（按优先级）
-- `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
+- `barvision/2026/events.html` 中的表单 URL — **6月1日 18:00 前填入**（`const FORM_URL = ''` 占位符；填入后同步 enable `index.html` 的「歌曲报名」按钮）
 - `about.html` — 关于榜吧完整历史
 - `archive.html` — 存档中心总览
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
@@ -298,7 +298,7 @@ barboard-space/
 - **届次**：第十六届　**主办**：@williw_　**主题语**：重声交响 Echoing Confluence（中文简称"吧视"）
 - **主办城市**：重庆（Chongqing）
 - **赛程**：
-  - 歌曲提交：6/1（北京时间 12:00 开启）— 7/19
+  - 歌曲提交：6/1（北京时间 18:00 开启）— 7/19
   - 附加赛资格赛投票：7/25 — 8/7
   - Semi Final 1 投票：7/25 — 7/31
   - Semi Final 2 投票：8/1 — 8/7
@@ -429,7 +429,11 @@ barboard-space/
 99. **`.footer__link--disabled` 禁用链接模式**：`href="#"` + `onclick="return false"` 禁止跳转，加 `data-tooltip="暂不可用"` 配合 `initDataTooltips()` 显示 tooltip；CSS 只需 `opacity:0.38; cursor:not-allowed` + hover 颜色锁定不变。当前用于 footer Barvision 2025 链接。
 100. **`barvision.html` 当前页面结构（已大幅重设计）**：两大板块——① Hero（大标题 + meta + desc + 按钮，右列为 `.bv-recent-card` 放置 `barvision_logo_2026.svg`，480px 宽，`align-items:stretch` 垂直居中）；② 历届大赛（XVI 当届大卡：`1fr auto` 网格，左列文字信息 season-card banner 样式，右列 logo，深紫背景+方格纹+紫色发光边框，padding 48px；2023–2025 三张独立首排含 logo；2020 及之前 + Unplugged 均用 `edition-card` 类，无结果展示）。HOF 已迁出至 `barvision/hof.html`。`buildRecentArchiveGrid/buildArchiveGrid/buildUnpluggedGrid` 三个函数在 `fadeObserver` 前运行。
 101. **`barvision_logo_202X.svg` 放置情况**：`barvision_logo_2026.svg`（1557×660，2.36:1）已放置于 ① `barvision.html` hero 右列（465px，深紫辉光）② `barvision.html` XVI 当届卡右列（`season-card__edition/name` 文字在左）③ `barvision/2026/events.html` hero 区（460px，替换文字标题，保留 breadcrumb + ev-meta + 倒计时/按钮）；`index.html` season-card 已**还原为文字**。`barvision_logo_2023/2024/2025.svg` 分别用于历届存档卡首排（opacity 0.85，深紫背景，`max-width:200px`）。
-102. **Barvision 品牌信息**：中文简称**吧视**；全称「欧美流行歌曲个人榜吧歌曲大赛」；主题语格式为中英并列无分隔符「重声交响 Echoing Confluence」（不用 ·）；由 @绿荫夏语（萌妈，space_id:125）于 2019 年创立，`member/125.html` 路径。`barvision/hof.html` 为独立 HOF 页，路径层级 `../scripts/nav.js`，breadcrumb：Barboard / Barvision / Hall of Fame。
+102. **Barvision 品牌信息**：中文简称**吧视**；全称「欧美流行歌曲个人榜吧歌曲大赛」；主题语格式为中英并列无分隔符「重声交响 Echoing Confluence」（不用 ·）；由 @绿荫夏语（萌妈，space_id:125）于 2019 年创立，`member/125.html` 路径。`barvision/hof.html` 为独立 HOF 页，路径层级 `../scripts/nav.js`，eyebrow 为返回 `/barvision.html` 的链接（无 breadcrumb）。
+103. **`barvision.html` 历届存档 grid 规格**：早期存档（2019–2020，12张）和娱乐版（4张）均使用 `repeat(7, 1fr)`，`gap:12px`；2020 的7张卡自然占满第一行，2019 的5张在第二行，视觉上自然按年份分行。近届存档（2023–2025）独立使用 `repeat(3, 1fr)`，`gap:12px`，各卡含年份 logo。年份显示格式「Barvision 2025」（`font-body; font-weight:700; color:var(--clr-text)`，覆盖 CSS 里的 mono 字体）。
+104. **`barvision/hof.html` 成员链接渲染**：页内定义 `MEMBER_MAP`（昵称→`{id, handle}`）+ `fmtMember(nickname)` + `fmtWho(who)`；`fmtWho` 按 ` · ` 分割多人，分隔符加 `opacity:0.35`。先驱奖 `@绿荫夏语` 用 `style="color:var(--clr-text)"` 白色覆盖，其他成员保持 style.css 默认紫色（`rgba(240,238,255,0.62)`）。**坑**：`bv-award` 有自身 `transition: border-color 0.2s`，写在 `<style>` 块（晚于 `style.css`）会覆盖 `.fade-up` 的 `opacity/transform` 过渡，导致卡片无淡入动画。修复：改为 `transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s`。
+105. **hof.html TOC 阈值设计**：TOC 用 `window.scrollY > 400` 触发显示，back-to-top 用 `> 320`；相差 80px，使 TOC 出现晚于、消失早于 back-to-top，视觉层次更自然。两个 hof.html 均采用此值。
+106. **`index.html` 歌曲报名按钮禁用模式**：`href="#" onclick="return false" data-tooltip="暂不可用" style="opacity:0.38;cursor:not-allowed"`；表单 URL 就绪后改回正常链接并移除 disable 样式。歌曲提交开放时间：北京时间 2026-06-01 18:00（`OPEN_DATE = new Date('2026-06-01T18:00:00+08:00')`，index.html 倒计时目标同步）。
 
 ---
 

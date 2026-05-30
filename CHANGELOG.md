@@ -4,6 +4,18 @@
 
 ---
 
+## [2026-05-30 session 3] — barvision/hof.html 深度打磨 + barvision.html 动画优化
+
+### Changed
+- **`barvision/hof.html`**：全面对标 bbl/hof.html——hero padding/margin/eyebrow/title/desc 间距与字号对齐；hero 金色主题（glow/eyebrow/title accent/desc 改为 gold）；移除 breadcrumb，eyebrow 改为跳回 `/barvision.html` 链接；入场动画补全（eyebrow 0s → title 0.1s → desc 0.2s）；section header 间距规则补全；content margin-top 改为 `var(--gap-md)`；「先驱奖」→「吧视先锋奖」；去除奖杯 emoji 和 Pioneer label；desc 文字增加「*本页正在更新中」；MEMBER_MAP + fmtMember/fmtWho 将所有成员名渲染为 `@handle` 链接（先驱白色，其余紫色）；Special Awards title 改为紫色；`bv-award` transition 修复（补 opacity/transform 防被覆盖）；stagger 优化为 `i × 0.07s`；页内 TOC（紫色呼吸点，阈值 > 400，IO suppression）
+- **`bbl/hof.html`**：hero desc 颜色改为金色 `rgba(245,200,64,0.85)`；TOC 阈值 `> 200` → `> 400`
+- **`barvision.html`**：移除 hero 背景 BV 水印；近届存档（2023–2025）年份改为「Barvision 202X」格式（bold white font-body）；早期存档 grid 改为 `repeat(7, 1fr)`、gap 统一 12px；娱乐版 grid 同步 `repeat(7, 1fr)`；娱乐版罗马数字改为紫色；第二部分动画全面优化（XVI 卡拆分 left/right 独立 fade-up，近届 0.10s stagger，早期 0.06s stagger，娱乐版 0.14s base + 0.08s stagger，`clearDelayAfterAnim` 替换 `transitionend`）
+- **`scripts/nav.js`**：footer Barvision 2025 链接由 disabled tooltip → `display:none` 隐藏（href 改为 `/barvision/2025/events.html`）；Hall of Fame 链接 `/barvision.html` → `/barvision/hof.html`
+- **`index.html`**：歌曲报名按钮 disable（`href="#"`, `onclick="return false"`, `data-tooltip="暂不可用"`, opacity 0.38）；开放时间 12:00 → 18:00（文案 + 倒计时目标 `T18:00:00+08:00`）
+- **`barvision/2026/events.html`**：开放时间 `00:00` → `北京时间 18:00`（文案 + `OPEN_DATE`）
+
+---
+
 ## [2026-05-30 session 2] — barvision.html 全面重设计 + barvision/hof.html 新建
 
 ### Added
