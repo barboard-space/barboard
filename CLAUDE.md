@@ -41,7 +41,7 @@
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
-- `bbl/hof.html` — BBL 荣誉殿堂（已完成，5大板块：冠军名录31首/驻榜纪录6组/艺人版图/上榜专辑/未冠之最，数据截至第124期，数据硬编码 JS 常量数组直接渲染；含 `VOL_DATES` 内联索引；eyebrow 链回 `/bbl.html`）
+- `bbl/hof.html` — BBL 荣誉殿堂（已完成，5大板块：冠军名录31首/驻榜纪录6组/艺人版图/上榜专辑/未冠之最，数据截至第124期，数据硬编码 JS 常量数组直接渲染；含 `VOL_DATES` 内联索引；eyebrow 链回 `/bbl.html`；冠军名录已重设计为按冠军周数分组卡片 + CSS `columns:3` 三列布局，详见开发注意事项 #82–83）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -404,6 +404,8 @@ barboard-space/
 79. **Bilibili iframe 权限与默认静音**：`allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; gyroscope; accelerometer" allowfullscreen`；embed URL 加 `&muted=1` 默认静音。跨域限制下无法从父页面 JS 控制音量/进度，这是平台侧设计，前端无法突破。
 80. **HOF 页面数据不 fetch，直接硬编码**：`bbl/hof.html` 的5大板块数据（冠军/纪录/艺人/专辑/未冠）以 JS 常量数组写在 `<script>` 内，无需 fetch CSV，加载即渲染。新页路径层级：`../scripts/nav.js`，`../fonts.css`，`../style.css`。冠军名录含 `VOL_DATES` 内联常量（Vol.1–124 期号→日期），外部索引见 `data/bbl/bbl-vol-index.json`（JSON 对象格式，供 bbl/charts 等页面 fetch）。
 81. **文件清理记录**：本次清除 61 个未声明的冗余字体文件（DM Sans 18pt/24pt/36pt 光学尺寸变体、DM Mono 斜体/Light/Medium 变体），`assets/fonts/` 目录从 82 个文件精简至 6 个；同时清除 `about/`、`archive/`、`charts/`、`barboardlab/`（当时空目录）等空目录；清除 `bbl.html` 遗留的 `.breadcrumb` CSS（HTML 已早前移除）。
+82. **bbl.html hero CSS animation**：hero 区元素始终在视口内，用 CSS `@keyframes`（非 IntersectionObserver）驱动入场。`cubic-bezier(0.22,1,0.36,1)` 快进慢出，比 `ease` 更有质感。`.bbl-video` 已从 `fade-up-right` 改为 CSS animation，移除了 inline `transition-delay`。各元素延迟：eyebrow 0s → 标题 0.08s → meta 0.18s → 描述 0.26s → 按钮 0.35s → 视频卡 0.20s → 水印 0.30s（1.4s）。
+83. **CSS `columns` 多列瀑布流**：`columns: N; column-gap: Xpx` 实现类瀑布流布局，浏览器自动平衡各列高度。子卡片必须加 `break-inside: avoid` 防止跨列截断；子卡片间距用 `margin-bottom`（不能用父容器 `gap`，`columns` 不支持）。移动端用 `columns: 1` 回退。已用于 `bbl/hof.html` 冠军名录三列布局。
 
 ---
 

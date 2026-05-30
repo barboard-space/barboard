@@ -4,6 +4,18 @@
 
 ---
 
+## [2026-05-29] — bbl.html hero 动画 + bbl/hof.html 冠军名录重设计
+
+### Changed
+- **bbl.html hero 入场动画**：左列所有元素（eyebrow → 标题 → meta → 描述 → 按钮）新增 CSS `@keyframes bbl-hero-in` 错排入场，easing 换为 `cubic-bezier(0.22,1,0.36,1)`；右侧视频卡从 `fade-up-right`（IntersectionObserver 0.2s）改为 CSS animation（0.7s，0.2s delay）；背景水印缓慢淡入（1.4s ease）
+- **bbl/hof.html stats 文案**：「期数」→「期单曲合榜」；「冠军单曲」→「首冠军单曲」；「最长冠军连续周」→「最长冠军周数」；「29 最高参榜人数」→「57 最长在榜周数」（取自 Billie Eilish — BIRDS OF A FEATHER 总在榜纪录）
+- **bbl/hof.html 冠军名录完整重设计**：排名平铺列表 → 按冠军周数分组卡片；组内按首次登顶日期升序；CSS `columns: 3` 三列瀑布流（浏览器自动平衡列高）；前三组（15/11/10周）金/银/铜全色系覆盖（head 背景、数字、label、歌名、艺人、日期、期数）；各组 `fade-up` 按 index×0.06s 错排入场；「Vol. N」→「第 N 期」
+
+### Style
+- **bbl/hof.html eyebrow 辉光**：单层 0.35 → 双层叠加（内层 `0 0 10px` 强度 0.7 + 外层 `0 0 32px` 扩散 0.28）
+
+---
+
 ## [2026-05-29] — bbl/hof.html 精修 + 数据更新至第124期 + data/ 目录重组
 
 ### Added

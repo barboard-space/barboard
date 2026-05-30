@@ -100,6 +100,21 @@
       margin-top: 32px;
     }
 
+    /* ── Hero Entrance Animations ── */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes bbl-hero-in {
+        from { opacity: 0; transform: translateY(22px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .bbl-eyebrow        { animation: bbl-hero-in 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+      .bbl-hero__title    { animation: bbl-hero-in 0.70s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+      .bbl-hero__meta     { animation: bbl-hero-in 0.50s 0.18s cubic-bezier(0.22,1,0.36,1) both; }
+      .bbl-hero__desc     { animation: bbl-hero-in 0.55s 0.26s cubic-bezier(0.22,1,0.36,1) both; }
+      .bbl-hero__actions  { animation: bbl-hero-in 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+      .bbl-video          { animation: bbl-hero-in 0.70s 0.20s cubic-bezier(0.22,1,0.36,1) both; }
+      .bbl-hero__watermark { animation: bbl-hero-in 1.4s  0.30s ease both; }
+    }
+
     /* ── Video Player ── */
     .bbl-video {
       background: var(--clr-surface);
@@ -532,7 +547,7 @@
       </div>
 
       <!-- 右列：本期视频 -->
-      <div class="bbl-video fade-up-right" style="transition-delay:0.15s;">
+      <div class="bbl-video">
         <div class="bbl-video__header">
           <span class="bbl-video__label">本期榜单视频</span>
           <span class="bbl-video__issue" id="bblVideoIssue">—</span>
