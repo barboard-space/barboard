@@ -28,7 +28,7 @@
 - `style.css` — 全站样式（含完整设计系统）
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
-- `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入）
+- `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入；已按 Rulebook Ver. 260530 全面更新：附加赛资格赛双阶段结构、在线表单提交方式、ELIGIBILITY 新增 Eurovision 排除条款 + 个人榜助攻规则、全站"复活赛"→"附加赛"）
 - `member.html` — Members 总览页（117位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
 - `member/N.html`（117个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
@@ -139,7 +139,7 @@ barboard-space/
 
 - **API**：`https://6api.musictrack.cn/api/charts/3045`（React SPA 后端接口，直接返回 JSON）
 - **注意**：有反爬限制（X-Anticrawler-Limit: 420），每周只抓一次，不要频繁请求
-- **workflow 触发时间**：周六 16:00 UTC（北京时间周日 00:00）主抓 + 周一 04:00 UTC（北京时间 12:00）备用；备用触发时先检查 `git log --since="2 days ago"` 判断主抓是否已提交，成功则跳过
+- **workflow 触发时间**：周六 19:00 UTC（北京时间周日 03:00）主抓 + 周一 04:00 UTC（北京时间 12:00）备用；备用触发时先检查 `git log --since="2 days ago"` 判断主抓是否已提交，成功则跳过
 - **前端渲染**：`loadChart()` 函数 fetch `data/bbl/bbl-latest.json`，动态生成 Top 10 列表并更新所有相关 UI
 
 ### API 顶层字段
@@ -440,6 +440,8 @@ barboard-space/
 109. **全站 eyebrow 箭头回退约定**：各页面 hero 顶部 eyebrow 元素统一用 `<a class="xxx-eyebrow" href="父页面路径"><span>←</span><span>父页面名</span></a>` 实现返回提示；eyebrow 本身已有 `display:inline-flex; align-items:center; gap:8px; transition:color 0.2s`，hover 变白（`color:#fff`）。映射关系：`barvision.html`/`bbl.html`/`archive.html` → `← Barboard`（`href="/"`）；`barvision/hof.html` → `← Barvision`；`bbl/hof.html` → `← BarboardLab`；`barvision/2026/events.html` → `← Barvision`。子页面用相对路径，导航页用绝对路径（`/`）。
 110. **`barvision/2026/events.html` 设计实现**：hero CSS animation（`ev-hero-in`，7 个元素依序延迟）+ 紫色 watermark "BARVISION" + 倒计时组件（`ev-countdown`，`ev-cd-unit`）；Submit 面板 `position:sticky; top:calc(var(--nav-h)+20px)` 跟随滚动；deadline bar 用 `grid-template-columns:1fr 1px 1fr`（分割线 `align-self:stretch`）；Schedule 三 STAGE 分组，每 stage 含 `ev-phase__tag` 色标 + `ev-phase__line` 弹性横线；时间列日期 `font-mono`，有补充描述的行 `flex-direction:column; justify-content:center`；Jury 评分格 10 个 `ev-js-cell`，#1/#2 加 `ev-js-cell--top` 金色；TOC 5 项（class `ev-toc`），紫色 `ev-toc-breathe` 呼吸点，IO suppression 同 bbl/hof.html；「本页上次更新于」置于倒计时下方，日期 font-mono，汉字 font-body；DM Mono 无 CJK——所有中文标签（北京时间、通道开启等）必须 inline `font-family:var(--font-body)`。
 111. **Tele Vote 上限纠错记录**：Rulebook 4.1.2 规定每首歌最多可投 **10 票**（不是 5 票）。旧版 events.html 写错为 5 票，重做时已修正。
+112. **附加赛双阶段结构**：Barvision 2026 的附加赛分两个阶段——①**附加赛资格赛**（与半决赛投票同期，07-25 至 08-07，仅各场海选第二名参与，采用 Approval Vote）；②**附加赛正赛**（08-08 直播现场，SF 未晋级全部歌曲 + 资格赛胜者，得票最高者晋级决赛）。全站统一使用"附加赛"，不再使用"复活赛"/"Second Chance Round"。
+113. **BBL workflow 触发时间已更新**：主抓改为周六 19:00 UTC（北京时间周日凌晨 03:00），备用周一 04:00 UTC 不变，间隔 33h，`git log --since="2 days ago"` 仍可覆盖。
 
 ---
 

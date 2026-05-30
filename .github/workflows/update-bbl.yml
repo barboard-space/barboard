@@ -2,7 +2,7 @@ name: Update BBL Chart Data
 
 on:
   schedule:
-    - cron: '0 16 * * 6'  # 主抓：Saturday 16:00 UTC = Sunday 00:00 Beijing
+    - cron: '0 19 * * 6'  # 主抓：Saturday 19:00 UTC = Sunday 03:00 Beijing
     - cron: '0 4  * * 1'  # 备用：Monday 04:00 UTC = Monday 12:00 Beijing
   workflow_dispatch:       # Manual trigger
 
@@ -24,7 +24,7 @@ jobs:
         if: github.event.schedule == '0 4 * * 1'
         run: |
           # 若 bbl-latest.json 在过去 2 天内有提交，说明主抓已成功，备用跳过
-          # 主抓在 Saturday 16:00 UTC，备用在 Monday 04:00 UTC，间隔 36h，"2 days ago" 可覆盖
+          # 主抓在 Saturday 19:00 UTC，备用在 Monday 04:00 UTC，间隔 33h，"2 days ago" 可覆盖
           RECENT=$(git log --since="2 days ago" --format="%H" -- data/bbl/bbl-latest.json | head -1)
           if [ -n "$RECENT" ]; then
             echo "skip=true" >> $GITHUB_OUTPUT

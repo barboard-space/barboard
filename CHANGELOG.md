@@ -4,6 +4,19 @@
 
 ---
 
+## [2026-05-30 session 7] — events.html Rulebook 更新 + BBL workflow 调整
+
+### Changed
+- **`barvision/2026/events.html`** — 按 Rulebook Ver. 260530 全面更新：
+  - SCHEDULE：STAGE 2 新增附加赛资格赛 07-25 展播/投票开启、08-07 截止两行；08-08 直播行改为"Semi-Final 暨附加赛直播"；STAGE 3 删除 08-16 补充说明、"决赛票数统计截止"→"结束"
+  - 全页"复活赛"/"Second Chance Round" 统一替换为"附加赛"（4 处）
+  - Submit：提交方式改为在线表单（移除"私信主办方"），新增"在线表单"主条目；补充 3.1.5 重复提交、3.1.6 一经提交不得更换；海选子条目补 3.5.3（须公布前两名）、3.5.4（胜者不得更换）
+  - ELIGIBILITY 歌曲要求：新增"未被选送至 Eurovision Song Contest 参赛"；BBL 峰值规则改为个人榜助攻数 ≤ 5 榜、最高排名 ≤ 50 名（单榜助攻除外）；末条加"须自行举证"
+  - VOTING：Tele Vote 补"不得将票数投给自己所选送的参赛歌曲"；Approval Vote 卡拆分为附加赛资格赛（07-25 至 08-07，仅海选第二名）+ 附加赛正赛（直播现场，SF 未晋级 + 资格赛胜者）两段
+  - RULEBOOK：卡片 #03 "复活赛晋级"→"附加赛晋级"；底部新增免责声明（左对齐，星号前缀）
+  - 细节："单曲排名峰值"→"单曲最高排名"（2 处）；助攻规则行加 `white-space:nowrap`；locked 面板日期格式"北京时间 2026 年 6 月 1 日 18:00"
+- **`.github/workflows/update-bbl.yml`**：主抓 cron `0 16 * * 6` → `0 19 * * 6`（北京时间周日 00:00 → 03:00）
+
 ## [2026-05-30 session 6] — barvision/2026/events.html 全面重做 + 全站眉链箭头
 
 ### Added
