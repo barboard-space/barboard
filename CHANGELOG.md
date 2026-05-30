@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-05-30] — bbl/hof.html 新增三个板块 + 个人榜冠军纪录动画精修
+
+### Added
+- **点数纪录板块**（单周最高点数纪录，前20）：来自 `bbl_03_most_points.csv`，hof-uncrowned 双列样式，badge `#rank` 金色，插入在「在榜周数纪录」和「无冕高分」之间
+- **助攻纪录板块**（单周助攻数纪录）：来自 `bbl_05_most_charts.csv`（25条），`.hof-group` 分组（金银铜 n=19/18/17）+ `.hof-no1-entry` 条目；同组同曲去重合并，多条出现记录以 `.hof-charts-occs`（flex nowrap，固定宽 170px）横排，名次内联色彩紧随日期；新 CSS 类 `.hof-charts-occs` / `.hof-charts-occ` / `.hof-charts-rank`；插入在「无冕高分」和「个人榜冠军纪录」之间
+- **最强N榜板块**（单周N榜助攻纪录）：来自 `bbl_06_single_chart.csv`（19条，N=1–19），hof-uncrowned 双列，badge「N榜」前置无序号，`#hofSingleChart` grid 覆盖，无金银铜；插入在「助攻纪录」和「个人榜冠军纪录」之间
+
+### Changed
+- **单周冠军纪录** → **个人榜冠军纪录**（section-label + TOC 统一更名）
+- **个人榜冠军纪录板块动画**：去掉 entry 级 `fade-up`，只保留三个 group 卡整体依次入场
+- **点数纪录 / 无冕高分 双列动画**：wrapper 去掉 `fade-up`，改为左列0s / 右列0.07s 卡片级入场，与「在榜周数纪录」卡片动画一致
+
+---
+
 ## [2026-05-30] — bbl/hof.html 全面重设计：板块重命名/重排/视觉精修 + 无冕高分新布局
 
 ### Changed

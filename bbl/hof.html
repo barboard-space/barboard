@@ -440,6 +440,7 @@
     .hof-uncrowned__artist { font-size: 11px; color: var(--clr-text-2); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .hof-uncrowned__vol { font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3); white-space: nowrap; text-align: right; line-height: 1.6; position: relative; left: -1px; }
     .hof-uncrowned__badge { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--clr-text-2); background: var(--clr-surface); border: 1px solid var(--clr-border-2); border-radius: 3px; padding: 3px 7px; white-space: nowrap; }
+    .hof-uncrowned__badge--gold   { color: rgba(212,168,50,0.75); border-color: rgba(212,168,50,0.32); }
     .hof-uncrowned__badge--silver { color: #90b8d0; border-color: rgba(144,184,208,0.45); }
     .hof-uncrowned__badge--bronze { color: #e0a870; border-color: rgba(224,168,112,0.40); }
     /* medal rows */
@@ -479,6 +480,18 @@
     .hof-no1__date { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--clr-text-2); white-space: nowrap; }
     .hof-no1__vol { font-family: var(--font-body); font-size: 11px; color: var(--clr-text-3); }
     .hof-no1__owners { font-size: 11px; color: var(--clr-text-2); white-space: normal; line-height: 1.75; margin-left: -30px; word-spacing: 1px; }
+
+    /* ── Single-chart: badge-first, no index column ── */
+    #hofSingleChart .hof-uncrowned-row { grid-template-columns: auto auto 1fr auto; }
+
+    /* ── Charts occurrences (flex-wrap, fixed-width items) ── */
+    .hof-group .hof-no1-entry__head { padding-bottom: 0; }
+    .hof-charts-occs { display: flex; flex-wrap: nowrap; padding: 1px 20px 6px; gap: 2px 12px; }
+    .hof-charts-occ  { flex: 0 0 170px; white-space: nowrap; overflow: hidden; line-height: 1.7; }
+    .hof-charts-rank { font-family: var(--font-mono); font-size: 11px; font-weight: 600; margin-left: 5px; color: var(--clr-text-3); }
+    .hof-charts-rank--gold   { color: rgba(212,168,50,0.75); }
+    .hof-charts-rank--silver { color: #90b8d0; }
+    .hof-charts-rank--bronze { color: #e0a870; }
 
     /* ── Page TOC ── */
     .hof-toc {
@@ -526,6 +539,7 @@
       .hof-uncrowned-header,
       .hof-uncrowned-row { grid-template-columns: 22px 1fr auto; }
       .hof-uncrowned__pts, .hof-uncrowned__vol { display: none; }
+      #hofSingleChart .hof-uncrowned-row { grid-template-columns: auto 1fr; }
       .hof-toc { display: none; }
     }
     @media (max-width: 540px) {
@@ -593,20 +607,50 @@
   </div>
 </section>
 
+<!-- ═══ MOST POINTS ═══ -->
+<section class="section section--bordered" id="most-points" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">点数纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">单周最高点数纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">单曲单周积分最高纪录（前 20），括注为该单曲当时的在榜周数。</p>
+    <div class="hof-uncrowned-grid" id="hofMostPoints"></div>
+  </div>
+</section>
+
 <!-- ═══ UNCROWNED ═══ -->
 <section class="section section--bordered" id="uncrowned" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
     <p class="section-label fade-up">无冕高分</p>
     <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">未夺冠单曲单周点数纪录</h2>
     <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">从未登顶但当周积分最高的单曲记录，括注为该周最终排名。</p>
-    <div class="hof-uncrowned-grid fade-up" style="transition-delay:0.3s;" id="hofUncrowned"></div>
+    <div class="hof-uncrowned-grid" id="hofUncrowned"></div>
+  </div>
+</section>
+
+<!-- ═══ MOST CHARTS ═══ -->
+<section class="section section--bordered" id="most-charts" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">助攻纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">单周助攻数纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">单曲单周被最多成员收录于个人榜的纪录，括注为该周最终排名。</p>
+    <div class="hof-no1-wrap" id="hofMostCharts"></div>
+  </div>
+</section>
+
+<!-- ═══ SINGLE CHART ═══ -->
+<section class="section section--bordered" id="single-chart" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">最强N榜</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">单周N榜助攻纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">各参榜人数规模下单周合榜积分最高纪录，括注为当期参榜成员数。</p>
+    <div class="hof-uncrowned-grid" id="hofSingleChart"></div>
   </div>
 </section>
 
 <!-- ═══ WEEKLY NO.1 ═══ -->
 <section class="section section--bordered" id="weekly-no1" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
-    <p class="section-label fade-up">单周冠军纪录</p>
+    <p class="section-label fade-up">个人榜冠军纪录</p>
     <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">单周个人榜冠军数</h2>
     <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">同一周内，被最多成员同时列为个人榜冠军的单曲纪录。</p>
     <div class="hof-no1-wrap" id="hofNo1Groups"></div>
@@ -635,8 +679,11 @@
 <nav id="hofToc" class="hof-toc" aria-label="页内目录">
   <div class="hof-toc__item" data-target="champions">冠单纪录</div>
   <div class="hof-toc__item" data-target="records">在榜纪录</div>
+  <div class="hof-toc__item" data-target="most-points">点数纪录</div>
   <div class="hof-toc__item" data-target="uncrowned">无冕高分</div>
-  <div class="hof-toc__item" data-target="weekly-no1">单周冠军纪录</div>
+  <div class="hof-toc__item" data-target="most-charts">助攻纪录</div>
+  <div class="hof-toc__item" data-target="single-chart">最强N榜</div>
+  <div class="hof-toc__item" data-target="weekly-no1">个人榜冠军纪录</div>
   <div class="hof-toc__item" data-target="artists">艺人版图</div>
   <div class="hof-toc__item" data-target="albums">上榜专辑</div>
 </nav>
@@ -811,6 +858,79 @@
     { artist:'Kendrick Lamar',   album:'GNX',                               songs:8,  rate:'66.7%' },
   ];
 
+  const MOST_POINTS = [
+    { pts:3081.23, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-17', rank:1 },
+    { pts:2915.13, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-24', rank:1 },
+    { pts:2823.11, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-08-30', rank:1 },
+    { pts:2731.53, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-10', rank:1 },
+    { pts:2689.92, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-09-06', rank:1 },
+    { pts:2638.26, artist:'Chappell Roan',                  song:'The Subway',          date:'2025-08-08', rank:1 },
+    { pts:2626.32, artist:'Tate McRae',                     song:'Sports car',          date:'2025-02-28', rank:1 },
+    { pts:2597.96, artist:'Lady Gaga',                      song:'Abracadabra',         date:'2025-02-14', rank:1 },
+    { pts:2587.56, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-09-13', rank:1 },
+    { pts:2569.79, artist:'ROSÉ & Bruno Mars',              song:'APT.',                date:'2024-10-25', rank:1 },
+    { pts:2560.57, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-31', rank:1 },
+    { pts:2501.86, artist:'Taylor Swift & Post Malone',     song:'Fortnight',           date:'2024-04-26', rank:1 },
+    { pts:2501.79, artist:'ROSÉ & Bruno Mars',              song:'APT.',                date:'2024-11-01', rank:1 },
+    { pts:2423.69, artist:'HAIM',                           song:'Relationships',       date:'2025-07-04', rank:1 },
+    { pts:2415.53, artist:'HAIM',                           song:'Relationships',       date:'2025-04-25', rank:1 },
+    { pts:2392.75, artist:'HAIM',                           song:'Relationships',       date:'2025-04-11', rank:1 },
+    { pts:2391.19, artist:'ROSÉ & Bruno Mars',              song:'APT.',                date:'2024-11-08', rank:1 },
+    { pts:2388.86, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-08-23', rank:1 },
+    { pts:2376.09, artist:'HAIM',                           song:'Relationships',       date:'2025-03-28', rank:1 },
+    { pts:2370.47, artist:'Lady Gaga',                      song:'Abracadabra',         date:'2025-03-14', rank:1 },
+  ];
+
+  const SINGLE_CHART = [
+    { n:19, artist:'Lady Gaga',                       song:'Abracadabra',              date:'2025-02-14', pts:2597.96 },
+    { n:18, artist:'Taylor Swift',                    song:'The Fate of Ophelia',      date:'2025-10-17', pts:3081.23 },
+    { n:17, artist:'Taylor Swift',                    song:'The Fate of Ophelia',      date:'2025-10-24', pts:2915.13 },
+    { n:16, artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',         date:'2024-08-30', pts:2823.11 },
+    { n:15, artist:'ROSÉ & Bruno Mars',               song:'APT.',                     date:'2024-10-25', pts:2569.79 },
+    { n:14, artist:'HAIM',                            song:'Relationships',            date:'2025-04-11', pts:2392.75 },
+    { n:13, artist:'Tate McRae',                      song:'Sports car',               date:'2025-02-28', pts:2626.32 },
+    { n:12, artist:'Ariana Grande',                   song:'yes, and?',               date:'2025-03-21', pts:2178.37 },
+    { n:11, artist:'Alex Warren',                     song:'FEVER DREAM',              date:'2026-04-17', pts:2019.15 },
+    { n:10, artist:'Alex Warren',                     song:'FEVER DREAM',              date:'2026-04-03', pts:1931.20 },
+    { n:9,  artist:'Ariana Grande',                   song:'yes, and?',               date:'2024-01-19', pts:2092.15 },
+    { n:8,  artist:'Alex Warren',                     song:'FEVER DREAM',              date:'2026-05-01', pts:1555.06 },
+    { n:7,  artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',             date:'2026-03-06', pts:1557.00 },
+    { n:6,  artist:'Gracie Abrams',                   song:"I Love You, I'm Sorry",   date:'2024-10-25', pts:1259.97 },
+    { n:5,  artist:'Taylor Swift',                    song:'Elizabeth Taylor',         date:'2026-05-08', pts:1046.16 },
+    { n:4,  artist:'Ella Langley, Morgan Wallen',     song:"I Can't Love You Anymore", date:'2026-05-01', pts:946.99  },
+    { n:3,  artist:'QWER',                            song:'My Name is Malguem',       date:'2024-10-04', pts:819.34  },
+    { n:2,  artist:'aespa',                           song:'Supernova',                date:'2024-05-31', pts:675.83  },
+    { n:1,  artist:'Bell Biv DeVoe',                  song:'Poison',                   date:'2025-10-24', pts:501.48  },
+  ];
+
+  const MOST_CHARTS = [
+    { n:19, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-14', rank:1 },
+    { n:18, artist:'ROSÉ & Bruno Mars',     song:'APT.',                date:'2024-11-08', rank:1 },
+    { n:18, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-17', rank:1 },
+    { n:17, artist:'ROSÉ & Bruno Mars',     song:'APT.',                date:'2024-11-15', rank:1 },
+    { n:17, artist:'ROSÉ & Bruno Mars',     song:'APT.',                date:'2024-11-22', rank:1 },
+    { n:17, artist:'Lady Gaga & Bruno Mars',song:'Die With A Smile',    date:'2024-09-13', rank:1 },
+    { n:17, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-21', rank:1 },
+    { n:17, artist:'HAIM',                  song:'Relationships',       date:'2025-07-04', rank:1 },
+    { n:17, artist:'HAIM',                  song:'Relationships',       date:'2025-07-11', rank:1 },
+    { n:17, artist:'Chappell Roan',         song:'The Subway',          date:'2025-08-08', rank:1 },
+    { n:17, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-10', rank:1 },
+    { n:17, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-24', rank:1 },
+    { n:17, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-31', rank:1 },
+    { n:16, artist:'Lady Gaga & Bruno Mars',song:'Die With A Smile',    date:'2024-08-30', rank:1 },
+    { n:16, artist:'Lady Gaga & Bruno Mars',song:'Die With A Smile',    date:'2024-09-06', rank:1 },
+    { n:16, artist:'Sabrina Carpenter',     song:'Taste',               date:'2024-10-04', rank:3 },
+    { n:16, artist:'Sabrina Carpenter',     song:'Manchild',            date:'2025-07-11', rank:3 },
+    { n:16, artist:'Sabrina Carpenter',     song:'Manchild',            date:'2025-07-18', rank:2 },
+    { n:16, artist:'Billie Eilish',         song:'BIRDS OF A FEATHER',  date:'2024-10-11', rank:1 },
+    { n:16, artist:'Billie Eilish',         song:'BIRDS OF A FEATHER',  date:'2024-10-18', rank:1 },
+    { n:16, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-07', rank:1 },
+    { n:16, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-28', rank:2 },
+    { n:16, artist:'Chappell Roan',         song:'The Subway',          date:'2025-08-15', rank:1 },
+    { n:16, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-11-07', rank:1 },
+    { n:16, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-11-14', rank:1 },
+  ];
+
   const UNCROWNED = [
     { artist:'Chappell Roan',                          song:'Pink Pony Club',        pts:1996.46, rank:2, vol:58  },
     { artist:'Taylor Swift & Florence + The Machine',  song:'Florida!!!',            pts:1895.93, rank:2, vol:17  },
@@ -966,6 +1086,116 @@
       card(ALBUMS.slice(half), half);
   }
 
+  function buildSingleChart() {
+    function renderRow(p, i) {
+      const int = Math.floor(p.pts);
+      const dec = (p.pts - int).toFixed(2).slice(1);
+      const vol = VOL_DATES.indexOf(p.date);
+      return `
+        <div class="hof-uncrowned-row">
+          <span class="hof-uncrowned__badge">${p.n}榜</span>
+          <span class="hof-uncrowned__pts">${int}<span class="hof-uncrowned__pts-dec">${dec}</span></span>
+          <div class="hof-uncrowned__info">
+            <div class="hof-uncrowned__song">${p.song}</div>
+            <div class="hof-uncrowned__artist">${p.artist}</div>
+          </div>
+          <div class="hof-uncrowned__vol">
+            <div>${fmtDebutDate(p.date)}</div>
+            <div style="font-family:var(--font-body);">第 ${vol} 期</div>
+          </div>
+        </div>`;
+    }
+    const mid = 10;
+    const left  = SINGLE_CHART.slice(0, mid).map((p, i) => renderRow(p, i)).join('');
+    const right = SINGLE_CHART.slice(mid).map((p, i) => renderRow(p, i + mid)).join('');
+    document.getElementById('hofSingleChart').innerHTML =
+      `<div class="hof-uncrowned fade-up">${left}</div>` +
+      `<div class="hof-uncrowned fade-up" style="transition-delay:0.07s;">${right}</div>`;
+  }
+
+  function buildMostCharts() {
+    const MEDAL = ['gold','silver','bronze'];
+    const groups = {};
+    MOST_CHARTS.forEach(p => {
+      if (!groups[p.n]) groups[p.n] = [];
+      groups[p.n].push(p);
+    });
+    const ns = Object.keys(groups).map(Number).sort((a, b) => b - a);
+
+    document.getElementById('hofMostCharts').innerHTML = ns.map((n, gi) => {
+      const tier = gi === 0 ? 'gold' : gi === 1 ? 'silver' : gi === 2 ? 'bronze' : '';
+      const cls  = tier ? ` hof-group--${tier}` : '';
+
+      const songMap = new Map();
+      groups[n].forEach(p => {
+        const key = p.artist + '|||' + p.song;
+        if (!songMap.has(key)) songMap.set(key, { artist: p.artist, song: p.song, occs: [] });
+        songMap.get(key).occs.push({ date: p.date, rank: p.rank });
+      });
+      const songs = [...songMap.values()];
+      const countLabel = songs.length > 1 ? `<span class="hof-group__count">${songs.length} 首</span>` : '';
+
+      const rows = songs.map(s => {
+        const occs = s.occs.map(o => {
+          const vol = VOL_DATES.indexOf(o.date);
+          const volStr = vol > 0 ? ` · 第 ${vol} 期` : '';
+          const rankCls = o.rank===1 ? ' hof-charts-rank--gold' : o.rank===2 ? ' hof-charts-rank--silver' : o.rank===3 ? ' hof-charts-rank--bronze' : '';
+          return `<span class="hof-charts-occ"><span class="hof-no1__date">${fmtDebutDate(o.date)}</span><span class="hof-no1__vol">${volStr}</span><span class="hof-charts-rank${rankCls}">　#${o.rank}</span></span>`;
+        }).join('');
+        return `
+          <div class="hof-no1-entry">
+            <div class="hof-no1-entry__head">
+              <span class="hof-no1__song">${s.song}</span><span class="hof-no1__artist">　${s.artist}</span>
+            </div>
+            <div class="hof-charts-occs">${occs}</div>
+          </div>`;
+      }).join('');
+
+      return `
+        <div class="hof-group${cls} fade-up" style="transition-delay:${(gi * 0.06).toFixed(2)}s;">
+          <div class="hof-group__head">
+            <div style="display:flex;align-items:baseline;gap:7px;margin-left:-2px;">
+              <div class="hof-group__num">${n}</div>
+              <div class="hof-group__label">进榜数</div>
+            </div>
+            ${countLabel}
+          </div>
+          ${rows}
+        </div>`;
+    }).join('');
+  }
+
+  function buildMostPoints() {
+    const MEDAL = ['gold','silver','bronze'];
+    function renderRow(p, i) {
+      const tier = MEDAL[i] || '';
+      const cls  = tier ? ` hof-uncrowned-row--${tier}` : '';
+      const int  = Math.floor(p.pts);
+      const dec  = (p.pts - int).toFixed(2).slice(1);
+      const vol  = VOL_DATES.indexOf(p.date);
+      return `
+        <div class="hof-uncrowned-row${cls}">
+          <span class="hof-uncrowned__idx">${i + 1}</span>
+          <span class="hof-uncrowned__pts">${int}<span class="hof-uncrowned__pts-dec">${dec}</span></span>
+          <div class="hof-uncrowned__info">
+            <div class="hof-uncrowned__song">${p.song}</div>
+            <div class="hof-uncrowned__artist">${p.artist}</div>
+          </div>
+          <div class="hof-uncrowned__vol">
+            <div>${fmtDebutDate(p.date)}</div>
+            <div style="font-family:var(--font-body);">第 ${vol} 期</div>
+          </div>
+          <span class="hof-uncrowned__badge${p.rank===1?' hof-uncrowned__badge--gold':p.rank===2?' hof-uncrowned__badge--silver':p.rank===3?' hof-uncrowned__badge--bronze':''}">#${p.rank}</span>
+        </div>`;
+    }
+    const mid = 10;
+    const left  = MOST_POINTS.slice(0, mid).map((p, i) => renderRow(p, i)).join('');
+    const right = MOST_POINTS.slice(mid).map((p, i) => renderRow(p, i + mid)).join('');
+    document.getElementById('hofMostPoints').innerHTML =
+      `<div class="hof-uncrowned fade-up">${left}</div>` +
+      `<div class="hof-uncrowned fade-up" style="transition-delay:0.07s;">${right}</div>`;
+  }
+
   function buildUncrowned() {
     const MEDAL = ['gold','silver','bronze'];
     const header = '';
@@ -993,7 +1223,8 @@
     const left  = header + UNCROWNED.slice(0, mid).map((u, i) => renderRow(u, i)).join('');
     const right = header + UNCROWNED.slice(mid).map((u, i) => renderRow(u, i + mid)).join('');
     document.getElementById('hofUncrowned').innerHTML =
-      `<div class="hof-uncrowned">${left}</div><div class="hof-uncrowned">${right}</div>`;
+      `<div class="hof-uncrowned fade-up">${left}</div>` +
+      `<div class="hof-uncrowned fade-up" style="transition-delay:0.07s;">${right}</div>`;
   }
 
   const OWNER_MAP = {
@@ -1088,7 +1319,6 @@
       });
 
       const entries = [...songMap.values()].map((s, ei) => {
-        const delay = (ei * 0.06).toFixed(2);
         const occs = s.occs.map(o => {
           const vol = VOL_DATES.indexOf(o.date);
           const volStr = vol > 0 ? ` · 第 ${vol} 期` : '';
@@ -1099,7 +1329,7 @@
             </div>`;
         }).join('');
         return `
-          <div class="hof-no1-entry fade-up" style="transition-delay:${delay}s;">
+          <div class="hof-no1-entry">
             <div class="hof-no1-entry__head">
               <span class="hof-no1__song">${s.song}</span><span class="hof-no1__artist">　${s.artist}</span>
             </div>
@@ -1121,6 +1351,9 @@
   buildChampionRoll();
   buildNo1Groups();
   buildRecordsGrid();
+  buildMostPoints();
+  buildMostCharts();
+  buildSingleChart();
   buildArtistCols();
   buildAlbums();
   buildUncrowned();
