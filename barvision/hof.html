@@ -50,7 +50,10 @@
       text-transform: uppercase; color: var(--clr-gold-light);
       text-shadow: 0 0 10px rgba(245,200,64,0.7), 0 0 32px rgba(245,200,64,0.28);
       margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
     }
+    .hof-eyebrow:hover { color: #fff; text-decoration: none; }
     .hof-title {
       font-family: var(--font-display);
       font-size: clamp(56px, 8vw, 108px);
@@ -184,7 +187,7 @@
   <div class="hof-hero__watermark" aria-hidden="true">BARVISION</div>
   <div class="hof-hero__inner section__inner">
 
-    <p class="hof-eyebrow fade-up"><a href="/barvision.html" style="color:inherit;text-decoration:none;">Barvision</a></p>
+    <a class="hof-eyebrow fade-up" href="/barvision.html"><span>←</span><span>Barvision</span></a>
     <h1 class="hof-title fade-up" style="transition-delay:0.1s;">Hall <span style="opacity:0.65;">of</span> <span class="bv-accent">Fame</span></h1>
     <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届的高光时刻。<br><span style="font-size:12px;opacity:0.45;">*本页正在更新中</span></p>
 

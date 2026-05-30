@@ -45,9 +45,10 @@
 - `barvision.html` — Barvision 总览（已完成，大幅重设计，详见开发注意事项 #100–102）
 - `barvision/hof.html` — Barvision Hall of Fame（深度打磨完成；hero 金色主题（glow/eyebrow/title accent/desc 均用 gold）+ 三 section；eyebrow 为跳回 barvision.html 的链接；MEMBER_MAP + fmtMember/fmtWho 将成员名渲染为 `@handle` 链接；页内 TOC（紫色，三项，IO suppression，阈值 > 400 晚于 back-to-top）；动画全面对标 bbl/hof.html；接入 `../scripts/nav.js`；hero 右下 `BARVISION` 水印）
 - `archive.html` — 活动存档总览（已完成；hero 榜吧蓝主题 + `BARBOARD` 水印；两节：常规活动（BBL/Barvision 2列卡）+ 过往活动 Legacy（年榜/吧莱美/ECVP 3列卡）；卡片动画 `cubic-bezier(0.22,1,0.36,1)` 0.55s stagger `i×0.07s`；Legacy 卡 opacity 0.82 降调；详见开发注意事项 #107）
+- `barvision/2026/events.html` — Barvision 2026 赛事详情页（**已重做完成**；对标 barvision.html 视觉风格；含 hero（← Barvision 眉链 + CSS 动画 + watermark + 倒计时 + 更新日期）+ 歌曲报名（locked/open 面板 + deadline bar grid）+ SCHEDULE 三阶段表格时间线 + VOTING（Jury 评分格 + Tele + Approval）+ ELIGIBILITY（平台数据表 + 歌曲/艺人/专辑要求）+ RULEBOOK（6卡）+ TOC（5项，紫色，IO suppression）；`const FORM_URL = ''` 待填入；详见开发注意事项 #108–111）
 
 ### 待建页面（按优先级）
-- `barvision/2026/events.html` — **整页重做**（当前页面结构老旧，需对标 bbl/hof.html + barvision/hof.html 风格全面重设计；重做完成后填入 `const FORM_URL` 表单链接并同步 enable `index.html` 的「歌曲报名」按钮；**6月1日 18:00 前上线**）
+- **填入表单 URL**：`barvision/2026/events.html` 的 `const FORM_URL = ''` 填入问卷星/金数据链接，同步 enable `index.html`「歌曲报名」按钮（移除 `href="#"` 等禁用样式，改为 `href="/barvision/2026/events.html#submit"`）；**6月1日 18:00 前完成**
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -436,6 +437,9 @@ barboard-space/
 106. **`index.html` 歌曲报名按钮禁用模式**：`href="#" onclick="return false" data-tooltip="暂不可用" style="opacity:0.38;cursor:not-allowed"`；表单 URL 就绪后改回正常链接并移除 disable 样式。歌曲提交开放时间：北京时间 2026-06-01 18:00（`OPEN_DATE = new Date('2026-06-01T18:00:00+08:00')`，index.html 倒计时目标同步）。
 108. **`barvision/2026/events.html` 重做要点**：现有页面（850行）结构老旧，需完整重写。路径层级：`../../fonts.css`、`../../style.css`、`../../scripts/nav.js`。保留关键内容：赛程（6/1–8/22 完整时间线）、投票方式（Jury 12分制 + Tele 20票各50%）、附加赛（Approval Vote 3票）、晋级规则（半决赛前8+东道主直通+附加赛1名=18首）、歌曲提交规则；`const FORM_URL = ''` 占位符必须保留（填入后 iframe 自动渲染）；表单开启时间 `OPEN_DATE = new Date('2026-06-01T18:00:00+08:00')`；hero 使用 `barvision_logo_2026.svg`（路径 `../../assets/images/barvision_logo_2026.svg`）；整体风格对标 barvision/hof.html（紫色/金色主题、section 结构、fade-up 动画）。
 107. **`archive.html` 设计规范**：全站活动总览页，hero 用榜吧蓝 `#6F9EC3` 作为主题色（eyebrow glow、section-label、section__title、arc-accent、desc 文字 `rgba(111,158,195,0.85)`、watermark `rgba(111,158,195,0.04)`）；顶部辉光仅主光改为榜吧蓝，左下粉色 `rgba(224,64,160,0.08)`，右侧紫色 `rgba(168,85,247,0.07)`；活动卡片 `.arc-card` 用 `--arc-color` CSS 变量控制各卡主色（BBL 紫色、BV 粉色、年榜蓝、吧莱美金、ECVP 青），顶边 3px 色条；Legacy 卡加 `.arc-card--ended`（`opacity:0.82`）降调；卡片动画单独覆盖为 `cubic-bezier(0.22,1,0.36,1)` 0.55s `translateY(28px)`，stagger `i×0.07s`；外链按钮使用全站统一 `ext-icon` SVG；section 标题首词白色 `var(--clr-text)`、次词榜吧蓝。
+109. **全站 eyebrow 箭头回退约定**：各页面 hero 顶部 eyebrow 元素统一用 `<a class="xxx-eyebrow" href="父页面路径"><span>←</span><span>父页面名</span></a>` 实现返回提示；eyebrow 本身已有 `display:inline-flex; align-items:center; gap:8px; transition:color 0.2s`，hover 变白（`color:#fff`）。映射关系：`barvision.html`/`bbl.html`/`archive.html` → `← Barboard`（`href="/"`）；`barvision/hof.html` → `← Barvision`；`bbl/hof.html` → `← BarboardLab`；`barvision/2026/events.html` → `← Barvision`。子页面用相对路径，导航页用绝对路径（`/`）。
+110. **`barvision/2026/events.html` 设计实现**：hero CSS animation（`ev-hero-in`，7 个元素依序延迟）+ 紫色 watermark "BARVISION" + 倒计时组件（`ev-countdown`，`ev-cd-unit`）；Submit 面板 `position:sticky; top:calc(var(--nav-h)+20px)` 跟随滚动；deadline bar 用 `grid-template-columns:1fr 1px 1fr`（分割线 `align-self:stretch`）；Schedule 三 STAGE 分组，每 stage 含 `ev-phase__tag` 色标 + `ev-phase__line` 弹性横线；时间列日期 `font-mono`，有补充描述的行 `flex-direction:column; justify-content:center`；Jury 评分格 10 个 `ev-js-cell`，#1/#2 加 `ev-js-cell--top` 金色；TOC 5 项（class `ev-toc`），紫色 `ev-toc-breathe` 呼吸点，IO suppression 同 bbl/hof.html；「本页上次更新于」置于倒计时下方，日期 font-mono，汉字 font-body；DM Mono 无 CJK——所有中文标签（北京时间、通道开启等）必须 inline `font-family:var(--font-body)`。
+111. **Tele Vote 上限纠错记录**：Rulebook 4.1.2 规定每首歌最多可投 **10 票**（不是 5 票）。旧版 events.html 写错为 5 票，重做时已修正。
 
 ---
 

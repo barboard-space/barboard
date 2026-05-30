@@ -1371,7 +1371,7 @@ img {
   content: '';
   position: absolute;
   top: 12px;
-  right: 12px;
+  left: 12px;
   width: 6px;
   height: 6px;
   border-radius: 50%;

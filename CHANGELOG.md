@@ -4,6 +4,18 @@
 
 ---
 
+## [2026-05-30 session 6] — barvision/2026/events.html 全面重做 + 全站眉链箭头
+
+### Added
+- **`barvision/2026/events.html`**（完整重做）：对标 barvision.html 视觉语言；hero 含 CSS 动画（`ev-hero-in`，7元素依序延迟）+ 紫色 watermark + 倒计时 + "本页上次更新于 2026-05-30"；歌曲报名 locked/open 面板（sticky 右列，deadline bar grid 1fr 1px 1fr）+ 提交方式 + 核心须知；SCHEDULE 三阶段（STAGE 1/2/3，色标标签 + 弹性横线 + 表格式时间线，badges：开启/投票/直播/Deadline）；VOTING（Jury 评分格含金色 #1/#2、Tele 修正上限 5→10、Approval 全宽卡）；ELIGIBILITY（平台数据表 + 歌曲/专辑同列左、艺人右）；RULEBOOK 6 卡；TOC（5项，紫色呼吸点，IO suppression，`scrollY > 400`）
+- **全站 eyebrow 箭头回退**：`barvision.html`、`bbl.html`、`archive.html`（← Barboard → `/`）；`barvision/hof.html`（← Barvision）；`bbl/hof.html`（← BarboardLab）均改为 `<a>` 元素，含 `←` 箭头 + hover 白色
+
+### Fixed
+- **`style.css`**：`edition-card--active::after` 呼吸点从右上角（`right:12px`）移至左上角（`left:12px`）
+- **`barvision/2026/events.html`**：Tele Vote 单曲最多投票数 5→10（Rulebook 4.1.2 修正）；所有中文标签（北京时间等）补 `font-family:var(--font-body)` 防 DM Mono 无法渲染
+
+---
+
 ## [2026-05-30 session 5] — barvision.html 卡片动画 + archive.html/nav 细节
 
 ### Changed

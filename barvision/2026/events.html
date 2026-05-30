@@ -5,846 +5,1049 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 赛事详情 | Barboard</title>
-  <meta name="description" content="第十六届 Barvision Chongqing 2026 赛事详情、歌曲提交通道及完整赛程。歌曲提交于 2026 年 6 月 1 日开启，7 月 19 日截止。" />
+  <meta name="description" content="第十六届 Barvision Chongqing 2026 赛事详情、歌曲提交通道及完整赛程。歌曲提交于 2026 年 6 月 1 日 18:00 开启，7 月 19 日截止。" />
   <link rel="icon" type="image/png" href="../../assets/images/logo_center.png" />
   <link rel="stylesheet" href="../../fonts.css" />
-  <link rel="stylesheet" href="../../style.css?v=2" />
+  <link rel="stylesheet" href="../../style.css" />
   <style>
-    /* ── Page hero ── */
+    /* ═══ Hero ═══ */
     .ev-hero {
       position: relative;
-      padding: calc(var(--nav-h) + 72px) 0 80px;
+      padding: calc(var(--nav-h) + 64px) 0 80px;
       overflow: hidden;
     }
     .ev-hero__glow {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 90% 70% at 55% 0%, rgba(76,24,160,0.32) 0%, transparent 60%),
-        radial-gradient(ellipse 55% 50% at 5% 100%, rgba(0,180,255,0.07) 0%, transparent 55%);
-      pointer-events: none;
+        radial-gradient(ellipse 80% 70% at 60% 0%,  rgba(168,85,247,0.26) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 0%  100%, rgba(224,64,160,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 40% at 100% 50%, rgba(0,180,255,0.06)  0%, transparent 50%);
     }
     .ev-hero__grid {
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0; pointer-events: none;
       background-image:
-        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
       background-size: 48px 48px;
-      pointer-events: none;
+    }
+    .ev-hero__watermark {
+      position: absolute; right: -10px; bottom: -10px;
+      font-family: var(--font-display); font-size: 200px; line-height: 1;
+      letter-spacing: -0.02em; color: rgba(168,85,247,0.04);
+      pointer-events: none; user-select: none;
     }
     .ev-hero__inner { position: relative; z-index: 2; }
-
-    .breadcrumb {
-      font-size: 12px;
-      color: var(--clr-text-3);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-bottom: 36px;
+    .ev-hero__layout {
+      display: grid; grid-template-columns: 1fr 400px;
+      gap: var(--gap-xl); align-items: center; margin-top: 12px;
     }
-    .breadcrumb a { color: var(--clr-text-3); transition: color 0.2s; }
-    .breadcrumb a:hover { color: var(--clr-text-2); }
-    .breadcrumb__sep { opacity: 0.35; }
-
-    .ev-logo {
-      width: clamp(280px, 32vw, 460px);
-      height: auto;
-      display: block;
-      margin-bottom: 16px;
-      filter: drop-shadow(0 0 32px rgba(192,132,252,0.18));
-      max-width: 100%;
+    .ev-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--clr-violet-light);
+      text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 24px; transition: color 0.2s;
     }
-    .ev-meta {
-      font-size: 12px;
-      color: var(--clr-text-3);
-      letter-spacing: 0.06em;
-      margin-top: 10px;
-    }
-    .ev-hero__bottom {
-      display: flex;
-      gap: 24px;
-      align-items: flex-end;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-    .ev-countdown {
-      background: var(--clr-surface);
-      border: 1px solid var(--clr-border-2);
-      border-radius: 6px;
-      padding: 14px 22px 16px;
-    }
-    .ev-countdown__label {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--clr-text-3);
-      margin-bottom: 6px;
-    }
-    .ev-countdown__digits {
+    .ev-eyebrow:hover { color: #fff; }
+    .ev-title {
       font-family: var(--font-display);
-      font-size: clamp(30px, 4vw, 48px);
-      color: var(--clr-accent);
-      line-height: 1;
-    }
-    .ev-countdown__unit {
-      font-size: 13px;
-      opacity: 0.5;
-      margin: 0 2px;
-    }
-    .ev-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* ── Sections ── */
-    .ev-section {
-      padding: 72px 0;
-      border-top: 1px solid var(--clr-border);
-    }
-    .ev-section__header { margin-bottom: 40px; }
-    .ev-two-col {
-      display: grid;
-      grid-template-columns: 1fr 1.1fr;
-      gap: 56px;
-      align-items: start;
-    }
-    @media (max-width: 860px) {
-      .ev-two-col { grid-template-columns: 1fr; gap: 36px; }
-    }
-
-    /* ── Criteria list ── */
-    .criteria-list {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 20px;
-    }
-    .criteria-item {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      padding: 12px 16px;
-      background: var(--clr-surface);
-      border-radius: 4px;
-      border: 1px solid var(--clr-border);
-    }
-    .criteria-item__dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--clr-accent);
-      flex-shrink: 0;
-      margin-top: 7px;
-    }
-    .criteria-item__text {
-      font-size: 13px;
-      color: var(--clr-text-2);
-      line-height: 1.65;
-    }
-    .criteria-item__text strong { color: var(--clr-text); }
-
-    /* ── Submit panel ── */
-    .submit-panel {
-      background: var(--clr-surface);
-      border: 1px solid var(--clr-border-2);
-      border-radius: 8px;
-      overflow: hidden;
-    }
-    .submit-panel__head {
-      padding: 22px 28px 18px;
-      border-bottom: 1px solid var(--clr-border);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-    .submit-panel__title {
-      font-family: var(--font-display);
-      font-size: 22px;
-      letter-spacing: 0.04em;
-    }
-    .submit-panel__status {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      padding: 4px 10px;
-      border-radius: 3px;
-    }
-    .submit-panel__status--locked {
-      color: var(--clr-text-3);
-      border: 1px solid var(--clr-border);
-    }
-    .submit-panel__status--open {
-      color: var(--clr-accent-light);
-      border: 1px solid rgba(0,180,255,0.35);
-      background: rgba(0,180,255,0.08);
-    }
-    .submit-panel__body { padding: 28px; }
-
-    .submit-locked {
-      text-align: center;
-      padding: 8px 0 4px;
-    }
-    .submit-locked__icon {
-      margin: 0 auto 14px;
-      opacity: 0.18;
-    }
-    .submit-locked__heading {
-      font-family: var(--font-display);
-      font-size: 20px;
-      letter-spacing: 0.04em;
-      color: var(--clr-text);
-      margin-bottom: 4px;
-    }
-    .submit-locked__msg {
-      font-size: 13px;
-      color: var(--clr-text-2);
-      line-height: 1.6;
-    }
-    .submit-locked__cd {
-      margin-top: 20px;
-      padding: 16px 20px;
-      background: var(--clr-bg-2);
-      border: 1px solid var(--clr-border);
-      border-radius: 4px;
-      display: inline-block;
-    }
-    .submit-locked__cd-label {
-      font-size: 10px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--clr-text-3);
-      margin-bottom: 6px;
-    }
-    .submit-locked__cd-digits {
-      font-family: var(--font-display);
-      font-size: 28px;
-      color: var(--clr-accent);
-      line-height: 1;
-    }
-    .submit-open { display: none; }
-    .submit-open__desc {
-      font-size: 13px;
-      color: var(--clr-text-2);
-      line-height: 1.75;
+      font-size: clamp(52px, 7vw, 96px);
+      line-height: 0.95; letter-spacing: 0.02em; text-transform: uppercase;
       margin-bottom: 20px;
     }
-    .submit-open__deadline {
-      font-size: 12px;
-      color: var(--clr-text-3);
-      margin-top: 12px;
-      font-family: var(--font-mono);
+    .ev-title .ev-accent { color: var(--clr-violet-light); }
+    .ev-meta {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 0; margin-bottom: 20px;
+    }
+    .ev-meta-item {
+      font-size: 12px; color: var(--clr-text-3);
+      padding-right: 14px; margin-right: 14px;
+      border-right: 1px solid var(--clr-border); white-space: nowrap;
+    }
+    .ev-meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .ev-hero__desc {
+      font-size: 15px; color: var(--clr-text-2); line-height: 1.75;
+      max-width: 500px; margin-bottom: 32px;
+    }
+    .ev-hero__cta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+    .ev-countdown {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--clr-surface); border: 1px solid var(--clr-border-2);
+      border-radius: 6px; padding: 12px 20px 14px;
+    }
+    .ev-countdown__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--clr-text-3); white-space: nowrap;
+    }
+    .ev-countdown__digits {
+      font-family: var(--font-display); font-size: clamp(26px, 3.2vw, 40px);
+      color: var(--clr-violet-light); line-height: 1;
+    }
+    .ev-cd-unit { font-size: 12px; opacity: 0.55; margin: 0 1px; }
+    .ev-logo-wrap { display: flex; align-items: center; justify-content: center; }
+    .ev-logo {
+      width: 100%; max-width: 400px; height: auto;
+      filter: drop-shadow(0 0 40px rgba(168,85,247,0.20)) drop-shadow(0 0 80px rgba(139,52,220,0.10));
+    }
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes ev-hero-in {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .ev-eyebrow      { animation: ev-hero-in 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-title        { animation: ev-hero-in 0.70s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-meta         { animation: ev-hero-in 0.50s 0.18s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-hero__desc   { animation: ev-hero-in 0.55s 0.26s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-hero__cta    { animation: ev-hero-in 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-countdown    { animation: ev-hero-in 0.55s 0.44s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-logo-wrap    { animation: ev-hero-in 0.70s 0.20s cubic-bezier(0.22,1,0.36,1) both; }
     }
 
-    /* ── Timeline ── */
-    .timeline {
+    /* ═══ Shared section chrome ═══ */
+    .ev-section { padding: 80px 0; border-top: 1px solid var(--clr-border); }
+    .ev-section__hd { margin-bottom: 48px; }
+    .ev-section__hd .section-label { margin-bottom: 16px; }
+    .ev-section__hd .section__title { margin-top: 24px; font-size: clamp(32px,5vw,64px); }
+    .ev-section__hd .section__subtitle { margin-top: 24px; max-width: 560px; }
+
+    /* ═══ Submit ═══ */
+    .ev-submit-layout {
+      display: grid; grid-template-columns: 1fr 1.1fr;
+      gap: 64px; align-items: start;
+    }
+    .ev-req-block { margin-top: 28px; }
+    .ev-req-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--clr-text-3); margin-bottom: 10px;
+    }
+    .ev-req-list { display: flex; flex-direction: column; gap: 5px; }
+    .ev-req-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 14px; background: var(--clr-surface);
+      border: 1px solid var(--clr-border); border-radius: 4px;
+      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.6;
+    }
+    .ev-req-item::before {
+      content: '·'; color: var(--clr-violet-light); flex-shrink: 0;
+      font-size: 16px; line-height: 1.2;
+    }
+    .ev-req-item strong { color: var(--clr-text); }
+    .ev-deadline-bar {
+      margin-top: 20px;
+      background: var(--clr-bg-2); border: 1px solid var(--clr-border);
+      border-radius: 6px; display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+    }
+    .ev-deadline-bar__item {
+      padding: 14px 20px;
+    }
+    .ev-deadline-bar__divider {
+      background: var(--clr-border); align-self: stretch;
+    }
+    .ev-deadline-bar__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--clr-text-3); margin-bottom: 4px;
+    }
+    .ev-deadline-bar__val { font-family: var(--font-mono); font-size: 13px; color: var(--clr-text); }
+    /* Submit panel */
+    .submit-panel {
+      background: var(--clr-surface); border: 1px solid var(--clr-border-2);
+      border-radius: 8px; overflow: hidden;
+      position: sticky; top: calc(var(--nav-h) + 20px);
+    }
+    .submit-panel__head {
+      padding: 20px 28px 18px; border-bottom: 1px solid var(--clr-border);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.07) 0%, transparent 60%);
+    }
+    .submit-panel__title { font-family: var(--font-display); font-size: 24px; letter-spacing: 0.04em; }
+    .sp-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 3px;
+    }
+    .sp-badge--locked { color: var(--clr-text-3); border: 1px solid var(--clr-border); }
+    .sp-badge--open   { color: var(--clr-accent-light); border: 1px solid rgba(0,180,255,0.35); background: rgba(0,180,255,0.08); }
+    .sp-badge--closed { color: var(--clr-text-3); border: 1px solid var(--clr-border); background: rgba(255,255,255,0.03); }
+    .submit-panel__body { padding: 32px 28px; }
+    /* Locked state */
+    .sp-locked { text-align: center; padding: 8px 0; }
+    .sp-locked__icon { margin: 0 auto 16px; opacity: 0.15; color: var(--clr-violet-light); }
+    .sp-locked__heading {
+      font-family: var(--font-display); font-size: 22px; letter-spacing: 0.04em; margin-bottom: 8px;
+    }
+    .sp-locked__msg { font-size: 13px; color: var(--clr-text-2); line-height: 1.7; }
+    .sp-locked__msg strong { color: var(--clr-violet-light); }
+    .sp-locked__cd {
+      margin: 24px auto 0; padding: 18px 24px;
+      background: var(--clr-bg-2); border: 1px solid rgba(168,85,247,0.22);
+      border-radius: 6px; display: inline-block; min-width: 210px;
+    }
+    .sp-locked__cd-label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--clr-text-3); margin-bottom: 8px;
+    }
+    .sp-locked__cd-digits { font-family: var(--font-display); font-size: 32px; color: var(--clr-violet-light); line-height: 1; }
+    .sp-locked__date { margin-top: 10px; font-size: 12px; color: var(--clr-text-3); font-family: var(--font-mono); }
+    /* Open state */
+    .sp-open { display: none; }
+    .sp-open__desc { font-size: 13px; color: var(--clr-text-2); line-height: 1.75; margin-bottom: 20px; }
+    .sp-open__deadline { font-size: 12px; color: var(--clr-text-3); margin-top: 12px; font-family: var(--font-mono); }
+
+    /* ═══ Schedule ═══ */
+    .ev-phases { display: flex; flex-direction: column; gap: 52px; margin-top: 48px; }
+    .ev-phase__header {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+    }
+    .ev-phase__tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 2px;
+    }
+    .ev-phase__tag--submit { background: rgba(224,64,160,0.1); color: var(--clr-pink-light); border: 1px solid rgba(224,64,160,0.28); }
+    .ev-phase__tag--semi   { background: rgba(0,180,255,0.08); color: var(--clr-accent-light); border: 1px solid rgba(0,180,255,0.28); }
+    .ev-phase__tag--final  { background: rgba(212,168,50,0.1); color: var(--clr-gold-light); border: 1px solid rgba(212,168,50,0.3); }
+    .ev-phase__name {
+      font-family: var(--font-display); font-size: 21px; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .ev-phase__line { flex: 1; height: 1px; background: var(--clr-border); }
+    /* Timeline table */
+    .ev-tl { border: 1px solid var(--clr-border); border-radius: 6px; overflow: hidden; }
+    .ev-tl-row {
+      display: grid; grid-template-columns: 144px 1fr;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .ev-tl-row:last-child { border-bottom: none; }
+    .ev-tl-row--hi   { background: rgba(168,85,247,0.04); }
+    .ev-tl-row--gold { background: rgba(212,168,50,0.04); }
+    .ev-tl-date {
+      padding: 14px 16px; font-family: var(--font-mono); font-size: 12px;
+      color: var(--clr-text-3); line-height: 1.45;
+      border-right: 1px solid var(--clr-border);
+      display: flex; align-items: center;
+    }
+    .ev-tl-row--hi   .ev-tl-date { color: var(--clr-violet); }
+    .ev-tl-row--gold .ev-tl-date { color: var(--clr-gold); }
+    .ev-tl-body { padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; }
+    .ev-tl-name {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      font-size: 13.5px; font-weight: 600; color: var(--clr-text); line-height: 1.3;
+    }
+    .ev-tl-row--gold .ev-tl-name { color: var(--clr-gold-light); }
+    .ev-tl-desc { font-size: 12px; color: var(--clr-text-3); line-height: 1.6; margin-top: 5px; }
+    .tl-b {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 6px; border-radius: 2px; flex-shrink: 0;
+    }
+    .tl-b--sub  { background: rgba(224,64,160,0.1);  color: var(--clr-pink-light);   border: 1px solid rgba(224,64,160,0.3); }
+    .tl-b--vote { background: rgba(0,180,255,0.1);   color: var(--clr-accent-light); border: 1px solid rgba(0,180,255,0.3); }
+    .tl-b--live { background: rgba(168,85,247,0.1);  color: var(--clr-violet-light); border: 1px solid rgba(168,85,247,0.3); }
+    .tl-b--adm  { background: rgba(180,160,255,0.06); color: var(--clr-text-3);      border: 1px solid var(--clr-border); }
+    .tl-b--gold { background: rgba(212,168,50,0.12); color: var(--clr-gold-light);   border: 1px solid rgba(212,168,50,0.3); }
+
+    /* ═══ Voting ═══ */
+    .ev-vote-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-top: 40px;
+    }
+    .ev-vote-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 8px; padding: 28px; overflow: hidden;
+    }
+    .ev-vote-card--jury     { border-color: rgba(168,85,247,0.30); }
+    .ev-vote-card--tele     { border-color: rgba(0,180,255,0.28); }
+    .ev-vote-card--approval { border-color: rgba(212,168,50,0.28); grid-column: 1 / -1; }
+    .ev-vc-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .ev-vote-card--jury     .ev-vc-eyebrow { color: var(--clr-violet-light); }
+    .ev-vote-card--tele     .ev-vc-eyebrow { color: var(--clr-accent); }
+    .ev-vote-card--approval .ev-vc-eyebrow { color: var(--clr-gold-light); }
+    .ev-vc-title { font-family: var(--font-display); font-size: 26px; letter-spacing: 0.04em; margin-bottom: 6px; }
+    .ev-vc-pct { font-family: var(--font-display); font-size: 64px; line-height: 1; margin-bottom: 14px; }
+    .ev-vote-card--jury     .ev-vc-pct { color: var(--clr-violet-light); }
+    .ev-vote-card--tele     .ev-vc-pct { color: var(--clr-accent); }
+    .ev-vote-card--approval .ev-vc-pct { color: var(--clr-gold-light); font-size: 40px; }
+    .ev-vc-desc { font-size: 13px; color: var(--clr-text-2); line-height: 1.75; }
+    .ev-vc-desc strong { color: var(--clr-text); }
+    /* Jury scoring grid */
+    .ev-jury-scores { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+    .ev-js-cell {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--clr-bg-2); border: 1px solid var(--clr-border);
+      border-radius: 4px; padding: 6px 10px; min-width: 40px;
+    }
+    .ev-js-cell--top { border-color: rgba(212,168,50,0.3); background: rgba(212,168,50,0.05); }
+    .ev-js-rank { font-size: 9px; color: var(--clr-text-3); letter-spacing: 0.08em; margin-bottom: 2px; }
+    .ev-js-cell--top .ev-js-rank { color: var(--clr-gold-light); opacity: 0.7; }
+    .ev-js-pts { font-family: var(--font-display); font-size: 20px; line-height: 1; color: var(--clr-violet-light); }
+    .ev-js-cell--top .ev-js-pts { color: var(--clr-gold-light); font-size: 24px; }
+    /* Approval layout */
+    .ev-approval-cols { display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: start; }
+    .ev-approval-rules { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+    .ev-approval-rule { display: flex; gap: 8px; font-size: 13px; color: var(--clr-text-2); line-height: 1.6; }
+    .ev-approval-rule::before { content: '·'; color: var(--clr-gold); flex-shrink: 0; font-size: 16px; line-height: 1.2; }
+    .ev-approval-rule strong { color: var(--clr-text); }
+
+    /* ═══ Eligibility ═══ */
+    .ev-elig-layout {
+      display: grid; grid-template-columns: 0.9fr 1fr;
+      gap: 48px 56px; margin-top: 48px; align-items: start;
+    }
+    .ev-elig-block__title {
+      font-weight: 700; font-size: 13px; color: var(--clr-text);
+      letter-spacing: 0.03em; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ev-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .ev-dot--v { background: var(--clr-violet-light); }
+    .ev-dot--p { background: var(--clr-pink-light); }
+    .ev-dot--a { background: var(--clr-accent-light); }
+    .ev-dot--g { background: var(--clr-gold-light); }
+    /* Platform table */
+    .ev-pt-wrap { border: 1px solid var(--clr-border); border-radius: 6px; overflow: hidden; }
+    .ev-pt-table {
+      width: 100%; border-collapse: collapse; font-size: 12px;
+    }
+    .ev-pt-table th {
+      background: var(--clr-surface-2); padding: 8px 12px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--clr-text-3); text-align: left; border-bottom: 1px solid var(--clr-border-2);
+    }
+    .ev-pt-table td { padding: 9px 12px; border-bottom: 1px solid var(--clr-border); color: var(--clr-text-2); vertical-align: middle; }
+    .ev-pt-table tr:last-child td { border-bottom: none; }
+    .ev-pt-table td:first-child { color: var(--clr-text); font-weight: 600; }
+    .ev-pt-table td:last-child { font-family: var(--font-mono); color: var(--clr-text); text-align: right; }
+    .ev-pt-note { margin-top: 8px; font-size: 11px; color: var(--clr-text-3); line-height: 1.55; }
+    /* Criteria list */
+    .ev-crit-list { display: flex; flex-direction: column; gap: 5px; }
+    .ev-crit-item {
+      display: flex; gap: 10px; align-items: flex-start;
+      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.6;
+      padding: 9px 12px; background: var(--clr-surface);
+      border: 1px solid var(--clr-border); border-radius: 4px;
+    }
+    .ev-crit-item::before { content: '·'; color: var(--clr-violet); flex-shrink: 0; font-size: 16px; line-height: 1.2; }
+    .ev-crit-item strong { color: var(--clr-text); }
+
+    /* ═══ Rules ═══ */
+    .ev-rules-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 40px;
+    }
+    .ev-rule-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 6px; padding: 22px 22px 20px;
+    }
+    .ev-rule-card__num {
+      font-family: var(--font-display); font-size: 28px; line-height: 1;
+      margin-bottom: 12px; opacity: 0.38;
+    }
+    .ev-rule-card--sf   .ev-rule-card__num { color: var(--clr-accent-light); }
+    .ev-rule-card--host .ev-rule-card__num { color: var(--clr-violet-light); }
+    .ev-rule-card--adv  .ev-rule-card__num { color: var(--clr-pink-light); }
+    .ev-rule-card--tie  .ev-rule-card__num { color: var(--clr-gold-light); }
+    .ev-rule-card--co   .ev-rule-card__num { color: var(--clr-accent-light); }
+    .ev-rule-card--champ .ev-rule-card__num { color: var(--clr-gold-light); }
+    .ev-rule-card__title { font-weight: 600; font-size: 13px; color: var(--clr-text); margin-bottom: 8px; }
+    .ev-rule-card__body { font-size: 12px; color: var(--clr-text-2); line-height: 1.75; }
+    .ev-rule-card__body strong { color: var(--clr-text); }
+
+    /* ═══ Responsive ═══ */
+    @media (max-width: 960px) {
+      .ev-hero__layout    { grid-template-columns: 1fr; }
+      .ev-logo-wrap       { display: none; }
+      .ev-submit-layout   { grid-template-columns: 1fr; gap: 40px; }
+      .submit-panel       { position: static; }
+      .ev-elig-layout     { grid-template-columns: 1fr; gap: 36px; }
+      .ev-vote-grid       { grid-template-columns: 1fr; }
+      .ev-vote-card--approval { grid-column: 1; }
+    }
+    @media (max-width: 700px) {
+      .ev-rules-grid      { grid-template-columns: 1fr 1fr; }
+      .ev-tl-row          { grid-template-columns: 112px 1fr; }
+      .ev-tl-date         { font-size: 11px; padding: 12px 10px; }
+    }
+    @media (max-width: 480px) {
+      .ev-rules-grid      { grid-template-columns: 1fr; }
+      .ev-tl-row          { grid-template-columns: 1fr; }
+      .ev-tl-date         { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 10px 14px 6px; font-size: 11px; }
+      .ev-approval-cols   { grid-template-columns: 1fr; gap: 16px; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .ev-eyebrow:hover { color: var(--clr-violet-light); }
+    }
+
+    /* ═══ TOC ═══ */
+    .ev-toc {
+      position: fixed; right: 19px; bottom: 90px; z-index: 90;
+      display: flex; flex-direction: column; gap: 1px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .ev-toc--visible { opacity: 1; visibility: visible; }
+    .ev-toc__item {
+      font-family: var(--font-body); font-size: 11px;
+      color: var(--clr-text-3); cursor: pointer;
+      padding: 3px 13px 3px 0;
       position: relative;
-      display: flex;
-      flex-direction: column;
+      transition: color 0.15s;
+      line-height: 1.5; white-space: nowrap; user-select: none;
+      text-align: right;
     }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 15px;
-      top: 16px;
-      bottom: 16px;
-      width: 1px;
-      background: linear-gradient(180deg,
-        var(--clr-accent) 0%,
-        var(--clr-violet) 55%,
-        transparent 100%);
-      opacity: 0.18;
+    .ev-toc__item::after {
+      content: ''; position: absolute; right: 3px; top: 50%;
+      transform: translateY(-50%); width: 5px; height: 5px;
+      border-radius: 50%; background: var(--clr-violet-light);
+      opacity: 0; transition: opacity 0.2s;
     }
-    .tl-item {
-      display: grid;
-      grid-template-columns: 32px 1fr;
-      gap: 14px;
-      padding: 10px 0;
+    .ev-toc__item:not(.ev-toc__item--active):hover { color: var(--clr-text); }
+    .ev-toc__item--active { color: var(--clr-violet-light); }
+    .ev-toc__item--active::after { opacity: 1; animation: ev-toc-breathe 3s ease-in-out infinite; }
+    @keyframes ev-toc-breathe {
+      0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+      50%       { opacity: 0.35; transform: translateY(-50%) scale(0.65); }
     }
-    .tl-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--clr-bg-2);
-      border: 1.5px solid var(--clr-border-2);
-      justify-self: center;
-      margin-top: 5px;
-    }
-    .tl-item--active .tl-dot {
-      background: var(--clr-accent);
-      border-color: var(--clr-accent);
-      box-shadow: 0 0 8px rgba(0,180,255,0.55);
-    }
-    .tl-item--gold .tl-dot {
-      background: var(--clr-gold);
-      border-color: var(--clr-gold);
-      box-shadow: 0 0 8px rgba(200,152,42,0.55);
-    }
-    .tl-name {
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--clr-text);
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
-      line-height: 1.3;
-    }
-    .tl-item--gold .tl-name { color: var(--clr-gold-light); }
-    .tl-date {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: var(--clr-text-3);
-      margin-top: 3px;
-    }
-    .tl-item--gold .tl-date { color: var(--clr-gold); opacity: 0.75; }
-    .tl-desc {
-      font-size: 12px;
-      color: var(--clr-text-3);
-      line-height: 1.65;
-      margin-top: 4px;
-    }
-    .tl-badge {
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 0.1em;
-      padding: 2px 5px;
-      border-radius: 2px;
-      text-transform: uppercase;
-      flex-shrink: 0;
-    }
-    .tl-badge--submit {
-      background: rgba(224,64,160,0.1);
-      color: var(--clr-pink-light);
-      border: 1px solid rgba(224,64,160,0.3);
-    }
-    .tl-badge--vote {
-      background: rgba(0,180,255,0.1);
-      color: var(--clr-accent-light);
-      border: 1px solid rgba(0,180,255,0.3);
-    }
-    .tl-badge--live {
-      background: rgba(168,85,247,0.1);
-      color: var(--clr-violet-light);
-      border: 1px solid rgba(168,85,247,0.3);
-    }
-
-    /* ── Rules grid ── */
-    .rules-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-    }
-    .rule-card {
-      background: var(--clr-surface);
-      border: 1px solid var(--clr-border);
-      border-radius: 6px;
-      padding: 20px 22px;
-    }
-    .rule-card__num {
-      font-family: var(--font-display);
-      font-size: 26px;
-      line-height: 1;
-      margin-bottom: 10px;
-      opacity: 0.3;
-    }
-    .rule-card--qualify .rule-card__num { color: var(--clr-violet-light); opacity: 0.4; }
-    .rule-card--song    .rule-card__num { color: var(--clr-accent);        opacity: 0.4; }
-    .rule-card--advance .rule-card__num { color: var(--clr-pink-light);    opacity: 0.4; }
-    .rule-card--vote    .rule-card__num { color: var(--clr-gold-light);    opacity: 0.4; }
-    .rule-card--prize   .rule-card__num { color: var(--clr-text);          opacity: 0.25; }
-    .rule-card__title {
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--clr-text);
-      margin-bottom: 7px;
-    }
-    .rule-card__body {
-      font-size: 12px;
-      color: var(--clr-text-2);
-      line-height: 1.75;
-    }
-    .rule-card__body strong { color: var(--clr-text); }
-
-    /* ── Vote split ── */
-    .vote-split {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    @media (max-width: 580px) { .vote-split { grid-template-columns: 1fr; } }
-    .vote-card {
-      background: var(--clr-surface);
-      border-radius: 6px;
-      padding: 22px 24px;
-      border: 1px solid var(--clr-border);
-    }
-    .vote-card--jury { border-color: rgba(168,85,247,0.28); }
-    .vote-card--tele { border-color: rgba(0,180,255,0.28);  }
-    .vote-card__eyebrow {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      margin-bottom: 4px;
-    }
-    .vote-card--jury .vote-card__eyebrow { color: var(--clr-violet-light); }
-    .vote-card--tele .vote-card__eyebrow { color: var(--clr-accent); }
-    .vote-card__title {
-      font-family: var(--font-display);
-      font-size: 24px;
-      letter-spacing: 0.04em;
-      color: var(--clr-text);
-      margin-bottom: 10px;
-    }
-    .vote-card__pct {
-      font-family: var(--font-display);
-      font-size: 56px;
-      line-height: 1;
-      margin-bottom: 12px;
-    }
-    .vote-card--jury .vote-card__pct { color: var(--clr-violet-light); }
-    .vote-card--tele .vote-card__pct { color: var(--clr-accent);       }
-    .vote-card__desc {
-      font-size: 12px;
-      color: var(--clr-text-2);
-      line-height: 1.75;
-    }
-    .vote-card__desc strong { color: var(--clr-text); }
-    .vote-extra {
-      margin-top: 14px;
-      padding: 18px 22px;
-      background: var(--clr-bg-2);
-      border: 1px solid var(--clr-border);
-      border-radius: 6px;
-    }
-    .vote-extra__title {
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--clr-text);
-      margin-bottom: 6px;
-    }
-    .vote-extra__desc {
-      font-size: 12px;
-      color: var(--clr-text-2);
-      line-height: 1.75;
-    }
-    .vote-extra__desc strong { color: var(--clr-text); }
+    @media (max-width: 960px) { .ev-toc { display: none; } }
   </style>
 </head>
 <body>
+<div id="site-nav"></div>
 
-  <!-- NAV -->
-  <div id="site-nav"></div>
+<!-- ═══ HERO ═══ -->
+<section class="ev-hero">
+  <div class="ev-hero__glow" aria-hidden="true"></div>
+  <div class="ev-hero__grid" aria-hidden="true"></div>
+  <div class="ev-hero__watermark" aria-hidden="true">BARVISION</div>
+  <div class="section__inner ev-hero__inner">
+    <div class="ev-hero__layout">
 
-  <!-- HERO -->
-  <section class="ev-hero">
-    <div class="ev-hero__glow" aria-hidden="true"></div>
-    <div class="ev-hero__grid" aria-hidden="true"></div>
-    <div class="ev-hero__inner section__inner">
-
-      <nav class="breadcrumb" aria-label="导航路径">
-        <a href="../../">Barboard</a>
-        <span class="breadcrumb__sep">/</span>
-        <a href="../../barvision.html">Barvision</a>
-        <span class="breadcrumb__sep">/</span>
-        <span>2026</span>
-      </nav>
-
-      <img src="../../assets/images/barvision_logo_2026.svg" class="ev-logo" alt="Barvision Chongqing 2026">
-      <div class="ev-meta">主办：<a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a> &nbsp;·&nbsp; 重庆</div>
-
-      <div class="ev-hero__bottom">
+      <div>
+        <a href="../../barvision.html" class="ev-eyebrow">
+          <span>←</span><span>Barvision</span>
+        </a>
+        <h1 class="ev-title">Chongqing<br><span class="ev-accent">2026</span></h1>
+        <div class="ev-meta">
+          <span class="ev-meta-item">Barvision Chongqing 2026</span>
+          <span class="ev-meta-item">主办：<a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a></span>
+          <span class="ev-meta-item">重声交响 Echoing Confluence</span>
+        </div>
+        <p class="ev-hero__desc">
+          第十六届欧美流行歌曲个人榜吧歌曲大赛。榜吧成员选送小众歌曲参赛，
+          经半决赛投票后晋级决赛，最终通过评委票与观众票合并计分决出年度冠军。
+        </p>
+        <div class="ev-hero__cta">
+          <a href="#submit"      class="btn btn--primary">歌曲报名</a>
+          <a href="#schedule"    class="btn btn--outline">赛程安排</a>
+          <a href="#voting"      class="btn btn--outline">投票方式</a>
+          <a href="#eligibility" class="btn btn--outline">参赛要求</a>
+        </div>
         <div class="ev-countdown" id="heroCountdownWrap">
-          <div class="ev-countdown__label" id="heroCountdownLabel">距离提交通道开启还有</div>
-          <div class="ev-countdown__digits" id="heroCountdown">— 天</div>
+          <span class="ev-countdown__label" id="heroCountdownLabel">距提交通道开启还有</span>
+          <span class="ev-countdown__digits" id="heroCountdown">—</span>
         </div>
-        <div class="ev-actions">
-          <a href="#submit" class="btn btn--primary">歌曲报名</a>
-          <a href="#schedule" class="btn btn--outline">查看赛程</a>
-          <a href="#rules" class="btn btn--outline">参赛规则</a>
-        </div>
+        <p style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-05-30</span></p>
+      </div>
+
+      <div class="ev-logo-wrap">
+        <img src="../../assets/images/barvision_logo_2026.svg" class="ev-logo" alt="Barvision Chongqing 2026">
       </div>
 
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 歌曲提交 -->
-  <section class="ev-section" id="submit">
-    <div class="section__inner">
-      <div class="ev-two-col">
+<!-- ═══ 歌曲报名 ═══ -->
+<section class="ev-section" id="submit">
+  <div class="section__inner">
+    <div class="ev-submit-layout">
 
-        <!-- 左：提交说明 -->
-        <div>
-          <div class="ev-section__header">
-            <p class="section-label">歌曲提交</p>
-            <h2 class="section__title" style="font-size:clamp(28px,4vw,52px);">SUBMIT<br>YOUR SONG</h2>
-            <p class="section__subtitle">每位榜吧成员均可报名参赛，提交一首你想代表自己参加本届赛事的歌曲。</p>
-          </div>
+      <!-- Left: info -->
+      <div>
+        <div class="ev-section__hd">
+          <p class="section-label fade-up">歌曲报名</p>
+          <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">SUBMIT<br>YOUR <span style="color:var(--clr-violet-light);">SONG</span></h2>
+          <p class="section__subtitle fade-up" style="margin-top:24px;max-width:460px;">
+            每位榜吧成员可提交一首参赛歌曲。提交成功后自动成为本届评委，须在各阶段完成投票。
+          </p>
+        </div>
 
-          <p class="section-label" style="margin-bottom:10px;">参赛歌曲要求</p>
-          <div class="criteria-list">
-            <div class="criteria-item">
-              <div class="criteria-item__dot"></div>
-              <div class="criteria-item__text"><strong>语言不限</strong>，任何语言的歌曲均可参赛</div>
-            </div>
-            <div class="criteria-item">
-              <div class="criteria-item__dot"></div>
-              <div class="criteria-item__text"><strong>发行时间：</strong>建议为近三年内发行的作品（详见 Rulebook）</div>
-            </div>
-            <div class="criteria-item">
-              <div class="criteria-item__dot"></div>
-              <div class="criteria-item__text"><strong>每人限报 1 首</strong>，同一参赛者不得重复提交</div>
-            </div>
-            <div class="criteria-item">
-              <div class="criteria-item__dot"></div>
-              <div class="criteria-item__text">参赛歌曲须为<strong>非本人原创</strong>的已发行歌曲</div>
-            </div>
-            <div class="criteria-item">
-              <div class="criteria-item__dot"></div>
-              <div class="criteria-item__text">歌曲须附有可供收听的<strong>公开链接</strong>（网易云 / QQ 音乐 / Spotify 等）</div>
-            </div>
-          </div>
-
-          <div style="margin-top:24px;padding:16px 20px;background:var(--clr-bg-2);border:1px solid var(--clr-border);border-radius:6px;">
-            <div style="font-size:11px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--clr-text-3);margin-bottom:6px;">提交截止</div>
-            <div style="font-family:var(--font-mono);font-size:14px;color:var(--clr-text);">2026 年 7 月 19 日 24:00（北京时间）</div>
+        <div class="ev-req-block fade-up">
+          <p class="ev-req-title">提交方式</p>
+          <div class="ev-req-list">
+            <div class="ev-req-item"><strong>内部选择（内定）</strong> 私信主办方 <a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a> 提交歌曲信息</div>
+            <div class="ev-req-item"><strong>公开选拔（海选）</strong> 由榜吧成员自行组织，海选获胜者代表参赛</div>
+            <div class="ev-req-item"><strong>合报（最多两人）</strong> 经主办方与双方同意后，共同选送一首歌曲</div>
           </div>
         </div>
 
-        <!-- 右：提交面板 -->
-        <div>
-          <div class="submit-panel">
-            <div class="submit-panel__head">
-              <span class="submit-panel__title">歌曲报名</span>
-              <span class="submit-panel__status submit-panel__status--locked" id="submitStatusBadge">未开启</span>
-            </div>
-            <div class="submit-panel__body">
+        <div class="ev-req-block fade-up">
+          <p class="ev-req-title">核心提交须知</p>
+          <div class="ev-req-list">
+            <div class="ev-req-item"><strong>每人限报 1 首</strong>，不接受代报</div>
+            <div class="ev-req-item">发行时间须在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
+            <div class="ev-req-item">未进入过任何榜吧<strong>官方榜单或评比名单</strong>（含 Barvision、吧莱美等）</div>
+            <div class="ev-req-item">BBL 周榜单曲<strong>峰值 ≤ #50</strong>，且在榜 <strong>≤ 5 周</strong></div>
+            <div class="ev-req-item">艺人在历届 Barvision 中<strong>未获前三名</strong>，参赛次数 <strong>≤ 3 次</strong></div>
+          </div>
+        </div>
 
-              <!-- 通道未开启 -->
-              <div class="submit-locked" id="submitLocked">
-                <svg class="submit-locked__icon" width="40" height="40" viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="10" y="18" width="20" height="16" rx="2"/>
-                  <path d="M14 18v-5a6 6 0 0112 0v5"/>
-                </svg>
-                <p class="submit-locked__heading">歌曲征集即将开启</p>
-                <p class="submit-locked__msg">歌曲提交通道将于 <strong style="color:var(--clr-accent);">北京时间 2026 年 6 月 1 日 18:00</strong> 正式开启。</p>
-                <div class="submit-locked__cd">
-                  <div class="submit-locked__cd-label">距开启还有</div>
-                  <div class="submit-locked__cd-digits" id="panelCountdown">— 天</div>
-                </div>
+        <div class="ev-deadline-bar fade-up">
+          <div class="ev-deadline-bar__item">
+            <div class="ev-deadline-bar__label">通道开启</div>
+            <div class="ev-deadline-bar__val"><span style="font-family:var(--font-body);">北京时间</span> 2026-06-01 18:00</div>
+          </div>
+          <div class="ev-deadline-bar__divider"></div>
+          <div class="ev-deadline-bar__item">
+            <div class="ev-deadline-bar__label">提交截止</div>
+            <div class="ev-deadline-bar__val"><span style="font-family:var(--font-body);">北京时间</span> 2026-07-19 24:00</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: panel -->
+      <div class="fade-up">
+        <div class="submit-panel">
+          <div class="submit-panel__head">
+            <span class="submit-panel__title">歌曲报名通道</span>
+            <span class="sp-badge sp-badge--locked" id="spBadge">即将开启</span>
+          </div>
+          <div class="submit-panel__body">
+
+            <!-- Locked -->
+            <div class="sp-locked" id="spLocked">
+              <svg class="sp-locked__icon" width="44" height="44" viewBox="0 0 44 44"
+                fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="11" y="20" width="22" height="18" rx="3"/>
+                <path d="M15 20v-6a7 7 0 0114 0v6"/>
+              </svg>
+              <p class="sp-locked__heading">歌曲征集即将开启</p>
+              <p class="sp-locked__msg">提交通道将于<br><strong>2026 年 6 月 1 日 18:00（北京时间）</strong><br>正式开启。</p>
+              <div class="sp-locked__cd">
+                <div class="sp-locked__cd-label">距开启还有</div>
+                <div class="sp-locked__cd-digits" id="panelCountdown">—</div>
+                <div class="sp-locked__date"><span style="font-family:var(--font-body);">北京时间</span> 2026-06-01 18:00</div>
               </div>
+            </div>
 
-              <!-- 通道已开启 -->
-              <!-- 替换 data-form-url 为实际问卷链接（问卷星 / 金数据 等） -->
-              <div class="submit-open" id="submitOpen" data-form-url="">
-                <p class="submit-open__desc">
-                  提交通道现已开启。请填写以下信息完成歌曲报名。<br>
-                  如表单加载失败，可点击下方按钮在新标签页中打开。
-                </p>
-                <!-- 问卷 iframe 嵌入（将 src 替换为实际链接） -->
-                <iframe
-                  id="submitIframe"
-                  src=""
-                  width="100%"
-                  style="min-height:600px;border:none;border-radius:4px;background:var(--clr-bg-2);"
-                  allowfullscreen
-                  title="Barvision 2026 歌曲提交表单"
-                ></iframe>
-                <div style="margin-top:14px;text-align:center;">
-                  <a id="submitExtLink" href="#" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:12px;">在新标签页中打开表单<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a>
-                </div>
-                <p class="submit-open__deadline">截止：2026-07-19 24:00 CST</p>
+            <!-- Open -->
+            <div class="sp-open" id="spOpen">
+              <p class="sp-open__desc">提交通道现已开启。请填写以下表单完成歌曲报名。<br>如表单加载失败，可点击下方按钮在新标签页打开。</p>
+              <iframe id="spIframe" src="" width="100%"
+                style="min-height:560px;border:none;border-radius:4px;background:var(--clr-bg-2);"
+                allowfullscreen title="Barvision 2026 歌曲提交表单"></iframe>
+              <div style="margin-top:14px;text-align:center;">
+                <a id="spExtLink" href="#" target="_blank" rel="noopener" class="btn btn--outline" style="font-size:12px;">
+                  在新标签页打开表单
+                  <svg xmlns="http://www.w3.org/2000/svg" width="9" height="9" viewBox="0 0 10 10"
+                    fill="none" stroke="currentColor" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"
+                    style="margin-left:4px;vertical-align:middle;">
+                    <path d="M2 8L8 2M8 2H4M8 2v4"/>
+                  </svg>
+                </a>
               </div>
+              <p class="sp-open__deadline">截止：<span style="font-family:var(--font-body);">北京时间</span> 2026-07-19 24:00</p>
+            </div>
 
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 赛程 ═══ -->
+<section class="ev-section" id="schedule">
+  <div class="section__inner">
+    <div class="ev-section__hd">
+      <p class="section-label fade-up">赛程安排</p>
+      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">SCHEDULE</h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;">完整赛程时间表，具体安排以后续公告为准。</p>
+    </div>
+
+    <div class="ev-phases">
+
+      <!-- STAGE 1 -->
+      <div class="ev-phase fade-up">
+        <div class="ev-phase__header">
+          <span class="ev-phase__tag ev-phase__tag--submit">STAGE 1</span>
+          <span class="ev-phase__name">歌曲提交</span>
+          <div class="ev-phase__line"></div>
+        </div>
+        <div class="ev-tl">
+          <div class="ev-tl-row ev-tl-row--hi">
+            <div class="ev-tl-date">06-01<br>18:00</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">歌曲提交通道开启 <span class="tl-b tl-b--sub">开启</span></div>
+              <div class="ev-tl-desc">榜吧成员可通过内定或组织海选的方式提交参赛歌曲</div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">07-19<br>24:00</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">提交通道关闭 · 歌曲名单公示 <span class="tl-b tl-b--adm">Deadline</span></div>
+              <div class="ev-tl-desc">提交截止，所有参赛曲目公开公示，进入 72 小时异议期（至 7/22 24:00）</div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">07-22<br>24:00</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">歌曲公示期结束 <span class="tl-b tl-b--adm">Deadline</span></div>
+              <div class="ev-tl-desc">公示期内可对参赛资格提出异议并举证，逾期无效</div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">07-24<br>24:00</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">参赛歌曲名单正式确定 <span class="tl-b tl-b--adm">Deadline</span></div>
+              <div class="ev-tl-desc">资格审查完成，名单锁定；被取消资格者可在此前重新提交替代歌曲</div>
             </div>
           </div>
         </div>
+      </div>
 
+      <!-- STAGE 2 -->
+      <div class="ev-phase fade-up">
+        <div class="ev-phase__header">
+          <span class="ev-phase__tag ev-phase__tag--semi">STAGE 2</span>
+          <span class="ev-phase__name">半决赛 Semi-Finals</span>
+          <div class="ev-phase__line"></div>
+        </div>
+        <div class="ev-tl">
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">07-25<br>晚间</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">Semi-Final 1 展播 · 投票开启 <span class="tl-b tl-b--vote">投票</span></div>
+              <div class="ev-tl-desc">SF1 参赛歌曲展播，评委票与观众票通道同步开启</div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">07-31<br>24:00</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">Semi-Final 1 投票截止 <span class="tl-b tl-b--adm">Deadline</span></div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">08-01<br>晚间</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">Semi-Final 2 展播 · 投票开启 <span class="tl-b tl-b--vote">投票</span></div>
+              <div class="ev-tl-desc">SF2 参赛歌曲展播，评委票与观众票通道同步开启</div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">08-07<br>24:00</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">Semi-Final 2 投票截止 <span class="tl-b tl-b--adm">Deadline</span></div>
+            </div>
+          </div>
+          <div class="ev-tl-row ev-tl-row--hi">
+            <div class="ev-tl-date">08-08<br>晚间</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">Semi-Final 暨复活赛 直播 <span class="tl-b tl-b--live">直播</span></div>
+              <div class="ev-tl-desc">公布两场半决赛结果及晋级名单；复活赛（Second Chance）现场实时 Approval Vote；赛后公布 Grand Final Running Order</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- STAGE 3 -->
+      <div class="ev-phase fade-up">
+        <div class="ev-phase__header">
+          <span class="ev-phase__tag ev-phase__tag--final">STAGE 3</span>
+          <span class="ev-phase__name">决赛 Grand Final</span>
+          <div class="ev-phase__line"></div>
+        </div>
+        <div class="ev-tl">
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">08-08<br>晚间</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">决赛展播 · 投票通道开启 <span class="tl-b tl-b--vote">投票</span></div>
+              <div class="ev-tl-desc">共 18 首参赛歌曲；评委票与观众票通道同步开启</div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">08-16<br>晚间</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">决赛投票通道关闭 <span class="tl-b tl-b--adm">Deadline</span></div>
+              <div class="ev-tl-desc">提前确认投票意向的成员最迟可于 08-18 24:00 前提交补充投票</div>
+            </div>
+          </div>
+          <div class="ev-tl-row">
+            <div class="ev-tl-date">08-18<br>24:00</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">决赛票数统计截止 <span class="tl-b tl-b--adm">Deadline</span></div>
+            </div>
+          </div>
+          <div class="ev-tl-row ev-tl-row--gold">
+            <div class="ev-tl-date">08-22<br>晚间</div>
+            <div class="ev-tl-body">
+              <div class="ev-tl-name">Grand Final 直播 <span class="tl-b tl-b--gold">直播</span></div>
+              <div class="ev-tl-desc">公布最终赛果，揭晓 Barvision Chongqing 2026 年度冠军</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 投票方式 ═══ -->
+<section class="ev-section" id="voting">
+  <div class="section__inner">
+    <div class="ev-section__hd">
+      <p class="section-label fade-up">投票方式</p>
+      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">VOTING</h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">半决赛与决赛均采用评委票与观众票并行制，各占 50%。复活赛采用认可票（Approval Vote）。</p>
+    </div>
+
+    <div class="ev-vote-grid">
+
+      <!-- Jury -->
+      <div class="ev-vote-card ev-vote-card--jury fade-up">
+        <div class="ev-vc-eyebrow">评委票</div>
+        <div class="ev-vc-title">Jury Vote</div>
+        <div class="ev-vc-pct">50%</div>
+        <div class="ev-vc-desc">每位评委从参赛歌曲中选出 <strong>Top 10 排名</strong>，按以下标准赋分（不得为自己的参赛歌曲投票）：</div>
+        <div class="ev-jury-scores">
+          <div class="ev-js-cell ev-js-cell--top"><span class="ev-js-rank">#1</span><span class="ev-js-pts">12</span></div>
+          <div class="ev-js-cell ev-js-cell--top"><span class="ev-js-rank">#2</span><span class="ev-js-pts">10</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#3</span><span class="ev-js-pts">8</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#4</span><span class="ev-js-pts">7</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#5</span><span class="ev-js-pts">6</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#6</span><span class="ev-js-pts">5</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#7</span><span class="ev-js-pts">4</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#8</span><span class="ev-js-pts">3</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#9</span><span class="ev-js-pts">2</span></div>
+          <div class="ev-js-cell"><span class="ev-js-rank">#10</span><span class="ev-js-pts">1</span></div>
+        </div>
+      </div>
+
+      <!-- Tele -->
+      <div class="ev-vote-card ev-vote-card--tele fade-up">
+        <div class="ev-vc-eyebrow">观众票</div>
+        <div class="ev-vc-title">Tele Vote</div>
+        <div class="ev-vc-pct">50%</div>
+        <div class="ev-vc-desc">
+          每位观众拥有 <strong>20 票</strong>，可自由分配给该场任意参赛歌曲。
+          同一首歌最多可投 <strong>10 票</strong>。<br><br>
+          所有观众票按比例换算为与评委票等值的总分池，再按比例分配给各参赛歌曲。<br><br>
+          非选送者的榜吧成员须先完成观众票投票，方可参与评委票投票。选送者须同时完成两种投票，不得缺席。
+        </div>
+      </div>
+
+      <!-- Approval -->
+      <div class="ev-vote-card ev-vote-card--approval fade-up">
+        <div class="ev-approval-cols">
+          <div>
+            <div class="ev-vc-eyebrow">认可票 · 复活赛</div>
+            <div class="ev-vc-title">Approval Vote</div>
+            <div class="ev-vc-pct">LIVE</div>
+          </div>
+          <div>
+            <p class="ev-vc-desc" style="margin-top:4px;">
+              复活赛（Second Chance Round）在 Semi-Final 直播现场（08-08 晚）实时进行。
+              半决赛未晋级的全部歌曲及各海选第二名均可参赛，得票最高者晋级决赛。
+            </p>
+            <div class="ev-approval-rules" style="margin-top:14px;">
+              <div class="ev-approval-rule">每位投票者拥有 <strong>3 票</strong>，须至少投出 1 票，至多 3 票</div>
+              <div class="ev-approval-rule">可分配给 <strong>1 至 3 首</strong>不同歌曲，每首最多获得 1 票</div>
+              <div class="ev-approval-rule">结果即时统计并公布，胜者 <strong>1 名</strong>直接晋级决赛</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 参赛要求 ═══ -->
+<section class="ev-section" id="eligibility">
+  <div class="section__inner">
+    <div class="ev-section__hd">
+      <p class="section-label fade-up">参赛要求</p>
+      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">ELIGIBILITY</h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">各项资格审查时限为 <strong style="color:var(--clr-text);">2026-07-19 24:00</strong>。以下任一平台指标超出上限，歌曲即失去参赛资格。</p>
+    </div>
+
+    <div class="ev-elig-layout">
+
+      <!-- Platform table spans full width -->
+      <div class="fade-up" style="grid-column:1/-1;">
+        <div class="ev-elig-block__title">
+          <span class="ev-dot ev-dot--v"></span>平台数据上限
+        </div>
+        <div class="ev-pt-wrap"><table class="ev-pt-table">
+          <thead>
+            <tr>
+              <th>平台</th>
+              <th>指标项目</th>
+              <th style="text-align:right;">上限</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>网易云音乐</td><td>歌曲评论量</td><td>1,000</td></tr>
+            <tr><td>网易云音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
+            <tr style="border-top:1px solid var(--clr-border-2);">
+              <td>QQ 音乐</td><td>歌曲评论量</td><td>1,000</td>
+            </tr>
+            <tr><td>QQ 音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
+            <tr style="border-top:1px solid var(--clr-border-2);">
+              <td>Spotify</td><td>歌手月听众数</td><td>5,000,000</td>
+            </tr>
+            <tr><td>Spotify</td><td>单曲累计播放量</td><td>10,000,000</td></tr>
+            <tr style="border-top:1px solid var(--clr-border-2);">
+              <td>YouTube</td><td>官方频道订阅数</td><td>5,000,000</td>
+            </tr>
+            <tr><td>YouTube</td><td>官方单曲 MV 播放量</td><td>10,000,000</td></tr>
+          </tbody>
+        </table></div>
+        <p class="ev-pt-note">* 若歌曲存在多个版本，以最早发行时间为准。审查时限均为 2026-07-19 24:00。</p>
+      </div>
+
+      <!-- Song + Album requirements (left column) -->
+      <div style="display:flex;flex-direction:column;gap:36px;">
+        <div class="ev-elig-block fade-up">
+          <div class="ev-elig-block__title"><span class="ev-dot ev-dot--p"></span>歌曲要求</div>
+          <div class="ev-crit-list">
+            <div class="ev-crit-item">发行日期在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
+            <div class="ev-crit-item">未进入过任何<strong>榜吧官方榜单</strong>（含全吧及各派季榜、周榜等）</div>
+            <div class="ev-crit-item">未进入过任何<strong>榜吧官方评比名单</strong>（含吧视、吧莱美等）</div>
+            <div class="ev-crit-item">BBL 周榜单曲<strong>峰值 ≤ #50</strong>，且在榜<strong> ≤ 5 周</strong></div>
+            <div class="ev-crit-item">未进入过除选送者外 <strong>2 位及以上</strong>其他成员的个人年榜或半年榜</div>
+          </div>
+        </div>
+        <div class="ev-elig-block fade-up">
+          <div class="ev-elig-block__title"><span class="ev-dot ev-dot--g"></span>专辑要求</div>
+          <div class="ev-crit-list">
+            <div class="ev-crit-item">未进入过 <strong>Billboard 200</strong></div>
+            <div class="ev-crit-item">未获得过<strong>格莱美奖提名</strong></div>
+            <div class="ev-crit-item">未获得过<strong>吧莱美奖提名</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artist requirements (right column) -->
+      <div class="ev-elig-block fade-up">
+        <div class="ev-elig-block__title"><span class="ev-dot ev-dot--a"></span>艺人要求</div>
+        <div class="ev-crit-list">
+          <div class="ev-crit-item">累计参与 Barvision 次数 <strong>≤ 3 次</strong></div>
+          <div class="ev-crit-item">在历届 Barvision 中<strong>未获得前三名</strong></div>
+          <div class="ev-crit-item">未进入过榜吧官方<strong>年榜或半年榜 Top 100</strong></div>
+          <div class="ev-crit-item">未进入过各大分派<strong>年榜或半年榜 Top 50</strong></div>
+          <div class="ev-crit-item">未获得过 <strong>Eurovision Song Contest 冠军</strong></div>
+          <div class="ev-crit-item">未进入过 <strong>Billboard Artist 100</strong></div>
+          <div class="ev-crit-item">Lead 单曲未进入过 <strong>Billboard Hot 100、Global 200 或 UK Official Singles Chart Top 100</strong></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 规则摘要 ═══ -->
+<section class="ev-section" id="rules">
+  <div class="section__inner">
+    <div class="ev-section__hd">
+      <p class="section-label fade-up">规则摘要</p>
+      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">RULEBOOK</h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">核心规则摘要。完整规则请参阅 Rulebook Ver. 260530，最终解释权归主办方所有。</p>
+    </div>
+    <div class="ev-rules-grid">
+      <div class="ev-rule-card ev-rule-card--sf fade-up">
+        <div class="ev-rule-card__num">01</div>
+        <div class="ev-rule-card__title">半决赛晋级</div>
+        <div class="ev-rule-card__body">每场半决赛前 <strong>8 名</strong>晋级决赛，两场合计 16 首。非东道主参赛歌曲均需经历半决赛；参赛场次及出场顺序由<strong>抽签</strong>决定。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--host fade-up">
+        <div class="ev-rule-card__num">02</div>
+        <div class="ev-rule-card__title">东道主直通</div>
+        <div class="ev-rule-card__body">东道主（主办方 <a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a>）选送的歌曲<strong>直接晋级决赛</strong>，不参与半决赛评比。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--adv fade-up">
+        <div class="ev-rule-card__num">03</div>
+        <div class="ev-rule-card__title">复活赛晋级</div>
+        <div class="ev-rule-card__body">复活赛（Approval Vote）胜者 <strong>1 名</strong>晋级决赛。决赛共 <strong>18 首</strong>参赛歌曲（SF 16 + 东道主 1 + 复活赛 1）。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--tie fade-up">
+        <div class="ev-rule-card__num">04</div>
+        <div class="ev-rule-card__title">平局判定</div>
+        <div class="ev-rule-card__body">依次比较：① 观众票得分 → ② 总票源数 → ③ 从 12 分起逐项比较最高得分次数 → ④ <strong>出场顺序靠前者</strong>获胜。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--co fade-up">
+        <div class="ev-rule-card__num">05</div>
+        <div class="ev-rule-card__title">合报规则</div>
+        <div class="ev-rule-card__body">经主办方与双方同意，<strong>最多两人</strong>可共同选送一首歌曲。若分别投票，各自得分按 <strong>50%</strong> 计入总分。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--champ fade-up">
+        <div class="ev-rule-card__num">06</div>
+        <div class="ev-rule-card__title">冠军奖励</div>
+        <div class="ev-rule-card__body">年度冠军选送方将获得 <strong>Barvision 2027</strong> 的主办权，负责组织和举办下一届大赛。</div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 赛程 -->
-  <section class="ev-section" id="schedule">
-    <div class="section__inner">
-      <div class="ev-section__header">
-        <p class="section-label">赛程</p>
-        <h2 class="section__title" style="font-size:clamp(28px,4vw,52px);">SCHEDULE</h2>
-        <p class="section__subtitle">Barvision Chongqing 2026 完整赛程时间表</p>
-      </div>
-
-      <div style="max-width:640px;">
-        <div class="timeline">
-
-          <div class="tl-item tl-item--active">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-name">歌曲提交阶段 <span class="tl-badge tl-badge--submit">提交</span></div>
-              <div class="tl-date">2026-06-01 00:00 — 2026-07-19 24:00（北京时间）</div>
-              <div class="tl-desc">榜吧成员通过报名表单提交参赛歌曲</div>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-name">附加赛资格赛 <span class="tl-badge tl-badge--vote">投票</span></div>
-              <div class="tl-date">2026-07-25 — 2026-08-07</div>
-              <div class="tl-desc">Approval Vote，每人 3 票；胜者 1 名直接晋级决赛</div>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-name">Semi-Final 1 <span class="tl-badge tl-badge--vote">投票</span></div>
-              <div class="tl-date">2026-07-25 — 2026-07-31</div>
-              <div class="tl-desc">前 8 名晋级决赛</div>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-name">Semi-Final 2 <span class="tl-badge tl-badge--vote">投票</span></div>
-              <div class="tl-date">2026-08-01 — 2026-08-07</div>
-              <div class="tl-desc">前 8 名晋级决赛</div>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-name">Semi-Final 暨附加赛 <span class="tl-badge tl-badge--live">直播</span></div>
-              <div class="tl-date">2026-08-08 晚</div>
-              <div class="tl-desc">公布两场半决赛结果，附加赛现场实时投票（Approval Vote，每人 3 票）</div>
-            </div>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-name">Grand Final <span class="tl-badge tl-badge--vote">投票</span></div>
-              <div class="tl-date">2026-08-08 — 2026-08-16</div>
-              <div class="tl-desc">共 18 首参赛歌曲；评委票 50% + 观众票 50%</div>
-            </div>
-          </div>
-
-          <div class="tl-item tl-item--gold">
-            <div class="tl-dot"></div>
-            <div>
-              <div class="tl-name">Grand Final <span class="tl-badge tl-badge--live">直播</span></div>
-              <div class="tl-date">2026-08-22 晚</div>
-              <div class="tl-desc">公布最终赛果，揭晓 Barvision 2026 年度冠军</div>
-            </div>
-          </div>
-
-        </div>
+<!-- ═══ About ═══ -->
+<section class="ev-section">
+  <div class="section__inner">
+    <div style="max-width:660px;">
+      <p class="section-label fade-up">关于活动</p>
+      <h2 class="section__title fade-up" style="font-size:clamp(28px,4vw,52px);margin-top:24px;">ABOUT<br><span style="color:var(--clr-violet-light);">BARVISION</span></h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:100%;">
+        Barvision 是欧美流行音乐个人榜吧（Barboard）举办的年度歌曲大赛，灵感来自 Eurovision Song Contest。
+        成员自行选送小众歌曲参赛，经半决赛投票后晋级决赛，最终通过评委票与观众票的合并计分决出年度冠军。
+      </p>
+      <p class="section__subtitle fade-up" style="max-width:100%;margin-top:16px;">
+        Barvision 始于 2019 年，由 <a class="member" href="../../member/125.html" data-nickname="萌妈">@绿荫夏语</a> 创立，历经数年停办后于 2023 年恢复，现已举办至第十六届。
+        本届 Barvision Chongqing 2026 以重庆为举办城市，主题语为「重声交响 Echoing Confluence」。
+      </p>
+      <div class="fade-up" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+        <a href="../../barvision.html" class="btn btn--outline">Barvision 总览</a>
+        <a href="../../barvision/hof.html" class="btn btn--outline">Hall of Fame</a>
+        <a href="../../" class="btn btn--outline">返回首页</a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- 参赛规则 -->
-  <section class="ev-section" id="rules">
-    <div class="section__inner">
-      <div class="ev-section__header">
-        <p class="section-label">参赛规则</p>
-        <h2 class="section__title" style="font-size:clamp(28px,4vw,52px);">RULEBOOK</h2>
-        <p class="section__subtitle">核心规则摘要，完整规则请参阅 Rulebook Ver. 260305</p>
-      </div>
+<nav id="evToc" class="ev-toc" aria-label="页内目录">
+  <div class="ev-toc__item" data-target="submit">歌曲报名</div>
+  <div class="ev-toc__item" data-target="schedule">赛程安排</div>
+  <div class="ev-toc__item" data-target="voting">投票方式</div>
+  <div class="ev-toc__item" data-target="eligibility">参赛要求</div>
+  <div class="ev-toc__item" data-target="rules">规则摘要</div>
+</nav>
 
-      <div class="rules-grid">
-        <div class="rule-card rule-card--qualify">
-          <div class="rule-card__num">01</div>
-          <div class="rule-card__title">参赛资格</div>
-          <div class="rule-card__body">欧美流行音乐个人榜吧成员均可参赛。<strong>每人限提交 1 首</strong>参赛歌曲。</div>
-        </div>
-        <div class="rule-card rule-card--song">
-          <div class="rule-card__num">02</div>
-          <div class="rule-card__title">歌曲要求</div>
-          <div class="rule-card__body">任意语言，须为<strong>已公开发行</strong>的非原创歌曲，并附可供收听的公开链接。</div>
-        </div>
-        <div class="rule-card rule-card--advance">
-          <div class="rule-card__num">03</div>
-          <div class="rule-card__title">晋级规则</div>
-          <div class="rule-card__body">每场半决赛<strong>前 8 名</strong>晋级决赛；东道主<strong>直通</strong>决赛；附加赛胜者 <strong>1 名</strong>晋级。决赛共 <strong>18 首</strong>。</div>
-        </div>
-        <div class="rule-card rule-card--vote">
-          <div class="rule-card__num">04</div>
-          <div class="rule-card__title">投票规则</div>
-          <div class="rule-card__body">评委票（Jury Vote）与观众票（Tele Vote）<strong>各占 50%</strong>。评委 Top 10 给分，观众票 20 票自由分配。</div>
-        </div>
-        <div class="rule-card rule-card--prize">
-          <div class="rule-card__num">05</div>
-          <div class="rule-card__title">冠军奖励</div>
-          <div class="rule-card__body">年度冠军获得者将取得 <strong>Barvision 2027</strong> 主办权，代表其选定城市举办下届赛事。</div>
-        </div>
-      </div>
-    </div>
-  </section>
+<div id="site-footer"></div>
+<script src="../../scripts/nav.js"></script>
+<script>
+  /* Fade-up observer */
+  if ('IntersectionObserver' in window) {
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }
 
-  <!-- 投票方式 -->
-  <section class="ev-section" id="voting">
-    <div class="section__inner">
-      <div class="ev-section__header">
-        <p class="section-label">投票方式</p>
-        <h2 class="section__title" style="font-size:clamp(28px,4vw,52px);">VOTING</h2>
-      </div>
+  /* Countdown + form gate */
+  const OPEN_DATE  = new Date('2026-06-01T18:00:00+08:00');
+  const CLOSE_DATE = new Date('2026-07-19T24:00:00+08:00');
+  const FORM_URL   = '';  // Fill in actual URL when ready, e.g. 'https://www.wjx.cn/vm/xxxxxxx.aspx'
 
-      <div style="max-width:640px;">
-        <div class="vote-split">
-          <div class="vote-card vote-card--jury">
-            <div class="vote-card__eyebrow">评委票</div>
-            <div class="vote-card__title">Jury Vote</div>
-            <div class="vote-card__pct">50%</div>
-            <div class="vote-card__desc">
-              每位评委从参赛歌曲中选出 <strong>Top 10</strong>，依照
-              <strong>12 / 10 / 8 / 7 / 6 / 5 / 4 / 3 / 2 / 1</strong> 分制给分。
-            </div>
-          </div>
-          <div class="vote-card vote-card--tele">
-            <div class="vote-card__eyebrow">观众票</div>
-            <div class="vote-card__title">Tele Vote</div>
-            <div class="vote-card__pct">50%</div>
-            <div class="vote-card__desc">
-              每位观众拥有 <strong>20 票</strong>，可自由分配给任意歌曲，
-              每首歌曲最多可投 <strong>5 票</strong>。
-            </div>
-          </div>
-        </div>
+  function pad(n) { return String(n).padStart(2, '0'); }
 
-        <div class="vote-extra">
-          <div class="vote-extra__title">附加赛 · Approval Vote</div>
-          <div class="vote-extra__desc">
-            附加赛采用认可票制，每位投票者拥有 <strong>3 票</strong>，可投给任意歌曲（每首最多 1 票）。
-            得票最高者晋级决赛。附加赛资格赛于赛前线上进行，决赛日当晚<strong>现场实时投票</strong>揭晓结果。
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+  function fmtCountdown(diff) {
+    if (diff <= 0) return '—';
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    return d + '<span class="ev-cd-unit">天</span>' +
+           pad(h) + '<span class="ev-cd-unit">时</span>' +
+           pad(m) + '<span class="ev-cd-unit">分</span>' +
+           pad(s) + '<span class="ev-cd-unit">秒</span>';
+  }
 
-  <!-- 关于 Barvision -->
-  <section class="ev-section">
-    <div class="section__inner">
-      <div style="max-width:680px;">
-        <p class="section-label">关于活动</p>
-        <h2 class="section__title" style="font-size:clamp(28px,4vw,52px);">ABOUT<br><span style="color:var(--clr-violet-light);">BARVISION</span></h2>
-        <p class="section__subtitle" style="max-width:100%;">
-          Barvision 是欧美流行音乐个人榜吧（Barboard）举办的年度歌曲大赛，灵感来自 Eurovision Song Contest。
-          成员自行选送小众歌曲参赛，经半决赛投票后晋级决赛，最终通过评委票与观众票的合并计分决出年度冠军。
-        </p>
-        <p class="section__subtitle" style="max-width:100%;margin-top:16px;">
-          Barvision 始于 2019 年，现已举办至第十六届。本届 Barvision Chongqing 2026 以重庆为举办城市，
-          主题语为「重声交响 Echoing Confluence」。
-        </p>
-        <div style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
-          <a href="../../barvision.html" class="btn btn--outline">完整 Barvision 存档</a>
-          <a href="../../" class="btn btn--outline">返回首页</a>
-        </div>
-      </div>
-    </div>
-  </section>
+  function updateAll() {
+    const now      = new Date();
+    const diff     = OPEN_DATE - now;
+    const isOpen   = diff <= 0 && now <= CLOSE_DATE;
+    const isClosed = now > CLOSE_DATE;
 
-  <!-- FOOTER -->
-  <div id="site-footer"></div>
-
-  <script src="../../scripts/nav.js"></script>
-  <script>
-    // Fade-up (shared)
-    if ('IntersectionObserver' in window) {
-      const obs = new IntersectionObserver((entries) => {
-        entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-      }, { threshold: 0.1 });
-      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-    } else {
-      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
-    }
-
-    // Countdown + form gate
-    const OPEN_DATE  = new Date('2026-06-01T18:00:00+08:00');
-    const CLOSE_DATE = new Date('2026-07-19T24:00:00+08:00');
-    // Replace with actual form URL when ready, e.g. 'https://www.wjx.cn/vm/xxxxxxx.aspx'
-    const FORM_URL   = '';
-
-    function pad(n) { return String(n).padStart(2, '0'); }
-
-    function renderCountdown(el, diff) {
-      if (diff <= 0) { el.textContent = '—'; return; }
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      el.innerHTML =
-        d + '<span class="ev-countdown__unit">天</span>' +
-        pad(h) + '<span class="ev-countdown__unit">时</span>' +
-        pad(m) + '<span class="ev-countdown__unit">分</span>' +
-        pad(s) + '<span class="ev-countdown__unit">秒</span>';
-    }
-
-    function updateAll() {
-      const now  = new Date();
-      const diff = OPEN_DATE - now;
-      const isOpen   = diff <= 0;
-      const isClosed = now > CLOSE_DATE;
-
-      // Hero countdown
-      const heroEl   = document.getElementById('heroCountdown');
-      const heroWrap = document.getElementById('heroCountdownWrap');
-      const heroLabel = document.getElementById('heroCountdownLabel');
-      if (heroEl) {
-        if (isClosed) {
-          heroLabel.textContent = '提交通道已关闭';
-          heroEl.textContent = '截止于 7/19';
-        } else if (isOpen) {
-          heroLabel.textContent = '提交通道已开启';
-          heroEl.innerHTML = '提交截止：<span style="font-size:24px;">7/19</span>';
-        } else {
-          renderCountdown(heroEl, diff);
-        }
+    /* Hero countdown */
+    const heroEl    = document.getElementById('heroCountdown');
+    const heroLabel = document.getElementById('heroCountdownLabel');
+    if (heroEl) {
+      if (isClosed) {
+        heroLabel.textContent = '提交通道已关闭';
+        heroEl.textContent    = '截止于 7/19';
+      } else if (isOpen) {
+        heroLabel.textContent = '提交通道已开启';
+        heroEl.innerHTML      = '截止：<span style="font-size:22px;opacity:0.75;">7/19</span>';
+      } else {
+        heroLabel.textContent = '距提交通道开启还有';
+        heroEl.innerHTML      = fmtCountdown(diff);
       }
-
-      // Panel countdown
-      const panelEl = document.getElementById('panelCountdown');
-      if (panelEl && !isOpen) renderCountdown(panelEl, diff);
-
-      // Show/hide submit form
-      const lockedEl = document.getElementById('submitLocked');
-      const openEl   = document.getElementById('submitOpen');
-      const badgeEl  = document.getElementById('submitStatusBadge');
-
-      if (isOpen && !isClosed) {
-        if (lockedEl) lockedEl.style.display = 'none';
-        if (openEl)   openEl.style.display = 'block';
-        if (badgeEl) {
-          badgeEl.textContent = '通道开启中';
-          badgeEl.className = 'submit-panel__status submit-panel__status--open';
-        }
-        // Wire up form
-        if (FORM_URL) {
-          const iframe  = document.getElementById('submitIframe');
-          const extLink = document.getElementById('submitExtLink');
-          if (iframe && !iframe.src) iframe.src = FORM_URL;
-          if (extLink) extLink.href = FORM_URL;
-        }
-      } else if (isClosed) {
-        if (lockedEl) {
-          lockedEl.querySelector('.submit-locked__msg').innerHTML =
-            '歌曲提交通道已于<br><strong style="color:var(--clr-text-2);">2026 年 7 月 19 日 24:00</strong><br>关闭。';
-          const cdEl = lockedEl.querySelector('.submit-locked__cd');
-          if (cdEl) cdEl.style.display = 'none';
-        }
-        if (badgeEl) badgeEl.textContent = '已关闭';
-      }
     }
 
-    updateAll();
-    setInterval(updateAll, 1000);
-  </script>
+    /* Panel countdown */
+    const panelEl = document.getElementById('panelCountdown');
+    if (panelEl && !isOpen && !isClosed) panelEl.innerHTML = fmtCountdown(diff);
+
+    /* Show / hide submit panel */
+    const spLocked = document.getElementById('spLocked');
+    const spOpen   = document.getElementById('spOpen');
+    const spBadge  = document.getElementById('spBadge');
+
+    if (isOpen) {
+      if (spLocked) spLocked.style.display = 'none';
+      if (spOpen)   spOpen.style.display   = 'block';
+      if (spBadge)  { spBadge.textContent = '通道开启中'; spBadge.className = 'sp-badge sp-badge--open'; }
+      if (FORM_URL) {
+        const iframe  = document.getElementById('spIframe');
+        const extLink = document.getElementById('spExtLink');
+        if (iframe  && !iframe.src)  iframe.src  = FORM_URL;
+        if (extLink) extLink.href = FORM_URL;
+      }
+    } else if (isClosed) {
+      if (spLocked) {
+        spLocked.querySelector('.sp-locked__msg').innerHTML =
+          '歌曲提交通道已于<br><strong style="color:var(--clr-text-2);">2026 年 7 月 19 日 24:00</strong><br>关闭。';
+        const cdEl = spLocked.querySelector('.sp-locked__cd');
+        if (cdEl) cdEl.style.display = 'none';
+      }
+      if (spBadge)  { spBadge.textContent = '已关闭'; spBadge.className = 'sp-badge sp-badge--closed'; }
+    }
+  }
+
+  updateAll();
+  setInterval(updateAll, 1000);
+
+  /* ── TOC ── */
+  (function initEvToc() {
+    const toc   = document.getElementById('evToc');
+    const items = Array.from(toc.querySelectorAll('.ev-toc__item'));
+    const navH  = 72;
+    let suppressIO    = false;
+    let suppressTimer = null;
+
+    window.addEventListener('scroll', () => {
+      toc.classList.toggle('ev-toc--visible', window.scrollY > 400);
+      if (suppressIO) {
+        clearTimeout(suppressTimer);
+        suppressTimer = setTimeout(() => { suppressIO = false; }, 200);
+      }
+    }, { passive: true });
+
+    const obs = new IntersectionObserver(entries => {
+      if (suppressIO) return;
+      entries.forEach(e => {
+        if (e.isIntersecting)
+          items.forEach(it => it.classList.toggle('ev-toc__item--active', it.dataset.target === e.target.id));
+      });
+    }, { rootMargin: `-${navH}px 0px -55% 0px` });
+
+    items.forEach(item => {
+      const el = document.getElementById(item.dataset.target);
+      if (el) obs.observe(el);
+      item.addEventListener('click', () => {
+        const el = document.getElementById(item.dataset.target);
+        if (!el) return;
+        suppressIO = true;
+        clearTimeout(suppressTimer);
+        items.forEach(it => it.classList.toggle('ev-toc__item--active', it === item));
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
 </body>
 </html>

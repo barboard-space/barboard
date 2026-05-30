@@ -66,13 +66,15 @@
       text-transform: uppercase;
       color: var(--clr-violet-light);
       text-shadow: 0 0 12px rgba(192,132,252,0.4);
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 8px;
       margin-top: 0;
       margin-bottom: 24px;
+      transition: color 0.2s;
     }
     .bbl-eyebrow::before { display: none; }
+    .bbl-eyebrow:hover { color: #fff; text-decoration: none; }
 
     .bbl-hero__title {
       font-family: var(--font-display);
@@ -518,7 +520,7 @@
     <div class="bbl-hero__layout">
       <!-- 左列：标题 + 简介 + 按钮 -->
       <div class="bbl-hero__info">
-        <p class="bbl-eyebrow">榜吧实验室</p>
+        <a class="bbl-eyebrow" href="/"><span>←</span><span>Barboard</span></a>
         <h1 class="bbl-hero__title">
           Bar<span class="bbl-board-accent">board</span><span class="bbl-lab-accent">Lab</span>
         </h1>

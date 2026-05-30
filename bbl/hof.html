@@ -59,7 +59,10 @@
       color: var(--clr-gold-light);
       text-shadow: 0 0 10px rgba(245,200,64,0.7), 0 0 32px rgba(245,200,64,0.28);
       margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
     }
+    .hof-eyebrow:hover { color: #fff; text-decoration: none; }
     .hof-hero__title {
       font-family: var(--font-display);
       font-size: clamp(56px, 8vw, 108px);
@@ -589,7 +592,7 @@
   <div class="hof-hero__grid"></div>
   <div class="hof-hero__watermark" aria-hidden="true">BARBOARDLAB</div>
   <div class="section__inner hof-hero__inner">
-    <p class="hof-eyebrow fade-up"><a href="/bbl.html" style="color:inherit;text-decoration:none;">BarboardLab</a></p>
+    <a class="hof-eyebrow fade-up" href="/bbl.html"><span>←</span><span>BarboardLab</span></a>
     <h1 class="hof-hero__title fade-up" style="transition-delay:0.1s;">
       Hall <span style="opacity:0.65;">of</span> <span class="hof-accent">Fame</span>
     </h1>
