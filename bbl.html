@@ -21,7 +21,7 @@
       inset: 0;
       background:
         radial-gradient(ellipse 80% 70% at 60% 0%,   rgba(168,85,247,0.22) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 60% at 0%  80%,  rgba(224,64,160,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 60% at 2%  100%,  rgba(224,64,160,0.10) 0%, transparent 55%),
         radial-gradient(ellipse 40% 40% at 100% 50%, rgba(0,180,255,0.06)  0%, transparent 50%);
       pointer-events: none;
     }
@@ -58,17 +58,6 @@
       margin-top: 40px;
     }
 
-    .breadcrumb {
-      font-size: 12px;
-      color: var(--clr-text-3);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      letter-spacing: 0.04em;
-    }
-    .breadcrumb a { color: var(--clr-text-3); transition: color 0.2s; }
-    .breadcrumb a:hover { color: var(--clr-text-2); }
-    .breadcrumb__sep { opacity: 0.35; }
 
     .bbl-eyebrow {
       font-size: 11px;
@@ -95,10 +84,10 @@
     .bbl-board-accent { color: #6F9EC3; }
     .bbl-lab-accent   { color: var(--clr-violet-light); }
 
-    .bbl-hero__meta { margin-top: 16px; }
+    .bbl-hero__meta { margin-top: 18px; }
 
     .bbl-hero__desc {
-      margin-top: 20px;
+      margin-top: 24px;
       font-size: 15px;
       color: var(--clr-text-2);
       line-height: 1.75;
@@ -108,7 +97,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 28px;
+      margin-top: 32px;
     }
 
     /* ── Video Player ── */
@@ -120,31 +109,37 @@
       box-shadow: 0 0 40px rgba(168,85,247,0.10), 0 4px 24px rgba(0,0,0,0.4);
       position: sticky;
       top: calc(var(--nav-h) + 20px);
+      display: flex;
+      flex-direction: column;
     }
     .bbl-video__header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
+      padding: 8px 16px;
       border-bottom: 1px solid var(--clr-border);
       background: var(--clr-surface-2);
     }
     .bbl-video__label {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: var(--clr-text-2);
     }
     .bbl-video__issue {
-      font-family: var(--font-mono);
+      font-family: var(--font-body);
       font-size: 11px;
-      color: var(--clr-violet-light);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clr-text-2);
     }
     .bbl-video__frame {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 9;
+      flex: 1;
+      min-height: 160px;
       background: #000;
     }
     .bbl-video__frame iframe {
@@ -167,25 +162,31 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 16px;
+      padding: 8px 16px;
       border-top: 1px solid var(--clr-border);
     }
     .bbl-video__date {
-      font-family: var(--font-mono);
+      font-family: var(--font-body);
       font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       color: var(--clr-text-2);
+      opacity: 0.65;
+      position: relative;
+      top: -1px;
     }
     .bbl-video__link {
       font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.06em;
       color: var(--clr-text-2);
+      opacity: 0.65;
       display: flex;
       align-items: center;
-      gap: 4px;
-      transition: color 0.2s;
+      gap: 0;
+      transition: color 0.2s, opacity 0.2s;
     }
-    .bbl-video__link:hover { color: var(--clr-text); }
+    .bbl-video__link:hover { color: var(--clr-violet-light); opacity: 0.75; }
 
     /* ── Chart + Highlights 双列布局 ── */
     .bbl-chart-section { background: var(--clr-bg); padding-top: 64px; }
@@ -363,7 +364,7 @@
       margin-top: 8px;
     }
     .bbl-chart-mt-link {
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 600;
       letter-spacing: 0.06em;
       color: var(--clr-text-2);
@@ -371,12 +372,14 @@
       white-space: nowrap;
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 0;
       transition: color 0.2s, opacity 0.2s;
       flex-shrink: 0;
       margin-bottom: 4px;
     }
-    .bbl-chart-mt-link:hover { color: var(--clr-violet-light); opacity: 1; }
+    .bbl-chart-mt-link:hover { color: var(--clr-violet-light); opacity: 0.75; }
+    .bbl-chart-mt-link .ext-icon,
+    .bbl-video__link .ext-icon { position: relative; top: 0.5px; }
 
     /* ── 榜单三列横排统计 ── */
     .bbl-chart-list .chart-item {
@@ -439,7 +442,7 @@
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 0.06em;
-      padding: 10px 24px;
+      padding: 8px 23px 12px 25px;
       border-radius: 4px;
       cursor: pointer;
       transition: all 0.2s;
@@ -517,7 +520,7 @@
         <div class="bbl-hero__actions">
           <a href="barboardlab/hall-of-fame.html" class="btn btn--primary">BBL Hall of Fame</a>
           <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener"
-             class="btn btn--outline" style="display:inline-flex;align-items:center;gap:8px;">
+             class="btn btn--outline" style="display:inline-flex;align-items:center;gap:4px;padding-right:18px;">
             完整历史榜单
             <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8"
                  viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
@@ -531,13 +534,13 @@
       <!-- 右列：本期视频 -->
       <div class="bbl-video fade-up-right" style="transition-delay:0.15s;">
         <div class="bbl-video__header">
-          <span class="bbl-video__label">本期视频</span>
+          <span class="bbl-video__label">本期榜单视频</span>
           <span class="bbl-video__issue" id="bblVideoIssue">—</span>
         </div>
         <div class="bbl-video__frame">
           <div class="bbl-video__placeholder" id="bblVideoPlaceholder">加载中…</div>
           <iframe id="bblVideoIframe" src="" frameborder="0"
-                  allow="fullscreen" scrolling="no"
+                  allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; gyroscope; accelerometer" allowfullscreen scrolling="no"
                   style="display:none;"></iframe>
         </div>
         <div class="bbl-video__footer">
@@ -585,7 +588,7 @@
 
         <div class="bbl-showmore" id="bblShowMore">
           <button class="bbl-showmore__btn" id="bblShowMoreBtn">
-            显示全部 100 首
+            查看完整 Top 100
             <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"
                  viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
                  stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -841,7 +844,7 @@
     const wrap   = document.getElementById('bblShowMore');
     if (!btn || !wrap) return;
     if (_allTracks.length <= INITIAL_COUNT) { wrap.classList.add('bbl-showmore--hidden'); return; }
-    btn.textContent = '显示全部 ' + _allTracks.length + ' 首';
+    btn.textContent = '查看完整 Top ' + _allTracks.length;
     btn.addEventListener('click', () => {
       renderChartItems(_allTracks);
       wrap.classList.add('bbl-showmore--hidden');
@@ -986,7 +989,7 @@
       const dateVid = document.getElementById('bblVideoDate');
       if (data.bilibili) {
         const bvUrl = 'https://www.bilibili.com/video/' + data.bilibili;
-        const embedUrl = 'https://player.bilibili.com/player.html?bvid=' + data.bilibili + '&page=1&high_quality=1&danmaku=0';
+        const embedUrl = 'https://player.bilibili.com/player.html?bvid=' + data.bilibili + '&page=1&high_quality=1&danmaku=0&muted=1';
         if (iframe) { iframe.src = embedUrl; iframe.style.display = ''; }
         if (ph)     ph.style.display = 'none';
         if (linkEl) linkEl.href = bvUrl;
@@ -1057,6 +1060,44 @@
     if (window.ResizeObserver) new ResizeObserver(update).observe(grid);
     update();
   }
+
+  function getDocTop(el) {
+    let top = 0;
+    while (el) { top += el.offsetTop; el = el.offsetParent; }
+    return top;
+  }
+
+  function alignVideo() {
+    if (window.innerWidth <= 768) return;
+    const layout  = document.querySelector('.bbl-hero__layout');
+    const title   = document.querySelector('.bbl-hero__title');
+    const actions = document.querySelector('.bbl-hero__actions');
+    const video   = document.querySelector('.bbl-video');
+    if (!layout || !title || !actions || !video) return;
+
+    layout.style.gridTemplateColumns = '';
+    video.style.marginTop = '';
+    video.style.height    = '';
+    void video.offsetWidth;
+
+    const mt = getDocTop(title) - getDocTop(video);
+    const h  = getDocTop(actions) + actions.offsetHeight - getDocTop(title);
+
+    if (mt > 0) video.style.marginTop = mt + 'px';
+    if (h  > 0) video.style.height    = h  + 'px';
+
+    void video.offsetHeight;
+
+    const headerH = (video.querySelector('.bbl-video__header') || {}).offsetHeight || 0;
+    const footerH = (video.querySelector('.bbl-video__footer') || {}).offsetHeight || 0;
+    const frameH  = h - headerH - footerH;
+    if (frameH > 80) {
+      layout.style.gridTemplateColumns = '1fr ' + (Math.round(frameH * 16 / 9) - 4) + 'px';
+    }
+  }
+
+  window.addEventListener('load',   alignVideo);
+  window.addEventListener('resize', alignVideo);
 
   initStickyHighlights();
   loadBBL();

@@ -4,6 +4,26 @@
 
 ---
 
+## [2026-05-29] — BBL Hall of Fame + bbl.html 视频区精修 + 动画修复 + 项目清理
+
+### Added
+- **`barboardlab/hall-of-fame.html`**：BBL 荣誉殿堂页面，5大板块：冠军名录（20首 #1 单曲按周数排行，金/银/铜 medal 样式）、驻榜韧性（6组在榜纪录卡片：总在榜/Top50~3）、艺人版图（总周数+上榜歌曲数各前10）、上榜专辑（19张两列排布含上榜率）、未冠之最（从未登顶但积分最高的10条）；数据硬编码 JS 常量，无 fetch
+
+### Changed
+- **bbl.html 视频框**：视频标签改为「本期榜单视频」；视频 header/footer padding 收窄至 `8px`；移除 `aspect-ratio: 16/9`，改为 JS `alignVideo()` 动态对齐 h1 顶 → 按钮底，列宽 = `frameH * 16/9 - 4px` 实时更新 grid；Bilibili iframe `allow` 属性补全，embed URL 加 `&muted=1` 默认静音
+- **bbl.html 外链样式统一**：「在 Bilibili 观看」与「在 Musictrack 查看」字号/间距/opacity/hover 颜色完全对齐；「本期视频」label 字间距还原 0.14em；「Vol. N」改用 font-body，样式与 label 一致；日期 font-body + opacity 0.65，与外链对齐同一基线
+- **bbl.html 榜单按钮**：「查看全部 100 首」改为「查看完整 Top 100」；「完整历史榜单」右 padding 收窄至 18px
+
+### Fixed
+- **index.html BBL 按钮 hover 延时**：`transitionend + { once: true }` 方案存在竞态且移除 inline style 后 CSS nth-child delay 重新接管。改用 `clearDelayAfterAnim(el)` + `setTimeout(delay*1000+250)` 精确清除，`style.transitionDelay = '0s'` 而非 `''`
+- **index.html `.btn--primary` 入场动画失效**：`.btn--primary.fade-up.visible` 规则仅写 `background-position/box-shadow`，覆盖了 `.btn.fade-up.visible { transition: all 0.2s }` 中的 opacity/transform，导致 `.btn--primary` 跳变显示；补全 `opacity 0.2s ease, transform 0.2s ease` 修复入场渐显
+
+### Docs
+- **项目清理**：删除 61 个未声明冗余字体文件（DM Sans 光学变体/DM Mono 变体），`assets/fonts/` 从 82 → 6 文件；删除空目录 `about/` `archive/` `charts/`；清除 `bbl.html` 遗留 `.breadcrumb` CSS
+- **CLAUDE.md** 新增开发注意事项 #76–81（delay 清除方案、btn--primary transition、视频框自适应、iframe 权限、HOF 架构、清理记录）
+
+---
+
 ## [2026-05-29] — bbl.html 大量 UI 精修 & 功能新增
 
 ### Added

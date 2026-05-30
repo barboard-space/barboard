@@ -1928,7 +1928,7 @@ body:has(.nav--open) .back-to-top {
     transition: all 0.2s;
   }
   .btn--primary.fade-up.visible {
-    transition: background-position 0.35s ease, box-shadow 0.35s ease;
+    transition: opacity 0.2s ease, transform 0.2s ease, background-position 0.35s ease, box-shadow 0.35s ease;
   }
 
   .fade-up:nth-child(2) { transition-delay: 0.1s; }

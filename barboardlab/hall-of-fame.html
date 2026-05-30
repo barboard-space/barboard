@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>BBL Hall of Fame · BarboardLab | Barboard</title>
+  <meta name="description" content="BarboardLab 荣誉殿堂 — 历届冠军单曲、在榜纪录、艺人成就与专辑上榜记录，数据覆盖 Vol.1—89。" />
+  <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../fonts.css" />
+  <link rel="stylesheet" href="../style.css?v=2" />
+  <style>
+    /* ── Hero ── */
+    .hof-hero {
+      position: relative;
+      padding: var(--nav-h) 0 80px;
+      overflow: hidden;
+    }
+    .hof-hero__glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 55% 0%,   rgba(212,168,50,0.20) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 50% at 0%  95%,  rgba(168,85,247,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 35% at 100% 40%, rgba(0,180,255,0.06)  0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hof-hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .hof-hero__watermark {
+      position: absolute;
+      right: -10px;
+      bottom: -10px;
+      font-family: var(--font-display);
+      font-size: 200px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: rgba(212,168,50,0.035);
+      pointer-events: none;
+      user-select: none;
+    }
+    .hof-hero__inner {
+      position: relative;
+      z-index: 2;
+    }
+    .hof-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--clr-gold-light);
+      text-shadow: 0 0 12px rgba(245,200,64,0.35);
+      margin-bottom: 24px;
+    }
+    .hof-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 7.5vw, 100px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .hof-accent { color: var(--clr-gold-light); }
+    .hof-hero__desc {
+      margin-top: 24px;
+      font-size: 15px;
+      color: var(--clr-text-2);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+    .hof-hero__stats {
+      display: flex;
+      gap: var(--gap-lg);
+      margin-top: 36px;
+      flex-wrap: wrap;
+    }
+    .hof-stat { display: flex; flex-direction: column; gap: 4px; }
+    .hof-stat__val {
+      font-family: var(--font-display);
+      font-size: 44px;
+      line-height: 1;
+      color: var(--clr-gold-light);
+    }
+    .hof-stat__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--clr-text-2);
+    }
+
+    /* ── Champion Roll ── */
+    .hof-section-desc {
+      margin-top: 12px;
+      font-size: 15px;
+      color: var(--clr-text-2);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+    .hof-roll { margin-top: var(--gap-md); border: 1px solid var(--clr-border); border-radius: 8px; overflow: hidden; }
+    .hof-roll-header {
+      display: grid;
+      grid-template-columns: 52px 1fr 88px 110px;
+      gap: 0 16px;
+      padding: 10px 20px;
+      background: var(--clr-surface-2);
+      border-bottom: 1px solid var(--clr-border);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clr-text-3);
+    }
+    .hof-roll-row {
+      display: grid;
+      grid-template-columns: 52px 1fr 88px 110px;
+      gap: 0 16px;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--clr-border);
+      align-items: center;
+      transition: background 0.15s;
+    }
+    .hof-roll-row:last-child { border-bottom: none; }
+    .hof-roll-row:hover { background: rgba(180,160,255,0.04); }
+    .hof-roll-row--gold    { background: rgba(212,168,50,0.07);   border-color: rgba(212,168,50,0.20); }
+    .hof-roll-row--gold:hover { background: rgba(212,168,50,0.11); }
+    .hof-roll-row--silver  { background: rgba(144,184,208,0.05);  border-color: rgba(144,184,208,0.15); }
+    .hof-roll-row--bronze  { background: rgba(224,168,112,0.05);  border-color: rgba(224,168,112,0.12); }
+
+    .hof-roll__rank {
+      font-family: var(--font-display);
+      font-size: 30px;
+      line-height: 1;
+      color: var(--clr-text-3);
+      opacity: 0.45;
+    }
+    .hof-roll-row--gold   .hof-roll__rank { color: var(--clr-gold-light); opacity: 1; }
+    .hof-roll-row--silver .hof-roll__rank { color: #90b8d0; opacity: 1; }
+    .hof-roll-row--bronze .hof-roll__rank { color: #e0a870; opacity: 1; }
+
+    .hof-roll__song { min-width: 0; }
+    .hof-roll__artist {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-roll__title {
+      font-size: 12px;
+      color: var(--clr-text-2);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-roll-row--gold .hof-roll__artist { color: #fff4d6; }
+    .hof-roll-row--gold .hof-roll__title  { color: rgba(245,200,64,0.75); }
+
+    .hof-roll__weeks { text-align: right; }
+    .hof-roll__weeks-num {
+      font-family: var(--font-display);
+      font-size: 34px;
+      line-height: 1;
+      color: var(--clr-text);
+    }
+    .hof-roll__weeks-unit {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-text-3);
+      margin-top: 2px;
+    }
+    .hof-roll-row--gold   .hof-roll__weeks-num { color: var(--clr-gold-light); }
+    .hof-roll-row--silver .hof-roll__weeks-num { color: #90b8d0; }
+    .hof-roll-row--bronze .hof-roll__weeks-num { color: #e0a870; }
+
+    .hof-roll__debut { text-align: right; }
+    .hof-roll__debut-date {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--clr-text-2);
+    }
+    .hof-roll__debut-vol {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--clr-text-3);
+      margin-top: 2px;
+    }
+
+    /* ── Records Grid ── */
+    .hof-records-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: var(--gap-md);
+    }
+    .hof-record-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+    .hof-record-card__title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clr-violet-light);
+      margin-bottom: 14px;
+    }
+    .hof-record-entry {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 0 10px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .hof-record-entry:last-child { border-bottom: none; }
+    .hof-record-entry__rank {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--clr-text-3);
+    }
+    .hof-record-entry__song { min-width: 0; }
+    .hof-record-entry__artist {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--clr-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-record-entry__name {
+      font-size: 11px;
+      color: var(--clr-text-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+    .hof-record-entry__val {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1;
+      color: var(--clr-text);
+      white-space: nowrap;
+    }
+    .hof-record-entry--top .hof-record-entry__artist { color: var(--clr-gold-light); }
+    .hof-record-entry--top .hof-record-entry__val    { color: var(--clr-gold-light); }
+
+    /* ── Artist + Album Tables ── */
+    .hof-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-md);
+      margin-top: var(--gap-md);
+    }
+    .hof-table-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .hof-table-card__head {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--clr-border);
+      background: var(--clr-surface-2);
+    }
+    .hof-table-card__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clr-violet-light);
+    }
+    .hof-table-card__sub {
+      font-size: 11px;
+      color: var(--clr-text-3);
+      margin-top: 3px;
+    }
+    .hof-table-row {
+      display: grid;
+      align-items: center;
+      padding: 11px 20px;
+      border-bottom: 1px solid var(--clr-border);
+      gap: 0 12px;
+    }
+    .hof-table-row:last-child { border-bottom: none; }
+    .hof-table-row--2col { grid-template-columns: 22px 1fr auto; }
+    .hof-table-row--3col { grid-template-columns: 22px 1fr auto auto; }
+    .hof-table__idx {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--clr-text-3);
+    }
+    .hof-table__info { min-width: 0; }
+    .hof-table__name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-table__sub {
+      font-size: 11px;
+      color: var(--clr-text-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+    .hof-table__val {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1;
+      color: var(--clr-text);
+      text-align: right;
+    }
+    .hof-table__rate {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--clr-text-3);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .hof-table-row:first-child .hof-table__name { color: var(--clr-gold-light); }
+    .hof-table-row:first-child .hof-table__val  { color: var(--clr-gold-light); }
+
+    /* ── Albums (full-width) ── */
+    .hof-album-wrap { margin-top: var(--gap-md); }
+
+    /* ── Uncrowned ── */
+    .hof-uncrowned {
+      margin-top: var(--gap-md);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .hof-uncrowned-header {
+      display: grid;
+      grid-template-columns: 28px 1fr auto auto;
+      gap: 0 16px;
+      padding: 10px 20px;
+      background: var(--clr-surface-2);
+      border-bottom: 1px solid var(--clr-border);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clr-text-3);
+    }
+    .hof-uncrowned-row {
+      display: grid;
+      grid-template-columns: 28px 1fr auto auto;
+      gap: 0 16px;
+      padding: 13px 20px;
+      border-bottom: 1px solid var(--clr-border);
+      align-items: center;
+      transition: background 0.15s;
+    }
+    .hof-uncrowned-row:last-child { border-bottom: none; }
+    .hof-uncrowned-row:hover { background: rgba(180,160,255,0.04); }
+    .hof-uncrowned__idx {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--clr-text-3);
+    }
+    .hof-uncrowned__info { min-width: 0; }
+    .hof-uncrowned__artist {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-uncrowned__song {
+      font-size: 12px;
+      color: var(--clr-text-2);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-uncrowned__badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--clr-text-2);
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border-2);
+      border-radius: 3px;
+      padding: 3px 7px;
+      white-space: nowrap;
+    }
+    .hof-uncrowned__pts {
+      font-family: var(--font-display);
+      font-size: 22px;
+      line-height: 1;
+      color: var(--clr-text);
+      text-align: right;
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .hof-hero__stats { gap: var(--gap-md); }
+      .hof-stat__val { font-size: 36px; }
+      .hof-records-grid { grid-template-columns: 1fr 1fr; }
+      .hof-two-col { grid-template-columns: 1fr; }
+      .hof-roll-header,
+      .hof-roll-row { grid-template-columns: 40px 1fr 72px; }
+      .hof-roll__debut { display: none; }
+      .hof-uncrowned-header,
+      .hof-uncrowned-row { grid-template-columns: 28px 1fr auto; }
+      .hof-uncrowned__pts { display: none; }
+    }
+    @media (max-width: 540px) {
+      .hof-records-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hof-hero">
+  <div class="hof-hero__glow"></div>
+  <div class="hof-hero__grid"></div>
+  <div class="hof-hero__watermark" aria-hidden="true">HOF</div>
+  <div class="section__inner hof-hero__inner">
+    <p class="hof-eyebrow fade-up">BarboardLab</p>
+    <h1 class="hof-hero__title fade-up" style="transition-delay:0.1s;">
+      Hall of <span class="hof-accent">Fame</span>
+    </h1>
+    <p class="hof-hero__desc fade-up" style="transition-delay:0.2s;">
+      BarboardLab 自第 1 期起的历届冠军、在榜纪录与艺人成就全览。数据覆盖 Vol.1—89，持续更新。
+    </p>
+    <div class="hof-hero__stats fade-up" style="transition-delay:0.3s;">
+      <div class="hof-stat">
+        <span class="hof-stat__val">89</span>
+        <span class="hof-stat__label">期数</span>
+      </div>
+      <div class="hof-stat">
+        <span class="hof-stat__val">20</span>
+        <span class="hof-stat__label">冠军单曲</span>
+      </div>
+      <div class="hof-stat">
+        <span class="hof-stat__val">15</span>
+        <span class="hof-stat__label">最长冠军连续周</span>
+      </div>
+      <div class="hof-stat">
+        <span class="hof-stat__val">28</span>
+        <span class="hof-stat__label">最高参榜人数</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHAMPION ROLL ═══ -->
+<section class="section section--bordered" id="champions" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">夺冠纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;">冠军名录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">历届 #1 单曲按夺冠周数排列，共 <strong>20</strong> 首冠军单曲，<strong>89</strong> 期。</p>
+    <div class="fade-up" style="transition-delay:0.3s;">
+      <div class="hof-roll">
+        <div class="hof-roll-header">
+          <span></span>
+          <span>艺人 — 歌曲</span>
+          <span style="text-align:right;">冠军周</span>
+          <span style="text-align:right;">首次登顶</span>
+        </div>
+        <div id="hofChampionRoll"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHARTING RECORDS ═══ -->
+<section class="section section--bordered" id="records" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">在榜纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;">驻榜韧性</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">各榜位长期驻榜纪录持有者，每组展示前五。</p>
+    <div class="hof-records-grid fade-up" style="transition-delay:0.3s;" id="hofRecordsGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ ARTIST RECORDS ═══ -->
+<section class="section section--bordered" id="artists" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">艺人成就</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;">艺人版图</h2>
+    <div class="hof-two-col fade-up" style="transition-delay:0.2s;" id="hofArtistCols"></div>
+  </div>
+</section>
+
+<!-- ═══ ALBUMS ═══ -->
+<section class="section section--bordered" id="albums" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">专辑成就</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;">上榜专辑</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">上榜歌曲最多的专辑（至少 6 首上榜），括号内为上榜率。</p>
+    <div class="hof-two-col hof-album-wrap fade-up" style="transition-delay:0.3s;" id="hofAlbums"></div>
+  </div>
+</section>
+
+<!-- ═══ UNCROWNED ═══ -->
+<section class="section section--bordered" id="uncrowned" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">珍贵纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;">未冠之最</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">从未登顶但当周积分最高的单曲记录，括注为该周最终排名。</p>
+    <div class="fade-up" style="transition-delay:0.3s;">
+      <div class="hof-uncrowned" id="hofUncrowned">
+        <div class="hof-uncrowned-header">
+          <span></span>
+          <span>艺人 — 歌曲</span>
+          <span>最高位</span>
+          <span style="text-align:right;">积分</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="../scripts/nav.js"></script>
+<script>
+  /* ─────────────────────────── DATA ──────────────────────────────────── */
+
+  const CHAMPIONS = [
+    { weeks:15, artist:'HAIM',                       song:'Relationships',                   vol:64,  date:'2025-03-21', peak:2423.69 },
+    { weeks:11, artist:'Ariana Grande',               song:'yes, and?',                       vol:3,   date:'2024-01-19', peak:2092.15 },
+    { weeks:10, artist:'Sabrina Carpenter',           song:'Espresso',                        vol:23,  date:'2024-06-07', peak:2040.79 },
+    { weeks:8,  artist:'ROSÉ & Bruno Mars',           song:'APT.',                            vol:43,  date:'2024-10-25', peak:2569.79 },
+    { weeks:7,  artist:'Lady Gaga & Bruno Mars',      song:'Die With A Smile',                vol:34,  date:'2024-08-23', peak:2823.11 },
+    { weeks:6,  artist:'Chappell Roan',               song:'The Subway',                      vol:84,  date:'2025-08-08', peak:2638.26 },
+    { weeks:4,  artist:'Twenty One Pilots',           song:'Overcompensate',                  vol:14,  date:'2024-04-05', peak:1992.02 },
+    { weeks:4,  artist:'Taylor Swift & Post Malone', song:'Fortnight',                       vol:17,  date:'2024-04-26', peak:2501.86 },
+    { weeks:4,  artist:'Kendrick Lamar & SZA',        song:'luther',                          vol:53,  date:'2025-01-03', peak:1604.71 },
+    { weeks:4,  artist:'Lady Gaga',                   song:'Abracadabra',                     vol:58,  date:'2025-02-07', peak:2597.96 },
+    { weeks:3,  artist:'Billie Eilish',               song:'BIRDS OF A FEATHER',              vol:28,  date:'2024-07-12', peak:2109.72 },
+    { weeks:3,  artist:'Tate McRae',                  song:'Sports car',                      vol:61,  date:'2025-02-28', peak:2626.32 },
+    { weeks:2,  artist:'Dua Lipa',                    song:'Houdini',                         vol:1,   date:'2024-01-05', peak:1159.82 },
+    { weeks:2,  artist:'Kali Uchis',                  song:'sunshine & rain...',              vol:72,  date:'2025-05-16', peak:2315.25 },
+    { weeks:1,  artist:'Baby Lasagna',                song:'Rim Tim Tagi Dim',                vol:20,  date:'2024-05-17', peak:1940.76 },
+    { weeks:1,  artist:'Lady Gaga',                   song:'Disease',                         vol:51,  date:'2024-12-20', peak:1313.97 },
+    { weeks:1,  artist:'Mariah Carey',                song:'All I Want for Christmas Is You', vol:52,  date:'2024-12-27', peak:1251.03 },
+    { weeks:1,  artist:'Sam Fender',                  song:'People Watching',                 vol:54,  date:'2025-01-10', peak:1437.04 },
+    { weeks:1,  artist:'Lorde',                       song:'What Was That',                   vol:70,  date:'2025-05-02', peak:2291.17 },
+    { weeks:1,  artist:'Sabrina Carpenter',           song:'Manchild',                        vol:76,  date:'2025-06-13', peak:1858.44 },
+  ];
+
+  const RECORDS = [
+    { title:'总在榜周数', items:[
+      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:57 },
+      { artist:'Sabrina Carpenter',  song:'Espresso',             val:54 },
+      { artist:'Alcest',             song:'Flamme Jumelle',       val:51 },
+      { artist:'Chappell Roan',      song:'Good Luck, Babe!',     val:50 },
+      { artist:'Chappell Roan',      song:'Pink Pony Club',       val:41 },
+    ]},
+    { title:'Top 50 周数', items:[
+      { artist:'Sabrina Carpenter',  song:'Espresso',             val:49 },
+      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:43 },
+      { artist:'Chappell Roan',      song:'Good Luck, Babe!',     val:42 },
+      { artist:'Alcest',             song:'Flamme Jumelle',       val:42 },
+      { artist:'Chappell Roan',      song:'Pink Pony Club',       val:34 },
+    ]},
+    { title:'Top 20 周数', items:[
+      { artist:'Sabrina Carpenter',  song:'Espresso',             val:41 },
+      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:35 },
+      { artist:'Chappell Roan',      song:'Good Luck, Babe!',     val:32 },
+      { artist:'Chappell Roan',      song:'Pink Pony Club',       val:29 },
+      { artist:'HAIM',               song:'Relationships',        val:26 },
+    ]},
+    { title:'Top 10 周数', items:[
+      { artist:'Sabrina Carpenter',  song:'Espresso',             val:38 },
+      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:26 },
+      { artist:'HAIM',               song:'Relationships',        val:25 },
+      { artist:'Chappell Roan',      song:'Pink Pony Club',       val:22 },
+      { artist:'Kendrick Lamar & SZA', song:'luther',             val:21 },
+    ]},
+    { title:'Top 5 周数', items:[
+      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:23 },
+      { artist:'Sabrina Carpenter',  song:'Espresso',             val:21 },
+      { artist:'HAIM',               song:'Relationships',        val:21 },
+      { artist:'Kendrick Lamar & SZA', song:'luther',             val:17 },
+      { artist:'Lady Gaga & Bruno Mars', song:'Die With A Smile', val:15 },
+    ]},
+    { title:'Top 3 周数', items:[
+      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:21 },
+      { artist:'HAIM',               song:'Relationships',        val:20 },
+      { artist:'Sabrina Carpenter',  song:'Espresso',             val:17 },
+      { artist:'Kendrick Lamar & SZA', song:'luther',             val:14 },
+      { artist:'Lady Gaga & Bruno Mars', song:'Die With A Smile', val:12 },
+    ]},
+  ];
+
+  const ARTISTS_WEEKS = [
+    { artist:'Taylor Swift',    val:324 },
+    { artist:'Sabrina Carpenter', val:226 },
+    { artist:'Ariana Grande',   val:219 },
+    { artist:'Billie Eilish',   val:200 },
+    { artist:'Lady Gaga',       val:195 },
+    { artist:'Tate McRae',      val:188 },
+    { artist:'Kendrick Lamar',  val:163 },
+    { artist:'Gracie Abrams',   val:162 },
+    { artist:'Chappell Roan',   val:155 },
+    { artist:'SZA',             val:146 },
+  ];
+
+  const ARTISTS_SONGS = [
+    { artist:'Taylor Swift',    val:62 },
+    { artist:'Sabrina Carpenter', val:22 },
+    { artist:'Lady Gaga',       val:19 },
+    { artist:'Ariana Grande',   val:17 },
+    { artist:'Charli xcx',      val:16 },
+    { artist:'The Weeknd',      val:14 },
+    { artist:'Kendrick Lamar',  val:14 },
+    { artist:'SZA',             val:14 },
+    { artist:'Tate McRae',      val:14 },
+    { artist:'Billie Eilish',   val:12 },
+    { artist:'Post Malone',     val:12 },
+  ];
+
+  const ALBUMS = [
+    { artist:'Taylor Swift',     album:'The Tortured Poets Department',     songs:25, rate:'80.6%' },
+    { artist:'Ariana Grande',    album:'eternal sunshine (deluxe)',          songs:18, rate:'100%'  },
+    { artist:'Lady Gaga',        album:'MAYHEM',                            songs:14, rate:'100%'  },
+    { artist:'Charli xcx',       album:'BRAT',                              songs:12, rate:'66.7%' },
+    { artist:'Sabrina Carpenter',album:"Man's Best Friend",                 songs:11, rate:'91.7%' },
+    { artist:'Magdalena Bay',    album:'Imaginal Disk',                     songs:11, rate:'73.3%' },
+    { artist:'SZA',              album:'SOS Deluxe: LANA',                  songs:11, rate:'28.9%' },
+    { artist:'FKA twigs',        album:'EUSEXUA',                           songs:10, rate:'90.9%' },
+    { artist:'Lorde',            album:'Virgin',                            songs:10, rate:'90.9%' },
+    { artist:'Sabrina Carpenter',album:"Short 'n' Sweet (Deluxe)",          songs:10, rate:'62.5%' },
+    { artist:'The Weeknd',       album:'Hurry Up Tomorrow',                 songs:10, rate:'45.5%' },
+    { artist:'Big Thief',        album:'Double Infinity',                   songs:9,  rate:'100%'  },
+    { artist:'Billie Eilish',    album:'HIT ME HARD AND SOFT',              songs:9,  rate:'90.0%' },
+    { artist:'Twenty One Pilots',album:'Clancy',                            songs:9,  rate:'69.2%' },
+    { artist:'Tate McRae',       album:'So Close To What',                  songs:9,  rate:'60.0%' },
+    { artist:'HAIM',             album:'I quit',                            songs:9,  rate:'60.0%' },
+    { artist:'Dua Lipa',         album:'Radical Optimism',                  songs:8,  rate:'72.7%' },
+    { artist:'Sam Fender',       album:'People Watching',                   songs:8,  rate:'72.7%' },
+    { artist:'Kendrick Lamar',   album:'GNX',                               songs:8,  rate:'66.7%' },
+  ];
+
+  const UNCROWNED = [
+    { artist:'Chappell Roan',                     song:'Pink Pony Club',      pts:1996.46, rank:2 },
+    { artist:'Taylor Swift & Florence + The Machine', song:'Florida!!!',       pts:1895.93, rank:2 },
+    { artist:'Vampire Weekend',                   song:'Capricorn',           pts:1808.16, rank:2 },
+    { artist:'Ariana Grande',                     song:'Twilight Zone',       pts:1803.89, rank:3 },
+    { artist:'LISA, Doja Cat & RAYE',             song:'Born Again',          pts:1799.01, rank:4 },
+    { artist:'Chappell Roan',                     song:'The Giver',           pts:1792.79, rank:4 },
+    { artist:'Miley Cyrus & Brittany Howard',     song:'Walk of Fame',        pts:1750.68, rank:3 },
+    { artist:'Lady Gaga',                         song:'Shadow of a Man',     pts:1739.54, rank:4 },
+    { artist:'Charli xcx & Billie Eilish',        song:'Guess',               pts:1726.38, rank:2 },
+    { artist:'Lorde',                             song:'Shapeshifter',        pts:1715.52, rank:2 },
+  ];
+
+  /* ─────────────────────────── RENDER ────────────────────────────────── */
+
+  function fmtDebutDate(d) {
+    const [y, m] = d.split('-');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[parseInt(m) - 1] + ' ' + y;
+  }
+
+  function getChampRank(idx) {
+    let rank = 1;
+    for (let j = 0; j < idx; j++) if (CHAMPIONS[j].weeks > CHAMPIONS[idx].weeks) rank++;
+    return rank;
+  }
+
+  function buildChampionRoll() {
+    const el = document.getElementById('hofChampionRoll');
+    el.innerHTML = CHAMPIONS.map((c, i) => {
+      const rank = getChampRank(i);
+      const cls  = i === 0 ? 'hof-roll-row--gold' : i === 1 ? 'hof-roll-row--silver' : i === 2 ? 'hof-roll-row--bronze' : '';
+      return `
+        <div class="hof-roll-row ${cls}">
+          <div class="hof-roll__rank">${rank}</div>
+          <div class="hof-roll__song">
+            <div class="hof-roll__artist">${c.artist}</div>
+            <div class="hof-roll__title">${c.song}</div>
+          </div>
+          <div class="hof-roll__weeks">
+            <div class="hof-roll__weeks-num">${c.weeks}</div>
+            <div class="hof-roll__weeks-unit">周</div>
+          </div>
+          <div class="hof-roll__debut">
+            <div class="hof-roll__debut-date">${fmtDebutDate(c.date)}</div>
+            <div class="hof-roll__debut-vol">Vol. ${c.vol}</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  function buildRecordsGrid() {
+    document.getElementById('hofRecordsGrid').innerHTML = RECORDS.map(r => `
+      <div class="hof-record-card">
+        <div class="hof-record-card__title">${r.title}</div>
+        ${r.items.map((it, i) => `
+          <div class="hof-record-entry ${i === 0 ? 'hof-record-entry--top' : ''}">
+            <span class="hof-record-entry__rank">${i + 1}</span>
+            <div class="hof-record-entry__song">
+              <div class="hof-record-entry__artist">${it.artist}</div>
+              <div class="hof-record-entry__name">${it.song}</div>
+            </div>
+            <span class="hof-record-entry__val">${it.val}</span>
+          </div>`).join('')}
+      </div>`).join('');
+  }
+
+  function buildArtistCols() {
+    function card(title, sub, data) {
+      return `
+        <div class="hof-table-card">
+          <div class="hof-table-card__head">
+            <div class="hof-table-card__label">${title}</div>
+            <div class="hof-table-card__sub">${sub}</div>
+          </div>
+          ${data.map((a, i) => `
+            <div class="hof-table-row hof-table-row--2col">
+              <span class="hof-table__idx">${i + 1}</span>
+              <div class="hof-table__info"><div class="hof-table__name">${a.artist}</div></div>
+              <span class="hof-table__val">${a.val}</span>
+            </div>`).join('')}
+        </div>`;
+    }
+    document.getElementById('hofArtistCols').innerHTML =
+      card('总在榜周数', '所有上榜歌曲累计在榜周数', ARTISTS_WEEKS) +
+      card('上榜歌曲数', '累计不重复上榜单曲数', ARTISTS_SONGS);
+  }
+
+  function buildAlbums() {
+    const half = Math.ceil(ALBUMS.length / 2);
+    function card(items, startIdx) {
+      return `
+        <div class="hof-table-card">
+          ${startIdx === 0
+            ? `<div class="hof-table-card__head">
+                 <div class="hof-table-card__label">上榜歌曲最多的专辑</div>
+                 <div class="hof-table-card__sub">括号内为专辑上榜率</div>
+               </div>`
+            : `<div class="hof-table-card__head"><div class="hof-table-card__sub" style="padding:2px 0;">（续）</div></div>`}
+          ${items.map((a, i) => `
+            <div class="hof-table-row hof-table-row--3col">
+              <span class="hof-table__idx">${startIdx + i + 1}</span>
+              <div class="hof-table__info">
+                <div class="hof-table__name">${a.album}</div>
+                <div class="hof-table__sub">${a.artist}</div>
+              </div>
+              <span class="hof-table__val">${a.songs}</span>
+              <span class="hof-table__rate">${a.rate}</span>
+            </div>`).join('')}
+        </div>`;
+    }
+    document.getElementById('hofAlbums').innerHTML =
+      card(ALBUMS.slice(0, half), 0) +
+      card(ALBUMS.slice(half), half);
+  }
+
+  function buildUncrowned() {
+    const el = document.getElementById('hofUncrowned');
+    el.innerHTML += UNCROWNED.map((u, i) => `
+      <div class="hof-uncrowned-row">
+        <span class="hof-uncrowned__idx">${i + 1}</span>
+        <div class="hof-uncrowned__info">
+          <div class="hof-uncrowned__artist">${u.artist}</div>
+          <div class="hof-uncrowned__song">${u.song}</div>
+        </div>
+        <span class="hof-uncrowned__badge">#${u.rank}</span>
+        <span class="hof-uncrowned__pts">${u.pts.toFixed(2)}</span>
+      </div>`).join('');
+  }
+
+  buildChampionRoll();
+  buildRecordsGrid();
+  buildArtistCols();
+  buildAlbums();
+  buildUncrowned();
+
+  /* ─────────────────────────── FADE-UP ───────────────────────────────── */
+  function clearDelayAfterAnim(el) {
+    const ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+    setTimeout(() => { el.style.transitionDelay = '0s'; }, ms);
+  }
+  if ('IntersectionObserver' in window) {
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+          clearDelayAfterAnim(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }
+</script>
+</body>
+</html>

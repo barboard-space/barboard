@@ -39,7 +39,8 @@
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
-- `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频 + 亮点 JS-sticky 侧栏 + 完整榜单，详见开发注意事项 #64–66, #67–69）
+- `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
+- `barboardlab/hall-of-fame.html` — BBL 荣誉殿堂（已完成，5大板块：20冠军排行/驻榜纪录6组/艺人版图/上榜专辑/未冠之最，数据硬编码 JS 常量数组直接渲染）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -49,7 +50,7 @@
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
 - `barvision/2025/events.html` 等历届页面
-- `barboardlab/hall-of-fame.html`、`barboardlab/charts/`
+- `barboardlab/charts/` — 历史榜单归档
 - `archive/barammy.html`、`archive/esc-voting-party.html`
 
 ---
@@ -87,8 +88,7 @@ barboard-space/
 │   └── updates.json        ← 动态条目（对象数组，BBL条目由fetch_bbl.py维护）
 │
 ├── barboardlab/
-│   ├── hall-of-fame.html
-│   └── charts/
+│   └── hall-of-fame.html   ← BBL 荣誉殿堂（已完成）
 │
 ├── member/
 │   ├── 7.html              ← @williw_（威妈）成员主页（已完成）
@@ -388,6 +388,12 @@ barboard-space/
 73. **bbl.html 向上滚动取消动画**：`_scrollingDown` 标志追踪滚动方向，IntersectionObserver 回调中若向上滚则对目标元素 `transition:none` + 强制 `.visible`，rAF 后清除 `transition`，避免向上回滚时条目重新播放入场动画。
 74. **全站搜索框统一规范**：`padding: 7px 30px 7px 14px`、`font-weight:500`、`letter-spacing:0.03em`、`border-radius:4px`、focus 时 `border-color: var(--clr-violet)` + `caret-color: var(--clr-violet)`、placeholder focus 时 `opacity:0`。放大镜图标须包在独立 `position:relative` 的 wrapper div 内（而非搜索容器），避免 count/label 子元素影响 `top:50%` 定位。
 75. **auto 列中 margin-left 无效**：grid `1fr auto` 中，对 auto 列的 grid item 加 `margin-left` 不会使内容视觉右移——auto 列宽随 margin 同步缩小，内容位置不变。要右移，应减小 chart-item 的 `padding-right`。
+76. **fade-up delay 清除正确方案**：`transitionend` + `{ once: true }` 存在竞态——用户在动画完成瞬间 hover 时 delay 尚未清除，且移除 inline style 后 CSS `nth-child` delay 规则重新接管。正确做法：用 `clearDelayAfterAnim(el)` 封装 `setTimeout`，时长 = `parseFloat(el.style.transitionDelay) * 1000 + 250`，到时将 `transitionDelay` 设为 `'0s'`（不是 `''`）。
+77. **`.btn--primary.fade-up.visible` 必须包含 opacity/transform**：该规则只写 `background-position` 和 `box-shadow` 时，会以相同特异度覆盖 `.btn.fade-up.visible { transition: all 0.2s }` 中的 opacity/transform，导致 `.btn--primary` 入场动画瞬间跳变而非渐显。必须完整写为 `transition: opacity 0.2s ease, transform 0.2s ease, background-position 0.35s ease, box-shadow 0.35s ease`。
+78. **bbl.html 视频框自适应宽高**：`alignVideo()` 用 `getDocTop(el)`（遍历 `offsetTop` 链，不受 CSS transform 影响）测量 h1 顶到 actions 底的高度作为视频框 `height`；再用 `frameH * 16/9 - 4px` 更新 `layout.style.gridTemplateColumns`（`-4px` 补偿视频播放器内部黑边偏差）；`window.load` + `resize` 时触发；768px 以下跳过。
+79. **Bilibili iframe 权限与默认静音**：`allow="autoplay; fullscreen; encrypted-media; picture-in-picture; clipboard-write; gyroscope; accelerometer" allowfullscreen`；embed URL 加 `&muted=1` 默认静音。跨域限制下无法从父页面 JS 控制音量/进度，这是平台侧设计，前端无法突破。
+80. **HOF 页面数据不 fetch，直接硬编码**：`barboardlab/hall-of-fame.html` 的5大板块数据（冠军/纪录/艺人/专辑/未冠）以 JS 常量数组写在 `<script>` 内，无需 fetch CSV，加载即渲染。新页路径层级：`../scripts/nav.js`，`../fonts.css`，`../style.css`。
+81. **文件清理记录**：本次清除 61 个未声明的冗余字体文件（DM Sans 18pt/24pt/36pt 光学尺寸变体、DM Mono 斜体/Light/Medium 变体），`assets/fonts/` 目录从 82 个文件精简至 6 个；同时清除 `about/`、`archive/`、`charts/`、`barboardlab/`（当时空目录）等空目录；清除 `bbl.html` 遗留的 `.breadcrumb` CSS（HTML 已早前移除）。
 
 ---
 
