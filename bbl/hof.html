@@ -327,6 +327,13 @@
       gap: var(--gap-md);
       margin-top: var(--gap-md);
     }
+    .hof-three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--gap-md);
+      margin-top: var(--gap-md);
+      align-items: start;
+    }
     .hof-table-card {
       background: var(--clr-surface);
       border: 1px solid var(--clr-border);
@@ -396,11 +403,30 @@
       text-align: right;
       white-space: nowrap;
     }
-    .hof-table-row:first-child .hof-table__name { color: var(--clr-gold-light); }
-    .hof-table-row:first-child .hof-table__val  { color: var(--clr-gold-light); }
+    .hof-table-card .hof-table-row:nth-child(2) { background: rgba(212,168,50,0.07);  border-bottom-color: rgba(212,168,50,0.13); }
+    .hof-table-card .hof-table-row:nth-child(3) { background: rgba(144,184,208,0.05); border-bottom-color: rgba(144,184,208,0.11); }
+    .hof-table-card .hof-table-row:nth-child(4) { background: rgba(224,168,112,0.05); border-bottom-color: rgba(224,168,112,0.11); }
+    .hof-table-card .hof-table-row:nth-child(2) .hof-table__idx,
+    .hof-table-card .hof-table-row:nth-child(2) .hof-table__name,
+    .hof-table-card .hof-table-row:nth-child(2) .hof-table__val { color: var(--clr-gold-light); }
+    .hof-table-card .hof-table-row:nth-child(3) .hof-table__idx,
+    .hof-table-card .hof-table-row:nth-child(3) .hof-table__name,
+    .hof-table-card .hof-table-row:nth-child(3) .hof-table__val { color: #90b8d0; }
+    .hof-table-card .hof-table-row:nth-child(4) .hof-table__idx,
+    .hof-table-card .hof-table-row:nth-child(4) .hof-table__name,
+    .hof-table-card .hof-table-row:nth-child(4) .hof-table__val { color: #e0a870; }
 
     /* ── Albums (full-width) ── */
     .hof-album-wrap { margin-top: var(--gap-md); }
+    .hof-group-song__rate {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--clr-text-3);
+      white-space: nowrap;
+    }
+    .hof-group--gold   .hof-group-song__rate { color: rgba(245,200,64,0.65); }
+    .hof-group--silver .hof-group-song__rate { color: rgba(144,184,208,0.65); }
+    .hof-group--bronze .hof-group-song__rate { color: rgba(224,168,112,0.65); }
 
     /* ── Uncrowned ── */
     .hof-uncrowned-grid {
@@ -483,6 +509,11 @@
 
     /* ── Single-chart: badge-first, no index column ── */
     #hofSingleChart .hof-uncrowned-row { grid-template-columns: auto auto 1fr auto; }
+    /* ── Artist peak: hide date on mobile ── */
+    @media (max-width: 768px) {
+      .hof-peak-card .hof-table-row { grid-template-columns: 22px 1fr auto; }
+      .hof-peak-card .hof-table__rate { display: none; }
+    }
 
     /* ── Charts occurrences (flex-wrap, fixed-width items) ── */
     .hof-group .hof-no1-entry__head { padding-bottom: 0; }
@@ -531,6 +562,7 @@
       .hof-records-grid { grid-template-columns: 1fr; }
       .hof-records-right { grid-template-columns: 1fr 1fr; }
       .hof-two-col { grid-template-columns: 1fr; }
+      .hof-three-col { grid-template-columns: 1fr; }
       .hof-roll { columns: 1; }
       .hof-no1-wrap { columns: 1; }
       .hof-group-song__debut { display: none; }
@@ -657,22 +689,22 @@
   </div>
 </section>
 
-<!-- ═══ ARTIST RECORDS ═══ -->
-<section class="section section--bordered" id="artists" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
-  <div class="section__inner">
-    <p class="section-label fade-up">艺人成就</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">艺人版图</h2>
-    <div class="hof-two-col fade-up" style="transition-delay:0.2s;" id="hofArtistCols"></div>
-  </div>
-</section>
-
 <!-- ═══ ALBUMS ═══ -->
 <section class="section section--bordered" id="albums" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
   <div class="section__inner">
-    <p class="section-label fade-up">专辑成就</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">上榜专辑</h2>
-    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">上榜歌曲最多的专辑（至少 6 首上榜），括号内为上榜率。</p>
-    <div class="hof-two-col hof-album-wrap fade-up" style="transition-delay:0.3s;" id="hofAlbums"></div>
+    <p class="section-label fade-up">专辑纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">单周专辑进榜纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">同一期榜单中进榜单曲最多的专辑（至少 7 首），条目末尾为进榜率（进榜曲数 / 专辑总曲数）。</p>
+    <div class="hof-roll hof-album-wrap" id="hofAlbums"></div>
+  </div>
+</section>
+
+<!-- ═══ ARTIST RECORDS ═══ -->
+<section class="section section--bordered" id="artists" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">艺人纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(18px, 2.4vw, 28px);">艺人进榜纪录</h2>
+    <div class="hof-three-col" id="hofArtistCols"></div>
   </div>
 </section>
 
@@ -684,8 +716,8 @@
   <div class="hof-toc__item" data-target="most-charts">助攻纪录</div>
   <div class="hof-toc__item" data-target="single-chart">最强N榜</div>
   <div class="hof-toc__item" data-target="weekly-no1">个人榜冠军纪录</div>
-  <div class="hof-toc__item" data-target="artists">艺人版图</div>
-  <div class="hof-toc__item" data-target="albums">上榜专辑</div>
+  <div class="hof-toc__item" data-target="albums">专辑纪录</div>
+  <div class="hof-toc__item" data-target="artists">艺人纪录</div>
 </nav>
 
 <div id="site-footer"></div>
@@ -809,53 +841,96 @@
     ]},
   ];
 
-  const ARTISTS_WEEKS = [
-    { artist:'Taylor Swift',    val:324 },
-    { artist:'Sabrina Carpenter', val:226 },
-    { artist:'Ariana Grande',   val:219 },
-    { artist:'Billie Eilish',   val:200 },
-    { artist:'Lady Gaga',       val:195 },
-    { artist:'Tate McRae',      val:188 },
-    { artist:'Kendrick Lamar',  val:163 },
-    { artist:'Gracie Abrams',   val:162 },
-    { artist:'Chappell Roan',   val:155 },
-    { artist:'SZA',             val:146 },
+  const ARTISTS_PEAK = [
+    { artist:'Taylor Swift',      val:31, date:'2024-01-05' },
+    { artist:'Taylor Swift',      val:24, date:'2024-04-26' },
+    { artist:'Taylor Swift',      val:19, date:'2024-05-03' },
+    { artist:'Taylor Swift',      val:17, date:'2024-01-12' },
+    { artist:'Lady Gaga',         val:14, date:'2025-03-14' },
+    { artist:'Ariana Grande',     val:13, date:'2024-03-15' },
+    { artist:'Taylor Swift',      val:13, date:'2024-05-17' },
+    { artist:'Ariana Grande',     val:12, date:'2024-03-22' },
+    { artist:'Taylor Swift',      val:12, date:'2024-05-10' },
+    { artist:'Taylor Swift',      val:12, date:'2025-10-10' },
+    { artist:'Taylor Swift',      val:12, date:'2025-10-17' },
+    { artist:'Wolf Alice',        val:12, date:'2026-01-09' },
+    { artist:'Ariana Grande',     val:11, date:'2024-04-05' },
+    { artist:'Magdalena Bay',     val:11, date:'2024-08-30' },
+    { artist:'Sabrina Carpenter', val:11, date:'2025-09-05' },
+    { artist:'ROSALÍA',           val:11, date:'2025-11-14' },
+    { artist:'Ariana Grande',     val:10, date:'2024-03-29' },
+    { artist:'Charli xcx',        val:10, date:'2024-10-18' },
+    { artist:'FKA twigs',         val:10, date:'2025-01-31' },
+    { artist:'The Weeknd',        val:10, date:'2025-02-07' },
+    { artist:'Danielle Haim',     val:10, date:'2025-06-27' },
+    { artist:'Lorde',             val:10, date:'2025-07-04' },
+    { artist:'JADE',              val:10, date:'2025-09-19' },
   ];
 
   const ARTISTS_SONGS = [
-    { artist:'Taylor Swift',    val:62 },
-    { artist:'Sabrina Carpenter', val:22 },
-    { artist:'Lady Gaga',       val:19 },
-    { artist:'Ariana Grande',   val:17 },
-    { artist:'Charli xcx',      val:16 },
-    { artist:'The Weeknd',      val:14 },
-    { artist:'Kendrick Lamar',  val:14 },
-    { artist:'SZA',             val:14 },
-    { artist:'Tate McRae',      val:14 },
-    { artist:'Billie Eilish',   val:12 },
-    { artist:'Post Malone',     val:12 },
+    { artist:'Taylor Swift',      val:75 },
+    { artist:'Sabrina Carpenter', val:26 },
+    { artist:'Lady Gaga',         val:22 },
+    { artist:'Ariana Grande',     val:22 },
+    { artist:'Morgan Wallen',     val:21 },
+    { artist:'Charli xcx',        val:20 },
+    { artist:'Twenty One Pilots', val:17 },
+    { artist:'Tate McRae',        val:16 },
+    { artist:'SZA',               val:16 },
+    { artist:'Kendrick Lamar',    val:15 },
+    { artist:'The Weeknd',        val:15 },
+    { artist:'FKA twigs',         val:15 },
+    { artist:'Zach Bryan',        val:15 },
+  ];
+
+  const ARTISTS_WEEKS = [
+    { artist:'Taylor Swift',      val:500 },
+    { artist:'Sabrina Carpenter', val:372 },
+    { artist:'Ariana Grande',     val:222 },
+    { artist:'Tate McRae',        val:217 },
+    { artist:'Lady Gaga',         val:210 },
+    { artist:'Billie Eilish',     val:200 },
+    { artist:'Chappell Roan',     val:181 },
+    { artist:'Kendrick Lamar',    val:167 },
+    { artist:'Gracie Abrams',     val:162 },
+    { artist:'SZA',               val:161 },
   ];
 
   const ALBUMS = [
-    { artist:'Taylor Swift',     album:'The Tortured Poets Department',     songs:25, rate:'80.6%' },
-    { artist:'Ariana Grande',    album:'eternal sunshine (deluxe)',          songs:18, rate:'100%'  },
-    { artist:'Lady Gaga',        album:'MAYHEM',                            songs:14, rate:'100%'  },
-    { artist:'Charli xcx',       album:'BRAT',                              songs:12, rate:'66.7%' },
-    { artist:'Sabrina Carpenter',album:"Man's Best Friend",                 songs:11, rate:'91.7%' },
-    { artist:'Magdalena Bay',    album:'Imaginal Disk',                     songs:11, rate:'73.3%' },
-    { artist:'SZA',              album:'SOS Deluxe: LANA',                  songs:11, rate:'28.9%' },
-    { artist:'FKA twigs',        album:'EUSEXUA',                           songs:10, rate:'90.9%' },
-    { artist:'Lorde',            album:'Virgin',                            songs:10, rate:'90.9%' },
-    { artist:'Sabrina Carpenter',album:"Short 'n' Sweet (Deluxe)",          songs:10, rate:'62.5%' },
-    { artist:'The Weeknd',       album:'Hurry Up Tomorrow',                 songs:10, rate:'45.5%' },
-    { artist:'Big Thief',        album:'Double Infinity',                   songs:9,  rate:'100%'  },
-    { artist:'Billie Eilish',    album:'HIT ME HARD AND SOFT',              songs:9,  rate:'90.0%' },
-    { artist:'Twenty One Pilots',album:'Clancy',                            songs:9,  rate:'69.2%' },
-    { artist:'Tate McRae',       album:'So Close To What',                  songs:9,  rate:'60.0%' },
-    { artist:'HAIM',             album:'I quit',                            songs:9,  rate:'60.0%' },
-    { artist:'Dua Lipa',         album:'Radical Optimism',                  songs:8,  rate:'72.7%' },
-    { artist:'Sam Fender',       album:'People Watching',                   songs:8,  rate:'72.7%' },
-    { artist:'Kendrick Lamar',   album:'GNX',                               songs:8,  rate:'66.7%' },
+    { artist:'Taylor Swift',      album:'The Tortured Poets Department',             songs:25, rate:'80.6%'  },
+    { artist:'Ariana Grande',     album:'eternal sunshine',                          songs:18, rate:'100.0%' },
+    { artist:'Lady Gaga',         album:'MAYHEM',                                    songs:15, rate:'88.2%'  },
+    { artist:'Taylor Swift',      album:'The Life of a Showgirl',                    songs:12, rate:'100.0%' },
+    { artist:'Charli xcx',        album:'BRAT',                                      songs:12, rate:'66.7%'  },
+    { artist:'Morgan Wallen',     album:"I'm the Problem",                           songs:12, rate:'32.4%'  },
+    { artist:'Sabrina Carpenter', album:"Man's Best Friend",                         songs:11, rate:'91.7%'  },
+    { artist:'Harry Styles',      album:'Kiss All the Time. Disco, Occasionally.',   songs:11, rate:'91.7%'  },
+    { artist:'JADE',              album:"THAT'S SHOWBIZ BABY!",                      songs:11, rate:'78.6%'  },
+    { artist:'Magdalena Bay',     album:'Imaginal Disk',                             songs:11, rate:'73.3%'  },
+    { artist:'ROSALÍA',           album:'LUX',                                       songs:11, rate:'73.3%'  },
+    { artist:'The Weeknd',        album:'Hurry Up Tomorrow',                         songs:11, rate:'50.0%'  },
+    { artist:'SZA',               album:'SOS Deluxe: LANA',                          songs:11, rate:'28.9%'  },
+    { artist:'FKA twigs',         album:'EUSEXUA',                                   songs:10, rate:'90.9%'  },
+    { artist:'Lorde',             album:'Virgin',                                    songs:10, rate:'90.9%'  },
+    { artist:'Sabrina Carpenter', album:"Short 'n' Sweet (Deluxe)",                  songs:10, rate:'62.5%'  },
+    { artist:'Sam Fender',        album:'People Watching (Deluxe Edition)',           songs:10, rate:'52.6%'  },
+    { artist:'Tate McRae',        album:'So Close to What???',                       songs:10, rate:'47.6%'  },
+    { artist:'Big Thief',         album:'Double Infinity',                            songs:9,  rate:'100.0%' },
+    { artist:'Billie Eilish',     album:'HIT ME HARD AND SOFT',                      songs:9,  rate:'90.0%'  },
+    { artist:'Mitski',            album:"Nothing's About To Happen To Me",            songs:9,  rate:'81.8%'  },
+    { artist:'Holly Humberstone', album:'Cruel World',                               songs:9,  rate:'75.0%'  },
+    { artist:'Twenty One Pilots', album:'Clancy',                                    songs:9,  rate:'69.2%'  },
+    { artist:'HAIM',              album:'I quit',                                    songs:9,  rate:'60.0%'  },
+    { artist:'Dua Lipa',          album:'Radical Optimism',                          songs:8,  rate:'72.7%'  },
+    { artist:'Kendrick Lamar',    album:'GNX',                                       songs:8,  rate:'66.7%'  },
+    { artist:'Miley Cyrus',       album:'Something Beautiful',                       songs:8,  rate:'61.5%'  },
+    { artist:'Vampire Weekend',   album:'Only God Was Above Us',                     songs:7,  rate:'70.0%'  },
+    { artist:'Linkin Park',       album:'From Zero',                                 songs:7,  rate:'63.6%'  },
+    { artist:'Charli xcx',        album:'Wuthering Heights',                         songs:7,  rate:'58.3%'  },
+    { artist:'Doja Cat',          album:'Vie',                                        songs:7,  rate:'46.7%'  },
+    { artist:'Oklou',             album:'Choke Enough (Deluxe)',                     songs:7,  rate:'41.2%'  },
+    { artist:'Zach Bryan',        album:'The Great American Bar Scene',              songs:7,  rate:'36.8%'  },
+    { artist:'Taylor Swift',      album:"1989 (Taylor's Version)",                   songs:7,  rate:'33.3%'  },
   ];
 
   const MOST_POINTS = [
@@ -1038,9 +1113,9 @@
   }
 
   function buildArtistCols() {
-    function card(title, sub, data) {
+    function simpleCard(title, sub, data, delay) {
       return `
-        <div class="hof-table-card">
+        <div class="hof-table-card fade-up" style="transition-delay:${delay}s;">
           <div class="hof-table-card__head">
             <div class="hof-table-card__label">${title}</div>
             <div class="hof-table-card__sub">${sub}</div>
@@ -1053,37 +1128,64 @@
             </div>`).join('')}
         </div>`;
     }
+    function peakCard() {
+      const rows = ARTISTS_PEAK.map((a, i) => {
+        const vol = VOL_DATES.indexOf(a.date);
+        return `
+          <div class="hof-table-row hof-table-row--3col">
+            <span class="hof-table__idx">${i + 1}</span>
+            <div class="hof-table__info"><div class="hof-table__name">${a.artist}</div></div>
+            <span class="hof-table__rate">${fmtDebutDate(a.date)}<span style="font-family:var(--font-body);"> · 第 ${vol} 期</span></span>
+            <span class="hof-table__val">${a.val}</span>
+          </div>`;
+      }).join('');
+      return `
+        <div class="hof-table-card hof-peak-card fade-up" style="transition-delay:0s;">
+          <div class="hof-table-card__head">
+            <div class="hof-table-card__label">单周进榜单曲数</div>
+            <div class="hof-table-card__sub">艺人单周进榜单曲数纪录（10首以上）</div>
+          </div>
+          ${rows}
+        </div>`;
+    }
     document.getElementById('hofArtistCols').innerHTML =
-      card('总在榜周数', '所有上榜歌曲累计在榜周数', ARTISTS_WEEKS) +
-      card('上榜歌曲数', '累计不重复上榜单曲数', ARTISTS_SONGS);
+      peakCard() +
+      simpleCard('累计进榜单曲数', '不重复上榜单曲总数', ARTISTS_SONGS, '0.12') +
+      simpleCard('累计在榜周数', '所有上榜歌曲累计在榜周数', ARTISTS_WEEKS, '0.24');
   }
 
   function buildAlbums() {
-    const half = Math.ceil(ALBUMS.length / 2);
-    function card(items, startIdx) {
+    const groups = {};
+    ALBUMS.forEach(a => { if (!groups[a.songs]) groups[a.songs] = []; groups[a.songs].push(a); });
+    const songsList = Object.keys(groups).map(Number).sort((a, b) => b - a);
+
+    document.getElementById('hofAlbums').innerHTML = songsList.map((songs, gi) => {
+      const tier = gi === 0 ? 'gold' : gi === 1 ? 'silver' : gi === 2 ? 'bronze' : '';
+      const cls  = tier ? ` hof-group--${tier}` : '';
+      const albums = groups[songs];
+      const countLabel = albums.length > 1 ? `<span class="hof-group__count">${albums.length} 张</span>` : '';
+      const rows = albums.map(a => `
+        <div class="hof-group-song">
+          <div>
+            <div class="hof-group-song__title">${a.album}</div>
+            <div class="hof-group-song__artist">${a.artist}</div>
+          </div>
+          <div class="hof-group-song__debut">
+            <div class="hof-group-song__rate">${a.rate}</div>
+          </div>
+        </div>`).join('');
       return `
-        <div class="hof-table-card">
-          ${startIdx === 0
-            ? `<div class="hof-table-card__head">
-                 <div class="hof-table-card__label">上榜歌曲最多的专辑</div>
-                 <div class="hof-table-card__sub">括号内为专辑上榜率</div>
-               </div>`
-            : `<div class="hof-table-card__head"><div class="hof-table-card__sub" style="padding:2px 0;">（续）</div></div>`}
-          ${items.map((a, i) => `
-            <div class="hof-table-row hof-table-row--3col">
-              <span class="hof-table__idx">${startIdx + i + 1}</span>
-              <div class="hof-table__info">
-                <div class="hof-table__name">${a.album}</div>
-                <div class="hof-table__sub">${a.artist}</div>
-              </div>
-              <span class="hof-table__val">${a.songs}</span>
-              <span class="hof-table__rate">${a.rate}</span>
-            </div>`).join('')}
+        <div class="hof-group${cls} fade-up" style="transition-delay:${(gi * 0.06).toFixed(2)}s;">
+          <div class="hof-group__head">
+            <div style="display:flex;align-items:baseline;gap:7px;margin-left:-2px;">
+              <div class="hof-group__num">${songs}</div>
+              <div class="hof-group__label">首</div>
+            </div>
+            ${countLabel}
+          </div>
+          <div>${rows}</div>
         </div>`;
-    }
-    document.getElementById('hofAlbums').innerHTML =
-      card(ALBUMS.slice(0, half), 0) +
-      card(ALBUMS.slice(half), half);
+    }).join('');
   }
 
   function buildSingleChart() {

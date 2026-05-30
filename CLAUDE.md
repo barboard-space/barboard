@@ -41,7 +41,7 @@
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
-- `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 艺人版图 → 上榜专辑，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–95）
+- `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 单周专辑进榜纪录 → 艺人进榜纪录，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–97）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日前填入**（`const FORM_URL = ''` 占位符）
@@ -414,10 +414,12 @@ barboard-space/
 89. **在榜周数纪录布局设计**：左列（`1.65fr`）为完整总在榜周数排行（`CHARTED_FULL`，12条），前三名金银铜配色；右列（`2fr`）为 `hof-records-right` 2×2 网格（Top3/5/10/50 四张卡片，`show:false` 保留 Top20 数据但不渲染）。左侧主卡片 `.hof-record-card--full`：紫色边框（`rgba(168,85,247,0.38)`）+ 渐变底色 + 外发光 + `overflow:hidden`；行背景全宽通过 `margin: 0 -20px; padding: 9px 20px` 实现（需卡片有 `overflow:hidden`）。周数相同的条目用 `computeRanks()` 计算并列名次。val 末尾 `*` 通过检测 `hasAst` 剥离后以 `<span class="hof-record-ast">` 加到歌名末尾。
 90. **data-tooltip 条目级注释**：在数据对象加 `note` 字段，渲染时写入 `data-tooltip` 属性，页底用 IIFE 事件委托实现 tooltip（复用 `.member-tooltip` / `.member-tooltip--visible` CSS）。与 nav.js member tooltip 完全同款，follow 鼠标 `(clientX+16, clientY)`，opacity 0.18s fade。
 91. **无冕高分（未夺冠单曲单周点数纪录）板块设计**：`UNCROWNED`（15条）含 `artist/song/pts/rank/vol` 五字段，vol 通过 `VOL_DATES` 查日期再 `fmtDebutDate()` 格式化；双列 `.hof-uncrowned-grid`（`1fr 1fr`，左8右7），各自独立卡片含 border 与 overflow:hidden；行网格 `22px auto 1fr auto auto`（排名/点数/歌曲/日期期数/位次）；点数整数 24px Bebas + 小数 13px 0.6透明；日期两行（ASCII 用 mono，中文「第N期」加 `font-family:var(--font-body)` inline style）；位次标签 `#2` 银色、`#3` 铜色、其余默认。移动端隐藏点数和日期列。
-92. **bbl-record CSV 编号规范**（截至当前）：`bbl_01` 冠单名录 / `bbl_02` 在榜周数纪录（合并版，含 Category 列）/ `bbl_03` 2000点以上单曲 / `bbl_04` 无冕高分点数 / `bbl_05` 最多上榜次数（16期+）/ `bbl_06` 单期最强榜 / `bbl_07` 单周个人榜冠军数 / `bbl_08` 专辑上榜 / `bbl_09` 艺人峰值歌曲数 / `bbl_10` 艺人总上榜歌曲数 / `bbl_11` 艺人总在榜周数。
+92. **bbl-record CSV 编号规范**（截至当前）：`bbl_01` 冠单名录 / `bbl_02` 在榜周数纪录（合并版，含 Category 列）/ `bbl_03` 2000点以上单曲 / `bbl_04` 无冕高分点数 / `bbl_05` 最多上榜次数（16期+）/ `bbl_06` 单期最强榜 / `bbl_07` 单周个人榜冠军数 / `bbl_08` 单周专辑进榜（7首以上，字段：number/artist/album/rate）/ `bbl_09` 艺人单周进榜单曲峰值（10首以上，字段：number/artist/volume）/ `bbl_10` 艺人累计进榜单曲数（字段：Singles/Artist）/ `bbl_11` 艺人累计在榜周数（字段：Weeks/Artist）。
 93. **hof.html 双列板块动画规范**：`.hof-uncrowned-grid` / `.hof-no1-wrap` 容器本身不加 `fade-up`，由 JS 在 `innerHTML` 中给左右两列 `.hof-uncrowned` / `.hof-no1-group` 各自加 `fade-up`（左0s，右0.07s），与 `buildRecordsGrid()` 的 `renderCard` delay 模式一致。点数纪录、无冕高分、单周N榜助攻均采用此模式。
 94. **hof.html 助攻纪录（buildMostCharts）**：容器 `.hof-no1-wrap`（columns:2）；`.hof-group` 分组卡（金银铜 n=19/18/17）内部使用 `.hof-no1-entry` 条目样式（歌名+歌手 head + 出现记录行）；同一 n 组内相同歌曲合并，多条出现日期放入 `.hof-charts-occs`（`flex nowrap`，`gap: 2px 12px`），每条为固定宽度 `flex: 0 0 170px` 的 `.hof-charts-occ`，名次用 `.hof-charts-rank` 内联色（金/银/铜）紧随日期文字；`.hof-group .hof-no1-entry__head { padding-bottom: 0 }` 压缩歌名到日期的间距至 1px。
 95. **hof.html 最强N榜（buildSingleChart）**：复用 hof-uncrowned 样式，但 badge（「N榜」）移至第一列、去掉序号列，用 `#hofSingleChart .hof-uncrowned-row { grid-template-columns: auto auto 1fr auto }` 覆盖默认 5 列 grid；移动端覆盖为 `auto 1fr`；无金银铜配色；N=17 行 CSV 空白已补填为 Taylor Swift — The Fate of Ophelia（据 pts/date 核实）；QWER 曲目韩文因终端编码乱码，暂用英文副标题「My Name is Malguem」，需核实后更新。
+96. **hof.html 单周专辑进榜纪录（buildAlbums）**：数据来自 `bbl_08_albums_most_charted.csv`（35条，7首以上），改用 `hof-group` 瀑布流（容器 `hof-roll`，`columns:3`）而非旧的双列表格；按进榜单曲数分组（共9组，降序），前三组金银铜；卡头显示「X首」（Bebas Neue 数字 + `hof-group__label` 「首」），每行：专辑名 + 歌手（`hof-group-song__title/artist`）+ 进榜率（`hof-group-song__rate`，mono 11px，金/银/铜行各自 rgba 0.65 配色）；`hof-group-song__rate` 为 HOF 专属新类，定义于 `<style>` 块内。
+97. **hof.html 艺人进榜纪录（buildArtistCols）**：三列 `.hof-three-col`（`1fr 1fr 1fr`，`align-items:start`，移动端折叠为单列），动画错排 `0s / 0.12s / 0.24s`。列1「单周进榜单曲数」：`.hof-peak-card`，数据来自 `bbl_09`（23条，艺人+峰值+日期），用 `hof-table-row--3col` 行（22px / 1fr / auto / auto），日期+期数合并为单行 `hof-table__rate`（ASCII mono + 中文 font-body span），移动端隐藏日期列；列2「累计进榜单曲数」（`bbl_10`，13条）+ 列3「累计在榜周数」（`bbl_11`，11条）均用 `hof-table-row--2col`。金银铜通过 `hof-table-card .hof-table-row:nth-child(2/3/4)` 实现（`hof-table-card__head` 占 child(1)，数据行从 nth-child(2) 起），覆盖行背景、分隔线色、idx/name/val 三元素颜色。
 
 ---
 
