@@ -43,12 +43,12 @@
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
 - `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 单周专辑进榜纪录 → 艺人进榜纪录，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–97）
 - `barvision.html` — Barvision 总览（已完成，大幅重设计，详见开发注意事项 #100–102）
-- `barvision/hof.html` — Barvision Hall of Fame（深度打磨完成；hero 金色主题（glow/eyebrow/title accent/desc 均用 gold）+ 三 section；eyebrow 为跳回 barvision.html 的链接；MEMBER_MAP + fmtMember/fmtWho 将成员名渲染为 `@handle` 链接；页内 TOC（紫色，三项，IO suppression，阈值 > 400 晚于 back-to-top）；动画全面对标 bbl/hof.html；接入 `../scripts/nav.js`）
+- `barvision/hof.html` — Barvision Hall of Fame（深度打磨完成；hero 金色主题（glow/eyebrow/title accent/desc 均用 gold）+ 三 section；eyebrow 为跳回 barvision.html 的链接；MEMBER_MAP + fmtMember/fmtWho 将成员名渲染为 `@handle` 链接；页内 TOC（紫色，三项，IO suppression，阈值 > 400 晚于 back-to-top）；动画全面对标 bbl/hof.html；接入 `../scripts/nav.js`；hero 右下 `BARVISION` 水印）
+- `archive.html` — 活动存档总览（已完成；hero 榜吧蓝主题 + `BARBOARD` 水印；两节：常规活动（BBL/Barvision 2列卡）+ 过往活动 Legacy（年榜/吧莱美/ECVP 3列卡）；卡片动画 `cubic-bezier(0.22,1,0.36,1)` 0.55s stagger `i×0.07s`；Legacy 卡 opacity 0.82 降调；详见开发注意事项 #107）
 
 ### 待建页面（按优先级）
 - `barvision/2026/events.html` 中的表单 URL — **6月1日 18:00 前填入**（`const FORM_URL = ''` 占位符；填入后同步 enable `index.html` 的「歌曲报名」按钮）
 - `about.html` — 关于榜吧完整历史
-- `archive.html` — 存档中心总览
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
 - `barvision/2025/events.html` 等历届页面
@@ -434,6 +434,7 @@ barboard-space/
 104. **`barvision/hof.html` 成员链接渲染**：页内定义 `MEMBER_MAP`（昵称→`{id, handle}`）+ `fmtMember(nickname)` + `fmtWho(who)`；`fmtWho` 按 ` · ` 分割多人，分隔符加 `opacity:0.35`。先驱奖 `@绿荫夏语` 用 `style="color:var(--clr-text)"` 白色覆盖，其他成员保持 style.css 默认紫色（`rgba(240,238,255,0.62)`）。**坑**：`bv-award` 有自身 `transition: border-color 0.2s`，写在 `<style>` 块（晚于 `style.css`）会覆盖 `.fade-up` 的 `opacity/transform` 过渡，导致卡片无淡入动画。修复：改为 `transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s`。
 105. **hof.html TOC 阈值设计**：TOC 用 `window.scrollY > 400` 触发显示，back-to-top 用 `> 320`；相差 80px，使 TOC 出现晚于、消失早于 back-to-top，视觉层次更自然。两个 hof.html 均采用此值。
 106. **`index.html` 歌曲报名按钮禁用模式**：`href="#" onclick="return false" data-tooltip="暂不可用" style="opacity:0.38;cursor:not-allowed"`；表单 URL 就绪后改回正常链接并移除 disable 样式。歌曲提交开放时间：北京时间 2026-06-01 18:00（`OPEN_DATE = new Date('2026-06-01T18:00:00+08:00')`，index.html 倒计时目标同步）。
+107. **`archive.html` 设计规范**：全站活动总览页，hero 用榜吧蓝 `#6F9EC3` 作为主题色（eyebrow glow、section-label、section__title、arc-accent、desc 文字 `rgba(111,158,195,0.85)`、watermark `rgba(111,158,195,0.04)`）；顶部辉光仅主光改为榜吧蓝，左下粉色 `rgba(224,64,160,0.08)`，右侧紫色 `rgba(168,85,247,0.07)`；活动卡片 `.arc-card` 用 `--arc-color` CSS 变量控制各卡主色（BBL 紫色、BV 粉色、年榜蓝、吧莱美金、ECVP 青），顶边 3px 色条；Legacy 卡加 `.arc-card--ended`（`opacity:0.82`）降调；卡片动画单独覆盖为 `cubic-bezier(0.22,1,0.36,1)` 0.55s `translateY(28px)`，stagger `i×0.07s`；外链按钮使用全站统一 `ext-icon` SVG；section 标题首词白色 `var(--clr-text)`、次词榜吧蓝。
 
 ---
 

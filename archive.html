@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>Archive | Barboard</title>
+  <meta name="description" content="Barboard 活动总览——BarboardLab 单曲周榜、Barvision 年度歌曲大赛、吧年榜、吧莱美及 Eurovision China Voting Party 历届存档。" />
+  <link rel="icon" type="image/png" href="assets/images/logo_center.png" />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ── Hero ── */
+    .arc-hero {
+      position: relative;
+      padding: var(--nav-h) 0 72px;
+      overflow: hidden;
+    }
+    .arc-hero__glow {
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 50% 0%,   rgba(111,158,195,0.22)  0%, transparent 55%),
+        radial-gradient(ellipse 45% 45% at 0%  95%,  rgba(224,64,160,0.08)   0%, transparent 55%),
+        radial-gradient(ellipse 35% 35% at 100% 40%, rgba(168,85,247,0.07)   0%, transparent 50%);
+      pointer-events: none;
+    }
+    .arc-hero__grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .arc-hero__watermark {
+      position: absolute;
+      right: -10px; bottom: -10px;
+      font-family: var(--font-display);
+      font-size: 200px; line-height: 1; letter-spacing: -0.02em;
+      color: rgba(111,158,195,0.04);
+      pointer-events: none; user-select: none;
+    }
+    .arc-hero__inner { position: relative; z-index: 2; margin-top: 40px; }
+    .arc-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.32em;
+      text-transform: uppercase; color: #6F9EC3;
+      text-shadow: 0 0 10px rgba(111,158,195,0.7), 0 0 32px rgba(111,158,195,0.28);
+      margin-bottom: 24px;
+    }
+    .arc-title {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 8vw, 108px);
+      line-height: 1; letter-spacing: 0.02em; text-transform: uppercase;
+    }
+    .arc-accent { color: #6F9EC3; }
+    .section__title { color: #6F9EC3; }
+    .section-label  { color: #6F9EC3; }
+    .arc-desc {
+      font-size: 15px; color: rgba(111,158,195,0.85); line-height: 1.7;
+      margin-top: 24px; max-width: 560px;
+    }
+
+    /* ── Activity cards grid ── */
+    .arc-grid {
+      display: grid;
+      gap: var(--gap-md);
+      margin-top: var(--gap-md);
+    }
+    .arc-grid--2 { grid-template-columns: 1fr 1fr; }
+    .arc-grid--3 { grid-template-columns: repeat(3, 1fr); }
+
+    .arc-card {
+      position: relative;
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      padding: 28px 28px 24px;
+      display: flex; flex-direction: column;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .arc-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 8px 8px 0 0;
+      background: var(--arc-color, var(--clr-violet-light));
+      pointer-events: none;
+    }
+    .arc-card:hover { border-color: var(--clr-border-2); }
+
+    .arc-card--bbl  { --arc-color: var(--clr-violet-light); }
+    .arc-card--bv   { --arc-color: var(--clr-pink-light); }
+    .arc-card--year { --arc-color: var(--clr-accent); }
+    .arc-card--bmy  { --arc-color: var(--clr-gold-light); }
+    .arc-card--esc  { --arc-color: #4ecca3; }
+
+    /* card header */
+    .arc-card__header {
+      display: flex; align-items: flex-start;
+      justify-content: space-between; gap: 12px;
+      margin-bottom: 18px;
+    }
+    .arc-card__eyebrow {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--clr-text-2);
+      margin-bottom: 11px;
+    }
+    .arc-card__name {
+      font-family: var(--font-display);
+      font-size: clamp(22px, 2.6vw, 30px);
+      line-height: 1.05; letter-spacing: 0.02em; text-transform: uppercase;
+      color: var(--clr-text);
+    }
+    .arc-card__years {
+      font-family: var(--font-mono);
+      font-size: 11px; color: var(--clr-text-2);
+      margin-top: 9px; letter-spacing: 0.06em;
+    }
+
+    /* status badge */
+    .arc-badge {
+      flex-shrink: 0;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 4px 10px;
+      border-radius: 3px; white-space: nowrap;
+    }
+    .arc-badge--active {
+      color: #6F9EC3;
+      background: rgba(111,158,195,0.08);
+      border: 1px solid rgba(111,158,195,0.22);
+    }
+    .arc-badge--annual {
+      color: var(--clr-violet-light);
+      background: rgba(168,85,247,0.08);
+      border: 1px solid rgba(168,85,247,0.22);
+    }
+    .arc-badge--ended {
+      color: var(--clr-text-2);
+      background: rgba(136,128,168,0.07);
+      border: 1px solid var(--clr-border);
+    }
+
+    /* mini stats row (active cards only) */
+    .arc-card__stats {
+      display: flex; gap: 24px;
+      margin-bottom: 18px;
+    }
+    .arc-stat { display: flex; flex-direction: column; gap: 3px; }
+    .arc-stat__val {
+      font-family: var(--font-display); font-size: 30px; line-height: 1;
+      color: var(--arc-color, var(--clr-violet-light));
+    }
+    .arc-stat__label {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--clr-text-2);
+    }
+
+    /* description */
+    .arc-card__desc {
+      font-size: 13px; color: var(--clr-text-2); line-height: 1.72;
+      flex: 1; margin-bottom: 22px;
+    }
+
+    /* link row */
+    .arc-card__links {
+      display: flex; gap: 8px; flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .arc-card__link {
+      display: inline-block;
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em;
+      text-transform: uppercase; text-decoration: none;
+      color: var(--clr-text-2);
+      padding: 5px 10px 5px 12px;
+      border: 1px solid var(--clr-border);
+      border-radius: 3px;
+      transition: color 0.18s, border-color 0.18s;
+    }
+    .arc-card__link:hover { color: var(--clr-text); border-color: var(--clr-border-2); }
+    .arc-card__link--primary {
+      color: var(--arc-color, var(--clr-violet-light));
+      border-color: var(--arc-color, var(--clr-violet-light));
+      opacity: 0.8;
+    }
+    .arc-card__link--primary:hover { opacity: 1; color: var(--arc-color); border-color: var(--arc-color); }
+    .arc-card__link--disabled {
+      opacity: 0.35; cursor: not-allowed;
+    }
+    .arc-card__link--disabled:hover { color: var(--clr-text-2); border-color: var(--clr-border); opacity: 0.35; }
+    .arc-card__link:hover .ext-icon { opacity: 1; }
+
+    /* ended card glow-off */
+    .arc-card--ended { opacity: 0.82; }
+    .arc-card--ended:hover { opacity: 1; border-color: var(--clr-border-2); }
+
+    /* responsive */
+    @media (prefers-reduced-motion: no-preference) {
+      .arc-card.fade-up {
+        transform: translateY(28px);
+        transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+                    transform 0.55s cubic-bezier(0.22,1,0.36,1);
+      }
+      .arc-card.fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1024px) {
+      .arc-grid--3 { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .arc-grid--2,
+      .arc-grid--3 { grid-template-columns: 1fr; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .arc-card:hover       { border-color: var(--clr-border); }
+      .arc-card--ended:hover { opacity: 0.82; border-color: var(--clr-border); }
+      .arc-card__link:hover  { color: var(--clr-text-2); border-color: var(--clr-border); }
+      .arc-card__link--primary:hover { opacity: 0.8; }
+      .arc-card__link--disabled:hover { opacity: 0.35; }
+    }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="arc-hero">
+  <div class="arc-hero__glow" aria-hidden="true"></div>
+  <div class="arc-hero__grid" aria-hidden="true"></div>
+  <div class="arc-hero__watermark" aria-hidden="true">BARBOARD</div>
+  <div class="arc-hero__inner section__inner">
+    <p class="arc-eyebrow fade-up"><a href="/" style="color:inherit;text-decoration:none;">Barboard</a></p>
+    <h1 class="arc-title fade-up" style="transition-delay:0.1s;">Archive</h1>
+    <p class="arc-desc fade-up" style="transition-delay:0.2s;">榜吧自 2013 年创立以来举办的各类活动总览，包含进行中的常规活动与 Legacy 的历届存档。</p>
+  </div>
+</section>
+
+<!-- ═══ 常规活动 ═══ -->
+<section class="section section--bordered" id="ongoing" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">常规活动</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);"><span style="color:var(--clr-text);">Ongoing</span> Activities</h2>
+
+    <div class="arc-grid arc-grid--2">
+
+      <!-- BarboardLab -->
+      <div class="arc-card arc-card--bbl fade-up" style="transition-delay:0.07s;">
+        <div class="arc-card__header">
+          <div>
+            <p class="arc-card__eyebrow">每周单曲合榜</p>
+            <div class="arc-card__name">BarboardLab</div>
+            <div class="arc-card__years">2024.03 —</div>
+          </div>
+          <span class="arc-badge arc-badge--active">ACTIVE</span>
+        </div>
+        <div class="arc-card__stats">
+          <div class="arc-stat">
+            <span class="arc-stat__val">124</span>
+            <span class="arc-stat__label">当前期数</span>
+          </div>
+          <div class="arc-stat">
+            <span class="arc-stat__val">100</span>
+            <span class="arc-stat__label">榜单容量</span>
+          </div>
+        </div>
+        <p class="arc-card__desc">每周六更新的个人单曲周榜合并积分活动。成员提交完整的个人周榜，由积分系统汇总生成合榜，完整记录在 Musictrack。自 2024 年 3 月 13 日第一期起，每周稳定运行至今。</p>
+        <div class="arc-card__links">
+          <a href="/bbl.html" class="arc-card__link arc-card__link--primary">了解 BBL</a>
+          <a href="/bbl/hof.html" class="arc-card__link">Hall of Fame</a>
+          <a href="https://musictrack.cn/chart/3045/" class="arc-card__link" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a>
+        </div>
+      </div>
+
+      <!-- Barvision -->
+      <div class="arc-card arc-card--bv fade-up" style="transition-delay:0.14s;">
+        <div class="arc-card__header">
+          <div>
+            <p class="arc-card__eyebrow">年度歌曲大赛</p>
+            <div class="arc-card__name">Barvision</div>
+            <div class="arc-card__years">2019 —</div>
+          </div>
+          <span class="arc-badge arc-badge--active">ACTIVE</span>
+        </div>
+        <div class="arc-card__stats">
+          <div class="arc-stat">
+            <span class="arc-stat__val">XVI</span>
+            <span class="arc-stat__label">当前届次</span>
+          </div>
+          <div class="arc-stat">
+            <span class="arc-stat__val">2019</span>
+            <span class="arc-stat__label">创立年份</span>
+          </div>
+        </div>
+        <p class="arc-card__desc">灵感来自 Eurovision 的年度歌曲大赛，成员选送小众欧美歌曲参赛，设半决赛与决赛。由 <a class="member" href="member/125.html" data-nickname="萌妈">@绿荫夏语</a> 于 2019 年创立，2021–2022 年停办后于 2023 年恢复，改为每年一届。</p>
+        <div class="arc-card__links">
+          <a href="/barvision.html" class="arc-card__link arc-card__link--primary">了解 Barvision</a>
+          <a href="/barvision/2026/events.html" class="arc-card__link">Barvision 2026</a>
+          <a href="/barvision/hof.html" class="arc-card__link">Hall of Fame</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ Legacy活动 ═══ -->
+<section class="section section--bordered" id="ended" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">过往活动</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);"><span style="color:var(--clr-text);">Legacy</span> Activities</h2>
+
+    <div class="arc-grid arc-grid--3">
+
+      <!-- 榜吧年榜/半年榜 -->
+      <div class="arc-card arc-card--year arc-card--ended fade-up" style="transition-delay:0.07s;">
+        <div class="arc-card__header">
+          <div>
+            <p class="arc-card__eyebrow">年度 / 半年榜单</p>
+            <div class="arc-card__name"><span style="font-size:0.94em;">榜吧年榜</span></div>
+            <div class="arc-card__years">2013 — 2024</div>
+          </div>
+          <span class="arc-badge arc-badge--ended">Legacy</span>
+        </div>
+        <p class="arc-card__desc">社区年度与半年度音乐盘点活动，成员评选年度最佳单曲与专辑。是榜吧成立初期的核心活动，运行逾十年，见证了社区从百度贴吧走向 Barboard 品牌的完整历程。</p>
+        <div class="arc-card__links">
+          <a href="#" class="arc-card__link arc-card__link--disabled" onclick="return false" data-tooltip="暂不可用">存档页面</a>
+        </div>
+      </div>
+
+      <!-- 吧莱美 -->
+      <div class="arc-card arc-card--bmy arc-card--ended fade-up" style="transition-delay:0.14s;">
+        <div class="arc-card__header">
+          <div>
+            <p class="arc-card__eyebrow">社区颁奖礼</p>
+            <div class="arc-card__name"><span style="font-size:0.94em;">吧莱美</span> Barammy</div>
+            <div class="arc-card__years">2021 — 2024</div>
+          </div>
+          <span class="arc-badge arc-badge--ended">Legacy</span>
+        </div>
+        <p class="arc-card__desc">社区原创颁奖礼，效仿格莱美设立多个音乐类奖项，由成员投票评选年度最佳，兼顾榜吧内外的音乐人与作品。举办四届，留下了完整的年度颁奖记录。</p>
+        <div class="arc-card__links">
+          <a href="#" class="arc-card__link arc-card__link--disabled" onclick="return false" data-tooltip="暂不可用">存档页面</a>
+        </div>
+      </div>
+
+      <!-- Eurovision China Voting Party -->
+      <div class="arc-card arc-card--esc arc-card--ended fade-up" style="transition-delay:0.21s;">
+        <div class="arc-card__header">
+          <div>
+            <p class="arc-card__eyebrow">观赛投票活动</p>
+            <div class="arc-card__name">ESC Voting Party</div>
+            <div class="arc-card__years">2022 — 2025</div>
+          </div>
+          <span class="arc-badge arc-badge--ended">Legacy</span>
+        </div>
+        <p class="arc-card__desc">Eurovision China Voting Party，社区 Eurovision 歌唱大赛同期观赛活动。成员模拟各国评审进行 Jury Vote，同步追随半决赛与总决赛直播，是榜吧与 Eurovision 文化交汇的独特记录。</p>
+        <div class="arc-card__links">
+          <a href="#" class="arc-card__link arc-card__link--disabled" onclick="return false" data-tooltip="暂不可用">存档页面</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="scripts/nav.js"></script>
+<script>
+  if ('IntersectionObserver' in window) {
+    var fadeObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          fadeObserver.unobserve(e.target);
+          clearDelayAfterAnim(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(function(el) { fadeObserver.observe(el); });
+  } else {
+    document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('visible'); });
+  }
+
+  function clearDelayAfterAnim(el) {
+    var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+    setTimeout(function() { el.style.transitionDelay = '0s'; }, ms);
+  }
+</script>
+</body>
+</html>

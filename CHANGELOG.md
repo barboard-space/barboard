@@ -4,6 +4,16 @@
 
 ---
 
+## [2026-05-30 session 4] — archive.html 新建 + barvision/hof.html 细节打磨
+
+### Added
+- **`archive.html`**（新页面）：全站活动存档总览；hero 榜吧蓝主题（`#6F9EC3`）+ `BARBOARD` 水印 + 三层辉光（主光榜吧蓝、左下粉、右紫）；两节——「常规活动」（BBL/Barvision 2列卡）+「过往活动 Legacy Activities」（年榜/吧莱美 Barammy/ESC Voting Party 3列卡）；卡片动画 `cubic-bezier(0.22,1,0.36,1)` 0.55s stagger `i×0.07s`；Legacy 卡 `opacity:0.82` 降调；ACTIVE badge 榜吧蓝、Legacy badge 灰色；Musictrack 外链按钮带 `ext-icon` 箭头；所有链接已验证
+
+### Changed
+- **`barvision/hof.html`**：hero 加 `BARVISION` 背景水印（`rgba(212,168,50,0.035)`，右下角 200px）；先驱奖描述文字中「绿荫夏语」改为 `@绿荫夏语` 成员链接；desc 与 name 间距 `margin-top` 8→16px
+
+---
+
 ## [2026-05-30 session 3] — barvision/hof.html 深度打磨 + barvision.html 动画优化
 
 ### Changed

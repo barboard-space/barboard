@@ -32,6 +32,18 @@
       background-size: 48px 48px;
       pointer-events: none;
     }
+    .hof-hero__watermark {
+      position: absolute;
+      right: -10px;
+      bottom: -10px;
+      font-family: var(--font-display);
+      font-size: 200px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: rgba(212,168,50,0.035);
+      pointer-events: none;
+      user-select: none;
+    }
     .hof-hero__inner { position: relative; z-index: 2; margin-top: 40px; }
     .hof-eyebrow {
       font-size: 11px; font-weight: 600; letter-spacing: 0.32em;
@@ -74,7 +86,7 @@
     }
     .bv-pioneer__desc {
       font-size: 13px; color: var(--clr-text-2); line-height: 1.65;
-      margin-top: 8px; max-width: 620px;
+      margin-top: 16px; max-width: 620px;
     }
 
     /* ── Records ── */
@@ -169,6 +181,7 @@
 <section class="hof-hero">
   <div class="hof-hero__glow" aria-hidden="true"></div>
   <div class="hof-hero__grid" aria-hidden="true"></div>
+  <div class="hof-hero__watermark" aria-hidden="true">BARVISION</div>
   <div class="hof-hero__inner section__inner">
 
     <p class="hof-eyebrow fade-up"><a href="/barvision.html" style="color:inherit;text-decoration:none;">Barvision</a></p>
@@ -188,7 +201,7 @@
     <div class="bv-pioneer fade-up" style="transition-delay:0.2s;">
       <div>
         <div class="bv-pioneer__name"><a class="member" href="../member/125.html" data-nickname="萌妈" style="color:var(--clr-text);">@绿荫夏语</a></div>
-        <p class="bv-pioneer__desc">2019 年，绿荫夏语在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。</p>
+        <p class="bv-pioneer__desc">2019 年，<a class="member" href="../member/125.html" data-nickname="萌妈">@绿荫夏语</a>在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。</p>
       </div>
     </div>
 
