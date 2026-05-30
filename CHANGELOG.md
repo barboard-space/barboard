@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-05-30 session 5] — barvision.html 卡片动画 + archive.html/nav 细节
+
+### Changed
+- **`barvision.html`**：Chongqing 2026 卡加 fancy hover 动画（shimmer 光扫 + 边框/辉光增强 + logo scale/glow）；初始辉光减淡、描边改偏蓝 `rgba(100,140,230,0.55)`；shimmer transition 移至 `:hover::after`（离开时无回退动画）；2019–2020 及娱乐版卡片 `cursor:default` + hover 无变色；届次信息行间距优化（`season-card__name` margin-top 16px，主办行 margin-top 14px）
+- **`scripts/nav.js`**：`DEV_GATE = false`（关闭密码保护）；nav CTA 副标题「歌曲报名通道」→「歌曲报名」
+
+---
+
 ## [2026-05-30 session 4] — archive.html 新建 + barvision/hof.html 细节打磨
 
 ### Added

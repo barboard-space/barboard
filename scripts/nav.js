@@ -5,7 +5,7 @@
      DEV GATE ─ 开发期密码保护
      上线时将 DEV_GATE 改为 false 即可完全关闭，无需删除任何代码
      ══════════════════════════════════════════════════════════════════════════ */
-  var DEV_GATE = true;
+  var DEV_GATE = false;
   var DEV_PASS  = 'waitaminute';
 
   /* 若守门已关 或 本 session 已通过 → 立即还原 <html> 可见性（配合各页面 head 内联脚本） */
@@ -27,7 +27,7 @@
     '      <li><a href="/archive.html">Archive</a></li>',
     '      <li><a href="/member.html">Members</a></li>',
     '      <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>',
-    '      <li><a href="/barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名通道</span></a></li>',
+    '      <li><a href="/barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名</span></a></li>',
     '    </ul>',
     '    <button class="nav__menu-btn" id="navMenuBtn" aria-label="打开菜单" aria-expanded="false">',
     '      <svg class="icon-menu" width="22" height="22" viewBox="0 0 22 22" fill="none" aria-hidden="true"><line x1="3" y1="6" x2="19" y2="6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="11" x2="19" y2="11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><line x1="3" y1="16" x2="19" y2="16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
@@ -41,7 +41,7 @@
     '      <li><a href="/archive.html">Archive</a></li>',
     '      <li><a href="/member.html">Members</a></li>',
     '      <li><a href="https://musictrack.cn" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a></li>',
-    '      <li><a href="/barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名通道</span></a></li>',
+    '      <li><a href="/barvision/2026/events.html" class="nav__cta"><span class="nav__cta-title">Barvision 2026</span><span class="nav__cta-sub">歌曲报名</span></a></li>',
     '    </ul>',
     '  </div>',
     '</nav>',
