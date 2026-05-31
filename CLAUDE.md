@@ -183,6 +183,55 @@ barboard-space/
 
 ---
 
+## 数据架构原则
+
+本网站是榜吧社区统一门户，涉及大量数据归档与查询，数据更新频繁。**所有涉及数据的页面设计必须遵循以下原则：**
+
+### 核心原则
+1. **动态加载，不硬编码**：所有数据（榜单、成员、赛果等）必须从数据文件动态 fetch，不在 HTML/JS 中硬编码。数据更新时只改数据文件，无需改页面代码。
+2. **CSV 为原始数据源，JSON 为展示缓存**：原始数据以 CSV 维护（易手动编辑、可版本对比），前端 fetch 的 JSON 由脚本从 CSV 生成，不允许绕过脚本直接手动编辑 JSON 的纯数据字段。
+3. **更新 CSV 后必须运行同步脚本**：`python scripts/sync_hof_data.py --write`，然后 git add + commit。跳过此步会导致 CSV 与 JSON 不一致（正是 bbl_11 未同步的根因）。
+4. **新数据模块同理**：日后添加 Barvision 赛果、成员统计等数据模块，同样遵循「CSV → 同步脚本 → JSON → 前端 fetch」流程。
+
+### `scripts/sync_hof_data.py` 使用说明
+
+```
+python scripts/sync_hof_data.py           # dry run，只显示 diff
+python scripts/sync_hof_data.py --write   # 写入 hof_data.json
+```
+
+**自动同步的字段**（来自 CSV，脚本全量覆盖）：
+
+| JSON 字段 | 来源 CSV | 说明 |
+|-----------|----------|------|
+| `charted_full` | bbl_02（Category=charted 行） | 保留已有 `note` 字段 |
+| `charted_records` | bbl_02（其他 category 行） | 保留已有 `show` 开关 |
+| `most_points` | bbl_03 | 全部 2000 分以上记录 |
+| `uncrowned` | bbl_04 | 日期通过 bbl-vol-index.json 转换为 vol 号 |
+| `most_charts` | bbl_05 | |
+| `single_chart` | bbl_06 | |
+| `no1_records` | bbl_07 | |
+| `albums` | bbl_08 | |
+| `artists_peak` | bbl_09 | |
+| `artists_songs` | bbl_10 | |
+| `artists_weeks` | bbl_11 | |
+
+**不被脚本覆盖的字段**（人工维护）：
+
+| JSON 字段 | 原因 |
+|-----------|------|
+| `champions` | 需跨 bbl_01 多行聚合计算，人工整理 |
+| `owner_map` | 成员 key→id/handle/nickname 手动映射 |
+| `charted_full[].note` | 手动添加的备注说明 |
+| `charted_records[].show` | 控制各分组是否在 HOF 页显示 |
+
+### CSV 数据质量规范
+- 文件编码：**UTF-8（含 BOM）**，禁止 Windows-1252/GBK（会导致 É、Ó、韩文等特殊字符损坏）
+- 不得用"留空=沿用上行"的电子表格惯例——每行必须填写完整的 artist/song 字段
+- 艺人名中的特殊字符（ROSÉ、ROSALÍA、Sigríður 等）必须正确录入 UTF-8，不得简化为 `?` 或 ASCII 替代
+
+---
+
 ## 设计系统
 
 ### 品牌色彩（CSS 变量，定义于 style.css :root）
@@ -450,6 +499,7 @@ barboard-space/
 116. **GitHub Actions 推送权限**：默认 `GITHUB_TOKEN` 只有只读权限，`git push` 会 403。在 workflow 顶层加 `permissions: contents: write` 修复。
 117. **workflow git add 必须包含所有输出文件**：`fetch_bbl.py` 写 `bbl-latest.json` + `ticker.json` + `updates.json` 三个文件，但 `git add` 若只写第一个，ticker/updates 的变更永远不会提交到远端。已修正为 `git add data/bbl/bbl-latest.json data/main-page/ticker.json data/main-page/updates.json`。
 118. **hof_data.json owner_map 缺 `白`**：`no1_records` 中 Dara — Bangaranga（Vol.125）的 owners 含 `白`，但 `owner_map` 没有该 key，`fmtOwners()` 兜底渲染为 `@白` 纯文字（无链接）。待确认该成员 space_id / handle 后补入 `owner_map`。
+119. **CSV → JSON 同步规范**：修改任意 `bbl_0X_*.csv` 后，必须运行 `python scripts/sync_hof_data.py --write` 再提交，否则 JSON 与 CSV 数据不一致。脚本 dry-run 默认不写文件，加 `--write` 才生效。CSV 文件须以 UTF-8（含 BOM）保存；禁用"留空=沿用上行"惯例（每行须填完整 artist/song）；特殊字符（ROSÉ、韩文等）须正确录入，损坏为 `?` 后脚本会将错误值写入 JSON。`champions` 和 `owner_map` 不被脚本覆盖，需手动维护。
 
 ---
 
