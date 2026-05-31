@@ -977,7 +977,7 @@ img {
 .chart-stats {
   display: grid;
   grid-template-columns: auto 20px;
-  row-gap: 0;
+  row-gap: 2px;
   column-gap: 6px;
   align-self: center;
   align-items: baseline;
@@ -991,7 +991,6 @@ img {
 .chart-stat__label {
   font-family: var(--font-body);
   font-size: 10px;
-  line-height: 1.1;
   color: var(--clr-text-3);
   white-space: nowrap;
   letter-spacing: 0;
@@ -1000,7 +999,6 @@ img {
 .chart-stat__val {
   font-family: var(--font-mono);
   font-size: 10px;
-  line-height: 1.1;
   font-weight: 600;
   color: var(--clr-text-2);
   white-space: nowrap;
@@ -1819,18 +1817,6 @@ body:has(.nav--open) .back-to-top {
 
 @media (max-width: 768px) {
   .chart-list { gap: 6px; }
-  .chart-item {
-    grid-template-columns: 36px 34px 1fr auto;
-    gap: 8px;
-    padding: 6px 10px 6px 6px;
-  }
-  .chart-cover          { width: 34px; height: 34px; }
-  .chart-rank           { font-size: 18px; }
-  .chart-stats          { margin-left: 6px; column-gap: 4px; row-gap: 0; grid-template-columns: auto auto; }
-  .chart-song__title    { white-space: normal; overflow: visible; text-overflow: unset; }
-  .chart-song__artist   { white-space: normal; margin-top: 0; }
-  .chart-stat__label    { font-size: 10px; line-height: 1.1; }
-  .chart-stat__val      { font-size: 10px; line-height: 1.1; }
   .hero__title-board { text-shadow: 0 0 22px rgba(192,132,252,0.15); }
 
   :root {

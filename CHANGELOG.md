@@ -4,23 +4,6 @@
 
 ---
 
-## [2026-05-31 session 12] — bbl.html 移动端 chart-item 全面调整 + 桌面端 stats 间距优化
-
-### Style
-- `style.css` `.chart-stats` 桌面端：`row-gap: 2px → 0` + `line-height: 1.1` on label/val，最高排名/在榜周数缩近约 4px
-- `style.css` 移动端 `.chart-item` 全面重排（多轮迭代，最终确认）：
-  - grid `36px 36px 1fr auto`（封面列扩至 36px，stats 列从 `display:none` 改为重新接入）
-  - padding `8px 0 8px 10px`（上/右/下/左，右边缘无 padding）
-  - `.chart-cover` 36×36px
-  - `.chart-stats`：`margin-left: 12px; column-gap: 0; grid-template-columns: auto auto`（val 列改 auto 消除右侧多余空白）
-  - `.chart-song__title/artist`：`line-height: 1.1`，允许换行；artist `margin-top: 2px`
-  - `.chart-stat__label/val`：`line-height: 0.8`；val `font-size: 9px`
-
-### Docs
-- CLAUDE.md 新增注意事项 #130–131：移动端 chart-item 布局规格 + stats val 列 auto 约定
-
----
-
 ## [2026-05-31 session 10] — barvision/2026/events.html 移动端优化 + section 顺序 + 排版规范
 
 ### Changed
