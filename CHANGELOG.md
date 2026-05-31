@@ -4,6 +4,26 @@
 
 ---
 
+## [2026-05-31 session 9] — 数据架构规范化 + CSV→JSON 同步脚本 + BBL 日期修复
+
+### Added
+- **`scripts/sync_hof_data.py`**：BBL HOF CSV→JSON 同步脚本（bbl_02–11 共 11 个字段，dry-run/--write 模式，保留人工字段 champions/owner_map/note/show）
+- **`scripts/sync_bv_hof_data.py`**：Barvision HOF CSV→JSON 同步脚本（records.val 更新 + awards 标题一致性检查）
+- **`data/barvision/bv_hof_data.json`**：新建 Barvision HOF 展示数据（pioneer/records/awards 三节）
+- **CLAUDE.md**：新增「数据架构原则」章节（动态加载、CSV→JSON 流程、sync 脚本规范、CSV 编码要求）
+
+### Changed
+- **`barvision/hof.html`**：移除硬编码 RECORDS/AWARDS/pioneer 数据，改为 async fetch `bv_hof_data.json`，fadeObserver 移入 async 回调
+- **`data/bbl/bbl-record/hof_data.json`**：`most_points` 从 20 条扩展到 62 条（全部 2000+ pt 记录）；`charted_records` top5 补入 Sabrina Carpenter — Taste；artists_weeks 同步最新数据
+- **`data/main-page/updates.json`**：修正 Vol.125 条目日期（2026-05-22→2026-05-30）及统计周期描述（5.22-5.28→5.15-5.21）
+
+### Fixed
+- **`scripts/fetch_bbl.py`** `fmt_week_range_cn`：修正日期计算方向（API date 为下一周期起始周五，统计周期为 date-7 到 date-1）；`update_updates` 改用实际更新日期而非 API chart date
+- **`bbl.html` / `index.html`** `fmtWeekRange`：同步修正（旧逻辑产生 May 16-22，现正确输出 May 15-21）
+- **CSV 数据质量**：bbl_04 日期 2024-04-11→2024-04-05（Vol.14）；bbl_05/06 ROSÉ 字符修复；bbl_06 n=17 空白字段补全、n=3 QWER 韩文编码修复；barvision_04 最长连续前十 metric 补单位（8→8场）
+
+---
+
 ## [2026-05-31 session 8] — BBL Vol.125 数据更新 + workflow 全面修复 + hof.html 动态加载重构
 
 ### Added

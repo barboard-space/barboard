@@ -499,7 +499,8 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 116. **GitHub Actions 推送权限**：默认 `GITHUB_TOKEN` 只有只读权限，`git push` 会 403。在 workflow 顶层加 `permissions: contents: write` 修复。
 117. **workflow git add 必须包含所有输出文件**：`fetch_bbl.py` 写 `bbl-latest.json` + `ticker.json` + `updates.json` 三个文件，但 `git add` 若只写第一个，ticker/updates 的变更永远不会提交到远端。已修正为 `git add data/bbl/bbl-latest.json data/main-page/ticker.json data/main-page/updates.json`。
 118. **hof_data.json owner_map 缺 `白`**：`no1_records` 中 Dara — Bangaranga（Vol.125）的 owners 含 `白`，但 `owner_map` 没有该 key，`fmtOwners()` 兜底渲染为 `@白` 纯文字（无链接）。待确认该成员 space_id / handle 后补入 `owner_map`。
-119. **CSV → JSON 同步规范**：修改任意 `bbl_0X_*.csv` 后，必须运行 `python scripts/sync_hof_data.py --write` 再提交，否则 JSON 与 CSV 数据不一致。脚本 dry-run 默认不写文件，加 `--write` 才生效。CSV 文件须以 UTF-8（含 BOM）保存；禁用"留空=沿用上行"惯例（每行须填完整 artist/song）；特殊字符（ROSÉ、韩文等）须正确录入，损坏为 `?` 后脚本会将错误值写入 JSON。`champions` 和 `owner_map` 不被脚本覆盖，需手动维护。
+119. **CSV → JSON 同步规范**：修改任意 `bbl_0X_*.csv` 后，必须运行 `python scripts/sync_hof_data.py --write` 再提交，否则 JSON 与 CSV 数据不一致。脚本 dry-run 默认不写文件，加 `--write` 才生效。CSV 文件须以 UTF-8（含 BOM）保存；禁用"留空=沿用上行"惯例（每行须填完整 artist/song）；特殊字符（ROSÉ、韩文等）须正确录入，损坏为 `?` 后脚本会将错误值写入 JSON。`champions` 和 `owner_map` 不被脚本覆盖，需手动维护。Barvision HOF 同理：改 `barvision_04/06/07 CSV` 后运行 `python scripts/sync_bv_hof_data.py --write`。
+120. **BBL API date 字段含义**：`bbl-latest.json` 的 `date`（如 `2026-05-22`）是该期统计结束后的**下一个周五**（即下一期的起始日），不是统计起始日。统计周期 = `[date-7, date-1]`（上上周五—上周四）。`fmtWeekRange(dateStr)` 和 `fmt_week_range_cn(date_str)` 均按此逻辑实现；切勿改回 `[date, date+6]` 或 `[date-6, date]`，否则显示周期会偏移 7 天或方向反转。`updates.json` 的 BBL 条目 `date` 字段用实际抓取日期（UTC 当天），不用 API chart date。
 
 ---
 
