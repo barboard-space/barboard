@@ -510,6 +510,8 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 127. **iOS 输入框缩放防治**：iOS Safari 在 input `font-size < 16px` 时聚焦自动缩放页面。修复：在 `@media (max-width: 768px)` 内加 `input { font-size: 16px; }`（只改移动端，桌面端保持原字号）。已用于 bbl.html 的 `.bbl-search__input`。
 128. **移动端榜单条目紧凑化约定**：`style.css` 的 `@media (max-width: 768px)` 内，`.chart-item` 改为三列 grid（`36px 34px 1fr`，去掉 `auto` stats 列）、gap 8px、padding `6px 10px`；`chart-stats { display:none }`；`chart-song__title/artist { white-space:normal; overflow:visible }`，允许歌名/歌手完整换行显示。
 129. **榜单条目子元素缩进指令习惯**：用户说某条目"开头没对齐"指 `::before` 圆点或文字起始 X 位置与其他条目不一致；说"改紧凑"指减小 padding/gap/字号；说"完整显示"指移除截断（`white-space:normal`）；说"外框/圆点去掉"指加 `--plain` modifier 或 `display:none`。
+130. **移动端 chart-item 布局规格（已确认）**：`@media (max-width: 768px)` 内最终定稿值——`.chart-item { grid-template-columns: 36px 36px 1fr auto; gap: 8px; padding: 8px 0 8px 10px }`；`.chart-cover { width/height: 36px }`；`.chart-stats { margin-left: 12px; column-gap: 0; grid-template-columns: auto auto }`；`.chart-song__title/artist { line-height: 1.1; white-space: normal }`，artist 加 `margin-top: 2px`；`.chart-stat__label { line-height: 0.8 }`；`.chart-stat__val { font-size: 9px; line-height: 0.8 }`。修改时以此为基准微调，不要回退到旧的三列布局或 `display: none`。
+131. **chart-stats val 列移动端必须用 `auto`**：全局 `.chart-stats { grid-template-columns: auto 20px }` 中 val 列固定 `20px`，在移动端会导致数字右侧出现多余空白（如 `#1` 只有 ~8px 但列宽 20px）。移动端必须覆盖为 `grid-template-columns: auto auto`，val 列按数字实际宽度自适应。
 
 ---
 
