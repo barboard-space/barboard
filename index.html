@@ -290,9 +290,11 @@
     }
 
     function fmtWeekRange(dateStr) {
-      const end = new Date(dateStr + 'T12:00:00');
-      const start = new Date(end);
-      start.setDate(start.getDate() - 6);
+      const nextFriday = new Date(dateStr + 'T12:00:00');
+      const end = new Date(nextFriday);
+      end.setDate(end.getDate() - 1);
+      const start = new Date(nextFriday);
+      start.setDate(start.getDate() - 7);
       const year = end.getFullYear();
       const opt = { month: 'short', day: 'numeric' };
       if (start.getMonth() === end.getMonth()) {

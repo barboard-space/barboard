@@ -22,8 +22,13 @@ def parse_date(date_str):
         return str(date_str)
 
 def fmt_week_range_cn(date_str):
-    start = datetime.strptime(date_str, "%Y-%m-%d")
-    end = start + timedelta(days=6)
+    # API date is the Friday marking the START of the new period.
+    # The stats period ran from the previous Friday (date-7) to Thursday (date-1).
+    next_friday = datetime.strptime(date_str, "%Y-%m-%d")
+    end   = next_friday - timedelta(days=1)   # Thursday (last day of stats period)
+    start = next_friday - timedelta(days=7)   # Friday (first day of stats period)
+    if start.month == end.month:
+        return f"{start.year}年{start.month}月{start.day}日—{end.day}日"
     return f"{start.year}年{start.month}月{start.day}日—{end.month}月{end.day}日"
 
 def update_ticker(issue, artist, title):
@@ -45,8 +50,9 @@ def update_updates(issue, date, artist, title):
             items = json.load(f)
     except Exception:
         items = []
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     bbl_entry = {
-        "date":  date,
+        "date":  today,
         "title": f"BarboardLab 单曲合榜第 {issue} 期已更新",
         "desc":  f"本周榜单统计周期为{fmt_week_range_cn(date)}。本周冠军为 {artist} — {title}。"
     }

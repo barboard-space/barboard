@@ -647,9 +647,13 @@
   }
 
   function fmtWeekRange(dateStr) {
-    const end = new Date(dateStr + 'T12:00:00');
-    const start = new Date(end);
-    start.setDate(start.getDate() - 6);
+    // API date is the Friday marking the start of the new period.
+    // Stats period = previous Friday (date-7) through Thursday (date-1).
+    const nextFriday = new Date(dateStr + 'T12:00:00');
+    const end = new Date(nextFriday);
+    end.setDate(end.getDate() - 1);
+    const start = new Date(nextFriday);
+    start.setDate(start.getDate() - 7);
     const year = end.getFullYear();
     const opt = { month: 'short', day: 'numeric' };
     if (start.getMonth() === end.getMonth()) {
