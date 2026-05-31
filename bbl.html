@@ -361,8 +361,7 @@
     /* ── Full Chart ── */
     .bbl-chart-header {
       display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
+      align-items: flex-start;
       gap: var(--gap-md);
       margin-bottom: var(--gap-md);
       padding-right: calc(236px + var(--gap-md));
@@ -373,12 +372,16 @@
       letter-spacing: 0.06em;
       margin-top: 14px;
     }
+    .bbl-chart-dateline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 8px;
+    }
     .bbl-chart-date {
       font-family: var(--font-mono);
       font-size: 12px;
       color: var(--clr-text-2);
-      display: block;
-      margin-top: 8px;
     }
     .bbl-chart-mt-link {
       font-size: 11px;
@@ -391,8 +394,6 @@
       align-items: center;
       gap: 0;
       transition: color 0.2s, opacity 0.2s;
-      flex-shrink: 0;
-      margin-bottom: 4px;
     }
     .bbl-chart-mt-link:hover { color: var(--clr-violet-light); opacity: 0.75; }
     .bbl-chart-mt-link .ext-icon,
@@ -492,18 +493,16 @@
       .bbl-chart-header { padding-right: calc(210px + var(--gap-md)); }
     }
     @media (max-width: 768px) {
-      .bbl-hero__layout   { grid-template-columns: 1fr; gap: var(--gap-md); }
-      .bbl-video          { position: static; }
-      .bbl-chart-layout   { grid-template-columns: 1fr; }
-      .bbl-hl-sidebar     { transform: none !important; flex-direction: row; flex-wrap: wrap; justify-content: flex-start; gap: 8px; }
-      .bbl-search         { flex: 0 0 100%; margin-bottom: 0; }
-      .bbl-hl-sidebar__label { flex: 0 0 100%; margin-bottom: 0; }
-      .bbl-hl-card        { flex: 1 1 calc(50% - 4px); min-width: 140px; }
-      .bbl-chart-header   { flex-direction: column; align-items: flex-start; gap: 12px; padding-right: 0; }
+      .bbl-hero__layout    { grid-template-columns: 1fr; gap: var(--gap-md); }
+      .bbl-video           { position: static; }
+      .bbl-chart-layout    { grid-template-columns: 1fr; }
+      .bbl-chart-header    { padding-right: 0; }
+      .bbl-chart-title     { font-size: 22px; }
+      .bbl-hl-sidebar      { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px; transform: none !important; }
+      .bbl-search          { grid-column: 1 / -1; margin-bottom: 0; }
+      .bbl-hl-sidebar__label { grid-column: 1 / -1; margin-bottom: 0; }
+      .bbl-chart-header    { flex-direction: column; align-items: flex-start; gap: 12px; padding-right: 0; }
       .bbl-stat:last-child { display: none; }
-    }
-    @media (max-width: 480px) {
-      .bbl-hl-card { flex: 1 1 100%; }
     }
   </style>
 </head>
@@ -586,17 +585,19 @@
       <div>
         <p class="section-label" style="margin-bottom:8px;">本期完整榜单</p>
         <h2 class="bbl-chart-title" id="bblChartTitle">BAR<span class="bbl-board-accent">BOARD</span><span class="bbl-lab-accent">LAB</span> SINGLES CHART</h2>
-        <span class="bbl-chart-date" id="bblChartDate">—</span>
+        <div class="bbl-chart-dateline">
+          <span class="bbl-chart-date" id="bblChartDate">—</span>
+          <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener"
+             class="bbl-chart-mt-link">
+            在 Musictrack 查看
+            <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8"
+                 viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
+                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M2 8L8 2M8 2H4M8 2v4"/>
+            </svg>
+          </a>
+        </div>
       </div>
-      <a href="https://musictrack.cn/chart/3045/" target="_blank" rel="noopener"
-         class="bbl-chart-mt-link">
-        在 Musictrack 查看
-        <svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8"
-             viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M2 8L8 2M8 2H4M8 2v4"/>
-        </svg>
-      </a>
     </div>
 
     <div class="bbl-chart-layout">
