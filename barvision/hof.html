@@ -201,12 +201,7 @@
     <p class="section-label fade-up">吧视先锋奖</p>
     <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Pioneer <span class="bv-accent">Award</span></h2>
 
-    <div class="bv-pioneer fade-up" style="transition-delay:0.2s;">
-      <div>
-        <div class="bv-pioneer__name"><a class="member" href="../member/125.html" data-nickname="萌妈" style="color:var(--clr-text);">@绿荫夏语</a></div>
-        <p class="bv-pioneer__desc">2019 年，<a class="member" href="../member/125.html" data-nickname="萌妈">@绿荫夏语</a>在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。</p>
-      </div>
-    </div>
+    <div id="bvPioneer" class="fade-up" style="transition-delay:0.2s;"></div>
 
   </div>
 </section>
@@ -246,6 +241,8 @@
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
 
+  let RECORDS = [], AWARDS = {};
+
   const MEMBER_MAP = {
     '威妈': { id:7,   handle:'williw_' },
     '锴妈': { id:12,  handle:'WillKris锴' },
@@ -276,47 +273,18 @@
     return who.split(' · ').map(fmtMember).join('<span style="opacity:0.35"> · </span>');
   }
 
-  const RECORDS = [
-    { label:'最多参与场数', val:'28',  who:'雨妈 · 锴妈', note:'第 1 届至第 15 届全程参与' },
-    { label:'最多冠军选送', val:'4',   who:'雨妈',         note:'4 首单曲夺得场次冠军' },
-    { label:'最高单届得分', val:'357', who:'威妈',         note:'第十五届 · Elliot James Reay — Boy In Love' },
-    { label:'最高单场支持率', val:'100%', who:'草妈 · 羊妈', note:'草妈第 4 届 A 场 · 羊妈第十三届' },
-    { label:'最长连续前十', val:'8场', who:'雨妈',         note:'第 1 届至第 5 届 A 场连续进入前十' },
-    { label:'最长连续参赛', val:'12届',who:'锴妈',         note:'第 4 届至第 15 届连续参赛' },
-  ];
-
-  const AWARDS = [
-    {
-      title:'出道即巅峰', metric:'首秀即夺冠',
-      winners:['猴妈','瑞妈','A妈','羊妈'],
-      detail:'猴妈（第 1 届）· 瑞妈（3B）· A妈（11B）· 羊妈（第 13 届）'
-    },
-    {
-      title:'实红艺人', metric:'连续两届夺冠',
-      winners:['包妈','雨妈'],
-      detail:'包妈连冠第 5–6 届（5A · 6C）· 雨妈连冠第 7–8 届（7A · 8A）'
-    },
-    {
-      title:'卧薪尝胆', metric:'花费最长时间夺首冠',
-      winners:['锴妈'],
-      detail:'第 1 届首次参赛，历经 21 组赛事，终于第 10 届 A 场首度夺冠'
-    },
-    {
-      title:'雨露均沾', metric:'最长连续参赛届数',
-      winners:['锴妈'],
-      detail:'第 4 届至第 15 届，连续 12 届保持参赛'
-    },
-    {
-      title:'全世界都在讲中国话', metric:'最多华语歌曲选送',
-      winners:['院妈'],
-      detail:'累计选送 13 首华语单曲参赛'
-    },
-    {
-      title:'喜获双学位', metric:'在常规版和娱乐版均夺冠',
-      winners:['瑞妈','包妈','雨妈','小妈'],
-      detail:'在 Barvision 常规赛与 Barvision Unplugged 各至少夺冠一次'
-    },
-  ];
+  function buildPioneer(p) {
+    var el = document.getElementById('bvPioneer');
+    if (!el) return;
+    var href = '../member/' + p.member_id + '.html';
+    var nameLink = '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '" style="color:var(--clr-text);">@' + esc(p.handle) + '</a>';
+    var descHtml = esc(p.desc).replace('@' + esc(p.handle),
+      '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '">@' + esc(p.handle) + '</a>');
+    el.innerHTML = '<div class="bv-pioneer">' +
+      '<div><div class="bv-pioneer__name">' + nameLink + '</div>' +
+      '<p class="bv-pioneer__desc">' + descHtml + '</p></div>' +
+      '</div>';
+  }
 
   function buildRecords() {
     var el = document.getElementById('bvRecordsGrid');
@@ -345,27 +313,41 @@
     }).join('');
   }
 
-  buildRecords();
-  buildAwards();
+  /* ─── async data load + render ─────────────────────────────────────── */
+  (async function() {
+    var d;
+    try {
+      d = await fetch('../data/barvision/bv_hof_data.json').then(function(r) { return r.json(); });
+    } catch(e) {
+      console.error('BV HOF: data load failed', e);
+      return;
+    }
+    RECORDS = d.records;
+    AWARDS  = d.awards;
 
-  function clearDelayAfterAnim(el) {
-    var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
-    setTimeout(function() { el.style.transitionDelay = '0s'; }, ms);
-  }
-  if ('IntersectionObserver' in window) {
-    var fadeObserver = new IntersectionObserver(function(entries) {
-      entries.forEach(function(e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          fadeObserver.unobserve(e.target);
-          clearDelayAfterAnim(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-up').forEach(function(el) { fadeObserver.observe(el); });
-  } else {
-    document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('visible'); });
-  }
+    buildPioneer(d.pioneer);
+    buildRecords();
+    buildAwards();
+
+    function clearDelayAfterAnim(el) {
+      var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+      setTimeout(function() { el.style.transitionDelay = '0s'; }, ms);
+    }
+    if ('IntersectionObserver' in window) {
+      var fadeObserver = new IntersectionObserver(function(entries) {
+        entries.forEach(function(e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            fadeObserver.unobserve(e.target);
+            clearDelayAfterAnim(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up').forEach(function(el) { fadeObserver.observe(el); });
+    } else {
+      document.querySelectorAll('.fade-up').forEach(function(el) { el.classList.add('visible'); });
+    }
+  })();
 
   /* ── TOC ── */
   (function() {
