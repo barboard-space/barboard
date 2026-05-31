@@ -1822,13 +1822,13 @@ body:has(.nav--open) .back-to-top {
   .chart-item {
     grid-template-columns: 36px 36px 1fr auto;
     gap: 8px;
-    padding: 4px;
+    padding: 6px 0 6px 6px;
   }
   .chart-cover          { width: 36px; height: 36px; }
   .chart-rank           { font-size: 18px; }
-  .chart-stats          { margin-left: 12px; column-gap: 4px; }
+  .chart-stats          { margin-left: 12px; column-gap: 0; }
   .chart-song__title    { white-space: normal; overflow: visible; text-overflow: unset; line-height: 1.1; }
-  .chart-song__artist   { white-space: normal; line-height: 1.1; }
+  .chart-song__artist   { white-space: normal; line-height: 1.1; margin-top: 2px; }
   .chart-stat__label    { line-height: 0.8; }
   .chart-stat__val      { font-size: 9px; line-height: 0.8; }
   .hero__title-board { text-shadow: 0 0 22px rgba(192,132,252,0.15); }
