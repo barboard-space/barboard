@@ -729,304 +729,9 @@
   /* ─────────────────────────── DATA ──────────────────────────────────── */
 
   /* Vol.1–124 日期索引（index = Vol. 期号） */
-  const VOL_DATES = ['',
-    '2024-01-05','2024-01-12','2024-01-19','2024-01-26','2024-02-02',
-    '2024-02-09','2024-02-16','2024-02-23','2024-03-01','2024-03-08',
-    '2024-03-15','2024-03-22','2024-03-29','2024-04-05','2024-04-12',
-    '2024-04-19','2024-04-26','2024-05-03','2024-05-10','2024-05-17',
-    '2024-05-24','2024-05-31','2024-06-07','2024-06-14','2024-06-21',
-    '2024-06-28','2024-07-05','2024-07-12','2024-07-19','2024-07-26',
-    '2024-08-02','2024-08-09','2024-08-16','2024-08-23','2024-08-30',
-    '2024-09-06','2024-09-13','2024-09-20','2024-09-27','2024-10-04',
-    '2024-10-11','2024-10-18','2024-10-25','2024-11-01','2024-11-08',
-    '2024-11-15','2024-11-22','2024-11-29','2024-12-06','2024-12-13',
-    '2024-12-20','2024-12-27','2025-01-03','2025-01-10','2025-01-17',
-    '2025-01-24','2025-01-31','2025-02-07','2025-02-14','2025-02-21',
-    '2025-02-28','2025-03-07','2025-03-14','2025-03-21','2025-03-28',
-    '2025-04-04','2025-04-11','2025-04-18','2025-04-25','2025-05-02',
-    '2025-05-09','2025-05-16','2025-05-23','2025-05-30','2025-06-06',
-    '2025-06-13','2025-06-20','2025-06-27','2025-07-04','2025-07-11',
-    '2025-07-18','2025-07-25','2025-08-01','2025-08-08','2025-08-15',
-    '2025-08-22','2025-08-29','2025-09-05','2025-09-12','2025-09-19',
-    '2025-09-26','2025-10-03','2025-10-10','2025-10-17','2025-10-24',
-    '2025-10-31','2025-11-07','2025-11-14','2025-11-21','2025-11-28',
-    '2025-12-05','2025-12-12','2025-12-19','2025-12-26','2026-01-02',
-    '2026-01-09','2026-01-16','2026-01-23','2026-01-30','2026-02-06',
-    '2026-02-13','2026-02-20','2026-02-27','2026-03-06','2026-03-13',
-    '2026-03-20','2026-03-27','2026-04-03','2026-04-10','2026-04-17',
-    '2026-04-24','2026-05-01','2026-05-08','2026-05-15','2026-05-22',
-  ];
-
-  const CHAMPIONS = [
-    { weeks:15, artist:'HAIM',                            song:'Relationships',                   vol:64,  date:'2025-03-21', peak:2423.69 },
-    { weeks:11, artist:'Ariana Grande',                   song:'yes, and?',                       vol:3,   date:'2024-01-19', peak:2092.15 },
-    { weeks:10, artist:'Sabrina Carpenter',               song:'Espresso',                        vol:23,  date:'2024-06-07', peak:2040.79 },
-    { weeks:10, artist:'Taylor Swift',                    song:'The Fate of Ophelia',             vol:93,  date:'2025-10-10', peak:3081.23 },
-    { weeks:8,  artist:'ROSÉ & Bruno Mars',               song:'APT.',                            vol:43,  date:'2024-10-25', peak:2569.79 },
-    { weeks:7,  artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',                vol:34,  date:'2024-08-23', peak:2823.11 },
-    { weeks:6,  artist:'Chappell Roan',                   song:'The Subway',                      vol:84,  date:'2025-08-08', peak:2638.26 },
-    { weeks:5,  artist:'Olivia Dean',                     song:'Man I Need',                      vol:105, date:'2026-01-02', peak:1688.56 },
-    { weeks:5,  artist:'Taylor Swift',                    song:'Opalite',                         vol:111, date:'2026-02-13', peak:1896.27 },
-    { weeks:4,  artist:'Twenty One Pilots',               song:'Overcompensate',                  vol:14,  date:'2024-04-05', peak:1992.02 },
-    { weeks:4,  artist:'Taylor Swift & Post Malone',      song:'Fortnight',                       vol:17,  date:'2024-04-26', peak:2501.86 },
-    { weeks:4,  artist:'Kendrick Lamar & SZA',            song:'luther',                          vol:53,  date:'2025-01-03', peak:1604.71 },
-    { weeks:4,  artist:'Lady Gaga',                       song:'Abracadabra',                     vol:58,  date:'2025-02-07', peak:2597.96 },
-    { weeks:4,  artist:'Alex Warren',                     song:'FEVER DREAM',                     vol:117, date:'2026-03-27', peak:2019.15 },
-    { weeks:3,  artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER',              vol:28,  date:'2024-07-12', peak:2109.72 },
-    { weeks:3,  artist:'Tate McRae',                      song:'Sports car',                      vol:61,  date:'2025-02-28', peak:2626.32 },
-    { weeks:3,  artist:'Olivia Rodrigo',                  song:'drop dead',                       vol:121, date:'2026-04-24', peak:1982.51 },
-    { weeks:2,  artist:'Dua Lipa',                        song:'Houdini',                         vol:1,   date:'2024-01-05', peak:1159.82 },
-    { weeks:2,  artist:'Mariah Carey',                    song:'All I Want for Christmas Is You', vol:52,  date:'2024-12-27', peak:1328.66 },
-    { weeks:2,  artist:'Kali Uchis',                      song:'sunshine & rain...',              vol:72,  date:'2025-05-16', peak:2315.25 },
-    { weeks:2,  artist:'Sabrina Carpenter',               song:'Tears',                           vol:90,  date:'2025-09-19', peak:1669.42 },
-    { weeks:1,  artist:'Baby Lasagna',                    song:'Rim Tim Tagi Dim',                vol:20,  date:'2024-05-17', peak:1940.76 },
-    { weeks:1,  artist:'Lady Gaga',                       song:'Disease',                         vol:51,  date:'2024-12-20', peak:1313.97 },
-    { weeks:1,  artist:'Sam Fender',                      song:'People Watching',                 vol:54,  date:'2025-01-10', peak:1437.04 },
-    { weeks:1,  artist:'Lorde',                           song:'What Was That',                   vol:70,  date:'2025-05-02', peak:2291.17 },
-    { weeks:1,  artist:'Sabrina Carpenter',               song:'Manchild',                        vol:76,  date:'2025-06-13', peak:1858.44 },
-    { weeks:1,  artist:'Doja Cat',                        song:'Jealous Type',                    vol:92,  date:'2025-10-03', peak:2010.88 },
-    { weeks:1,  artist:'RAYE',                            song:'WHERE IS MY HUSBAND!',            vol:99,  date:'2025-11-21', peak:1793.27 },
-    { weeks:1,  artist:'After',                           song:'Outbound',                        vol:109, date:'2026-01-30', peak:1338.59 },
-    { weeks:1,  artist:'Harry Styles',                    song:'Aperture',                        vol:115, date:'2026-03-13', peak:1897.10 },
-    { weeks:1,  artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',                    vol:124, date:'2026-05-15', peak:1509.37 },
-    { weeks:1,  artist:'Dara',                            song:'Bangaranga',                      vol:125, date:'2026-05-22', peak:1478.15 },
-  ];
-
-  const CHARTED_FULL = [
-    { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',                       val:'57' },
-    { artist:'Sabrina Carpenter',  song:'Espresso',                                 val:'54' },
-    { artist:'Alcest',             song:'Flamme Jumelle',                           val:'51' },
-    { artist:'Chappell Roan',      song:'Good Luck, Babe!',                         val:'50' },
-    { artist:'Chappell Roan',      song:'Pink Pony Club',                           val:'41' },
-    { artist:'Kendrick Lamar',     song:'Not Like Us',                              val:'38' },
-    { artist:'Ravyn Lenae',        song:'Love Me Not',                              val:'36*', note:'其中Rex Orange County合作版为13周' },
-    { artist:'Muni Long',          song:'Made For Me',                              val:'35' },
-    { artist:'Gracie Abrams',      song:'Risk',                                     val:'35' },
-    { artist:'Billie Eilish',      song:'WILDFLOWER',                               val:'35' },
-    { artist:'The Marías',         song:'Run Your Mouth',                           val:'35' },
-    { artist:'Ariana Grande',      song:"we can't be friends (wait for your love)", val:'35' },
-  ];
-
-  const RECORDS = [
-    { title:'Top 3 周数', show:true, items:[
-      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:21 },
-      { artist:'HAIM',               song:'Relationships',        val:20 },
-      { artist:'Sabrina Carpenter',  song:'Espresso',             val:17 },
-      { artist:'Kendrick Lamar & SZA', song:'luther',             val:14 },
-      { artist:'Lady Gaga & Bruno Mars', song:'Die With A Smile', val:12 },
-    ]},
-    { title:'Top 5 周数', show:true, items:[
-      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:23 },
-      { artist:'Sabrina Carpenter',  song:'Espresso',             val:21 },
-      { artist:'HAIM',               song:'Relationships',        val:21 },
-      { artist:'Kendrick Lamar & SZA', song:'luther',             val:17 },
-      { artist:'Lady Gaga & Bruno Mars', song:'Die With A Smile', val:15 },
-    ]},
-    { title:'Top 10 周数', show:true, items:[
-      { artist:'Sabrina Carpenter',  song:'Espresso',             val:38 },
-      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:26 },
-      { artist:'HAIM',               song:'Relationships',        val:25 },
-      { artist:'Chappell Roan',      song:'Pink Pony Club',       val:22 },
-      { artist:'Kendrick Lamar & SZA', song:'luther',             val:21 },
-    ]},
-    { title:'Top 20 周数', show:false, items:[
-      { artist:'Sabrina Carpenter',  song:'Espresso',             val:41 },
-      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:35 },
-      { artist:'Chappell Roan',      song:'Good Luck, Babe!',     val:32 },
-      { artist:'Chappell Roan',      song:'Pink Pony Club',       val:29 },
-      { artist:'HAIM',               song:'Relationships',        val:26 },
-    ]},
-    { title:'Top 50 周数', show:true, items:[
-      { artist:'Sabrina Carpenter',  song:'Espresso',             val:49 },
-      { artist:'Billie Eilish',      song:'BIRDS OF A FEATHER',   val:43 },
-      { artist:'Chappell Roan',      song:'Good Luck, Babe!',     val:42 },
-      { artist:'Alcest',             song:'Flamme Jumelle',       val:42 },
-      { artist:'Chappell Roan',      song:'Pink Pony Club',       val:34 },
-    ]},
-  ];
-
-  const ARTISTS_PEAK = [
-    { artist:'Taylor Swift',      val:31, date:'2024-01-05' },
-    { artist:'Taylor Swift',      val:24, date:'2024-04-26' },
-    { artist:'Taylor Swift',      val:19, date:'2024-05-03' },
-    { artist:'Taylor Swift',      val:17, date:'2024-01-12' },
-    { artist:'Lady Gaga',         val:14, date:'2025-03-14' },
-    { artist:'Ariana Grande',     val:13, date:'2024-03-15' },
-    { artist:'Taylor Swift',      val:13, date:'2024-05-17' },
-    { artist:'Ariana Grande',     val:12, date:'2024-03-22' },
-    { artist:'Taylor Swift',      val:12, date:'2024-05-10' },
-    { artist:'Taylor Swift',      val:12, date:'2025-10-10' },
-    { artist:'Taylor Swift',      val:12, date:'2025-10-17' },
-    { artist:'Wolf Alice',        val:12, date:'2026-01-09' },
-    { artist:'Ariana Grande',     val:11, date:'2024-04-05' },
-    { artist:'Magdalena Bay',     val:11, date:'2024-08-30' },
-    { artist:'Sabrina Carpenter', val:11, date:'2025-09-05' },
-    { artist:'ROSALÍA',           val:11, date:'2025-11-14' },
-    { artist:'Ariana Grande',     val:10, date:'2024-03-29' },
-    { artist:'Charli xcx',        val:10, date:'2024-10-18' },
-    { artist:'FKA twigs',         val:10, date:'2025-01-31' },
-    { artist:'The Weeknd',        val:10, date:'2025-02-07' },
-    { artist:'Danielle Haim',     val:10, date:'2025-06-27' },
-    { artist:'Lorde',             val:10, date:'2025-07-04' },
-    { artist:'JADE',              val:10, date:'2025-09-19' },
-  ];
-
-  const ARTISTS_SONGS = [
-    { artist:'Taylor Swift',      val:75 },
-    { artist:'Sabrina Carpenter', val:26 },
-    { artist:'Lady Gaga',         val:22 },
-    { artist:'Ariana Grande',     val:22 },
-    { artist:'Morgan Wallen',     val:21 },
-    { artist:'Charli xcx',        val:20 },
-    { artist:'Twenty One Pilots', val:17 },
-    { artist:'Tate McRae',        val:16 },
-    { artist:'SZA',               val:16 },
-    { artist:'Kendrick Lamar',    val:15 },
-    { artist:'The Weeknd',        val:15 },
-    { artist:'FKA twigs',         val:15 },
-    { artist:'Zach Bryan',        val:15 },
-  ];
-
-  const ARTISTS_WEEKS = [
-    { artist:'Taylor Swift',      val:500 },
-    { artist:'Sabrina Carpenter', val:372 },
-    { artist:'Ariana Grande',     val:222 },
-    { artist:'Tate McRae',        val:217 },
-    { artist:'Lady Gaga',         val:210 },
-    { artist:'Billie Eilish',     val:200 },
-    { artist:'Chappell Roan',     val:181 },
-    { artist:'Kendrick Lamar',    val:167 },
-    { artist:'Gracie Abrams',     val:162 },
-    { artist:'SZA',               val:161 },
-  ];
-
-  const ALBUMS = [
-    { artist:'Taylor Swift',      album:'The Tortured Poets Department',             songs:25, rate:'80.6%'  },
-    { artist:'Ariana Grande',     album:'eternal sunshine',                          songs:18, rate:'100.0%' },
-    { artist:'Lady Gaga',         album:'MAYHEM',                                    songs:15, rate:'88.2%'  },
-    { artist:'Taylor Swift',      album:'The Life of a Showgirl',                    songs:12, rate:'100.0%' },
-    { artist:'Charli xcx',        album:'BRAT',                                      songs:12, rate:'66.7%'  },
-    { artist:'Morgan Wallen',     album:"I'm the Problem",                           songs:12, rate:'32.4%'  },
-    { artist:'Sabrina Carpenter', album:"Man's Best Friend",                         songs:11, rate:'91.7%'  },
-    { artist:'Harry Styles',      album:'Kiss All the Time. Disco, Occasionally.',   songs:11, rate:'91.7%'  },
-    { artist:'JADE',              album:"THAT'S SHOWBIZ BABY!",                      songs:11, rate:'78.6%'  },
-    { artist:'Magdalena Bay',     album:'Imaginal Disk',                             songs:11, rate:'73.3%'  },
-    { artist:'ROSALÍA',           album:'LUX',                                       songs:11, rate:'73.3%'  },
-    { artist:'The Weeknd',        album:'Hurry Up Tomorrow',                         songs:11, rate:'50.0%'  },
-    { artist:'SZA',               album:'SOS Deluxe: LANA',                          songs:11, rate:'28.9%'  },
-    { artist:'FKA twigs',         album:'EUSEXUA',                                   songs:10, rate:'90.9%'  },
-    { artist:'Lorde',             album:'Virgin',                                    songs:10, rate:'90.9%'  },
-    { artist:'Sabrina Carpenter', album:"Short 'n' Sweet (Deluxe)",                  songs:10, rate:'62.5%'  },
-    { artist:'Sam Fender',        album:'People Watching (Deluxe Edition)',           songs:10, rate:'52.6%'  },
-    { artist:'Tate McRae',        album:'So Close to What???',                       songs:10, rate:'47.6%'  },
-    { artist:'Big Thief',         album:'Double Infinity',                            songs:9,  rate:'100.0%' },
-    { artist:'Billie Eilish',     album:'HIT ME HARD AND SOFT',                      songs:9,  rate:'90.0%'  },
-    { artist:'Mitski',            album:"Nothing's About To Happen To Me",            songs:9,  rate:'81.8%'  },
-    { artist:'Holly Humberstone', album:'Cruel World',                               songs:9,  rate:'75.0%'  },
-    { artist:'Twenty One Pilots', album:'Clancy',                                    songs:9,  rate:'69.2%'  },
-    { artist:'HAIM',              album:'I quit',                                    songs:9,  rate:'60.0%'  },
-    { artist:'Dua Lipa',          album:'Radical Optimism',                          songs:8,  rate:'72.7%'  },
-    { artist:'Kendrick Lamar',    album:'GNX',                                       songs:8,  rate:'66.7%'  },
-    { artist:'Miley Cyrus',       album:'Something Beautiful',                       songs:8,  rate:'61.5%'  },
-    { artist:'Vampire Weekend',   album:'Only God Was Above Us',                     songs:7,  rate:'70.0%'  },
-    { artist:'Linkin Park',       album:'From Zero',                                 songs:7,  rate:'63.6%'  },
-    { artist:'Charli xcx',        album:'Wuthering Heights',                         songs:7,  rate:'58.3%'  },
-    { artist:'Doja Cat',          album:'Vie',                                        songs:7,  rate:'46.7%'  },
-    { artist:'Oklou',             album:'Choke Enough (Deluxe)',                     songs:7,  rate:'41.2%'  },
-    { artist:'Zach Bryan',        album:'The Great American Bar Scene',              songs:7,  rate:'36.8%'  },
-    { artist:'Taylor Swift',      album:"1989 (Taylor's Version)",                   songs:7,  rate:'33.3%'  },
-  ];
-
-  const MOST_POINTS = [
-    { pts:3081.23, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-17', rank:1 },
-    { pts:2915.13, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-24', rank:1 },
-    { pts:2823.11, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-08-30', rank:1 },
-    { pts:2731.53, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-10', rank:1 },
-    { pts:2689.92, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-09-06', rank:1 },
-    { pts:2638.26, artist:'Chappell Roan',                  song:'The Subway',          date:'2025-08-08', rank:1 },
-    { pts:2626.32, artist:'Tate McRae',                     song:'Sports car',          date:'2025-02-28', rank:1 },
-    { pts:2597.96, artist:'Lady Gaga',                      song:'Abracadabra',         date:'2025-02-14', rank:1 },
-    { pts:2587.56, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-09-13', rank:1 },
-    { pts:2569.79, artist:'ROSÉ & Bruno Mars',              song:'APT.',                date:'2024-10-25', rank:1 },
-    { pts:2560.57, artist:'Taylor Swift',                   song:'The Fate of Ophelia', date:'2025-10-31', rank:1 },
-    { pts:2501.86, artist:'Taylor Swift & Post Malone',     song:'Fortnight',           date:'2024-04-26', rank:1 },
-    { pts:2501.79, artist:'ROSÉ & Bruno Mars',              song:'APT.',                date:'2024-11-01', rank:1 },
-    { pts:2423.69, artist:'HAIM',                           song:'Relationships',       date:'2025-07-04', rank:1 },
-    { pts:2415.53, artist:'HAIM',                           song:'Relationships',       date:'2025-04-25', rank:1 },
-    { pts:2392.75, artist:'HAIM',                           song:'Relationships',       date:'2025-04-11', rank:1 },
-    { pts:2391.19, artist:'ROSÉ & Bruno Mars',              song:'APT.',                date:'2024-11-08', rank:1 },
-    { pts:2388.86, artist:'Lady Gaga & Bruno Mars',         song:'Die With A Smile',    date:'2024-08-23', rank:1 },
-    { pts:2376.09, artist:'HAIM',                           song:'Relationships',       date:'2025-03-28', rank:1 },
-    { pts:2370.47, artist:'Lady Gaga',                      song:'Abracadabra',         date:'2025-03-14', rank:1 },
-  ];
-
-  const SINGLE_CHART = [
-    { n:19, artist:'Lady Gaga',                       song:'Abracadabra',              date:'2025-02-14', pts:2597.96 },
-    { n:18, artist:'Taylor Swift',                    song:'The Fate of Ophelia',      date:'2025-10-17', pts:3081.23 },
-    { n:17, artist:'Taylor Swift',                    song:'The Fate of Ophelia',      date:'2025-10-24', pts:2915.13 },
-    { n:16, artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',         date:'2024-08-30', pts:2823.11 },
-    { n:15, artist:'ROSÉ & Bruno Mars',               song:'APT.',                     date:'2024-10-25', pts:2569.79 },
-    { n:14, artist:'HAIM',                            song:'Relationships',            date:'2025-04-11', pts:2392.75 },
-    { n:13, artist:'Tate McRae',                      song:'Sports car',               date:'2025-02-28', pts:2626.32 },
-    { n:12, artist:'Ariana Grande',                   song:'yes, and?',               date:'2025-03-21', pts:2178.37 },
-    { n:11, artist:'Alex Warren',                     song:'FEVER DREAM',              date:'2026-04-17', pts:2019.15 },
-    { n:10, artist:'Alex Warren',                     song:'FEVER DREAM',              date:'2026-04-03', pts:1931.20 },
-    { n:9,  artist:'Ariana Grande',                   song:'yes, and?',               date:'2024-01-19', pts:2092.15 },
-    { n:8,  artist:'Alex Warren',                     song:'FEVER DREAM',              date:'2026-05-01', pts:1555.06 },
-    { n:7,  artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',             date:'2026-03-06', pts:1557.00 },
-    { n:6,  artist:'Gracie Abrams',                   song:"I Love You, I'm Sorry",   date:'2024-10-25', pts:1259.97 },
-    { n:5,  artist:'Taylor Swift',                    song:'Elizabeth Taylor',         date:'2026-05-08', pts:1046.16 },
-    { n:4,  artist:'Ella Langley, Morgan Wallen',     song:"I Can't Love You Anymore", date:'2026-05-01', pts:946.99  },
-    { n:3,  artist:'QWER',                            song:'My Name is Malguem',       date:'2024-10-04', pts:819.34  },
-    { n:2,  artist:'aespa',                           song:'Supernova',                date:'2024-05-31', pts:675.83  },
-    { n:1,  artist:'Bell Biv DeVoe',                  song:'Poison',                   date:'2025-10-24', pts:501.48  },
-  ];
-
-  const MOST_CHARTS = [
-    { n:19, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-14', rank:1 },
-    { n:18, artist:'ROSÉ & Bruno Mars',     song:'APT.',                date:'2024-11-08', rank:1 },
-    { n:18, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-17', rank:1 },
-    { n:17, artist:'ROSÉ & Bruno Mars',     song:'APT.',                date:'2024-11-15', rank:1 },
-    { n:17, artist:'ROSÉ & Bruno Mars',     song:'APT.',                date:'2024-11-22', rank:1 },
-    { n:17, artist:'Lady Gaga & Bruno Mars',song:'Die With A Smile',    date:'2024-09-13', rank:1 },
-    { n:17, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-21', rank:1 },
-    { n:17, artist:'HAIM',                  song:'Relationships',       date:'2025-07-04', rank:1 },
-    { n:17, artist:'HAIM',                  song:'Relationships',       date:'2025-07-11', rank:1 },
-    { n:17, artist:'Chappell Roan',         song:'The Subway',          date:'2025-08-08', rank:1 },
-    { n:17, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-10', rank:1 },
-    { n:17, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-24', rank:1 },
-    { n:17, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-10-31', rank:1 },
-    { n:16, artist:'Lady Gaga & Bruno Mars',song:'Die With A Smile',    date:'2024-08-30', rank:1 },
-    { n:16, artist:'Lady Gaga & Bruno Mars',song:'Die With A Smile',    date:'2024-09-06', rank:1 },
-    { n:16, artist:'Sabrina Carpenter',     song:'Taste',               date:'2024-10-04', rank:3 },
-    { n:16, artist:'Sabrina Carpenter',     song:'Manchild',            date:'2025-07-11', rank:3 },
-    { n:16, artist:'Sabrina Carpenter',     song:'Manchild',            date:'2025-07-18', rank:2 },
-    { n:16, artist:'Billie Eilish',         song:'BIRDS OF A FEATHER',  date:'2024-10-11', rank:1 },
-    { n:16, artist:'Billie Eilish',         song:'BIRDS OF A FEATHER',  date:'2024-10-18', rank:1 },
-    { n:16, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-07', rank:1 },
-    { n:16, artist:'Lady Gaga',             song:'Abracadabra',         date:'2025-02-28', rank:2 },
-    { n:16, artist:'Chappell Roan',         song:'The Subway',          date:'2025-08-15', rank:1 },
-    { n:16, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-11-07', rank:1 },
-    { n:16, artist:'Taylor Swift',          song:'The Fate of Ophelia', date:'2025-11-14', rank:1 },
-  ];
-
-  const UNCROWNED = [
-    { artist:'Chappell Roan',                          song:'Pink Pony Club',        pts:1996.46, rank:2, vol:58  },
-    { artist:'Taylor Swift & Florence + The Machine',  song:'Florida!!!',            pts:1895.93, rank:2, vol:17  },
-    { artist:'Vampire Weekend',                        song:'Capricorn',             pts:1808.16, rank:2, vol:15  },
-    { artist:'Ariana Grande',                          song:'Twilight Zone',         pts:1803.89, rank:3, vol:14  },
-    { artist:'LISA, Doja Cat & RAYE',                  song:'Born Again',            pts:1799.01, rank:4, vol:62  },
-    { artist:'Chappell Roan',                          song:'The Giver',             pts:1792.79, rank:4, vol:64  },
-    { artist:'Miley Cyrus & Brittany Howard',          song:'Walk of Fame',          pts:1750.68, rank:3, vol:75  },
-    { artist:'Lady Gaga',                              song:'Shadow of a Man',       pts:1739.54, rank:4, vol:63  },
-    { artist:'Charli xcx & Billie Eilish',             song:'Guess',                 pts:1726.38, rank:2, vol:34  },
-    { artist:'Lorde',                                  song:'Shapeshifter',          pts:1715.52, rank:2, vol:79  },
-    { artist:'Sabrina Carpenter',                      song:'Taste',                 pts:1675.13, rank:3, vol:40  },
-    { artist:'Linkin Park',                            song:'The Emptiness Machine', pts:1661.76, rank:2, vol:47  },
-    { artist:'Dua Lipa',                               song:'Training Season',       pts:1651.66, rank:3, vol:12  },
-    { artist:'Chappell Roan',                          song:'Good Luck, Babe!',      pts:1613.35, rank:3, vol:30  },
-    { artist:'Kendrick Lamar & Lefty Gunplay',         song:'tv off',                pts:1607.08, rank:5, vol:59  },
-  ];
+  let VOL_DATES = [], CHAMPIONS = [], CHARTED_FULL = [], RECORDS = [];
+  let ARTISTS_PEAK = [], ARTISTS_SONGS = [], ARTISTS_WEEKS = [];
+  let ALBUMS = [], MOST_POINTS = [], SINGLE_CHART = [], MOST_CHARTS = [], UNCROWNED = [];
 
   /* ─────────────────────────── RENDER ────────────────────────────────── */
 
@@ -1333,36 +1038,7 @@
       `<div class="hof-uncrowned fade-up" style="transition-delay:0.07s;">${right}</div>`;
   }
 
-  const OWNER_MAP = {
-    '邓': { id:31,  handle:'DuncanLee',       nickname:'邓妈' },
-    '笃': { id:33,  handle:'吃辣喝香',         nickname:'笃妈' },
-    '韩': { id:67,  handle:'SouthkoreaBall',   nickname:'韩妈' },
-    'S':  { id:27,  handle:'哈哈哈时光机',     nickname:'S妈'  },
-    '雨': { id:17,  handle:'Lee翼雨',          nickname:'雨妈' },
-    '团': { id:68,  handle:'不动团子',         nickname:'团妈' },
-    '威': { id:7,   handle:'williw_',          nickname:'威妈' },
-    '柠': { id:19,  handle:'LemonSheeran',     nickname:'柠妈' },
-    'T':  { id:115, handle:'iTAP_II',          nickname:'T妈'  },
-    '包': { id:20,  handle:'Jeremy_BAg',       nickname:'包妈' },
-    '醉': { id:614, handle:'醉の蒲公英',       nickname:'醉妈' },
-    '文': { id:116, handle:'SummertimeDawns',  nickname:'文妈' },
-    '圈': { id:108, handle:'TimCircles6',      nickname:'圈妈' },
-    '兔': { id:118, handle:'Razbit',           nickname:'兔妈' },
-    '晕': { id:117, handle:'dizzyhugh',        nickname:'晕妈' },
-    '锴': { id:12,  handle:'WillKris锴',       nickname:'锴妈' },
-    '鸣': { id:158, handle:'漫画小鸣',         nickname:'鸣妈' },
-    'X':  { id:88,  handle:'xjebs',            nickname:'X妈'  },
-    '泰': { id:131, handle:'泰坦crazy',        nickname:'泰妈' },
-    '海': { id:119, handle:'Ocean',            nickname:'海妈' },
-    '杰': { id:156, handle:'jh201013',         nickname:'杰妈' },
-    '星': { id:45,  handle:'白矮星爱吃东西',   nickname:'星妈' },
-    '羊': { id:100, handle:'SeafishYANG',      nickname:'羊妈' },
-    '布': { id:157, handle:'Vivienne-Eliza',   nickname:'布妈' },
-    '米': { id:256, handle:'LUKY',             nickname:'米妈' },
-    '波': { id:101, handle:'ww_micro_微波',    nickname:'波妈' },
-    'P':  { id:104, handle:'PROKING',          nickname:'P妈'  },
-    '叉': { id:13,  handle:'PRONGS',           nickname:'叉妈' },
-  };
+  let OWNER_MAP = {};
 
   function fmtOwners(str) {
     return str.split(' ').map(k => {
@@ -1372,42 +1048,7 @@
     }).join(' ');
   }
 
-  const NO1_RECORDS = [
-    { n:5, artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',        date:'2026-05-15', owners:'邓 笃 韩 S 雨' },
-    { n:4, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-06-21', owners:'团 威 柠 T' },
-    { n:4, artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',   date:'2024-09-06', owners:'团 威 包 醉' },
-    { n:4, artist:'Tate McRae',                      song:'Sports car',         date:'2025-03-07', owners:'S 文 圈 韩' },
-    { n:4, artist:'Lady Gaga',                       song:'Shadow of a Man',    date:'2025-03-14', owners:'醉 威 兔 柠' },
-    { n:4, artist:'Taylor Swift',                    song:'The Fate of Ophelia',date:'2025-10-17', owners:'晕 文 锴 柠' },
-    { n:4, artist:'Linda Lampenius, Pete Parkkonen', song:'Liekinheitin',        date:'2026-03-06', owners:'韩 鸣 X 雨' },
-    { n:4, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-24', owners:'韩 柠 泰 雨' },
-    { n:4, artist:'Olivia Rodrigo',                  song:'drop dead',          date:'2026-04-24', owners:'S 海 杰 文' },
-    { n:3, artist:'Ariana Grande',                   song:'yes, and?',          date:'2024-01-19', owners:'S 团 锴' },
-    { n:3, artist:'Baby Lasagna',                    song:'Rim Tim Tagi Dim',   date:'2024-05-17', owners:'S 韩 雨' },
-    { n:3, artist:'Baby Lasagna',                    song:'Rim Tim Tagi Dim',   date:'2024-05-24', owners:'S 韩 雨' },
-    { n:3, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-06-14', owners:'威 柠 团' },
-    { n:3, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-07-05', owners:'威 柠 星' },
-    { n:3, artist:'Lady Gaga & Bruno Mars',          song:'Die With A Smile',   date:'2024-08-30', owners:'威 团 醉' },
-    { n:3, artist:'Billie Eilish',                   song:'BIRDS OF A FEATHER', date:'2024-09-27', owners:'威 柠 韩' },
-    { n:3, artist:'Chappell Roan',                   song:'Pink Pony Club',     date:'2025-02-07', owners:'羊 柠 文' },
-    { n:3, artist:'Lady Gaga',                       song:'Abracadabra',        date:'2025-02-14', owners:'威 团 星' },
-    { n:3, artist:'Lady Gaga',                       song:'Abracadabra',        date:'2025-02-21', owners:'威 团 柠' },
-    { n:3, artist:'Kendrick Lamar & SZA',            song:'luther',             date:'2025-02-21', owners:'醉 兔 布' },
-    { n:3, artist:'Kendrick Lamar & SZA',            song:'luther',             date:'2025-02-28', owners:'醉 兔 米' },
-    { n:3, artist:'Tate McRae',                      song:'Sports car',         date:'2025-02-28', owners:'文 圈 韩' },
-    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-03-21', owners:'羊 杰 波' },
-    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-04-25', owners:'团 T P' },
-    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-05-02', owners:'团 T P' },
-    { n:3, artist:'HAIM',                            song:'Relationships',      date:'2025-05-23', owners:'团 T P' },
-    { n:3, artist:'Chappell Roan',                   song:'The Subway',         date:'2025-08-08', owners:'文 威 海' },
-    { n:3, artist:'ROSALÍA',                         song:'Reliquia',           date:'2025-11-14', owners:'T 杰 海' },
-    { n:3, artist:'Taylor Swift',                    song:'Opalite',            date:'2026-02-06', owners:'波 叉 文' },
-    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-03-20', owners:'柠 雨 邓' },
-    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-03', owners:'柠 雨 泰' },
-    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-10', owners:'柠 雨 叉' },
-    { n:3, artist:'Alex Warren',                     song:'FEVER DREAM',        date:'2026-04-17', owners:'柠 雨 邓' },
-    { n:3, artist:'Dara',                            song:'Bangaranga',         date:'2026-05-22', owners:'雨 邓 白' },
-  ];
+  let NO1_RECORDS = [];
 
   function buildNo1Groups() {
     const groups = {};
@@ -1455,15 +1096,50 @@
     }).join('');
   }
 
-  buildChampionRoll();
-  buildNo1Groups();
-  buildRecordsGrid();
-  buildMostPoints();
-  buildMostCharts();
-  buildSingleChart();
-  buildArtistCols();
-  buildAlbums();
-  buildUncrowned();
+  /* ─── async data load + render ─────────────────────────────────────── */
+  (async function() {
+    let volIndex, d;
+    try {
+      [volIndex, d] = await Promise.all([
+        fetch('../data/bbl/bbl-vol-index.json').then(r => r.json()),
+        fetch('../data/bbl/bbl-record/hof_data.json').then(r => r.json()),
+      ]);
+    } catch (e) {
+      console.error('HOF: data load failed', e);
+      return;
+    }
+    VOL_DATES.push('');
+    const maxVol = Math.max(...Object.keys(volIndex).map(Number));
+    for (let i = 1; i <= maxVol; i++) VOL_DATES.push(volIndex[String(i)] || '');
+    CHAMPIONS = d.champions;      CHARTED_FULL = d.charted_full;    RECORDS       = d.charted_records;
+    ARTISTS_PEAK = d.artists_peak; ARTISTS_SONGS = d.artists_songs; ARTISTS_WEEKS = d.artists_weeks;
+    ALBUMS = d.albums;            MOST_POINTS  = d.most_points;     SINGLE_CHART  = d.single_chart;
+    MOST_CHARTS = d.most_charts;  UNCROWNED    = d.uncrowned;
+    OWNER_MAP = d.owner_map;      NO1_RECORDS  = d.no1_records;
+
+    buildChampionRoll(); buildNo1Groups();  buildRecordsGrid();
+    buildMostPoints();   buildMostCharts(); buildSingleChart();
+    buildArtistCols();   buildAlbums();     buildUncrowned();
+
+    function clearDelayAfterAnim(el) {
+      const ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+      setTimeout(() => { el.style.transitionDelay = '0s'; }, ms);
+    }
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+            clearDelayAfterAnim(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }
+  })();
 
   /* ─────────────────────────── TOC ───────────────────────────────────── */
   (function initHofToc() {
@@ -1503,27 +1179,7 @@
     });
   })();
 
-  /* ─────────────────────────── FADE-UP ───────────────────────────────── */
-  function clearDelayAfterAnim(el) {
-    const ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
-    setTimeout(() => { el.style.transitionDelay = '0s'; }, ms);
-  }
-  if ('IntersectionObserver' in window) {
-    const obs = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          obs.unobserve(e.target);
-          clearDelayAfterAnim(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
-  } else {
-    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
-  }
-
-  /* ── Data tooltip (same style as member tooltip) ── */
+    /* ── Data tooltip (same style as member tooltip) ── */
   (function() {
     var tip = document.createElement('div');
     tip.className = 'member-tooltip';
