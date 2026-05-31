@@ -1820,7 +1820,7 @@ body:has(.nav--open) .back-to-top {
   .chart-item {
     grid-template-columns: 36px 34px 1fr;
     gap: 8px;
-    padding: 6px 10px;
+    padding: 6px 10px 6px 6px;
   }
   .chart-cover          { width: 34px; height: 34px; }
   .chart-rank           { font-size: 18px; }
