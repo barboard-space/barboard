@@ -1822,11 +1822,11 @@ body:has(.nav--open) .back-to-top {
   .chart-item {
     grid-template-columns: 36px 36px 1fr auto;
     gap: 8px;
-    padding: 6px 0 6px 6px;
+    padding: 8px 0 8px 10px;
   }
   .chart-cover          { width: 36px; height: 36px; }
   .chart-rank           { font-size: 18px; }
-  .chart-stats          { margin-left: 12px; column-gap: 0; }
+  .chart-stats          { margin-left: 12px; column-gap: 0; grid-template-columns: auto auto; }
   .chart-song__title    { white-space: normal; overflow: visible; text-overflow: unset; line-height: 1.1; }
   .chart-song__artist   { white-space: normal; line-height: 1.1; margin-top: 2px; }
   .chart-stat__label    { line-height: 0.8; }
