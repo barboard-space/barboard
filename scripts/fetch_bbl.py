@@ -1,7 +1,7 @@
 import json
 import re
 import sys
-import requests
+from curl_cffi import requests
 from datetime import datetime, timedelta, timezone
 
 API_URL = "https://6api.musictrack.cn/api/charts/3045"
@@ -74,7 +74,7 @@ def main():
     }
 
     try:
-        resp = requests.get(API_URL, headers=headers, timeout=30)
+        resp = requests.get(API_URL, headers=headers, timeout=30, impersonate="chrome136")
         if resp.status_code == 403:
             print("API returned 403 (anti-crawler). Keeping existing data.", file=sys.stderr)
             sys.exit(0)
