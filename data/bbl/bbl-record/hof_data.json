@@ -130,15 +130,15 @@
   ],
 
   "artists_weeks": [
-    { "artist":"Taylor Swift",      "val":500 },
+    { "artist":"Taylor Swift",      "val":503 },
     { "artist":"Sabrina Carpenter", "val":372 },
     { "artist":"Ariana Grande",     "val":222 },
     { "artist":"Tate McRae",        "val":217 },
-    { "artist":"Lady Gaga",         "val":210 },
+    { "artist":"Lady Gaga",         "val":212 },
     { "artist":"Billie Eilish",     "val":200 },
     { "artist":"Chappell Roan",     "val":181 },
     { "artist":"Kendrick Lamar",    "val":167 },
-    { "artist":"Gracie Abrams",     "val":162 },
+    { "artist":"Gracie Abrams",     "val":163 },
     { "artist":"SZA",               "val":161 }
   ],
 
