@@ -15,7 +15,7 @@
 - **榜吧**（欧美流行音乐个人榜吧）：2013年5月21日创建于百度贴吧，成员效仿 Billboard 形式制作个人音乐周榜/年榜
 - **Barboard**：榜吧的英文品牌名
 - **当前活跃活动**：
-  - **BarboardLab（BBL）**：2024年3月13日创立，每周六更新，成员提交完整个人周榜合并积分，当前已到第124期，完整榜单在 [musictrack.cn/chart/3045/](https://musictrack.cn/chart/3045/)
+  - **BarboardLab（BBL）**：2024年3月13日创立，每周六更新，成员提交完整个人周榜合并积分，当前已到第125期，完整榜单在 [musictrack.cn/chart/3045/](https://musictrack.cn/chart/3045/)
   - **Barvision**：年度歌曲大赛，灵感来自 Eurovision，成员选送小众歌曲参赛，2019年创立（当年办了5届），2020年7届，2021-2022停办，2023年恢复改为一年一届，当前为**第十六届 Barvision Chongqing 2026**
 - **已停办活动**（存档保留）：吧年榜/半年榜（2013-2024）、吧莱美（2021-2024）、Eurovision China Voting Party（2022-2025）
 
@@ -35,13 +35,14 @@
 - `scripts/member-render.js` — 成员页共享模板：注入 CSS、读取 `window.MEMBER_DATA`、渲染 hero+Works 两节、处理 CJK/ASCII 头像字体、设置 fade-up 动画
 - `scripts/gen_member_pages.py` — 成员页批量生成脚本：读 CSV → 输出 117 个 `member/N.html`；数据变动时重新运行
 - `data/bbl/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
-- `data/bbl/bbl-vol-index.json` — Vol.1–124 期号→日期索引（对象格式，`{"1":"2024-01-05",...}`，供 bbl/charts 等页面引用）
+- `data/bbl/bbl-vol-index.json` — Vol.1–125 期号→日期索引（对象格式，`{"1":"2024-01-05",...}`，供 bbl/charts 等页面引用）
+- `data/bbl/bbl-record/hof_data.json` — BBL HOF 全部数据（13个板块：champions/charted_full/charted_records/artists_peak/artists_songs/artists_weeks/albums/most_points/single_chart/most_charts/uncrowned/owner_map/no1_records）；今后更新 HOF 数据只需编辑此文件
 - `data/members/members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
-- `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正）
-- `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据
+- `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正；使用 `curl_cffi` 伪装 Chrome TLS 指纹绕过 Cloudflare）
+- `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据（已修复：`permissions: contents: write`；`git add` 包含 ticker/updates；curl_cffi 已验证可正常 fetch + push）
 - **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
-- `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 单周专辑进榜纪录 → 艺人进榜纪录，数据截至第124期；数据全部硬编码 JS 常量数组；含 `VOL_DATES` + `OWNER_MAP`（28位成员简称→space_id/handle/nickname）内联常量；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–97）
+- `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 单周专辑进榜纪录 → 艺人进榜纪录，数据截至第125期；**数据已迁移至 `data/bbl/bbl-record/hof_data.json` 动态加载**，HTML 内只有空 `let` 声明；async IIFE `Promise.all` fetch `bbl-vol-index.json` + `hof_data.json` 后渲染；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–97, #114）
 - `barvision.html` — Barvision 总览（已完成，大幅重设计，详见开发注意事项 #100–102）
 - `barvision/hof.html` — Barvision Hall of Fame（深度打磨完成；hero 金色主题（glow/eyebrow/title accent/desc 均用 gold）+ 三 section；eyebrow 为跳回 barvision.html 的链接；MEMBER_MAP + fmtMember/fmtWho 将成员名渲染为 `@handle` 链接；页内 TOC（紫色，三项，IO suppression，阈值 > 400 晚于 back-to-top）；动画全面对标 bbl/hof.html；接入 `../scripts/nav.js`；hero 右下 `BARVISION` 水印）
 - `archive.html` — 活动存档总览（已完成；hero 榜吧蓝主题 + `BARBOARD` 水印；两节：常规活动（BBL/Barvision 2列卡）+ 过往活动 Legacy（年榜/吧莱美/ECVP 3列卡）；卡片动画 `cubic-bezier(0.22,1,0.36,1)` 0.55s stagger `i×0.07s`；Legacy 卡 opacity 0.82 降调；详见开发注意事项 #107）
@@ -88,7 +89,9 @@ barboard-space/
 ├── data/
 │   ├── bbl/
 │   │   ├── bbl-latest.json     ← BBL 最新榜单（自动更新，含真实数据）
-│   │   ├── bbl-vol-index.json  ← Vol.1–124 期号→日期索引
+│   │   ├── bbl-vol-index.json  ← Vol.1–125 期号→日期索引
+│   │   └── bbl-record/
+│   │       └── hof_data.json   ← BBL HOF 全部数据（13板块，动态加载）
 │   │   └── bbl-record/         ← BBL 原始数据文件（CSV 等）
 │   ├── main-page/
 │   │   ├── ticker.json         ← 字幕条目（字符串数组，BBL条目由fetch_bbl.py维护）
@@ -355,7 +358,7 @@ barboard-space/
 24. **Ticker 入场动画**：必须用纯 opacity（`@keyframes ticker-fade-in`），不能带 `translateY`——`.hero` 有 `overflow:hidden`，ticker 在 `bottom:0`，translateY 初始位置会被裁出边界，动画不可见
 25. **Ticker 移动端**：隐藏 `.ticker__label`（WHAT'S NOW），动画时长从 42s 改为 55s
 26. **BBL 日期格式**：`fmtWeekRange()` 同月输出 `May 9–15, 2026`，跨月输出 `May 30–Jun 5, 2026`（省略重复月份）
-27. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`
+27. **GitHub Actions fetch**：fetch_bbl.py 遇到 403 时 exit 0（保留旧数据，workflow 不报红）；Actions 用 `FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true` + `actions/checkout@v4.2.2` + `actions/setup-python@v5.6.0`。**验证自动更新是否真正成功**：看远端是否出现 `chore: update BBL chart data [skip ci]` 且 author 为 `github-actions[bot]`，workflow 显示绿色不代表数据有变化（可能是 403 后 exit 0 + No changes）
 28. **nav-enter 动画禁用 transform**：`@keyframes nav-enter` 只能用 `opacity` 过渡，不能含 `transform`。因为 `animation-fill-mode: both` 会使末态 `transform: translateY(0)` 永久保留在 `.nav` 上，nav 成为 fixed 子元素的 containing block，`.nav__drawer` 从此相对 nav 而非 viewport 定位，永久无法正常展开
 29. **backdrop-filter 激活陷阱**：`::before` 的毛玻璃过渡必须用 `background` 属性过渡（`rgba(x,x,x,0)→rgba(x,x,x,0.88)`），不能用 `opacity: 0→1`——部分浏览器在 `opacity:0` 时完全不激活 `backdrop-filter`
 30. **Ticker JS 化**：`.ticker__track` 由 JS `requestAnimationFrame` 驱动（每帧 `x += speed * dt; if (x >= halfWidth) x -= halfWidth`）。`buildTicker(items)` 从 `data/main-page/ticker.json` 读取条目，生成 ×2 复制后写入 track，调用 `_tickerUpdateHalfWidth()` 更新宽度
@@ -442,6 +445,11 @@ barboard-space/
 111. **Tele Vote 上限纠错记录**：Rulebook 4.1.2 规定每首歌最多可投 **10 票**（不是 5 票）。旧版 events.html 写错为 5 票，重做时已修正。
 112. **附加赛双阶段结构**：Barvision 2026 的附加赛分两个阶段——①**附加赛资格赛**（与半决赛投票同期，07-25 至 08-07，仅各场海选第二名参与，采用 Approval Vote）；②**附加赛正赛**（08-08 直播现场，SF 未晋级全部歌曲 + 资格赛胜者，得票最高者晋级决赛）。全站统一使用"附加赛"，不再使用"复活赛"/"Second Chance Round"。
 113. **BBL workflow 触发时间已更新**：主抓改为周六 19:00 UTC（北京时间周日凌晨 03:00），备用周一 04:00 UTC 不变，间隔 33h，`git log --since="2 days ago"` 仍可覆盖。
+114. **bbl/hof.html 动态加载架构**：所有 HOF 数据（13个常量）迁移至 `data/bbl/bbl-record/hof_data.json`；hof.html script 只保留空 `let` 声明 + render 函数；底部 async IIFE `Promise.all` 并行 fetch `../data/bbl/bbl-vol-index.json` 和 `../data/bbl/bbl-record/hof_data.json`，填充全局变量后依次调用 build 函数；`fadeObserver` 必须在 async 回调内（build 函数之后）才能观察到动态生成的 `.fade-up` 元素。今后更新 HOF 数据只需编辑 `hof_data.json`，无需改 HTML。
+115. **curl_cffi 绕过 Cloudflare TLS 指纹检测**：musictrack.cn 用 Cloudflare Bot Management 检测 TLS 握手指纹（JA3/JA4），Python `requests` 的指纹与浏览器不同，直接被 403。改用 `from curl_cffi import requests`，`requests.get(url, ..., impersonate="chrome136")` 即可伪装 Chrome 指纹，通过率高。workflow 中 `pip install requests` 改为 `pip install curl-cffi`。已在 GitHub Actions 验证通过。
+116. **GitHub Actions 推送权限**：默认 `GITHUB_TOKEN` 只有只读权限，`git push` 会 403。在 workflow 顶层加 `permissions: contents: write` 修复。
+117. **workflow git add 必须包含所有输出文件**：`fetch_bbl.py` 写 `bbl-latest.json` + `ticker.json` + `updates.json` 三个文件，但 `git add` 若只写第一个，ticker/updates 的变更永远不会提交到远端。已修正为 `git add data/bbl/bbl-latest.json data/main-page/ticker.json data/main-page/updates.json`。
+118. **hof_data.json owner_map 缺 `白`**：`no1_records` 中 Dara — Bangaranga（Vol.125）的 owners 含 `白`，但 `owner_map` 没有该 key，`fmtOwners()` 兜底渲染为 `@白` 纯文字（无链接）。待确认该成员 space_id / handle 后补入 `owner_map`。
 
 ---
 

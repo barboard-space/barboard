@@ -4,6 +4,25 @@
 
 ---
 
+## [2026-05-31 session 8] — BBL Vol.125 数据更新 + workflow 全面修复 + hof.html 动态加载重构
+
+### Added
+- **`data/bbl/bbl-record/hof_data.json`**：新增 BBL HOF 全量数据文件（13个板块，原硬编码于 hof.html 的所有 JS 常量数组）；今后更新 HOF 数据只需编辑此 JSON 文件
+
+### Changed
+- **`data/bbl/bbl-latest.json`**：更新至 Vol.125（2026-05-22，冠军：Dara — Bangaranga，100首完整数据）
+- **`data/main-page/ticker.json`**：BBL 字幕条更新为第 125 期
+- **`data/main-page/updates.json`**：BBL 动态条目更新为第 125 期（2026-05-22，统计周期 5/22–5/28）
+- **`data/bbl/bbl-vol-index.json`**：新增 `"125": "2026-05-22"`
+- **`bbl/hof.html`**：全面重构为动态加载——13个硬编码 JS 常量全部移除，改为空 `let` 声明；底部新增 async IIFE `Promise.all` fetch `bbl-vol-index.json` + `hof_data.json`，填充变量后渲染；`fadeObserver` 移入 async 回调内（确保在 build 函数后执行）；数据截至 Vol.125（VOL_DATES/CHAMPIONS/NO1_RECORDS 三处已更新）
+- **`scripts/fetch_bbl.py`**：`import requests` → `from curl_cffi import requests`，`get()` 加 `impersonate="chrome136"` 伪装 Chrome TLS 指纹，绕过 musictrack.cn Cloudflare Bot Management
+- **`.github/workflows/update-bbl.yml`**：三项修复——① 顶层加 `permissions: contents: write`（修复 push 403）；② `git add` 补充 `ticker.json` / `updates.json`（修复漏提交）；③ pip install `curl-cffi` 替代 `requests`
+
+### Fixed
+- GitHub Actions workflow 显示绿色但数据不更新的问题（根因：Cloudflare TLS 指纹检测 + Actions 缺少 push 权限，均已修复，已验证 `github-actions[bot]` 成功提交）
+
+---
+
 ## [2026-05-30 session 7] — events.html Rulebook 更新 + BBL workflow 调整
 
 ### Changed
