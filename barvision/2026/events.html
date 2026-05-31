@@ -130,9 +130,11 @@
       font-size: 12.5px; color: var(--clr-text-2); line-height: 1.5;
     }
     .ev-req-item::before {
-      content: '· '; color: var(--clr-violet-light);
+      content: '· '; color: var(--clr-violet-light); margin-right: 3px;
     }
     .ev-req-item strong { color: var(--clr-text); }
+    .ev-req-item--plain { background: none; border: none; border-radius: 0; padding-left: 0; }
+    .ev-req-item--plain::before { display: none; }
     .ev-deadline-bar {
       margin-top: 20px;
       background: var(--clr-bg-2); border: 1px solid var(--clr-border);
@@ -221,7 +223,7 @@
     .ev-tl-row--gold { background: rgba(212,168,50,0.04); }
     .ev-tl-date {
       padding: 14px 16px; font-family: var(--font-mono); font-size: 12px;
-      color: var(--clr-text-3); line-height: 1.45;
+      color: var(--clr-text-3); line-height: 1.45; word-spacing: -1px;
       border-right: 1px solid var(--clr-border);
       display: flex; align-items: center;
     }
@@ -340,17 +342,13 @@
     }
     .ev-rule-card__num {
       font-family: var(--font-display); font-size: 28px; line-height: 1;
-      margin-bottom: 12px; opacity: 0.38;
+      margin-bottom: 12px; opacity: 0.65; color: var(--clr-pink-light);
     }
-    .ev-rule-card--sf   .ev-rule-card__num { color: var(--clr-accent-light); }
-    .ev-rule-card--host .ev-rule-card__num { color: var(--clr-violet-light); }
-    .ev-rule-card--adv  .ev-rule-card__num { color: var(--clr-pink-light); }
-    .ev-rule-card--tie  .ev-rule-card__num { color: var(--clr-gold-light); }
-    .ev-rule-card--co   .ev-rule-card__num { color: var(--clr-accent-light); }
-    .ev-rule-card--champ .ev-rule-card__num { color: var(--clr-gold-light); }
     .ev-rule-card__title { font-weight: 600; font-size: 13px; color: var(--clr-text); margin-bottom: 8px; }
     .ev-rule-card__body { font-size: 12px; color: var(--clr-text-2); line-height: 1.75; }
     .ev-rule-card__body strong { color: var(--clr-text); }
+
+    .ev-about-btns .btn { padding: 8px 14px; font-size: 12px; }
 
     /* ═══ Responsive ═══ */
     @media (max-width: 960px) {
@@ -505,8 +503,8 @@
             <div class="ev-req-item"><strong>在线表单</strong> 所有参赛歌曲均须通过本页报名表单提交</div>
             <div class="ev-req-item"><strong>内部选择（内定）</strong> 经与主办方确认后，通过本页表单提交歌曲信息</div>
             <div class="ev-req-item"><strong>公开选拔（海选）</strong> 由榜吧成员自行组织，海选获胜者通过本页表单代表参赛</div>
-            <div class="ev-req-item" style="padding-left:1.5em;color:var(--clr-text-2);">海选组织者须至少公布 <strong style="color:var(--clr-text);">前两名排名</strong>，以确认附加赛参赛资格</div>
-            <div class="ev-req-item" style="padding-left:1.5em;color:var(--clr-text-2);">海选获胜者须代表该海选参与本届吧视，<strong style="color:var(--clr-text);">不得更换</strong></div>
+            <div class="ev-req-item">海选组织者须至少公布 <strong>前两名排名</strong>，以确认附加赛参赛资格</div>
+            <div class="ev-req-item">海选获胜者须代表该海选参与本届吧视，<strong>不得更换</strong></div>
             <div class="ev-req-item"><strong>合报（最多两人）</strong> 经主办方与双方同意后，共同通过本页表单选送一首歌曲</div>
           </div>
         </div>
@@ -695,28 +693,28 @@
         </div>
         <div class="ev-tl">
           <div class="ev-tl-row ev-tl-row--hi">
-            <div class="ev-tl-date">06-01<br>18:00</div>
+            <div class="ev-tl-date">06-01 18:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">歌曲提交通道开启 <span class="tl-b tl-b--sub">开启</span></div>
               <div class="ev-tl-desc">榜吧成员可通过内定或组织海选的方式提交参赛歌曲</div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">07-19<br>24:00</div>
+            <div class="ev-tl-date">07-19 24:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">提交通道关闭 · 歌曲名单公示 <span class="tl-b tl-b--adm">Deadline</span></div>
               <div class="ev-tl-desc">提交截止，所有参赛曲目公开公示，进入 72 小时异议期（至 7/22 24:00）</div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">07-22<br>24:00</div>
+            <div class="ev-tl-date">07-22 24:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">歌曲公示期结束 <span class="tl-b tl-b--adm">Deadline</span></div>
               <div class="ev-tl-desc">公示期内可对参赛资格提出异议并举证，逾期无效</div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">07-24<br>24:00</div>
+            <div class="ev-tl-date">07-24 24:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">参赛歌曲名单正式确定 <span class="tl-b tl-b--adm">Deadline</span></div>
               <div class="ev-tl-desc">资格审查完成，名单锁定；被取消资格者可在此前重新提交替代歌曲</div>
@@ -734,45 +732,45 @@
         </div>
         <div class="ev-tl">
           <div class="ev-tl-row">
-            <div class="ev-tl-date">07-25<br>晚间</div>
+            <div class="ev-tl-date">07-25 晚间</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">附加赛资格赛 展播 · 投票开启 <span class="tl-b tl-b--vote">投票</span></div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">07-25<br>晚间</div>
+            <div class="ev-tl-date">07-25 晚间</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">Semi-Final 1 展播 · 投票开启 <span class="tl-b tl-b--vote">投票</span></div>
               <div class="ev-tl-desc">SF1 参赛歌曲展播，评委票与观众票通道同步开启</div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">07-31<br>24:00</div>
+            <div class="ev-tl-date">07-31 24:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">Semi-Final 1 投票截止 <span class="tl-b tl-b--adm">Deadline</span></div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">08-01<br>晚间</div>
+            <div class="ev-tl-date">08-01 晚间</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">Semi-Final 2 展播 · 投票开启 <span class="tl-b tl-b--vote">投票</span></div>
               <div class="ev-tl-desc">SF2 参赛歌曲展播，评委票与观众票通道同步开启</div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">08-07<br>24:00</div>
+            <div class="ev-tl-date">08-07 24:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">Semi-Final 2 投票截止 <span class="tl-b tl-b--adm">Deadline</span></div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">08-07<br>24:00</div>
+            <div class="ev-tl-date">08-07 24:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">附加赛资格赛 投票截止 <span class="tl-b tl-b--adm">Deadline</span></div>
             </div>
           </div>
           <div class="ev-tl-row ev-tl-row--hi">
-            <div class="ev-tl-date">08-08<br>晚间</div>
+            <div class="ev-tl-date">08-08 晚间</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">Semi-Final 暨附加赛 直播 <span class="tl-b tl-b--live">直播</span></div>
               <div class="ev-tl-desc">公布两场半决赛结果及晋级名单；附加赛现场实时 Approval Vote；赛后公布 Grand Final Running Order</div>
@@ -790,26 +788,26 @@
         </div>
         <div class="ev-tl">
           <div class="ev-tl-row">
-            <div class="ev-tl-date">08-08<br>晚间</div>
+            <div class="ev-tl-date">08-08 晚间</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">决赛展播 · 投票通道开启 <span class="tl-b tl-b--vote">投票</span></div>
               <div class="ev-tl-desc">共 18 首参赛歌曲；评委票与观众票通道同步开启</div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">08-16<br>晚间</div>
+            <div class="ev-tl-date">08-16 晚间</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">决赛投票通道关闭 <span class="tl-b tl-b--adm">Deadline</span></div>
             </div>
           </div>
           <div class="ev-tl-row">
-            <div class="ev-tl-date">08-18<br>24:00</div>
+            <div class="ev-tl-date">08-18 24:00</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">决赛票数统计结束 <span class="tl-b tl-b--adm">Deadline</span></div>
             </div>
           </div>
           <div class="ev-tl-row ev-tl-row--gold">
-            <div class="ev-tl-date">08-22<br>晚间</div>
+            <div class="ev-tl-date">08-22 晚间</div>
             <div class="ev-tl-body">
               <div class="ev-tl-name">Grand Final 直播 <span class="tl-b tl-b--gold">直播</span></div>
               <div class="ev-tl-desc">公布最终赛果，揭晓 Barvision Chongqing 2026 年度冠军</div>
@@ -834,32 +832,32 @@
       <div class="ev-rule-card ev-rule-card--sf fade-up">
         <div class="ev-rule-card__num">01</div>
         <div class="ev-rule-card__title">半决赛晋级</div>
-        <div class="ev-rule-card__body">每场半决赛前 <strong>8 名</strong>晋级决赛，两场合计 16 首。非东道主参赛歌曲均需经历半决赛；参赛场次及出场顺序由<strong>抽签</strong>决定。</div>
+        <div class="ev-req-item ev-req-item--plain">每场半决赛前 <strong>8 名</strong> 晋级决赛，两场合计 16 首。非东道主参赛歌曲均需经历半决赛；参赛场次及出场顺序由 <strong>抽签</strong> 决定。</div>
       </div>
       <div class="ev-rule-card ev-rule-card--host fade-up">
         <div class="ev-rule-card__num">02</div>
         <div class="ev-rule-card__title">东道主直通</div>
-        <div class="ev-rule-card__body">东道主（主办方 <a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a>）选送的歌曲<strong>直接晋级决赛</strong>，不参与半决赛评比。</div>
+        <div class="ev-req-item ev-req-item--plain">东道主（主办方 <a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a>）选送的歌曲 <strong>直接晋级决赛</strong>，不参与半决赛评比。</div>
       </div>
       <div class="ev-rule-card ev-rule-card--adv fade-up">
         <div class="ev-rule-card__num">03</div>
         <div class="ev-rule-card__title">附加赛晋级</div>
-        <div class="ev-rule-card__body">附加赛（Approval Vote）胜者 <strong>1 名</strong>晋级决赛。决赛共 <strong>18 首</strong>参赛歌曲（SF 16 + 东道主 1 + 附加赛 1）。</div>
+        <div class="ev-req-item ev-req-item--plain">附加赛（Approval Vote）胜者 <strong>1 名</strong> 晋级决赛。决赛共 <strong>18 首</strong> 参赛歌曲（SF 16 + 东道主 1 + 附加赛 1）。</div>
       </div>
       <div class="ev-rule-card ev-rule-card--tie fade-up">
         <div class="ev-rule-card__num">04</div>
         <div class="ev-rule-card__title">平局判定</div>
-        <div class="ev-rule-card__body">依次比较：① 观众票得分 → ② 总票源数 → ③ 从 12 分起逐项比较最高得分次数 → ④ <strong>出场顺序靠前者</strong>获胜。</div>
+        <div class="ev-req-item ev-req-item--plain">依次比较：① 观众票得分 → ② 总票源数 → ③ 从 12 分起逐项比较最高得分次数 → ④ <strong>出场顺序靠前者</strong> 获胜。</div>
       </div>
       <div class="ev-rule-card ev-rule-card--co fade-up">
         <div class="ev-rule-card__num">05</div>
         <div class="ev-rule-card__title">合报规则</div>
-        <div class="ev-rule-card__body">经主办方与双方同意，<strong>最多两人</strong>可共同选送一首歌曲。若分别投票，各自得分按 <strong>50%</strong> 计入总分。</div>
+        <div class="ev-req-item ev-req-item--plain">经主办方与双方同意，<strong>最多两人</strong> 可共同选送一首歌曲。若分别投票，各自得分按 <strong>50%</strong> 计入总分。</div>
       </div>
       <div class="ev-rule-card ev-rule-card--champ fade-up">
         <div class="ev-rule-card__num">06</div>
         <div class="ev-rule-card__title">冠军奖励</div>
-        <div class="ev-rule-card__body">年度冠军选送方将获得 <strong>Barvision 2027</strong> 的主办权，负责组织和举办下一届大赛。</div>
+        <div class="ev-req-item ev-req-item--plain">年度冠军选送方将获得 <strong>Barvision 2027</strong> 的主办权，负责组织和举办下一届大赛。</div>
       </div>
     </div>
     <p class="fade-up" style="margin-top:20px;font-size:12.5px;color:var(--clr-text-2);">
@@ -874,7 +872,7 @@
     <div class="ev-section__hd">
       <p class="section-label fade-up">投票方式</p>
       <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">VOTING</h2>
-      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">半决赛与决赛均采用评委票与观众票并行制，各占 50%。附加赛采用认可票（Approval Vote）。</p>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">半决赛与决赛均采用评委票与观众票，各占 50%。附加赛采用认可票（Approval Vote）。</p>
     </div>
 
     <div class="ev-vote-grid">
@@ -884,7 +882,7 @@
         <div class="ev-vc-eyebrow">评委票</div>
         <div class="ev-vc-title">Jury Vote</div>
         <div class="ev-vc-pct">50%</div>
-        <div class="ev-vc-desc">每位评委从参赛歌曲中选出 <strong>Top 10 排名</strong>，按以下标准赋分（不得为自己的参赛歌曲投票）：</div>
+        <div class="ev-req-item ev-req-item--plain" style="margin-top:14px;">每位评委从参赛歌曲中选出 <strong>Top 10 排名</strong>，按以下标准赋分（不得为自己的参赛歌曲投票）：</div>
         <div class="ev-jury-scores">
           <div class="ev-js-cell ev-js-cell--top"><span class="ev-js-rank">#1</span><span class="ev-js-pts">12</span></div>
           <div class="ev-js-cell ev-js-cell--top"><span class="ev-js-rank">#2</span><span class="ev-js-pts">10</span></div>
@@ -904,12 +902,11 @@
         <div class="ev-vc-eyebrow">观众票</div>
         <div class="ev-vc-title">Tele Vote</div>
         <div class="ev-vc-pct">50%</div>
-        <div class="ev-vc-desc">
-          每位观众拥有 <strong>20 票</strong>，可自由分配给该场任意参赛歌曲。
-          同一首歌最多可投 <strong>10 票</strong>。<br><br>
-          所有观众票按比例换算为与评委票等值的总分池，再按比例分配给各参赛歌曲。<br><br>
-          非选送者的榜吧成员须先完成观众票投票，方可参与评委票投票。选送者须同时完成两种投票，不得缺席。<br><br>
-          投票人不得将票数投给自己所选送的参赛歌曲。
+        <div class="ev-req-list" style="margin-top:14px;">
+          <div class="ev-req-item ev-req-item--plain">每位观众拥有 <strong>20 票</strong>，可自由分配给该场任意参赛歌曲。同一首歌最多可投 <strong>10 票</strong>。</div>
+          <div class="ev-req-item ev-req-item--plain">所有观众票按比例换算为与评委票等值的总分池，再按比例分配给各参赛歌曲。</div>
+          <div class="ev-req-item ev-req-item--plain">非选送者的榜吧成员须先完成观众票投票，方可参与评委票投票。选送者须同时完成两种投票，不得缺席。</div>
+          <div class="ev-req-item ev-req-item--plain">投票人不得将票数投给自己所选送的参赛歌曲。</div>
         </div>
       </div>
 
@@ -919,21 +916,14 @@
           <div>
             <div class="ev-vc-eyebrow">认可票 · 附加赛</div>
             <div class="ev-vc-title">Approval Vote</div>
-            <div class="ev-vc-pct">LIVE</div>
           </div>
-          <div>
-            <p class="ev-vc-desc" style="margin-top:4px;">
-              <strong style="color:var(--clr-text);">附加赛资格赛</strong>与半决赛投票同步进行（07-25 至 08-07），参赛资格仅限各场<strong>海选第二名</strong>；资格赛胜者进入附加赛。
-            </p>
-            <p class="ev-vc-desc" style="margin-top:10px;">
-              <strong style="color:var(--clr-text);">附加赛</strong>在 Semi-Final 直播现场（08-08 晚）实时进行，参赛歌曲为两场<strong>半决赛未晋级的全部歌曲</strong>及附加赛资格赛胜者，得票最高者晋级决赛。
-            </p>
-            <div class="ev-approval-rules" style="margin-top:14px;">
-              <div class="ev-approval-rule">每位投票者拥有 <strong>3 票</strong>，须至少投出 1 票，至多 3 票</div>
-              <div class="ev-approval-rule">可分配给 <strong>1 至 3 首</strong>不同歌曲，每首最多获得 1 票</div>
-              <div class="ev-approval-rule">不得将票数投给自己所选送的参赛歌曲</div>
-              <div class="ev-approval-rule">结果即时统计并公布，胜者 <strong>1 名</strong>直接晋级决赛</div>
-            </div>
+          <div class="ev-req-list" style="align-self:center;">
+            <div class="ev-req-item ev-req-item--plain"><strong>附加赛资格赛</strong> 与半决赛投票同步进行（07-25 至 08-07），参赛资格仅限各场 <strong>海选第二名</strong>；资格赛胜者进入附加赛。</div>
+            <div class="ev-req-item ev-req-item--plain"><strong>附加赛</strong> 在 Semi-Final 直播现场（08-08 晚）实时进行，参赛歌曲为两场 <strong>半决赛未晋级的全部歌曲</strong> 及附加赛资格赛胜者，得票最高者晋级决赛。</div>
+            <div class="ev-req-item ev-req-item--plain">每位投票者拥有 <strong>3 票</strong>，须至少投出 1 票，至多 3 票</div>
+            <div class="ev-req-item ev-req-item--plain">可分配给 <strong>1 至 3 首</strong> 不同歌曲，每首最多获得 1 票</div>
+            <div class="ev-req-item ev-req-item--plain">不得将票数投给自己所选送的参赛歌曲</div>
+            <div class="ev-req-item ev-req-item--plain">结果即时统计并公布，胜者 <strong>1 名</strong> 直接晋级决赛</div>
           </div>
         </div>
       </div>
@@ -947,16 +937,16 @@
   <div class="section__inner">
     <div style="max-width:660px;">
       <p class="section-label fade-up">关于活动</p>
-      <h2 class="section__title fade-up" style="font-size:clamp(28px,4vw,52px);margin-top:24px;">ABOUT<br><span style="color:var(--clr-violet-light);">BARVISION</span></h2>
-      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:100%;">
+      <h2 class="section__title fade-up" style="font-size:clamp(28px,4vw,52px);margin-top:24px;">ABOUT <span style="color:var(--clr-violet-light);">BARVISION</span></h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:100%;font-size:14px;">
         Barvision 是欧美流行音乐个人榜吧（Barboard）举办的年度歌曲大赛，灵感来自 Eurovision Song Contest。
         成员自行选送小众歌曲参赛，经半决赛投票后晋级决赛，最终通过评委票与观众票的合并计分决出年度冠军。
       </p>
-      <p class="section__subtitle fade-up" style="max-width:100%;margin-top:16px;">
+      <p class="section__subtitle fade-up" style="max-width:100%;margin-top:16px;font-size:14px;">
         Barvision 始于 2019 年，由 <a class="member" href="../../member/125.html" data-nickname="萌妈">@绿荫夏语</a> 创立，历经数年停办后于 2023 年恢复，现已举办至第十六届。
-        本届 Barvision Chongqing 2026 以重庆为举办城市，主题语为「重声交响 Echoing Confluence」。
+        本届 Barvision Chongqing 2026 以重庆为举办城市，主题为「重声交响 Echoing Confluence」。
       </p>
-      <div class="fade-up" style="display:flex;gap:12px;flex-wrap:wrap;margin-top:28px;">
+      <div class="ev-about-btns fade-up" style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;">
         <a href="../../barvision.html" class="btn btn--outline">Barvision 总览</a>
         <a href="../../barvision/hof.html" class="btn btn--outline">Hall of Fame</a>
         <a href="../../" class="btn btn--outline">返回首页</a>
