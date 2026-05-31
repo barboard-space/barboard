@@ -109,29 +109,28 @@
     .ev-section { padding: 80px 0; border-top: 1px solid var(--clr-border); }
     .ev-section__hd { margin-bottom: 48px; }
     .ev-section__hd .section-label { margin-bottom: 16px; }
-    .ev-section__hd .section__title { margin-top: 24px; font-size: clamp(32px,5vw,64px); }
-    .ev-section__hd .section__subtitle { margin-top: 24px; max-width: 560px; }
+    .ev-section__hd .section__title { margin-top: 24px; font-size: clamp(24px,3.5vw,48px); }
+    .ev-section__hd .section__subtitle { margin-top: 24px; max-width: 560px; font-size: 14px; }
 
     /* ═══ Submit ═══ */
     .ev-submit-layout {
       display: grid; grid-template-columns: 1fr 1.1fr;
       gap: 64px; align-items: start;
     }
-    .ev-req-block { margin-top: 28px; }
+    .ev-req-block { margin-top: 24px; }
     .ev-req-title {
       font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
       color: var(--clr-text-3); margin-bottom: 10px;
     }
-    .ev-req-list { display: flex; flex-direction: column; gap: 5px; }
+    .ev-req-list { display: flex; flex-direction: column; gap: 4px; }
     .ev-req-item {
-      display: flex; gap: 10px; align-items: flex-start;
-      padding: 10px 14px; background: var(--clr-surface);
+      display: block;
+      padding: 6px 10px; background: var(--clr-surface);
       border: 1px solid var(--clr-border); border-radius: 4px;
-      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.6;
+      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.5;
     }
     .ev-req-item::before {
-      content: '·'; color: var(--clr-violet-light); flex-shrink: 0;
-      font-size: 16px; line-height: 1.2;
+      content: '· '; color: var(--clr-violet-light);
     }
     .ev-req-item strong { color: var(--clr-text); }
     .ev-deadline-bar {
@@ -320,14 +319,14 @@
     .ev-pt-table td:last-child { font-family: var(--font-mono); color: var(--clr-text); text-align: right; }
     .ev-pt-note { margin-top: 8px; font-size: 11px; color: var(--clr-text-3); line-height: 1.55; }
     /* Criteria list */
-    .ev-crit-list { display: flex; flex-direction: column; gap: 5px; }
+    .ev-crit-list { display: flex; flex-direction: column; gap: 3px; }
     .ev-crit-item {
-      display: flex; gap: 10px; align-items: flex-start;
-      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.6;
-      padding: 9px 12px; background: var(--clr-surface);
+      display: block;
+      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.5;
+      padding: 6px 10px; background: var(--clr-surface);
       border: 1px solid var(--clr-border); border-radius: 4px;
     }
-    .ev-crit-item::before { content: '·'; color: var(--clr-violet); flex-shrink: 0; font-size: 16px; line-height: 1.2; }
+    .ev-crit-item::before { content: '· '; color: var(--clr-violet); }
     .ev-crit-item strong { color: var(--clr-text); }
 
     /* ═══ Rules ═══ */
@@ -494,8 +493,8 @@
       <div>
         <div class="ev-section__hd">
           <p class="section-label fade-up">歌曲报名</p>
-          <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">SUBMIT<br>YOUR <span style="color:var(--clr-violet-light);">SONG</span></h2>
-          <p class="section__subtitle fade-up" style="margin-top:24px;max-width:460px;">
+          <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">SUBMIT <span style="color:var(--clr-violet-light);">YOUR</span> <span style="color:var(--clr-violet-light);">SONG</span></h2>
+          <p class="section__subtitle fade-up" style="margin-top:24px;max-width:460px;font-size:14px;">
             每位榜吧成员可提交一首参赛歌曲。提交成功后自动成为本届评委，须在各阶段完成投票。
           </p>
         </div>
@@ -506,7 +505,7 @@
             <div class="ev-req-item"><strong>在线表单</strong> 所有参赛歌曲均须通过本页报名表单提交</div>
             <div class="ev-req-item"><strong>内部选择（内定）</strong> 经与主办方确认后，通过本页表单提交歌曲信息</div>
             <div class="ev-req-item"><strong>公开选拔（海选）</strong> 由榜吧成员自行组织，海选获胜者通过本页表单代表参赛</div>
-            <div class="ev-req-item" style="padding-left:1.5em;color:var(--clr-text-2);">海选组织者须至少公布<strong style="color:var(--clr-text);">前两名排名</strong>，以确认附加赛参赛资格</div>
+            <div class="ev-req-item" style="padding-left:1.5em;color:var(--clr-text-2);">海选组织者须至少公布 <strong style="color:var(--clr-text);">前两名排名</strong>，以确认附加赛参赛资格</div>
             <div class="ev-req-item" style="padding-left:1.5em;color:var(--clr-text-2);">海选获胜者须代表该海选参与本届吧视，<strong style="color:var(--clr-text);">不得更换</strong></div>
             <div class="ev-req-item"><strong>合报（最多两人）</strong> 经主办方与双方同意后，共同通过本页表单选送一首歌曲</div>
           </div>
@@ -518,9 +517,9 @@
             <div class="ev-req-item"><strong>每人限报 1 首</strong>，不接受代报；一首歌曲仅限一位选送者提交</div>
             <div class="ev-req-item"><strong>一经提交不得更换</strong>（重复提交或资格被取消时除外）</div>
             <div class="ev-req-item">发行时间须在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
-            <div class="ev-req-item">未进入过任何榜吧<strong>官方榜单或评比名单</strong>（含 Barvision、吧莱美等）</div>
-            <div class="ev-req-item">个人榜单助攻数<strong>不超过 5 榜</strong>；单曲最高排名<strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
-            <div class="ev-req-item">艺人在历届 Barvision 中<strong>未获前三名</strong>，参赛次数 <strong>≤ 3 次</strong></div>
+            <div class="ev-req-item">未进入过任何榜吧 <strong>官方榜单或评比名单</strong>（含 Barvision、吧莱美等）</div>
+            <div class="ev-req-item">个人榜单助攻数 <strong>不超过 5 榜</strong>；单曲最高排名 <strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
+            <div class="ev-req-item">艺人在历届 Barvision 中 <strong>未获前三名</strong>，参赛次数 <strong>≤ 3 次</strong></div>
           </div>
         </div>
 
@@ -596,7 +595,7 @@
   <div class="section__inner">
     <div class="ev-section__hd">
       <p class="section-label fade-up">参赛要求</p>
-      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">ELIGIBILITY</h2>
+      <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">ELIGIBILITY</h2>
       <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">各项资格审查时限为 <strong style="color:var(--clr-text);">2026-07-19 24:00</strong>。以下任一平台指标超出上限，歌曲即失去参赛资格。</p>
     </div>
 
@@ -642,18 +641,18 @@
           <div class="ev-crit-list">
             <div class="ev-crit-item">发行日期在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
             <div class="ev-crit-item">未被选送至 <strong>Eurovision Song Contest</strong> 参赛</div>
-            <div class="ev-crit-item">未进入过任何<strong>榜吧官方榜单</strong>（含全吧及各派季榜、周榜等）</div>
-            <div class="ev-crit-item">未进入过任何<strong>榜吧官方评比名单</strong>（含吧视、吧莱美等）</div>
-            <div class="ev-crit-item">个人榜单助攻数<strong>不超过 5 榜</strong>；单曲最高排名<strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
-            <div class="ev-crit-item">未进入过除选送者外 <strong>2 位及以上</strong>其他成员的个人年榜或半年榜（须自行举证）</div>
+            <div class="ev-crit-item">未进入过任何 <strong>榜吧官方榜单</strong>（含全吧及各派季榜、周榜等）</div>
+            <div class="ev-crit-item">未进入过任何 <strong>榜吧官方评比名单</strong>（含吧视、吧莱美等）</div>
+            <div class="ev-crit-item">个人榜单助攻数 <strong>不超过 5 榜</strong>；单曲最高排名 <strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
+            <div class="ev-crit-item">未进入过除选送者外 <strong>2 位及以上</strong> 其他成员的个人年榜或半年榜（须自行举证）</div>
           </div>
         </div>
         <div class="ev-elig-block fade-up">
           <div class="ev-elig-block__title"><span class="ev-dot ev-dot--g"></span>专辑要求</div>
           <div class="ev-crit-list">
             <div class="ev-crit-item">未进入过 <strong>Billboard 200</strong></div>
-            <div class="ev-crit-item">未获得过<strong>格莱美奖提名</strong></div>
-            <div class="ev-crit-item">未获得过<strong>吧莱美奖提名</strong></div>
+            <div class="ev-crit-item">未获得过 <strong>格莱美奖提名</strong></div>
+            <div class="ev-crit-item">未获得过 <strong>吧莱美奖提名</strong></div>
           </div>
         </div>
       </div>
@@ -663,9 +662,9 @@
         <div class="ev-elig-block__title"><span class="ev-dot ev-dot--a"></span>艺人要求</div>
         <div class="ev-crit-list">
           <div class="ev-crit-item">累计参与 Barvision 次数 <strong>≤ 3 次</strong></div>
-          <div class="ev-crit-item">在历届 Barvision 中<strong>未获得前三名</strong></div>
-          <div class="ev-crit-item">未进入过榜吧官方<strong>年榜或半年榜 Top 100</strong></div>
-          <div class="ev-crit-item">未进入过各大分派<strong>年榜或半年榜 Top 50</strong></div>
+          <div class="ev-crit-item">在历届 Barvision 中 <strong>未获得前三名</strong></div>
+          <div class="ev-crit-item">未进入过榜吧官方 <strong>年榜或半年榜 Top 100</strong></div>
+          <div class="ev-crit-item">未进入过各大分派 <strong>年榜或半年榜 Top 50</strong></div>
           <div class="ev-crit-item">未获得过 <strong>Eurovision Song Contest 冠军</strong></div>
           <div class="ev-crit-item">未进入过 <strong>Billboard Artist 100</strong></div>
           <div class="ev-crit-item">Lead 单曲未进入过 <strong>Billboard Hot 100、Global 200 或 UK Official Singles Chart Top 100</strong></div>
@@ -681,7 +680,7 @@
   <div class="section__inner">
     <div class="ev-section__hd">
       <p class="section-label fade-up">赛程安排</p>
-      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">SCHEDULE</h2>
+      <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">SCHEDULE</h2>
       <p class="section__subtitle fade-up" style="margin-top:24px;">完整赛程时间表，具体安排以后续公告为准。</p>
     </div>
 
@@ -828,7 +827,7 @@
   <div class="section__inner">
     <div class="ev-section__hd">
       <p class="section-label fade-up">规则摘要</p>
-      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">RULEBOOK</h2>
+      <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">RULEBOOK</h2>
       <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">核心规则摘要。完整规则请参阅 Rulebook Ver. 260530，最终解释权归主办方所有。</p>
     </div>
     <div class="ev-rules-grid">
@@ -874,7 +873,7 @@
   <div class="section__inner">
     <div class="ev-section__hd">
       <p class="section-label fade-up">投票方式</p>
-      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">VOTING</h2>
+      <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">VOTING</h2>
       <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">半决赛与决赛均采用评委票与观众票并行制，各占 50%。附加赛采用认可票（Approval Vote）。</p>
     </div>
 

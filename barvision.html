@@ -143,11 +143,9 @@
     .bv-live-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: var(--clr-violet-light);
-      animation: bv-dot-pulse 2s ease-in-out infinite;
-    }
-    @keyframes bv-dot-pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50%       { opacity: 0.4; transform: scale(0.7); }
+      box-shadow: 0 0 6px rgba(192,132,252,0.9);
+      position: relative; top: -1px;
+      animation: ripple-out 1.2s ease-out infinite;
     }
     .bv-current-logo {
       width: clamp(180px, 20vw, 240px);
@@ -270,12 +268,12 @@
         <a class="bv-eyebrow" href="/"><span>←</span><span>Barboard</span></a>
         <h1 class="bv-hero__title">Barvision</h1>
         <div class="bv-hero__meta lab__meta">
-          <span class="lab__meta-item">第十六届即将开赛</span>
+          <span class="lab__meta-item">欧美流行音乐个人榜吧歌曲大赛</span>
           <span class="lab__meta-item">始于 2019 年</span>
-          <span class="lab__meta-item">已举办十五届</span>
+          <span class="lab__meta-item">第十六届正在进行中</span>
         </div>
         <p class="bv-hero__desc">
-          Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。榜吧成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。2019 年由 <a class="member" href="member/125.html" data-nickname="萌妈">@绿荫夏语</a> 创立，历经数年停办后于 2023 年恢复，现已举办至第十六届。
+          Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。榜吧成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。2019 年由 <a class="member" href="member/125.html" data-nickname="萌妈">@绿荫夏语</a> 创立，历经两年停办后于 2023 年恢复，现已举办至第十六届。
         </p>
         <div class="bv-hero__actions">
           <a href="barvision/2026/events.html" class="btn btn--primary">Barvision Chongqing 2026</a>

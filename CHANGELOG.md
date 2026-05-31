@@ -4,6 +4,25 @@
 
 ---
 
+## [2026-05-31 session 10] — barvision/2026/events.html 移动端优化 + section 顺序 + 排版规范
+
+### Changed
+- `barvision/2026/events.html` section 顺序调整：参赛要求提前至歌曲报名后；规则摘要与投票方式互换；TOC 和 hero CTA 按钮顺序同步
+- `barvision/2026/events.html` 移动端全面优化：新增 `@media (max-width: 768px)` 块（section/hero padding 压缩、CTA 按钮 2×2、投票 % 字号缩小）；扩充 `@media (max-width: 480px)`（CTA 竖排全宽、deadline bar 竖排、提交面板 padding 收紧、倒计时 full-width）；平台表格 `overflow-x: auto`
+- `barvision/2026/events.html` 条目样式重构：`ev-req-item` / `ev-crit-item` 由 `display: flex` 改为 `display: block`，bullet `·` 改为 inline `::before`，消除 bold 关键词与描述文字的视觉割裂
+- `barvision/2026/events.html` 间距调整：`ev-req-list` / `ev-crit-list` gap 3→4px；`ev-req-block` margin-top 28→24px；条目 padding 10→6px；`line-height` 1.6→1.5
+- `barvision/2026/events.html` 标题与文字：section title `clamp(32px,5vw,64px)` → `clamp(24px,3.5vw,48px)`；subtitle 统一 14px；submit 标题 "SUBMIT YOUR SONG" 改为一行，YOUR/SONG 紫色
+- `barvision.html`：meta 文案更新（"第十六届即将开赛" → "欧美流行音乐个人榜吧歌曲大赛"；"已举办十五届" → "第十六届正在进行中"；"历经数年停办后" → "历经两年停办后"）；"进行中"呼吸灯改为 `ripple-out` 样式（与首页 edition-card--active 一致），上移 1px
+
+### Fixed
+- 移除两处 `white-space:nowrap` 防内容在移动端溢出屏幕
+- `<strong>` 行内加粗文本前后补全空格（文字字符相邻处），消除中英文混排粘连
+
+### Docs
+- CLAUDE.md 注意事项 #121：行内 `<strong>` 前后空格规范（文字字符相邻加空格，标点/句首句末不加）
+
+---
+
 ## [2026-05-31 session 9] — 数据架构规范化 + CSV→JSON 同步脚本 + BBL 日期修复
 
 ### Added
