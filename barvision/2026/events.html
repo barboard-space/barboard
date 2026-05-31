@@ -101,6 +101,7 @@
       .ev-hero__desc   { animation: ev-hero-in 0.55s 0.26s cubic-bezier(0.22,1,0.36,1) both; }
       .ev-hero__cta    { animation: ev-hero-in 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both; }
       .ev-countdown    { animation: ev-hero-in 0.55s 0.44s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-updated      { animation: ev-hero-in 0.50s 0.53s cubic-bezier(0.22,1,0.36,1) both; }
       .ev-logo-wrap    { animation: ev-hero-in 0.70s 0.20s cubic-bezier(0.22,1,0.36,1) both; }
     }
 
@@ -356,18 +357,46 @@
     @media (max-width: 960px) {
       .ev-hero__layout    { grid-template-columns: 1fr; }
       .ev-logo-wrap       { display: none; }
-      .ev-submit-layout   { grid-template-columns: 1fr; gap: 40px; }
+      .ev-submit-layout   { grid-template-columns: 1fr; gap: 32px; }
       .submit-panel       { position: static; }
       .ev-elig-layout     { grid-template-columns: 1fr; gap: 36px; }
       .ev-vote-grid       { grid-template-columns: 1fr; }
       .ev-vote-card--approval { grid-column: 1; }
     }
+    @media (max-width: 768px) {
+      .ev-hero            { padding: calc(var(--nav-h) + 40px) 0 56px; }
+      .ev-section         { padding: 60px 0; }
+      .ev-section__hd     { margin-bottom: 36px; }
+      .ev-section__hd .section__title { margin-top: 16px; }
+      .ev-hero__desc      { max-width: 100%; }
+      .ev-phases          { gap: 40px; }
+      .ev-vc-pct          { font-size: 52px; }
+      .ev-vote-card--approval .ev-vc-pct { font-size: 36px; }
+      .ev-hero__cta .btn  { flex: 1; min-width: calc(50% - 5px); justify-content: center; }
+    }
     @media (max-width: 700px) {
       .ev-rules-grid      { grid-template-columns: 1fr 1fr; }
       .ev-tl-row          { grid-template-columns: 112px 1fr; }
       .ev-tl-date         { font-size: 11px; padding: 12px 10px; }
+      .ev-pt-wrap         { overflow-x: auto; overflow-y: visible; }
     }
     @media (max-width: 480px) {
+      .ev-hero            { padding: calc(var(--nav-h) + 28px) 0 44px; }
+      .ev-section         { padding: 48px 0; }
+      .ev-section__hd     { margin-bottom: 26px; }
+      .ev-phases          { gap: 30px; }
+      .ev-submit-layout   { gap: 24px; }
+      .ev-vc-pct          { font-size: 44px; }
+      .ev-vote-card--approval .ev-vc-pct { font-size: 30px; }
+      .ev-vote-card       { padding: 22px 20px; }
+      .ev-hero__cta       { flex-direction: column; }
+      .ev-hero__cta .btn  { width: 100%; justify-content: center; }
+      .ev-countdown       { display: flex; width: 100%; box-sizing: border-box; }
+      .ev-deadline-bar    { grid-template-columns: 1fr; }
+      .ev-deadline-bar__divider { height: 1px; }
+      .submit-panel__head { padding: 16px 20px 14px; }
+      .submit-panel__body { padding: 24px 20px; }
+      .sp-locked__cd      { min-width: 0; width: 100%; box-sizing: border-box; }
       .ev-rules-grid      { grid-template-columns: 1fr; }
       .ev-tl-row          { grid-template-columns: 1fr; }
       .ev-tl-date         { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 10px 14px 6px; font-size: 11px; }
@@ -437,15 +466,15 @@
         </p>
         <div class="ev-hero__cta">
           <a href="#submit"      class="btn btn--primary">歌曲报名</a>
-          <a href="#schedule"    class="btn btn--outline">赛程安排</a>
-          <a href="#voting"      class="btn btn--outline">投票方式</a>
           <a href="#eligibility" class="btn btn--outline">参赛要求</a>
+          <a href="#schedule"    class="btn btn--outline">赛程安排</a>
+          <a href="#rules"       class="btn btn--outline">规则摘要</a>
         </div>
         <div class="ev-countdown" id="heroCountdownWrap">
           <span class="ev-countdown__label" id="heroCountdownLabel">距提交通道开启还有</span>
           <span class="ev-countdown__digits" id="heroCountdown">—</span>
         </div>
-        <p style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-05-30</span></p>
+        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-05-30</span></p>
       </div>
 
       <div class="ev-logo-wrap">
@@ -490,7 +519,7 @@
             <div class="ev-req-item"><strong>一经提交不得更换</strong>（重复提交或资格被取消时除外）</div>
             <div class="ev-req-item">发行时间须在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
             <div class="ev-req-item">未进入过任何榜吧<strong>官方榜单或评比名单</strong>（含 Barvision、吧莱美等）</div>
-            <div class="ev-req-item" style="white-space:nowrap;">个人榜单助攻数<strong>不超过 5 榜</strong>；单曲最高排名<strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
+            <div class="ev-req-item">个人榜单助攻数<strong>不超过 5 榜</strong>；单曲最高排名<strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
             <div class="ev-req-item">艺人在历届 Barvision 中<strong>未获前三名</strong>，参赛次数 <strong>≤ 3 次</strong></div>
           </div>
         </div>
@@ -555,6 +584,91 @@
             </div>
 
           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 参赛要求 ═══ -->
+<section class="ev-section" id="eligibility">
+  <div class="section__inner">
+    <div class="ev-section__hd">
+      <p class="section-label fade-up">参赛要求</p>
+      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">ELIGIBILITY</h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">各项资格审查时限为 <strong style="color:var(--clr-text);">2026-07-19 24:00</strong>。以下任一平台指标超出上限，歌曲即失去参赛资格。</p>
+    </div>
+
+    <div class="ev-elig-layout">
+
+      <!-- Platform table spans full width -->
+      <div class="fade-up" style="grid-column:1/-1;">
+        <div class="ev-elig-block__title">
+          <span class="ev-dot ev-dot--v"></span>平台数据上限
+        </div>
+        <div class="ev-pt-wrap"><table class="ev-pt-table">
+          <thead>
+            <tr>
+              <th>平台</th>
+              <th>指标项目</th>
+              <th style="text-align:right;">上限</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>网易云音乐</td><td>歌曲评论量</td><td>1,000</td></tr>
+            <tr><td>网易云音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
+            <tr style="border-top:1px solid var(--clr-border-2);">
+              <td>QQ 音乐</td><td>歌曲评论量</td><td>1,000</td>
+            </tr>
+            <tr><td>QQ 音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
+            <tr style="border-top:1px solid var(--clr-border-2);">
+              <td>Spotify</td><td>歌手月听众数</td><td>5,000,000</td>
+            </tr>
+            <tr><td>Spotify</td><td>单曲累计播放量</td><td>10,000,000</td></tr>
+            <tr style="border-top:1px solid var(--clr-border-2);">
+              <td>YouTube</td><td>官方频道订阅数</td><td>5,000,000</td>
+            </tr>
+            <tr><td>YouTube</td><td>官方单曲 MV 播放量</td><td>10,000,000</td></tr>
+          </tbody>
+        </table></div>
+        <p class="ev-pt-note">* 若歌曲存在多个版本，以最早发行时间为准。审查时限均为 2026-07-19 24:00。</p>
+      </div>
+
+      <!-- Song + Album requirements (left column) -->
+      <div style="display:flex;flex-direction:column;gap:36px;">
+        <div class="ev-elig-block fade-up">
+          <div class="ev-elig-block__title"><span class="ev-dot ev-dot--p"></span>歌曲要求</div>
+          <div class="ev-crit-list">
+            <div class="ev-crit-item">发行日期在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
+            <div class="ev-crit-item">未被选送至 <strong>Eurovision Song Contest</strong> 参赛</div>
+            <div class="ev-crit-item">未进入过任何<strong>榜吧官方榜单</strong>（含全吧及各派季榜、周榜等）</div>
+            <div class="ev-crit-item">未进入过任何<strong>榜吧官方评比名单</strong>（含吧视、吧莱美等）</div>
+            <div class="ev-crit-item">个人榜单助攻数<strong>不超过 5 榜</strong>；单曲最高排名<strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
+            <div class="ev-crit-item">未进入过除选送者外 <strong>2 位及以上</strong>其他成员的个人年榜或半年榜（须自行举证）</div>
+          </div>
+        </div>
+        <div class="ev-elig-block fade-up">
+          <div class="ev-elig-block__title"><span class="ev-dot ev-dot--g"></span>专辑要求</div>
+          <div class="ev-crit-list">
+            <div class="ev-crit-item">未进入过 <strong>Billboard 200</strong></div>
+            <div class="ev-crit-item">未获得过<strong>格莱美奖提名</strong></div>
+            <div class="ev-crit-item">未获得过<strong>吧莱美奖提名</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Artist requirements (right column) -->
+      <div class="ev-elig-block fade-up">
+        <div class="ev-elig-block__title"><span class="ev-dot ev-dot--a"></span>艺人要求</div>
+        <div class="ev-crit-list">
+          <div class="ev-crit-item">累计参与 Barvision 次数 <strong>≤ 3 次</strong></div>
+          <div class="ev-crit-item">在历届 Barvision 中<strong>未获得前三名</strong></div>
+          <div class="ev-crit-item">未进入过榜吧官方<strong>年榜或半年榜 Top 100</strong></div>
+          <div class="ev-crit-item">未进入过各大分派<strong>年榜或半年榜 Top 50</strong></div>
+          <div class="ev-crit-item">未获得过 <strong>Eurovision Song Contest 冠军</strong></div>
+          <div class="ev-crit-item">未进入过 <strong>Billboard Artist 100</strong></div>
+          <div class="ev-crit-item">Lead 单曲未进入过 <strong>Billboard Hot 100、Global 200 或 UK Official Singles Chart Top 100</strong></div>
         </div>
       </div>
 
@@ -709,6 +823,52 @@
   </div>
 </section>
 
+<!-- ═══ 规则摘要 ═══ -->
+<section class="ev-section" id="rules">
+  <div class="section__inner">
+    <div class="ev-section__hd">
+      <p class="section-label fade-up">规则摘要</p>
+      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">RULEBOOK</h2>
+      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">核心规则摘要。完整规则请参阅 Rulebook Ver. 260530，最终解释权归主办方所有。</p>
+    </div>
+    <div class="ev-rules-grid">
+      <div class="ev-rule-card ev-rule-card--sf fade-up">
+        <div class="ev-rule-card__num">01</div>
+        <div class="ev-rule-card__title">半决赛晋级</div>
+        <div class="ev-rule-card__body">每场半决赛前 <strong>8 名</strong>晋级决赛，两场合计 16 首。非东道主参赛歌曲均需经历半决赛；参赛场次及出场顺序由<strong>抽签</strong>决定。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--host fade-up">
+        <div class="ev-rule-card__num">02</div>
+        <div class="ev-rule-card__title">东道主直通</div>
+        <div class="ev-rule-card__body">东道主（主办方 <a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a>）选送的歌曲<strong>直接晋级决赛</strong>，不参与半决赛评比。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--adv fade-up">
+        <div class="ev-rule-card__num">03</div>
+        <div class="ev-rule-card__title">附加赛晋级</div>
+        <div class="ev-rule-card__body">附加赛（Approval Vote）胜者 <strong>1 名</strong>晋级决赛。决赛共 <strong>18 首</strong>参赛歌曲（SF 16 + 东道主 1 + 附加赛 1）。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--tie fade-up">
+        <div class="ev-rule-card__num">04</div>
+        <div class="ev-rule-card__title">平局判定</div>
+        <div class="ev-rule-card__body">依次比较：① 观众票得分 → ② 总票源数 → ③ 从 12 分起逐项比较最高得分次数 → ④ <strong>出场顺序靠前者</strong>获胜。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--co fade-up">
+        <div class="ev-rule-card__num">05</div>
+        <div class="ev-rule-card__title">合报规则</div>
+        <div class="ev-rule-card__body">经主办方与双方同意，<strong>最多两人</strong>可共同选送一首歌曲。若分别投票，各自得分按 <strong>50%</strong> 计入总分。</div>
+      </div>
+      <div class="ev-rule-card ev-rule-card--champ fade-up">
+        <div class="ev-rule-card__num">06</div>
+        <div class="ev-rule-card__title">冠军奖励</div>
+        <div class="ev-rule-card__body">年度冠军选送方将获得 <strong>Barvision 2027</strong> 的主办权，负责组织和举办下一届大赛。</div>
+      </div>
+    </div>
+    <p class="fade-up" style="margin-top:20px;font-size:12.5px;color:var(--clr-text-2);">
+      * 本章程的最终解释权归 <strong style="color:rgba(240,238,255,0.75);">Barvision Chongqing 2026 主办方</strong> 所有。
+    </p>
+  </div>
+</section>
+
 <!-- ═══ 投票方式 ═══ -->
 <section class="ev-section" id="voting">
   <div class="section__inner">
@@ -783,137 +943,6 @@
   </div>
 </section>
 
-<!-- ═══ 参赛要求 ═══ -->
-<section class="ev-section" id="eligibility">
-  <div class="section__inner">
-    <div class="ev-section__hd">
-      <p class="section-label fade-up">参赛要求</p>
-      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">ELIGIBILITY</h2>
-      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">各项资格审查时限为 <strong style="color:var(--clr-text);">2026-07-19 24:00</strong>。以下任一平台指标超出上限，歌曲即失去参赛资格。</p>
-    </div>
-
-    <div class="ev-elig-layout">
-
-      <!-- Platform table spans full width -->
-      <div class="fade-up" style="grid-column:1/-1;">
-        <div class="ev-elig-block__title">
-          <span class="ev-dot ev-dot--v"></span>平台数据上限
-        </div>
-        <div class="ev-pt-wrap"><table class="ev-pt-table">
-          <thead>
-            <tr>
-              <th>平台</th>
-              <th>指标项目</th>
-              <th style="text-align:right;">上限</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>网易云音乐</td><td>歌曲评论量</td><td>1,000</td></tr>
-            <tr><td>网易云音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
-            <tr style="border-top:1px solid var(--clr-border-2);">
-              <td>QQ 音乐</td><td>歌曲评论量</td><td>1,000</td>
-            </tr>
-            <tr><td>QQ 音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
-            <tr style="border-top:1px solid var(--clr-border-2);">
-              <td>Spotify</td><td>歌手月听众数</td><td>5,000,000</td>
-            </tr>
-            <tr><td>Spotify</td><td>单曲累计播放量</td><td>10,000,000</td></tr>
-            <tr style="border-top:1px solid var(--clr-border-2);">
-              <td>YouTube</td><td>官方频道订阅数</td><td>5,000,000</td>
-            </tr>
-            <tr><td>YouTube</td><td>官方单曲 MV 播放量</td><td>10,000,000</td></tr>
-          </tbody>
-        </table></div>
-        <p class="ev-pt-note">* 若歌曲存在多个版本，以最早发行时间为准。审查时限均为 2026-07-19 24:00。</p>
-      </div>
-
-      <!-- Song + Album requirements (left column) -->
-      <div style="display:flex;flex-direction:column;gap:36px;">
-        <div class="ev-elig-block fade-up">
-          <div class="ev-elig-block__title"><span class="ev-dot ev-dot--p"></span>歌曲要求</div>
-          <div class="ev-crit-list">
-            <div class="ev-crit-item">发行日期在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
-            <div class="ev-crit-item">未被选送至 <strong>Eurovision Song Contest</strong> 参赛</div>
-            <div class="ev-crit-item">未进入过任何<strong>榜吧官方榜单</strong>（含全吧及各派季榜、周榜等）</div>
-            <div class="ev-crit-item">未进入过任何<strong>榜吧官方评比名单</strong>（含吧视、吧莱美等）</div>
-            <div class="ev-crit-item" style="white-space:nowrap;">个人榜单助攻数<strong>不超过 5 榜</strong>；单曲最高排名<strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
-            <div class="ev-crit-item">未进入过除选送者外 <strong>2 位及以上</strong>其他成员的个人年榜或半年榜（须自行举证）</div>
-          </div>
-        </div>
-        <div class="ev-elig-block fade-up">
-          <div class="ev-elig-block__title"><span class="ev-dot ev-dot--g"></span>专辑要求</div>
-          <div class="ev-crit-list">
-            <div class="ev-crit-item">未进入过 <strong>Billboard 200</strong></div>
-            <div class="ev-crit-item">未获得过<strong>格莱美奖提名</strong></div>
-            <div class="ev-crit-item">未获得过<strong>吧莱美奖提名</strong></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Artist requirements (right column) -->
-      <div class="ev-elig-block fade-up">
-        <div class="ev-elig-block__title"><span class="ev-dot ev-dot--a"></span>艺人要求</div>
-        <div class="ev-crit-list">
-          <div class="ev-crit-item">累计参与 Barvision 次数 <strong>≤ 3 次</strong></div>
-          <div class="ev-crit-item">在历届 Barvision 中<strong>未获得前三名</strong></div>
-          <div class="ev-crit-item">未进入过榜吧官方<strong>年榜或半年榜 Top 100</strong></div>
-          <div class="ev-crit-item">未进入过各大分派<strong>年榜或半年榜 Top 50</strong></div>
-          <div class="ev-crit-item">未获得过 <strong>Eurovision Song Contest 冠军</strong></div>
-          <div class="ev-crit-item">未进入过 <strong>Billboard Artist 100</strong></div>
-          <div class="ev-crit-item">Lead 单曲未进入过 <strong>Billboard Hot 100、Global 200 或 UK Official Singles Chart Top 100</strong></div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- ═══ 规则摘要 ═══ -->
-<section class="ev-section" id="rules">
-  <div class="section__inner">
-    <div class="ev-section__hd">
-      <p class="section-label fade-up">规则摘要</p>
-      <h2 class="section__title fade-up" style="font-size:clamp(32px,5vw,64px);margin-top:24px;">RULEBOOK</h2>
-      <p class="section__subtitle fade-up" style="margin-top:24px;max-width:560px;">核心规则摘要。完整规则请参阅 Rulebook Ver. 260530，最终解释权归主办方所有。</p>
-    </div>
-    <div class="ev-rules-grid">
-      <div class="ev-rule-card ev-rule-card--sf fade-up">
-        <div class="ev-rule-card__num">01</div>
-        <div class="ev-rule-card__title">半决赛晋级</div>
-        <div class="ev-rule-card__body">每场半决赛前 <strong>8 名</strong>晋级决赛，两场合计 16 首。非东道主参赛歌曲均需经历半决赛；参赛场次及出场顺序由<strong>抽签</strong>决定。</div>
-      </div>
-      <div class="ev-rule-card ev-rule-card--host fade-up">
-        <div class="ev-rule-card__num">02</div>
-        <div class="ev-rule-card__title">东道主直通</div>
-        <div class="ev-rule-card__body">东道主（主办方 <a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a>）选送的歌曲<strong>直接晋级决赛</strong>，不参与半决赛评比。</div>
-      </div>
-      <div class="ev-rule-card ev-rule-card--adv fade-up">
-        <div class="ev-rule-card__num">03</div>
-        <div class="ev-rule-card__title">附加赛晋级</div>
-        <div class="ev-rule-card__body">附加赛（Approval Vote）胜者 <strong>1 名</strong>晋级决赛。决赛共 <strong>18 首</strong>参赛歌曲（SF 16 + 东道主 1 + 附加赛 1）。</div>
-      </div>
-      <div class="ev-rule-card ev-rule-card--tie fade-up">
-        <div class="ev-rule-card__num">04</div>
-        <div class="ev-rule-card__title">平局判定</div>
-        <div class="ev-rule-card__body">依次比较：① 观众票得分 → ② 总票源数 → ③ 从 12 分起逐项比较最高得分次数 → ④ <strong>出场顺序靠前者</strong>获胜。</div>
-      </div>
-      <div class="ev-rule-card ev-rule-card--co fade-up">
-        <div class="ev-rule-card__num">05</div>
-        <div class="ev-rule-card__title">合报规则</div>
-        <div class="ev-rule-card__body">经主办方与双方同意，<strong>最多两人</strong>可共同选送一首歌曲。若分别投票，各自得分按 <strong>50%</strong> 计入总分。</div>
-      </div>
-      <div class="ev-rule-card ev-rule-card--champ fade-up">
-        <div class="ev-rule-card__num">06</div>
-        <div class="ev-rule-card__title">冠军奖励</div>
-        <div class="ev-rule-card__body">年度冠军选送方将获得 <strong>Barvision 2027</strong> 的主办权，负责组织和举办下一届大赛。</div>
-      </div>
-    </div>
-    <p class="fade-up" style="margin-top:20px;font-size:12.5px;color:var(--clr-text-2);">
-      * 本章程的最终解释权归 <strong style="color:rgba(240,238,255,0.75);">Barvision Chongqing 2026 主办方</strong> 所有。
-    </p>
-  </div>
-</section>
-
 <!-- ═══ About ═══ -->
 <section class="ev-section">
   <div class="section__inner">
@@ -939,10 +968,10 @@
 
 <nav id="evToc" class="ev-toc" aria-label="页内目录">
   <div class="ev-toc__item" data-target="submit">歌曲报名</div>
-  <div class="ev-toc__item" data-target="schedule">赛程安排</div>
-  <div class="ev-toc__item" data-target="voting">投票方式</div>
   <div class="ev-toc__item" data-target="eligibility">参赛要求</div>
+  <div class="ev-toc__item" data-target="schedule">赛程安排</div>
   <div class="ev-toc__item" data-target="rules">规则摘要</div>
+  <div class="ev-toc__item" data-target="voting">投票方式</div>
 </nav>
 
 <div id="site-footer"></div>
