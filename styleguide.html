@@ -47,6 +47,10 @@
     .sg-spacing-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
     .sg-spacing-bar { height: 16px; background: var(--clr-violet); border-radius: 2px; }
     .sg-spacing-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--clr-text-2); width: 130px; }
+    .sg-type-row { display: flex; align-items: baseline; gap: 20px; padding: 7px 0; border-bottom: 1px solid var(--clr-border); flex-wrap: wrap; }
+    .sg-type-sample { color: var(--clr-text); font-family: var(--font-body); flex: 0 0 240px; line-height: 1.2; }
+    .sg-type-meta { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text-3); }
+    .sg-type-meta b { color: var(--clr-violet-light); font-weight: 600; }
 
     /* small render frames */
     .sg-chart { max-width: 560px; }
@@ -102,6 +106,23 @@
     <div class="sg-item">
       <div class="sg-item__bar"><span class="sg-item__name">间距</span><span class="sg-item__cls">--gap-*</span><span class="sg-item__src">style.css :root</span></div>
       <div id="sgSpacing"></div>
+    </div>
+  </section>
+
+  <!-- ============ 一·补、尺度 ============ -->
+  <section class="sg-cat">
+    <h2 class="sg-cat__title">一·补 · 尺度 Scale（字号 / 间距阶梯）</h2>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">字号阶梯</span><span class="sg-item__cls">Type Scale</span><span class="sg-item__src">DESIGN.md §一·补2</span></div>
+      <div id="sgType"></div>
+      <div class="sg-note">避免离散值 7/9/12.5/13.5/17/20/21/30/34/36px，就近归并。display/hero/watermark 档实际更大，此处仅标注。</div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">间距阶梯</span><span class="sg-item__cls">Spacing Scale · 4px 基准</span><span class="sg-item__src">DESIGN.md §一·补2</span></div>
+      <div id="sgSpace"></div>
+      <div class="sg-note">8/16/32/64/96 已是 --gap-* 令牌；其余为推荐档。避免 5/7/9/11/13/18/22/26/28/36/52/60 等零散值。</div>
     </div>
   </section>
 
@@ -318,6 +339,30 @@
   document.getElementById('sgSpacing').innerHTML = GAPS.map(function(g){
     return '<div class="sg-spacing-row"><span class="sg-spacing-lbl">'+g[0]+' · '+g[1]+'</span>'
       + '<span class="sg-spacing-bar" style="width:'+g[1]+'"></span></div>';
+  }).join('');
+
+  // ── 字号阶梯 ──
+  var TYPE = [
+    ['caption',10,'stat/角标/meta'],['label',11,'eyebrow/小标签'],['small',12,'歌手/次要描述'],
+    ['body',13,'正文/卡片描述'],['body-lg',14,'歌名/强调正文'],['lead',15,'hero 描述'],['input',16,'输入框/section 基准'],
+    ['h-sm',18,'小标题'],['h-md',22,'移动端标题'],['num',24,'大数字'],['h-lg',28,'section 标题'],['display-sm',32,'倒计时']
+  ];
+  var TYPE_BIG = [['display','40–44px','HOF 大数字'],['display-lg','52–64px','超大展示'],['hero','clamp(56,8vw,108)','页面主标题'],['watermark','200–280px','背景水印']];
+  document.getElementById('sgType').innerHTML =
+    TYPE.map(function(t){
+      return '<div class="sg-type-row"><span class="sg-type-sample" style="font-size:'+t[1]+'px">样例文字 Aa 重声交响</span>'
+        + '<span class="sg-type-meta"><b>'+t[0]+'</b> · '+t[1]+'px · '+t[2]+'</span></div>';
+    }).join('')
+    + TYPE_BIG.map(function(t){
+      return '<div class="sg-type-row"><span class="sg-type-sample" style="font-size:20px;color:var(--clr-text-2)">（更大）</span>'
+        + '<span class="sg-type-meta"><b>'+t[0]+'</b> · '+t[1]+' · '+t[2]+'</span></div>';
+    }).join('');
+
+  // ── 间距阶梯 ──
+  var SPACE = [['2xs',4,''],['xs',8,'--gap-xs'],['sm',12,''],['md',16,'--gap-sm'],['lg',24,''],['xl',32,'--gap-md'],['2xl',48,''],['3xl',64,'--gap-lg'],['4xl',96,'--gap-xl']];
+  document.getElementById('sgSpace').innerHTML = SPACE.map(function(s){
+    return '<div class="sg-spacing-row"><span class="sg-spacing-lbl">'+s[0]+' · '+s[1]+'px'+(s[2]?' · '+s[2]:'')+'</span>'
+      + '<span class="sg-spacing-bar" style="width:'+s[1]+'px"></span></div>';
   }).join('');
 
   // ── chart-change SVG ──
