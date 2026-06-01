@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Barboard 组件库 · Styleguide（开发用）</title>
+  <meta name="robots" content="noindex" />
+  <link rel="stylesheet" href="fonts.css" />
+  <link rel="stylesheet" href="style.css?v=3.0.2" />
+  <style>
+    /* ===== styleguide 专用布局（sg- 前缀，避免与站点 class 冲突）===== */
+    body { padding: 40px 0 120px; }
+    .sg-wrap { max-width: 980px; margin: 0 auto; padding: 0 24px; }
+    .sg-head { margin-bottom: 48px; }
+    .sg-head h1 { font-family: var(--font-display); font-size: 48px; letter-spacing: 0.02em; color: var(--clr-text); }
+    .sg-head p { color: var(--clr-text-2); font-size: 14px; line-height: 1.7; margin-top: 8px; max-width: 640px; }
+    .sg-head code { font-family: var(--font-mono); font-size: 12px; color: var(--clr-violet-light); background: var(--clr-surface); padding: 1px 6px; border-radius: 3px; }
+
+    .sg-cat { margin-top: 64px; }
+    .sg-cat__title {
+      font-family: var(--font-display); font-size: 13px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--clr-violet-light); border-bottom: 1px solid var(--clr-border-2); padding-bottom: 10px; margin-bottom: 28px;
+    }
+
+    .sg-item { margin-bottom: 36px; }
+    .sg-item__bar {
+      display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap;
+      margin-bottom: 14px; padding-bottom: 6px; border-bottom: 1px dashed var(--clr-border);
+    }
+    .sg-item__name { font-size: 14px; font-weight: 600; color: var(--clr-text); }
+    .sg-item__cls  { font-family: var(--font-mono); font-size: 12px; color: var(--clr-accent-light); }
+    .sg-item__src  { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text-3); margin-left: auto; }
+    .sg-note { font-size: 12px; color: var(--clr-text-3); line-height: 1.6; margin-top: 8px; }
+    .sg-demo { padding: 8px 0; }
+    .sg-demo--panel { background: var(--clr-bg-2); border: 1px solid var(--clr-border); border-radius: 8px; padding: 20px; }
+
+    /* tokens */
+    .sg-swatches { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; }
+    .sg-swatch { border: 1px solid var(--clr-border); border-radius: 6px; overflow: hidden; }
+    .sg-swatch__chip { height: 56px; }
+    .sg-swatch__meta { padding: 8px 10px; }
+    .sg-swatch__var { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text); display: block; }
+    .sg-swatch__val { font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3); }
+    .sg-fonts > div { margin-bottom: 14px; }
+    .sg-font-sample { font-size: 26px; color: var(--clr-text); }
+    .sg-spacing-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
+    .sg-spacing-bar { height: 16px; background: var(--clr-violet); border-radius: 2px; }
+    .sg-spacing-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--clr-text-2); width: 130px; }
+
+    /* small render frames */
+    .sg-chart { max-width: 560px; }
+    .sg-chart .chart-list { display: flex; flex-direction: column; gap: 8px; }
+    .sg-inline { display: flex; gap: 16px; align-items: center; flex-wrap: wrap; }
+    .sg-season { max-width: 460px; }
+    .sg-editions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; max-width: 460px; }
+
+    /* index table for page-scoped components */
+    .sg-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    .sg-table th, .sg-table td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--clr-border); vertical-align: top; }
+    .sg-table th { color: var(--clr-text-3); font-weight: 600; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+    .sg-table td.cls { font-family: var(--font-mono); font-size: 12px; color: var(--clr-accent-light); }
+    .sg-table td.file { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text-3); }
+  </style>
+</head>
+<body>
+<div class="sg-wrap">
+
+  <div class="sg-head">
+    <h1>BARBOARD 组件库</h1>
+    <p>
+      开发用 styleguide（不进导航、<code>noindex</code>）。<strong>全局组件</strong>（定义于 <code>style.css</code>）在此实时渲染——
+      改 style.css 后本页自动同步，可作视觉回归基准。<strong>页面专属组件</strong>（各页内联 <code>&lt;style&gt;</code>）暂以索引表列出，
+      待阶段三迁移到全局后再在此实时渲染。命名俗名与完整说明见 <code>DESIGN.md</code>。
+    </p>
+  </div>
+
+  <!-- ============ 一、设计令牌 ============ -->
+  <section class="sg-cat">
+    <h2 class="sg-cat__title">一 · 设计令牌 Tokens</h2>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">颜色</span><span class="sg-item__cls">--clr-*</span><span class="sg-item__src">style.css :root</span></div>
+      <div class="sg-swatches" id="sgColors"></div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">字体</span><span class="sg-item__cls">--font-*</span><span class="sg-item__src">fonts.css</span></div>
+      <div class="sg-fonts">
+        <div><span class="sg-font-sample" style="font-family:var(--font-display)">BARBOARD 2026 重声交响</span><div class="sg-note">--font-display · Bebas Neue · 大标题/数字（无中文字形，中文会回退）</div></div>
+        <div><span class="sg-font-sample" style="font-family:var(--font-body)">Barboard 榜吧 · 正文与按钮</span><div class="sg-note">--font-body · DM Sans · 正文/按钮/所有中文标签</div></div>
+        <div><span class="sg-font-sample" style="font-family:var(--font-mono)">2026-05-31 · Vol.125</span><div class="sg-note">--font-mono · DM Mono · 日期/期号/数字（无中文字形）</div></div>
+      </div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">间距</span><span class="sg-item__cls">--gap-*</span><span class="sg-item__src">style.css :root</span></div>
+      <div id="sgSpacing"></div>
+    </div>
+  </section>
+
+  <!-- ============ 二、章节级 ============ -->
+  <section class="sg-cat">
+    <h2 class="sg-cat__title">二 · 章节级 Sections</h2>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">章节眉标</span><span class="sg-item__cls">.section-label</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo"><p class="section-label">年度歌曲大赛</p></div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">章节大标题 / 副标题</span><span class="sg-item__cls">.section__title · .section__subtitle</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo">
+        <h2 class="section__title">Bar<span style="color:var(--clr-violet-light)">vision</span></h2>
+        <p class="section__subtitle">榜吧年度歌曲大赛 · 第十六届</p>
+      </div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">内联标签</span><span class="sg-item__cls">.tag（--red / --gold / --dim）</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo sg-inline">
+        <span class="tag">默认</span>
+        <span class="tag tag--red">红</span>
+        <span class="tag tag--gold">金</span>
+        <span class="tag tag--dim">弱</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 三、卡片 ============ -->
+  <section class="sg-cat">
+    <h2 class="sg-cat__title">三 · 卡片 Cards</h2>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">歌曲条目（榜单行）</span><span class="sg-item__cls">.chart-item（--top / --silver / --bronze）</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo sg-chart"><div class="chart-list" id="sgChart"></div></div>
+      <div class="sg-note">子元素：.chart-rank-col（.chart-rank + .chart-change）· .chart-cover · .chart-song（__title/__artist）· .chart-stats（.chart-stat &gt; __label/__val）</div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">走势指示器</span><span class="sg-item__cls">.chart-change（--up/--down/--same/--new/--re）</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo sg-inline" id="sgChange"></div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">赛季大卡</span><span class="sg-item__cls">.season-card</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo sg-season">
+        <div class="season-card">
+          <div class="season-card__banner">
+            <div class="season-card__edition">BARVISION CHONGQING 2026</div>
+            <div class="season-card__name">重声交响 Echoing Confluence</div>
+          </div>
+          <div class="season-card__body">
+            <div class="season-status"><div class="season-status__dot"></div>歌曲征集即将开启</div>
+            <div class="season-phases" style="margin-top:16px;">
+              <div class="phase phase--active">
+                <span class="phase__name">歌曲提交阶段</span>
+                <span class="phase__status">即将开启</span>
+                <span class="phase__badge" aria-hidden="true" style="visibility:hidden;">投票</span>
+                <span class="phase__date">6/1 — 7/19</span>
+              </div>
+              <div class="phase">
+                <span class="phase__name">附加赛资格赛</span>
+                <span class="phase__status phase__status--pending">暂未开启</span>
+                <span class="phase__badge phase__badge--vote">投票</span>
+                <span class="phase__date">7/25 — 8/7</span>
+              </div>
+              <div class="phase">
+                <span class="phase__name">总决赛直播</span>
+                <span class="phase__status phase__status--pending">暂未开启</span>
+                <span class="phase__badge phase__badge--live">直播</span>
+                <span class="phase__date">8/22</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sg-note">子元素：.season-card__banner（__edition/__name）· .season-card__body · .season-status（__dot）· .season-phases &gt; .phase</div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">赛程行</span><span class="sg-item__cls">.phase（--active；__badge--vote/--live；__status--pending）</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-note">见上方赛季卡内的赛程列表。</div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">历届小卡</span><span class="sg-item__cls">.edition-card（--active）</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo sg-editions">
+        <div class="edition-card edition-card--active"><div class="edition-card__num">XVI</div><div class="edition-card__year">2026</div><div class="edition-card__winner">Chongqing</div></div>
+        <div class="edition-card"><div class="edition-card__num">XV</div><div class="edition-card__year">2025</div><div class="edition-card__winner">Jinzhong</div></div>
+        <div class="edition-card"><div class="edition-card__num">XIV</div><div class="edition-card__year">2024</div><div class="edition-card__winner">Tonghua</div></div>
+      </div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">动态条目</span><span class="sg-item__cls">.update-item（.update-date/__title/__desc）</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo sg-demo--panel" style="max-width:420px;">
+        <div class="update-item">
+          <div class="update-date">2026.05.31</div>
+          <div class="update-title">BarboardLab 第 125 期已更新</div>
+          <div class="update-desc">本周冠军：Dara — Bangaranga</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 四、元素 ============ -->
+  <section class="sg-cat">
+    <h2 class="sg-cat__title">四 · 元素 Elements</h2>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">按钮</span><span class="sg-item__cls">.btn（--primary / --outline）</span><span class="sg-item__src">style.css</span></div>
+      <div class="sg-demo sg-inline">
+        <a class="btn btn--primary">BARVISION CHONGQING 2026</a>
+        <a class="btn btn--outline">BARBOARDLAB 单曲周榜</a>
+      </div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">成员提及</span><span class="sg-item__cls">.member[data-nickname]</span><span class="sg-item__src">style.css + nav.js</span></div>
+      <div class="sg-demo">主办：<a class="member" href="member/7.html" data-nickname="威妈">@williw_</a>（悬停看 tooltip，需 nav.js）</div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">字幕跑马灯</span><span class="sg-item__cls">.ticker（__label/__track/__item）</span><span class="sg-item__src">style.css + nav/index JS</span></div>
+      <div class="sg-demo" style="position:relative;height:40px;background:var(--clr-bg-2);border:1px solid var(--clr-border);border-radius:6px;overflow:hidden;">
+        <div class="ticker" style="position:absolute;inset:0;">
+          <div class="ticker__label">WHAT'S NOW</div>
+          <div class="ticker__track" style="transform:none;">
+            <span class="ticker__item">BarboardLab 第 125 期已更新</span>
+            <span class="ticker__item">Barvision 2026 歌曲征集 6/1 开启</span>
+          </div>
+        </div>
+      </div>
+      <div class="sg-note">实际滚动由 JS（requestAnimationFrame）驱动，此处为静态结构示意。</div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">返回顶部</span><span class="sg-item__cls">.back-to-top</span><span class="sg-item__src">style.css + nav.js</span></div>
+      <div class="sg-note">固定右下角、滚动 320px 后显示。本页右下角即为真实组件（若加载了 nav.js）。</div>
+    </div>
+  </section>
+
+  <!-- ============ 五、页面专属组件（索引）============ -->
+  <section class="sg-cat">
+    <h2 class="sg-cat__title">五 · 页面专属组件（索引）</h2>
+    <p class="sg-note" style="margin-bottom:18px;">
+      以下组件目前定义在各页面内联 <code style="font-family:var(--font-mono)">&lt;style&gt;</code> 中，无法在本页直接实时渲染。
+      阶段三去重时会逐个迁移到 <code style="font-family:var(--font-mono)">style.css</code> 全局，迁移后即可上移到上面对应类别实时展示。完整说明见 DESIGN.md。
+    </p>
+    <table class="sg-table">
+      <thead><tr><th>俗名</th><th>class</th><th>类别</th><th>定义文件</th></tr></thead>
+      <tbody>
+        <tr><td>统计角标（完整榜单版）</td><td class="cls">.bbl-item-stats · .bbl-stat</td><td>卡片</td><td class="file">bbl.html</td></tr>
+        <tr><td>搜索框</td><td class="cls">.bbl-search · .bbl-search__input</td><td>元素</td><td class="file">bbl.html</td></tr>
+        <tr><td>搜索框（成员页）</td><td class="cls">.ml-search</td><td>元素</td><td class="file">member.html</td></tr>
+        <tr><td>页内目录 TOC</td><td class="cls">.hof-toc · .hof-toc__item</td><td>元素</td><td class="file">bbl/hof.html</td></tr>
+        <tr><td>HOF 分组卡</td><td class="cls">.hof-group（--gold/--silver/--bronze）</td><td>卡片</td><td class="file">bbl/hof.html</td></tr>
+        <tr><td>存档活动卡</td><td class="cls">.arc-card（--bbl/--bv/--year/--bmy/--esc/--ended）</td><td>卡片</td><td class="file">archive.html</td></tr>
+        <tr><td>活动状态徽章</td><td class="cls">.arc-badge</td><td>元素</td><td class="file">archive.html</td></tr>
+        <tr><td>成员列表卡</td><td class="cls">.ml-card · .ml-badge</td><td>卡片</td><td class="file">member.html</td></tr>
+        <tr><td>成员页信息卡</td><td class="cls">.mp-card · .mp-tag · .mp-work-card</td><td>卡片</td><td class="file">member-render.js</td></tr>
+        <tr><td>倒计时</td><td class="cls">#countdown（index）· .ev-countdown（events）</td><td>元素</td><td class="file">index.html · events.html</td></tr>
+        <tr><td>提交面板</td><td class="cls">.submit-panel · .sp-badge</td><td>卡片</td><td class="file">events.html</td></tr>
+        <tr><td>投票结果卡</td><td class="cls">.ev-vote-card · .ev-js-cell</td><td>卡片</td><td class="file">events.html</td></tr>
+        <tr><td>赛程时间线</td><td class="cls">.ev-tl · .tl-b</td><td>元素</td><td class="file">events.html</td></tr>
+        <tr><td>返回眉链（← 上级）</td><td class="cls">.bbl-eyebrow / .bv-eyebrow / .arc-eyebrow / .hof-eyebrow</td><td>章节</td><td class="file">各内容页</td></tr>
+        <tr><td>英雄背景装饰</td><td class="cls">.xx-hero__glow / __grid / __watermark</td><td>章节</td><td class="file">各内容页</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+</div>
+
+<script>
+  // ── 令牌：颜色 ──
+  var COLORS = [
+    ['--clr-bg','#080812'],['--clr-bg-2','#0c0c18'],['--clr-bg-3','#10101e'],
+    ['--clr-surface','#141422'],['--clr-surface-2','#1a1a2e'],
+    ['--clr-border','rgba(180,160,255,.14)'],['--clr-border-2','rgba(180,160,255,.26)'],
+    ['--clr-accent','#00b4ff'],['--clr-accent-light','#33c6ff'],
+    ['--clr-pink','#e040a0'],['--clr-pink-light','#f060b8'],
+    ['--clr-violet','#a855f7'],['--clr-violet-light','#c084fc'],
+    ['--clr-gold','#d4a832'],['--clr-gold-light','#f5c840'],
+    ['--clr-text','#f0eeff'],['--clr-text-2','#8880a8'],['--clr-text-3','#8880a8']
+  ];
+  document.getElementById('sgColors').innerHTML = COLORS.map(function(c){
+    return '<div class="sg-swatch"><div class="sg-swatch__chip" style="background:var('+c[0]+')"></div>'
+      + '<div class="sg-swatch__meta"><span class="sg-swatch__var">'+c[0]+'</span><span class="sg-swatch__val">'+c[1]+'</span></div></div>';
+  }).join('');
+
+  // ── 令牌：间距 ──
+  var GAPS = [['--gap-xs','8px'],['--gap-sm','16px'],['--gap-md','32px'],['--gap-lg','64px'],['--gap-xl','96px']];
+  document.getElementById('sgSpacing').innerHTML = GAPS.map(function(g){
+    return '<div class="sg-spacing-row"><span class="sg-spacing-lbl">'+g[0]+' · '+g[1]+'</span>'
+      + '<span class="sg-spacing-bar" style="width:'+g[1]+'"></span></div>';
+  }).join('');
+
+  // ── chart-change SVG ──
+  var svgUp = '<svg width="7" height="5" viewBox="0 0 7 5" fill="currentColor"><path d="M3.5 0L7 5H0z"/></svg>';
+  var svgDown = '<svg width="7" height="5" viewBox="0 0 7 5" fill="currentColor"><path d="M3.5 5L0 0H7z"/></svg>';
+
+  // ── chart-item 示例 ──
+  function stat(label,val,mod){ var m = mod ? ' chart-stat__'+'label--'+mod : '';
+    var vm = mod ? ' chart-stat__'+'val--'+mod : '';
+    return '<div class="chart-stat"><span class="chart-stat__label'+m+'">'+label+'</span><span class="chart-stat__val'+vm+'">'+val+'</span></div>'; }
+  function cover(){ return '<div class="chart-cover" style="background:linear-gradient(135deg,#2a2a44,#1a1a2e)"></div>'; }
+  function item(rank, change, title, artist, peakStat, weekStat, medal){
+    return '<div class="chart-item '+(medal?medal+' ':'')+'">'
+      + '<div class="chart-rank-col"><div class="chart-rank">'+rank+'</div>'+change+'</div>'
+      + cover()
+      + '<div class="chart-song"><div class="chart-song__title">'+title+'</div><div class="chart-song__artist">'+artist+'</div></div>'
+      + '<div class="chart-stats">'+peakStat+weekStat+'</div></div>';
+  }
+  document.getElementById('sgChart').innerHTML =
+      item('1','<span class="chart-change chart-change--up">'+svgUp+'26</span>','Bangaranga','Dara', stat('最高排名','1'), stat('在榜周数','2'),'chart-item--top')
+    + item('2','<span class="chart-change chart-change--same">—</span>','To Love Somebody','Holly Humberstone', stat('最高排名','2'), stat('在榜周数','17'),'chart-item--silver')
+    + item('3','<span class="chart-change chart-change--down">'+svgDown+'2</span>','Liekinheitin','Linda Lampenius, Pete Parkkonen', stat('最高排名','1','pink'), stat('在榜周数','18'),'chart-item--bronze')
+    + item('5','<span class="chart-change chart-change--new">NEW</span>','Hit the Wall','Gracie Abrams', stat('最高排名','5','violet'), stat('在榜周数','1'),'')
+    + item('7','<span class="chart-change chart-change--re">RE</span>','drop dead','Olivia Rodrigo', stat('最高排名','1','pink'), stat('在榜周数','5'),'');
+
+  // ── chart-change 单列 ──
+  document.getElementById('sgChange').innerHTML =
+      '<span class="chart-change chart-change--up">'+svgUp+'5</span>'
+    + '<span class="chart-change chart-change--down">'+svgDown+'3</span>'
+    + '<span class="chart-change chart-change--same">—</span>'
+    + '<span class="chart-change chart-change--new">NEW</span>'
+    + '<span class="chart-change chart-change--re">RE</span>';
+</script>
+
+<div id="site-footer"></div>
+<script src="scripts/nav.js"></script>
+</body>
+</html>
