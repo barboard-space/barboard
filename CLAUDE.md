@@ -66,6 +66,8 @@ barboard-space/
 ├── index.html              ← 首页（已完成）
 ├── style.css               ← 全站样式
 ├── fonts.css               ← 本地字体 @font-face
+├── DESIGN.md               ← 设计系统（令牌/配色地图/字号间距阶梯/断点/组件命名速查）
+├── styleguide.html         ← 开发用实时组件库（noindex，不进导航）
 ├── CNAME                   ← barboard.space
 ├── about.html
 ├── bbl.html
@@ -234,43 +236,12 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 
 ## 设计系统
 
-### 品牌色彩（CSS 变量，定义于 style.css :root）
+> **权威文档 = `DESIGN.md`**（设计令牌 / 配色用途地图 / 字号·间距阶梯 / 屏幕断点 / 组件与命名速查）。`styleguide.html` 为开发用实时组件库 + 可视化。以下只留速记，详值与用法以 DESIGN.md 为准——改令牌只改一处、勿在本文件复制。
 
-```css
---clr-bg:         #080812;   /* 极深午夜蓝黑，主背景 */
---clr-bg-2:       #0c0c18;
---clr-bg-3:       #10101e;
---clr-surface:    #141422;
---clr-surface-2:  #1a1a2e;
---clr-border:     rgba(180,160,255,0.14);
---clr-border-2:   rgba(180,160,255,0.26);
---clr-accent:       #00b4ff;   /* 电蓝 */
---clr-accent-light: #33c6ff;
---clr-pink:         #e040a0;   /* 霓虹粉 */
---clr-pink-light:   #f060b8;
---clr-violet:       #a855f7;   /* 软紫 */
---clr-violet-light: #c084fc;
---clr-gold:       #d4a832;
---clr-gold-light: #f5c840;
---clr-text:       #f0eeff;
---clr-text-2:     #8880a8;
---clr-text-3:     #8880a8;
-```
-
-**整体视觉风格**：赛博朋克/霓虹风，契合 Barvision 2026 举办地重庆（主题 Echoing Confluence）。
-
-### 字体
-- **Bebas Neue**（`var(--font-display)`）：大标题、Logo、展示性数字
-- **DM Sans**（`var(--font-body)`）：正文、导航、按钮、中文标签（DM Mono 无 CJK 字形）
-- **DM Mono**（`var(--font-mono)`）：日期、期数、数字数据
-
-字体通过 `fonts.css` 本地加载（不用 Google Fonts，用户主要在中国大陆）。
-
-### 间距系统
-```css
---gap-xs:8px  --gap-sm:16px  --gap-md:32px  --gap-lg:64px  --gap-xl:96px
---max-width:1200px  --nav-h:72px  /* 移动端 @media(max-width:768px) 覆盖为 56px */
-```
+### 速记
+- **令牌**（`style.css :root`）：颜色 `--clr-*`（电蓝 accent / 霓虹粉 pink / 软紫 violet / 金 gold + bg/surface/border/text）、字体 `--font-display`(Bebas Neue 大标题数字) / `--font-body`(DM Sans 正文+中文) / `--font-mono`(DM Mono 日期数字，无 CJK)、间距 `--gap-xs/sm/md/lg/xl`(8/16/32/64/96)、`--max-width:1200px`、`--nav-h:72px`（移动端 56px）。字体本地 `fonts.css` 加载（不用 Google Fonts）。
+- **整体风格**：赛博朋克/霓虹风，契合 Barvision 2026 重庆主题。
+- **断点**（详见 #124）：手机 ≤768 / 平板 769–1024（继承桌面）/ 桌面 ≥1025。
 
 ### 主题语（Barvision 2026）
 - 中文：**重声交响**　英文：**Echoing Confluence**
@@ -416,7 +387,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 33. **移动端抽屉滚动锁**：`openDrawer()` 保存 `scrollY`，设 `body { position:fixed; top:-scrollY; width:100%; overflow:hidden }`；`closeDrawer()` 还原并 `window.scrollTo(0, scrollY)`。纯 `overflow:hidden` 在 iOS 无效
 34. **BarboardLab 标题三段配色**：`Bar`（白色）+ `board`（`#6F9EC3`，`.bbl-board-accent`，与 nav logo BOARD 一致）+ `Lab`（`var(--clr-violet-light)`，`.lab-accent`）
 35. **BBL 榜单条目动画**：不使用容器级 `listObserver`，改为逐条接入全局 `fadeObserver`，`transitionDelay: 0s`，随滚动自然逐一触发
-36. **Scroll hint CSS 顺序陷阱**：`.hero__scroll-hint` 基础样式（含 `display:flex`）必须放在 `@media (max-width:768px)` 块之前；若放在其后，媒体查询的 `display:none` 被层叠覆盖，移动端无法隐藏
+36. **Scroll hint CSS 顺序陷阱**：`.hero__scroll-hint` 基础样式（含 `display:flex`）定义在 `@media (max-width:768px)` 块之后，导致同特异度下媒体查询的 `display:none` 被层叠覆盖、移动端隐藏失效。**现行解法（已采用）**：移动端规则用 `.hero .hero__scroll-hint { display:none }`（特异度 0,2,0 > 全局 0,1,0），无视源顺序都胜出（commit 7a0af27）。同理可不调整源顺序而靠提升特异度修此类层叠问题。
 37. **Nav logo mix-blend-mode 移除**：`.nav__logo-img` 曾有 `mix-blend-mode:screen`，`openDrawer()` 时 `body{position:fixed}` 触发全页 reflow，GPU 合成层重建导致 logo 闪烁；PNG 已有透明背景，直接移除 mix-blend-mode 无视觉影响
 38. **openDrawer() rAF 分帧**：body scroll lock (`position:fixed` 等) 包入 `requestAnimationFrame`，与 `nav--open` class 切换分帧执行，防止同帧 reflow 导致视觉闪烁
 39. **closeDrawer() scrollBehavior 陷阱**：`html { scroll-behavior:smooth }` 全局生效，`window.scrollTo(0, savedScrollY)` 会触发平滑动画造成页面跳滚；还原前须临时设 `document.documentElement.style.scrollBehavior = 'auto'`，还原后清除

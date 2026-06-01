@@ -4,6 +4,27 @@
 
 ---
 
+## [2026-05-31] — 设计系统文档化 + 移动端精修 + 版本号方案
+
+### Added
+- **`DESIGN.md`**：设计系统单一权威文档——设计令牌、🎨配色用途地图（功能色/各页主题色/成员组色/游离硬编码色清单）、🔤字号阶梯 & 📏间距阶梯（基于真实用值归纳）、DM Sans×Bebas Neue 视觉等大配对（+30~40%）、📱屏幕断点标准（手机768/平板1024/桌面，平板=继承桌面）、组件与中文俗名↔class 速查表、待统一清单
+- **`styleguide.html`**：开发用实时组件库（`noindex`、不进导航）——加载真实 `style.css` 实时渲染全局组件 + 令牌/字号间距阶梯/配色可视化；页面专属组件以索引表列出。可作视觉回归基准
+
+### Changed
+- **`bbl.html`** 完整榜单 `.bbl-stat` 移动端改为与首页 `.chart-stats` 同款（grid 竖排、去分隔线），stats 列 144→66px、歌名获更多空间
+- **`style.css`** `.chart-song__title/artist` 允许换行（去 nowrap/ellipsis）+ line-height 1.2，artist margin-top 4px 补偿间隙（PC/移动端）
+- **`bbl.html`** 移动端搜索框 `font-size:16px` 防 iOS 聚焦缩放 + placeholder 12px；提示文字 padding 微调
+- **`style.css`** 移动端隐藏首页 scroll-hint（`.hero .hero__scroll-hint` 提特异度）
+- **版本号方案**：`style.css?v=N` 改用补丁位 `3.0.x`（禁止自行升版本，升 3.1/4 需确认），当前 `v=3.0.2`
+
+### Docs
+- CLAUDE.md #122–126：版本号规则 / DESIGN.md 指引 / 屏幕断点标准 / 阶段三去重工作流 / 设计流程（桌面优先·忽略平板）；设计系统节瘦身为指向 DESIGN.md；文件结构补 DESIGN.md+styleguide.html
+
+### Note
+- 本 session 早期的 chart-stats 移动端实验经 `git revert` 整体回退到基线 commit `d0aec10`（保留历史），随后重做为上述方案
+
+---
+
 ## [2026-05-31 session 10] — barvision/2026/events.html 移动端优化 + section 顺序 + 排版规范
 
 ### Changed
