@@ -2086,8 +2086,8 @@ body:has(.nav--open) .back-to-top {
     overflow-x: clip;
   }
 
-  .hero__scroll-hint {
-    display: none;
+  .hero .hero__scroll-hint {
+    display: none;  /* 提升特异度，覆盖后定义的全局 .hero__scroll-hint{display:flex} */
   }
 
   .hero__bg-logo {
