@@ -500,7 +500,7 @@
       .bbl-chart-header    { padding-right: 0; }
       .bbl-chart-title     { font-size: 22px; }
       .bbl-search          { margin-bottom: 16px; }
-      .bbl-search__input   { font-size: 16px; }  /* 防 iOS 聚焦自动缩放（<16px 会触发） */
+      .bbl-search__input   { font-size: 16px; padding: 6px 30px 8px 12px; }  /* 防 iOS 聚焦缩放；提示文字左移2px/上移1px（框高不变） */
       .bbl-search__input::placeholder { font-size: 12px; }  /* 输入框本体 16px 防缩放，但默认提示文字显示小一些 */
       .bbl-hl-sidebar      { transform: none !important; }
       #bblHighlights       { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
