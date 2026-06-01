@@ -563,7 +563,7 @@
         <div class="ev-req-block fade-up">
           <p class="ev-req-title">核心提交须知</p>
           <div class="ev-req-list">
-            <div class="ev-req-item"><strong>每人限报 1 首</strong>，不接受代报；一首歌曲仅限一位选送者提交</div>
+            <div class="ev-req-item"><strong>内定每人限报 1 首</strong>；<strong>本届办过海选的成员可报 2 首</strong>（海选冠军 + 亚军）。不接受代报，一首歌曲仅限一位选送者提交</div>
             <div class="ev-req-item"><strong>一经提交不得更换</strong>（重复提交或资格被取消时除外）</div>
             <div class="ev-req-item">发行时间须在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
             <div class="ev-req-item">未进入过任何榜吧 <strong>官方榜单或评比名单</strong>（含 Barvision、吧莱美等）</div>
@@ -1075,6 +1075,7 @@
 
 <div id="site-footer"></div>
 <script src="../../scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   /* Fade-up observer */
   if ('IntersectionObserver' in window) {
@@ -1159,6 +1160,10 @@
   (function initSubmitForm() {
     const form = document.getElementById('subForm');
     if (!form) return;
+
+    // EmailJS 配置（Public Key 前端可见，配合成员校验 + 蜜罐 + 域名白名单防滥用）
+    const EMAILJS = { publicKey: 'M2tBv7vRh3TY2MAeA', serviceId: 'service_cqbstn7', templateId: 'template_d75xg0c' };
+    if (window.emailjs) emailjs.init({ publicKey: EMAILJS.publicKey });
 
     // 成员名单（校验提交人 = 验证步骤）
     let memberSet = null;
@@ -1262,12 +1267,49 @@
       return p;
     }
 
+    function buildMessage(d) {
+      function song(s, label) {
+        if (!s) return '';
+        return '\n【' + label + '】\n'
+          + '歌名：' + s.title + '\n'
+          + '艺人：' + s.artist + '\n'
+          + (s.album ? '专辑：' + s.album + '\n' : '')
+          + '发行日期：' + s.date + '\n'
+          + '链接：' + s.link + '\n'
+          + (s.note ? '选送理由：' + s.note + '\n' : '');
+      }
+      let txt = '提交人：' + d.handle + '\n'
+        + (d.contact ? '联系方式：' + d.contact + '\n' : '')
+        + '报名方式：' + d.type + (d.audition ? '（海选名称：' + d.audition + '）' : '') + '\n';
+      if (d.song2) {
+        txt += song(d.song1, '歌曲① · 海选冠军 → Semi-Final');
+        txt += song(d.song2, '歌曲② · 海选亚军 → 附加赛资格赛');
+      } else {
+        txt += song(d.song1, '参赛歌曲');
+      }
+      txt += '\n—\n提交时间：' + new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }) + '（北京时间）';
+      return txt;
+    }
+
     function submitSubmission(data) {
-      // TODO（待接入 EmailJS）：emailjs.send(SERVICE_ID, TEMPLATE_ID, {...data})
-      //   .then(showSuccess).catch(showSendError)
-      // 目前后台未接入 → 演示模式：直接成功
-      console.log('[报名提交 payload]', data);
-      showSuccess();
+      const btn = document.getElementById('subSubmit');
+      const errForm = document.getElementById('errForm');
+      if (!window.emailjs) { errForm.textContent = '邮件服务未加载，请刷新页面重试，或联系主办方。'; return; }
+      btn.disabled = true;
+      const orig = btn.textContent;
+      btn.textContent = '提交中…';
+      emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, {
+        submitter: data.handle,
+        message:   buildMessage(data)
+      }).then(function () {
+        showSuccess();
+      }).catch(function (err) {
+        console.warn('EmailJS 发送失败', err);
+        errForm.textContent = '提交失败，请检查网络后重试；多次失败请联系主办方。';
+      }).finally(function () {
+        btn.disabled = false;
+        btn.textContent = orig;
+      });
     }
     function showSuccess() {
       form.hidden = true;
