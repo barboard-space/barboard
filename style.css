@@ -970,7 +970,7 @@ img {
 .chart-song__artist {
   font-size: 12px;
   color: var(--clr-text-2);
-  margin-top: 6px;
+  margin-top: 4px;
   line-height: 1.2;
 }
 
