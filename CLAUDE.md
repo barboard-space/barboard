@@ -28,7 +28,7 @@
 - `style.css` — 全站样式（含完整设计系统）
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
-- `barvision/2026/events.html` — Barvision 2026 赛事页（已完成，已接入 nav.js，`const FORM_URL = ''` 待填入；已按 Rulebook Ver. 260530 全面更新：附加赛资格赛双阶段结构、在线表单提交方式、ELIGIBILITY 新增 Eurovision 排除条款 + 个人榜助攻规则、全站"复活赛"→"附加赛"）
+- `barvision/2026/events.html` — Barvision 2026 赛事页（已完成；**歌曲报名通道已上线**：自定义表单 + EmailJS 发邮件，非问卷星，详见 #127；已接入 nav.js；已按 Rulebook Ver. 260530 全面更新：附加赛资格赛双阶段结构、在线表单提交方式、ELIGIBILITY 新增 Eurovision 排除条款 + 个人榜助攻规则、全站"复活赛"→"附加赛"）
 - `member.html` — Members 总览页（117位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
 - `member/N.html`（117个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
@@ -49,7 +49,6 @@
 - `barvision/2026/events.html` — Barvision 2026 赛事详情页（**已重做完成**；对标 barvision.html 视觉风格；含 hero（← Barvision 眉链 + CSS 动画 + watermark + 倒计时 + 更新日期）+ 歌曲报名（locked/open 面板 + deadline bar grid）+ SCHEDULE 三阶段表格时间线 + VOTING（Jury 评分格 + Tele + Approval）+ ELIGIBILITY（平台数据表 + 歌曲/艺人/专辑要求）+ RULEBOOK（6卡）+ TOC（5项，紫色，IO suppression）；`const FORM_URL = ''` 待填入；详见开发注意事项 #108–111）
 
 ### 待建页面（按优先级）
-- **填入表单 URL**：`barvision/2026/events.html` 的 `const FORM_URL = ''` 填入问卷星/金数据链接，同步 enable `index.html`「歌曲报名」按钮（移除 `href="#"` 等禁用样式，改为 `href="/barvision/2026/events.html#submit"`）；**6月1日 18:00 前完成**
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -333,9 +332,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 - **投票方式**：Jury Vote（Top 10，12分制）+ Tele Vote（20票自由分配）各50%
 - **附加赛**：Approval Vote，每人3票
 - **晋级规则**：每场半决赛前8名晋级，东道主直通，附加赛胜者1名，决赛共18首
-- **表单邮件接收**：liu.zhuoq@northeastern.edu
-- **歌曲提交表单**：需选用国内可访问的服务（问卷星/金数据），避免 Tally.so/Formspree（国内不稳定）
-- **events.html 表单占位符**：`const FORM_URL = ''`，填入后表单 iframe 自动渲染，6/1前完成
+- **歌曲提交表单（已上线）**：events.html 自定义表单 + **EmailJS** 发邮件，报名发到 **william115zq@gmail.com**（设在 EmailJS 模板 To Email）。详见 #127。
 
 ---
 
@@ -479,6 +476,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 124. **屏幕断点标准（已与用户确认）**：3 档设备模型——**手机 ≤768 / 平板 769–1024 / 桌面 ≥1025**，仅用 `max-width:768px` + `max-width:1024px` 两个断点（桌面为基础样式逐级收窄）+ `min-width:769px` 写桌面专属。**桌面不再细分**（MacBook 与显示器同布局，`--max-width:1200px` 居中）。**平板 = 继承桌面（方案 A，已定）**：不主动写平板规则，仅当某块在平板上确实难看时再在 `max-width:1024px` 加局部单列收窄（已否决"平板当大号手机"，因需主动铺规则、与忽略平板矛盾）。**`480px` 是手机内"极小屏"可选子档**（SE 类，仅需要时用），非主分界。功能查询 `prefers-reduced-motion` / `hover-pointer` 保留。**一次性断点 465/540/600/700/960 待精修各页时逐个看、能就近归并才归并**（内容驱动确有必要的保留）。详见 DESIGN.md §一·补3。
 125. **阶段三去重工作流（用户主导）**：用户逐个 HTML 精修去重，**从 index.html 开始**。规则：用户主导、AI 辅助提醒+只读审计+预览验证，**不擅自改代码、不擅自 push**。每元素对照「精修基准准则」：①硬编码 hex→`--clr-*`/配色地图 ②inline 字号→字号阶梯（中文+Bebas 数字配对 +30~40%）③inline 间距→间距阶梯 ④内联且与全局重复的组件→复用全局 class ⑤复用组件不加页面前缀 ⑥层级间距与全站统一。注：index.html 组件大多已全局，去重主要是 inline px→阶梯、零散硬编码→令牌。
 126. **设计流程（用户习惯）**：① **桌面端为基准**（先精修桌面 base）；② 之后**手机端定点微调**（`@media max-width:768px`）；③ **平板基本忽略**，继承桌面 base。含义：**预览验证只用桌面 + 手机（≤768）两个视口、跳过平板**；`max-width:1024px`（平板）档低优先、不主动加新的；手机端改动严格锁 `@media` 不回灌桌面。
+127. **歌曲报名通道（自定义表单 + EmailJS，已上线）**：`barvision/2026/events.html` 用**自定义表单**（非问卷星/无 iframe）收报名，前端 **EmailJS** 直发邮件到 **william115zq@gmail.com**（收件地址设在 EmailJS 模板 To Email）。关键实现：① SDK `@emailjs/browser@4` CDN 引入；② 配置 `EMAILJS = {publicKey:'M2tBv7vRh3TY2MAeA', serviceId:'service_cqbstn7', templateId:'template_d75xg0c'}`；③ 模板仅用 `{{submitter}}` + `{{message}}`（`buildMessage()` 把全部字段拼成文本）；④ **验证**：提交人须在 `members.csv`（校验 space_name/barboard_name）+ 蜜罐 `#subHp` 防机器人；⑤ **报名数量逻辑**：内定 1 首 / 海选 2 首（选「海选」显示海选名称，填了解锁歌曲②＝亚军→附加赛资格赛）；⑥ 发行日期校验 2023-07-01~2026-06-30；⑦ 三态由 `OPEN_DATE`(6/1 18:00)/`CLOSE_DATE`(7/19 24:00) 控制。未设 EmailJS 域名白名单（付费功能）。重复提交靠人工核（前端无法跨会话防重）。首页 index.html「歌曲报名」按钮已 enable → `barvision/2026/events.html#submit`。
 
 ---
 
