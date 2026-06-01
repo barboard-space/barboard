@@ -502,7 +502,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 119. **CSV → JSON 同步规范**：修改任意 `bbl_0X_*.csv` 后，必须运行 `python scripts/sync_hof_data.py --write` 再提交，否则 JSON 与 CSV 数据不一致。脚本 dry-run 默认不写文件，加 `--write` 才生效。CSV 文件须以 UTF-8（含 BOM）保存；禁用"留空=沿用上行"惯例（每行须填完整 artist/song）；特殊字符（ROSÉ、韩文等）须正确录入，损坏为 `?` 后脚本会将错误值写入 JSON。`champions` 和 `owner_map` 不被脚本覆盖，需手动维护。Barvision HOF 同理：改 `barvision_04/06/07 CSV` 后运行 `python scripts/sync_bv_hof_data.py --write`。
 120. **BBL API date 字段含义**：`bbl-latest.json` 的 `date`（如 `2026-05-22`）是该期统计结束后的**下一个周五**（即下一期的起始日），不是统计起始日。统计周期 = `[date-7, date-1]`（上上周五—上周四）。`fmtWeekRange(dateStr)` 和 `fmt_week_range_cn(date_str)` 均按此逻辑实现；切勿改回 `[date, date+6]` 或 `[date-6, date]`，否则显示周期会偏移 7 天或方向反转。`updates.json` 的 BBL 条目 `date` 字段用实际抓取日期（UTC 当天），不用 API chart date。
 121. **行内 `<strong>` 前后空格规范**：在所有页面的行内加粗文本（`ev-req-item`、`ev-crit-item` 及类似列表条目）中，若 `<strong>` 前/后紧接**文字字符**（汉字、字母、数字），必须在该侧插入一个 ASCII 空格；若紧接**标点符号**（`，、；。（）【】` 等）或位于**句首/句末**，则不加空格。例：`榜吧 <strong>官方榜单</strong>（含…）`（"吧"后加空格，"（"前不加）；`以上</strong> 其他成员`（"其"前加空格）。目的是避免中英文混排时 bold 关键词与周围文字视觉粘连。
-122. **`style.css?v=N` 版本号规则（用户约定，重要）**：`index.html`/`bbl.html`/`bbl/hof.html` 引用 `style.css?v=N` 用于刷新 GitHub Pages/浏览器缓存（固定版本号不变则真机看不到 CSS 改动）。**当前基线 = `v=3`**。规则：① **禁止自行升版本号**；② 后续小优化用 `3.0.1`、`3.0.2` 之类递增（小数补丁位），改 `style.css` 后同步三个文件的 `?v=`；③ 若认为需要升到 `3.1`（次版本）或 `4`（主版本），**必须先与用户确认**再改。背景：之前自行从 v=2 一路升到 v=5 被用户叫停并要求回退到 3。
+122. **`style.css?v=N` 版本号规则（用户约定，重要）**：`index.html`/`bbl.html`/`bbl/hof.html` 引用 `style.css?v=N` 用于刷新 GitHub Pages/浏览器缓存（固定版本号不变则真机看不到 CSS 改动）。**当前版本 = `v=3.0.1`**。规则：① **禁止自行升版本号**；② 后续小优化用 `3.0.2`、`3.0.3` 之类递增（补丁位），改 `style.css` 后同步三个文件的 `?v=`；③ 若认为需要升到 `3.1`（次版本）或 `4`（主版本），**必须先与用户确认**再改。背景：之前自行从 v=2 一路升到 v=5 被用户叫停并要求回退；现以 `3.0.1` 作为起点启用补丁位方案。
 
 ---
 
