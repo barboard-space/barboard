@@ -4,6 +4,31 @@
 
 ---
 
+## [2026-06-01] — 歌曲报名通道上线 + 设计系统扩充
+
+### Added
+- **歌曲报名通道（`barvision/2026/events.html`，已上线）**：弃用问卷星 iframe，改为**自定义表单 + EmailJS** 直发邮件到 william115zq@gmail.com。
+  - 字段：提交人（不校验、仅蜜罐防机器人）/ 联系方式（QQ·微信）/ 报名方式（内定 1 首·海选 2 首，海选名称解锁歌曲②）/ 每首歌：歌名·艺人·发行国家·语种·发行日期（选填，范围校验 2023-07-01~2026-06-30）
+  - **localStorage 持久化**（key `barvision2026_submission`）：刷新后自动显示「您已提交报名」+「查看报名详情」回显 +「重新报名」覆盖
+  - **三态随时间自动切换**：OPEN 6/1 18:00 / CLOSE 7/20 00:00 / 投票 VOTE1 7/25 22:00；hero 倒计时按阶段接力（开启→关闭→Semi-Final 1+附加赛资格赛投票）；badge 即将开启/已开启(粉色呼吸点)/已关闭；倒计时数字粉色
+  - 首页 index.html「歌曲报名」按钮 enable → `#submit`
+- **设计系统文档扩充**（`DESIGN.md`）：配色用途地图（含游离色清单）、字号/间距阶梯、中文×Bebas 视觉等大配对、屏幕断点标准（手机768/平板1024/桌面，平板继承桌面）、流体令牌（clamp）标准、Logo 规格、彩色/mono 令牌分组
+- **`styleguide.html`**：拆为「精选已确认标准」（建设中，逐项搬入）；原全量自动渲染版 → `styleguide-draft.html`
+
+### Changed
+- **`--clr-board`（榜吧蓝 #6F9EC3）tokenize** 为品牌色，全站 `#6F9EC3 → var(--clr-board)`（style.css/archive/bbl/member）
+- `:root` 颜色令牌按「彩色 / Mono 黑白灰」分组
+- `style.css?v=` 版本号方案改补丁位 `3.0.x`（当前 3.0.4）；约定不自行升版本、升 3.1/4 需确认
+
+### Fixed
+- 关闭态标题原误显示「即将开启」→「歌曲征集已结束」；open→关闭实时切换未隐藏表单 → 修复
+- `CLOSE_DATE` `24:00` 改 `2026-07-20T00:00`（避免部分浏览器 Invalid Date）
+
+### Note
+- 本 session 早期 chart-stats 移动端实验经 revert 回退至 `d0aec10`；Logo 真实应用亦回滚，现仅在 styleguide 沙箱（`--sgl-*`）待微调定稿后写回
+
+---
+
 ## [2026-05-31] — 设计系统文档化 + 移动端精修 + 版本号方案
 
 ### Added
