@@ -1233,8 +1233,9 @@ img {
 }
 
 .phase--active {
-  border-color: var(--clr-red-dim);
-  background: var(--clr-red-dim);
+  border-color: rgba(240,96,184,0.45);
+  background: linear-gradient(90deg, rgba(240,96,184,0.16) 0%, rgba(240,96,184,0.07) 55%, transparent 100%);
+  box-shadow: 0 0 18px rgba(240,96,184,0.14), inset 3px 0 0 var(--clr-pink-light);
 }
 
 .phase--gold {
@@ -1300,6 +1301,21 @@ img {
 .phase__status--pending {
   color: var(--clr-text-3);
   visibility: hidden;
+}
+
+.phase__status--live {
+  color: var(--clr-pink-light);
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.phase__status--live::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--clr-pink-light);
+  box-shadow: 0 0 0 0 rgba(240,96,184,0.6);
+  animation: ripple-out-pink 1.6s ease-out infinite;
+  flex-shrink: 0;
 }
 
 .season-card__footer {

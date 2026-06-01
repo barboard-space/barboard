@@ -8,7 +8,7 @@
   <meta name="description" content="欧美流行音乐个人榜吧（Barboard），成立于2013年的欧美流行音乐爱好者社区。旗下设有 BarboardLab 每周合榜活动与 Barvision 年度歌曲大赛。" />
   <link rel="icon" type="image/png" href="assets/images/logo_center.png" />
   <link rel="stylesheet" href="fonts.css" />
-  <link rel="stylesheet" href="style.css?v=3.0.3" />
+  <link rel="stylesheet" href="style.css?v=3.0.4" />
 </head>
 <body>
 
@@ -110,19 +110,19 @@
                 <div class="season-card__body">
                   <div class="season-status">
                     <div class="season-status__dot"></div>
-                    歌曲征集即将开启
+                    歌曲征集正在进行中
                   </div>
                   <p style="font-size:13px;color:var(--clr-text-2);line-height:1.6;margin-top:2px;">
-                    歌曲提交通道将于 <strong style="color:var(--clr-accent);">北京时间 2026 年 6 月 1 日 18:00</strong> 正式开启。
+                    歌曲提交通道现已开启，将于 <strong style="color:var(--clr-accent);">北京时间 2026 年 7 月 19 日 24:00</strong> 关闭。
                   </p>
                   <div style="margin-top:14px;padding:14px;background:var(--clr-bg-2);border-radius:4px;border:1px solid var(--clr-border);text-align:center;">
-                    <div style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离歌曲提交通道开启还有</div>
+                    <div style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离歌曲提交通道关闭还有</div>
                     <div id="countdown" style="font-family:var(--font-display);font-size:32px;color:var(--clr-accent);line-height:1;">— 天</div>
                   </div>
                   <div class="season-phases" style="margin-top:16px;">
                     <div class="phase phase--active">
                       <span class="phase__name">歌曲提交阶段</span>
-                      <span class="phase__status">即将开启</span>
+                      <span class="phase__status phase__status--live">正在进行</span>
                       <span class="phase__badge" aria-hidden="true" style="visibility:hidden;">投票</span>
                       <span class="phase__date">6/1 — 7/19</span>
                     </div>
@@ -500,11 +500,11 @@
 
     // Countdown
     function updateCountdown() {
-      const target = new Date('2026-06-01T18:00:00+08:00');
+      const target = new Date('2026-07-20T00:00:00+08:00');  // 提交通道关闭（= 7/19 24:00）
       const diff = target - new Date();
       const el = document.getElementById('countdown');
       if (!el) return;
-      if (diff <= 0) { el.innerHTML = '通道已开启'; return; }
+      if (diff <= 0) { el.innerHTML = '通道已关闭'; return; }
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);
