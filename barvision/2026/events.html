@@ -82,7 +82,7 @@
     }
     .ev-countdown__digits {
       font-family: var(--font-display); font-size: clamp(26px, 3.2vw, 40px);
-      color: var(--clr-violet-light); line-height: 1;
+      color: var(--clr-pink-light); line-height: 1;
     }
     .ev-cd-unit { font-size: 12px; opacity: 0.55; margin: 0 1px; }
     .ev-logo-wrap { display: flex; align-items: center; justify-content: center; }
@@ -167,10 +167,20 @@
     .sp-badge {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
       padding: 4px 10px; border-radius: 3px;
+      display: inline-flex; align-items: center; gap: 6px;
     }
     .sp-badge--locked { color: var(--clr-text-3); border: 1px solid var(--clr-border); }
-    .sp-badge--open   { color: var(--clr-accent-light); border: 1px solid rgba(0,180,255,0.35); background: rgba(0,180,255,0.08); }
+    .sp-badge--open   { color: var(--clr-pink-light); border: 1px solid rgba(224,64,160,0.35); background: rgba(224,64,160,0.08); }
     .sp-badge--closed { color: var(--clr-text-3); border: 1px solid var(--clr-border); background: rgba(255,255,255,0.03); }
+    .sp-badge__dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--clr-pink-light); flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(240,96,184,0.6); animation: sp-badge-pulse 1.8s ease-out infinite;
+    }
+    @keyframes sp-badge-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(240,96,184,0.55); }
+      70%  { box-shadow: 0 0 0 6px rgba(240,96,184,0); }
+      100% { box-shadow: 0 0 0 0 rgba(240,96,184,0); }
+    }
     .submit-panel__body { padding: 32px 28px; }
     /* Locked state */
     .sp-locked { text-align: center; padding: 8px 0; }
@@ -189,7 +199,7 @@
       font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--clr-text-3); margin-bottom: 8px;
     }
-    .sp-locked__cd-digits { font-family: var(--font-display); font-size: 32px; color: var(--clr-violet-light); line-height: 1; }
+    .sp-locked__cd-digits { font-family: var(--font-display); font-size: 32px; color: var(--clr-pink-light); line-height: 1; }
     .sp-locked__date { margin-top: 10px; font-size: 12px; color: var(--clr-text-3); font-family: var(--font-mono); }
     /* Open state */
     .sp-open { display: none; }
@@ -209,6 +219,7 @@
       transition: border-color 0.2s; caret-color: var(--clr-violet);
     }
     .sub-input::placeholder { color: var(--clr-text-3); }
+    .sub-input[type="date"]::-webkit-datetime-edit { color: var(--clr-text-3); }
     .sub-input:focus { outline: none; border-color: var(--clr-violet); }
     .sub-input.sub-input--err { border-color: var(--clr-pink); }
     .sub-textarea { resize: vertical; line-height: 1.6; }
@@ -241,11 +252,13 @@
     .sub-success__icon {
       width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 50%;
       display: flex; align-items: center; justify-content: center; font-size: 24px;
-      color: var(--clr-violet-light); border: 2px solid var(--clr-violet);
-      background: rgba(168,85,247,0.1);
+      color: var(--clr-pink-light); border: 2px solid var(--clr-pink);
+      background: rgba(224,64,160,0.1);
     }
     .sub-success__title { font-size: 16px; font-weight: 600; color: var(--clr-text); margin-bottom: 8px; }
     .sub-success__msg { font-size: 13px; color: var(--clr-text-2); line-height: 1.7; margin-bottom: 18px; }
+    .sub-success__btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .sub-recap { margin-top: 18px; text-align: left; background: var(--clr-bg-2); border: 1px solid var(--clr-border); border-radius: 6px; padding: 14px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--clr-text-2); line-height: 1.8; white-space: pre-wrap; }
 
     /* ═══ Schedule ═══ */
     .ev-phases { display: flex; flex-direction: column; gap: 52px; margin-top: 48px; }
@@ -522,7 +535,7 @@
           <span class="ev-countdown__label" id="heroCountdownLabel">距提交通道开启还有</span>
           <span class="ev-countdown__digits" id="heroCountdown">—</span>
         </div>
-        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-05-30</span></p>
+        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-06-01</span></p>
       </div>
 
       <div class="ev-logo-wrap">
@@ -579,7 +592,7 @@
           </div>
           <div class="ev-deadline-bar__divider"></div>
           <div class="ev-deadline-bar__item">
-            <div class="ev-deadline-bar__label">提交截止</div>
+            <div class="ev-deadline-bar__label">通道关闭</div>
             <div class="ev-deadline-bar__val"><span style="font-family:var(--font-body);">北京时间</span> 2026-07-19 24:00</div>
           </div>
         </div>
@@ -619,14 +632,14 @@
                 <!-- 提交人 -->
                 <div class="sub-field">
                   <label class="sub-label" for="subHandle">提交人（榜吧成员）<span class="sub-req">*</span></label>
-                  <input class="sub-input" type="text" id="subHandle" autocomplete="off" placeholder="输入你的成员昵称或 ID（如 威妈 / williw_）" />
+                  <input class="sub-input" type="text" id="subHandle" autocomplete="off" placeholder="昵称 或 B站ID" />
                   <p class="sub-err" id="errHandle"></p>
                 </div>
 
                 <!-- 联系方式 -->
                 <div class="sub-field">
-                  <label class="sub-label" for="subContact">联系方式（选填，便于联系你）</label>
-                  <input class="sub-input" type="text" id="subContact" autocomplete="off" placeholder="B站 / QQ / 微信 等" />
+                  <label class="sub-label" for="subContact">联系方式（QQ号 / 微信名，选填）</label>
+                  <input class="sub-input" type="text" id="subContact" autocomplete="off" placeholder="QQ号 或 微信名" />
                 </div>
 
                 <!-- 报名方式 -->
@@ -642,7 +655,7 @@
                 <!-- 海选名称（仅海选） -->
                 <div class="sub-field" id="auditionField" hidden>
                   <label class="sub-label" for="subAudition">海选名称 <span class="sub-req">*</span></label>
-                  <input class="sub-input" type="text" id="subAudition" autocomplete="off" placeholder="你本届举办的海选名称" />
+                  <input class="sub-input" type="text" id="subAudition" autocomplete="off" />
                   <p class="sub-hint">填写海选名称后将解锁「第二首（海选亚军）」。</p>
                   <p class="sub-err" id="errAudition"></p>
                 </div>
@@ -653,41 +666,41 @@
                   <div class="sub-grid">
                     <div class="sub-field"><label class="sub-label">歌曲名 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="1" data-key="title" /><p class="sub-err"></p></div>
                     <div class="sub-field"><label class="sub-label">艺人 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="1" data-key="artist" /><p class="sub-err"></p></div>
-                    <div class="sub-field"><label class="sub-label">专辑（选填）</label><input class="sub-input" type="text" data-song="1" data-key="album" /></div>
-                    <div class="sub-field"><label class="sub-label">发行日期 <span class="sub-req">*</span></label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="1" data-key="date" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">发行国家（选填）</label><input class="sub-input" type="text" data-song="1" data-key="country" /></div>
+                    <div class="sub-field"><label class="sub-label">语种（选填）</label><input class="sub-input" type="text" data-song="1" data-key="language" /></div>
+                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="1" data-key="date" /><p class="sub-err"></p></div>
                   </div>
-                  <div class="sub-field"><label class="sub-label">歌曲链接 <span class="sub-req">*</span></label><input class="sub-input" type="url" data-song="1" data-key="link" placeholder="Spotify / 网易云 / QQ音乐 / YouTube 任一" /><p class="sub-err"></p></div>
-                  <div class="sub-field"><label class="sub-label">选送理由 / 推荐语（选填）</label><textarea class="sub-input sub-textarea" rows="3" maxlength="300" data-song="1" data-key="note" placeholder="为什么选送这首歌？（≤300 字）"></textarea></div>
                 </fieldset>
 
                 <!-- 歌曲②（仅海选·亚军） -->
                 <fieldset class="sub-song" id="song2" hidden>
-                  <legend class="sub-song__legend">第二首 · 海选亚军 <small>→ 附加赛资格赛</small></legend>
+                  <legend class="sub-song__legend">歌曲二 · 海选亚军 <small>→ 附加赛资格赛</small></legend>
                   <div class="sub-grid">
                     <div class="sub-field"><label class="sub-label">歌曲名 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="2" data-key="title" /><p class="sub-err"></p></div>
                     <div class="sub-field"><label class="sub-label">艺人 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="2" data-key="artist" /><p class="sub-err"></p></div>
-                    <div class="sub-field"><label class="sub-label">专辑（选填）</label><input class="sub-input" type="text" data-song="2" data-key="album" /></div>
-                    <div class="sub-field"><label class="sub-label">发行日期 <span class="sub-req">*</span></label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="2" data-key="date" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">发行国家（选填）</label><input class="sub-input" type="text" data-song="2" data-key="country" /></div>
+                    <div class="sub-field"><label class="sub-label">语种（选填）</label><input class="sub-input" type="text" data-song="2" data-key="language" /></div>
+                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="2" data-key="date" /><p class="sub-err"></p></div>
                   </div>
-                  <div class="sub-field"><label class="sub-label">歌曲链接 <span class="sub-req">*</span></label><input class="sub-input" type="url" data-song="2" data-key="link" placeholder="Spotify / 网易云 / QQ音乐 / YouTube 任一" /><p class="sub-err"></p></div>
-                  <div class="sub-field"><label class="sub-label">选送理由 / 推荐语（选填）</label><textarea class="sub-input sub-textarea" rows="3" maxlength="300" data-song="2" data-key="note"></textarea></div>
                 </fieldset>
 
                 <!-- 蜜罐（防机器人，勿填） -->
                 <input type="text" id="subHp" class="sub-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
 
                 <p class="sub-err sub-err--form" id="errForm"></p>
-                <button type="submit" class="btn btn--primary sub-submit" id="subSubmit">提交报名</button>
+                <button type="submit" class="btn btn--primary sub-submit" id="subSubmit">提交歌曲</button>
               </form>
 
               <div class="sub-success" id="subSuccess" hidden>
                 <div class="sub-success__icon" aria-hidden="true">✓</div>
-                <p class="sub-success__title">报名提交成功</p>
-                <p class="sub-success__msg">我们已收到你的报名信息。如有问题会通过你留的联系方式与你联系。</p>
-                <button type="button" class="btn btn--outline sub-success__again" id="subAgain" style="font-size:12px;">再报一首 / 修改</button>
+                <p class="sub-success__title">歌曲提交成功</p>
+                <p class="sub-success__msg">我们已收到您的报名信息。如有问题会通过您留的联系方式与您联系。</p>
+                <div class="sub-success__btns">
+                  <button type="button" class="btn btn--outline" id="subView" style="font-size:12px;">查看报名详情</button>
+                  <button type="button" class="btn btn--outline" id="subAgain" style="font-size:12px;" data-tooltip="该操作将覆盖之前的提交记录">重新报名</button>
+                </div>
+                <div class="sub-recap" id="subRecap" hidden></div>
               </div>
-
-              <p class="sp-open__deadline">截止：<span style="font-family:var(--font-body);">北京时间</span> 2026-07-19 24:00</p>
             </div>
 
           </div>
@@ -1091,7 +1104,8 @@
 
   /* Countdown + form gate */
   const OPEN_DATE  = new Date('2026-06-01T18:00:00+08:00');
-  const CLOSE_DATE = new Date('2026-07-19T24:00:00+08:00');
+  const CLOSE_DATE = new Date('2026-07-20T00:00:00+08:00');  // = 北京时间 7/19 24:00
+  const VOTE1_DATE = new Date('2026-07-25T22:00:00+08:00');  // Semi-Final 1 + 附加赛资格赛投票开启
 
   function pad(n) { return String(n).padStart(2, '0'); }
 
@@ -1118,11 +1132,16 @@
     const heroLabel = document.getElementById('heroCountdownLabel');
     if (heroEl) {
       if (isClosed) {
-        heroLabel.textContent = '提交通道已关闭';
-        heroEl.textContent    = '截止于 7/19';
+        if (now < VOTE1_DATE) {
+          heroLabel.textContent = '距 Semi-Final 1 和附加赛资格赛投票开启还有';
+          heroEl.innerHTML      = fmtCountdown(VOTE1_DATE - now);
+        } else {
+          heroLabel.textContent = 'Semi-Final 1 / 附加赛资格赛投票';
+          heroEl.textContent    = '投票进行中';
+        }
       } else if (isOpen) {
-        heroLabel.textContent = '提交通道已开启';
-        heroEl.innerHTML      = '截止：<span style="font-size:22px;opacity:0.75;">7/19</span>';
+        heroLabel.textContent = '距提交通道关闭还有';
+        heroEl.innerHTML      = fmtCountdown(CLOSE_DATE - now);
       } else {
         heroLabel.textContent = '距提交通道开启还有';
         heroEl.innerHTML      = fmtCountdown(diff);
@@ -1141,11 +1160,14 @@
     if (isOpen) {
       if (spLocked) spLocked.style.display = 'none';
       if (spOpen)   spOpen.style.display   = 'block';
-      if (spBadge)  { spBadge.textContent = '通道开启中'; spBadge.className = 'sp-badge sp-badge--open'; }
+      if (spBadge)  { spBadge.innerHTML = '<span class="sp-badge__dot"></span>已开启'; spBadge.className = 'sp-badge sp-badge--open'; }
     } else if (isClosed) {
+      if (spLocked) spLocked.style.display = '';
+      if (spOpen)   spOpen.style.display = 'none';
       if (spLocked) {
+        spLocked.querySelector('.sp-locked__heading').textContent = '歌曲征集已结束';
         spLocked.querySelector('.sp-locked__msg').innerHTML =
-          '歌曲提交通道已于<br><strong style="color:var(--clr-text-2);">2026 年 7 月 19 日 24:00</strong><br>关闭。';
+          '歌曲提交通道已于 <strong style="color:var(--clr-text-2);">2026 年 7 月 19 日 24:00</strong> 关闭。';
         const cdEl = spLocked.querySelector('.sp-locked__cd');
         if (cdEl) cdEl.style.display = 'none';
       }
@@ -1165,20 +1187,6 @@
     const EMAILJS = { publicKey: 'M2tBv7vRh3TY2MAeA', serviceId: 'service_cqbstn7', templateId: 'template_d75xg0c' };
     if (window.emailjs) emailjs.init({ publicKey: EMAILJS.publicKey });
 
-    // 成员名单（校验提交人 = 验证步骤）
-    let memberSet = null;
-    fetch('../../data/members/members.csv')
-      .then(r => r.text())
-      .then(txt => {
-        memberSet = new Set();
-        txt.split(/\r?\n/).slice(1).forEach(line => {
-          if (!line.trim()) return;
-          const cols = line.split(',');          // 前 3 列无逗号，安全
-          [cols[1], cols[2]].forEach(v => { if (v) memberSet.add(v.trim().toLowerCase()); });
-        });
-      })
-      .catch(() => { memberSet = null; });        // 名单加载失败则跳过校验，不阻塞提交
-
     const auditionField = document.getElementById('auditionField');
     const auditionInput = document.getElementById('subAudition');
     const song2         = document.getElementById('song2');
@@ -1192,7 +1200,7 @@
       const t = getType();
       if (t === '海选') {
         auditionField.hidden = false;
-        song1Legend.innerHTML = '第一首 · 海选冠军 <small>→ Semi-Final</small>';
+        song1Legend.innerHTML = '歌曲一 · 海选冠军 <small>→ Semi-Final</small>';
         song2.hidden = !auditionInput.value.trim();
       } else {
         auditionField.hidden = true;
@@ -1210,7 +1218,7 @@
     }
     function validateSong(n) {
       let ok = true;
-      ['title', 'artist', 'date', 'link'].forEach(key => {
+      ['title', 'artist'].forEach(key => {
         const inp = form.querySelector('[data-song="' + n + '"][data-key="' + key + '"]');
         if (!inp.value.trim()) { fieldErr(inp, '必填'); ok = false; } else fieldErr(inp, '');
       });
@@ -1228,10 +1236,7 @@
       let ok = true;
       const handleInput = document.getElementById('subHandle');
       const handle = handleInput.value.trim();
-      if (!handle) { fieldErr(handleInput, '请填写提交人'); ok = false; }
-      else if (memberSet && !memberSet.has(handle.toLowerCase())) {
-        fieldErr(handleInput, '未在榜吧成员名单中，请确认昵称 / ID 是否正确'); ok = false;
-      } else fieldErr(handleInput, '');
+      if (!handle) { fieldErr(handleInput, '请填写提交人'); ok = false; } else fieldErr(handleInput, '');
 
       const type = getType();
       const errType = document.getElementById('errType');
@@ -1254,7 +1259,7 @@
     function collectPayload(type, hasSong2) {
       function song(n) {
         const g = k => (form.querySelector('[data-song="' + n + '"][data-key="' + k + '"]') || {}).value || '';
-        return { title: g('title'), artist: g('artist'), album: g('album'), date: g('date'), link: g('link'), note: g('note') };
+        return { title: g('title'), artist: g('artist'), country: g('country'), language: g('language'), date: g('date') };
       }
       const p = {
         handle:   document.getElementById('subHandle').value.trim(),
@@ -1273,10 +1278,9 @@
         return '\n【' + label + '】\n'
           + '歌名：' + s.title + '\n'
           + '艺人：' + s.artist + '\n'
-          + (s.album ? '专辑：' + s.album + '\n' : '')
-          + '发行日期：' + s.date + '\n'
-          + '链接：' + s.link + '\n'
-          + (s.note ? '选送理由：' + s.note + '\n' : '');
+          + (s.country ? '发行国家：' + s.country + '\n' : '')
+          + (s.language ? '语种：' + s.language + '\n' : '')
+          + (s.date ? '发行日期：' + s.date + '\n' : '');
       }
       let txt = '提交人：' + d.handle + '\n'
         + (d.contact ? '联系方式：' + d.contact + '\n' : '')
@@ -1302,7 +1306,7 @@
         submitter: data.handle,
         message:   buildMessage(data)
       }).then(function () {
-        showSuccess();
+        showSuccess(data);
       }).catch(function (err) {
         console.warn('EmailJS 发送失败', err);
         errForm.textContent = '提交失败，请检查网络后重试；多次失败请联系主办方。';
@@ -1311,14 +1315,65 @@
         btn.textContent = orig;
       });
     }
-    function showSuccess() {
+
+    const STORE_KEY = 'barvision2026_submission';
+    let lastPayload = null;
+    const spDesc  = form.previousElementSibling;  // .sp-open__desc（成功页隐藏）
+    const okTitle = document.querySelector('.sub-success__title');
+    const okMsg   = document.querySelector('.sub-success__msg');
+
+    function showSuccess(data, returning) {
+      lastPayload = data || null;
+      if (data && !returning) {                    // 新提交 → 覆盖本设备记录
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch (e) {}
+      }
+      if (returning) {
+        okTitle.textContent = '您已提交报名';
+        okMsg.textContent   = '以下是您在本设备已提交的报名信息。如需修改，点「重新报名」覆盖。';
+      } else {
+        okTitle.textContent = '歌曲提交成功';
+        okMsg.textContent   = '我们已收到您的报名信息。如有问题会通过您留的联系方式与您联系。';
+      }
       form.hidden = true;
+      if (spDesc && spDesc.classList.contains('sp-open__desc')) spDesc.hidden = true;
+      const recap = document.getElementById('subRecap');
+      recap.hidden = true; recap.textContent = '';
+      document.getElementById('subView').textContent = '查看报名详情';
       document.getElementById('subSuccess').hidden = false;
     }
+
+    // 查看自己的报名：回显本次提交内容（无后台，仅本次会话）
+    document.getElementById('subView').addEventListener('click', function () {
+      const recap = document.getElementById('subRecap');
+      if (recap.hidden) {
+        recap.textContent = lastPayload ? buildMessage(lastPayload) : '本次会话暂无报名记录。';
+        recap.hidden = false;
+        this.textContent = '收起报名详情';
+      } else {
+        recap.hidden = true;
+        this.textContent = '查看报名详情';
+      }
+    });
+
+    // 重新报名：清空表单，回到填写态
     document.getElementById('subAgain').addEventListener('click', function () {
+      form.reset();
+      syncConditional();
+      form.querySelectorAll('.sub-input--err').forEach(el => el.classList.remove('sub-input--err'));
+      form.querySelectorAll('.sub-err').forEach(el => el.textContent = '');
+      document.getElementById('errForm').textContent = '';
+      document.getElementById('subView').textContent = '查看报名详情';
+      document.getElementById('subRecap').hidden = true;
       document.getElementById('subSuccess').hidden = true;
+      if (spDesc && spDesc.classList.contains('sp-open__desc')) spDesc.hidden = false;
       form.hidden = false;
     });
+
+    // 本设备已提交过 → 加载时直接显示「已报名」态
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+      if (saved) showSuccess(saved, true);
+    } catch (e) {}
   })();
 
   /* ── TOC ── */
