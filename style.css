@@ -1305,17 +1305,6 @@ img {
 
 .phase__status--live {
   color: var(--clr-pink-light);
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-}
-.phase__status--live::before {
-  content: '';
-  width: 6px; height: 6px; border-radius: 50%;
-  background: var(--clr-pink-light);
-  box-shadow: 0 0 0 0 rgba(240,96,184,0.6);
-  animation: ripple-out-pink 1.6s ease-out infinite;
-  flex-shrink: 0;
 }
 
 .season-card__footer {
