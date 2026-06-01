@@ -676,8 +676,8 @@
                 <fieldset class="sub-song" id="song2" hidden>
                   <legend class="sub-song__legend">歌曲二 · 海选亚军 <small>→ 附加赛资格赛</small></legend>
                   <div class="sub-grid">
-                    <div class="sub-field"><label class="sub-label">歌曲名 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="2" data-key="title" /><p class="sub-err"></p></div>
-                    <div class="sub-field"><label class="sub-label">艺人 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="2" data-key="artist" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">歌曲名（选填）</label><input class="sub-input" type="text" data-song="2" data-key="title" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">艺人（选填）</label><input class="sub-input" type="text" data-song="2" data-key="artist" /><p class="sub-err"></p></div>
                     <div class="sub-field"><label class="sub-label">发行国家（选填）</label><input class="sub-input" type="text" data-song="2" data-key="country" /></div>
                     <div class="sub-field"><label class="sub-label">语种（选填）</label><input class="sub-input" type="text" data-song="2" data-key="language" /></div>
                     <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="2" data-key="date" /><p class="sub-err"></p></div>
@@ -1216,11 +1216,11 @@
       const err = input.closest('.sub-field').querySelector('.sub-err');
       if (err) err.textContent = msg || '';
     }
-    function validateSong(n) {
+    function validateSong(n, requireBasics) {
       let ok = true;
       ['title', 'artist'].forEach(key => {
         const inp = form.querySelector('[data-song="' + n + '"][data-key="' + key + '"]');
-        if (!inp.value.trim()) { fieldErr(inp, '必填'); ok = false; } else fieldErr(inp, '');
+        if (requireBasics && !inp.value.trim()) { fieldErr(inp, '必填'); ok = false; } else fieldErr(inp, '');
       });
       const d = form.querySelector('[data-song="' + n + '"][data-key="date"]');
       if (d.value && (d.value < '2023-07-01' || d.value > '2026-06-30')) {
@@ -1245,9 +1245,9 @@
       if (type === '海选' && !auditionInput.value.trim()) { fieldErr(auditionInput, '海选报名须填写海选名称'); ok = false; }
       else fieldErr(auditionInput, '');
 
-      if (!validateSong(1)) ok = false;
+      if (!validateSong(1, true)) ok = false;
       const hasSong2 = type === '海选' && !!auditionInput.value.trim();
-      if (hasSong2 && !validateSong(2)) ok = false;
+      if (hasSong2 && !validateSong(2, false)) ok = false;
 
       const errForm = document.getElementById('errForm');
       if (!ok) { errForm.textContent = '请检查标红的必填项。'; return; }
@@ -1268,7 +1268,10 @@
         audition: auditionInput.value.trim(),
         song1:    song(1)
       };
-      if (hasSong2) p.song2 = song(2);
+      if (hasSong2) {
+        const s2 = song(2);
+        if (s2.title || s2.artist || s2.country || s2.language || s2.date) p.song2 = s2;  // 空的歌曲二不计入
+      }
       return p;
     }
 
