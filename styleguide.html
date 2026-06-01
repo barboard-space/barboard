@@ -43,6 +43,20 @@
     .sg-spec td.tok { font-family: var(--font-mono); font-size: 12px; color: var(--clr-accent-light); }
     .sg-spec td.val { font-family: var(--font-mono); font-size: 12px; color: var(--clr-text-2); }
     .sg-chip { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: middle; margin-right: 6px; border: 1px solid var(--clr-border-2); }
+
+    /* ===== Logo 沙箱（在此微调 --sgl-*，确认后我写回 style.css 的 --logo-*）===== */
+    :root {
+      --sgl-fs-en:    26px;  /* Bebas 英文字标 */
+      --sgl-fs-cjk:   12px;  /* DM Sans 中文副标 */
+      --sgl-gap-cjk:  10px;  /* 字标 ↔ 中文副标 */
+      --sgl-gap-icon: 4px;   /* 图标 ↔ 字标 */
+    }
+    .sgl { display: inline-flex; align-items: center; gap: var(--sgl-gap-icon); font-family: var(--font-display); font-size: var(--sgl-fs-en); font-weight: 400; letter-spacing: 0.02em; line-height: 1; color: var(--clr-text); text-decoration: none; }
+    .sgl__img { width: 26px; height: 26px; opacity: 0.92; margin-top: -5px; flex-shrink: 0; }
+    .sgl__board { color: var(--clr-board); margin-left: 1px; }
+    .sgl__cjk { font-family: var(--font-body); font-size: var(--sgl-fs-cjk); color: var(--clr-text); margin-top: var(--sgl-gap-cjk); margin-bottom: 8px; }
+    .sgl__tagline { font-size: 14px; color: var(--clr-text-2); max-width: 260px; line-height: 1.6; margin-top: 24px; }
+    .sgl__tagline span { display: block; }
   </style>
 </head>
 <body>
@@ -58,40 +72,40 @@
 
   <!-- ↓↓↓ 确认项逐个搬入此处 ↓↓↓ -->
 
-  <!-- ===== 元素 · Logo 标志 ===== -->
+  <!-- ===== 元素 · Logo 标志（沙箱·微调中，未写回 style.css）===== -->
   <section class="sg-cat">
     <h2 class="sg-cat__title">元素 Elements · Logo 标志</h2>
+    <div class="sg-note" style="margin:-14px 0 20px;">🧪 <strong>沙箱状态</strong>：用本页局部 <code style="font-family:var(--font-mono)">--sgl-*</code> 渲染，<strong>未写回真实 style.css</strong>。在 <code style="font-family:var(--font-mono)">&lt;style&gt;</code> 顶部调 4 个 <code style="font-family:var(--font-mono)">--sgl-*</code> 即可微调；确认后由我写回 style.css 的 <code style="font-family:var(--font-mono)">--logo-*</code> + 应用到 nav/footer。</div>
 
     <div class="sg-item">
-      <div class="sg-item__bar"><span class="sg-item__name">版本 A · 纯字标（nav）</span><span class="sg-item__cls">.nav__logo</span><span class="sg-item__src">nav.js + style.css</span></div>
+      <div class="sg-item__bar"><span class="sg-item__name">版本 A · 纯字标（nav）</span><span class="sg-item__cls">图标 + BAR + BOARD</span></div>
       <div class="sg-demo sg-demo--panel">
-        <a class="nav__logo" href="javascript:void(0)"><img src="/assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" /><span>BAR<span class="nav__logo-board">BOARD</span></span></a>
+        <a class="sgl" href="javascript:void(0)"><img src="/assets/images/logo_center.png" alt="" class="sgl__img" aria-hidden="true" /><span>BAR<span class="sgl__board">BOARD</span></span></a>
       </div>
-      <div class="sg-note">图标 + 字标 BAR + BOARD。BOARD 用品牌蓝 `--clr-board`，BAR 用 `--clr-text`。</div>
+      <div class="sg-note">BOARD 用品牌蓝 <code style="font-family:var(--font-mono)">--clr-board</code>，BAR 用 <code style="font-family:var(--font-mono)">--clr-text</code>。</div>
     </div>
 
     <div class="sg-item">
-      <div class="sg-item__bar"><span class="sg-item__name">版本 B · 带中文锁定（footer）</span><span class="sg-item__cls">.nav__logo.footer__logo + 中文名 + .footer__tagline</span><span class="sg-item__src">nav.js + style.css</span></div>
+      <div class="sg-item__bar"><span class="sg-item__name">版本 B · 带中文锁定（footer）</span><span class="sg-item__cls">A + 中文副标 + tagline</span></div>
       <div class="sg-demo sg-demo--panel">
-        <a class="nav__logo footer__logo" href="javascript:void(0)"><img src="/assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" /><span>BAR<span class="nav__logo-board">BOARD</span></span></a>
-        <p style="font-size:var(--logo-fs-cjk);color:var(--clr-text);margin-bottom:8px;">欧美流行音乐个人榜吧</p>
-        <p class="footer__tagline"><span>始于2013年5月21日</span><span>UNITED BY MUSIC</span></p>
+        <a class="sgl" href="javascript:void(0)"><img src="/assets/images/logo_center.png" alt="" class="sgl__img" aria-hidden="true" /><span>BAR<span class="sgl__board">BOARD</span></span></a>
+        <p class="sgl__cjk">欧美流行音乐个人榜吧</p>
+        <p class="sgl__tagline"><span>始于2013年5月21日</span><span>UNITED BY MUSIC</span></p>
       </div>
-      <div class="sg-note">版本 A + 中文副标（DM Sans）+ tagline。字标↔中文副标间距 `--logo-gap-cjk`。</div>
     </div>
 
     <div class="sg-item">
-      <div class="sg-item__bar"><span class="sg-item__name">确认标准（令牌）</span><span class="sg-item__cls">--clr-* / --logo-*</span></div>
+      <div class="sg-item__bar"><span class="sg-item__name">标准（待确认 → 写回 --logo-*）</span><span class="sg-item__cls">--sgl-* / --clr-*</span></div>
       <table class="sg-spec">
-        <thead><tr><th>类别</th><th>令牌</th><th>值</th><th>用途</th></tr></thead>
+        <thead><tr><th>类别</th><th>沙箱令牌 → 目标</th><th>值</th><th>用途</th></tr></thead>
         <tbody>
-          <tr><td>彩色</td><td class="tok">--clr-board</td><td class="val"><span class="sg-chip" style="background:var(--clr-board)"></span>#6F9EC3</td><td>BOARD 字（榜吧蓝）</td></tr>
-          <tr><td>mono</td><td class="tok">--clr-text</td><td class="val"><span class="sg-chip" style="background:var(--clr-text)"></span>#f0eeff</td><td>BAR + 中文名（纯白系）</td></tr>
+          <tr><td>彩色</td><td class="tok">--clr-board</td><td class="val"><span class="sg-chip" style="background:var(--clr-board)"></span>#6F9EC3</td><td>BOARD 字</td></tr>
+          <tr><td>mono</td><td class="tok">--clr-text</td><td class="val"><span class="sg-chip" style="background:var(--clr-text)"></span>#f0eeff</td><td>BAR + 中文名</td></tr>
           <tr><td>mono</td><td class="tok">--clr-bg</td><td class="val"><span class="sg-chip" style="background:var(--clr-bg)"></span>#080812</td><td>背景</td></tr>
-          <tr><td>字号·Bebas</td><td class="tok">--logo-fs-en</td><td class="val">26px (h-lg)</td><td>英文字标 BARBOARD</td></tr>
-          <tr><td>字号·DM Sans</td><td class="tok">--logo-fs-cjk</td><td class="val">12px (small)</td><td>中文副标</td></tr>
-          <tr><td>间距·中英文</td><td class="tok">--logo-gap-cjk</td><td class="val">10px</td><td>字标 ↔ 中文副标</td></tr>
-          <tr><td>间距·图标</td><td class="tok">--logo-gap-icon</td><td class="val">4px</td><td>图标 ↔ 字标</td></tr>
+          <tr><td>字号·Bebas</td><td class="tok">--sgl-fs-en → --logo-fs-en</td><td class="val">26px (h-lg)</td><td>英文字标</td></tr>
+          <tr><td>字号·DM Sans</td><td class="tok">--sgl-fs-cjk → --logo-fs-cjk</td><td class="val">12px (small)</td><td>中文副标</td></tr>
+          <tr><td>间距·中英文</td><td class="tok">--sgl-gap-cjk → --logo-gap-cjk</td><td class="val">10px</td><td>字标 ↔ 中文副标</td></tr>
+          <tr><td>间距·图标</td><td class="tok">--sgl-gap-icon → --logo-gap-icon</td><td class="val">4px</td><td>图标 ↔ 字标</td></tr>
         </tbody>
       </table>
     </div>
