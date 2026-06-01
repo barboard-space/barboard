@@ -322,6 +322,7 @@
     ['--clr-pink','#e040a0','副强调·霓虹粉'],['--clr-pink-light','#f060b8','首页Lab标题/曾登顶/Indie组'],
     ['--clr-violet','#a855f7','软紫'],['--clr-violet-light','#c084fc','眉标/TOC/bbl·bv主题/新进/本周新高/BBL组'],
     ['--clr-gold','#d4a832','金'],['--clr-gold-light','#f5c840','No.1/HOF/HOF页主题'],
+    ['--clr-board','#6F9EC3','榜吧蓝·品牌第二色（logo BOARD/archive主题/无分组）'],
     ['--clr-text','#f0eeff','主文字'],['--clr-text-2','#8880a8','次文字/描述'],['--clr-text-3','#8880a8','三级/meta']
   ];
   document.getElementById('sgColors').innerHTML = COLORS.map(function(c){
@@ -332,7 +333,6 @@
 
   // ── 功能色 / 游离硬编码色（不在 --clr-* 令牌里，[值, 角色, 建议令牌]）──
   var FUNC = [
-    ['#6F9EC3','榜吧蓝·品牌第二色（nav BOARD/archive主题/无分组）','→ --clr-board'],
     ['#90b8d0','银 · No.2','→ --clr-silver'],
     ['#e0a870','铜 · No.3','→ --clr-bronze'],
     ['#4ade80','走势上升·绿','→ --clr-up'],

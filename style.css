@@ -43,6 +43,9 @@
   --clr-gold:       #d4a832;
   --clr-gold-light: #f5c840;
 
+  /* ── Brand 榜吧蓝（品牌第二色：nav/footer logo BOARD、archive 主题、成员无分组） ── */
+  --clr-board:      #6F9EC3;
+
   /* ── Text ── */
   --clr-text:       #f0eeff;
   --clr-text-2:     #8880a8;
@@ -623,7 +626,7 @@ img {
 }
 
 .bbl-board-accent {
-  color: #6F9EC3;
+  color: var(--clr-board);
 }
 
 /* =============================================
@@ -2230,6 +2233,6 @@ body:has(.nav--open) .back-to-top {
 }
 
 .nav__logo-board {
-  color: #6F9EC3;
+  color: var(--clr-board);
   margin-left: 1px;
 }

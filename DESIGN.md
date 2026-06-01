@@ -25,6 +25,7 @@
 | 霓虹粉 | `--clr-pink` / `--clr-pink-light` | `#e040a0` / `#f060b8` | 副强调色 |
 | 软紫 | `--clr-violet` / `--clr-violet-light` | `#a855f7` / `#c084fc` | 眉标、强调、TOC |
 | 金 | `--clr-gold` / `--clr-gold-light` | `#d4a832` / `#f5c840` | 奖项、Top 1 |
+| **榜吧蓝（品牌第二色）** | `--clr-board` | `#6F9EC3` | logo BOARD、archive 主题、成员无分组 |
 | 主文字 | `--clr-text` | `#f0eeff` | 正文主色 |
 | 次文字 | `--clr-text-2` / `--clr-text-3` | `#8880a8` | 描述、小标签、meta |
 
@@ -77,7 +78,7 @@
 | Barvision 总览 / events | 软紫 `--clr-violet-light` | |
 | BBL bbl.html | 软紫 `--clr-violet-light` | |
 | BBL HOF / Barvision HOF | 金 `--clr-gold-light` | |
-| Archive | 榜吧蓝 `#6F9EC3` 🔸 | 整页榜吧蓝主题（[CLAUDE.md #107]） |
+| Archive | 榜吧蓝 `--clr-board` | 整页榜吧蓝主题（[CLAUDE.md #107]） |
 | events 投票卡 | Jury 紫 / Tele 蓝(`--clr-accent`) / Approval 金 | 按投票类型分色 |
 
 > **约定**：每页一个"主题强调色"，贯穿该页 eyebrow/glow/标题 accent/watermark；正文/卡片仍用全局令牌。新页面套用此约定即可保持一致。
@@ -86,7 +87,7 @@
 
 | 组 | 颜色 | badge |
 |---|---|---|
-| 全部 / 无分组 | 榜吧蓝 `#6F9EC3` 🔸 | — |
+| 全部 / 无分组 | 榜吧蓝 `--clr-board` | — |
 | BBL | 软紫 `--clr-violet-light` | BBL |
 | 村摇欧共体 | 棕黄 `#D49840` 🔸 | 村摇欧 |
 | Indienation | 粉 `--clr-pink-light` | Indie |
@@ -95,7 +96,7 @@
 
 | 颜色 | 含义 | 出现于 | 建议令牌 |
 |---|---|---|---|
-| `#6F9EC3` | 榜吧蓝（品牌第二色） | nav.js（BOARD logo）、archive 主题、member 无分组、bbl board accent | `--clr-board` |
+| ~~`#6F9EC3`~~ | 榜吧蓝（品牌第二色） | — | ✅ **已 tokenize 为 `--clr-board`**（全站已替换；nav.js Dev Gate 内仍保留硬编码，dev-only 不影响） |
 | `#90b8d0` | 银（No.2） | bbl/hof | `--clr-silver` |
 | `#e0a870` | 铜（No.3） | bbl/hof | `--clr-bronze` |
 | `#4ade80` | 走势绿 | style.css、bbl | `--clr-up` |
@@ -215,6 +216,34 @@
 - **小 UI 文字/间距保持固定**——跨设备无需变。
 - （可选未来）`px → rem` 利无障碍；因需精确控制 px，暂不做。
 - **采用方式：不一次性全改**；精修各页/组件时，遇到该流体的大值就地换 clamp，逐步收敛。
+
+---
+
+## 一·补5、🅱️ Logo 标志规格（全站共享，nav.js 注入）
+
+Logo = 图标 + 文字标 `BAR` + `BOARD`（BOARD 用品牌蓝 `--clr-board`）。两个版本：
+
+**版本 A — nav 版（不带中文，纯文字标）**
+`<a class="nav__logo"><img class="nav__logo-img">…<span>BAR<span class="nav__logo-board">BOARD</span></span></a>`
+
+| 部件 | class | 规格 |
+|---|---|---|
+| 容器 | `.nav__logo` | Bebas Neue **26px**(h-lg) `!important`、weight 400、letter-spacing 0.02em、line-height 1、color `--clr-text`、flex `gap:5px`（⚠️离散→4）|
+| 图标 | `.nav__logo-img` | **26×26px**、opacity 0.92、`margin-top:-5px`（视觉对齐微调）|
+| BOARD | `.nav__logo-board` | color **`--clr-board`**、margin-left 1px |
+
+**版本 B — footer 版（带中文副标 = 品牌锁定 lockup）**
+同 `.nav__logo` + `.footer__logo` modifier，下接中文名 + tagline
+
+| 部件 | class / 内联 | 规格 |
+|---|---|---|
+| logo | `.nav__logo.footer__logo` | 同版本 A + `margin-top:0!important`、`margin-bottom:10px` |
+| 中文名 | 内联 `<p>` | **12px**(small)、color `--clr-text`、margin-bottom 8px、文案「欧美流行音乐个人榜吧」 |
+| tagline | `.footer__tagline` | **14px**(body-lg)、`--clr-text-2`、max-width 260、line-height 1.6、margin-top 24px；两行：始于2013年5月21日 / UNITED BY MUSIC |
+
+> - 文字标结构 `<span>BAR<span class="nav__logo-board">BOARD</span></span>`（单 span 包裹防 flex 间距问题，[CLAUDE.md #6]）。
+> - 中文名目前是内联 `<p>`（非 class）；若多处复用可抽 `.footer__name`。
+> - 移动端 nav 高度 `--nav-h` 72→56，logo 不另调。
 
 ---
 
