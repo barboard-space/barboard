@@ -11,16 +11,7 @@
 }
 
 :root {
-  /* ── Background & Surface ── */
-  /* 参考 Barvision 2026 opening credits 色调：极深午夜蓝黑 */
-  --clr-bg:         #080812;
-  --clr-bg-2:       #0c0c18;
-  --clr-bg-3:       #10101e;
-  --clr-surface:    #141422;
-  --clr-surface-2:  #1a1a2e;
-  --clr-border:     rgba(180,160,255,0.14);
-  --clr-border-2:   rgba(180,160,255,0.26);
-
+  /* ═══════════ 彩色 Chromatic ═══════════ */
   /* ── Primary — Electric Blue（片头蓝色线条）── */
   --clr-accent:       #00b4ff;
   --clr-accent-light: #33c6ff;
@@ -43,19 +34,31 @@
   --clr-gold:       #d4a832;
   --clr-gold-light: #f5c840;
 
-  /* ── Brand 榜吧蓝（品牌第二色：nav/footer logo BOARD、archive 主题、成员无分组） ── */
+  /* ── Brand 榜吧蓝（品牌第二色：logo BOARD、archive 主题、成员无分组） ── */
   --clr-board:      #6F9EC3;
-
-  /* ── Text ── */
-  --clr-text:       #f0eeff;
-  --clr-text-2:     #8880a8;
-  --clr-text-3:     #8880a8;
 
   /* ── Semantic aliases ── */
   --clr-red:        var(--clr-pink);
   --clr-red-light:  var(--clr-pink-light);
   --clr-red-glow:   var(--clr-pink-glow);
   --clr-red-dim:    var(--clr-pink-dim);
+
+  /* ═══════════ Mono 黑白灰（黑/白/灰系）═══════════ */
+  /* ── Background & Surface（参考 Barvision 2026 opening credits：极深午夜蓝黑）── */
+  --clr-bg:         #080812;
+  --clr-bg-2:       #0c0c18;
+  --clr-bg-3:       #10101e;
+  --clr-surface:    #141422;
+  --clr-surface-2:  #1a1a2e;
+
+  /* ── Border ── */
+  --clr-border:     rgba(180,160,255,0.14);
+  --clr-border-2:   rgba(180,160,255,0.26);
+
+  /* ── Text（纯白系 → 灰）── */
+  --clr-text:       #f0eeff;
+  --clr-text-2:     #8880a8;
+  --clr-text-3:     #8880a8;
 
   /* Typography */
   --font-display: 'Bebas Neue', 'Impact', 'Arial Black', sans-serif;
@@ -68,6 +71,12 @@
   --gap-md:  32px;
   --gap-lg:  64px;
   --gap-xl:  96px;
+
+  /* Logo 组件令牌 */
+  --logo-fs-en:    26px;  /* Bebas Neue 英文字标 BARBOARD（= 阶梯 h-lg） */
+  --logo-fs-cjk:   12px;  /* DM Sans 中文副标「欧美流行音乐个人榜吧」（= 阶梯 small） */
+  --logo-gap-cjk:  10px;  /* 英文字标 ↔ 中文副标 垂直间距 */
+  --logo-gap-icon: 4px;   /* 图标 ↔ 字标 */
 
   /* Layout */
   --max-width: 1200px;
@@ -1640,7 +1649,7 @@ img {
 
 .footer__logo {
   margin-top: 0 !important;
-  margin-bottom: 10px;
+  margin-bottom: var(--logo-gap-cjk);
   text-decoration: none;
 }
 
@@ -2212,9 +2221,9 @@ body:has(.nav--open) .back-to-top {
 .nav__logo {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--logo-gap-icon);
   font-family: 'Bebas Neue', Impact, 'Arial Black', Arial, sans-serif !important;
-  font-size: 26px !important;
+  font-size: var(--logo-fs-en) !important;
   font-weight: 400 !important;
   letter-spacing: 0.02em;
   line-height: 1;
