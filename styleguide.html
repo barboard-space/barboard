@@ -40,7 +40,8 @@
     .sg-swatch__chip { height: 56px; }
     .sg-swatch__meta { padding: 8px 10px; }
     .sg-swatch__var { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text); display: block; }
-    .sg-swatch__val { font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3); }
+    .sg-swatch__val { font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3); display: block; }
+    .sg-swatch__use { font-size: 11px; color: var(--clr-text-2); display: block; margin-top: 3px; line-height: 1.4; }
     .sg-fonts > div { margin-bottom: 14px; }
     .sg-font-sample { font-size: 26px; color: var(--clr-text); }
     .sg-spacing-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
@@ -79,8 +80,14 @@
     <h2 class="sg-cat__title">一 · 设计令牌 Tokens</h2>
 
     <div class="sg-item">
-      <div class="sg-item__bar"><span class="sg-item__name">颜色</span><span class="sg-item__cls">--clr-*</span><span class="sg-item__src">style.css :root</span></div>
+      <div class="sg-item__bar"><span class="sg-item__name">令牌色</span><span class="sg-item__cls">--clr-*</span><span class="sg-item__src">style.css :root</span></div>
       <div class="sg-swatches" id="sgColors"></div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">功能色 / 游离硬编码色</span><span class="sg-item__cls">未 tokenize</span><span class="sg-item__src">散落各页</span></div>
+      <div class="sg-swatches" id="sgFunc"></div>
+      <div class="sg-note">这些颜色有固定语义但 <strong>不在 <code style="font-family:var(--font-mono)">--clr-*</code> 令牌里</strong>，散落各页 inline——是"配色混乱"主因。箭头是阶段三建议的令牌名。完整地图见 DESIGN.md §一·补。</div>
     </div>
 
     <div class="sg-item">
@@ -272,20 +279,38 @@
 </div>
 
 <script>
-  // ── 令牌：颜色 ──
+  // ── 令牌：颜色（[变量, 值, 用途]）──
   var COLORS = [
-    ['--clr-bg','#080812'],['--clr-bg-2','#0c0c18'],['--clr-bg-3','#10101e'],
-    ['--clr-surface','#141422'],['--clr-surface-2','#1a1a2e'],
-    ['--clr-border','rgba(180,160,255,.14)'],['--clr-border-2','rgba(180,160,255,.26)'],
-    ['--clr-accent','#00b4ff'],['--clr-accent-light','#33c6ff'],
-    ['--clr-pink','#e040a0'],['--clr-pink-light','#f060b8'],
-    ['--clr-violet','#a855f7'],['--clr-violet-light','#c084fc'],
-    ['--clr-gold','#d4a832'],['--clr-gold-light','#f5c840'],
-    ['--clr-text','#f0eeff'],['--clr-text-2','#8880a8'],['--clr-text-3','#8880a8']
+    ['--clr-bg','#080812','全站主背景'],['--clr-bg-2','#0c0c18','次背景/演示底'],['--clr-bg-3','#10101e','三级背景'],
+    ['--clr-surface','#141422','卡片/输入框表面'],['--clr-surface-2','#1a1a2e','卡片 hover'],
+    ['--clr-border','rgba(180,160,255,.14)','默认边框'],['--clr-border-2','rgba(180,160,255,.26)','hover边框/走势持平'],
+    ['--clr-accent','#00b4ff','主强调·电蓝/Tele投票'],['--clr-accent-light','#33c6ff','电蓝浅'],
+    ['--clr-pink','#e040a0','副强调·霓虹粉'],['--clr-pink-light','#f060b8','首页Lab标题/曾登顶/Indie组'],
+    ['--clr-violet','#a855f7','软紫'],['--clr-violet-light','#c084fc','眉标/TOC/bbl·bv主题/新进/本周新高/BBL组'],
+    ['--clr-gold','#d4a832','金'],['--clr-gold-light','#f5c840','No.1/HOF/HOF页主题'],
+    ['--clr-text','#f0eeff','主文字'],['--clr-text-2','#8880a8','次文字/描述'],['--clr-text-3','#8880a8','三级/meta']
   ];
   document.getElementById('sgColors').innerHTML = COLORS.map(function(c){
     return '<div class="sg-swatch"><div class="sg-swatch__chip" style="background:var('+c[0]+')"></div>'
-      + '<div class="sg-swatch__meta"><span class="sg-swatch__var">'+c[0]+'</span><span class="sg-swatch__val">'+c[1]+'</span></div></div>';
+      + '<div class="sg-swatch__meta"><span class="sg-swatch__var">'+c[0]+'</span><span class="sg-swatch__val">'+c[1]+'</span>'
+      + '<span class="sg-swatch__use">'+c[2]+'</span></div></div>';
+  }).join('');
+
+  // ── 功能色 / 游离硬编码色（不在 --clr-* 令牌里，[值, 角色, 建议令牌]）──
+  var FUNC = [
+    ['#6F9EC3','榜吧蓝·品牌第二色（nav BOARD/archive主题/无分组）','→ --clr-board'],
+    ['#90b8d0','银 · No.2','→ --clr-silver'],
+    ['#e0a870','铜 · No.3','→ --clr-bronze'],
+    ['#4ade80','走势上升·绿','→ --clr-up'],
+    ['#f87171','走势下降·红','→ --clr-down'],
+    ['#facc15','走势重入·黄','→ --clr-re'],
+    ['#D49840','村摇欧·棕黄（成员组）','→ --clr-team-cun'],
+    ['#4ecca3','ECVP 青（archive）','→ --clr-esc']
+  ];
+  document.getElementById('sgFunc').innerHTML = FUNC.map(function(c){
+    return '<div class="sg-swatch"><div class="sg-swatch__chip" style="background:'+c[0]+'"></div>'
+      + '<div class="sg-swatch__meta"><span class="sg-swatch__var">'+c[0]+'</span><span class="sg-swatch__use">'+c[1]+'</span>'
+      + '<span class="sg-swatch__val" style="color:var(--clr-violet-light)">'+c[2]+'</span></div></div>';
   }).join('');
 
   // ── 令牌：间距 ──

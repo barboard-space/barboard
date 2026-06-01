@@ -49,6 +49,66 @@
 
 ---
 
+## 一·补、🎨 配色用途地图（哪里用什么颜色）
+
+> 解决"配色混乱"的关键：把每个颜色的**语义角色**和**使用位置**钉死。
+> ⚠️ 标 🔸 的是**游离硬编码色**——不在 `--clr-*` 令牌里、散落在各页，是混乱主因，建议阶段三 tokenize。
+
+### A. 语义功能色（含义固定，全站统一）
+
+| 角色 | 颜色 | class / 位置 |
+|---|---|---|
+| 排名 No.1（金） | `--clr-gold-light` `#f5c840` | `.chart-item--top`、HOF 第一档 |
+| 排名 No.2（银）🔸 | `#90b8d0` | `.chart-item--silver`、HOF 第二档 |
+| 排名 No.3（铜）🔸 | `#e0a870` | `.chart-item--bronze`、HOF 第三档 |
+| 走势上升 🔸 | `#4ade80` 绿 | `.chart-change--up` |
+| 走势下降 🔸 | `#f87171` 红 | `.chart-change--down` |
+| 走势新进 | `--clr-violet-light` | `.chart-change--new` |
+| 走势重入 🔸 | `#facc15` 黄 | `.chart-change--re` |
+| 走势持平 | `--clr-border-2` | `.chart-change--same` |
+| 统计·本周新高 | `--clr-violet-light` | `.chart-stat__*--violet` |
+| 统计·曾登顶 | `--clr-pink-light` `#f060b8` | `.chart-stat__*--pink` |
+
+### B. 每页主题色（hero eyebrow / glow / 标题 accent / watermark）
+
+| 页面 | 主题色 | 备注 |
+|---|---|---|
+| 首页 index | 粉 + 紫 | hero eyebrow 粉；Barvision 标题紫、Lab 标题粉 |
+| Barvision 总览 / events | 软紫 `--clr-violet-light` | |
+| BBL bbl.html | 软紫 `--clr-violet-light` | |
+| BBL HOF / Barvision HOF | 金 `--clr-gold-light` | |
+| Archive | 榜吧蓝 `#6F9EC3` 🔸 | 整页榜吧蓝主题（[CLAUDE.md #107]） |
+| events 投票卡 | Jury 紫 / Tele 蓝(`--clr-accent`) / Approval 金 | 按投票类型分色 |
+
+> **约定**：每页一个"主题强调色"，贯穿该页 eyebrow/glow/标题 accent/watermark；正文/卡片仍用全局令牌。新页面套用此约定即可保持一致。
+
+### C. 成员小组色（member.html，[CLAUDE.md #54]）
+
+| 组 | 颜色 | badge |
+|---|---|---|
+| 全部 / 无分组 | 榜吧蓝 `#6F9EC3` 🔸 | — |
+| BBL | 软紫 `--clr-violet-light` | BBL |
+| 村摇欧共体 | 棕黄 `#D49840` 🔸 | 村摇欧 |
+| Indienation | 粉 `--clr-pink-light` | Indie |
+
+### D. 🔸 游离硬编码色清单（建议阶段三 tokenize）
+
+| 颜色 | 含义 | 出现于 | 建议令牌 |
+|---|---|---|---|
+| `#6F9EC3` | 榜吧蓝（品牌第二色） | nav.js（BOARD logo）、archive 主题、member 无分组、bbl board accent | `--clr-board` |
+| `#90b8d0` | 银（No.2） | bbl/hof | `--clr-silver` |
+| `#e0a870` | 铜（No.3） | bbl/hof | `--clr-bronze` |
+| `#4ade80` | 走势绿 | style.css、bbl | `--clr-up` |
+| `#f87171` | 走势红 | style.css、bbl | `--clr-down` |
+| `#facc15` | 走势黄（重入） | style.css | `--clr-re` |
+| `#D49840` | 村摇欧棕黄 | member、bbl | `--clr-team-cun` |
+| `#4ecca3` | ECVP 青 | archive | `--clr-esc` |
+| `#fff4d6`/`#d4e8f4`/`#f4dcc0` | 金/银/铜档歌名微调色 | bbl/hof | （tier 文字色，可保留） |
+
+> tokenize 后，改一处即可全站统一调色；目前这些散落各页，是"配色混乱"的根因。
+
+---
+
 ## 二、🌟 命名速查表（中文俗名 ↔ class）
 
 > 找不到的元素，描述大概位置+功能，我帮你定位后补进此表。
