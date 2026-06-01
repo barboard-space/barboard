@@ -47,10 +47,17 @@
     .sg-spacing-row { display: flex; align-items: center; gap: 14px; margin-bottom: 8px; }
     .sg-spacing-bar { height: 16px; background: var(--clr-violet); border-radius: 2px; }
     .sg-spacing-lbl { font-family: var(--font-mono); font-size: 12px; color: var(--clr-text-2); width: 130px; }
-    .sg-type-row { display: flex; align-items: baseline; gap: 20px; padding: 7px 0; border-bottom: 1px solid var(--clr-border); flex-wrap: wrap; }
-    .sg-type-sample { color: var(--clr-text); font-family: var(--font-body); flex: 0 0 240px; line-height: 1.2; }
+    .sg-type-row { display: flex; align-items: baseline; gap: 20px; padding: 9px 0; border-bottom: 1px solid var(--clr-border); flex-wrap: wrap; }
+    .sg-type-sample { color: var(--clr-text); line-height: 1.1; flex: 0 0 200px; }
+    .sg-type-sample--body  { font-family: var(--font-body); }
+    .sg-type-sample--bebas { font-family: var(--font-display); letter-spacing: 0.02em; }
     .sg-type-meta { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text-3); }
     .sg-type-meta b { color: var(--clr-violet-light); font-weight: 600; }
+    /* 配对对照 */
+    .sg-pair-row { display: flex; align-items: baseline; gap: 16px; padding: 10px 14px; border: 1px solid var(--clr-border); border-radius: 6px; margin-bottom: 10px; background: var(--clr-bg-2); flex-wrap: wrap; }
+    .sg-pair-cjk { font-family: var(--font-body); color: var(--clr-text); }
+    .sg-pair-num { font-family: var(--font-display); color: var(--clr-gold-light); }
+    .sg-pair-meta { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text-3); margin-left: auto; }
 
     /* small render frames */
     .sg-chart { max-width: 560px; }
@@ -116,7 +123,13 @@
     <div class="sg-item">
       <div class="sg-item__bar"><span class="sg-item__name">字号阶梯</span><span class="sg-item__cls">Type Scale</span><span class="sg-item__src">DESIGN.md §一·补2</span></div>
       <div id="sgType"></div>
-      <div class="sg-note">避免离散值 7/9/12.5/13.5/17/20/21/30/34/36px，就近归并。display/hero/watermark 档实际更大，此处仅标注。</div>
+      <div class="sg-note">两列同为该档 px。可见 <strong>Bebas Neue（窄高全大写）在相同 px 下比 DM Sans 中文视觉更小</strong>。避免离散值 7/9/12.5/13.5/17/20/21/30/34/36px，就近归并。display/hero/watermark 档实际更大，此处仅标注。</div>
+    </div>
+
+    <div class="sg-item">
+      <div class="sg-item__bar"><span class="sg-item__name">中文 × 数字 视觉等大配对</span><span class="sg-item__cls">DM Sans + Bebas Neue</span><span class="sg-item__src">配对参考</span></div>
+      <div id="sgPair"></div>
+      <div class="sg-note">中文标签（DM Sans）与数字（Bebas Neue）相邻时，要<strong>看起来一样大</strong>，Bebas 需比 DM Sans <strong>大约 +30~40%</strong>（如 12↔16、14↔20）。上面是建议配对，真机上微调到顺眼为准。</div>
     </div>
 
     <div class="sg-item">
@@ -350,13 +363,35 @@
   var TYPE_BIG = [['display','40–44px','HOF 大数字'],['display-lg','52–64px','超大展示'],['hero','clamp(56,8vw,108)','页面主标题'],['watermark','200–280px','背景水印']];
   document.getElementById('sgType').innerHTML =
     TYPE.map(function(t){
-      return '<div class="sg-type-row"><span class="sg-type-sample" style="font-size:'+t[1]+'px">样例文字 Aa 重声交响</span>'
+      return '<div class="sg-type-row">'
+        + '<span class="sg-type-sample sg-type-sample--body"  style="font-size:'+t[1]+'px">样例文字 0123</span>'
+        + '<span class="sg-type-sample sg-type-sample--bebas" style="font-size:'+t[1]+'px">BARBOARD 0123</span>'
         + '<span class="sg-type-meta"><b>'+t[0]+'</b> · '+t[1]+'px · '+t[2]+'</span></div>';
     }).join('')
     + TYPE_BIG.map(function(t){
-      return '<div class="sg-type-row"><span class="sg-type-sample" style="font-size:20px;color:var(--clr-text-2)">（更大）</span>'
+      return '<div class="sg-type-row"><span class="sg-type-sample" style="font-size:18px;color:var(--clr-text-2)">（更大）</span>'
         + '<span class="sg-type-meta"><b>'+t[0]+'</b> · '+t[1]+' · '+t[2]+'</span></div>';
     }).join('');
+  document.querySelector('#sgType .sg-type-row').insertAdjacentHTML('beforebegin',
+    '<div class="sg-type-row" style="border-bottom:1px solid var(--clr-border-2)">'
+    + '<span class="sg-type-sample sg-type-meta" style="flex:0 0 200px"><b>DM Sans（中文/正文）</b></span>'
+    + '<span class="sg-type-sample sg-type-meta" style="flex:0 0 200px"><b>Bebas Neue（英文/数字）</b></span>'
+    + '<span class="sg-type-meta">同 px · 档名 · 用途</span></div>');
+
+  // ── DM Sans × Bebas Neue 视觉等大配对 ──
+  // 同 px 下 Bebas（窄高全大写）比 DM Sans 中文视觉偏小，配对时 Bebas 常需放大约 +30~40% 才看起来等大
+  var PAIRS = [
+    [12, 16, '最高排名', '1', 'stat 标签+数字'],
+    [13, 18, '本周点数', '1478', '榜单数据'],
+    [14, 20, '在榜周数', '17', '统计角标'],
+    [16, 22, '距开启还有', '12', '倒计时']
+  ];
+  document.getElementById('sgPair').innerHTML = PAIRS.map(function(p){
+    return '<div class="sg-pair-row">'
+      + '<span class="sg-pair-cjk" style="font-size:'+p[0]+'px">'+p[2]+'</span>'
+      + '<span class="sg-pair-num" style="font-size:'+p[1]+'px">'+p[3]+'</span>'
+      + '<span class="sg-pair-meta">DM Sans '+p[0]+'px ＋ Bebas '+p[1]+'px · '+p[4]+'</span></div>';
+  }).join('');
 
   // ── 间距阶梯 ──
   var SPACE = [['2xs',4,''],['xs',8,'--gap-xs'],['sm',12,''],['md',16,'--gap-sm'],['lg',24,''],['xl',32,'--gap-md'],['2xl',48,''],['3xl',64,'--gap-lg'],['4xl',96,'--gap-xl']];
