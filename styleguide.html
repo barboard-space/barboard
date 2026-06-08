@@ -79,10 +79,19 @@
     .sg-mini i { width: 24px; height: 24px; border-radius: 4px; border: 1px solid var(--clr-border-2); display: inline-block; }
     .sg-type { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 18px; padding: 9px 0; border-bottom: 1px solid var(--clr-border); }
     .sg-barrow { flex-wrap: wrap; }
-    .sg-where { flex: 1 1 100%; font-family: var(--font-mono); font-size: 10px; color: var(--clr-accent-light); line-height: 1.6; word-break: break-all; margin-top: 2px; }
-    .sg-where__k { color: var(--clr-text-3); margin-right: 4px; }
+    .sg-where { flex: 1 1 100%; font-family: var(--font-body); font-size: 11px; color: var(--clr-accent-light); line-height: 1.6; margin-top: 4px; }
+    .sg-where__k { color: var(--clr-text-3); margin-right: 6px; font-size: 10px; }
     .sg-where--none { color: var(--clr-text-3); }
     .sg-sw__m .sg-where { flex: none; margin-top: 6px; }
+
+    /* 左侧目录 TOC */
+    .sg-toc { position: fixed; left: 16px; top: 40px; width: 122px; max-height: calc(100vh - 80px); overflow-y: auto; }
+    .sg-toc__h { font-family: var(--font-display); letter-spacing: 0.2em; text-transform: uppercase; font-size: 12px; color: var(--clr-text-3); margin-bottom: 12px; }
+    .sg-toc a { display: block; font-size: 12px; line-height: 1.4; color: var(--clr-text-2); text-decoration: none; padding: 4px 0 4px 12px; border-left: 1px solid var(--clr-border); transition: color 0.15s, border-color 0.15s; }
+    .sg-toc a:hover { color: var(--clr-violet-light); border-color: var(--clr-violet-light); }
+    .sg-toc a.sg-toc--tier { color: var(--clr-text); font-weight: 600; padding-left: 0; border-left: none; margin-top: 12px; }
+    .sg-cat__title, .sg-tier__title { scroll-margin-top: 24px; }
+    @media (max-width: 1280px) { .sg-toc { display: none; } }
     .sg-type__px { font-family: var(--font-mono); font-size: 12px; color: var(--clr-text-2); width: 120px; flex-shrink: 0; }
     .sg-type__s { font-family: var(--font-display); color: var(--clr-text); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .sg-barrow { display: flex; align-items: center; gap: 14px; padding: 5px 0; }
@@ -97,6 +106,7 @@
   </style>
 </head>
 <body>
+<nav class="sg-toc" id="sgToc" aria-label="目录"></nav>
 <div class="sg-wrap">
 
   <div class="sg-head">
@@ -224,7 +234,24 @@
   if(!D || !root) return;
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function cat(t, badge){ return '<h3 class="sg-cat__title" style="margin-top:40px">'+t+(badge?'<span class="sg-auto">'+badge+'</span>':'')+'</h3>'; }
-  function where(comps){ if(!comps||!comps.length) return '<div class="sg-where sg-where--none"><span class="sg-where__k">用于</span> —</div>'; var n=10,s=comps.slice(0,n).map(esc).join(' · ')+(comps.length>n?' +'+(comps.length-n):''); return '<div class="sg-where" title="'+esc(comps.join('  '))+'"><span class="sg-where__k">用于</span> '+s+'</div>'; }
+  function area(b){ b=b.replace(/^[.#]/,'');
+    if(/^hof/.test(b)) return '荣誉殿堂';
+    if(/^bbl/i.test(b)) return 'BarboardLab 页';
+    if(/^(ev-|sub-|sp-|submit|tl-)/.test(b)) return '赛事 · 报名页';
+    if(/^(bv-|barvision$)/.test(b)) return 'Barvision 总览';
+    if(/^(arc|archive)/.test(b)) return '存档页';
+    if(/^(ml-|mlCount$)/i.test(b)) return '成员页';
+    if(/^chart/.test(b)) return '榜单条目';
+    if(/^(season|phase$|edition)/.test(b)) return '赛季卡 · 赛程';
+    if(b==='about') return '关于页';
+    if(/^(lab|update|quick-link|hero|ticker|scroll|pillar|editions-grid)/.test(b)) return '首页';
+    if(/^(nav|footer|btn|tag|member|section|divider|container|back-to-top|ext-icon|active|scrolled)/.test(b)) return '全站通用';
+    return b; }
+  function where(comps){
+    if(!comps||!comps.length) return '<div class="sg-where sg-where--none"><span class="sg-where__k">用于</span> —</div>';
+    var areas=[]; comps.forEach(function(c){ var a=area(c); if(areas.indexOf(a)<0) areas.push(a); });
+    return '<div class="sg-where" title="'+esc(comps.join('  '))+'"><span class="sg-where__k">用于</span>'+areas.map(esc).join('、')+'</div>';
+  }
   var h = '';
 
   /* ① 配色令牌（按 :root 分组）*/
@@ -302,6 +329,20 @@
   }
 
   root.innerHTML = h;
+
+  /* 目录 TOC：渲染后扫描所有大区/子区标题 */
+  var toc = document.getElementById('sgToc');
+  if(toc){
+    var heads = document.querySelectorAll('.sg-tier__title, .sg-cat__title');
+    var html = '<div class="sg-toc__h">目录</div>';
+    heads.forEach(function(el, i){
+      if(!el.id) el.id = 'sg-h-' + i;
+      var clone = el.cloneNode(true); var badge = clone.querySelector('.sg-auto'); if(badge) badge.remove();
+      var tier = el.classList.contains('sg-tier__title');
+      html += '<a href="#'+el.id+'"'+(tier?' class="sg-toc--tier"':'')+'>'+esc(clone.textContent.trim())+'</a>';
+    });
+    toc.innerHTML = html;
+  }
 })();
 </script>
 </body>
