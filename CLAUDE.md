@@ -66,9 +66,10 @@ barboard-space/
 ├── style.css               ← 全站样式
 ├── fonts.css               ← 本地字体 @font-face
 ├── DESIGN.md               ← 设计系统（令牌/配色地图/字号间距阶梯/断点/组件命名速查）
-├── styleguide.html         ← 精选「已确认标准」展示（逐项搬入，noindex）
-├── styleguide-draft.html   ← 全量自动渲染底稿（参考/查漏，noindex）
-├── CNAME                   ← barboard.space
+├── styleguide.html         ← 设计标准（noindex）：Foundation 审计可视化 + Elements + Components
+├── styleguide-data.js      ← styleguide Foundation 渲染数据（audit 脚本生成）
+├── DESIGN_AUDIT.md         ← 设计值审计详表（audit 脚本生成）
+├── CNAME                   ← barboard.space（GitHub Pages 自定义域名，勿删）
 ├── about.html
 ├── bbl.html
 ├── barvision.html
@@ -472,7 +473,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 120. **BBL API date 字段含义**：`bbl-latest.json` 的 `date`（如 `2026-05-22`）是该期统计结束后的**下一个周五**（即下一期的起始日），不是统计起始日。统计周期 = `[date-7, date-1]`（上上周五—上周四）。`fmtWeekRange(dateStr)` 和 `fmt_week_range_cn(date_str)` 均按此逻辑实现；切勿改回 `[date, date+6]` 或 `[date-6, date]`，否则显示周期会偏移 7 天或方向反转。`updates.json` 的 BBL 条目 `date` 字段用实际抓取日期（UTC 当天），不用 API chart date。
 121. **行内 `<strong>` 前后空格规范**：在所有页面的行内加粗文本（`ev-req-item`、`ev-crit-item` 及类似列表条目）中，若 `<strong>` 前/后紧接**文字字符**（汉字、字母、数字），必须在该侧插入一个 ASCII 空格；若紧接**标点符号**（`，、；。（）【】` 等）或位于**句首/句末**，则不加空格。例：`榜吧 <strong>官方榜单</strong>（含…）`（"吧"后加空格，"（"前不加）；`以上</strong> 其他成员`（"其"前加空格）。目的是避免中英文混排时 bold 关键词与周围文字视觉粘连。
 122. **`style.css?v=N` 版本号规则（用户约定，重要）**：`index.html`/`bbl.html`/`bbl/hof.html` 引用 `style.css?v=N` 用于刷新 GitHub Pages/浏览器缓存（固定版本号不变则真机看不到 CSS 改动）。**当前版本 = `v=3.0.5`**。规则：① **禁止自行升版本号**；② 后续小优化用 `3.0.6`、`3.0.7` 之类递增（补丁位），改 `style.css` 后同步三个文件的 `?v=`；③ 若认为需要升到 `3.1`（次版本）或 `4`（主版本），**必须先与用户确认**再改。背景：之前自行从 v=2 一路升到 v=5 被用户叫停并要求回退；现以 `3.0.x` 补丁位方案递增。
-123. **设计系统文档 `DESIGN.md`（组件与命名速查）**：根目录 `DESIGN.md` 是全站组件库与命名速查表——含设计令牌、**中文俗名 ↔ class 对照表**（用户用俗名描述需求，据此定位元素）、命名规范（BEM + 页面前缀）、「待统一清单」（9+ 处同物多套的重复实现，供阶段三逐个去重）。新增/改名组件须同步更新。组件展示页分两个（均根目录、`noindex`、不进导航，加载真实 `style.css`）：① **`styleguide.html`** = **精选「已确认标准」展示**，逐项精修确认后才搬入，是全站权威基准 + 视觉回归参考（**建设中，逐个搬入**）；② **`styleguide-draft.html`** = 全量自动渲染底稿（原 styleguide.html 重命名而来，渲染所有全局组件 + 令牌/阶梯/配色可视化 + 页面专属组件索引表，供参考/查漏）。**用户约定**：多页面复用的组件不再加页面前缀，直接放 `style.css` 全局用通用名；页面前缀（`bbl-`/`bv-`/`arc-`/`ml-`/`mp-`/`hof-`/`ev-`）只留给页面独有组件。
+123. **设计系统文档 `DESIGN.md`（组件与命名速查）**：根目录 `DESIGN.md` 是全站组件库与命名速查表——含设计令牌、**中文俗名 ↔ class 对照表**（用户用俗名描述需求，据此定位元素）、命名规范（BEM + 页面前缀）、「待统一清单」（9+ 处同物多套的重复实现，供阶段三逐个去重）。新增/改名组件须同步更新。组件展示页分两个（均根目录、`noindex`、不进导航，加载真实 `style.css`）：① **`styleguide.html`** = **精选「已确认标准」展示**，逐项精修确认后才搬入，是全站权威基准 + 视觉回归参考（**建设中，逐个搬入**）；② `styleguide-draft.html` **已删除**（其「页面专属组件索引表」已并入 styleguide.html Components；令牌/阶梯/配色可视化由 #128 审计可视化取代）。**用户约定**：多页面复用的组件不再加页面前缀，直接放 `style.css` 全局用通用名；页面前缀（`bbl-`/`bv-`/`arc-`/`ml-`/`mp-`/`hof-`/`ev-`）只留给页面独有组件。
 124. **屏幕断点标准（已与用户确认）**：3 档设备模型——**手机 ≤768 / 平板 769–1024 / 桌面 ≥1025**，仅用 `max-width:768px` + `max-width:1024px` 两个断点（桌面为基础样式逐级收窄）+ `min-width:769px` 写桌面专属。**桌面不再细分**（MacBook 与显示器同布局，`--max-width:1200px` 居中）。**平板 = 继承桌面（方案 A，已定）**：不主动写平板规则，仅当某块在平板上确实难看时再在 `max-width:1024px` 加局部单列收窄（已否决"平板当大号手机"，因需主动铺规则、与忽略平板矛盾）。**`480px` 是手机内"极小屏"可选子档**（SE 类，仅需要时用），非主分界。功能查询 `prefers-reduced-motion` / `hover-pointer` 保留。**一次性断点 465/540/600/700/960 待精修各页时逐个看、能就近归并才归并**（内容驱动确有必要的保留）。详见 DESIGN.md §一·补3。
 125. **阶段三去重工作流（用户主导）**：用户逐个 HTML 精修去重，**从 index.html 开始**。规则：用户主导、AI 辅助提醒+只读审计+预览验证，**不擅自改代码、不擅自 push**。每元素对照「精修基准准则」：①硬编码 hex→`--clr-*`/配色地图 ②inline 字号→字号阶梯（中文+Bebas 数字配对 +30~40%）③inline 间距→间距阶梯 ④内联且与全局重复的组件→复用全局 class ⑤复用组件不加页面前缀 ⑥层级间距与全站统一。注：index.html 组件大多已全局，去重主要是 inline px→阶梯、零散硬编码→令牌。
 126. **设计流程（用户习惯）**：① **桌面端为基准**（先精修桌面 base）；② 之后**手机端定点微调**（`@media max-width:768px`）；③ **平板基本忽略**，继承桌面 base。含义：**预览验证只用桌面 + 手机（≤768）两个视口、跳过平板**；`max-width:1024px`（平板）档低优先、不主动加新的；手机端改动严格锁 `@media` 不回灌桌面。
@@ -484,7 +485,12 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **localStorage 持久化**：key `barvision2026_submission`，提交成功存本设备；**刷新/重进若有记录→自动显示「您已提交报名」态**（「查看报名详情」回显、「重新报名」清空表单，**再次成功提交才覆盖**本地记录）。仅本设备/浏览器，非云端。
     - **三态随时间自动切换**（`updateAll` 每秒）：`OPEN_DATE`=6/1 18:00、`CLOSE_DATE`=**2026-07-20T00:00**(=7/19 24:00，**勿写 24:00 会 Invalid Date**)、`VOTE1_DATE`=7/25 22:00。hero 倒计时按阶段：开启前→倒数开启 / 开启中→倒数关闭 / 关闭后→**倒数 Semi-Final 1+附加赛资格赛投票（7/25 22:00）**。面板：锁定（倒计时）/ 表单 / 关闭（「歌曲征集已结束」）；badge：即将开启 / **已开启（粉色呼吸点 `.sp-badge__dot`）** / 已关闭。倒计时数字均粉色。
     - 首页 index.html「歌曲报名」按钮已 enable → `barvision/2026/events.html#submit`。重复提交靠人工核（前端无法真正跨设备防重，权威记录=邮箱邮件）。
-128. **阶段三去重·styleguide 沙箱工作流（进行中）**：精选展示页 `styleguide.html`（已确认标准）+ 全量底稿 `styleguide-draft.html`。工作流 = **提取→放进 styleguide 沙箱→用户微调→才写回原 html/style.css**（不可跳过微调步直接写回）。**Logo 现状**：标准已设计（彩色 `--clr-board` + mono；字号令牌 `--logo-fs-en` 26/`--logo-fs-cjk` 12；间距 `--logo-gap-cjk` 10/`--logo-gap-icon` 4），但**真实 style.css 的 logo 应用已回滚**（见本 session），logo 只在 `styleguide.html` 用局部 `--sgl-*` 沙箱渲染，**等用户微调定稿后再写回 style.css 的 `--logo-*` + 应用到 nav/footer**。已 tokenize 入真实 style.css 的只有 `--clr-board`（#一·补）。`:root` 颜色已分「彩色 Chromatic / Mono 黑白灰」两组注释。
+128. **设计系统：令牌归并 + styleguide 可视化（现状）**：
+    - **Logo 已定稿并写回** `style.css`：令牌 `--logo-fs-en` 26 / `--logo-fs-cjk` 12 / `--logo-gap-cjk` 8 / `--logo-gap-icon` 4；nav 图标↔字标 gap 5→4；footer 中文名抽成 `.footer__name`（tagline 不计入 logo）。沙箱 `--sgl-*` 已废弃。
+    - **审计/替换工具**（handle）：`scripts/audit_design_tokens.py` 扫全站设计值 → `DESIGN_AUDIT.md`（详表）+ `styleguide-data.js`（可视化数据）；`scripts/apply_design_tokens.py` 把硬编码批量换成 `var(--token)`（默认 dry-run，`--write` 落盘；仅 CSS 上下文替换，**不碰 SVG fill/stroke**）。
+    - **已 tokenize**：14 个新令牌入 `:root`（`--clr-silver/-bronze/-up/-down/-re/-team-cun/-esc/-white/-cta-1~3` + 金银铜 `-tint`），66 处硬编码已替换（零视觉变化）。仍硬编码：深色 hero bg 族（~13 HEX，待手动并簇）+ 大量 rgba 发光/阴影（多为一次性）。`--clr-text-2` = `#A299C8`。
+    - **`styleguide.html` 结构**（取代旧沙箱版）：基础 Foundation = **审计数据驱动的可视化**（JS 读 `styleguide-data.js` 渲染色块/字号样例/间距条/圆角；离散值金标、移动端青色 📱）+ 元素 Elements（Logo 手工条目）+ 组件 Components（占位）。**章节 Sections 层已移除**；Components 含「页面专属组件待迁移索引」表（原 styleguide-draft.html 的索引，draft 已删除）。重跑审计即刷新 Foundation。
+    - **建设规则**（Elements/Components 手工条目）：①记录名称+class名 ②记录所用地方（不省略）③只追加不改既有，改既有先确认。新令牌确认后并入 `style.css` 再重跑审计。
 
 ---
 

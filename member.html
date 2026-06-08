@@ -31,7 +31,7 @@
       font-size: clamp(56px, 8vw, 96px);
       line-height: 0.95;
       letter-spacing: 0.01em;
-      color: #fff;
+      color: var(--clr-white);
       margin-bottom: 36px;
     }
 
@@ -68,7 +68,7 @@
     .ml-filter:hover { border-color: var(--clr-border-2); color: var(--clr-text); }
     .ml-filter.active                        { border-color: rgba(111,158,195,0.7); color: var(--clr-board); background: rgba(111,158,195,0.1); }
     .ml-filter[data-filter="bbl"].active    { border-color: var(--clr-violet-light); color: var(--clr-violet-light); background: var(--clr-violet-dim); }
-    .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: #D49840; background: rgba(180,120,45,0.1); }
+    .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: var(--clr-team-cun); background: rgba(180,120,45,0.1); }
     .ml-filter[data-filter="indie"].active  { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
 
     .ml-search-wrap {
@@ -176,7 +176,7 @@
     .ml-card:has(.ml-card__badges) .ml-card__handle:empty { display: none; }
     .ml-card__handle:empty + .ml-card__badges { margin-top: -2px; }
     .ml-badge--bbl   { color: var(--clr-violet-light); background: var(--clr-violet-dim);    border: 1px solid rgba(192,132,252,0.4); }
-    .ml-badge--cun   { color: #D49840;                 background: rgba(180,120,45,0.1);      border: 1px solid rgba(212,152,64,0.4); }
+    .ml-badge--cun   { color: var(--clr-team-cun);                 background: rgba(180,120,45,0.1);      border: 1px solid rgba(212,152,64,0.4); }
     .ml-badge--indie { color: var(--clr-pink-light);   background: var(--clr-pink-dim);       border: 1px solid rgba(240,96,184,0.4); }
 
     .ml-card__foot {

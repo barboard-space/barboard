@@ -48,7 +48,7 @@
 
   /* ── Text ── */
   --clr-text:       #f0eeff;
-  --clr-text-2:     #8880a8;
+  --clr-text-2:     #A299C8;
   --clr-text-3:     #8880a8;
 
   /* ── Semantic aliases ── */
@@ -72,6 +72,28 @@
   /* Layout */
   --max-width: 1200px;
   --nav-h:     72px;
+
+  /* Logo（nav/footer 共享 · 见 DESIGN.md §一·补5） */
+  --logo-fs-en:    26px;  /* Bebas 英文字标 */
+  --logo-fs-cjk:   12px;  /* DM Sans 中文副标 */
+  --logo-gap-cjk:  8px;   /* 字标 ↔ 中文副标 */
+  --logo-gap-icon: 4px;   /* 图标 ↔ 字标 */
+
+  /* ── 语义色 / 排名 / 走势 / CTA（由 audit 归并）── */
+  --clr-silver: #90b8d0; /* 排名 No.2 银 */
+  --clr-bronze: #e0a870; /* 排名 No.3 铜 */
+  --clr-gold-tint: #fff4d6; /* 金档歌名微调 */
+  --clr-silver-tint: #d4e8f4; /* 银档歌名微调 */
+  --clr-bronze-tint: #f4dcc0; /* 铜档歌名微调 */
+  --clr-up: #4ade80; /* 走势上升 绿 */
+  --clr-down: #f87171; /* 走势下降 红 */
+  --clr-re: #facc15; /* 走势重入 黄 */
+  --clr-team-cun: #d49840; /* 小组 村摇欧共体 */
+  --clr-esc: #4ecca3; /* 活动 ECVP 青 */
+  --clr-white: #ffffff; /* 纯白 */
+  --clr-cta-1: #9840f0; /* CTA 渐变 stop */
+  --clr-cta-2: #7030c8; /* CTA 渐变 stop */
+  --clr-cta-3: #4c18a0; /* CTA 渐变 stop */
 }
 
 html {
@@ -259,7 +281,7 @@ img {
 }
 
 .nav__links .nav__cta {
-  color: #fff;
+  color: var(--clr-white);
   padding: 6px 16px 7px;
   border-radius: 4px;
   border: none;
@@ -271,9 +293,9 @@ img {
     135deg,
     var(--clr-pink-light) 0%,
     var(--clr-pink-light) 35%,
-    #9840f0               60%,
-    #7030c8               80%,
-    #4c18a0               100%
+    var(--clr-cta-1)               60%,
+    var(--clr-cta-2)               80%,
+    var(--clr-cta-3)               100%
   );
   background-size: 250% 100%;
   background-position: right center;
@@ -359,7 +381,7 @@ img {
 }
 
 .nav__drawer-links .nav__cta {
-  color: #fff;
+  color: var(--clr-white);
   border-bottom: 1px solid var(--clr-border);
   border-radius: 0;
   padding: 14px 0;
@@ -500,13 +522,13 @@ img {
     135deg,
     var(--clr-pink-light) 0%,
     var(--clr-pink-light) 35%,
-    #9840f0               60%,
-    #7030c8               80%,
-    #4c18a0               100%
+    var(--clr-cta-1)               60%,
+    var(--clr-cta-2)               80%,
+    var(--clr-cta-3)               100%
   );
   background-size: 250% 100%;
   background-position: right center;
-  color: #fff;
+  color: var(--clr-white);
   border: none;
   box-shadow: 0 0 18px rgba(168,85,247,0.22), 0 0 36px rgba(224,64,160,0.12);
   transition: background-position 0.35s ease, box-shadow 0.35s ease;
@@ -563,7 +585,7 @@ img {
    TICKER / ANNOUNCEMENT BAR
    ============================================= */
 .ticker {
-  background: linear-gradient(90deg, #9840f0 0%, #7030c8 55%, #4c18a0 100%);
+  background: linear-gradient(90deg, var(--clr-cta-1) 0%, var(--clr-cta-2) 55%, var(--clr-cta-3) 100%);
   overflow: hidden;
   height: 38px;
   display: flex;
@@ -573,7 +595,7 @@ img {
 
 .ticker__label {
   flex-shrink: 0;
-  background: linear-gradient(to right, #4c18a0 calc(100% - 36px), transparent 100%);
+  background: linear-gradient(to right, var(--clr-cta-3) calc(100% - 36px), transparent 100%);
   height: 100%;
   display: flex;
   align-items: center;
@@ -582,7 +604,7 @@ img {
   font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--clr-white);
   white-space: nowrap;
   z-index: 2;
 }
@@ -600,7 +622,7 @@ img {
   letter-spacing: 0.04em;
   padding: 0 36px;
   position: relative;
-  color: #ffffff;
+  color: var(--clr-white);
 }
 
 .ticker__item::after {
@@ -888,7 +910,7 @@ img {
 }
 
 .chart-item--top .chart-song__title {
-  color: #fff4d6;
+  color: var(--clr-gold-tint);
 }
 
 .chart-item--top .chart-song__artist {
@@ -908,7 +930,7 @@ img {
 }
 
 .chart-item--silver .chart-rank {
-  color: #90b8d0;
+  color: var(--clr-silver);
   text-shadow: 0 0 18px rgba(110,170,204,0.5);
 }
 
@@ -933,7 +955,7 @@ img {
 }
 
 .chart-item--bronze .chart-rank {
-  color: #e0a870;
+  color: var(--clr-bronze);
   text-shadow: 0 0 18px rgba(224,148,84,0.6);
 }
 
@@ -1044,8 +1066,8 @@ img {
   align-self: center;
 }
 
-.chart-change--up   { color: #4ade80; }
-.chart-change--down { color: #f87171; }
+.chart-change--up   { color: var(--clr-up); }
+.chart-change--down { color: var(--clr-down); }
 .chart-change--same { color: var(--clr-border-2); font-size: 12px; letter-spacing: 0; }
 
 .chart-change--new,
@@ -1058,7 +1080,7 @@ img {
 }
 
 .chart-change--new  { color: var(--clr-violet-light); }
-.chart-change--re   { color: #facc15; }
+.chart-change--re   { color: var(--clr-re); }
 
 .chart-stat--peak   { color: var(--clr-gold-light); }
 
@@ -1645,8 +1667,15 @@ img {
 
 .footer__logo {
   margin-top: 0 !important;
-  margin-bottom: 10px;
+  margin-bottom: var(--logo-gap-cjk);
   text-decoration: none;
+}
+
+.footer__name {
+  font-family: var(--font-body);
+  font-size: var(--logo-fs-cjk);
+  color: var(--clr-text);
+  margin-bottom: 8px;
 }
 
 .footer__tagline {
@@ -2217,13 +2246,13 @@ body:has(.nav--open) .back-to-top {
 .nav__logo {
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: var(--logo-gap-icon);
   font-family: 'Bebas Neue', Impact, 'Arial Black', Arial, sans-serif !important;
-  font-size: 26px !important;
+  font-size: var(--logo-fs-en) !important;
   font-weight: 400 !important;
   letter-spacing: 0.02em;
   line-height: 1;
-  color: #f0eeff !important;
+  color: var(--clr-text) !important;
   text-decoration: none;
   margin-top: 0px;
 }
