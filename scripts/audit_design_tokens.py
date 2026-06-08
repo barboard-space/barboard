@@ -26,6 +26,9 @@ RADIUS    = re.compile(r'border-radius\s*:\s*([^;{}]+)')
 SPACING_PROP = re.compile(r'(?:^|[\s;{"])((?:margin|padding)(?:-(?:top|bottom|left|right))?|gap|row-gap|column-gap)\s*:\s*([^;{}]+)')
 FONTFAMILY = re.compile(r'font-family\s*:\s*([^;{}]+)')
 PXNUM = re.compile(r'(-?[0-9.]+)px')
+VAR_USE = re.compile(r'var\(\s*(--[\w-]+)')
+CLASS = re.compile(r'\.([A-Za-z_][\w-]*)')
+STYLE_BLOCK = re.compile(r'<style[^>]*>(.*?)</style>', re.DOTALL | re.IGNORECASE)
 
 
 def gather_files():
@@ -62,6 +65,71 @@ def rel(path):
     return os.path.relpath(path, BASE).replace("\\", "/")
 
 
+def iter_css_rules(css):
+    """把 CSS 拆成 (selector, body) 叶规则；@media 等 at-rule 包裹层跳过。"""
+    out, buf, stack = [], '', []
+    for c in css:
+        if c == '{':
+            stack.append(buf.strip())
+            buf = ''
+        elif c == '}':
+            sel = stack.pop() if stack else ''
+            if sel and not sel.startswith('@'):
+                out.append((sel, buf))
+            buf = ''
+        else:
+            buf += c
+    return out
+
+
+def sel_blocks(selector):
+    """从选择器提取「组件」名（取每段主体 class 的 BEM 块；无 class 取 #id）。"""
+    blocks = set()
+    for part in selector.split(','):
+        part = part.strip()
+        if not part:
+            continue
+        classes = CLASS.findall(part)
+        if classes:                                  # 取最后一个 class = 被样式的主体
+            blocks.add('.' + classes[-1].split('__')[0].split('--')[0])
+        else:
+            m = re.search(r'#([\w-]+)', part)
+            if m:
+                blocks.add('#' + m.group(1))
+    return blocks
+
+
+def component_usage(files):
+    """解析每个文件的 CSS 规则，把令牌/颜色/字号/间距/圆角的使用归到「组件」。"""
+    tok, hexc, rgbac, fsc, spc, radc = (collections.defaultdict(set) for _ in range(6))
+    for path in files:
+        try:
+            text = open(path, encoding="utf-8").read()
+        except Exception:
+            continue
+        csses = [text] if path.endswith('.css') else STYLE_BLOCK.findall(text)
+        for css in csses:
+            for sel, body in iter_css_rules(css):
+                blocks = sel_blocks(sel)
+                if not blocks:                        # :root / body / 裸元素 → 非组件，跳过
+                    continue
+                for m in VAR_USE.finditer(body):
+                    for b in blocks: tok[m.group(1)].add(b)
+                for m in HEX.finditer(body):
+                    for b in blocks: hexc[norm_color(m.group(0))].add(b)
+                for m in RGBA.finditer(body):
+                    for b in blocks: rgbac[norm_color(m.group(0))].add(b)
+                for m in FONTSIZE.finditer(body):
+                    for b in blocks: fsc[float(m.group(1))].add(b)
+                for m in SPACING_PROP.finditer(body):
+                    for px in PXNUM.findall(m.group(2)):
+                        for b in blocks: spc[abs(float(px))].add(b)
+                for m in RADIUS.finditer(body):
+                    if 'var(' not in m.group(1):
+                        for b in blocks: radc[m.group(1).strip()].add(b)
+    return tok, hexc, rgbac, fsc, spc, radc
+
+
 def main():
     try:
         sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -94,7 +162,6 @@ def main():
     spacings = collections.defaultdict(list)
     radii = collections.defaultdict(list)
     fontfams = collections.defaultdict(list)
-    var_files = collections.defaultdict(set)   # token 名 -> 用到 var(--token) 的文件集合
 
     for path in files:
         try:
@@ -122,8 +189,9 @@ def main():
                 val = ff.group(1).strip()
                 if 'var(' not in val:
                     fontfams[val].append(loc)
-            for vm in re.finditer(r'var\(\s*(--[\w-]+)', line):
-                var_files[vm.group(1)].add(rel(path))
+
+    # 组件级使用归属（解析 CSS 规则 → 组件）
+    tok_comp, hex_comp, rgba_comp, fs_comp, sp_comp, rad_comp = component_usage(files)
 
     def fmt_px(x):
         return f"{int(x)}px" if x == int(x) else f"{x}px"
@@ -221,31 +289,28 @@ def main():
                 name, val = mm.group(1), mm.group(2).strip()
                 is_color = bool(HEX.search(val) or RGBA.search(val) or 'var(--clr' in val)
                 tokens.append({"name": name, "value": val, "group": group, "color": is_color,
-                               "files": sorted(var_files.get(name, []))})
+                               "components": sorted(tok_comp.get(name, []))})
         if depth <= 0:
             break
 
-    def files_of(loclist):                       # loc "file:line" -> 去重文件列表
-        return sorted({l.rsplit(':', 1)[0] for l in loclist})
-
-    def color_list(d):
+    def color_list(d, comp):
         out = []
         for v, lst in sorted(d.items(), key=lambda kv: -len(kv[1])):
             tks = color_token_by_val.get(v, [])
             out.append({"value": v, "count": len(lst), "token": (tks[0] if tks else None),
-                        "files": files_of(lst)})
+                        "components": sorted(comp.get(v, []))})
         return out
 
     data = {
         "tokens": tokens,
-        "hardcodedHex": [x for x in color_list(hexes) if not x["token"]],
-        "hardcodedRgba": [x for x in color_list(rgbas) if not x["token"]],
+        "hardcodedHex": [x for x in color_list(hexes, hex_comp) if not x["token"]],
+        "hardcodedRgba": [x for x in color_list(rgbas, rgba_comp) if not x["token"]],
         "fontSizes": [{"px": (int(x) if x == int(x) else x), "count": len(lst),
-                       "onScale": int(x) in TYPE_SCALE, "files": files_of(lst)} for x, lst in sorted(fontsizes.items())],
+                       "onScale": int(x) in TYPE_SCALE, "components": sorted(fs_comp.get(x, []))} for x, lst in sorted(fontsizes.items())],
         "spacings": [{"px": (int(x) if x == int(x) else x), "count": len(lst),
-                      "onScale": int(x) in GAP_SCALE, "files": files_of(lst)} for x, lst in sorted(spacings.items())],
-        "radii": [{"value": v, "count": len(lst), "files": files_of(lst)} for v, lst in sorted(radii.items())],
-        "fonts": [{"value": v, "count": len(lst), "files": files_of(lst)} for v, lst in sorted(fontfams.items(), key=lambda kv: -len(kv[1]))],
+                      "onScale": int(x) in GAP_SCALE, "components": sorted(sp_comp.get(x, []))} for x, lst in sorted(spacings.items())],
+        "radii": [{"value": v, "count": len(lst), "components": sorted(rad_comp.get(v, []))} for v, lst in sorted(radii.items())],
+        "fonts": [{"value": v, "count": len(lst)} for v, lst in sorted(fontfams.items(), key=lambda kv: -len(kv[1]))],
     }
     js = "/* 自动生成 by scripts/audit_design_tokens.py — 勿手改 */\nwindow.SG_AUDIT = " \
          + json.dumps(data, ensure_ascii=False, indent=2) + ";\n"
