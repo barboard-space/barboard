@@ -77,7 +77,10 @@
     .sg-sw__v { font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3); margin-top: 2px; }
     .sg-mini { display: flex; flex-wrap: wrap; gap: 6px; }
     .sg-mini i { width: 24px; height: 24px; border-radius: 4px; border: 1px solid var(--clr-border-2); display: inline-block; }
-    .sg-type { display: flex; align-items: baseline; gap: 18px; padding: 9px 0; border-bottom: 1px solid var(--clr-border); }
+    .sg-type { display: flex; align-items: baseline; flex-wrap: wrap; gap: 6px 18px; padding: 9px 0; border-bottom: 1px solid var(--clr-border); }
+    .sg-barrow { flex-wrap: wrap; }
+    .sg-where { flex: 1 1 100%; font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3); line-height: 1.5; word-break: break-all; margin-top: 2px; }
+    .sg-sw__m .sg-where { flex: none; margin-top: 5px; }
     .sg-type__px { font-family: var(--font-mono); font-size: 12px; color: var(--clr-text-2); width: 120px; flex-shrink: 0; }
     .sg-type__s { font-family: var(--font-display); color: var(--clr-text); line-height: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .sg-barrow { display: flex; align-items: center; gap: 14px; padding: 5px 0; }
@@ -219,6 +222,7 @@
   if(!D || !root) return;
   function esc(s){ return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
   function cat(t, badge){ return '<h3 class="sg-cat__title" style="margin-top:40px">'+t+(badge?'<span class="sg-auto">'+badge+'</span>':'')+'</h3>'; }
+  function where(files){ if(!files||!files.length) return ''; var n=6,s=files.slice(0,n).map(esc).join(' · ')+(files.length>n?' +'+(files.length-n):''); return '<div class="sg-where" title="'+esc(files.join('  '))+'">📍 '+s+'</div>'; }
   var h = '';
 
   /* ① 配色令牌（按 :root 分组）*/
@@ -231,7 +235,7 @@
     ct.filter(function(t){return t.group===g;}).forEach(function(t){
       h += '<div class="sg-sw"><div class="sg-sw__c" style="background:'+esc(t.value)+'"></div>'
          + '<div class="sg-sw__m"><div class="sg-sw__n">'+esc(t.name)+'</div>'
-         + '<div class="sg-sw__v">'+esc(t.value)+'</div></div></div>';
+         + '<div class="sg-sw__v">'+esc(t.value)+'</div>'+where(t.files)+'</div></div>';
     });
     h += '</div>';
   });
@@ -243,7 +247,7 @@
   D.hardcodedHex.forEach(function(c){
     h += '<div class="sg-sw"><div class="sg-sw__c" style="background:'+esc(c.value)+'"></div>'
        + '<div class="sg-sw__m"><div class="sg-sw__n">'+esc(c.value)+'</div>'
-       + '<div class="sg-sw__v">×'+c.count+'</div></div></div>';
+       + '<div class="sg-sw__v">×'+c.count+'</div>'+where(c.files)+'</div></div>';
   });
   h += '</div>';
   h += '<div class="sg-grp">rgba · 前 60（悬停看值）</div><div class="sg-mini">';
@@ -265,7 +269,7 @@
     var disp = Math.min(f.px, 56);
     h += '<div class="sg-type"><div class="sg-type__px">'+f.px+'px · ×'+f.count
        + (f.onScale?'':' <span class="sg-off">离散</span>')+'</div>'
-       + '<div class="sg-type__s" style="font-size:'+disp+'px">Aa 2026</div></div>';
+       + '<div class="sg-type__s" style="font-size:'+disp+'px">Aa 2026</div>'+where(f.files)+'</div>';
   });
 
   /* ⑤ 间距 */
@@ -273,17 +277,16 @@
   D.spacings.filter(function(s){return s.px>0;}).forEach(function(s){
     h += '<div class="sg-barrow"><div class="sg-barrow__l">'+s.px+'px ×'+s.count+'</div>'
        + '<div class="sg-barrow__b" style="width:'+Math.min(s.px,320)+'px"></div>'
-       + (s.onScale?'':'<span class="sg-off">离散</span>')+'</div>';
+       + (s.onScale?'':'<span class="sg-off">离散</span>')+where(s.files)+'</div>';
   });
 
   /* ⑥ 圆角 */
   h += cat('圆角 Radius', D.radii.length+' 种');
-  h += '<div class="sg-rad-grid">';
   D.radii.forEach(function(r){
-    h += '<div class="sg-rad"><div class="sg-rad__b" style="border-radius:'+esc(r.value)+'"></div>'
-       + '<div class="sg-rad__l">'+esc(r.value)+' ×'+r.count+'</div></div>';
+    h += '<div class="sg-barrow"><div class="sg-barrow__l">'+esc(r.value)+' ×'+r.count+'</div>'
+       + '<div class="sg-rad__b" style="width:44px;height:24px;border-radius:'+esc(r.value)+'"></div>'
+       + where(r.files)+'</div>';
   });
-  h += '</div>';
 
   /* ⑦ 其它令牌（尺寸 / 布局 / Logo）*/
   var others = D.tokens.filter(function(t){return !t.color && !/^--font-/.test(t.name);});
@@ -291,7 +294,7 @@
     h += cat('其它令牌（尺寸 / 布局 / Logo）');
     h += '<div class="sg-sw-grid" style="grid-template-columns:repeat(auto-fill,minmax(180px,1fr))">';
     others.forEach(function(t){
-      h += '<div class="sg-sw" style="background:var(--clr-bg-2)"><div class="sg-sw__m"><div class="sg-sw__n">'+esc(t.name)+'</div><div class="sg-sw__v">'+esc(t.value)+'</div></div></div>';
+      h += '<div class="sg-sw" style="background:var(--clr-bg-2)"><div class="sg-sw__m"><div class="sg-sw__n">'+esc(t.name)+'</div><div class="sg-sw__v">'+esc(t.value)+'</div>'+where(t.files)+'</div></div>';
     });
     h += '</div>';
   }

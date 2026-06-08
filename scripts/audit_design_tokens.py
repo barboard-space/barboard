@@ -94,6 +94,7 @@ def main():
     spacings = collections.defaultdict(list)
     radii = collections.defaultdict(list)
     fontfams = collections.defaultdict(list)
+    var_files = collections.defaultdict(set)   # token 名 -> 用到 var(--token) 的文件集合
 
     for path in files:
         try:
@@ -121,6 +122,8 @@ def main():
                 val = ff.group(1).strip()
                 if 'var(' not in val:
                     fontfams[val].append(loc)
+            for vm in re.finditer(r'var\(\s*(--[\w-]+)', line):
+                var_files[vm.group(1)].add(rel(path))
 
     def fmt_px(x):
         return f"{int(x)}px" if x == int(x) else f"{x}px"
@@ -217,15 +220,20 @@ def main():
             if mm:
                 name, val = mm.group(1), mm.group(2).strip()
                 is_color = bool(HEX.search(val) or RGBA.search(val) or 'var(--clr' in val)
-                tokens.append({"name": name, "value": val, "group": group, "color": is_color})
+                tokens.append({"name": name, "value": val, "group": group, "color": is_color,
+                               "files": sorted(var_files.get(name, []))})
         if depth <= 0:
             break
+
+    def files_of(loclist):                       # loc "file:line" -> 去重文件列表
+        return sorted({l.rsplit(':', 1)[0] for l in loclist})
 
     def color_list(d):
         out = []
         for v, lst in sorted(d.items(), key=lambda kv: -len(kv[1])):
             tks = color_token_by_val.get(v, [])
-            out.append({"value": v, "count": len(lst), "token": (tks[0] if tks else None)})
+            out.append({"value": v, "count": len(lst), "token": (tks[0] if tks else None),
+                        "files": files_of(lst)})
         return out
 
     data = {
@@ -233,11 +241,11 @@ def main():
         "hardcodedHex": [x for x in color_list(hexes) if not x["token"]],
         "hardcodedRgba": [x for x in color_list(rgbas) if not x["token"]],
         "fontSizes": [{"px": (int(x) if x == int(x) else x), "count": len(lst),
-                       "onScale": int(x) in TYPE_SCALE} for x, lst in sorted(fontsizes.items())],
+                       "onScale": int(x) in TYPE_SCALE, "files": files_of(lst)} for x, lst in sorted(fontsizes.items())],
         "spacings": [{"px": (int(x) if x == int(x) else x), "count": len(lst),
-                      "onScale": int(x) in GAP_SCALE} for x, lst in sorted(spacings.items())],
-        "radii": [{"value": v, "count": len(lst)} for v, lst in sorted(radii.items())],
-        "fonts": [{"value": v, "count": len(lst)} for v, lst in sorted(fontfams.items(), key=lambda kv: -len(kv[1]))],
+                      "onScale": int(x) in GAP_SCALE, "files": files_of(lst)} for x, lst in sorted(spacings.items())],
+        "radii": [{"value": v, "count": len(lst), "files": files_of(lst)} for v, lst in sorted(radii.items())],
+        "fonts": [{"value": v, "count": len(lst), "files": files_of(lst)} for v, lst in sorted(fontfams.items(), key=lambda kv: -len(kv[1]))],
     }
     js = "/* 自动生成 by scripts/audit_design_tokens.py — 勿手改 */\nwindow.SG_AUDIT = " \
          + json.dumps(data, ensure_ascii=False, indent=2) + ";\n"
