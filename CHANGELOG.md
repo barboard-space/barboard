@@ -4,6 +4,31 @@
 
 ---
 
+## [2026-06-08] — 成员数据修正 + 设计系统统一（令牌归并 / styleguide 可视化）
+
+### Added
+- **设计值审计工具**：`scripts/audit_design_tokens.py`（扫全站颜色/字号/间距/圆角 → `DESIGN_AUDIT.md` + `styleguide-data.js`）+ `scripts/apply_design_tokens.py`（硬编码→令牌批量替换，dry-run / `--write`）。
+- **14 个新令牌**写入 `style.css :root`：`--clr-silver/-bronze/-up/-down/-re/-team-cun/-esc/-white/-cta-1~3` + 金银铜 `-tint`；`--logo-*`（fs-en 26 / fs-cjk 12 / gap-cjk 8 / gap-icon 4）；`.footer__name` 类。
+- 新成员 X妈 `@没有XX不科学`（space_id 195）。
+
+### Changed
+- **Logo 定稿写回 `style.css`**：nav 图标↔字标 gap 5→4、footer 中文名抽成 `.footer__name`、去硬编码改令牌。
+- **66 处硬编码颜色 → `var(--token)`**（8 文件，精确 1:1、零视觉变化）。
+- `--clr-text-2` `#8880a8` → `#A299C8`；`--logo-gap-cjk` 10 → 8（=`--gap-xs`）。
+- **`styleguide.html` 重构**：基础 Foundation 改为**审计数据驱动的可视化**（色块 / 字号样例 / 间距条 / 圆角 / 离散金标 / 移动端青色 📱）；保留 Elements·Logo；色块放大。
+- 成员 xjebs（space_id 88）昵称 X妈 → XX妈。
+- ticker：补「重声交响」中文主题语；Grand Final 文案改冒号格式。
+
+### Fixed
+- Members 卡片「大名+标签」与「大名+小名」等高（桌面 84 / 手机 74）。
+- `member/109·132·180.html` 随 CSV 同步（B 站 id / handle 修正）。
+
+### Removed
+- 废弃 npm 残留：`node_modules/`（空）+ `package.json`（`{}`）+ `package-lock.json`，并加入 `.gitignore`。
+- `styleguide.html` 章节 Sections 层（Navbar 记录）+ 相关 demo CSS。
+
+---
+
 ## [2026-06-01] — 歌曲报名通道上线 + 设计系统扩充
 
 ### Added
