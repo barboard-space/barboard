@@ -89,7 +89,6 @@
 | `rgba(0,180,255,0.05)` | 2 | ❓ 无 token | barvision.html:24 · barvision/hof.html:24 |
 | `rgba(100,140,230,0.55)` | 2 | ❓ 无 token | barvision.html:92 · barvision.html:247 |
 | `rgba(120,160,240,0.08)` | 2 | ❓ 无 token | barvision.html:96 · barvision.html:248 |
-| `rgba(192,132,252,0.22)` | 2 | ❓ 无 token | barvision.html:126 · barvision/hof.html:111 |
 | `rgba(255,255,255,0.035)` | 2 | ❓ 无 token | barvision.html:199 · barvision.html:200 |
 | `rgba(180,120,45,0.1)` | 2 | ❓ 无 token | member.html:71 · member.html:179 |
 | `rgba(255,255,255,0.018)` | 2 | ❓ 无 token | barvision/hof.html:30 · barvision/hof.html:31 |
@@ -112,7 +111,7 @@
 | `rgba(224,64,160,0.5)` | 1 | ❓ 无 token | style.css:308 |
 | `rgba(224,64,160,0.55)` | 1 | ❓ 无 token | style.css:539 |
 | `rgba(240,238,255,0.65)` | 1 | ❓ 无 token | style.css:544 |
-| `rgba(240,238,255,0.62)` | 1 | ❓ 无 token | style.css:659 |
+| `rgba(240,238,255,0.82)` | 1 | ❓ 无 token | style.css:659 |
 | `rgba(240,238,255,0.09)` | 1 | ❓ 无 token | style.css:717 |
 | `rgba(255,255,255,0.02)` | 1 | ❓ 无 token | style.css:820 |
 | `rgba(245,200,64,0.35)` | 1 | ❓ 无 token | style.css:894 |
@@ -166,6 +165,7 @@
 | `rgba(192,132,252,0.1)` | 1 | ❓ 无 token | barvision.html:113 |
 | `rgba(255,255,255,0.06)` | 1 | ❓ 无 token | barvision.html:114 |
 | `rgba(192,132,252,0.98)` | 1 | ❓ 无 token | barvision.html:125 |
+| `rgba(192,132,252,0.22)` | 1 | ❓ 无 token | barvision.html:126 |
 | `rgba(168,85,247,0.36)` | 1 | ❓ 无 token | barvision.html:127 |
 | `rgba(139,52,220,0.16)` | 1 | ❓ 无 token | barvision.html:128 |
 | `rgba(168,85,247,0.05)` | 1 | ❓ 无 token | barvision.html:129 |
@@ -182,6 +182,8 @@
 | `rgba(240,96,184,0.4)` | 1 | ❓ 无 token | member.html:180 |
 | `rgba(168,85,247,0.11)` | 1 | ❓ 无 token | barvision/hof.html:75 |
 | `rgba(224,64,160,0.05)` | 1 | ❓ 无 token | barvision/hof.html:75 |
+| `rgba(240,96,184,0.3)` | 1 | ❓ 无 token | barvision/hof.html:96 |
+| `rgba(192,132,252,0.3)` | 1 | ❓ 无 token | barvision/hof.html:97 |
 | `rgba(168,85,247,0.26)` | 1 | ❓ 无 token | barvision/2026/events.html:22 |
 | `rgba(139,52,220,0.1)` | 1 | ❓ 无 token | barvision/2026/events.html:91 |
 | `rgba(224,64,160,0.35)` | 1 | ❓ 无 token | barvision/2026/events.html:173 |
@@ -196,7 +198,7 @@
 | `rgba(180,160,255,0.06)` | 1 | ❓ 无 token | barvision/2026/events.html:310 |
 | `rgba(212,168,50,0.12)` | 1 | ❓ 无 token | barvision/2026/events.html:311 |
 | `rgba(212,168,50,0.05)` | 1 | ❓ 无 token | barvision/2026/events.html:345 |
-| `rgba(240,238,255,0.75)` | 1 | ❓ 无 token | barvision/2026/events.html:987 |
+| `rgba(240,238,255,0.75)` | 1 | ❓ 无 token | barvision/2026/events.html:993 |
 | `rgba(212,168,50,0.2)` | 1 | ❓ 无 token | bbl/hof.html:23 |
 | `rgba(144,184,208,0.2)` | 1 | ❓ 无 token | bbl/hof.html:118 |
 | `rgba(224,168,112,0.18)` | 1 | ❓ 无 token | bbl/hof.html:119 |
@@ -230,14 +232,14 @@
 | px | 次数 | 在档? | 位置示例 |
 |---|---|---|---|
 | 7px | 1 | 🔸 离散 | style.css:634 |
-| 9px | 5 | 🔸 离散 | style.css:1076 · style.css:1292 · member.html:165 · barvision/2026/events.html:304 · barvision/2026/events.html:346 |
+| 9px | 6 | 🔸 离散 | style.css:1076 · style.css:1292 · member.html:165 · barvision/hof.html:147 · barvision/2026/events.html:304 … (+1) |
 | 10px | 40 | ✅ | style.css:312 · style.css:319 · style.css:672 · style.css:1018 · style.css:1026 … (+35) |
 | 11px | 57 | ✅ | style.css:134 · style.css:159 · style.css:577 · style.css:603 · style.css:1283 … (+52) |
-| 12px | 35 | ✅ | style.css:481 · style.css:620 · style.css:996 · style.css:1071 · style.css:1200 … (+30) |
-| 12.5px | 4 | ✅ | barvision/2026/events.html:130 · barvision/2026/events.html:261 · barvision/2026/events.html:391 · barvision/2026/events.html:986 |
-| 13px | 38 | ✅ | style.css:240 · style.css:510 · style.css:794 · style.css:855 · style.css:1116 … (+33) |
+| 12px | 37 | ✅ | style.css:481 · style.css:620 · style.css:996 · style.css:1071 · style.css:1200 … (+32) |
+| 12.5px | 4 | ✅ | barvision/2026/events.html:130 · barvision/2026/events.html:261 · barvision/2026/events.html:391 · barvision/2026/events.html:992 |
+| 13px | 36 | ✅ | style.css:240 · style.css:510 · style.css:794 · style.css:855 · style.css:1116 … (+31) |
 | 13.5px | 1 | ✅ | barvision/2026/events.html:299 |
-| 14px | 10 | ✅ | style.css:786 · style.css:988 · style.css:1500 · style.css:1682 · bbl.html:261 … (+5) |
+| 14px | 11 | ✅ | style.css:786 · style.css:988 · style.css:1500 · style.css:1682 · bbl.html:261 … (+6) |
 | 15px | 9 | ✅ | style.css:371 · style.css:400 · style.css:408 · archive.html:62 · barvision.html:59 … (+4) |
 | 16px | 13 | ✅ | style.css:108 · style.css:721 · style.css:838 · style.css:1156 · style.css:1541 … (+8) |
 | 17px | 1 | 🔸 离散 | style.css:493 |
@@ -249,8 +251,8 @@
 | 26px | 4 | ✅ | bbl.html:321 · member.html:144 · barvision/2026/events.html:331 · bbl/hof.html:496 |
 | 28px | 5 | ✅ | style.css:777 · style.css:1374 · style.css:1631 · barvision/2026/events.html:408 · bbl/hof.html:309 |
 | 30px | 2 | 🔸 离散 | archive.html:153 · barvision/2026/events.html:451 |
-| 32px | 2 | ✅ | index.html:120 · barvision/2026/events.html:202 |
-| 34px | 2 | 🔸 离散 | barvision/hof.html:88 · barvision/hof.html:110 |
+| 32px | 3 | ✅ | index.html:120 · barvision/hof.html:119 · barvision/2026/events.html:202 |
+| 34px | 1 | 🔸 离散 | barvision/hof.html:88 |
 | 36px | 3 | 🔸 离散 | style.css:571 · barvision/2026/events.html:435 · bbl/hof.html:564 |
 | 40px | 2 | ✅ | style.css:1603 · barvision/2026/events.html:335 |
 | 42px | 1 | 🔸 离散 | member.html:215 |
@@ -267,22 +269,22 @@
 | px | 次数 | 在档? | 位置示例 |
 |---|---|---|---|
 | 0px | 2 | 🔸 离散 | style.css:2257 · bbl.html:359 |
-| 1px | 18 | 🔸 离散 | style.css:272 · style.css:291 · style.css:1009 · style.css:2271 · bbl.html:410 … (+13) |
+| 1px | 20 | 🔸 离散 | style.css:272 · style.css:291 · style.css:1009 · style.css:2271 · bbl.html:410 … (+15) |
 | 2px | 29 | 🔸 离散 | style.css:581 · style.css:675 · style.css:866 · style.css:1005 · style.css:1058 … (+24) |
-| 3px | 22 | 🔸 离散 | style.css:1092 · style.css:1296 · style.css:1296 · style.css:1496 · style.css:2091 … (+17) |
-| 4px | 31 | ✅ | style.css:138 · style.css:271 · style.css:332 · style.css:365 · style.css:790 … (+26) |
-| 5px | 13 | 🔸 离散 | style.css:1296 · style.css:1430 · style.css:2266 · archive.html:177 · archive.html:177 … (+8) |
-| 6px | 36 | 🔸 离散 | style.css:285 · style.css:854 · style.css:885 · style.css:1006 · style.css:1241 … (+31) |
-| 7px | 14 | 🔸 离散 | style.css:285 · style.css:396 · style.css:675 · style.css:1251 · bbl.html:233 … (+9) |
-| 8px | 54 | ✅ | style.css:168 · style.css:509 · style.css:1092 · style.css:1205 · style.css:1217 … (+49) |
+| 3px | 21 | 🔸 离散 | style.css:1092 · style.css:1296 · style.css:1296 · style.css:1496 · style.css:2091 … (+16) |
+| 4px | 32 | ✅ | style.css:138 · style.css:271 · style.css:332 · style.css:365 · style.css:790 … (+27) |
+| 5px | 14 | 🔸 离散 | style.css:1296 · style.css:1430 · style.css:2266 · archive.html:177 · archive.html:177 … (+9) |
+| 6px | 37 | 🔸 离散 | style.css:285 · style.css:854 · style.css:885 · style.css:1006 · style.css:1241 … (+32) |
+| 7px | 15 | 🔸 离散 | style.css:285 · style.css:396 · style.css:675 · style.css:1251 · bbl.html:233 … (+10) |
+| 8px | 55 | ✅ | style.css:168 · style.css:509 · style.css:1092 · style.css:1205 · style.css:1217 … (+50) |
 | 9px | 7 | 🔸 离散 | archive.html:120 · barvision/2026/events.html:217 · barvision/2026/events.html:229 · barvision/2026/events.html:270 · barvision/2026/events.html:382 … (+2) |
-| 10px | 30 | 🔸 离散 | style.css:138 · style.css:877 · style.css:1851 · style.css:2162 · archive.html:127 … (+25) |
+| 10px | 31 | 🔸 离散 | style.css:138 · style.css:877 · style.css:1851 · style.css:2162 · archive.html:127 … (+26) |
 | 11px | 3 | 🔸 离散 | archive.html:109 · barvision/2026/events.html:230 · bbl/hof.html:366 |
-| 12px | 35 | ✅ | style.css:513 · style.css:716 · style.css:884 · style.css:1336 · style.css:1699 … (+30) |
-| 13px | 4 | 🔸 离散 | style.css:2063 · barvision/hof.html:159 · barvision/2026/events.html:481 · bbl/hof.html:541 |
+| 12px | 38 | ✅ | style.css:513 · style.css:716 · style.css:884 · style.css:1336 · style.css:1699 … (+33) |
+| 13px | 4 | 🔸 离散 | style.css:2063 · barvision/hof.html:179 · barvision/2026/events.html:481 · bbl/hof.html:541 |
 | 14px | 46 | 🔸 离散 | style.css:374 · style.css:387 · style.css:885 · style.css:1211 · style.css:1242 … (+41) |
-| 16px | 44 | ✅ | style.css:285 · style.css:724 · style.css:762 · style.css:1333 · style.css:1355 … (+39) |
-| 18px | 16 | 🔸 离散 | archive.html:104 · archive.html:149 · barvision.html:57 · bbl.html:89 · bbl.html:557 … (+11) |
+| 16px | 43 | ✅ | style.css:285 · style.css:724 · style.css:762 · style.css:1333 · style.css:1355 … (+38) |
+| 18px | 15 | 🔸 离散 | archive.html:104 · archive.html:149 · barvision.html:57 · bbl.html:89 · bbl.html:557 … (+10) |
 | 20px | 32 | 🔸 离散 | style.css:561 · style.css:602 · style.css:763 · style.css:1159 · style.css:1623 … (+27) |
 | 22px | 6 | 🔸 离散 | style.css:1172 · archive.html:164 · barvision.html:190 · barvision/2026/events.html:405 · barvision/2026/events.html:405 … (+1) |
 | 23px | 1 | 🔸 离散 | bbl.html:464 |
@@ -311,13 +313,13 @@
 | 值 | 次数 | 位置示例 |
 |---|---|---|
 | `0` | 2 | style.css:386 · barvision/2026/events.html:136 |
-| `2px` | 5 | style.css:1093 · style.css:1297 · member.html:170 · barvision/2026/events.html:270 · barvision/2026/events.html:305 |
-| `3px` | 7 | style.css:139 · style.css:1044 · archive.html:128 · archive.html:179 · bbl.html:339 … (+2) |
+| `2px` | 6 | style.css:1093 · style.css:1297 · member.html:170 · barvision/hof.html:148 · barvision/2026/events.html:270 … (+1) |
+| `3px` | 9 | style.css:139 · style.css:1044 · archive.html:128 · archive.html:179 · bbl.html:339 … (+4) |
 | `4px` | 18 | style.css:286 · style.css:514 · style.css:888 · style.css:1253 · style.css:1354 … (+13) |
-| `50%` | 10 | style.css:863 · style.css:1227 · style.css:1407 · barvision.html:144 · barvision/hof.html:167 … (+5) |
+| `50%` | 10 | style.css:863 · style.css:1227 · style.css:1407 · barvision.html:144 · barvision/hof.html:187 … (+5) |
 | `5px` | 1 | style.css:676 |
-| `6px` | 14 | style.css:766 · style.css:1566 · barvision.html:177 · bbl.html:292 · barvision/hof.html:103 … (+9) |
-| `8px` | 13 | style.css:1166 · archive.html:79 · barvision.html:93 · bbl.html:124 · member.html:123 … (+8) |
+| `6px` | 12 | style.css:766 · style.css:1566 · barvision.html:177 · bbl.html:292 · barvision/2026/events.html:77 … (+7) |
+| `8px` | 14 | style.css:1166 · archive.html:79 · barvision.html:93 · bbl.html:124 · member.html:123 … (+9) |
 | `8px 8px 0 0` | 1 | archive.html:88 |
 
 ## ⑥ 硬编码字体栈（未用 var(--font-*)）

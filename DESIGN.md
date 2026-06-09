@@ -6,7 +6,7 @@
 > 3. **去重依据**——文末「待统一清单」记录了"同物多套"的重复实现，供后续阶段三逐个收敛。
 >
 > 维护约定：新增/改名组件时同步更新本文件。配套展示页：`styleguide.html`（设计标准：Foundation 审计可视化 + Elements + Components 索引；`styleguide-data.js` 由审计脚本生成）。
-> 当前 `style.css` 版本号：`?v=3.0.2`（改 style.css 须按 [CLAUDE.md #122] 同步 index/bbl/bbl-hof 的 `?v=`）。
+> 当前 `style.css` 版本号：`?v=3.0.6`（改 style.css 须按 [CLAUDE.md #122] 同步 index/bbl/bbl-hof 的 `?v=`）。
 
 ---
 
@@ -27,8 +27,8 @@
 | 金 | `--clr-gold` / `--clr-gold-light` | `#d4a832` / `#f5c840` | 奖项、Top 1 |
 | **榜吧蓝（品牌第二色）** | `--clr-board` | `#6F9EC3` | logo BOARD、archive 主题、成员无分组 |
 | 主文字 | `--clr-text` | `#f0eeff` | 正文主色 |
-| 次文字 | `--clr-text-2` | `#A299C8` | 描述、小标签、meta、nav 链接 |
-| 次文字（暗） | `--clr-text-3` | `#8880a8` | 更弱的 meta / 占位 |
+| 次文字 | `--clr-text-2` | `#C2BBDF` | 描述、小标签、meta、nav 链接 |
+| 次文字（暗） | `--clr-text-3` | `#A39BC2` | 更弱的 meta / 占位 |
 
 > 金/银/铜约定：金 `--clr-gold-light`、银 `#90b8d0`、铜 `#e0a870`（[CLAUDE.md #84]）。
 

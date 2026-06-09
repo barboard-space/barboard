@@ -48,8 +48,8 @@
 
   /* ── Text ── */
   --clr-text:       #f0eeff;
-  --clr-text-2:     #A299C8;
-  --clr-text-3:     #8880a8;
+  --clr-text-2:     #C2BBDF;
+  --clr-text-3:     #A39BC2;
 
   /* ── Semantic aliases ── */
   --clr-red:        var(--clr-pink);
@@ -656,7 +656,7 @@ img {
    ============================================= */
 .member {
   display: inline-block;
-  color: rgba(240,238,255,0.62);
+  color: rgba(240,238,255,0.82);
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;

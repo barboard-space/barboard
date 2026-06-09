@@ -51,8 +51,8 @@ window.SG_AUDIT = {
         ".bbl-search",
         ".bbl-video",
         ".bv-arch-card",
-        ".bv-award",
-        ".bv-rec",
+        ".bv-card",
+        ".bv-legend",
         ".chart-item",
         ".edition-card",
         ".ev-countdown",
@@ -107,7 +107,7 @@ window.SG_AUDIT = {
         ".bbl-video",
         ".bv-arch-card",
         ".bv-award",
-        ".bv-rec",
+        ".bv-card",
         ".chart-item",
         ".divider",
         ".edition-card",
@@ -170,7 +170,10 @@ window.SG_AUDIT = {
         ".bbl-video",
         ".btn",
         ".bv-arch-card",
-        ".bv-award",
+        ".bv-card",
+        ".bv-old-tag",
+        ".bv-session",
+        ".bv-ver",
         ".chart-change",
         ".edition-card",
         ".ev-countdown",
@@ -247,6 +250,7 @@ window.SG_AUDIT = {
         ".active",
         ".arc-card",
         ".btn",
+        ".bv-group",
         ".ev-countdown",
         ".ev-dot",
         ".ev-phase",
@@ -317,11 +321,12 @@ window.SG_AUDIT = {
         ".bbl-video",
         ".bv-accent",
         ".bv-archive-link",
-        ".bv-award",
+        ".bv-card",
+        ".bv-entry",
         ".bv-eyebrow",
+        ".bv-group",
         ".bv-live-badge",
         ".bv-live-dot",
-        ".bv-rec",
         ".chart-change",
         ".chart-stat",
         ".edition-card",
@@ -439,8 +444,9 @@ window.SG_AUDIT = {
         ".bbl-search",
         ".bbl-showmore",
         ".btn",
+        ".bv-card",
+        ".bv-entry",
         ".bv-pioneer",
-        ".bv-rec",
         ".chart-song",
         ".ev-approval-rule",
         ".ev-crit-item",
@@ -476,7 +482,7 @@ window.SG_AUDIT = {
     },
     {
       "name": "--clr-text-2",
-      "value": "#A299C8",
+      "value": "#C2BBDF",
       "group": "Text",
       "color": true,
       "components": [
@@ -496,10 +502,14 @@ window.SG_AUDIT = {
         ".bbl-video",
         ".btn",
         ".bv-archive-link",
-        ".bv-award",
+        ".bv-card",
+        ".bv-entry",
         ".bv-hero",
+        ".bv-legend",
+        ".bv-old-tag",
         ".bv-pioneer",
-        ".bv-rec",
+        ".bv-session",
+        ".bv-ver",
         ".chart-header",
         ".chart-song",
         ".chart-stat",
@@ -540,15 +550,15 @@ window.SG_AUDIT = {
     },
     {
       "name": "--clr-text-3",
-      "value": "#8880a8",
+      "value": "#A39BC2",
       "group": "Text",
       "color": true,
       "components": [
         ".archive-card",
         ".bbl-search",
         ".bbl-stat",
-        ".bv-award",
-        ".bv-rec",
+        ".bv-entry",
+        ".bv-legend",
         ".chart-rank",
         ".chart-stat",
         ".edition-card",
@@ -644,9 +654,9 @@ window.SG_AUDIT = {
         ".bbl-chart-title",
         ".bbl-hero",
         ".bbl-hl-card",
+        ".bv-card",
         ".bv-hero",
         ".bv-pioneer",
-        ".bv-rec",
         ".chart-rank",
         ".edition-card",
         ".ev-countdown",
@@ -712,6 +722,9 @@ window.SG_AUDIT = {
         ".arc-card",
         ".bbl-chart-date",
         ".bbl-stat",
+        ".bv-entry",
+        ".bv-legend",
+        ".bv-session",
         ".chart-change",
         ".chart-stat",
         ".edition-card",
@@ -768,11 +781,10 @@ window.SG_AUDIT = {
         ".bbl-chart-header",
         ".bbl-chart-layout",
         ".bbl-hero",
-        ".bv-awards-grid",
         ".bv-current-card",
         ".bv-hero",
         ".bv-pioneer",
-        ".bv-records-grid",
+        ".bv-ver",
         ".container",
         ".footer",
         ".hero",
@@ -1682,15 +1694,6 @@ window.SG_AUDIT = {
       ]
     },
     {
-      "value": "rgba(192,132,252,0.22)",
-      "count": 2,
-      "token": null,
-      "components": [
-        ".bv-current-card",
-        ".bv-rec"
-      ]
-    },
-    {
       "value": "rgba(255,255,255,0.035)",
       "count": 2,
       "token": null,
@@ -1871,7 +1874,7 @@ window.SG_AUDIT = {
       ]
     },
     {
-      "value": "rgba(240,238,255,0.62)",
+      "value": "rgba(240,238,255,0.82)",
       "count": 1,
       "token": null,
       "components": [
@@ -2297,6 +2300,14 @@ window.SG_AUDIT = {
       ]
     },
     {
+      "value": "rgba(192,132,252,0.22)",
+      "count": 1,
+      "token": null,
+      "components": [
+        ".bv-current-card"
+      ]
+    },
+    {
       "value": "rgba(168,85,247,0.36)",
       "count": 1,
       "token": null,
@@ -2422,6 +2433,22 @@ window.SG_AUDIT = {
       "token": null,
       "components": [
         ".bv-pioneer"
+      ]
+    },
+    {
+      "value": "rgba(240,96,184,0.3)",
+      "count": 1,
+      "token": null,
+      "components": [
+        ".bv-group"
+      ]
+    },
+    {
+      "value": "rgba(192,132,252,0.3)",
+      "count": 1,
+      "token": null,
+      "components": [
+        ".bv-group"
       ]
     },
     {
@@ -2752,9 +2779,10 @@ window.SG_AUDIT = {
     },
     {
       "px": 9,
-      "count": 5,
+      "count": 6,
       "onScale": false,
       "components": [
+        ".bv-old-tag",
         ".chart-change",
         ".ev-js-rank",
         ".ml-badge",
@@ -2773,9 +2801,9 @@ window.SG_AUDIT = {
         ".bbl-hl-card",
         ".bbl-search",
         ".bbl-stat",
-        ".bv-award",
+        ".bv-card",
         ".bv-live-badge",
-        ".bv-rec",
+        ".bv-session",
         ".chart-badge",
         ".chart-change",
         ".chart-stat",
@@ -2814,9 +2842,9 @@ window.SG_AUDIT = {
         ".bbl-hl-card",
         ".bbl-hl-sidebar",
         ".bbl-video",
-        ".bv-award",
+        ".bv-card",
         ".bv-eyebrow",
-        ".bv-rec",
+        ".bv-legend",
         ".edition-card",
         ".ev-eyebrow",
         ".ev-pt-note",
@@ -2850,7 +2878,7 @@ window.SG_AUDIT = {
     },
     {
       "px": 12,
-      "count": 35,
+      "count": 37,
       "onScale": true,
       "components": [
         ".archive-card",
@@ -2858,6 +2886,9 @@ window.SG_AUDIT = {
         ".bbl-search",
         ".bbl-stat",
         ".btn",
+        ".bv-card",
+        ".bv-entry",
+        ".bv-ver",
         ".chart-change",
         ".chart-song",
         ".edition-card",
@@ -2895,7 +2926,7 @@ window.SG_AUDIT = {
     },
     {
       "px": 13,
-      "count": 38,
+      "count": 36,
       "onScale": true,
       "components": [
         ".arc-card",
@@ -2904,9 +2935,8 @@ window.SG_AUDIT = {
         ".bbl-video",
         ".btn",
         ".bv-archive-link",
-        ".bv-award",
+        ".bv-card",
         ".bv-pioneer",
-        ".bv-rec",
         ".chart-header",
         ".ev-approval-rule",
         ".ev-deadline-bar",
@@ -2944,10 +2974,11 @@ window.SG_AUDIT = {
     },
     {
       "px": 14,
-      "count": 10,
+      "count": 11,
       "onScale": true,
       "components": [
         ".bbl-search",
+        ".bv-card",
         ".chart-song",
         ".footer",
         ".pillar",
@@ -3077,19 +3108,19 @@ window.SG_AUDIT = {
     },
     {
       "px": 32,
-      "count": 2,
+      "count": 3,
       "onScale": true,
       "components": [
+        ".bv-card",
         ".sp-locked"
       ]
     },
     {
       "px": 34,
-      "count": 2,
+      "count": 1,
       "onScale": false,
       "components": [
-        ".bv-pioneer",
-        ".bv-rec"
+        ".bv-pioneer"
       ]
     },
     {
@@ -3193,10 +3224,12 @@ window.SG_AUDIT = {
     },
     {
       "px": 1,
-      "count": 18,
+      "count": 20,
       "onScale": false,
       "components": [
         ".bbl-item-stats",
+        ".bv-legend",
+        ".bv-session",
         ".chart-stats",
         ".ev-cd-unit",
         ".ev-toc",
@@ -3238,13 +3271,12 @@ window.SG_AUDIT = {
     },
     {
       "px": 3,
-      "count": 22,
+      "count": 21,
       "onScale": false,
       "components": [
         ".arc-stat",
         ".bbl-stat",
-        ".bv-award",
-        ".bv-rec",
+        ".bv-card",
         ".chart-badge",
         ".ev-crit-list",
         ".ev-phase",
@@ -3262,14 +3294,15 @@ window.SG_AUDIT = {
     },
     {
       "px": 4,
-      "count": 31,
+      "count": 32,
       "onScale": true,
       "components": [
         ".arc-badge",
         ".archive-card",
         ".bbl-hl-sidebar",
         ".bbl-search",
-        ".bv-award",
+        ".bv-entry",
+        ".bv-old-tag",
         ".chart-rank-col",
         ".chart-song",
         ".edition-card",
@@ -3294,12 +3327,13 @@ window.SG_AUDIT = {
     },
     {
       "px": 5,
-      "count": 13,
+      "count": 14,
       "onScale": false,
       "components": [
         ".arc-card",
         ".bbl-hl-card",
         ".bv-archive-link",
+        ".bv-legend",
         ".ev-jury-scores",
         ".ev-tl-desc",
         ".hof-charts-rank",
@@ -3312,7 +3346,7 @@ window.SG_AUDIT = {
     },
     {
       "px": 6,
-      "count": 36,
+      "count": 37,
       "onScale": false,
       "components": [
         "#mlCount",
@@ -3320,8 +3354,9 @@ window.SG_AUDIT = {
         ".bbl-hl-card",
         ".bbl-item-stats",
         ".bbl-search",
+        ".bv-entry",
         ".bv-live-badge",
-        ".bv-rec",
+        ".bv-session",
         ".chart-item",
         ".chart-list",
         ".chart-stats",
@@ -3352,11 +3387,12 @@ window.SG_AUDIT = {
     },
     {
       "px": 7,
-      "count": 14,
+      "count": 15,
       "onScale": false,
       "components": [
         ".bbl-hl-card",
         ".bbl-search",
+        ".bv-card",
         ".ev-approval-rules",
         ".hof-uncrowned",
         ".member-tooltip",
@@ -3367,7 +3403,7 @@ window.SG_AUDIT = {
     },
     {
       "px": 8,
-      "count": 54,
+      "count": 55,
       "onScale": true,
       "components": [
         "#bblHighlights",
@@ -3381,10 +3417,10 @@ window.SG_AUDIT = {
         ".bbl-stat",
         ".bbl-video",
         ".btn",
-        ".bv-award",
+        ".bv-card",
+        ".bv-entry",
         ".bv-eyebrow",
         ".bv-live-badge",
-        ".bv-rec",
         ".chart-badge",
         ".chart-item",
         ".ev-approval-rule",
@@ -3426,14 +3462,15 @@ window.SG_AUDIT = {
     },
     {
       "px": 10,
-      "count": 30,
+      "count": 31,
       "onScale": false,
       "components": [
         ".arc-badge",
         ".arc-card",
         ".bbl-hero",
         ".bbl-hl-card",
-        ".bv-award",
+        ".bv-card",
+        ".bv-entry",
         ".bv-hero",
         ".chart-list",
         ".ev-countdown",
@@ -3468,7 +3505,7 @@ window.SG_AUDIT = {
     },
     {
       "px": 12,
-      "count": 35,
+      "count": 38,
       "onScale": true,
       "components": [
         ".arc-card",
@@ -3476,10 +3513,12 @@ window.SG_AUDIT = {
         ".bbl-showmore",
         ".btn",
         ".bv-archive-grid",
-        ".bv-awards-grid",
+        ".bv-card",
+        ".bv-grid",
+        ".bv-legend",
         ".bv-recent-archive-grid",
-        ".bv-records-grid",
         ".bv-unplugged-grid",
+        ".bv-ver",
         ".chart-item",
         ".ev-countdown",
         ".ev-elig-block",
@@ -3557,15 +3596,14 @@ window.SG_AUDIT = {
     },
     {
       "px": 16,
-      "count": 44,
+      "count": 43,
       "onScale": true,
       "components": [
         "#mlCount",
         ".bbl-search",
         ".bbl-video",
-        ".bv-award",
+        ".bv-card",
         ".bv-pioneer",
-        ".bv-rec",
         ".edition-card",
         ".ev-approval-cols",
         ".ev-phase",
@@ -3595,14 +3633,13 @@ window.SG_AUDIT = {
     },
     {
       "px": 18,
-      "count": 16,
+      "count": 15,
       "onScale": false,
       "components": [
         ".arc-card",
         ".bbl-hero",
-        ".bv-award",
+        ".bv-card",
         ".bv-hero",
-        ".bv-rec",
         ".ev-tl-body",
         ".hof-record-card",
         ".ml-card",
@@ -3902,8 +3939,9 @@ window.SG_AUDIT = {
     },
     {
       "value": "2px",
-      "count": 5,
+      "count": 6,
       "components": [
+        ".bv-old-tag",
         ".chart-badge",
         ".ev-phase",
         ".ml-badge",
@@ -3913,11 +3951,13 @@ window.SG_AUDIT = {
     },
     {
       "value": "3px",
-      "count": 7,
+      "count": 9,
       "components": [
         ".arc-badge",
         ".arc-card",
         ".bbl-hl-card",
+        ".bv-legend",
+        ".bv-session",
         ".chart-cover",
         ".hof-uncrowned",
         ".sp-badge",
@@ -3971,13 +4011,11 @@ window.SG_AUDIT = {
     },
     {
       "value": "6px",
-      "count": 14,
+      "count": 12,
       "components": [
         ".archive-card",
         ".bbl-hl-card",
         ".bv-arch-card",
-        ".bv-award",
-        ".bv-rec",
         ".ev-countdown",
         ".ev-deadline-bar",
         ".ev-pt-wrap",
@@ -3991,10 +4029,11 @@ window.SG_AUDIT = {
     },
     {
       "value": "8px",
-      "count": 13,
+      "count": 14,
       "components": [
         ".arc-card",
         ".bbl-video",
+        ".bv-card",
         ".bv-current-card",
         ".bv-pioneer",
         ".ev-vote-card",
