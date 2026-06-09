@@ -638,8 +638,8 @@
 
                 <!-- 联系方式 -->
                 <div class="sub-field">
-                  <label class="sub-label" for="subContact">联系方式（QQ号 / 微信名，选填）</label>
-                  <input class="sub-input" type="text" id="subContact" autocomplete="off" placeholder="QQ号 或 微信名" />
+                  <label class="sub-label" for="subContact">联系方式（QQ号 / 微信号，选填）</label>
+                  <input class="sub-input" type="text" id="subContact" autocomplete="off" placeholder="QQ号 或 微信号" />
                 </div>
 
                 <!-- 报名方式 -->
@@ -668,7 +668,7 @@
                     <div class="sub-field"><label class="sub-label">艺人 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="1" data-key="artist" /><p class="sub-err"></p></div>
                     <div class="sub-field"><label class="sub-label">发行国家（选填）</label><input class="sub-input" type="text" data-song="1" data-key="country" /></div>
                     <div class="sub-field"><label class="sub-label">语种（选填）</label><input class="sub-input" type="text" data-song="1" data-key="language" /></div>
-                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="text" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="年-月-日" data-song="1" data-key="date" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="1" data-key="date" /><p class="sub-err"></p></div>
                   </div>
                 </fieldset>
 
@@ -680,14 +680,14 @@
                     <div class="sub-field"><label class="sub-label">艺人（选填）</label><input class="sub-input" type="text" data-song="2" data-key="artist" /><p class="sub-err"></p></div>
                     <div class="sub-field"><label class="sub-label">发行国家（选填）</label><input class="sub-input" type="text" data-song="2" data-key="country" /></div>
                     <div class="sub-field"><label class="sub-label">语种（选填）</label><input class="sub-input" type="text" data-song="2" data-key="language" /></div>
-                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="text" inputmode="numeric" maxlength="10" autocomplete="off" placeholder="年-月-日" data-song="2" data-key="date" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="2" data-key="date" /><p class="sub-err"></p></div>
                   </div>
                 </fieldset>
 
                 <!-- 备注（选填，给主办方的信息） -->
                 <div class="sub-field">
                   <label class="sub-label" for="subNote">备注（选填）</label>
-                  <textarea class="sub-input sub-textarea" id="subNote" rows="3" autocomplete="off" placeholder="可向主办方说明的信息，如：使用的版本、展播时播放 MV 还是 Live 现场版等。"></textarea>
+                  <textarea class="sub-input sub-textarea" id="subNote" rows="3" autocomplete="off" placeholder="想要补充的报名信息，如：选送的歌曲版本、展播时倾向播放 MV 或 Live 版本等。"></textarea>
                 </div>
 
                 <!-- 蜜罐（防机器人，勿填） -->
@@ -1229,12 +1229,9 @@
         if (requireBasics && !inp.value.trim()) { fieldErr(inp, '必填'); ok = false; } else fieldErr(inp, '');
       });
       const d = form.querySelector('[data-song="' + n + '"][data-key="date"]');
-      const dv = d.value.trim();
-      if (dv && !/^\d{4}-\d{2}-\d{2}$/.test(dv)) {
-        fieldErr(d, '格式：年-月-日，如 2024-05-01'); ok = false;
-      } else if (dv && (dv < '2023-07-01' || dv > '2026-06-30')) {
+      if (d.value && (d.value < '2023-07-01' || d.value > '2026-06-30')) {
         fieldErr(d, '须在 2023-07-01 ～ 2026-06-30'); ok = false;
-      } else fieldErr(d, '');
+      }
       return ok;
     }
 
