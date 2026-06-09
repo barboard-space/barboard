@@ -327,7 +327,7 @@
     if (e.val)    l += '<span class="bv-entry__val">' + esc(e.val) + '</span>';
     if (e.song)   l += '<span class="bv-entry__song">' + esc(e.song) + '</span>';
     if (e.detail) l += '<span class="bv-entry__detail">' + esc(e.detail) + '</span>';
-    var r = sessionBadge(e.session) + (e.old ? '<span class="bv-old-tag">旧</span>' : '');
+    var r = (e.old ? '<span class="bv-old-tag">旧</span>' : '') + sessionBadge(e.session);
     return '<div class="bv-entry' + (e.old ? ' bv-entry--old' : '') + '">' +
       '<span class="bv-entry__l">' + l + '</span>' +
       (r ? '<span class="bv-entry__r">' + r + '</span>' : '') + '</div>';
