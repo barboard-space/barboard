@@ -6,51 +6,110 @@
     "desc": "2019 年，@绿荫夏语在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。"
   },
 
-  "records": [
-    { "label": "最多参与场数",   "val": "28",   "who": "雨妈 · 锴妈", "note": "第 1 届至第 15 届全程参与" },
-    { "label": "最多冠军选送",   "val": "4",    "who": "雨妈",        "note": "4 首单曲夺得场次冠军" },
-    { "label": "最高单届得分",   "val": "357",  "who": "威妈",        "note": "第十五届 · Elliot James Reay — Boy In Love" },
-    { "label": "最高单场支持率", "val": "100%", "who": "草妈 · 羊妈", "note": "草妈第 4 届 A 场 · 羊妈第十三届" },
-    { "label": "最长连续前十",   "val": "8场",  "who": "雨妈",        "note": "第 1 届至第 5 届 A 场连续进入前十" },
-    { "label": "最长连续参赛",   "val": "12届", "who": "锴妈",        "note": "第 4 届至第 15 届连续参赛" }
-  ],
+  "season": {
+    "regular": [
+      { "label": "最多参与人数届次", "val": "68(6)", "edition": "The 5th Barvision · 2019", "session": "5A 5B 5C" },
+      { "label": "最多参与人数场次", "val": "27",    "edition": "The 13th Barvision · 2023", "session": "13" }
+    ],
+    "unplugged": [
+      { "label": "最多参与人数届次", "val": "21", "edition": "The 1st Barvision Unplugged · 2019", "session": "1E" }
+    ]
+  },
 
-  "awards": [
-    {
-      "title":   "出道即巅峰",
-      "metric":  "首秀即夺冠",
-      "winners": ["猴妈", "瑞妈", "A妈", "羊妈"],
-      "detail":  "猴妈（第 1 届）· 瑞妈（3B）· A妈（11B）· 羊妈（第 13 届）"
-    },
-    {
-      "title":   "实红艺人",
-      "metric":  "连续两届夺冠",
-      "winners": ["包妈", "雨妈"],
-      "detail":  "包妈连冠第 5–6 届（5A · 6C）· 雨妈连冠第 7–8 届（7A · 8A）"
-    },
-    {
-      "title":   "卧薪尝胆",
-      "metric":  "花费最长时间夺首冠",
-      "winners": ["锴妈"],
-      "detail":  "第 1 届首次参赛，历经 21 组赛事，终于第 10 届 A 场首度夺冠"
-    },
-    {
-      "title":   "雨露均沾",
-      "metric":  "最长连续参赛届数",
-      "winners": ["锴妈"],
-      "detail":  "第 4 届至第 15 届，连续 12 届保持参赛"
-    },
-    {
-      "title":   "全世界都在讲中国话",
-      "metric":  "最多华语歌曲选送",
-      "winners": ["院妈"],
-      "detail":  "累计选送 13 首华语单曲参赛"
-    },
-    {
-      "title":   "喜获双学位",
-      "metric":  "在常规版和娱乐版均夺冠",
-      "winners": ["瑞妈", "包妈", "雨妈", "小妈"],
-      "detail":  "在 Barvision 常规赛与 Barvision Unplugged 各至少夺冠一次"
-    }
-  ]
+  "records": {
+    "regular": [
+      { "label": "最多冠军单曲选送数", "val": "4", "who": "雨妈", "entries": [
+        { "song": "K. Michelle — Not A Little Bit", "session": "5C" },
+        { "song": "Brantley Gilbert — Tried to Tell Ya", "session": "5C", "old": true },
+        { "song": "Indochine — Station 13", "session": "7A" },
+        { "song": "Dorian Electra — Man to Man", "session": "8A" }
+      ] },
+      { "label": "最多单组前三场数", "val": "11", "who": "雨妈" },
+      { "label": "最多单组前十场数", "val": "24", "who": "雨妈" },
+      { "label": "最高单届总分", "val": "281", "who": "包妈", "edition": "The 6th Barvision · 2020", "session": "6A 6B 6C" },
+      { "label": "最高单组总分", "val": "357", "who": "威妈", "song": "Elliot James Reay — Boy In Love", "session": "15", "entries": [
+        { "who": "S妈", "val": "266", "song": "Bennett Coast — Pretender", "session": "14", "old": true },
+        { "who": "羊妈", "val": "159", "song": "Best Frenz & Joywave — Flatline", "session": "13", "old": true }
+      ] },
+      { "label": "最高单组支持率", "val": "100%", "entries": [
+        { "who": "草妈", "song": "Hatchie — Stay With Me", "session": "4A" },
+        { "who": "羊妈", "song": "Best Frenz & Joywave — Flatline", "session": "13" }
+      ] },
+      { "label": "最长连续前十场数", "val": "8", "who": "雨妈", "session": "1–5A" },
+      { "label": "最多参与场数", "val": "28", "who": "雨妈 · 锴妈", "session": "1–15" }
+    ],
+    "unplugged": [
+      { "label": "最多冠军场数", "val": "1", "entries": [
+        { "who": "瑞妈", "song": "Charli XCX — Boom Clap", "session": "1E" },
+        { "who": "包妈", "song": "Markus Feehily — Butterfly", "session": "2E" },
+        { "who": "雨妈", "song": "Free-Out — Free-Out 2019 Cypher", "session": "3E" },
+        { "who": "泰妈", "song": "许巍 — 蓝莲花", "session": "3E Mini" },
+        { "who": "小妈", "song": "Lana Del Rey — West Coast", "session": "4E" }
+      ] },
+      { "label": "最多单组前三场数", "val": "2", "entries": [
+        { "who": "田妈", "detail": "2nd (1E) · 3rd (3E Mini)" },
+        { "who": "小妈", "detail": "1st (4E) · 3rd (3E)" },
+        { "who": "雨妈", "detail": "1st (3E) · 2nd (4E)" }
+      ] },
+      { "label": "最高单组总分", "val": "151.7", "who": "包妈", "song": "Free-Out — Free-Out 2019 Cypher", "session": "3E" },
+      { "label": "最低单组总分", "val": "-21", "who": "泰妈", "song": "Lil Nas X & Billy Ray Cyrus — Old Town Road", "session": "2E" }
+    ]
+  },
+
+  "achievements": {
+    "regular": [
+      { "title": "出道即巅峰", "metric": "首秀最好成绩", "val": "1st", "entries": [
+        { "who": "猴妈", "song": "Parachute — Had It All", "session": "1" },
+        { "who": "瑞妈", "song": "Tame Impala — Borderline", "session": "3B" },
+        { "who": "A妈", "song": "Phoebe Bridgers — Kyoto", "session": "11B" },
+        { "who": "羊妈", "song": "Best Frenz & Joywave — Flatline", "session": "13" }
+      ] },
+      { "title": "卧薪尝胆", "metric": "花费最长时间夺冠", "val": "21 组", "entries": [
+        { "who": "锴妈", "detail": "第 1 届参赛 → 第 10 届 A 组（10A）首度夺冠" }
+      ] },
+      { "title": "实红艺人", "metric": "实现连冠", "val": "2 届", "entries": [
+        { "who": "包妈", "detail": "第 5–6 届（5A · 6C）" },
+        { "who": "雨妈", "detail": "第 7–8 届（7A · 8A）" }
+      ] },
+      { "title": "小众之星", "metric": "最多小众场夺冠次数", "val": "2 届", "entries": [
+        { "who": "包妈", "session": "3A · 5A" },
+        { "who": "雨妈", "session": "7A · 8A" }
+      ] },
+      { "title": "雨露均沾", "metric": "最多连续排名", "val": "12", "entries": [
+        { "who": "锴妈", "detail": "第 4 届 — 第 15 届" }
+      ] },
+      { "title": "跳水天后", "metric": "最大相邻两场成绩差", "val": "1st → 24th", "entries": [
+        { "who": "羊妈", "detail": "13 → 14 届" },
+        { "who": "A妈", "val": "1st → 17th", "detail": "11B → 12A", "old": true }
+      ] },
+      { "title": "极限卡位", "metric": "同名次同届异场歌曲", "entries": [
+        { "who": "雨妈", "val": "2nd", "detail": "第 2 届 · 2019（2SF · 2GF）" },
+        { "who": "洛妈", "val": "9th", "detail": "第 9 届 · 2020（9A · 9B）" }
+      ] },
+      { "title": "独家冠名", "metric": "最多同名次选送", "val": "5 首", "entries": [
+        { "who": "锴妈", "detail": "第 4 名 · 2SF 6C 7C 9B 11A" },
+        { "who": "城妈", "detail": "第 5 名 · 2GF 5B 7C 8A 10B" }
+      ] },
+      { "title": "全世界都在讲中国话", "metric": "最多选送华语单曲", "val": "13 首", "entries": [
+        { "who": "院妈" }
+      ] },
+      { "title": "即刻开吸", "metric": "混淆单曲超过选送单曲最大差距", "val": "13 名", "entries": [
+        { "who": "田妈", "detail": "选送 3rd · 混淆 16th（10B）" }
+      ] }
+    ],
+    "unplugged": [
+      { "title": "喜获双学位", "metric": "在常规版和娱乐版均获第一名", "val": "1st", "entries": [
+        { "who": "瑞妈" }, { "who": "包妈" }, { "who": "雨妈" }, { "who": "小妈" }
+      ] },
+      { "title": "全身而退", "metric": "所有场次均分最高", "val": "86.4", "entries": [
+        { "who": "雨妈", "detail": "432 分 / 5 场" }
+      ] },
+      { "title": "惨遭陷害", "metric": "所有场次均分最低", "val": "20.2", "entries": [
+        { "who": "嘟妈", "detail": "101 分 / 5 场" }
+      ] },
+      { "title": "过气还是翻红?", "metric": "最大选送歌曲分差", "val": "138", "entries": [
+        { "who": "泰妈", "detail": "-21 / 117（2E / 3E Mini）" }
+      ] }
+    ]
+  }
 }

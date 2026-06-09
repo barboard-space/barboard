@@ -92,57 +92,77 @@
       margin-top: 16px; max-width: 620px;
     }
 
-    /* ── Records ── */
-    .bv-records-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-top: var(--gap-md);
+    /* ── 版本分组小标题 ── */
+    .bv-ver {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--clr-text-3); margin: var(--gap-md) 0 12px;
+      display: flex; align-items: center; gap: 12px;
     }
-    .bv-rec {
-      background: var(--clr-surface);
-      border: 1px solid var(--clr-border);
-      border-radius: 6px; padding: 16px 18px;
+    .bv-ver::after { content: ''; flex: 1; height: 1px; background: var(--clr-border); }
+    .bv-ver--regular   { color: var(--clr-violet-light); }
+    .bv-ver--unplugged { color: var(--clr-pink-light); }
+
+    /* ── 卡片网格 ── */
+    .bv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
+    .bv-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 8px; padding: 16px 18px;
+      transition: border-color 0.2s, opacity 0.5s ease, transform 0.5s ease;
     }
-    .bv-rec__label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--clr-text-3); margin-bottom: 8px;
+    .bv-card:hover { border-color: var(--clr-border-2); }
+    .bv-card__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--clr-text-3); margin-bottom: 8px;
     }
-    .bv-rec__val {
-      font-family: var(--font-display); font-size: 34px; line-height: 1;
+    .bv-card__head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+    .bv-card__val {
+      font-family: var(--font-display); font-size: 32px; line-height: 1;
       color: var(--clr-violet-light); text-shadow: 0 0 20px rgba(192,132,252,0.22);
     }
-    .bv-rec__who { font-size: 13px; font-weight: 600; color: var(--clr-text); margin-top: 6px; }
-    .bv-rec__note { font-size: 11px; color: var(--clr-text-2); margin-top: 3px; line-height: 1.5; }
+    .bv-card__who { font-size: 13px; font-weight: 600; color: var(--clr-text); }
+    .bv-card__sub { font-size: 11px; color: var(--clr-text-2); margin-top: 8px; line-height: 1.6; }
+    .bv-card__title  { font-size: 14px; font-weight: 700; color: var(--clr-violet-light); }
+    .bv-card__metric { font-size: 11px; color: var(--clr-text-3); margin-top: 3px; }
+    .bv-card__aval   { color: var(--clr-text); font-weight: 600; }
 
-    /* ── Awards ── */
-    .bv-awards-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-top: var(--gap-md);
+    /* ── 条目 ── */
+    .bv-card__entries {
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--clr-border);
+      display: flex; flex-direction: column; gap: 7px;
     }
-    .bv-award {
-      background: var(--clr-surface);
-      border: 1px solid var(--clr-border);
-      border-radius: 6px; padding: 16px 18px;
-      transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s;
+    .bv-entry { display: flex; align-items: baseline; gap: 10px; font-size: 12px; line-height: 1.5; }
+    .bv-entry__l { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
+    .bv-entry__r { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
+    .bv-entry__val    { font-family: var(--font-mono); color: var(--clr-violet-light); }
+    .bv-entry__song   { color: var(--clr-text-2); }
+    .bv-entry__detail { color: var(--clr-text-2); }
+    .bv-session {
+      font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3);
+      border: 1px solid var(--clr-border); border-radius: 3px; padding: 1px 6px; white-space: nowrap;
     }
-    .bv-award:hover { border-color: var(--clr-border-2); }
-    .bv-award__title { font-size: 13px; font-weight: 700; color: var(--clr-violet-light); margin-bottom: 3px; }
-    .bv-award__metric { font-size: 10px; color: var(--clr-text-3); letter-spacing: 0.04em; margin-bottom: 10px; }
-    .bv-award__winners { display: flex; flex-wrap: wrap; gap: 4px 10px; margin-bottom: 8px; font-size: 13px; }
-    .bv-award__detail { font-size: 11px; color: var(--clr-text-2); line-height: 1.55; }
+    .bv-entry--old { opacity: 0.45; }
+    .bv-entry--old .bv-entry__song,
+    .bv-entry--old .bv-entry__val { text-decoration: line-through; }
+    .bv-old-tag {
+      font-size: 9px; color: var(--clr-text-3); border: 1px solid var(--clr-border);
+      border-radius: 2px; padding: 0 4px; letter-spacing: 0.05em;
+    }
+
+    /* ── 场次代码图例 ── */
+    .bv-legend { font-size: 11px; color: var(--clr-text-3); line-height: 1.8; margin-top: 12px; }
+    .bv-legend code {
+      font-family: var(--font-mono); color: var(--clr-text-2);
+      background: var(--clr-surface); padding: 0 5px; border-radius: 3px; margin: 0 1px;
+    }
 
     /* ── Responsive ── */
-    @media (max-width: 1024px) {
-      .bv-records-grid { grid-template-columns: repeat(2, 1fr); }
-      .bv-awards-grid  { grid-template-columns: repeat(2, 1fr); }
-    }
     @media (max-width: 768px) {
-      .bv-records-grid { grid-template-columns: repeat(2, 1fr); }
-      .bv-awards-grid  { grid-template-columns: 1fr; }
+      .bv-grid { grid-template-columns: 1fr; }
       .bv-pioneer      { flex-direction: column; align-items: flex-start; }
       .bv-pioneer::after { display: none; }
     }
     @media (hover: none), (pointer: coarse) {
-      .bv-award:hover { border-color: var(--clr-border); }
+      .bv-card:hover { border-color: var(--clr-border); }
     }
 
     /* ── Page TOC ── */
@@ -189,7 +209,7 @@
 
     <a class="hof-eyebrow fade-up" href="/barvision.html"><span>←</span><span>Barvision</span></a>
     <h1 class="hof-title fade-up" style="transition-delay:0.1s;">Hall <span style="opacity:0.65;">of</span> <span class="bv-accent">Fame</span></h1>
-    <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届的高光时刻。<br><span style="font-size:12px;opacity:0.45;">*本页正在更新中</span></p>
+    <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届的高光时刻。</p>
 
   </div>
 </section>
@@ -206,13 +226,25 @@
   </div>
 </section>
 
+<!-- ═══ 赛季纪录 ═══ -->
+<section class="section section--bordered" id="season" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+
+    <p class="section-label fade-up">赛季纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Season <span class="bv-accent">Records</span></h2>
+    <div id="bvSeasonGrid"></div>
+
+  </div>
+</section>
+
 <!-- ═══ 数据纪录 ═══ -->
 <section class="section section--bordered" id="records" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
 
     <p class="section-label fade-up">数据纪录</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Records</h2>
-    <div class="bv-records-grid" id="bvRecordsGrid"></div>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Category <span class="bv-accent">Records</span></h2>
+    <p class="bv-legend fade-up" style="transition-delay:0.15s;">场次代码：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版（如 <code>7A</code> = 第 7 届小众组）。<span style="opacity:0.7;">划线条目为已被刷新的旧纪录。</span></p>
+    <div id="bvRecordsGrid"></div>
 
   </div>
 </section>
@@ -223,13 +255,14 @@
 
     <p class="section-label fade-up">特别奖项</p>
     <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Special <span class="bv-accent">Awards</span></h2>
-    <div class="bv-awards-grid" id="bvAwardsGrid"></div>
+    <div id="bvAwardsGrid"></div>
 
   </div>
 </section>
 
 <nav id="bvHofToc" class="hof-toc" aria-label="页内目录">
   <div class="hof-toc__item" data-target="pioneer">吧视先锋奖</div>
+  <div class="hof-toc__item" data-target="season">赛季纪录</div>
   <div class="hof-toc__item" data-target="records">数据纪录</div>
   <div class="hof-toc__item" data-target="awards">特别奖项</div>
 </nav>
@@ -240,8 +273,6 @@
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-
-  let RECORDS = [], AWARDS = {};
 
   const MEMBER_MAP = {
     '威妈': { id:7,   handle:'williw_' },
@@ -263,6 +294,8 @@
     '布妈': { id:157, handle:'Vivienne-Eliza' },
     '田妈': { id:295, handle:'FREEMAN' },
     '院妈': { id:326, handle:'天神院院长' },
+    '洛妈': { id:124, handle:'Lolo_sara' },
+    '嘟妈': { id:190, handle:'DDDDDope' },
   };
   function fmtMember(nickname) {
     var m = MEMBER_MAP[nickname.trim()];
@@ -286,31 +319,55 @@
       '</div>';
   }
 
-  function buildRecords() {
-    var el = document.getElementById('bvRecordsGrid');
-    if (!el) return;
-    el.innerHTML = RECORDS.map(function(r, i) {
-      return '<div class="bv-rec fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
-        '<div class="bv-rec__label">' + esc(r.label) + '</div>' +
-        '<div class="bv-rec__val">' + esc(r.val) + '</div>' +
-        '<div class="bv-rec__who">' + fmtWho(r.who) + '</div>' +
-        '<div class="bv-rec__note">' + esc(r.note) + '</div>' +
-      '</div>';
-    }).join('');
+  function sessionBadge(s) { return s ? '<span class="bv-session">' + esc(s) + '</span>' : ''; }
+
+  function renderEntry(e) {
+    var l = '';
+    if (e.who)    l += '<span class="bv-entry__who">' + fmtMember(e.who) + '</span>';
+    if (e.val)    l += '<span class="bv-entry__val">' + esc(e.val) + '</span>';
+    if (e.song)   l += '<span class="bv-entry__song">' + esc(e.song) + '</span>';
+    if (e.detail) l += '<span class="bv-entry__detail">' + esc(e.detail) + '</span>';
+    var r = sessionBadge(e.session) + (e.old ? '<span class="bv-old-tag">旧</span>' : '');
+    return '<div class="bv-entry' + (e.old ? ' bv-entry--old' : '') + '">' +
+      '<span class="bv-entry__l">' + l + '</span>' +
+      (r ? '<span class="bv-entry__r">' + r + '</span>' : '') + '</div>';
   }
 
-  function buildAwards() {
-    var el = document.getElementById('bvAwardsGrid');
-    if (!el) return;
-    el.innerHTML = AWARDS.map(function(a, i) {
-      var winnersHtml = a.winners.map(fmtMember).join('');
-      return '<div class="bv-award fade-up" style="transition-delay:' + (i * 0.07).toFixed(2) + 's;">' +
-        '<div class="bv-award__title">' + esc(a.title) + '</div>' +
-        '<div class="bv-award__metric">' + esc(a.metric) + '</div>' +
-        '<div class="bv-award__winners">' + winnersHtml + '</div>' +
-        '<div class="bv-award__detail">' + esc(a.detail) + '</div>' +
-      '</div>';
-    }).join('');
+  function renderRecordCard(r, i) {
+    var entries = (r.entries || []).slice();
+    var subs = [];
+    if (r.edition) subs.push(esc(r.edition) + (r.session ? ' ' + sessionBadge(r.session) : ''));
+    else if (r.song) entries.unshift({ song: r.song, session: r.session });
+    else if (r.session) subs.push(sessionBadge(r.session));
+    return '<div class="bv-card fade-up" style="transition-delay:' + (i * 0.05).toFixed(2) + 's;">' +
+      '<div class="bv-card__label">' + esc(r.label) + '</div>' +
+      '<div class="bv-card__head"><span class="bv-card__val">' + esc(r.val) + '</span>' +
+        (r.who ? '<span class="bv-card__who">' + fmtWho(r.who) + '</span>' : '') + '</div>' +
+      (subs.length ? '<div class="bv-card__sub">' + subs.join(' · ') + '</div>' : '') +
+      (entries.length ? '<div class="bv-card__entries">' + entries.map(renderEntry).join('') + '</div>' : '') +
+    '</div>';
+  }
+
+  function renderAwardCard(a, i) {
+    return '<div class="bv-card fade-up" style="transition-delay:' + (i * 0.05).toFixed(2) + 's;">' +
+      '<div class="bv-card__title">' + esc(a.title) + '</div>' +
+      '<div class="bv-card__metric">' + esc(a.metric) + (a.val ? ' · <span class="bv-card__aval">' + esc(a.val) + '</span>' : '') + '</div>' +
+      ((a.entries && a.entries.length) ? '<div class="bv-card__entries">' + a.entries.map(renderEntry).join('') + '</div>' : '') +
+    '</div>';
+  }
+
+  var VERSIONS = [['常规版', 'regular'], ['娱乐版', 'unplugged']];
+  function buildVersioned(containerId, data, renderFn) {
+    var el = document.getElementById(containerId);
+    if (!el || !data) return;
+    var html = '';
+    VERSIONS.forEach(function(v) {
+      var arr = data[v[1]];
+      if (!arr || !arr.length) return;
+      html += '<div class="bv-ver bv-ver--' + v[1] + '">' + v[0] + '</div>';
+      html += '<div class="bv-grid">' + arr.map(renderFn).join('') + '</div>';
+    });
+    el.innerHTML = html;
   }
 
   /* ─── async data load + render ─────────────────────────────────────── */
@@ -322,12 +379,10 @@
       console.error('BV HOF: data load failed', e);
       return;
     }
-    RECORDS = d.records;
-    AWARDS  = d.awards;
-
     buildPioneer(d.pioneer);
-    buildRecords();
-    buildAwards();
+    buildVersioned('bvSeasonGrid',  d.season,       renderRecordCard);
+    buildVersioned('bvRecordsGrid', d.records,      renderRecordCard);
+    buildVersioned('bvAwardsGrid',  d.achievements, renderAwardCard);
 
     function clearDelayAfterAnim(el) {
       var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
