@@ -656,7 +656,7 @@ img {
    ============================================= */
 .member {
   display: inline-block;
-  color: rgba(240,238,255,0.82);
+  color: rgba(240,238,255,0.80);
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;
