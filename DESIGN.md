@@ -6,7 +6,7 @@
 > 3. **去重依据**——文末「待统一清单」记录了"同物多套"的重复实现，供后续阶段三逐个收敛。
 >
 > 维护约定：新增/改名组件时同步更新本文件。配套展示页：`styleguide.html`（设计标准：Foundation 审计可视化 + Elements + Components 索引；`styleguide-data.js` 由审计脚本生成）。
-> 当前 `style.css` 版本号：`?v=3.0.7`（改 style.css 须按 [CLAUDE.md #122] 同步 index/bbl/bbl-hof 的 `?v=`）。
+> 当前 `style.css` 版本号：`?v=3.0.8`（改 style.css 须按 [CLAUDE.md #122] 同步 index/bbl/bbl-hof 的 `?v=`）。
 
 ---
 
