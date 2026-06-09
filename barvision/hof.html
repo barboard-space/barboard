@@ -92,15 +92,15 @@
       margin-top: 16px; max-width: 620px;
     }
 
-    /* ── 版本分组小标题 ── */
+    /* ── 版本分组：常规版 = 粉色 / 娱乐版 = 紫色（用 --bv-accent 贯穿该组卡片）── */
+    .bv-group--regular   { --bv-accent: var(--clr-pink-light);   --bv-glow: rgba(240,96,184,0.30); }
+    .bv-group--unplugged { --bv-accent: var(--clr-violet-light); --bv-glow: rgba(192,132,252,0.30); }
     .bv-ver {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--clr-text-3); margin: var(--gap-md) 0 12px;
+      font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--bv-accent, var(--clr-text-2)); margin: var(--gap-md) 0 12px;
       display: flex; align-items: center; gap: 12px;
     }
-    .bv-ver::after { content: ''; flex: 1; height: 1px; background: var(--clr-border); }
-    .bv-ver--regular   { color: var(--clr-violet-light); }
-    .bv-ver--unplugged { color: var(--clr-pink-light); }
+    .bv-ver::after { content: ''; flex: 1; height: 1px; background: var(--clr-border-2); }
 
     /* ── 卡片网格 ── */
     .bv-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 12px; }
@@ -112,39 +112,39 @@
     .bv-card:hover { border-color: var(--clr-border-2); }
     .bv-card__label {
       font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase;
-      color: var(--clr-text-3); margin-bottom: 8px;
+      color: var(--clr-text-2); margin-bottom: 8px;
     }
     .bv-card__head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
     .bv-card__val {
       font-family: var(--font-display); font-size: 32px; line-height: 1;
-      color: var(--clr-violet-light); text-shadow: 0 0 20px rgba(192,132,252,0.22);
+      color: var(--bv-accent, var(--clr-violet-light)); text-shadow: 0 0 18px var(--bv-glow, transparent);
     }
     .bv-card__who { font-size: 13px; font-weight: 600; color: var(--clr-text); }
-    .bv-card__sub { font-size: 11px; color: var(--clr-text-2); margin-top: 8px; line-height: 1.6; }
-    .bv-card__title  { font-size: 14px; font-weight: 700; color: var(--clr-violet-light); }
-    .bv-card__metric { font-size: 11px; color: var(--clr-text-3); margin-top: 3px; }
+    .bv-card__sub { font-size: 12px; color: var(--clr-text); margin-top: 8px; line-height: 1.6; }
+    .bv-card__title  { font-size: 14px; font-weight: 700; color: var(--bv-accent, var(--clr-violet-light)); }
+    .bv-card__metric { font-size: 11px; color: var(--clr-text-2); margin-top: 3px; }
     .bv-card__aval   { color: var(--clr-text); font-weight: 600; }
 
     /* ── 条目 ── */
     .bv-card__entries {
-      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--clr-border);
+      margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--clr-border-2);
       display: flex; flex-direction: column; gap: 7px;
     }
     .bv-entry { display: flex; align-items: baseline; gap: 10px; font-size: 12px; line-height: 1.5; }
     .bv-entry__l { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 8px; }
     .bv-entry__r { flex-shrink: 0; display: flex; align-items: center; gap: 6px; }
-    .bv-entry__val    { font-family: var(--font-mono); color: var(--clr-violet-light); }
-    .bv-entry__song   { color: var(--clr-text-2); }
+    .bv-entry__val    { font-family: var(--font-mono); color: var(--bv-accent, var(--clr-violet-light)); }
+    .bv-entry__song   { color: var(--clr-text); }
     .bv-entry__detail { color: var(--clr-text-2); }
     .bv-session {
-      font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3);
-      border: 1px solid var(--clr-border); border-radius: 3px; padding: 1px 6px; white-space: nowrap;
+      font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-2);
+      border: 1px solid var(--clr-border-2); border-radius: 3px; padding: 1px 6px; white-space: nowrap;
     }
-    .bv-entry--old { opacity: 0.45; }
+    .bv-entry--old { opacity: 0.6; }
     .bv-entry--old .bv-entry__song,
-    .bv-entry--old .bv-entry__val { text-decoration: line-through; }
+    .bv-entry--old .bv-entry__val { text-decoration: line-through; text-decoration-color: var(--clr-text-3); }
     .bv-old-tag {
-      font-size: 9px; color: var(--clr-text-3); border: 1px solid var(--clr-border);
+      font-size: 9px; color: var(--clr-text-2); border: 1px solid var(--clr-border-2);
       border-radius: 2px; padding: 0 4px; letter-spacing: 0.05em;
     }
 
@@ -364,8 +364,10 @@
     VERSIONS.forEach(function(v) {
       var arr = data[v[1]];
       if (!arr || !arr.length) return;
-      html += '<div class="bv-ver bv-ver--' + v[1] + '">' + v[0] + '</div>';
-      html += '<div class="bv-grid">' + arr.map(renderFn).join('') + '</div>';
+      html += '<div class="bv-group bv-group--' + v[1] + '">' +
+        '<div class="bv-ver">' + v[0] + '</div>' +
+        '<div class="bv-grid">' + arr.map(renderFn).join('') + '</div>' +
+        '</div>';
     });
     el.innerHTML = html;
   }
