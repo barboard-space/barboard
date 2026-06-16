@@ -4,6 +4,28 @@
 
 ---
 
+## [2026-06-09] — 报名表单微调 + Barvision HOF 重构 + 全站调色
+
+### Added
+- **Barvision HOF（barvision/hof.html）按 Notion 截图全量补全**：`bv_hof_data.json` 改为富嵌套结构（pioneer + season + records + achievements，各分常规/娱乐）；新增「赛季纪录」section；卡片显示 获奖者@链接 + 歌曲 + 场次徽章，旧纪录以「旧」标 + 划线保留；加场次代码图例。
+- 歌曲报名表单新增**「备注（选填）」**字段（随报名邮件发出）。
+- 新成员 X妈 `@没有XX不科学`（space_id 195，成员总数 → 118）。
+
+### Changed
+- 成员数据修正：xjebs(88) 昵称 X妈 → XX妈。
+- 报名表单文案：「提交人」→「提交者」、「微信名」→「微信号」、报名方式「直接内定/本届海选」→「内部选择(内定)/公开选拔(海选)」。
+- **全站调色（提升黑底可读性）**：`--clr-text-2` `#8880a8`→`#C2BBDF`、`--clr-text-3`→`#A39BC2`；成员 @名 `.member` 改用榜吧蓝 `--clr-board`（不再偏灰）。
+- Barvision HOF 配色按版本区分：常规版=粉 / 娱乐版=紫（`--bv-accent`）。
+- `style.css?v` 3.0.5 → 3.0.8（多轮调色累计）。
+
+### Fixed
+- Members 卡片「大名+标签」与「大名+小名」等高（桌面 84 / 手机 74）。
+
+### Removed
+- **退役 Barvision HOF 旧数据流**：删除 `data/barvision/barvision-record/*.csv`（7 个）+ `scripts/sync_bv_hof_data.py`；改为直接维护 `bv_hof_data.json`。
+
+---
+
 ## [2026-06-08] — 成员数据修正 + 设计系统统一（令牌归并 / styleguide 可视化）
 
 ### Added

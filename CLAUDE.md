@@ -29,11 +29,11 @@
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成；**歌曲报名通道已上线**：自定义表单 + EmailJS 发邮件，非问卷星，详见 #127；已接入 nav.js；已按 Rulebook Ver. 260530 全面更新：附加赛资格赛双阶段结构、在线表单提交方式、ELIGIBILITY 新增 Eurovision 排除条款 + 个人榜助攻规则、全站"复活赛"→"附加赛"）
-- `member.html` — Members 总览页（117位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
+- `member.html` — Members 总览页（118位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
-- `member/N.html`（117个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
+- `member/N.html``member/N.html`（118个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
 - `scripts/member-render.js` — 成员页共享模板：注入 CSS、读取 `window.MEMBER_DATA`、渲染 hero+Works 两节、处理 CJK/ASCII 头像字体、设置 fade-up 动画
-- `scripts/gen_member_pages.py` — 成员页批量生成脚本：读 CSV → 输出 117 个 `member/N.html`；数据变动时重新运行
+- `scripts/gen_member_pages.py` — 成员页批量生成脚本：读 CSV → 输出 118 个 `member/N.html`；数据变动时重新运行
 - `data/bbl/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
 - `data/bbl/bbl-vol-index.json` — Vol.1–125 期号→日期索引（对象格式，`{"1":"2024-01-05",...}`，供 bbl/charts 等页面引用）
 - `data/bbl/bbl-record/hof_data.json` — BBL HOF 全部数据（13个板块：champions/charted_full/charted_records/artists_peak/artists_songs/artists_weeks/albums/most_points/single_chart/most_charts/uncrowned/owner_map/no1_records）；今后更新 HOF 数据只需编辑此文件
@@ -110,7 +110,7 @@ barboard-space/
 │
 ├── member/
 │   ├── 7.html              ← @williw_（威妈）成员主页（已完成）
-│   ├── 12.html … 770.html  ← 全部117位成员主页（gen_member_pages.py 生成）
+│   ├── 12.html … 770.html  ← 全部118位成员主页（gen_member_pages.py 生成）
 │   └── …
 │
 ├── barvision/
@@ -479,7 +479,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 126. **设计流程（用户习惯）**：① **桌面端为基准**（先精修桌面 base）；② 之后**手机端定点微调**（`@media max-width:768px`）；③ **平板基本忽略**，继承桌面 base。含义：**预览验证只用桌面 + 手机（≤768）两个视口、跳过平板**；`max-width:1024px`（平板）档低优先、不主动加新的；手机端改动严格锁 `@media` 不回灌桌面。
 127. **歌曲报名通道（自定义表单 + EmailJS，已上线）**：`barvision/2026/events.html` 用**自定义表单**（非问卷星/无 iframe）收报名，前端 **EmailJS** 直发邮件到 **william115zq@gmail.com**（收件地址设在 EmailJS 模板 To Email）。
     - **EmailJS**：SDK `@emailjs/browser@4` CDN；配置 `EMAILJS = {publicKey:'M2tBv7vRh3TY2MAeA', serviceId:'service_cqbstn7', templateId:'template_d75xg0c'}`；模板仅用 `{{submitter}}` + `{{message}}`（`buildMessage()` 拼全字段为文本）。未设域名白名单（付费）。
-    - **表单字段**（`#subForm`）：提交人（必填，**不校验** members.csv，仅蜜罐 `#subHp` 防机器人）/ 联系方式（QQ·微信，选填）/ 报名方式（内定·海选）/ 海选名称（海选时，填了解锁歌曲②）/ 歌曲字段：歌名·艺人·发行国家·语种·发行日期（日期填了校验 2023-07-01~2026-06-30）。**歌曲①** 歌名+艺人必填；**歌曲②（海选亚军）全部选填**（海选可只报冠军，空的歌曲②不计入邮件）。**已移除**：专辑、歌曲链接、选送理由、成员校验。
+    - **表单字段**（`#subForm`）：提交者（必填，**不校验** members.csv，仅蜜罐 `#subHp` 防机器人）/ 联系方式（QQ·微信号，选填）/ 报名方式（内部选择(内定)·公开选拔(海选)）/ 海选名称（海选时，填了解锁歌曲②）/ 歌曲字段：歌名·艺人·发行国家·语种·发行日期（日期填了校验 2023-07-01~2026-06-30）。**歌曲①** 歌名+艺人必填；**歌曲②（海选亚军）全部选填**（海选可只报冠军，空的歌曲②不计入邮件）。新增**备注**（选填，随报名邮件发出）。**已移除**：专辑、歌曲链接、选送理由、成员校验。
     - **首页 index.html 赛季卡已同步「已开启」态**：season-status「歌曲征集正在进行中」、倒计时「距离…关闭还有」目标 7/20 00:00、歌曲提交阶段 `.phase__status--live`「正在进行」+ `.phase--active` 增强高亮（粉色渐变/左条/辉光）。
     - **数量逻辑**：内定 1 首 / 海选 2 首（歌曲①=冠军→Semi-Final，歌曲②=亚军→附加赛资格赛）。
     - **localStorage 持久化**：key `barvision2026_submission`，提交成功存本设备；**刷新/重进若有记录→自动显示「您已提交报名」态**（「查看报名详情」回显、「重新报名」清空表单，**再次成功提交才覆盖**本地记录）。仅本设备/浏览器，非云端。
