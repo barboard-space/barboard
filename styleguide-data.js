@@ -291,6 +291,7 @@ window.SG_AUDIT = {
       "components": [
         ".archive-card",
         ".bbl-search",
+        ".edition-card",
         ".ev-crit-item",
         ".ev-tl-date",
         ".lab",
@@ -433,6 +434,15 @@ window.SG_AUDIT = {
       ]
     },
     {
+      "name": "--clr-board-light",
+      "value": "#8FBEE3",
+      "group": "Brand 榜吧蓝",
+      "color": true,
+      "components": [
+        ".member"
+      ]
+    },
+    {
       "name": "--clr-text",
       "value": "#f0eeff",
       "group": "Text",
@@ -445,7 +455,6 @@ window.SG_AUDIT = {
         ".bbl-showmore",
         ".btn",
         ".bv-card",
-        ".bv-entry",
         ".bv-pioneer",
         ".chart-song",
         ".ev-approval-rule",
@@ -1871,14 +1880,6 @@ window.SG_AUDIT = {
       "token": null,
       "components": [
         ".btn"
-      ]
-    },
-    {
-      "value": "rgba(240,238,255,0.82)",
-      "count": 1,
-      "token": null,
-      "components": [
-        ".member"
       ]
     },
     {

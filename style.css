@@ -45,6 +45,7 @@
 
   /* ── Brand 榜吧蓝（品牌第二色：nav/footer logo BOARD、archive 主题、成员无分组） ── */
   --clr-board:      #6F9EC3;
+  --clr-board-light: #8FBEE3;   /* @名 .member 专用，比品牌色更亮 */
 
   /* ── Text ── */
   --clr-text:       #f0eeff;
@@ -656,7 +657,7 @@ img {
    ============================================= */
 .member {
   display: inline-block;
-  color: var(--clr-board);
+  color: var(--clr-board-light);
   font-weight: 500;
   text-decoration: none;
   cursor: pointer;

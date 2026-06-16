@@ -29,11 +29,11 @@
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events.html` — Barvision 2026 赛事页（已完成；**歌曲报名通道已上线**：自定义表单 + EmailJS 发邮件，非问卷星，详见 #127；已接入 nav.js；已按 Rulebook Ver. 260530 全面更新：附加赛资格赛双阶段结构、在线表单提交方式、ELIGIBILITY 新增 Eurovision 排除条款 + 个人榜助攻规则、全站"复活赛"→"附加赛"）
-- `member.html` — Members 总览页（118位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
+- `member.html` — Members 总览页（119位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
-- `member/N.html``member/N.html`（118个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
+- `member/N.html``member/N.html`（119个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
 - `scripts/member-render.js` — 成员页共享模板：注入 CSS、读取 `window.MEMBER_DATA`、渲染 hero+Works 两节、处理 CJK/ASCII 头像字体、设置 fade-up 动画
-- `scripts/gen_member_pages.py` — 成员页批量生成脚本：读 CSV → 输出 118 个 `member/N.html`；数据变动时重新运行
+- `scripts/gen_member_pages.py` — 成员页批量生成脚本：读 CSV → 输出 119 个 `member/N.html`；数据变动时重新运行
 - `data/bbl/bbl-latest.json` — BBL 最新榜单数据（真实 API 数据，自动更新）
 - `data/bbl/bbl-vol-index.json` — Vol.1–125 期号→日期索引（对象格式，`{"1":"2024-01-05",...}`，供 bbl/charts 等页面引用）
 - `data/bbl/bbl-record/hof_data.json` — BBL HOF 全部数据（13个板块：champions/charted_full/charted_records/artists_peak/artists_songs/artists_weeks/albums/most_points/single_chart/most_charts/uncrowned/owner_map/no1_records）；今后更新 HOF 数据只需编辑此文件
@@ -47,8 +47,10 @@
 - `barvision/hof.html` — Barvision Hall of Fame（数据已按 Notion 截图全面补全；hero 金色主题 + 4 section：吧视先锋奖 / 赛季纪录 / 数据纪录 / 特别奖项；每 section 分**常规版 / 娱乐版**两组（`.bv-ver` 小标题）；卡片 `.bv-card`（label/val/who + `.bv-card__entries` 条目，条目含 `@member` 链接 + 歌曲 + `.bv-session` 场次徽章 + `.bv-entry--old`「旧」划线保留被刷新的旧纪录）；数据纪录区有**场次代码图例**（A 小众/B 中众/C 大众/SF/GF/E 娱乐；如 7A=第7届小众组）；MEMBER_MAP + fmtMember/fmtWho；页内 TOC 四项；数据源 `data/barvision/bv_hof_data.json`（富嵌套，手工维护，见 #119）；渲染函数 `renderEntry/renderRecordCard/renderAwardCard/buildVersioned` 均全局）
 - `archive.html` — 活动存档总览（已完成；hero 榜吧蓝主题 + `BARBOARD` 水印；两节：常规活动（BBL/Barvision 2列卡）+ 过往活动 Legacy（年榜/吧莱美/ECVP 3列卡）；卡片动画 `cubic-bezier(0.22,1,0.36,1)` 0.55s stagger `i×0.07s`；Legacy 卡 opacity 0.82 降调；详见开发注意事项 #107）
 - `barvision/2026/events.html` — Barvision 2026 赛事详情页（**已重做完成**；对标 barvision.html 视觉风格；含 hero（← Barvision 眉链 + CSS 动画 + watermark + 倒计时 + 更新日期）+ 歌曲报名（locked/open 面板 + deadline bar grid）+ SCHEDULE 三阶段表格时间线 + VOTING（Jury 评分格 + Tele + Approval）+ ELIGIBILITY（平台数据表 + 歌曲/艺人/专辑要求）+ RULEBOOK（6卡）+ TOC（5项，紫色，IO suppression）；`const FORM_URL = ''` 待填入；详见开发注意事项 #108–111）
+- `barvision/2019/regular-01.html` — **Barvision 历届详情页（第一届，已完成，模板基准）**；薄壳 + 共享 `scripts/bv-results-render.js` + `data/barvision/barvision-2019/regular-01.json`；板块 赛制/结果概览/Scoreboard 矩阵/12 Points + 页内 TOC；可点表头排序、桌面+手机两端已打磨；解析脚本 `scripts/parse_bv_edition.py`；详见开发注意事项 **#130**。barvision.html 届次卡 Ⅰ 已接入链接（`BUILT_EDITIONS`）
 
 ### 待建页面（按优先级）
+- **Barvision 历史成绩数据体系（进行中，见 #129）**：完整赛果表（逐届录入）+ 历届详情页（从 barvision.html 届次卡片点入）+ 成员主页「吧视」板块 + HOF 历届前三改版 + 数据核对
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -83,7 +85,9 @@ barboard-space/
 │   ├── fetch_bbl.py        ← BBL 抓取脚本（同时更新 ticker.json / updates.json）
 │   ├── nav.js              ← 全站共享 nav/footer 组件 + 所有 nav JS
 │   ├── member-render.js    ← 成员页共享模板（CSS注入 + HTML渲染 + 动画）
-│   └── gen_member_pages.py ← 批量生成 member/N.html（读CSV，运行一次）
+│   ├── gen_member_pages.py ← 批量生成 member/N.html（读CSV，运行一次）
+│   ├── bv-results-render.js ← Barvision 历届详情页共享渲染（见 #130）
+│   └── parse_bv_edition.py  ← 解析每届 Excel → 详情页 JSON（见 #130）
 │
 ├── partials/
 │   ├── nav.html            ← nav HTML 可读备份（与 nav.js 内容同步）
@@ -102,7 +106,8 @@ barboard-space/
 │   ├── members/
 │   │   └── members.csv         ← 全体成员信息
 │   └── barvision/
-│       ├── barvision-archive/  ← Barvision 历届存档
+│       ├── barvision-archive/  ← Barvision 历届存档（领奖台 only CSV，见 #129）
+│       ├── barvision-2019/     ← 详情页每届 JSON（regular-01.json…，见 #130）
 │       └── bv_hof_data.json    ← Barvision HOF 数据（富嵌套，手工维护，见 #119）
 │
 ├── bbl/
@@ -110,7 +115,7 @@ barboard-space/
 │
 ├── member/
 │   ├── 7.html              ← @williw_（威妈）成员主页（已完成）
-│   ├── 12.html … 770.html  ← 全部118位成员主页（gen_member_pages.py 生成）
+│   ├── 12.html … 770.html  ← 全部119位成员主页（gen_member_pages.py 生成）
 │   └── …
 │
 ├── barvision/
@@ -118,6 +123,8 @@ barboard-space/
 │   │   ├── events.html     ← 已完成，已接入 nav.js，待填表单 URL
 │   │   ├── results.html
 │   │   └── news.html
+│   ├── 2019/
+│   │   └── regular-01.html ← 第一届详情页薄壳（已完成，模板基准，见 #130）
 │   └── 2025/
 │
 ├── archive/
@@ -395,7 +402,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 42. **updates.json show_after 字段**：BV 里程碑条目加 `"show_after":"YYYY-MM-DD"`，JS 过滤 `new Date(show_after) <= now`；普通条目不加此字段（始终显示）；文件整体按 `date` 降序排列
 43. **装饰性 `::before`/`::after` overlay 必须加 `pointer-events: none`**：`position:absolute; inset:0` 的伪元素在 z-order 上覆盖内容区，若无 `pointer-events:none` 会拦截所有点击（包括子元素的 `<a>` 链接）。典型案例：`.season-card__banner::before` 网格层漏掉此属性，导致 `.member` 链接无法点击
 44. **Member tooltip 用 JS 事件委托**：`initMemberTooltips()` 监听 `document` 的 `mouseover/mousemove/mouseout`，用 `e.target.closest('.member[data-nickname]')` 匹配；tooltip div 挂在 `<body>`，`position:fixed`，跟随鼠标坐标 `(e.clientX+16, e.clientY)`，opacity 0.85，10px 字体；事件委托自动覆盖动态渲染元素，无需重新绑定
-45. **成员页编号规则**：`member/space_id.html`，与 CSV 的 `space_id` 字段一一对应；全部117个已由 `gen_member_pages.py` 生成。`member.html` 为总览入口（已完成）
+45. **成员页编号规则**：`member/space_id.html`，与 CSV 的 `space_id` 字段一一对应；全部119个已由 `gen_member_pages.py` 生成。`member.html` 为总览入口（已完成）
 46. **`@username` 自动解析**：`index.html` 中 `MEMBER_MAP`（键为完整 handle，值为 `{nickname, href}`）+ `parseMentions(raw)` 函数；正则 `/@([\p{L}\p{N}_-]+)/gu` 支持 Unicode 字母数字、下划线、连字符；含尾部连字符的 handle（如 `健Jian-`）用 `.replace(/-+$/, '')` 截断后查表；含中文的 handle（如 `哈哈哈时光机`）直接以完整 handle 为 key；不在 MEMBER_MAP 的保留纯文本
 47. **`member.html` 数据维护**：成员数据从 `data/members/members.csv` 动态加载（已废弃硬编码 MEMBERS 数组）。新增/修改成员只需编辑 CSV；建好个人主页后将对应 `space_id` 加入 `BUILT_PAGES` Set（见 #52），对应卡片自动变为可点击链接。
 48. **Dev Gate 开关**：`scripts/nav.js` 第8行 `var DEV_GATE = true`，上线时改为 `false` 即完全关闭（无需删代码）。各页面 `<head>` 含防闪内联脚本（sessionStorage key `barboard_dev`，值 `'1'` 表示已通过，关 tab 失效）。gate CSS/HTML/JS 全部封装在 `initDevGate()` 函数内
@@ -491,6 +498,26 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **已 tokenize**：14 个新令牌入 `:root`（`--clr-silver/-bronze/-up/-down/-re/-team-cun/-esc/-white/-cta-1~3` + 金银铜 `-tint`），66 处硬编码已替换（零视觉变化）。仍硬编码：深色 hero bg 族（~13 HEX，待手动并簇）+ 大量 rgba 发光/阴影（多为一次性）。`--clr-text-2` = `#A299C8`。
     - **`styleguide.html` 结构**（取代旧沙箱版）：基础 Foundation = **审计数据驱动的可视化**（JS 读 `styleguide-data.js` 渲染色块/字号样例/间距条/圆角；离散值金标、移动端青色 📱）+ 元素 Elements（Logo 手工条目）+ 组件 Components（占位）。**章节 Sections 层已移除**；Components 含「页面专属组件待迁移索引」表（原 styleguide-draft.html 的索引，draft 已删除）。重跑审计即刷新 Foundation。
     - **建设规则**（Elements/Components 手工条目）：①记录名称+class名 ②记录所用地方（不省略）③只追加不改既有，改既有先确认。新令牌确认后并入 `style.css` 再重跑审计。
+129. **Barvision 历史成绩数据体系（规划已与用户确认，进行中）**：把 Barvision 历届赛果建成一个完整数据层，逐届录入，上层 4 个产出面全部从**一份「每场完整排名表」**派生。
+    - **唯一真相源 = 完整赛果表**（schema 已锁定，每首参赛曲一行）：`year, edition_no, edition_name, version, match, venue, rank, is_shadow, member, artist, song, score, note`。`rank`=该场**完整名次**（1,2,3,4,5…，不只前三）；`is_shadow`=混淆曲标记。升级/取代现有领奖台 only 的 `barvision_results_regular.csv`。
+    - **现有存档数据**（`data/barvision/barvision-archive/`）：`barvision_results_regular.csv`（87 行，1–15 届，**仅领奖台 冠/亚/季+Shadow Track**）、`_unplugged.csv`（15 行，1–4 届）、`_freestyle.csv`（仅参与人数）、`barvision_data_dictionary.md`（字段字典）。⚠️ 字典提到的 `barvision_member_profiles.csv` **目录内不存在**。完整排名/分数由用户**逐届上传**（CSV/Excel/截图），AI 解析进表、回读核对。
+    - **4 个产出面**：① HOF 改版——展示「历届每场前三」（场次/选送者/歌手/歌名/得分）；② **历届详情页**（新建 HTML，从 `barvision.html` 的届次卡片点入，看该届完整得分表，23–26 年对标 Eurovision wiki 的 content/scoreboard 风格，19–20 年不规范按实际数据呈现）；③ **成员主页「吧视」板块**（概览：最好成绩/Top1/Top3/参加场数/首次参赛/最近参赛(是否活跃) + 个人参赛表按名次分组，参考用户 Excel：场次/歌名/歌手/得分，含混淆曲 `*` 灰条）；④ 用真实数据**核对** `bv_hof_data.json` 列疑点。
+    - **已发现疑点**：现 `bv_hof_data.json`「最多冠军单曲选送数=4（雨妈）」含一条 `5C` 实为 **Shadow Track（混淆曲）非冠军**；用户 Excel 同样标 `5C*`。雨妈真正常规版冠军为 3 首（5C/7A/8A）。待数据齐后统一核对修正。
+    - **术语决定（已确认）**：组别名用「**组**」（小众组/中众组/大众组；半决赛/决赛），计数量词统一用「**场**」（"参加 26 场"、"前三 9 场"）——即现有「最多单组前三场数」的用法，全站统一。「**中众**」保留（小-中-大对仗自解释，不改）。
+    - **规则要点**：混淆曲(`is_shadow`)默认不计正式成绩，**唯独闯进前三的特例计入**；2025 前为匿名选送（投票只见歌手-歌名），但现在公开展示历史选送者 OK，2025 起明牌；每届规则略有不同，用字段表达差异。
+    - **待用户确认**：成员概览 Excel 表头括号语义（`Best:1st(3)(1)`、`Top1:3(1)`、`Top3:9(1)`、`Entry:26(5)`——首括号疑为正式次数、末 `(1)` 疑为混淆曲数、`(5)` 疑为娱乐版场数，需用户给准确定义）；历史得分是否含支持率/票数（决定"最高支持率"类记录能否反推）。
+130. **Barvision 历届详情页体系（已建第一届，进行中）**：每届一个 HTML 详情页，对标 Eurovision wiki 的 content/scoreboard，沿用全站版式。
+    - **三件套架构**（类似成员页）：① 薄壳 HTML `barvision/<年>/<版本>-<NN>.html`（仅 `<head>` + `var EDITION_SRC='...json'` + 两个 `<script>`：`bv-results-render.js` 先于 `nav.js`，路径 `../../`）；② 共享渲染 `scripts/bv-results-render.js`（注入全部 CSS + fetch JSON + 渲染 + 页内 TOC + 交互排序）；③ 每届 JSON `data/barvision/barvision-<年>/<版本>-<NN>.json`。**新增一届 = 录 JSON + 复制薄壳改 EDITION_SRC + 把 href 加进 `barvision.html` 的 `BUILT_EDITIONS` 集合**（卡片自动可点；`romanToInt`+`editionHref` 算路径）。
+    - **数据来源 / 解析**：`scripts/parse_bv_edition.py` 读每届 Excel（`pip install openpyxl`，pandas）→ JSON。第一届 Excel 有 4 sheet：**参赛信息**（赛果汇总）/ **投票**（19 人×14 首逐票矩阵）/ 歌曲展示 / Sheet1。脚本从矩阵交叉校验 jury/tele（自动对比汇总，14/14 OK）；`ALIASES` 把昵称变体（Bag→包妈/dope→嘟妈/Lemon·淋檬→柠妈/绿萌→萌妈/锴→锴妈/城城→城妈/肥屎→肥妈）归一；`seen` 收集 members 映射（昵称→{id,handle}）。docx 用 `python-docx` 提取主题/规则进 meta。
+    - **JSON schema**：`{year, edition_no, edition_name, cn_name, version, city, host, motto, summary, rules{submission,niche_standard[],format,voting}, source, members{昵称:{id,handle}}, vote_rule{scale,jury,tele,note}, matches[{match, venue, entries[], votes{voters[]}}]}`。`entries[]`：`rank, member, member_id, language, artist, song, jury_vote, tele_vote, score, support_rate, high_rate, is_shadow`。`votes.voters[]`：`voter, type(jury|tele), points{选送者:分}`。**第一届投票规则**：14 位选送者互投（去自投）= **评委票 Jury**；其余 5 位非选送者 = **观众票 Tele**；总分=Jury+Tele；Top10 给 12/10/8/7/6/5/4/3/2/1 分。
+    - **页面板块顺序**：Hero → **赛制 Rules** → **结果概览 Results** → **投票详情 Detailed Voting Results**（含 **Scoreboard** 矩阵 + **12 Points**）。歌曲介绍板块已取消（`intro` 字段/`introsBlock` 函数保留备用）。右下**页内 TOC 加载即显示**（hero 短，不绑滚动阈值）。
+    - **Hero**（对标 2026 events.html）：标题=`edition_name`（去罗马数字、序数词 `1st` 染粉 `--clr-pink-light`），下方 meta = `cn_name｜Barvision <城市?> <年>`（DM Sans 12px `--clr-text-3`，城市仅 2023 起），再下 `summary` 作 intro；section header 复用全局 `.section-label`(渐变横杠)+`.section__title`(Bebas)+`.section__subtitle`。
+    - **配色（全表统一）**：Jury=`--clr-accent-light`(浅蓝) / Tele=`--clr-pink-light`(粉) / Total·Points=`--clr-text`(白) / 12 分单元格=`--clr-gold-light`(金)。分数字体 **DM Sans**。
+    - **① 结果概览表**（`.bvr-tbl`）：列 名次 / 选送者@ / 歌手 / 歌名 / 语种 / Jury / Tele / Points。名次用 Bebas 20px（套 bbl `.chart-rank` 样式，前三金银铜渐变底+左 3px 光条+歌名歌手染色，`translateY(2px)` 内层 span 微调）；分数居中、Jury/Tele 下方带**竞赛式 #名次**（`compRank`，绝对定位不撑动数值；jury #0.55 / tele #0.7 透明度）；**表头可点排序**（`wireSortable`，读 `data-v`，↑↓ 实心三角 SVG mask + currentColor 跟随列色，全大写表头，三角 `margin-right:-10px` 使文字居中对齐数值，JURY 因结尾 Y 单独 `margin-left:0` 补偿）。
+    - **② Scoreboard 矩阵**（`.bvr-mtx`）：评委+观众**合并一表**（评委列在前、观众附后，`.vsep` 分隔线；分组表头 **Jury Vote**(colspan) / **Tele Vote**(colspan)）。行=选送者（**默认按评委列顺序排→自投格连成主对角线**），列=选送者/Total/Jury/Tele（`rowspan=2` 合并到分组行、消除左上空角）+ 全部投票人。前 4 列**可排序**（`wireMatrixSort`，选送者=默认对角线序、其余数值降序）。自投格斜纹（`.self`）；12 分金色；汇总分 DM Sans 13px；`.bvr-mw` 用 `display:inline-block;max-width:100%` 收缩包裹（无右侧空白、超宽横向滚动）。
+    - **③ 12 Points 表**（`.bvr-12`）：三列容器 grid `max-content 1fr 1fr`——选送者（前置 **Bebas 数字**=该行 12 分个数，weight 400 防假粗，`--clr-text`）/ **Jury** 组 / **Tele** 组；无 Jury 时 Tele 占第二列；给分者 @名（`.member` 10px 间距、无顿号）；评委/观众用蓝/粉 `Jury`/`Tele` 小标签区分。
+    - **手机适配**（`@media max-width:768px`）：结果表 + 矩阵横向滚动 + 上方「⟷ 左右滑动」提示（`.bvr-scroll-hint`）；12 Points 改**单列堆叠**（选送者/Jury/Tele 各占整行、空 Tele 格隐藏、条目 border-top 分隔）；TOC 隐藏。桌面零影响。
+    - **已确认决策**：2019–2020 的「X妈」= space_id **195**（@没有XX不科学）；城市仅 **2023 起**（=主办大妈所在城市）；详情页**每届一个 HTML**（非单页+参数）；歌曲介绍文案由用户**逐条提供**（非每届都有）；23–26 年一年一届不细分场次。
 
 ---
 

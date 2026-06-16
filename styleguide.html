@@ -6,7 +6,7 @@
   <title>Barboard 设计标准（已确认）· Styleguide</title>
   <meta name="robots" content="noindex" />
   <link rel="stylesheet" href="fonts.css" />
-  <link rel="stylesheet" href="style.css?v=3.0.8" />
+  <link rel="stylesheet" href="style.css?v=3.0.9" />
   <style>
     /* ===== styleguide 布局（sg- 前缀，勿与站点 class 冲突）===== */
     body { padding: 40px 0 120px; }
@@ -190,7 +190,39 @@
       </div>
     </div>
 
-    <div class="sg-todo">Icons / Buttons / Labels … 待逐个加入。</div>
+    <!-- ── @名 成员提及 ── -->
+    <div class="sg-cat">
+      <h3 class="sg-cat__title">@名 成员提及 Member Mention</h3>
+      <div class="sg-item">
+        <div class="sg-item__bar"><span class="sg-item__name">成员 @名链接</span><span class="sg-item__cls">.member（+ data-nickname）</span><span class="sg-item__src">style.css + nav.js</span></div>
+        <div class="sg-demo sg-demo--panel">
+          <p style="font-size:13px;color:var(--clr-text-2);line-height:1.9;margin:0;">
+            本周冠军 <a class="member" href="javascript:void(0)" data-nickname="威妈">@williw_</a> ·
+            <a class="member" href="javascript:void(0)" data-nickname="雨妈">@Lee翼雨</a> ·
+            <a class="member" href="javascript:void(0)" data-nickname="羊妈">@SeafishYANG</a>
+          </p>
+        </div>
+        <div class="sg-note">全站成员 @名统一用 <code style="font-family:var(--font-mono);color:var(--clr-accent-light)">.member</code>：默认色 <code style="font-family:var(--font-mono);color:var(--clr-accent-light)">--clr-board-light</code>（比品牌蓝 <code style="font-family:var(--font-mono);color:var(--clr-accent-light)">--clr-board</code> 更亮，黑底更醒目），hover <code style="font-family:var(--font-mono);color:var(--clr-accent-light)">--clr-violet-light</code>（仅 <code style="font-family:var(--font-mono);color:var(--clr-accent-light)">hover:hover</code> 桌面）。<code style="font-family:var(--font-mono);color:var(--clr-accent-light)">data-nickname</code> 由 nav.js <code style="font-family:var(--font-mono);color:var(--clr-accent-light)">initMemberTooltips()</code> 读取显示昵称 tooltip；移动端点击跳成员页。</div>
+        <table class="sg-spec" style="margin-top:12px;">
+          <thead><tr><th>属性</th><th>值</th></tr></thead>
+          <tbody>
+            <tr><td class="tok">color</td><td class="val"><span class="sg-chip" style="background:var(--clr-board-light)"></span>--clr-board-light · #8FBEE3</td></tr>
+            <tr><td class="tok">color:hover</td><td class="val"><span class="sg-chip" style="background:var(--clr-violet-light)"></span>--clr-violet-light</td></tr>
+            <tr><td class="tok">font-weight</td><td class="val">500</td></tr>
+          </tbody>
+        </table>
+        <div class="sg-used">
+          <b>📍 所用的地方</b>（全站统一）：<br>
+          · <b>首页</b>：动态 / 字幕里的 @名（<code>parseMentions</code> 渲染）<br>
+          · <b>成员总览 / 成员主页</b>：成员引用<br>
+          · <b>BarboardLab 荣誉殿堂</b>：冠军 / 纪录 / 助攻 owners @名<br>
+          · <b>Barvision HOF</b>：获奖者 @名<br>
+          · <b>Barvision 历届详情页</b>：结果表「选送者」列、投票矩阵「选送者」行
+        </div>
+      </div>
+    </div>
+
+    <div class="sg-todo">Icons / Buttons … 待逐个加入。</div>
   </section>
 
   <!-- ╔══════════════════════════════════════════════╗ -->

@@ -212,6 +212,17 @@
     .bv-archive-grid .edition-card:hover,
     .bv-unplugged-grid .edition-card:hover { border-color: var(--clr-border); background: var(--clr-surface); }
 
+    /* 已建详情页的卡片：恢复可点 pointer + 紫色 hover */
+    .bv-archive-grid .edition-card--link,
+    .bv-unplugged-grid .edition-card--link { cursor: pointer; }
+    .bv-archive-grid .edition-card--link:hover,
+    .bv-unplugged-grid .edition-card--link:hover {
+      border-color: var(--clr-violet); background: var(--clr-surface);
+    }
+    .edition-card--link .edition-card__num { transition: color 0.2s; }
+    .bv-archive-grid .edition-card--link:hover .edition-card__num,
+    .bv-unplugged-grid .edition-card--link:hover .edition-card__num { color: var(--clr-violet-light); }
+
     /* Unplugged subsection */
     .bv-unplugged-grid .edition-card__num { color: var(--clr-violet-light); }
     .bv-unplugged-hdr {
@@ -404,6 +415,24 @@
     ]},
   ];
 
+  // ── 详情页链接 ───────────────────────────────────────────────
+  // 已建好详情页的届次（href 形式）；建好新一届就把 href 加进来，对应卡片自动可点
+  var BUILT_EDITIONS = new Set([
+    '/barvision/2019/regular-01.html',
+  ]);
+  function romanToInt(r) {
+    var map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 }, n = 0;
+    for (var i = 0; i < r.length; i++) {
+      var c = map[r[i]], nx = map[r[i + 1]];
+      n += (nx && c < nx) ? -c : c;
+    }
+    return n;
+  }
+  function editionHref(year, version, roman) {
+    var n = romanToInt(roman);
+    return '/barvision/' + year + '/' + version + '-' + (n < 10 ? '0' + n : n) + '.html';
+  }
+
   // ── Build functions ──────────────────────────────────────────
   function buildRecentArchiveGrid() {
     var el = document.getElementById('bvRecentArchiveGrid');
@@ -431,7 +460,11 @@
     var older = EDITIONS.filter(function(ed) { return ed.year <= 2020; });
     el.innerHTML = older.map(function(ed, i) {
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';
-      return '<div class="edition-card fade-up" style="transition-delay:' + (Math.min(i, 6) * 0.06).toFixed(2) + 's;">' +
+      var href = editionHref(ed.year, 'regular', ed.roman);
+      var link = BUILT_EDITIONS.has(href);
+      return '<div class="edition-card fade-up' + (link ? ' edition-card--link' : '') + '"' +
+        (link ? ' onclick="location.href=\'' + href + '\'"' : '') +
+        ' style="transition-delay:' + (Math.min(i, 6) * 0.06).toFixed(2) + 's;">' +
         '<div class="edition-card__num">' + esc(ed.roman) + '</div>' +
         '<div class="edition-card__year">' + ed.year + '</div>' +
         cityHtml +
@@ -443,7 +476,11 @@
     var el = document.getElementById('bvUnpluggedGrid');
     if (!el) return;
     el.innerHTML = UNPLUGGED.map(function(ed, i) {
-      return '<div class="edition-card fade-up" style="transition-delay:' + (0.14 + i * 0.08).toFixed(2) + 's;">' +
+      var href = editionHref(ed.year, 'unplugged', ed.roman);
+      var link = BUILT_EDITIONS.has(href);
+      return '<div class="edition-card fade-up' + (link ? ' edition-card--link' : '') + '"' +
+        (link ? ' onclick="location.href=\'' + href + '\'"' : '') +
+        ' style="transition-delay:' + (0.14 + i * 0.08).toFixed(2) + 's;">' +
         '<div class="edition-card__num">' + esc(ed.roman) + '</div>' +
         '<div class="edition-card__year">' + ed.year + '</div>' +
       '</div>';

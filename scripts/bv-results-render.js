@@ -1,0 +1,580 @@
+/* ============================================================================
+ * bv-results-render.js — Barvision 历届详情页共享渲染
+ * 薄壳 HTML 仅需：<div id="bvr-root"></div> + var EDITION_SRC='...json' + 本脚本
+ * 渲染：Hero → (每 match) 结果表 → 得分拆分(Combined/Jury/Tele) → 评委/观众矩阵
+ *       → 12 分汇总 → 歌曲介绍 → 赛制规则 ；右下页内 TOC（沿用 hof 版式）
+ * 对标 Eurovision wiki 的 content / scoreboard。
+ * ==========================================================================*/
+(function () {
+  'use strict';
+
+  /* ---------- helpers ---------- */
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  var ROMAN = [[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],
+               [50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+  function roman(n) {
+    var r = '';
+    ROMAN.forEach(function (p) { while (n >= p[0]) { r += p[1]; n -= p[0]; } });
+    return r;
+  }
+  function fmtScore(v) {
+    if (v == null || v === '') return '';
+    var n = Number(v);
+    return Number.isInteger(n) ? String(n) : String(n);
+  }
+  // 多歌手：换行归一为空格、逗号后补空格（提供手机端换行机会）
+  function fmtArtist(a) {
+    return String(a == null ? '' : a).replace(/\s*[\r\n]+\s*/g, ' ').replace(/\s*,\s*/g, ', ');
+  }
+
+  var DATA = null;             // edition JSON
+  function memberLink(nick, opts) {
+    opts = opts || {};
+    var m = DATA && DATA.members && DATA.members[nick];
+    var label = opts.nick ? esc(nick) : ('@' + esc(m ? m.handle : nick));
+    if (!m) return '<span class="member">' + label + '</span>';
+    return '<a class="member" href="../../member/' + m.id + '.html" data-nickname="'
+      + esc(nick) + '">' + label + '</a>';
+  }
+
+  /* ---------- CSS ---------- */
+  function injectCSS() {
+    var css = `
+    .bvr-hero { position:relative; padding:var(--nav-h) 0 56px; overflow:hidden; }
+    .bvr-hero__glow { position:absolute; inset:0; pointer-events:none; background:
+      radial-gradient(ellipse 75% 55% at 50% 0%, rgba(168,85,247,0.20) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 45% at 100% 90%, rgba(240,96,184,0.10) 0%, transparent 55%); }
+    .bvr-hero__grid { position:absolute; inset:0; pointer-events:none; background-image:
+      linear-gradient(rgba(255,255,255,0.018) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,0.018) 1px,transparent 1px); background-size:48px 48px; }
+    .bvr-hero__wm { position:absolute; right:-14px; bottom:-26px; font-family:var(--font-display);
+      font-size:200px; line-height:1; color:rgba(168,85,247,0.045); pointer-events:none; user-select:none; }
+    .bvr-hero__inner { position:relative; z-index:2; margin-top:36px; }
+    .bvr-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.32em; text-transform:uppercase;
+      color:var(--clr-violet-light); margin-bottom:24px; display:inline-flex; align-items:center; gap:8px;
+      transition:color 0.2s; }
+    .bvr-eyebrow:hover { color:var(--clr-white); text-decoration:none; }
+    .bvr-title { font-family:var(--font-display); font-size:clamp(44px,7vw,92px); line-height:0.98;
+      letter-spacing:0.01em; text-transform:uppercase; }
+    .bvr-title .bvr-ord { color:var(--clr-pink-light); }
+    .bvr-meta { display:flex; flex-wrap:wrap; align-items:center; gap:6px 12px; margin-top:22px;
+      font-family:var(--font-body); font-size:12px; color:var(--clr-text-3); }
+    .bvr-meta__sep { color:var(--clr-text-3); opacity:0.55; }
+    .bvr-meta__motto { color:var(--clr-violet-light); }
+    .bvr-desc { margin-top:18px; font-size:15px; line-height:1.7; color:var(--clr-text-2); max-width:620px; }
+
+    .bvr-sec__hd { margin-bottom:40px; }
+    .bvr-sec__sub { font-size:13px; color:var(--clr-text-2); margin-bottom:20px; line-height:1.6; max-width:680px; }
+    .bvr-dvr-sub { font-family:var(--font-body); font-weight:700; font-size:12px; letter-spacing:0.03em;
+      margin:48px 0 12px; }
+    .bvr-dvr-sub:first-child { margin-top:0; }
+    .bvr-mtx-cap { font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:0.08em;
+      margin:8px 0 6px; }
+
+    /* ----- result table ----- */
+    .bvr-tw { overflow-x:auto; border:1px solid var(--clr-border); border-radius:8px; }
+    table.bvr-tbl { width:100%; border-collapse:collapse; font-size:13px; min-width:560px; }
+    .bvr-tbl th { font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:0.06em;
+      text-transform:uppercase; color:var(--clr-text-2); text-align:left; padding:11px 14px;
+      background:var(--clr-surface); border-bottom:1px solid var(--clr-border-2); white-space:nowrap; }
+    .bvr-tbl th.th-jury { color:var(--clr-accent-light); }
+    .bvr-tbl th.th-tele { color:var(--clr-pink-light); }
+    .bvr-tbl th.th-pts  { color:var(--clr-text); }
+    .bvr-th-sort { cursor:pointer; user-select:none; }
+    .bvr-th-sort:hover { filter:brightness(1.25); }
+    .bvr-th-sort::after { content:''; display:inline-block; width:9px; height:14px;
+      margin-left:1px; vertical-align:middle; transform:translateY(-1px);
+      background-color:currentColor; opacity:0.5;
+      mask-repeat:no-repeat; mask-position:center; mask-size:contain;
+      -webkit-mask-repeat:no-repeat; -webkit-mask-position:center; -webkit-mask-size:contain;
+      mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%2014'%3E%3Cpath%20fill='%23000'%20d='M4%201%200.6%205.8%207.4%205.8%20Z'/%3E%3Cpath%20fill='%23000'%20d='M4%2013%200.6%208.2%207.4%208.2%20Z'/%3E%3C/svg%3E");
+      -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%2014'%3E%3Cpath%20fill='%23000'%20d='M4%201%200.6%205.8%207.4%205.8%20Z'/%3E%3Cpath%20fill='%23000'%20d='M4%2013%200.6%208.2%207.4%208.2%20Z'/%3E%3C/svg%3E"); }
+    .bvr-th-sort[data-sort]::after { opacity:1; }
+    /* 结果表：抵消三角宽度，使表头文字居中对齐数值 */
+    .bvr-tbl th.bvr-th-sort::after { margin-right:-10px; }
+    /* JURY 结尾字母 Y 右侧留白多，三角间距单独收紧一点 */
+    .bvr-tbl th.th-jury.bvr-th-sort::after { margin-left:0; }
+    .bvr-th-sort[data-sort="desc"]::after {
+      mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%2014'%3E%3Cpath%20fill='%23000'%20fill-opacity='0.3'%20d='M4%201%200.6%205.8%207.4%205.8%20Z'/%3E%3Cpath%20fill='%23000'%20d='M4%2013%200.6%208.2%207.4%208.2%20Z'/%3E%3C/svg%3E");
+      -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%2014'%3E%3Cpath%20fill='%23000'%20fill-opacity='0.3'%20d='M4%201%200.6%205.8%207.4%205.8%20Z'/%3E%3Cpath%20fill='%23000'%20d='M4%2013%200.6%208.2%207.4%208.2%20Z'/%3E%3C/svg%3E"); }
+    .bvr-th-sort[data-sort="asc"]::after {
+      mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%2014'%3E%3Cpath%20fill='%23000'%20d='M4%201%200.6%205.8%207.4%205.8%20Z'/%3E%3Cpath%20fill='%23000'%20fill-opacity='0.3'%20d='M4%2013%200.6%208.2%207.4%208.2%20Z'/%3E%3C/svg%3E");
+      -webkit-mask-image:url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%208%2014'%3E%3Cpath%20fill='%23000'%20d='M4%201%200.6%205.8%207.4%205.8%20Z'/%3E%3Cpath%20fill='%23000'%20fill-opacity='0.3'%20d='M4%2013%200.6%208.2%207.4%208.2%20Z'/%3E%3C/svg%3E"); }
+    .bvr-tbl tbody td { padding-top:12px; padding-bottom:12px; }
+    .bvr-tbl .pts-v { display:block; line-height:1.1; }
+    /* 数值 + #排名 作为整体在行内垂直居中 */
+    .bvr-tbl .pts-rank { display:block; font-size:10px; line-height:1; font-weight:600; opacity:0.55; margin-top:2px; }
+    .bvr-tbl .pts--tele .pts-rank { opacity:0.7; }
+    .bvr-tbl td { padding:10px 14px; border-bottom:1px solid var(--clr-border); vertical-align:middle; }
+    .bvr-tbl tr:last-child td { border-bottom:none; }
+    .bvr-tbl .num { font-family:var(--font-display); font-size:20px; line-height:1; text-align:center;
+      color:var(--clr-text-3); width:48px; }
+    .bvr-tbl .num span { display:inline-block; transform:translateY(2px); }
+    .bvr-tbl .pts { font-family:var(--font-body); text-align:center; white-space:nowrap; font-size:15px; }
+    .bvr-tbl .pts--total { color:var(--clr-text); font-size:16px; }
+    .bvr-tbl .song { color:var(--clr-text); }
+    .bvr-tbl .artist { color:var(--clr-text); overflow-wrap:break-word; }
+    .bvr-tbl .lang { font-size:11px; color:var(--clr-text-3); }
+    /* 前三名：参考 bbl 本期完整榜单卡片（渐变底 + 左侧光条 + 染色） */
+    .bvr-row--1 { background:linear-gradient(90deg, rgba(212,168,50,0.20) 0%, rgba(212,168,50,0.06) 50%, transparent 85%); }
+    .bvr-row--2 { background:linear-gradient(90deg, rgba(110,150,178,0.15) 0%, rgba(110,150,178,0.05) 50%, transparent 85%); }
+    .bvr-row--3 { background:linear-gradient(90deg, rgba(196,120,68,0.16) 0%, rgba(196,120,68,0.05) 50%, transparent 85%); }
+    .bvr-row--1 td:first-child { box-shadow:inset 3px 0 0 var(--clr-gold-light); }
+    .bvr-row--2 td:first-child { box-shadow:inset 3px 0 0 #7ea4bc; }
+    .bvr-row--3 td:first-child { box-shadow:inset 3px 0 0 #d09068; }
+    .bvr-row--1 .num { color:var(--clr-gold-light); text-shadow:0 0 18px rgba(224,176,64,0.7); }
+    .bvr-row--2 .num { color:var(--clr-silver);     text-shadow:0 0 18px rgba(110,170,204,0.5); }
+    .bvr-row--3 .num { color:var(--clr-bronze);     text-shadow:0 0 18px rgba(224,148,84,0.6); }
+    .bvr-row--1 .song { color:var(--clr-gold-tint); }
+    .bvr-row--2 .song { color:#ccdde8; }
+    .bvr-row--3 .song { color:#fde8d0; }
+    .bvr-row--1 .artist { color:var(--clr-gold-tint); }
+    .bvr-row--2 .artist { color:#ccdde8; }
+    .bvr-row--3 .artist { color:#fde8d0; }
+    .bvr-row--1 .lang { color:rgba(224,176,64,0.85); }
+    .bvr-row--2 .lang { color:rgba(148,196,220,0.85); }
+    .bvr-row--3 .lang { color:rgba(224,160,100,0.8); }
+    .bvr-tbl .pts--jury  { color:var(--clr-accent-light); }
+    .bvr-tbl .pts--tele  { color:var(--clr-pink-light); }
+    .bvr-row--shadow td { background:rgba(255,255,255,0.02); color:var(--clr-text-3); font-style:italic; }
+    .bvr-row--shadow .song, .bvr-row--shadow .artist { color:var(--clr-text-3); }
+    .bvr-shadow-tag { font-size:9px; border:1px solid var(--clr-border-2); border-radius:2px;
+      padding:0 4px; margin-left:6px; color:var(--clr-text-3); font-style:normal; }
+
+    /* ----- matrix ----- */
+    .bvr-mw { overflow-x:auto; border:1px solid var(--clr-border); border-radius:8px;
+      display:inline-block; max-width:100%; vertical-align:top; }
+    table.bvr-mtx { border-collapse:collapse; font-size:11px; font-family:var(--font-mono); }
+    .bvr-mtx th, .bvr-mtx td { border:1px solid var(--clr-border); padding:5px 7px; text-align:center;
+      white-space:nowrap; }
+    .bvr-mtx thead th { background:var(--clr-surface); color:var(--clr-text-2); font-weight:700;
+      font-family:var(--font-body); }
+    .bvr-mtx .mtx-grp { letter-spacing:0.06em; }
+    .bvr-mtx .mtx-grp--jury { color:var(--clr-accent-light); }
+    .bvr-mtx .mtx-grp--tele { color:var(--clr-pink-light); }
+    .bvr-mtx .mtx-corner { background:var(--clr-bg); }
+    .bvr-mtx .rcp { text-align:left; font-family:var(--font-body); color:var(--clr-text);
+      position:sticky; left:0; background:var(--clr-bg); z-index:1; }
+    .bvr-mtx .tot { color:var(--clr-text); font-weight:700; background:var(--clr-surface); }
+    .bvr-mtx .sj  { color:var(--clr-accent-light); background:var(--clr-surface); }
+    .bvr-mtx .st  { color:var(--clr-pink-light);    background:var(--clr-surface); }
+    .bvr-mtx tbody .tot, .bvr-mtx tbody .sj, .bvr-mtx tbody .st { font-family:var(--font-body); font-size:13px; }
+    .bvr-mtx .vsep { border-left:2px solid var(--clr-border-2); }
+    .bvr-mtx td.pt { color:var(--clr-text-2); }
+    .bvr-mtx td.pt--12 { color:var(--clr-gold-light); font-weight:700; }
+    .bvr-mtx td.self { background-color:rgba(255,255,255,0.05);
+      background-image:repeating-linear-gradient(45deg,
+        rgba(255,255,255,0.13),rgba(255,255,255,0.13) 2px,transparent 2px,transparent 5px); }
+
+    /* ----- 12-points（三列：选送者 | Jury 组 | Tele 组，跨行对齐） ----- */
+    .bvr-12 { display:grid; grid-template-columns:max-content minmax(0,1fr) minmax(0,1fr);
+      border:1px solid var(--clr-border); border-radius:8px; overflow:hidden; }
+    .bvr-12 > span { padding:8px 14px; border-bottom:1px solid var(--clr-border); font-size:12px; }
+    .bvr-12 > span:nth-last-child(-n+3) { border-bottom:none; }
+    .bvr-12__r { display:flex; align-items:center; font-weight:600; white-space:nowrap; }
+    .bvr-12__n { font-family:var(--font-display); font-weight:400; font-size:17px; line-height:1;
+      color:var(--clr-text); margin-right:10px; }
+    .bvr-12__c { color:var(--clr-text-2); line-height:1.9; }
+    .bvr-12__c .member { margin-right:10px; }
+    .bvr-12tag { font-size:10px; font-weight:700; letter-spacing:0.04em; margin-right:6px; }
+    .bvr-12tag--jury { color:var(--clr-accent-light); }
+    .bvr-12tag--tele { color:var(--clr-pink-light); }
+
+    /* ----- intros / rules ----- */
+    .bvr-intro { border:1px solid var(--clr-border); border-radius:8px; padding:16px 18px; margin-bottom:10px; }
+    .bvr-intro__hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
+    .bvr-intro__song { font-size:14px; font-weight:700; color:var(--clr-text); }
+    .bvr-intro__artist { font-size:12px; color:var(--clr-text-2); }
+    .bvr-intro__by { font-size:11px; color:var(--clr-text-3); margin-left:auto; }
+    .bvr-intro__txt { font-size:13px; color:var(--clr-text-2); line-height:1.7; white-space:pre-wrap; }
+    .bvr-empty { font-size:13px; color:var(--clr-text-3); border:1px dashed var(--clr-border-2);
+      border-radius:8px; padding:18px; text-align:center; }
+    .bvr-rules { border:1px solid var(--clr-border); border-radius:8px; padding:18px 20px; }
+    .bvr-rules dl { display:grid; grid-template-columns:auto 1fr; gap:8px 18px; margin:0; }
+    .bvr-rules dt { font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+      color:var(--clr-violet-light); white-space:nowrap; }
+    .bvr-rules dd { margin:0; font-size:13px; color:var(--clr-text-2); line-height:1.65; }
+    .bvr-rules dd .niche { display:flex; flex-wrap:wrap; gap:4px 8px; }
+    .bvr-rules dd .niche code { font-family:var(--font-body); font-size:11px; color:var(--clr-text-2);
+      background:var(--clr-surface); padding:1px 6px; border-radius:3px; }
+    .bvr-src { margin-top:12px; font-size:11px; color:var(--clr-text-3); }
+
+    /* ----- TOC (沿用 hof) ----- */
+    .bvr-toc { position:fixed; right:19px; bottom:90px; z-index:90; display:flex; flex-direction:column;
+      gap:1px; opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
+    .bvr-toc--visible { opacity:1; visibility:visible; }
+    .bvr-toc__item { font-family:var(--font-body); font-size:11px; color:var(--clr-text-3); cursor:pointer;
+      padding:3px 13px 3px 0; position:relative; transition:color 0.15s; line-height:1.5; white-space:nowrap;
+      user-select:none; text-align:right; }
+    .bvr-toc__item::after { content:''; position:absolute; right:3px; top:50%; transform:translateY(-50%);
+      width:5px; height:5px; border-radius:50%; background:var(--clr-violet-light); opacity:0; transition:opacity 0.2s; }
+    .bvr-toc__item:not(.bvr-toc__item--active):hover { color:var(--clr-text); }
+    .bvr-toc__item--active { color:var(--clr-violet-light); }
+    .bvr-toc__item--active::after { opacity:1; animation:bvr-breathe 3s ease-in-out infinite; }
+    @keyframes bvr-breathe { 0%,100%{opacity:1;transform:translateY(-50%) scale(1);} 50%{opacity:0.35;transform:translateY(-50%) scale(0.65);} }
+
+    /* 宽表横向滚动提示（仅手机显示） */
+    .bvr-scroll-hint { display:none; }
+
+    @media (max-width:768px) {
+      .bvr-toc { display:none; }
+      .bvr-scroll-hint { display:block; font-size:11px; color:var(--clr-text-3);
+        letter-spacing:0.04em; margin-bottom:7px; }
+      /* 12 Points 改单列堆叠：选送者 / Jury / Tele 各占整行（@名不挤） */
+      .bvr-12 { grid-template-columns:1fr; }
+      .bvr-12 > span { border-bottom:none; padding:2px 14px; }
+      .bvr-12__c:empty { display:none; }
+      .bvr-12__r { padding-top:14px; border-top:1px solid var(--clr-border); }
+      .bvr-12 > span:first-child { border-top:none; }
+      .bvr-12 > span:last-child { padding-bottom:14px; }
+    }
+    `;
+    var st = document.createElement('style');
+    st.textContent = css;
+    document.head.appendChild(st);
+  }
+
+  /* ---------- section builders ---------- */
+  function buildHero(d) {
+    // 标题去掉罗马数字后缀；序数词（1st/2nd…）染粉色
+    var name = esc(d.edition_name).replace(/(\d+(?:st|nd|rd|th))/i, '<span class="bvr-ord">$1</span>');
+    var bits = [];
+    if (d.cn_name) bits.push(esc(d.cn_name));
+    bits.push('Barvision ' + (d.city ? esc(d.city) + ' ' : '') + esc(d.year));
+    if (d.host) bits.push('主办：' + esc(d.host));
+    if (d.motto) bits.push('<span class="bvr-meta__motto">' + esc(d.motto) + '</span>');
+    var meta = bits.map(function (b) { return '<span>' + b + '</span>'; })
+      .join('<span class="bvr-meta__sep">｜</span>');
+    return '' +
+      '<section class="bvr-hero">' +
+      '<div class="bvr-hero__glow"></div><div class="bvr-hero__grid"></div>' +
+      '<div class="bvr-hero__wm">' + roman(d.edition_no) + '</div>' +
+      '<div class="bvr-hero__inner section__inner">' +
+      '<a class="bvr-eyebrow fade-up" href="/barvision.html"><span>←</span><span>Barvision</span></a>' +
+      '<h1 class="bvr-title fade-up" style="transition-delay:0.08s;">' + name + '</h1>' +
+      '<div class="bvr-meta fade-up" style="transition-delay:0.16s;">' + meta + '</div>' +
+      (d.summary ? '<p class="bvr-desc fade-up" style="transition-delay:0.22s;">' + esc(d.summary) + '</p>' : '') +
+      '</div></section>';
+  }
+
+  // header 复用全站全局类（渐变横杠 section-label + Bebas section__title + subtitle），对标 2026 events.html
+  function section(id, cnLabel, enTitle, subtitle, bodyHtml) {
+    return '<section class="section section--bordered bvr-sec" id="' + id + '" ' +
+      'style="scroll-margin-top:calc(var(--nav-h) - 2px)"><div class="section__inner">' +
+      '<div class="bvr-sec__hd">' +
+        '<p class="section-label fade-up">' + esc(cnLabel) + '</p>' +
+        '<h2 class="section__title fade-up" style="margin-top:24px;font-size:clamp(24px,3.5vw,48px);">' + esc(enTitle) + '</h2>' +
+        (subtitle ? '<p class="section__subtitle fade-up" style="margin-top:24px;font-size:14px;">' + subtitle + '</p>' : '') +
+      '</div>' +
+      bodyHtml + '</div></section>';
+  }
+
+  function matchTitle(m) {
+    if (m.venue) return esc(m.venue) + (m.match ? ' <span style="color:var(--clr-text-3)">(' + esc(m.match) + ')</span>' : '');
+    if (m.match) return esc(m.match);
+    return '';
+  }
+
+  // 竞赛式名次（同分同名次，如 1,2,2,4）
+  function compRank(arr, key, val) {
+    var n = 0, v = val || 0;
+    for (var i = 0; i < arr.length; i++) if ((arr[i][key] || 0) > v) n++;
+    return n + 1;
+  }
+  function ptsCell(cls, val, rankArr, key, e) {
+    var rank = (e.is_shadow || val == null) ? '' : '<span class="pts-rank">#' + compRank(rankArr, key, val) + '</span>';
+    return '<td class="pts ' + cls + '" data-v="' + (val == null ? -1 : val) + '">' +
+      '<span class="pts-v">' + fmtScore(val) + '</span>' + rank + '</td>';
+  }
+  function resultTable(m) {
+    var pool = m.entries.filter(function (e) { return !e.is_shadow; });  // 排名只在正式曲目间统计
+    var rows = m.entries.map(function (e) {
+      var cls = e.is_shadow ? 'bvr-row--shadow' : (e.rank <= 3 ? 'bvr-row--' + e.rank : '');
+      return '<tr class="' + cls + '">' +
+        '<td class="num"><span>' + (e.is_shadow ? '·' : esc(e.rank)) + '</span></td>' +
+        '<td>' + memberLink(e.member) + '</td>' +
+        '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + '</td>' +
+        '<td class="lang">' + esc(e.language || '') + '</td>' +
+        ptsCell('pts--jury', e.jury_vote, pool, 'jury_vote', e) +
+        ptsCell('pts--tele', e.tele_vote, pool, 'tele_vote', e) +
+        '<td class="pts pts--total" data-v="' + (e.score == null ? -1 : e.score) + '">' + fmtScore(e.score) + '</td>' +
+        '</tr>';
+    }).join('');
+    return '<div class="bvr-scroll-hint">⟷ 左右滑动查看完整表格</div>' +
+      '<div class="bvr-tw fade-up"><table class="bvr-tbl"><thead><tr>' +
+      '<th>名次</th><th>选送者</th><th>歌手</th><th>歌名</th><th>语种</th>' +
+      '<th class="th-jury" style="text-align:center">Jury</th>' +
+      '<th class="th-tele" style="text-align:center">Tele</th>' +
+      '<th class="th-pts" style="text-align:center">Points</th>' +
+      '</tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
+  // 合并矩阵：分组表头(Jury Vote/Tele Vote) + 可排序前 4 列；默认按选送者排（自投格成主对角线）
+  function votingMatrix(m, label) {
+    var voters = m.votes.voters;
+    if (!voters.length) return '';
+    var juryN = voters.filter(function (v) { return v.type === 'jury'; }).length;
+    var teleN = voters.length - juryN;
+    var firstTele = juryN;  // voters 顺序：评委在前、观众在后
+    // 默认顺序：行按评委投票人列顺序排列，使自投格连成主对角线
+    var orderIdx = {};
+    voters.forEach(function (v, i) { if (v.type === 'jury') orderIdx[v.voter] = i; });
+    var recips = m.entries.filter(function (e) { return !e.is_shadow; }).slice()
+      .sort(function (a, b) {
+        var ia = orderIdx[a.member] != null ? orderIdx[a.member] : 999;
+        var ib = orderIdx[b.member] != null ? orderIdx[b.member] : 999;
+        return ia - ib;
+      });
+    function vsep(i) { return (i === 0 || i === firstTele) ? ' vsep' : ''; }
+    var grpRow = '<tr>' +
+      '<th class="rcp bvr-th-sort" rowspan="2" data-msort="rcp">' + esc(label) + '</th>' +
+      '<th class="tot bvr-th-sort" rowspan="2" data-msort="tot">Total</th>' +
+      '<th class="sj bvr-th-sort" rowspan="2" data-msort="sj">Jury</th>' +
+      '<th class="st bvr-th-sort" rowspan="2" data-msort="st">Tele</th>' +
+      (juryN ? '<th class="mtx-grp mtx-grp--jury vsep" colspan="' + juryN + '">Jury Vote</th>' : '') +
+      (teleN ? '<th class="mtx-grp mtx-grp--tele vsep" colspan="' + teleN + '">Tele Vote</th>' : '') +
+      '</tr>';
+    var colRow = '<tr>' +
+      voters.map(function (v, i) {
+        return '<th class="' + (v.type === 'tele' ? 'vt' : 'vj') + vsep(i) + '">' + esc(v.voter) + '</th>';
+      }).join('') + '</tr>';
+    var body = recips.map(function (e) {
+      var cells = voters.map(function (v, i) {
+        var sep = vsep(i);
+        if (v.voter === e.member) return '<td class="self' + sep + '"></td>';
+        var p = v.points[e.member];
+        if (p == null) return '<td class="pt' + sep + '"></td>';
+        return '<td class="pt' + (p === 12 ? ' pt--12' : '') + sep + '">' + p + '</td>';
+      }).join('');
+      return '<tr><td class="rcp">' + memberLink(e.member) + '</td>' +
+        '<td class="tot">' + fmtScore(e.score) + '</td>' +
+        '<td class="sj">' + fmtScore(e.jury_vote) + '</td>' +
+        '<td class="st">' + fmtScore(e.tele_vote) + '</td>' + cells + '</tr>';
+    }).join('');
+    return '<div class="bvr-scroll-hint">⟷ 左右滑动查看完整计分板</div>' +
+      '<div class="bvr-mw fade-up"><table class="bvr-mtx">' +
+      '<thead>' + grpRow + colRow + '</thead><tbody>' + body + '</tbody></table></div>';
+  }
+
+  // 12 分合并表：每位获 12 分的选送者一行，区分评委 / 观众给分，给分者用 @名
+  function twelveBlock(m) {
+    var got = {};  // recipient -> {jury:[], tele:[]}
+    m.votes.voters.forEach(function (v) {
+      Object.keys(v.points).forEach(function (r) {
+        if (v.points[r] === 12) { (got[r] = got[r] || { jury: [], tele: [] })[v.type].push(v.voter); }
+      });
+    });
+    var recips = Object.keys(got).sort(function (a, b) {
+      return (got[b].jury.length + got[b].tele.length) - (got[a].jury.length + got[a].tele.length);
+    });
+    if (!recips.length) return '<div class="bvr-empty fade-up">本场无 12 分记录。</div>';
+    function givers(arr) { return arr.map(function (g) { return memberLink(g); }).join(''); }
+    function grp(type, arr) {
+      return '<span class="bvr-12tag bvr-12tag--' + type + '">' + (type === 'jury' ? 'Jury' : 'Tele') + '</span>' + givers(arr);
+    }
+    // 三列：选送者 | Jury 组 | Tele 组；无 Jury 时 Tele 占第二列
+    var cells = recips.map(function (r) {
+      var j = got[r].jury, t = got[r].tele, c2 = '', c3 = '';
+      if (j.length) { c2 = grp('jury', j); if (t.length) c3 = grp('tele', t); }
+      else if (t.length) { c2 = grp('tele', t); }
+      return '<span class="bvr-12__r"><span class="bvr-12__n">' + (j.length + t.length) + '</span>' + memberLink(r) + '</span>' +
+        '<span class="bvr-12__c">' + c2 + '</span>' +
+        '<span class="bvr-12__c">' + c3 + '</span>';
+    }).join('');
+    return '<div class="bvr-12 fade-up">' + cells + '</div>';
+  }
+
+  function introsBlock(m) {
+    var withIntro = m.entries.filter(function (e) { return e.intro; });
+    if (!withIntro.length) {
+      return '<div class="bvr-empty fade-up">本届歌曲介绍待补充。</div>';
+    }
+    return withIntro.map(function (e) {
+      return '<div class="bvr-intro fade-up"><div class="bvr-intro__hd">' +
+        '<span class="bvr-intro__song">' + esc(e.song) + '</span>' +
+        '<span class="bvr-intro__artist">' + esc(e.artist) + '</span>' +
+        '<span class="bvr-intro__by">' + memberLink(e.member, { nick: true }) + '</span></div>' +
+        '<div class="bvr-intro__txt">' + esc(e.intro) + '</div></div>';
+    }).join('');
+  }
+
+  function rulesBlock(d) {
+    var r = d.rules || {};
+    var dl = '';
+    if (r.submission) dl += '<dt>报名</dt><dd>' + esc(r.submission) + '</dd>';
+    if (r.niche_standard) dl += '<dt>要求</dt><dd><span class="niche">' +
+      r.niche_standard.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join('') + '</span></dd>';
+    if (r.format) dl += '<dt>赛制</dt><dd>' + esc(r.format) + '</dd>';
+    if (r.voting) dl += '<dt>投票</dt><dd>' + esc(r.voting) + '</dd>';
+    if (!dl) return '';
+    return '<div class="bvr-rules fade-up"><dl>' + dl + '</dl>' +
+      (d.source ? '<div class="bvr-src">来源：' + esc(d.source) + '</div>' : '') + '</div>';
+  }
+
+  /* ---------- TOC ---------- */
+  function buildTOC(items) {
+    var nav = document.createElement('nav');
+    nav.className = 'bvr-toc';
+    nav.setAttribute('aria-label', '页内目录');
+    nav.innerHTML = items.map(function (it) {
+      return '<div class="bvr-toc__item" data-target="' + it.id + '">' + esc(it.label) + '</div>';
+    }).join('');
+    document.body.appendChild(nav);
+    nav.classList.add('bvr-toc--visible');  // hero 较短，目录加载即显示（不绑定滚动阈值）
+
+    var els = Array.prototype.slice.call(nav.querySelectorAll('.bvr-toc__item'));
+    var navH = 72, suppress = false, timer = null;
+    window.addEventListener('scroll', function () {
+      if (suppress) { clearTimeout(timer); timer = setTimeout(function () { suppress = false; }, 200); }
+    }, { passive: true });
+    var obs = new IntersectionObserver(function (entries) {
+      if (suppress) return;
+      entries.forEach(function (e) {
+        if (e.isIntersecting) els.forEach(function (it) {
+          it.classList.toggle('bvr-toc__item--active', it.dataset.target === e.target.id);
+        });
+      });
+    }, { rootMargin: '-' + navH + 'px 0px -55% 0px' });
+    els.forEach(function (it) {
+      var t = document.getElementById(it.dataset.target);
+      if (t) obs.observe(t);
+      it.addEventListener('click', function () {
+        var t = document.getElementById(it.dataset.target);
+        if (!t) return;
+        suppress = true; clearTimeout(timer);
+        els.forEach(function (x) { x.classList.toggle('bvr-toc__item--active', x === it); });
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+      });
+    });
+  }
+
+  /* ---------- fade-up observer ---------- */
+  function observeFades() {
+    if (!('IntersectionObserver' in window)) {
+      document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.06 });
+    document.querySelectorAll('.fade-up').forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------- 交互式排序：点击 Jury/Tele/Points 表头按该列排序 ---------- */
+  function wireSortable() {
+    document.querySelectorAll('.bvr-tbl').forEach(function (tbl) {
+      var tbody = tbl.tBodies[0];
+      if (!tbody) return;
+      var state = { cls: null, dir: -1 };
+      tbl.querySelectorAll('thead th.th-jury, thead th.th-tele, thead th.th-pts').forEach(function (th) {
+        th.classList.add('bvr-th-sort');
+        var cls = th.classList.contains('th-jury') ? 'pts--jury'
+          : th.classList.contains('th-tele') ? 'pts--tele' : 'pts--total';
+        th.addEventListener('click', function () {
+          if (state.cls === cls) state.dir = -state.dir; else { state.cls = cls; state.dir = -1; }
+          var rows = Array.prototype.slice.call(tbody.rows);
+          rows.sort(function (a, b) {
+            var va = parseFloat((a.querySelector('.' + cls) || {}).getAttribute('data-v')) || 0;
+            var vb = parseFloat((b.querySelector('.' + cls) || {}).getAttribute('data-v')) || 0;
+            return (va - vb) * state.dir;
+          });
+          rows.forEach(function (r) { tbody.appendChild(r); });
+          tbl.querySelectorAll('thead th').forEach(function (h) { h.removeAttribute('data-sort'); });
+          th.setAttribute('data-sort', state.dir < 0 ? 'desc' : 'asc');
+        });
+      });
+    });
+  }
+
+  /* ---------- 矩阵排序：选送者(默认对角线) / Total / Jury / Tele ---------- */
+  function wireMatrixSort() {
+    document.querySelectorAll('.bvr-mtx').forEach(function (tbl) {
+      var tbody = tbl.tBodies[0]; if (!tbody) return;
+      var defaultOrder = Array.prototype.slice.call(tbody.rows);
+      var heads = Array.prototype.slice.call(tbl.querySelectorAll('thead th[data-msort]'));
+      var state = { col: 'rcp', dir: 1 };
+      function indicate() {
+        heads.forEach(function (h) { h.removeAttribute('data-sort'); });
+        var th = heads.find(function (h) { return h.dataset.msort === state.col; });
+        if (th) th.setAttribute('data-sort', state.dir < 0 ? 'desc' : 'asc');
+      }
+      indicate();  // 默认选送者排序
+      heads.forEach(function (th) {
+        th.addEventListener('click', function () {
+          var col = th.dataset.msort;
+          if (state.col === col) state.dir = -state.dir;
+          else { state.col = col; state.dir = (col === 'rcp') ? 1 : -1; }
+          var rows;
+          if (col === 'rcp') {
+            rows = defaultOrder.slice();
+            if (state.dir < 0) rows.reverse();
+          } else {
+            rows = Array.prototype.slice.call(tbody.rows).sort(function (a, b) {
+              var va = parseFloat((a.querySelector('.' + col) || {}).textContent) || 0;
+              var vb = parseFloat((b.querySelector('.' + col) || {}).textContent) || 0;
+              return (va - vb) * state.dir;
+            });
+          }
+          rows.forEach(function (r) { tbody.appendChild(r); });
+          indicate();
+        });
+      });
+    });
+  }
+
+  /* ---------- render ---------- */
+  function render(d) {
+    DATA = d;
+    document.title = d.edition_name + ' | Barvision';
+    var root = document.getElementById('bvr-root');
+    var html = buildHero(d);
+    var toc = [];
+
+    // 1) 赛制
+    var rb = rulesBlock(d);
+    if (rb) { html += section('rules', '赛制', 'Rules', '', rb); toc.push({ id: 'rules', label: '赛制' }); }
+
+    // 2) 每个 match：结果概览 + Detailed voting results（Split / 矩阵 / 12 分）
+    var multi = d.matches.length > 1;
+    d.matches.forEach(function (m, mi) {
+      var mName = matchTitle(m).replace(/<[^>]+>/g, '');
+      var pfx = multi ? (mName + ' · ') : '';
+
+      var rid = 'result' + (multi ? mi : '');
+      html += section(rid, pfx + '结果概览', 'Results', '', resultTable(m));
+      toc.push({ id: rid, label: (multi ? mName + ' 结果' : '结果概览') });
+
+      var mtx = votingMatrix(m, '选送者');
+      var dvr = '';
+      if (mtx) dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--matrix">Scoreboard</div>' + mtx;
+      dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--12">12 Points</div>' + twelveBlock(m);
+
+      var did = 'dvr' + (multi ? mi : '');
+      html += section(did, pfx + '投票详情', 'Detailed Voting Results', '', dvr);
+      toc.push({ id: did, label: (multi ? mName + ' 投票' : '投票详情') });
+    });
+
+    root.innerHTML = html;
+    buildTOC(toc);
+    observeFades();
+    wireSortable();
+    wireMatrixSort();
+  }
+
+  /* ---------- boot ---------- */
+  injectCSS();
+  var src = (typeof EDITION_SRC !== 'undefined') ? EDITION_SRC : null;
+  if (!src) { console.error('bv-results-render: EDITION_SRC 未定义'); return; }
+  fetch(src).then(function (r) { return r.json(); }).then(render)
+    .catch(function (e) { console.error('bv-results-render: 加载失败', e);
+      var root = document.getElementById('bvr-root');
+      if (root) root.innerHTML = '<section class="section"><div class="section__inner">' +
+        '<p style="color:var(--clr-text-2)">赛果数据加载失败。</p></div></section>'; });
+})();

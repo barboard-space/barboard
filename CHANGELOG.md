@@ -4,6 +4,28 @@
 
 ---
 
+## [2026-06-16] — 新成员 + Barvision 历届详情页（第一届）
+
+### Added
+- 新成员 **野妈 `@Tye`**（space_id 196，标签 村摇欧共体，Bilibili 366510550，暂无 Musictrack）；`gen_member_pages.py` 重跑生成 `member/196.html`，`member.html` BUILT_PAGES 加入 196。成员总数 **118 → 119**。
+- **Barvision 历届详情页体系（已建第一届）**：
+  - `scripts/parse_bv_edition.py`——读每届 Excel（openpyxl/pandas）→ 每届 JSON；从逐票矩阵交叉校验 jury/tele、昵称变体归一 + members 映射。
+  - `scripts/bv-results-render.js`——共享渲染脚本（薄壳 HTML 仅需 `var EDITION_SRC` + 本脚本）；注入 CSS + 渲染全部板块 + 页内 TOC + 交互排序。
+  - `data/barvision/barvision-2019/regular-01.json`——第一届完整数据（14 首赛果 + 19 人逐票矩阵 + meta/规则）。
+  - `barvision/2019/regular-01.html`——第一届薄壳页。
+  - 页面板块（对标 Eurovision wiki + 沿用全站版式）：Hero → 赛制 → 结果概览 → 投票详情（Scoreboard 矩阵 + 12 Points）；右下 TOC 加载即显示。
+- **新令牌 `--clr-board-light: #8FBEE3`**（@名 `.member` 专用，比品牌蓝 `--clr-board` 更亮）；全局 `.member` 改用之；styleguide 已记录（Foundation 色块 + Elements「@名 成员提及」条目）。
+- 安装 `openpyxl` / `python-docx`（读 Excel / docx）。
+
+### Changed
+- `barvision.html` 届次卡片接入详情页链接（`BUILT_EDITIONS` 集合 + `romanToInt` + `editionHref`，已建页面的卡自动可点）。
+- `style.css?v` 3.0.8 → **3.0.9**（index / bbl / bbl-hof / styleguide 同步）。
+
+### Docs
+- CLAUDE.md 成员数 118 → 119；新增 **#129**（Barvision 历史成绩体系规划）、**#130**（详情页实现：JSON schema / 三个表格结构 / 配色 / 手机适配）。
+
+---
+
 ## [2026-06-09] — 报名表单微调 + Barvision HOF 重构 + 全站调色
 
 ### Added
