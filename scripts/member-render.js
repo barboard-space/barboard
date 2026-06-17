@@ -105,7 +105,7 @@
     '  .mp-avatar{width:96px;height:96px}',
     '  .mp-avatar__placeholder{font-size:38px !important}',
     '  .mp-nickname{font-size:36px}',
-    '  .mp-bv-badge{width:21.25px;height:20.4px;margin-left:9px}',
+    '  .mp-bv-badge{width:21.25px;height:20.4px;margin-left:7px}',
     '  table.mp-bv-tbl{min-width:588px}',
     '  .mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4),.mp-bv-tbl th:nth-child(5),.mp-bv-tbl td:nth-child(5){width:150px}',
     '  .mp-bv-tbl td:nth-child(4){white-space:normal}',

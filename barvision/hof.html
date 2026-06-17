@@ -160,6 +160,7 @@
       .bv-grid { grid-template-columns: 1fr; }
       .bv-pioneer      { flex-direction: column; align-items: flex-start; }
       .bv-pioneer::after { display: none; }
+      .bv-legend__ex { display: none; }
     }
     @media (hover: none), (pointer: coarse) {
       .bv-card:hover { border-color: var(--clr-border); }
@@ -243,7 +244,7 @@
 
     <p class="section-label fade-up">数据纪录</p>
     <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Category <span class="bv-accent">Records</span></h2>
-    <p class="bv-legend fade-up" style="transition-delay:0.15s;">场次代码：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版（如 <code>7A</code> = 第 7 届小众组）。<span style="opacity:0.7;">划线条目为已被刷新的旧纪录。</span></p>
+    <p class="bv-legend fade-up" style="transition-delay:0.15s;">注：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版<span class="bv-legend__ex">（如 <code>7A</code> = 第 7 届小众组）</span> · <span style="opacity:0.7;">划线条目为已被刷新的旧纪录。</span></p>
     <div id="bvRecordsGrid"></div>
 
   </div>

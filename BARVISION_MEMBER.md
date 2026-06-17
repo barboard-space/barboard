@@ -73,6 +73,7 @@
 ### 1. 大名届数徽章 `bvBadges()`
 - 大名右上角，**每参加一届一个徽章**并排（数字=届号）；空心五边形 logo（inline SVG，path 同 `logo_hollow.svg`），`fill` 用 `BV_YEAR_COLOR[year]`（`currentColor`）。
 - 数字色：**第一届 = `--clr-board`，其余届 = 白**；两位数届号自动缩小字号（fs 360→300）并下移 baseline 居中。
+- **尺寸**：桌面 30×29px；**手机端缩小 15%**（≈21.25×20.4）、`margin-left` 离大名 **7px**（桌面 9px）。
 - 仅 `MEMBER_DATA.barvision` 存在且有 `edition_no` 时渲染。
 
 ### 2. 概览卡 `stats`（`.mp-bv-stat`，flex 居中）
@@ -90,11 +91,12 @@
 - **场次列**：无组别（数字 series）显示 `-`，有组别显字母；色 `--clr-text-3`。**12分列**色 `--clr-text-3`。
 - **名次前三**：行加 `mp-bv-row--1/2/3` → 名次金/银/铜。
 - **所有数字用 DM Sans**（名次 `.rk` 15px/600，其余 `.num2`）。
-- **列宽**：名次/届次/场次/总分/12分 `width:1px`（收缩到内容）；**歌手列固定 `width:400px`**；**歌名列吸收剩余**。`.artist` 必须 `white-space:nowrap`（否则收缩列会竖排）。
+- **列宽（桌面）**：名次/届次/场次/总分/12分 `width:1px`（收缩到内容）；**歌手列固定 `width:400px`**；**歌名列吸收剩余**。`.artist` 必须 `white-space:nowrap`（否则收缩列会竖排）。
+- **列宽（手机 ≤600px）**：`table` 改 `min-width:588px`（覆盖全局 `width:100%`/`min-width:460`，须用 `table.mp-bv-tbl` 提特异度），**歌手/歌名各 `width:150px`**、歌手 `white-space:normal`；表格整体横向滚动。
 - 微调：名次左移（首列 `padding-left:4px`）、场次 `padding-left:11px`、歌手 `padding-left:14px`、歌名 `padding-left:8px`；表头数字列居中靠 `.ta-c` + `::before` 占位平衡三角。
 
 ### 4. 场次代码图例 `.mp-bv-legend`
-表格之后、走势之前，紧贴表格（`margin-top:14px`）。文案：`场次代码：A 小众 · B 中众 · C 大众 · SF 半决赛 · GF 决赛 · E 娱乐版（如 7A = 第 7 届小众组）。`（复刻 `barvision/hof.html` 的 `.bv-legend`）。
+表格之后、走势之前，紧贴表格（`margin-top:14px`）。文案：`注：A 小众 · B 中众 · C 大众 · SF 半决赛 · GF 决赛 · E 娱乐版` + `.mp-bv-legend__ex`「（如 7A = 第 7 届小众组）」**（手机隐藏）**；**无句号**。`barvision/hof.html` 的 `.bv-legend` 用同样改法（「场次代码」→「注」、括号补充包 `.bv-legend__ex` 手机隐藏、`· ` 替代原句号分隔「划线条目」说明）——两处文案保持一致。
 
 ### 5. 历届排名走势图 `bvTrend()` + `drawBvTrend()`（响应式 SVG）
 - **响应式核心**：`bvTrend()` 只输出空 `<svg>`；`drawBvTrend()` 在渲染后读 `svg.clientWidth` 作为 viewBox 宽度（**viewBox = 实际像素宽，1:1**），高固定 180；监听 `window resize` 重绘。这样字号恒 13px、X 轴点间距按屏宽自适应、桌面手机都完整展示**不横滚**。

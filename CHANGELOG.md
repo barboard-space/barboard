@@ -21,9 +21,15 @@
   - 新增**历届排名走势图**（响应式 SVG：viewBox=实际宽 1:1、resize 重绘、字恒 13px、X 自适应、手机完整不横滚）：每场一点、X 标签届/组、Y 倒置、第一名金 / 第16届 `--clr-red-light` / 混淆空心点+虚线、点上 `#名次`、hover tooltip「歌手 — 歌名」。
 - `member.html` Barvision 筛选按钮改蓝 `--clr-accent` + 届数下拉框（替代二级按钮行）。
 
+### Style
+- **场次图例文案统一**：成员页与 `barvision/hof.html` 均「场次代码」→「注」、去句号；括号补充 `（如 7A = …）` 包入 `.bv-legend__ex` / `.mp-bv-legend__ex`，**手机端隐藏**。
+- **响应式细节**：手机端参赛表歌手/歌名各 150px（`table` 改 `min-width:588px`）；个人主页徽章手机缩小 15%、`margin-left` 离大名 7px（桌面保持 30×29）；`member.html` 卡片 logo 手机缩小 5%。
+- **member.html 筛选按钮**：Barvision 改蓝 `--clr-accent` + 届数下拉框；英文按钮（BarboardLab/Indienation/Barvision）内部文字下移 1px（padding 6/8→7/7），Barvision 按钮 logo 手机端再下移 1px。
+- 板块标题 Barvision 加粗。
+
 ### Docs
 - CLAUDE.md 新增 **#131**（吧视成员页功能：聚合 / 概览 / member.html 筛选徽章 / 活跃判定）。
-- 新增 **`BARVISION_MEMBER.md`** — 吧视成员页数据导入流程 + 各组件样式/逻辑速查（为后续逐届录入做准备；含 `LATEST_ED`、`BV_YEAR_COLOR`、`BV_ACTIVE_SINCE_YEAR` 等导入须改的常量）。
+- 新增 **`BARVISION_MEMBER.md`** — 吧视成员页数据导入流程 + 各组件样式/逻辑速查（为后续逐届录入做准备；含 `LATEST_ED`、`BV_YEAR_COLOR`、`BV_ACTIVE_SINCE_YEAR` 等导入须改的常量）；含图例文案、桌面/手机列宽、徽章尺寸等约定。
 
 ---
 
