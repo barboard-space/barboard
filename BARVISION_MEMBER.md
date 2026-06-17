@@ -83,6 +83,7 @@
 - **计数值为 0** 的项一律 `--clr-text-3` 弱化。
 - **最近参赛**：== `LATEST_ED` 正常白，否则 `--clr-text-3` 弱化。
 - 「第 N 届」格式：**数字前后留空格**；含中文的值自动用 DM Sans（`.mp-bv-stat__v--cjk`，20px/600），纯数字用 Bebas 26px。
+- **值区等高对齐**：`.mp-bv-stat__v` 固定 `min-height`（桌面 26 / 手机 21）+ flex 居中——数字(Bebas 行高=字号)与「第 N 届」(DM Sans 行高更矮)值区等高、**标签水平对齐**（否则矮值卡标签偏上）。卡内 `padding` 上多下少（桌面 `15px 10px 11px`、手机 `12px 6px 8px`），内容视觉**下移 2px** 居中。
 - **手机端（≤600px）**：整体缩小一档（数字 26→21px、「第 N 届」20→16px、标签 11→10px、`grid` `minmax(72px)`、`gap` 8px）；卡内 `padding:12px 6px 8px`（上 12 / 下 8）使内容视觉略偏下、居中更舒服。
 
 ### 3. 可排序参赛表 `.mp-bv-tbl`（`renderBvRows` + `sortBvEntries`）
