@@ -80,6 +80,7 @@
     '.mp-bv-tbl th:nth-child(-n+3),.mp-bv-tbl td:nth-child(-n+3){padding-left:6px;padding-right:6px}',
     '.mp-bv-tbl th:first-child,.mp-bv-tbl td:first-child{padding-left:4px}',
     '.mp-bv-tbl th:nth-child(-n+3),.mp-bv-tbl td:nth-child(-n+3),.mp-bv-tbl th:nth-child(n+6),.mp-bv-tbl td:nth-child(n+6){width:1px}',
+    '.mp-bv-tbl td:nth-child(2){text-align:center}',
     '.mp-bv-tbl td:nth-child(3),.mp-bv-tbl td:nth-child(7){color:var(--clr-text-3)}',
     '.mp-bv-tbl th:nth-child(3),.mp-bv-tbl td:nth-child(3){padding-left:11px}',
     '.mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4){padding-left:14px;width:400px}',
@@ -106,6 +107,11 @@
     '  .mp-avatar__placeholder{font-size:38px !important}',
     '  .mp-nickname{font-size:36px}',
     '  .mp-bv-badge{width:21.25px;height:20.4px;margin-left:7px}',
+    '  .mp-bv-stats{gap:8px;grid-template-columns:repeat(auto-fit,minmax(72px,1fr))}',
+    '  .mp-bv-stat{padding:12px 6px 8px}',
+    '  .mp-bv-stat__v{font-size:21px}',
+    '  .mp-bv-stat__v--cjk{font-size:16px}',
+    '  .mp-bv-stat__k{font-size:10px;margin-top:5px}',
     '  table.mp-bv-tbl{min-width:588px}',
     '  .mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4),.mp-bv-tbl th:nth-child(5),.mp-bv-tbl td:nth-child(5){width:150px}',
     '  .mp-bv-tbl td:nth-child(4){white-space:normal}',
@@ -315,7 +321,7 @@
         '<div class="mp-section-title fade-up" style="transition-delay:.15s">吧视参赛记录</div>' +
         '<div class="mp-bv-stats fade-up" style="transition-delay:.2s">' + statsHtml + '</div>' +
         '<div class="mp-bv-tw fade-up" style="transition-delay:.25s"><table class="mp-bv-tbl"><thead><tr>' +
-          '<th class="sortable ta-c" data-sort="rank">名次' + TRI + '</th><th class="sortable" data-sort="edition">届次' + TRI + '</th><th class="ta-c">场次</th><th>歌手</th><th>歌名</th><th class="sortable ta-c" data-sort="total">总分' + TRI + '</th><th class="sortable ta-c" data-sort="twelve">12分' + TRI + '</th>' +
+          '<th class="sortable ta-c" data-sort="rank">名次' + TRI + '</th><th class="sortable ta-c" data-sort="edition">届次' + TRI + '</th><th class="ta-c">场次</th><th>歌手</th><th>歌名</th><th class="sortable ta-c" data-sort="total">总分' + TRI + '</th><th class="sortable ta-c" data-sort="twelve">12分' + TRI + '</th>' +
         '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
         '<p class="mp-bv-legend fade-up" style="transition-delay:.3s">注：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版<span class="mp-bv-legend__ex">（如 <code>7A</code> = 第 7 届小众组）</span></p>' +
         bvTrend(bv) +

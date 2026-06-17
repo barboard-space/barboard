@@ -26,6 +26,8 @@
 - **响应式细节**：手机端参赛表歌手/歌名各 150px（`table` 改 `min-width:588px`）；个人主页徽章手机缩小 15%、`margin-left` 离大名 7px（桌面保持 30×29）；`member.html` 卡片 logo 手机缩小 5%。
 - **member.html 筛选按钮**：Barvision 改蓝 `--clr-accent` + 届数下拉框；英文按钮（BarboardLab/Indienation/Barvision）内部文字下移 1px（padding 6/8→7/7），Barvision 按钮 logo 手机端再下移 1px。
 - 板块标题 Barvision 加粗。
+- **手机端概览卡缩小一档**（数字 26→21px、「第 N 届」20→16px、标签 10px、`grid minmax(72px)`、padding 减），并 `padding:12px 6px 8px` 使内容视觉居中偏下 2px。
+- **参赛表表头对齐**：届次由左对齐改为居中（与名次/场次/总分/12分一致；歌手/歌名仍左）；带三角列用 `::before` 占位平衡，表头文字精确居中对齐数据。
 
 ### Docs
 - CLAUDE.md 新增 **#131**（吧视成员页功能：聚合 / 概览 / member.html 筛选徽章 / 活跃判定）。
