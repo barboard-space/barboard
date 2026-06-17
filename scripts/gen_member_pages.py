@@ -1,8 +1,72 @@
 #!/usr/bin/env python3
-"""Generate member/N.html stub pages from data/barboard_members.csv."""
+"""Generate member/N.html stub pages from data/members/members.csv.
+
+同时聚合 Barvision 历届赛果（data/barvision/barvision-*/*.json）到每位大妈：
+  - 注入各 member/N.html 的 MEMBER_DATA.barvision（个人主页「吧视」板块）
+  - 输出 data/barvision/member-bv-index.json（供 member.html 筛选/logo 徽章）
+"""
 import csv
+import glob
 import json
 import os
+
+# 活跃判定：最近参赛年份 ≥ 此值 → active（member.html 用实心 logo，否则空心）
+BV_ACTIVE_SINCE_YEAR = 2024
+
+
+def load_bv_editions(base):
+    eds = []
+    pat = os.path.join(base, "data", "barvision", "barvision-*", "*.json")
+    for p in sorted(glob.glob(pat)):
+        with open(p, encoding="utf-8") as f:
+            eds.append(json.load(f))
+    return eds
+
+
+def aggregate_barvision(eds):
+    """{规范昵称: {overview, entries[]}}（含 12 分次数、混淆曲计数）"""
+    per = {}
+    for ed in eds:
+        for m in ed.get("matches", []):
+            match = (m.get("match") or "").strip()
+            voters = m.get("votes", {}).get("voters", [])
+            for e in m.get("entries", []):
+                nick = e.get("member")
+                if not nick or nick == "匿名":
+                    continue
+                twelve = sum(1 for v in voters if v.get("points", {}).get(nick) == 12)
+                per.setdefault(nick, []).append({
+                    "year": ed["year"], "edition_no": ed["edition_no"],
+                    "edition_name": ed["edition_name"], "version": ed["version"],
+                    "series": match if match else str(ed["edition_no"]),  # 综合赛=届次号
+                    "rank": e.get("rank"), "song": e.get("song"), "artist": e.get("artist"),
+                    "language": e.get("language"),
+                    "jury": e.get("jury_vote"), "tele": e.get("tele_vote"), "total": e.get("score"),
+                    "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
+                })
+    out = {}
+    for nick, entries in per.items():
+        entries.sort(key=lambda x: (x["edition_no"], x["series"]))
+        official = [x for x in entries if not x["is_shadow"]]
+        shadow = [x for x in entries if x["is_shadow"]]
+        ranks = [x["rank"] for x in official if x["rank"]]
+        out[nick] = {
+            "overview": {
+                "best": (min(ranks) if ranks else None),
+                "top1": sum(1 for x in official if x["rank"] == 1),
+                "top1_shadow": sum(1 for x in shadow if x["rank"] == 1),
+                "top3": sum(1 for x in official if x["rank"] and x["rank"] <= 3),
+                "top3_shadow": sum(1 for x in shadow if x["rank"] and x["rank"] <= 3),
+                "entries": len(official),
+                "shadow": len(shadow),
+                "twelve": sum(x["twelve"] for x in entries),
+                "debut": min(x["edition_no"] for x in entries),
+                "active_in": max(x["edition_no"] for x in entries),
+                "active": max(x["year"] for x in entries) >= BV_ACTIVE_SINCE_YEAR,
+            },
+            "entries": entries,
+        }
+    return out
 
 TEMPLATE = """\
 <!DOCTYPE html>
@@ -53,6 +117,9 @@ def main():
     member_dir = os.path.join(base, "member")
     os.makedirs(member_dir, exist_ok=True)
 
+    bv_by_nick = aggregate_barvision(load_bv_editions(base))
+    bv_index = {}  # space_id -> {editions, active, count, best}
+
     space_ids = []
 
     with open(csv_path, encoding="utf-8") as f:
@@ -87,6 +154,16 @@ def main():
             if chart_id:
                 data["chart_id"] = chart_id
 
+            bv = bv_by_nick.get(nickname)
+            if bv:
+                data["barvision"] = bv
+                ov = bv["overview"]
+                bv_index[str(space_id)] = {
+                    "editions": sorted(set(e["edition_no"] for e in bv["entries"])),
+                    "active": ov["active"], "count": ov["entries"] + ov["shadow"],
+                    "best": ov["best"], "active_in": ov["active_in"],
+                }
+
             data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
             html = TEMPLATE.replace("PLACEHOLDER", data_json)
 
@@ -97,7 +174,12 @@ def main():
             space_ids.append(space_id)
             print(f"  {space_id}.html — {nickname}")
 
+    idx_path = os.path.join(base, "data", "barvision", "member-bv-index.json")
+    with open(idx_path, "w", encoding="utf-8") as f:
+        json.dump(bv_index, f, ensure_ascii=False, indent=1)
+
     print(f"\nTotal: {len(space_ids)} files")
+    print(f"Barvision 参赛大妈: {len(bv_index)}  → member-bv-index.json")
     print("\nBUILT_PAGES:")
     print("var BUILT_PAGES = new Set(" + json.dumps(sorted(space_ids)) + ");")
 

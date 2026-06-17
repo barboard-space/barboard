@@ -519,6 +519,12 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **手机适配**（`@media max-width:768px`）：结果表 + 矩阵横向滚动 + 上方「⟷ 左右滑动」提示（`.bvr-scroll-hint`）；12 Points 改**单列堆叠**（选送者/Jury/Tele 各占整行、空 Tele 格隐藏、条目 border-top 分隔）；TOC 隐藏。桌面零影响。
     - **已确认决策**：2019–2020 的「X妈」= space_id **195**（@没有XX不科学）；城市仅 **2023 起**（=主办大妈所在城市）；详情页**每届一个 HTML**（非单页+参数）；歌曲介绍文案由用户**逐条提供**（非每届都有）；23–26 年一年一届不细分场次。
     - **完整设计 Guideline（桌面 + 手机，三表样式）见 `DESIGN.md §六`**。本次精修补充：名次 Bebas **18px**；结果表列头 `Points → PTS`；**手机端 @名一律用昵称（X妈 格式）**省空间（`.member{font-size:0}` + `::before content:attr(data-nickname)`）；宽表**隐藏滚动条**（`scrollbar-width:none`/`::-webkit-scrollbar`）；结果表手机压缩间距 + 分数 13px + 名次列缩窄且表头同步对齐；**12 Points 每条目改对称 padding 块**（`.bvr-12e`，桌面 `display:contents` 保持三列对齐、手机对称内边距）+ 接收者 @名白色；**矩阵粘性列改 `border-collapse:separate`** 修复滚动漏光；**nav.js 触屏（`hover:none`/`pointer:coarse`）禁用 hover tooltip**（`initMemberTooltips/initDataTooltips` 早返回）。曾试过手机端卡片/合并列布局，已回退为横滚表。
+131. **Barvision 成绩 → 成员页「吧视」板块 + member.html 徽章/筛选（已建，第一届）**：
+    - **数据聚合**：`gen_member_pages.py` 读所有 `data/barvision/barvision-*/*.json`（`load_bv_editions`+`aggregate_barvision`）→ 按规范昵称聚合每位大妈参赛记录 + 概览（`best/top1/top3/entries/shadow/twelve/debut/active_in/active`）+ **12 分次数**（该场多少投票人给该曲 12 分）→ 注入各 `member/N.html` 的 `MEMBER_DATA.barvision{overview,entries[]}`；同时输出 `data/barvision/member-bv-index.json`（`space_id→{editions,active,count,best,active_in}`）供 member.html 用。**改赛果数据后须重跑 `python scripts/gen_member_pages.py`**（会同时刷新成员页 + 索引）。
+    - **活跃判定**：脚本常量 `BV_ACTIVE_SINCE_YEAR=2024`（最近参赛年份 ≥ 此 → active=实心 logo，否则空心）。当前只有 2019 第一届 → **全部空心**，录入近届后自动转实心。括号 = 混淆(影子)曲选送次数（第一届无 → 不显示）。
+    - **成员页「吧视」板块**（`member-render.js` `bvSection()`，仅 `MEMBER_DATA.barvision` 存在时渲染，取代「代表成绩 即将上线」）：概览 stat 卡（最好名次/夺冠/前三/参加场数/12分次数/首次/最近）+ 参赛表（名次金银铜 / 届次=`.mp-bv-ed` 链接到详情页 / 场次 / 歌名 / 歌手 / 总分 / 12分；混淆曲灰斜体 +「混淆」标）。
+    - **member.html**：筛选按钮 Indienation 后加 **Barvision**（`data-filter=bv`，金色激活态）；选中时显示**届数子筛选** `.ml-subfilters`（全部届 + 第N届，从 `BV_INDEX` 动态生成，状态 `currentBvEdition`）；数据加载改 `Promise.all([members.csv, member-bv-index.json])`；member 元组加 `spaceId`(m[6])；大名后 `.ml-bv-logo`（实心 `logo_center.png` / 空心 `logo_hollow.png`）。
+    - **范围**：仅 14 位选送者有记录（只投票未选送的 5 位无）；先建结构 + 只填第一届，后续逐届累加（重跑脚本即更新）。**待确认**：活跃判定规则（现全空心）。
 
 ---
 

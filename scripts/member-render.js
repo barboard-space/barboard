@@ -37,6 +37,30 @@
     '.mp-work-card__title{font-size:15px;font-weight:600;color:var(--clr-text);margin-bottom:4px}',
     '.mp-work-card__desc{font-size:12px;color:var(--clr-text-2);line-height:1.5}',
     '.mp-todo{font-size:13px;color:var(--clr-text-3);padding:32px;border:1px dashed var(--clr-border);border-radius:8px;text-align:center}',
+    /* 吧视 板块 */
+    '.mp-bv-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:10px;margin-bottom:26px}',
+    '.mp-bv-stat{background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:8px;padding:13px 10px;text-align:center}',
+    '.mp-bv-stat__v{font-family:var(--font-display);font-size:26px;line-height:1;color:var(--clr-text)}',
+    '.mp-bv-stat__v .sh{font-family:var(--font-body);font-size:13px;color:var(--clr-text-3);margin-left:1px}',
+    '.mp-bv-stat__k{font-size:11px;color:var(--clr-text-2);margin-top:7px}',
+    '.mp-bv-stat--active .mp-bv-stat__v{color:var(--clr-violet-light)}',
+    '.mp-bv-tw{overflow-x:auto;border:1px solid var(--clr-border);border-radius:8px;scrollbar-width:none}',
+    '.mp-bv-tw::-webkit-scrollbar{display:none}',
+    'table.mp-bv-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}',
+    '.mp-bv-tbl th{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--clr-text-2);text-align:left;padding:10px 12px;background:var(--clr-surface);border-bottom:1px solid var(--clr-border-2);white-space:nowrap}',
+    '.mp-bv-tbl td{padding:9px 12px;border-bottom:1px solid var(--clr-border);vertical-align:middle;white-space:nowrap}',
+    '.mp-bv-tbl tr:last-child td{border-bottom:none}',
+    '.mp-bv-tbl .rk{font-family:var(--font-display);font-size:18px;line-height:1;color:var(--clr-text-3);text-align:center;width:42px}',
+    '.mp-bv-tbl .num2{font-family:var(--font-body);text-align:center;color:var(--clr-text)}',
+    '.mp-bv-tbl .song{color:var(--clr-text);white-space:normal}',
+    '.mp-bv-tbl .artist{color:var(--clr-text-2);white-space:normal}',
+    '.mp-bv-ed{color:var(--clr-board-light);text-decoration:none}',
+    '.mp-bv-ed:hover{color:var(--clr-violet-light)}',
+    '.mp-bv-row--1 .rk{color:var(--clr-gold-light)}',
+    '.mp-bv-row--2 .rk{color:var(--clr-silver)}',
+    '.mp-bv-row--3 .rk{color:var(--clr-bronze)}',
+    '.mp-bv-row--shadow td{color:var(--clr-text-3);font-style:italic;background:rgba(255,255,255,.02)}',
+    '.mp-bv-sh{font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-3);margin-left:5px}',
     '@media (max-width:600px){',
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
     '  .mp-links{grid-column:1/-1;flex-direction:row}',
@@ -90,6 +114,54 @@
   if (biliId)  links += '<a class="mp-link" href="https://space.bilibili.com/' + biliId + '" target="_blank" rel="noopener">' + BILI_SVG + 'Bilibili</a>';
   if (chartId) links += '<a class="mp-link" href="https://musictrack.cn/chart/' + chartId + '/" target="_blank" rel="noopener">' + MT_SVG + 'Musictrack</a>';
 
+  /* ── 吧视 板块 ── */
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+  function bvSection(bv) {
+    var ov = bv.overview;
+    function shadow(n) { return n ? '<span class="sh">(' + n + ')</span>' : ''; }
+    var stats = [
+      { v: (ov.best == null ? '—' : ov.best), k: '最好名次' },
+      { v: ov.top1, sh: ov.top1_shadow, k: '夺冠场数' },
+      { v: ov.top3, sh: ov.top3_shadow, k: '前三场数' },
+      { v: ov.entries, sh: ov.shadow, k: '参加场数' },
+      { v: ov.twelve, k: '12 分次数' },
+      { v: '第' + ov.debut + '届', k: '首次参赛' },
+      { v: '第' + ov.active_in + '届', k: '最近参赛', active: ov.active }
+    ];
+    var statsHtml = stats.map(function (s) {
+      return '<div class="mp-bv-stat' + (s.active ? ' mp-bv-stat--active' : '') + '">' +
+        '<div class="mp-bv-stat__v">' + s.v + (s.sh ? shadow(s.sh) : '') + '</div>' +
+        '<div class="mp-bv-stat__k">' + s.k + '</div></div>';
+    }).join('');
+    var rows = bv.entries.map(function (e) {
+      var cls = e.is_shadow ? 'mp-bv-row--shadow' : (e.rank && e.rank <= 3 ? 'mp-bv-row--' + e.rank : '');
+      var nn = e.edition_no < 10 ? '0' + e.edition_no : e.edition_no;
+      var href = '../barvision/' + e.year + '/' + e.version + '-' + nn + '.html';
+      return '<tr class="' + cls + '">' +
+        '<td class="rk">' + (e.is_shadow ? '·' : (e.rank == null ? '—' : e.rank)) + '</td>' +
+        '<td><a class="mp-bv-ed" href="' + href + '">第' + e.edition_no + '届</a></td>' +
+        '<td class="num2">' + esc(e.series) + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + '</td>' +
+        '<td class="artist">' + esc(e.artist) + '</td>' +
+        '<td class="num2">' + (e.total == null ? '—' : e.total) + '</td>' +
+        '<td class="num2">' + (e.twelve ? e.twelve : '—') + '</td>' +
+        '</tr>';
+    }).join('');
+    return '<section class="mp-section">' +
+      '<div class="section__inner">' +
+        '<div class="mp-section-label fade-up" style="transition-delay:.05s">Barvision</div>' +
+        '<div class="mp-section-title fade-up" style="transition-delay:.15s">吧视参赛记录</div>' +
+        '<div class="mp-bv-stats fade-up" style="transition-delay:.2s">' + statsHtml + '</div>' +
+        '<div class="mp-bv-tw fade-up" style="transition-delay:.25s"><table class="mp-bv-tbl"><thead><tr>' +
+          '<th>名次</th><th>届次</th><th>场次</th><th>歌名</th><th>歌手</th><th>总分</th><th>12分</th>' +
+        '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+      '</div>' +
+    '</section>';
+  }
+
   /* ── Render ── */
   var root = document.getElementById('mp-root');
   if (!root) return;
@@ -121,15 +193,16 @@
         '</div>' +
       '</div>' +
     '</section>' +
-    '<section class="mp-section">' +
-      '<div class="section__inner">' +
-        '<div class="mp-section-label fade-up" style="transition-delay:.05s">Works</div>' +
-        '<div class="mp-section-title fade-up" style="transition-delay:.15s">代表成绩</div>' +
-        '<div class="mp-works-grid fade-up" style="transition-delay:.25s">' +
-          '<div class="mp-todo">即将上线</div>' +
+    (d.barvision ? bvSection(d.barvision) :
+      '<section class="mp-section">' +
+        '<div class="section__inner">' +
+          '<div class="mp-section-label fade-up" style="transition-delay:.05s">Works</div>' +
+          '<div class="mp-section-title fade-up" style="transition-delay:.15s">代表成绩</div>' +
+          '<div class="mp-works-grid fade-up" style="transition-delay:.25s">' +
+            '<div class="mp-todo">即将上线</div>' +
+          '</div>' +
         '</div>' +
-      '</div>' +
-    '</section>';
+      '</section>');
 
   /* ── Fade-up animations ── */
   if ('IntersectionObserver' in window) {

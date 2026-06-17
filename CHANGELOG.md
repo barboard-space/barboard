@@ -4,6 +4,19 @@
 
 ---
 
+## [2026-06-17] — Barvision 成绩进成员页「吧视」板块 + member.html 徽章/筛选
+
+### Added
+- **成员页「吧视」板块**：`gen_member_pages.py` 聚合各届 JSON → 注入 `MEMBER_DATA.barvision`（概览 + 参赛表 + 12 分次数），`member-render.js` `bvSection()` 渲染（概览 stat 卡 + 参赛表，名次金银铜 / 届次链接详情页 / 总分 / 12分）。
+- 新输出 `data/barvision/member-bv-index.json`（space_id→吧视摘要）供 member.html。
+- **member.html**：Indienation 后加 **Barvision 筛选**（+ 届数子筛选「全部届/第N届」）；参赛大妈大名后加 **logo 徽章**（活跃实心 `logo_center.png` / 不活跃空心 `logo_hollow.png`，`logo_hollow.png` 新增）。
+- 第一届 14 位选送者已有吧视记录；活跃判定 `BV_ACTIVE_SINCE_YEAR=2024`（现仅 2019 数据 → 全部空心，待确认规则）。
+
+### Docs
+- CLAUDE.md 新增 **#131**（吧视成员页功能：聚合 / 概览 / member.html 筛选徽章 / 活跃判定）。
+
+---
+
 ## [2026-06-16] — 新成员 + Barvision 历届详情页（第一届）
 
 ### Added

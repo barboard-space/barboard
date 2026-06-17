@@ -70,6 +70,14 @@
     .ml-filter[data-filter="bbl"].active    { border-color: var(--clr-violet-light); color: var(--clr-violet-light); background: var(--clr-violet-dim); }
     .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: var(--clr-team-cun); background: rgba(180,120,45,0.1); }
     .ml-filter[data-filter="indie"].active  { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
+    .ml-filter[data-filter="bv"].active      { border-color: rgba(245,200,64,0.7); color: var(--clr-gold-light); background: rgba(245,200,64,0.1); }
+    .ml-subfilters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+    .ml-subfilters[hidden] { display: none; }
+    .ml-subfilter { font-size: 12px; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--clr-border);
+      background: var(--clr-surface); color: var(--clr-text-2); cursor: pointer; transition: border-color .2s, color .2s, background .2s; }
+    .ml-subfilter:hover { border-color: var(--clr-border-2); color: var(--clr-text); }
+    .ml-subfilter.active { border-color: rgba(245,200,64,0.7); color: var(--clr-gold-light); background: rgba(245,200,64,0.1); }
+    .ml-bv-logo { width: 14px; height: 14px; vertical-align: -2px; margin-left: 6px; }
 
     .ml-search-wrap {
       position: relative;
@@ -292,6 +300,7 @@
         <button class="ml-filter" data-filter="bbl">BarboardLab</button>
         <button class="ml-filter" data-filter="cun">村摇欧共体</button>
         <button class="ml-filter" data-filter="indie">Indienation</button>
+        <button class="ml-filter" data-filter="bv">Barvision</button>
         <div class="ml-search-wrap">
           <input class="ml-search" type="text" id="mlSearch" placeholder="搜索成员…" autocomplete="off" />
           <svg class="ml-search-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
@@ -301,6 +310,7 @@
           </svg>
         </div>
       </div>
+      <div class="ml-subfilters" id="mlSubfilters" hidden></div>
     </div>
   </section>
 
@@ -518,6 +528,8 @@
     var allMembers = [];
     var currentFilter = 'all';
     var currentSearch = '';
+    var BV_INDEX = {};
+    var currentBvEdition = null;  // null = 全部届
 
     function buildGrid(members, filter, search) {
       var grid = document.getElementById('mlGrid');
@@ -528,12 +540,21 @@
       if (isFirst) { count.style.transition = 'none'; count.style.opacity = '0'; count.style.transform = 'translateY(8px)'; }
 
       grid.innerHTML = members.map(function(m) {
-        var name = m[0], bId = m[1], groups = m[2], mtId = m[3], biliId = m[4], page = m[5];
+        var name = m[0], bId = m[1], groups = m[2], mtId = m[3], biliId = m[4], page = m[5], spaceId = m[6];
+        var bv = BV_INDEX[spaceId];
         var q = search ? search.toLowerCase() : '';
-        var matchGroup = filter === 'all' || groups.indexOf(filter) !== -1;
+        var matchGroup;
+        if (filter === 'bv') {
+          matchGroup = !!bv && (currentBvEdition == null || bv.editions.indexOf(currentBvEdition) !== -1);
+        } else {
+          matchGroup = filter === 'all' || groups.indexOf(filter) !== -1;
+        }
         var matchSearch = !q || name.toLowerCase().indexOf(q) !== -1 || bId.toLowerCase().indexOf(q) !== -1;
         var show = matchGroup && matchSearch;
         if (show) visible++;
+
+        var bvLogo = bv ? '<img class="ml-bv-logo" src="' + (bv.active ? 'assets/images/logo_center.png' : 'assets/images/logo_hollow.png') +
+          '" alt="Barvision" title="' + (bv.active ? '吧视活跃成员' : '参加过吧视') + '">' : '';
 
         var badges = groups.map(function(g) {
           return '<span class="ml-badge ml-badge--' + g + '">' + BADGE_LABEL[g] + '</span>';
@@ -548,7 +569,7 @@
         var cls = 'ml-card ml-card-enter' + (page ? ' ml-card--link' : '') + (show ? '' : ' hidden');
 
         return '<div class="' + cls + '"' + attrs + '>' +
-          '<div class="ml-card__nickname">' + name + '</div>' +
+          '<div class="ml-card__nickname">' + name + bvLogo + '</div>' +
           '<div class="ml-card__handle">' + (bId ? '@' + bId : '') + '</div>' +
           (badges ? '<div class="ml-card__badges">' + badges + '</div>' : '') +
           (foot ? '<div class="ml-card__foot">' + foot + '</div>' : '') +
@@ -617,9 +638,35 @@
         document.querySelectorAll('.ml-filter').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         currentFilter = btn.dataset.filter;
+        var sub = document.getElementById('mlSubfilters');
+        sub.hidden = currentFilter !== 'bv';
+        if (currentFilter !== 'bv') {
+          currentBvEdition = null;
+          sub.querySelectorAll('.ml-subfilter').forEach(function(b) { b.classList.toggle('active', b.dataset.ed === ''); });
+        }
         buildGrid(allMembers, currentFilter, currentSearch);
       });
     });
+
+    function buildBvSubfilters() {
+      var eds = [];
+      Object.keys(BV_INDEX).forEach(function(id) {
+        (BV_INDEX[id].editions || []).forEach(function(e) { if (eds.indexOf(e) < 0) eds.push(e); });
+      });
+      eds.sort(function(a, b) { return a - b; });
+      var sub = document.getElementById('mlSubfilters');
+      if (!eds.length) { sub.innerHTML = ''; return; }
+      sub.innerHTML = '<button class="ml-subfilter active" data-ed="">全部届</button>' +
+        eds.map(function(e) { return '<button class="ml-subfilter" data-ed="' + e + '">第' + e + '届</button>'; }).join('');
+      sub.querySelectorAll('.ml-subfilter').forEach(function(b) {
+        b.addEventListener('click', function() {
+          sub.querySelectorAll('.ml-subfilter').forEach(function(x) { x.classList.remove('active'); });
+          b.classList.add('active');
+          currentBvEdition = b.dataset.ed === '' ? null : parseInt(b.dataset.ed);
+          buildGrid(allMembers, currentFilter, currentSearch);
+        });
+      });
+    }
 
     document.getElementById('mlSearch').addEventListener('input', function() {
       currentSearch = this.value.trim();
@@ -627,9 +674,13 @@
       buildGrid(allMembers, currentFilter, currentSearch);
     });
 
-    fetch('data/members/members.csv')
-      .then(function(r) { return r.text(); })
-      .then(function(text) {
+    Promise.all([
+      fetch('data/members/members.csv').then(function(r) { return r.text(); }),
+      fetch('data/barvision/member-bv-index.json').then(function(r) { return r.json(); }).catch(function() { return {}; })
+    ])
+      .then(function(res) {
+        var text = res[0];
+        BV_INDEX = res[1] || {};
         var lines = text.trim().split('\n');
         for (var i = 1; i < lines.length; i++) {
           var row = parseCSVLine(lines[i]);
@@ -642,7 +693,7 @@
           var biliId = biliRaw || null;
           var mtId = row[6] ? parseInt(row[6]) || null : null;
           var page = BUILT_PAGES.has(spaceId) ? 'member/' + spaceId + '.html' : null;
-          allMembers.push([name, bId, groups, mtId, biliId, page]);
+          allMembers.push([name, bId, groups, mtId, biliId, page, spaceId]);
         }
         // 固定前四：雨妈-威妈-羊妈-S妈，其余按完善度得分排序
         var pinned = [];
@@ -660,6 +711,7 @@
           return getTeamPriority(b[2]) - getTeamPriority(a[2]);
         });
         allMembers = pinned.concat(rest);
+        buildBvSubfilters();
         buildGrid(allMembers, currentFilter, currentSearch);
       });
   </script>
