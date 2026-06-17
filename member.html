@@ -71,6 +71,8 @@
     .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: var(--clr-team-cun); background: rgba(180,120,45,0.1); }
     .ml-filter[data-filter="indie"].active  { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
     .ml-filter[data-filter="bv"].active      { border-color: var(--clr-accent); color: var(--clr-accent); background: var(--clr-accent-dim); }
+    /* 英文按钮内部文字下移 1px（padding 6/8 → 7/7，高度不变） */
+    .ml-filter[data-filter="bbl"], .ml-filter[data-filter="indie"], .ml-filter[data-filter="bv"] { padding-top: 7px; padding-bottom: 7px; }
     /* Barvision 届次下拉 */
     .ml-bvdd { position: relative; display: inline-block; opacity: 0; visibility: hidden; transition: opacity 0.22s ease; }
     .ml-bvdd.ml-bvdd--show { opacity: 1; visibility: visible; }
@@ -299,6 +301,7 @@
       .ml-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
       .ml-card { padding: 14px 12px 12px; min-height: 74px; }
       .ml-card__nickname { font-size: 22px; }
+      .ml-bv-logo { height: 12.35px; }
       .ml-search-wrap { margin-left: 0; width: 100%; }
       .ml-search, .ml-search:focus { width: 100%; }
     }

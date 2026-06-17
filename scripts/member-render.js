@@ -105,7 +105,11 @@
     '  .mp-avatar{width:96px;height:96px}',
     '  .mp-avatar__placeholder{font-size:38px !important}',
     '  .mp-nickname{font-size:36px}',
-    '  .mp-bv-badge{width:25px;height:24px;margin-left:9px}',
+    '  .mp-bv-badge{width:21.25px;height:20.4px;margin-left:9px}',
+    '  table.mp-bv-tbl{min-width:588px}',
+    '  .mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4),.mp-bv-tbl th:nth-child(5),.mp-bv-tbl td:nth-child(5){width:150px}',
+    '  .mp-bv-tbl td:nth-child(4){white-space:normal}',
+    '  .mp-bv-legend__ex{display:none}',
     '}'
   ].join('\n');
 
@@ -307,13 +311,13 @@
     var TRI = '<svg class="mp-bv-tri" viewBox="0 0 10 14" aria-hidden="true"><path class="up" d="M5 0L9 5H1Z"/><path class="dn" d="M5 14L1 9H9Z"/></svg>';
     return '<section class="mp-section">' +
       '<div class="section__inner">' +
-        '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body)">Barvision</div>' +
+        '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">Barvision</div>' +
         '<div class="mp-section-title fade-up" style="transition-delay:.15s">吧视参赛记录</div>' +
         '<div class="mp-bv-stats fade-up" style="transition-delay:.2s">' + statsHtml + '</div>' +
         '<div class="mp-bv-tw fade-up" style="transition-delay:.25s"><table class="mp-bv-tbl"><thead><tr>' +
           '<th class="sortable ta-c" data-sort="rank">名次' + TRI + '</th><th class="sortable" data-sort="edition">届次' + TRI + '</th><th class="ta-c">场次</th><th>歌手</th><th>歌名</th><th class="sortable ta-c" data-sort="total">总分' + TRI + '</th><th class="sortable ta-c" data-sort="twelve">12分' + TRI + '</th>' +
         '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-        '<p class="mp-bv-legend fade-up" style="transition-delay:.3s">场次代码：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版（如 <code>7A</code> = 第 7 届小众组）。</p>' +
+        '<p class="mp-bv-legend fade-up" style="transition-delay:.3s">注：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版<span class="mp-bv-legend__ex">（如 <code>7A</code> = 第 7 届小众组）</span></p>' +
         bvTrend(bv) +
       '</div>' +
     '</section>';
