@@ -29,6 +29,7 @@
   - 22 位成员全部解析（含麦妈 130 `@Tandiny`/泰妈 131/音妈 770/瑞妈 135/院妈 326/草妈 141）；`院长→院妈`、`瑞玛→瑞妈`、`绿萌→萌妈`、`淋檬→柠妈`、`肥屎→肥妈` 归一。
 - `barvision/2019/regular-02.html` 薄壳详情页（**SF + GF 两场**，`bv-results-render.js` 已支持多场）；`barvision.html` `BUILT_EDITIONS` 加入 Ⅱ（卡片可点）。
 - 重跑 `gen_member_pages.py`：吧视记录成员 **14 → 20**，`member-bv-index.json` 更新；member.html 届数下拉新增「第二届」。
+- 补充 **35 首歌曲语种**（用户提供，详情页结果表语种列；非英语：意大利语 / 俄语 / 冰岛语 ×2 / 葡萄牙语 / 中文），`parse_bv_edition2.py` 加 `LANG` 映射；并清理 Excel 的不间断空格 `\xa0`（歌名/歌手归一）。
 
 ### Docs
 - `BARVISION_MEMBER.md` 增「已导入届次」+ 第二届(`parse_bv_edition2.py`/SF+GF/GF 加成总分) 处理说明。

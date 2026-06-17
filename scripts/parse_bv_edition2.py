@@ -25,9 +25,18 @@ ALIASES = {
     '锴': '锴妈', '城城': '城妈',
 }
 
+# 歌名 → 语种（非英语显式列出，其余默认英语）
+LANG = {
+    'Per Sempre': '意大利语',
+    'Я ХЕЙТЕР': '俄语',
+    'Hatrið mun sigra': '冰岛语',
+    'Louquinho': '葡萄牙语',
+    '节奏爱': '中文',
+}
+
 def canon(name):
     if name is None: return None
-    s = str(name).strip()
+    s = str(name).replace('\xa0', ' ').strip()
     if not s or s == 'nan': return None
     s = s.replace('【提名者】', '').strip()
     return ALIASES.get(s, s)
@@ -91,10 +100,12 @@ def build_match(df, hdr_row, col_member, col_artist, col_song, col_score,
             if p is None: continue
             if vn in entrants: jury += p
             else: tele += p
+        song_v = (str(df.iat[rr, col_song]).replace('\xa0', ' ').strip() if not pd.isna(df.iat[rr, col_song]) else '')
+        artist_v = (str(df.iat[rr, col_artist]).replace('\xa0', ' ').strip() if not pd.isna(df.iat[rr, col_artist]) else '')
         raw.append({
-            'member': mem, 'member_id': mid, 'language': '',
-            'artist': (str(df.iat[rr, col_artist]).strip() if not pd.isna(df.iat[rr, col_artist]) else ''),
-            'song': (str(df.iat[rr, col_song]).strip() if not pd.isna(df.iat[rr, col_song]) else ''),
+            'member': mem, 'member_id': mid, 'language': LANG.get(song_v, '英语'),
+            'artist': artist_v,
+            'song': song_v,
             'jury_vote': jury, 'tele_vote': tele, 'score': score,
             'support_rate': num(df.iat[rr, col_support]) if col_support is not None else None,
             'high_rate': num(df.iat[rr, col_high]) if col_high is not None else None,
