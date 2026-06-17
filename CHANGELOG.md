@@ -12,8 +12,18 @@
 - **member.html**：Indienation 后加 **Barvision 筛选**（+ 届数子筛选「全部届/第N届」）；参赛大妈大名后加 **logo 徽章**（活跃实心 `logo_center.png` / 不活跃空心 `logo_hollow.png`，`logo_hollow.png` 新增）。
 - 第一届 14 位选送者已有吧视记录；活跃判定 `BV_ACTIVE_SINCE_YEAR=2024`（现仅 2019 数据 → 全部空心，待确认规则）。
 
+### Changed
+- **成员页「吧视」板块大幅精修**（均在 `scripts/member-render.js`）：
+  - 大名右上角届数徽章改 **inline SVG**（`logo_hollow.svg`，`fill:currentColor`）：每届一个、数字=届号、logo 色按年（`BV_YEAR_COLOR`，2019 创始=`--clr-board`）、第一届数字 `--clr-board` 其余白、两位数自动缩放居中。
+  - 概览卡：「最好名次」→「最佳名次」、「参加场数」→「参与场数」；flex 居中；最佳名次前三金银铜 + 重复名次加 `(次数)`；夺冠场数金色（0 弱化）；计数 0 / 最近参赛非最新届 → `--clr-text-3` 弱化；「第 N 届」加空格 + 含中文值用 DM Sans。
+  - 参赛表合并为**可点表头排序表**（名次/届次/总分/12分，双三角指示，默认届次升序）；同届场次按 `A→B→C→SF→GF→E`；场次无组别显 `-`；歌手移到歌名前、二者颜色互换；数字统一 DM Sans；前三金银铜；列宽（歌手 400 固定 / 歌名吸收）+ 表头对齐修复。
+  - 新增**场次代码图例**（表格后、走势前，复刻 hof.html）。
+  - 新增**历届排名走势图**（响应式 SVG：viewBox=实际宽 1:1、resize 重绘、字恒 13px、X 自适应、手机完整不横滚）：每场一点、X 标签届/组、Y 倒置、第一名金 / 第16届 `--clr-red-light` / 混淆空心点+虚线、点上 `#名次`、hover tooltip「歌手 — 歌名」。
+- `member.html` Barvision 筛选按钮改蓝 `--clr-accent` + 届数下拉框（替代二级按钮行）。
+
 ### Docs
 - CLAUDE.md 新增 **#131**（吧视成员页功能：聚合 / 概览 / member.html 筛选徽章 / 活跃判定）。
+- 新增 **`BARVISION_MEMBER.md`** — 吧视成员页数据导入流程 + 各组件样式/逻辑速查（为后续逐届录入做准备；含 `LATEST_ED`、`BV_YEAR_COLOR`、`BV_ACTIVE_SINCE_YEAR` 等导入须改的常量）。
 
 ---
 

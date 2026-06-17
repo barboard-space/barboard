@@ -525,6 +525,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **成员页「吧视」板块**（`member-render.js` `bvSection()`，仅 `MEMBER_DATA.barvision` 存在时渲染，取代「代表成绩 即将上线」）：概览 stat 卡（最好名次/夺冠/前三/参加场数/12分次数/首次/最近）+ 参赛表（名次金银铜 / 届次=`.mp-bv-ed` 链接到详情页 / 场次 / 歌名 / 歌手 / 总分 / 12分；混淆曲灰斜体 +「混淆」标）。
     - **member.html**：筛选按钮 Indienation 后加 **Barvision**（`data-filter=bv`，金色激活态）；选中时显示**届数子筛选** `.ml-subfilters`（全部届 + 第N届，从 `BV_INDEX` 动态生成，状态 `currentBvEdition`）；数据加载改 `Promise.all([members.csv, member-bv-index.json])`；member 元组加 `spaceId`(m[6])；大名后 `.ml-bv-logo`（实心 `logo_center.png` / 空心 `logo_hollow.png`）。
     - **范围**：仅 14 位选送者有记录（只投票未选送的 5 位无）；先建结构 + 只填第一届，后续逐届累加（重跑脚本即更新）。**待确认**：活跃判定规则（现全空心）。
+    - **后续精修（徽章 SVG 化 / 概览配色 / 可排序表 / 场次图例 / 响应式走势图）+ 导入新届流程 + 各组件样式速查 → 详见 `BARVISION_MEMBER.md`**（含导入须改的常量：`member-render.js` 的 `LATEST_ED`/`BV_YEAR_COLOR`、`gen_member_pages.py` 的 `BV_ACTIVE_SINCE_YEAR`）。
 
 ---
 

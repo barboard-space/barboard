@@ -14,7 +14,6 @@
     .ml-hero {
       padding: calc(var(--nav-h) + 48px) 0 25px;
       position: relative;
-      overflow: hidden;
     }
     .ml-hero__glow {
       position: absolute;
@@ -53,6 +52,7 @@
       gap: 8px;
     }
     .ml-filter {
+      font-family: var(--font-body);
       font-size: 12px;
       font-weight: 600;
       letter-spacing: 0.1em;
@@ -70,14 +70,73 @@
     .ml-filter[data-filter="bbl"].active    { border-color: var(--clr-violet-light); color: var(--clr-violet-light); background: var(--clr-violet-dim); }
     .ml-filter[data-filter="cun"].active    { border-color: rgba(200,145,55,0.7); color: var(--clr-team-cun); background: rgba(180,120,45,0.1); }
     .ml-filter[data-filter="indie"].active  { border-color: var(--clr-pink-light); color: var(--clr-pink-light); background: var(--clr-pink-dim); }
-    .ml-filter[data-filter="bv"].active      { border-color: rgba(245,200,64,0.7); color: var(--clr-gold-light); background: rgba(245,200,64,0.1); }
-    .ml-subfilters { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
-    .ml-subfilters[hidden] { display: none; }
-    .ml-subfilter { font-size: 12px; padding: 4px 12px; border-radius: 6px; border: 1px solid var(--clr-border);
-      background: var(--clr-surface); color: var(--clr-text-2); cursor: pointer; transition: border-color .2s, color .2s, background .2s; }
-    .ml-subfilter:hover { border-color: var(--clr-border-2); color: var(--clr-text); }
-    .ml-subfilter.active { border-color: rgba(245,200,64,0.7); color: var(--clr-gold-light); background: rgba(245,200,64,0.1); }
-    .ml-bv-logo { width: 14px; height: 14px; vertical-align: -2px; margin-left: 6px; }
+    .ml-filter[data-filter="bv"].active      { border-color: var(--clr-accent); color: var(--clr-accent); background: var(--clr-accent-dim); }
+    /* Barvision 届次下拉 */
+    .ml-bvdd { position: relative; display: inline-block; opacity: 0; visibility: hidden; transition: opacity 0.22s ease; }
+    .ml-bvdd.ml-bvdd--show { opacity: 1; visibility: visible; }
+    .ml-bvdd__trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 6px 12px 8px 14px;
+      border-radius: 4px;
+      border: 1px solid var(--clr-accent);
+      background: var(--clr-accent-dim);
+      color: var(--clr-accent);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.18s;
+    }
+    .ml-bvdd__trigger:hover { background: rgba(0,180,255,0.18); }
+    .ml-bvdd__chev { width: 12px; height: 12px; flex-shrink: 0; transition: transform 0.2s ease; }
+    .ml-bvdd.open .ml-bvdd__chev { transform: rotate(180deg); }
+    .ml-bvdd__menu {
+      position: absolute;
+      top: calc(100% + 6px);
+      left: 0;
+      z-index: 60;
+      min-width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      padding: 5px;
+      border-radius: 6px;
+      border: 1px solid var(--clr-border-2);
+      background: var(--clr-surface-2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.45);
+      max-height: 300px;
+      overflow-y: auto;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-6px);
+      transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    }
+    .ml-bvdd.open .ml-bvdd__menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    .ml-bvdd__opt {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      text-align: left;
+      white-space: nowrap;
+      padding: 7px 16px;
+      border: none;
+      border-radius: 4px;
+      background: transparent;
+      color: var(--clr-text-2);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+    .ml-bvdd__opt:hover { background: var(--clr-accent-dim); color: var(--clr-text); }
+    .ml-bvdd__opt.active { background: var(--clr-accent-dim); color: var(--clr-accent); }
+    .ml-bv-logo { height: 13px; width: auto; margin-left: 4px; flex-shrink: 0; }
+    .ml-bv-logo--hollow { opacity: 0.65; }
+    .ml-filter[data-filter="bv"] { display: inline-flex; align-items: center; }
+    .ml-bv-btn-logo { height: 12px; width: auto; margin-right: 4px; flex-shrink: 0; display: block; position: relative; top: -1px; }
 
     .ml-search-wrap {
       position: relative;
@@ -153,6 +212,8 @@
       letter-spacing: 0.04em;
       line-height: 1;
       color: var(--clr-text);
+      display: flex;
+      align-items: flex-start;
     }
     .ml-card__handle {
       font-size: 11px;
@@ -277,11 +338,12 @@
       .ml-filters .ml-filter:nth-child(2) { animation-delay: 0.34s; }
       .ml-filters .ml-filter:nth-child(3) { animation-delay: 0.40s; }
       .ml-filters .ml-filter:nth-child(4) { animation-delay: 0.46s; }
+      .ml-filters .ml-filter:nth-child(5) { animation-delay: 0.52s; }
       .ml-filters .ml-search-wrap {
         opacity: 0;
         transform: translateY(14px);
         animation: ml-hero-in 0.45s ease forwards;
-        animation-delay: 0.52s;
+        animation-delay: 0.58s;
       }
     }
   </style>
@@ -300,7 +362,14 @@
         <button class="ml-filter" data-filter="bbl">BarboardLab</button>
         <button class="ml-filter" data-filter="cun">村摇欧共体</button>
         <button class="ml-filter" data-filter="indie">Indienation</button>
-        <button class="ml-filter" data-filter="bv">Barvision</button>
+        <button class="ml-filter" data-filter="bv"><svg class="ml-bv-btn-logo" viewBox="0 0 770 746" fill="currentColor" aria-hidden="true"><path d="M387.903 15.0204C392.208 12.8947 396.69 11.9405 400.817 14.3965C542.26 98.5777 620.627 159.145 757.684 286.872C761.672 290.589 759.482 299.875 758.121 305.154C714.812 473.06 687.145 567.802 618.062 716.07C614.305 724.133 609.258 730.2 600.368 730.494C425.028 736.292 334.86 733.788 159.125 720.458C152.268 719.938 148.169 715.598 145.55 709.239C95.0684 586.7 53.9544 473.223 16.2905 287.844C15.0382 281.679 14.3152 274.906 19.0353 270.748C121.283 180.687 230.374 92.803 387.903 15.0204ZM424.598 105.424C416.477 105.566 360.587 161.078 315.693 181.587C271.949 201.571 247.272 205.77 205.087 226.451C168.273 244.498 114.733 272.121 114.296 276.77C113.86 281.419 148.411 370.162 151.625 421.162C154.63 468.86 156.579 507.647 160.795 547.479C164.963 586.858 170.699 622.729 176.09 626.116C179.611 628.328 219.957 623.412 248.01 624.86C297.951 627.438 334.568 630.879 380.655 645.752C402.827 652.907 438.892 658.335 469.199 666.253C491.864 672.175 530.178 679.797 533.218 677.899C538.956 674.316 546.585 609.472 563.815 569.453C582.773 525.418 595.4 504.773 623.471 463.981C646.101 431.096 677.494 367.89 680.709 352.749C681.946 346.925 598.662 305.446 544.106 237.938C489.551 170.43 430.401 105.325 424.598 105.424Z"/></svg>Barvision</button>
+        <div class="ml-bvdd" id="mlBvDd">
+          <button class="ml-bvdd__trigger" id="mlBvDdTrigger" type="button" aria-haspopup="listbox" aria-expanded="false">
+            <span class="ml-bvdd__label" id="mlBvDdLabel">全部</span>
+            <svg class="ml-bvdd__chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="ml-bvdd__menu" id="mlBvDdMenu" role="listbox"></div>
+        </div>
         <div class="ml-search-wrap">
           <input class="ml-search" type="text" id="mlSearch" placeholder="搜索成员…" autocomplete="off" />
           <svg class="ml-search-icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12"
@@ -310,7 +379,6 @@
           </svg>
         </div>
       </div>
-      <div class="ml-subfilters" id="mlSubfilters" hidden></div>
     </div>
   </section>
 
@@ -553,7 +621,7 @@
         var show = matchGroup && matchSearch;
         if (show) visible++;
 
-        var bvLogo = bv ? '<img class="ml-bv-logo" src="' + (bv.active ? 'assets/images/logo_center.png' : 'assets/images/logo_hollow.png') +
+        var bvLogo = bv ? '<img class="ml-bv-logo' + (bv.active ? '' : ' ml-bv-logo--hollow') + '" src="' + (bv.active ? 'assets/images/logo_center.svg' : 'assets/images/logo_hollow.svg') +
           '" alt="Barvision" title="' + (bv.active ? '吧视活跃成员' : '参加过吧视') + '">' : '';
 
         var badges = groups.map(function(g) {
@@ -638,15 +706,33 @@
         document.querySelectorAll('.ml-filter').forEach(function(b) { b.classList.remove('active'); });
         btn.classList.add('active');
         currentFilter = btn.dataset.filter;
-        var sub = document.getElementById('mlSubfilters');
-        sub.hidden = currentFilter !== 'bv';
+        var dd = document.getElementById('mlBvDd');
+        dd.classList.toggle('ml-bvdd--show', currentFilter === 'bv');
         if (currentFilter !== 'bv') {
-          currentBvEdition = null;
-          sub.querySelectorAll('.ml-subfilter').forEach(function(b) { b.classList.toggle('active', b.dataset.ed === ''); });
+          dd.classList.remove('open');
+          setBvEdition('');
         }
         buildGrid(allMembers, currentFilter, currentSearch);
       });
     });
+
+    function bvCnNum(n) {
+      var d = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+      if (n < 10) return d[n];
+      if (n === 10) return '十';
+      if (n < 20) return '十' + d[n - 10];
+      var t = Math.floor(n / 10), o = n % 10;
+      return d[t] + '十' + (o ? d[o] : '');
+    }
+    function bvEdLabel(e) { return '第' + bvCnNum(e) + '届'; }
+
+    function setBvEdition(ed) {
+      currentBvEdition = ed === '' ? null : parseInt(ed);
+      var label = document.getElementById('mlBvDdLabel');
+      if (label) label.textContent = ed === '' ? '全部' : bvEdLabel(parseInt(ed));
+      var menu = document.getElementById('mlBvDdMenu');
+      if (menu) menu.querySelectorAll('.ml-bvdd__opt').forEach(function(o) { o.classList.toggle('active', o.dataset.ed === ed); });
+    }
 
     function buildBvSubfilters() {
       var eds = [];
@@ -654,17 +740,32 @@
         (BV_INDEX[id].editions || []).forEach(function(e) { if (eds.indexOf(e) < 0) eds.push(e); });
       });
       eds.sort(function(a, b) { return a - b; });
-      var sub = document.getElementById('mlSubfilters');
-      if (!eds.length) { sub.innerHTML = ''; return; }
-      sub.innerHTML = '<button class="ml-subfilter active" data-ed="">全部届</button>' +
-        eds.map(function(e) { return '<button class="ml-subfilter" data-ed="' + e + '">第' + e + '届</button>'; }).join('');
-      sub.querySelectorAll('.ml-subfilter').forEach(function(b) {
-        b.addEventListener('click', function() {
-          sub.querySelectorAll('.ml-subfilter').forEach(function(x) { x.classList.remove('active'); });
-          b.classList.add('active');
-          currentBvEdition = b.dataset.ed === '' ? null : parseInt(b.dataset.ed);
+      var dd = document.getElementById('mlBvDd');
+      var menu = document.getElementById('mlBvDdMenu');
+      var trigger = document.getElementById('mlBvDdTrigger');
+      if (!eds.length) { dd.style.display = 'none'; return; }
+      menu.innerHTML = '<button type="button" class="ml-bvdd__opt active" data-ed="">全部</button>' +
+        eds.map(function(e) { return '<button type="button" class="ml-bvdd__opt" data-ed="' + e + '">' + bvEdLabel(e) + '</button>'; }).join('');
+
+      trigger.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = dd.classList.toggle('open');
+        trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      menu.querySelectorAll('.ml-bvdd__opt').forEach(function(opt) {
+        opt.addEventListener('click', function(e) {
+          e.stopPropagation();
+          setBvEdition(opt.dataset.ed);
+          dd.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
           buildGrid(allMembers, currentFilter, currentSearch);
         });
+      });
+      document.addEventListener('click', function(e) {
+        if (dd.classList.contains('open') && !dd.contains(e.target)) {
+          dd.classList.remove('open');
+          trigger.setAttribute('aria-expanded', 'false');
+        }
       });
     }
 
