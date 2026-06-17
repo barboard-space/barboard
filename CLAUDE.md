@@ -518,6 +518,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **③ 12 Points 表**（`.bvr-12`）：三列容器 grid `max-content 1fr 1fr`——选送者（前置 **Bebas 数字**=该行 12 分个数，weight 400 防假粗，`--clr-text`）/ **Jury** 组 / **Tele** 组；无 Jury 时 Tele 占第二列；给分者 @名（`.member` 10px 间距、无顿号）；评委/观众用蓝/粉 `Jury`/`Tele` 小标签区分。
     - **手机适配**（`@media max-width:768px`）：结果表 + 矩阵横向滚动 + 上方「⟷ 左右滑动」提示（`.bvr-scroll-hint`）；12 Points 改**单列堆叠**（选送者/Jury/Tele 各占整行、空 Tele 格隐藏、条目 border-top 分隔）；TOC 隐藏。桌面零影响。
     - **已确认决策**：2019–2020 的「X妈」= space_id **195**（@没有XX不科学）；城市仅 **2023 起**（=主办大妈所在城市）；详情页**每届一个 HTML**（非单页+参数）；歌曲介绍文案由用户**逐条提供**（非每届都有）；23–26 年一年一届不细分场次。
+    - **完整设计 Guideline（桌面 + 手机，三表样式）见 `DESIGN.md §六`**。本次精修补充：名次 Bebas **18px**；结果表列头 `Points → PTS`；**手机端 @名一律用昵称（X妈 格式）**省空间（`.member{font-size:0}` + `::before content:attr(data-nickname)`）；宽表**隐藏滚动条**（`scrollbar-width:none`/`::-webkit-scrollbar`）；结果表手机压缩间距 + 分数 13px + 名次列缩窄且表头同步对齐；**12 Points 每条目改对称 padding 块**（`.bvr-12e`，桌面 `display:contents` 保持三列对齐、手机对称内边距）+ 接收者 @名白色；**矩阵粘性列改 `border-collapse:separate`** 修复滚动漏光；**nav.js 触屏（`hover:none`/`pointer:coarse`）禁用 hover tooltip**（`initMemberTooltips/initDataTooltips` 早返回）。曾试过手机端卡片/合并列布局，已回退为横滚表。
 
 ---
 

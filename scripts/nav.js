@@ -247,8 +247,13 @@
     });
   }
 
+  /* 触屏设备（无 hover）：tooltip 会因 tap 触发并卡住，整体禁用 */
+  var TOUCH_DEVICE = window.matchMedia &&
+    window.matchMedia('(hover: none), (pointer: coarse)').matches;
+
   /* ── Member tooltip (event delegation — works on dynamic content) ──────── */
   function initMemberTooltips() {
+    if (TOUCH_DEVICE) return;
     var tip = document.createElement('div');
     tip.className = 'member-tooltip';
     tip.setAttribute('aria-hidden', 'true');
@@ -285,6 +290,7 @@
 
   /* ── Generic data-tooltip (event delegation) ──────────────────────────── */
   function initDataTooltips() {
+    if (TOUCH_DEVICE) return;
     var tip = document.createElement('div');
     tip.className = 'member-tooltip';
     tip.setAttribute('aria-hidden', 'true');

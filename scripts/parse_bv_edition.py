@@ -105,6 +105,16 @@ def parse_edition1(xlsx):
             'is_shadow': False,
         })
 
+    # ---- 手工修正：Excel 歌手/歌名拆分有误的条目（键 = 选送者 + 原歌名） ----
+    CORRECTIONS = {
+        ('城妈', 'Calipso'): {'artist': 'Charlie Charles',
+                              'song': 'Calipso (feat. Sfera Ebbasta, Mahmood & Fabri Fibra)'},
+    }
+    for r in results:
+        fix = CORRECTIONS.get((r['member'], r['song']))
+        if fix:
+            r.update(fix)
+
     # ---- 投票: matrix ----
     vote = pd.read_excel(xlsx, sheet_name='投票', header=None)
     # header row idx 1, recipients in cols 2..15

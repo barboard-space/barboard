@@ -77,6 +77,9 @@
 
     /* ----- result table ----- */
     .bvr-tw { overflow-x:auto; border:1px solid var(--clr-border); border-radius:8px; }
+    /* 隐藏横向滚动条（保留滑动；靠「左右滑动」提示引导） */
+    .bvr-tw, .bvr-mw { scrollbar-width:none; -ms-overflow-style:none; }
+    .bvr-tw::-webkit-scrollbar, .bvr-mw::-webkit-scrollbar { display:none; }
     table.bvr-tbl { width:100%; border-collapse:collapse; font-size:13px; min-width:560px; }
     .bvr-tbl th { font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:0.06em;
       text-transform:uppercase; color:var(--clr-text-2); text-align:left; padding:11px 14px;
@@ -111,7 +114,7 @@
     .bvr-tbl .pts--tele .pts-rank { opacity:0.7; }
     .bvr-tbl td { padding:10px 14px; border-bottom:1px solid var(--clr-border); vertical-align:middle; }
     .bvr-tbl tr:last-child td { border-bottom:none; }
-    .bvr-tbl .num { font-family:var(--font-display); font-size:20px; line-height:1; text-align:center;
+    .bvr-tbl .num { font-family:var(--font-display); font-size:18px; line-height:1; text-align:center;
       color:var(--clr-text-3); width:48px; }
     .bvr-tbl .num span { display:inline-block; transform:translateY(2px); }
     .bvr-tbl .pts { font-family:var(--font-body); text-align:center; white-space:nowrap; font-size:15px; }
@@ -148,9 +151,10 @@
     /* ----- matrix ----- */
     .bvr-mw { overflow-x:auto; border:1px solid var(--clr-border); border-radius:8px;
       display:inline-block; max-width:100%; vertical-align:top; }
-    table.bvr-mtx { border-collapse:collapse; font-size:11px; font-family:var(--font-mono); }
-    .bvr-mtx th, .bvr-mtx td { border:1px solid var(--clr-border); padding:5px 7px; text-align:center;
-      white-space:nowrap; }
+    table.bvr-mtx { border-collapse:separate; border-spacing:0; font-size:11px; font-family:var(--font-mono); }
+    /* 单元格只画右/下边框（左/上边框由 .bvr-mw 外框提供）——避免折叠边框被粘性列盖不住而漏光 */
+    .bvr-mtx th, .bvr-mtx td { border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border);
+      padding:5px 7px; text-align:center; white-space:nowrap; }
     .bvr-mtx thead th { background:var(--clr-surface); color:var(--clr-text-2); font-weight:700;
       font-family:var(--font-body); }
     .bvr-mtx .mtx-grp { letter-spacing:0.06em; }
@@ -158,7 +162,7 @@
     .bvr-mtx .mtx-grp--tele { color:var(--clr-pink-light); }
     .bvr-mtx .mtx-corner { background:var(--clr-bg); }
     .bvr-mtx .rcp { text-align:left; font-family:var(--font-body); color:var(--clr-text);
-      position:sticky; left:0; background:var(--clr-bg); z-index:1; }
+      position:sticky; left:0; background:var(--clr-bg); z-index:2; }
     .bvr-mtx .tot { color:var(--clr-text); font-weight:700; background:var(--clr-surface); }
     .bvr-mtx .sj  { color:var(--clr-accent-light); background:var(--clr-surface); }
     .bvr-mtx .st  { color:var(--clr-pink-light);    background:var(--clr-surface); }
@@ -173,9 +177,11 @@
     /* ----- 12-points（三列：选送者 | Jury 组 | Tele 组，跨行对齐） ----- */
     .bvr-12 { display:grid; grid-template-columns:max-content minmax(0,1fr) minmax(0,1fr);
       border:1px solid var(--clr-border); border-radius:8px; overflow:hidden; }
-    .bvr-12 > span { padding:8px 14px; border-bottom:1px solid var(--clr-border); font-size:12px; }
-    .bvr-12 > span:nth-last-child(-n+3) { border-bottom:none; }
+    .bvr-12e { display:contents; }
+    .bvr-12__r, .bvr-12__c { padding:8px 14px; border-bottom:1px solid var(--clr-border); font-size:12px; }
+    .bvr-12e:last-child .bvr-12__r, .bvr-12e:last-child .bvr-12__c { border-bottom:none; }
     .bvr-12__r { display:flex; align-items:center; font-weight:600; white-space:nowrap; }
+    .bvr-12__r .member { color:var(--clr-text); }
     .bvr-12__n { font-family:var(--font-display); font-weight:400; font-size:17px; line-height:1;
       color:var(--clr-text); margin-right:10px; }
     .bvr-12__c { color:var(--clr-text-2); line-height:1.9; }
@@ -224,13 +230,31 @@
       .bvr-toc { display:none; }
       .bvr-scroll-hint { display:block; font-size:11px; color:var(--clr-text-3);
         letter-spacing:0.04em; margin-bottom:7px; }
-      /* 12 Points 改单列堆叠：选送者 / Jury / Tele 各占整行（@名不挤） */
-      .bvr-12 { grid-template-columns:1fr; }
-      .bvr-12 > span { border-bottom:none; padding:2px 14px; }
+
+      /* 结果概览：保留横向滚动表，手机端压缩间距 + 分数字号统一为歌手/歌名大小(13px，#除外) */
+      .bvr-tbl tbody td { padding-top:8px; padding-bottom:8px; }
+      .bvr-tbl th, .bvr-tbl td { padding-left:9px; padding-right:9px; }
+      .bvr-tbl .pts { font-size:13px; }
+      .bvr-tbl .pts--total { font-size:13px; }
+      /* 名次列缩窄 + 收紧与选送者间距（手机省空间）；表头同步对齐 */
+      .bvr-tbl tbody .num { width:28px; padding-right:5px; }
+      .bvr-tbl tbody .num + td { padding-left:5px; }
+      .bvr-tbl thead th:first-child { width:28px; padding-right:5px; text-align:center; }
+      .bvr-tbl thead th:nth-child(2) { padding-left:5px; }
+      /* 手机省空间：@名改用昵称（X妈 格式），链接/tooltip 仍有效；桌面不变 */
+      .bvr-tbl .member, .bvr-mtx .member, .bvr-12 .member { font-size:0; }
+      .bvr-tbl .member::before { content:attr(data-nickname); font-size:13px; }
+      .bvr-mtx .member::before { content:attr(data-nickname); font-size:11px; }
+      .bvr-12 .member::before  { content:attr(data-nickname); font-size:12px; }
+      /* 12 Points 改单列堆叠：每条目为对称 padding 块，内部行紧凑 */
+      .bvr-12 { display:block; }
+      .bvr-12e { display:block; border-top:1px solid var(--clr-border); padding:10px 14px; }
+      .bvr-12e:first-child { border-top:none; }
+      .bvr-12__r, .bvr-12__c { border-bottom:none; padding:1px 0; }
+      .bvr-12__r { padding-bottom:3px; }
+      .bvr-12__c { display:block; line-height:1.45; }
+      .bvr-12__c + .bvr-12__c { margin-top:2px; }
       .bvr-12__c:empty { display:none; }
-      .bvr-12__r { padding-top:14px; border-top:1px solid var(--clr-border); }
-      .bvr-12 > span:first-child { border-top:none; }
-      .bvr-12 > span:last-child { padding-bottom:14px; }
     }
     `;
     var st = document.createElement('style');
@@ -305,12 +329,12 @@
         '<td class="pts pts--total" data-v="' + (e.score == null ? -1 : e.score) + '">' + fmtScore(e.score) + '</td>' +
         '</tr>';
     }).join('');
-    return '<div class="bvr-scroll-hint">⟷ 左右滑动查看完整表格</div>' +
+    return '<div class="bvr-scroll-hint">左右滑动查看完整结果</div>' +
       '<div class="bvr-tw fade-up"><table class="bvr-tbl"><thead><tr>' +
       '<th>名次</th><th>选送者</th><th>歌手</th><th>歌名</th><th>语种</th>' +
       '<th class="th-jury" style="text-align:center">Jury</th>' +
       '<th class="th-tele" style="text-align:center">Tele</th>' +
-      '<th class="th-pts" style="text-align:center">Points</th>' +
+      '<th class="th-pts" style="text-align:center">PTS</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>';
   }
 
@@ -356,7 +380,7 @@
         '<td class="sj">' + fmtScore(e.jury_vote) + '</td>' +
         '<td class="st">' + fmtScore(e.tele_vote) + '</td>' + cells + '</tr>';
     }).join('');
-    return '<div class="bvr-scroll-hint">⟷ 左右滑动查看完整计分板</div>' +
+    return '<div class="bvr-scroll-hint">左右滑动查看完整计分板</div>' +
       '<div class="bvr-mw fade-up"><table class="bvr-mtx">' +
       '<thead>' + grpRow + colRow + '</thead><tbody>' + body + '</tbody></table></div>';
   }
@@ -382,9 +406,9 @@
       var j = got[r].jury, t = got[r].tele, c2 = '', c3 = '';
       if (j.length) { c2 = grp('jury', j); if (t.length) c3 = grp('tele', t); }
       else if (t.length) { c2 = grp('tele', t); }
-      return '<span class="bvr-12__r"><span class="bvr-12__n">' + (j.length + t.length) + '</span>' + memberLink(r) + '</span>' +
+      return '<div class="bvr-12e"><span class="bvr-12__r"><span class="bvr-12__n">' + (j.length + t.length) + '</span>' + memberLink(r) + '</span>' +
         '<span class="bvr-12__c">' + c2 + '</span>' +
-        '<span class="bvr-12__c">' + c3 + '</span>';
+        '<span class="bvr-12__c">' + c3 + '</span></div>';
     }).join('');
     return '<div class="bvr-12 fade-up">' + cells + '</div>';
   }

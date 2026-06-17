@@ -20,9 +20,13 @@
 ### Changed
 - `barvision.html` 届次卡片接入详情页链接（`BUILT_EDITIONS` 集合 + `romanToInt` + `editionHref`，已建页面的卡自动可点）。
 - `style.css?v` 3.0.8 → **3.0.9**（index / bbl / bbl-hof / styleguide 同步）。
+- 详情页三表深度精修（桌面 + 手机）：结果表（Bebas 名次 18px、分数 DM Sans 居中 + 竞赛 #名次、可点排序实心三角、前三 bbl 金银铜、列头 PTS）；Scoreboard 矩阵（评委+观众合并、分组表头、四列 rowspan 合并、粘性选送者列 + `border-collapse:separate` 修漏光、可排序对角线默认序）；12 Points（三列 + Bebas 计数 + 接收者白名 + 评委/观众标签）。
+- Calipso 歌手/歌名修正（解析脚本手工修正）：歌手 Charlie Charles / 歌名 Calipso (feat. …)。
+- **手机适配**：宽表横滚 + 文字提示 + 隐藏滚动条；@名一律用昵称（X妈 格式）省空间；12 Points 单列对称 padding 块；触屏（`hover:none`）禁用 hover tooltip。
 
 ### Docs
-- CLAUDE.md 成员数 118 → 119；新增 **#129**（Barvision 历史成绩体系规划）、**#130**（详情页实现：JSON schema / 三个表格结构 / 配色 / 手机适配）。
+- CLAUDE.md 成员数 118 → 119；新增 **#129**（Barvision 历史成绩体系规划）、**#130**（详情页实现 + 本次精修）。
+- **DESIGN.md 新增 §六「Barvision 历届详情页 设计 Guideline（桌面 + 手机）」**：页面整体 / 配色 / 三表设计 / 手机通用约定。
 
 ---
 
