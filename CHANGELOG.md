@@ -4,6 +4,23 @@
 
 ---
 
+## [2026-06-17] — 吧视走势图微调 + 总分取整 + 新令牌
+
+### Changed
+- **历届排名走势图**：坐标点两端各内缩 8%（不再贴边，标签随点内移；网格线仍满宽）；连线改用新令牌 `--clr-accent-line`（淡蓝、宽 2px）。
+- **总分四舍五入**：详情页 `bv-results-render.js` 的 `fmtScore()` + 成员页参赛表总分列统一 `Math.round` 显示（决赛含加成小数如 140.44 → 140），JSON 数据保留原值。
+
+### Added
+- 新令牌 **`--clr-accent-line: rgba(0,180,255,0.24)`**（介于 `--clr-accent-dim` 0.12 与 `--clr-accent-glow` 0.30，专给走势连线）。
+
+### Style
+- `style.css?v` **3.0.9 → 3.0.10**（index / bbl / bbl·hof / styleguide，因 `:root` 新增令牌）。
+
+### Docs
+- `BARVISION_MEMBER.md` §五 走势图准则补充（点内缩 8% / 连线 `--clr-accent-line` / 总分四舍五入）。
+
+---
+
 ## [2026-06-17] — Barvision 第二届赛果导入
 
 ### Added

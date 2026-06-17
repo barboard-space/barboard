@@ -25,6 +25,7 @@
   --clr-accent:       #00b4ff;
   --clr-accent-light: #33c6ff;
   --clr-accent-glow:  rgba(0,180,255,0.30);
+  --clr-accent-line:  rgba(0,180,255,0.24);
   --clr-accent-dim:   rgba(0,180,255,0.12);
 
   /* ── Secondary — Neon Pink/Magenta（片头粉紫线条）── */

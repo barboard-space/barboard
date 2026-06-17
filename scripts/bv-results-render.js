@@ -23,8 +23,7 @@
   }
   function fmtScore(v) {
     if (v == null || v === '') return '';
-    var n = Number(v);
-    return Number.isInteger(n) ? String(n) : String(n);
+    return String(Math.round(Number(v)));
   }
   // 多歌手：换行归一为空格、逗号后补空格（提供手机端换行机会）
   function fmtArtist(a) {

@@ -112,10 +112,14 @@
 ### 5. 历届排名走势图 `bvTrend()` + `drawBvTrend()`（响应式 SVG）
 - **响应式核心**：`bvTrend()` 只输出空 `<svg>`；`drawBvTrend()` 在渲染后读 `svg.clientWidth` 作为 viewBox 宽度（**viewBox = 实际像素宽，1:1**），高固定 180；监听 `window resize` 重绘。这样字号恒 13px、X 轴点间距按屏宽自适应、桌面手机都完整展示**不横滚**。
 - **每场一个点**（`rank != null`）；**X 标签** `bvXLabel`：无组别=纯届号（`1`），有组别=届+组（`7A`、`2GF`）。
+- **横向不贴边**：`xAt` 两端各内缩 `plotW * 0.08`（点/标签离边缘留白）；单点居中。网格参考线仍满宽。
 - **Y 轴倒置**（第 1 名在顶），范围 1 → `maxRank + 1`。
+- **连线**：正常段 `stroke:var(--clr-accent-line)`（= `rgba(0,180,255,0.24)`，淡蓝、宽 2px）；涉及混淆曲的段用弱化虚线（`.is-dim`）。
 - **点配色优先级**：混淆曲（空心弱化）> 第一名 `is-champ` 金 > 第 16 届 `is-latest` `--clr-red-light` > 默认 `--clr-accent-light`。
 - 点上方显示 `#名次`；hover 透明大热区（r12）+ `data-tooltip="歌手 — 歌名"`（站内 `initDataTooltips`，移动端禁用 hover）。
-- 涉及混淆曲的连线用弱化虚线（`.is-dim`）。单点居中。
+
+### 6. 总分显示
+- **总分（score）一律四舍五入为整数显示**，数据 JSON 保留原值（决赛含加成的小数如 140.44 → 显示 140）。详情页 `bv-results-render.js` 的 `fmtScore()` + 成员页参赛表 `Math.round(e.total)`。
 
 ---
 

@@ -56,7 +56,7 @@
     '.mp-bv-trend__svg{width:100%;height:auto;display:block;overflow:visible}',
     '.mp-bv-trend__grid{stroke:var(--clr-border);stroke-width:1}',
     '.mp-bv-trend__ylab,.mp-bv-trend__xlab{fill:var(--clr-text-3);font-family:var(--font-mono);font-size:13px}',
-    '.mp-bv-trend__edge{stroke:var(--clr-accent-light);stroke-width:2.5;fill:none}',
+    '.mp-bv-trend__edge{stroke:var(--clr-accent-line);stroke-width:2;fill:none}',
     '.mp-bv-trend__edge.is-dim{stroke:var(--clr-text-3);stroke-width:2;stroke-dasharray:5 4;opacity:.6}',
     '.mp-bv-trend__dot{fill:var(--clr-accent-light)}',
     '.mp-bv-trend__dot.is-champ{fill:var(--clr-gold-light)}',
@@ -213,7 +213,7 @@
         '<td class="num2">' + seriesLabel + '</td>' +
         '<td class="artist">' + esc(e.artist) + '</td>' +
         '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + '</td>' +
-        '<td class="num2">' + (e.total == null ? '—' : e.total) + '</td>' +
+        '<td class="num2">' + (e.total == null ? '—' : Math.round(e.total)) + '</td>' +
         '<td class="num2">' + (e.twelve ? e.twelve : '—') + '</td>' +
         '</tr>';
     }).join('');
@@ -261,7 +261,7 @@
     var W = Math.round(svg.clientWidth || svg.getBoundingClientRect().width) || 600;
     var H = 180, padL = 36, padR = 20, padT = 28, padB = 38;
     var plotW = W - padL - padR, plotH = H - padT - padB;
-    function xAt(i) { return n === 1 ? padL + plotW / 2 : padL + plotW * i / (n - 1); }
+    function xAt(i) { var ins = plotW * 0.08, lo = padL + ins, hi = W - padR - ins; return n === 1 ? padL + plotW / 2 : lo + (hi - lo) * i / (n - 1); }
     function yAt(r) { return padT + plotH * (r - 1) / (yMax - 1); }
     var out = '';
     var yvals = [1]; if (yMax >= 4) yvals.push(Math.round(yMax / 2)); yvals.push(yMax);
