@@ -33,6 +33,14 @@
 5. **重跑** `python scripts/gen_member_pages.py` —— 聚合进各成员页 + 刷新 `member-bv-index.json`。
 6. 完成。成员页徽章 / 概览 / 表格 / 走势图全部自动反映新数据。
 
+**已导入届次**：第一届 `regular-01`（单场综合赛）、第二届 `regular-02`（SF 半决赛 + GF 决赛两场）。
+
+**⚠️ 各届 Excel 结构不同，可能需要各自的解析脚本**：
+- `scripts/parse_bv_edition.py` = 第一届（「参赛信息」+「投票」两 sheet 分离）。
+- `scripts/parse_bv_edition2.py` = 第二届（`2SF`/`2GF` 两 sheet，每 sheet 自带「报名者/歌手/歌名/分数 + 逐票矩阵 + 支持率/高位率」一体）。**多场**写成 `matches:[{venue:'半决赛',…},{venue:'决赛',…}]`（`bv-results-render.js` 已支持 `matches.length>1`）。
+- **GF 决赛总分含半决赛加成**（逐人公式不同），直接取 Excel「分数」列、按它排名；`jury_vote/tele_vote` 仅为逐票和供展示，**不要求 jury+tele==score**（半决赛则要求并已校验）。
+- 选送者互投=评委会票(jury)，非选送投票人=评审团票(tele/观众)。Excel 里若另有「观众总分」等汇总列，用我们自己的逐票加总即可。
+
 ---
 
 ## 三、`entries[]` 关键字段（影响成员页）
