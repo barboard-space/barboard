@@ -24,22 +24,59 @@
 
 ---
 
-## 二、导入新一届的步骤
+## 二、导入新一届的步骤（SOP）
 
-1. **拿到该届 Excel**（赛果 + 逐票矩阵），运行 `scripts/parse_bv_edition.py` 生成 `data/barvision/barvision-<年>/<版本>-NN.json`。各届 Excel 结构可能不同，脚本的分组/列解析需按届微调。
-2. **复制详情页薄壳**到 `barvision/<年>/<版本>-NN.html`，改 `var EDITION_SRC` 指向新 JSON。
-3. **`barvision.html` 的 `BUILT_EDITIONS`** 集合加入该届 href（届次卡变可点）。
-4. **检查 `member-render.js` 的两个常量**（见下「四」）——是否需要为新年份加配色、是否要更新「最新届」号。
-5. **重跑** `python scripts/gen_member_pages.py` —— 聚合进各成员页 + 刷新 `member-bv-index.json`。
-6. 完成。成员页徽章 / 概览 / 表格 / 走势图全部自动反映新数据。
+> **核心原则：JSON 是唯一数据源，详情页 / 成员页 / 索引 / barvision.html 全部数据驱动。** 只要新届 JSON 严格符合 §2.1 的 schema 契约，导入就**不需要改任何渲染代码或样式**——`bv-results-render.js`（详情页）、`member-render.js`（成员页）、生成脚本全是通用逻辑。布局/排版若需调，应改这些**共享文件一次、全届受益**，绝不为单届打补丁。
+>
+> 历史上"导入后还要微调"的根因只有三类，已分别消除/固化：① **数据键不统一**（一二届 nick 键、三四届 eid 键 → 见 #140；**新届一律按 §2.1 用 eid 键**，下游已统一走 eid）；② **必改常量漏改**（→ §四清单）；③ **人工字段没核对**（语种 / 多艺人 lead·feat / 混淆并排名次 → §2.3 核对清单）。照此 SOP 做，新届导入应是机械操作。
 
-**已导入届次**：第一届 `regular-01`（单场综合赛）、第二届 `regular-02`（SF 半决赛 + GF 决赛两场）。
+### 2.1 JSON schema 契约（硬性 —— parse 脚本必须严格产出）
 
-**⚠️ 各届 Excel 结构不同，可能需要各自的解析脚本**：
-- `scripts/parse_bv_edition.py` = 第一届（「参赛信息」+「投票」两 sheet 分离）。
-- `scripts/parse_bv_edition2.py` = 第二届（`2SF`/`2GF` 两 sheet，每 sheet 自带「报名者/歌手/歌名/分数 + 逐票矩阵 + 支持率/高位率」一体）。**多场**写成 `matches:[{venue:'半决赛',…},{venue:'决赛',…}]`（`bv-results-render.js` 已支持 `matches.length>1`）。
-- **GF 决赛总分含半决赛加成**（逐人公式不同），直接取 Excel「分数」列、按它排名；`jury_vote/tele_vote` 仅为逐票和供展示，**不要求 jury+tele==score**（半决赛则要求并已校验）。
-- 选送者互投=评委会票(jury)，非选送投票人=评审团票(tele/观众)。Excel 里若另有「观众总分」等汇总列，用我们自己的逐票加总即可。
+文件：`data/barvision/barvision-<年>/<版本>-NN.json`。
+
+**顶层**：`year`(int) · `edition_no`(int) · `edition_name`(如 `The 5th Barvision`) · `cn_name` · `version`(如 `regular`) · `city`(2023 起填，2019–2022 留空/省略) · `host`(无记录则省略，勿编造) · `motto`(同) · `summary`(intro，**文案约定见 #141 / `edition-intros-2023-2025.md`**) · `rules{submission, niche_standard[], format, voting}` · `source` · `members{昵称:{id,handle, unclaimed?:true}}` · `vote_rule{scale,jury,tele,note}` · `matches[]`。
+
+**`matches[]`**（单场 1 元素、多场 N 元素）：`match`(场次代码 `SF/GF/A/B/C/E` 或单场可省——`bv-results-render.js` 的 `matchEng` 已把这 6 个代码映射为 `SEMI-FINAL/GRAND FINAL/GROUP A–C/ENTERTAINMENT` section 前缀，新增代码须在 `matchEng` 的 `MAP` 补) · `venue`(中文场次名，如 `半决赛`/`小众组`) · `note`(可选，渲染在计分板后) · `entries[]` · `votes{voters[]}`。
+
+**`entries[]`**（每首一条；**展示顺序 = 总分↓、同分正式在前混淆在后、正式内 tele↓**，见 #137）：
+
+| 字段 | 必填 | 规范 |
+|------|------|------|
+| `eid` | ✅ | **该 entry 在本 match 的 0 基行索引**。⚠️ **新届必须输出**——`votes.points` 按它作键、下游矩阵/12分/12分次数全靠它。（一二届历史遗留无 eid，下游靠"eid 优先、回退 member"兼容，新届勿再省。） |
+| `member` | ✅ | 选送者昵称（规范化，见 ALIASES）；**联合选送写 `A妈/B妈` 斜杠串**（下游按 `/` 拆分计入各人）；匿名混淆曲写 `匿名` 且 members 映射 `{id:0,unclaimed:true}`。 |
+| `rank` | ✅ | 正式曲：连续 `1..N`，同分按 tele↓ 打破（欧视规则）。混淆曲：**并排名次** = 不低于其分的正式曲数 + 1（不计正式排名序列），见 #135。 |
+| `is_shadow` | ✅ | 混淆单曲 `true`，否则 `false`。 |
+| `score` | ✅ | 总分。**决赛含半决赛加成时直接取 Excel 值、按它排名**，不要求 `jury+tele==score`；常规场要求并应校验。 |
+| `jury_vote` / `tele_vote` | ✅ | 评委票(选送者互投) / 观众票(非选送者)。泰妈式折算：`score` 取折算后值，`tele = score - jury`（见 #136）。 |
+| `series` | ✅ | 场次字母 `A/B/C/SF/GF/E`；单场无组别可留空（渲染回退 `edition_no`）。**必须已在 `member-render.js` 的 `BV_SLOTS` 中**（见 §四）。 |
+| `song` / `artist` | ✅ | `艺人 — 歌名` 拆开存；多艺人 lead/feat 规范见 CLAUDE.md #15（feat 进歌名、多 lead 用 `&`）。 |
+| `language` | ✅ | 语种（**人工/猜测，非英语必须核对**）。 |
+
+**`votes.voters[]`**：`voter`(投票人昵称；联合投票写 `A妈/B妈`) · `type`(`jury`|`tele`) · **`points{ "<eid>": 分 }`**——⚠️ **键必须是 entry 的 `eid`（字符串）**，值为该投票人给该曲的分（Top10 给 12/10/8/7/6/5/4/3/2/1）。**严禁按昵称作键**（#140 的 bug 根源）。
+
+### 2.2 步骤
+
+1. **解析 Excel → JSON**：各届 Excel 结构不同，按需复制/改 `scripts/parse_bv_edition*.py`（见文末「各届解析差异」），产出严格符合 §2.1 的 JSON。**务必输出 `eid` + eid 键 points**。
+2. **薄壳页**：复制 `barvision/<年>/<版本>-NN.html`，改 `var EDITION_SRC` 指向新 JSON（路径 `../../`）。
+3. **`barvision.html`**：`BUILT_EDITIONS` 加该届 href（届次卡变可点）；如该届卡片尚未存在则补 `EDITIONS` 卡。
+4. **核对/改常量**（§四）：`BV_SLOTS`（新场次代码是否已含）、`LATEST_ED`（最新届号）、`BV_YEAR_COLOR`（新年份配色）、`BV_ACTIVE_SINCE_YEAR`。
+5. **重跑两脚本**：`python scripts/gen_member_pages.py`（聚合进成员页 + 刷新 `member-bv-index.json`）+ `python scripts/gen_bv_editions_index.py`（刷新 `editions-index.json`，供成员变动 / 上下届导航）。
+6. **校验**（§2.3）。完成——成员页徽章/概览/可排序表/走势图、详情页结果表/计分板/12分/上下届导航全部自动反映。
+
+### 2.3 导入后自查清单（命令 + 人工核对）
+
+- **校验 JSON 可解析 + 键规范**（一条命令扫全届）：
+  ```bash
+  python -c "import json,glob;[print(f,'OK' if all(('eid' in e) for m in json.load(open(f,encoding='utf-8')).get('matches',[]) for e in m['entries']) else '缺eid') for f in glob.glob('data/barvision/barvision-*/*.json')]"
+  ```
+- **12 分次数交叉核对**（成员页 twelve vs JSON 权威值，应 0 不匹配）：见 #140 用过的核对脚本（按 `eid` 优先、回退 `member` 取键统计，逐条比对各 `member/*.html`）。
+- **人工核对**：① 语种 `language`（非英语）；② 多艺人 lead/feat 归属（#15，不确定先问用户）；③ 混淆并排名次是否正确；④ 联合选送 `member` 斜杠串是否两人都进了名册/吧视；⑤ intro `summary` 是否符合 #141 文案约定。
+
+**已导入届次**：第一~四届（均 2019）。`regular-01` 单场综合赛；`regular-02` SF+GF 两场；`regular-03`/`regular-04` A/B 双组。
+
+**⚠️ 各届 Excel 结构不同 → 各自解析脚本**（仅 parse 层按届适配，下游不动）：
+- `parse_bv_edition.py`=第一届（「参赛信息」+「投票」两 sheet 分离）；`parse_bv_edition2.py`=第二届（`2SF`/`2GF` 一体 sheet）；`parse_bv_edition3.py`=第三届（A/B 两 CSV）；`parse_bv_edition4.py`=第四届（A/B 两 CSV + 泰妈折算 + 联合选送）。
+- 通则：选送者互投=`jury`，非选送投票人=`tele`；Excel 的「观众总分」等汇总列不用，以我们逐票加总为准。**新届脚本务必给 entry 赋 `eid` 并用 eid 键写 points**（早期脚本若复制，注意补上）。
 
 ---
 
@@ -65,10 +102,13 @@
 
 ## 四、导入新届时**必查/必改**的常量
 
+> 这是导入时唯一需要"改代码"的地方——4 个常量，对照即可，漏改才会出问题。
+
 ### `scripts/member-render.js`
 
-- **`LATEST_ED`**（bvSection 内，当前 `16`）：「最新一届」的届号。概览卡「最近参赛」== 此值才正常显示，否则用 `--clr-text-3` 弱化；走势点 `edition_no===16` 用 `--clr-red-light` 标记。**开新一届时改成新的最新届号**（并同步走势点 `is-latest` 判断里的 `16`）。
-- **`BV_YEAR_COLOR`**（IIFE 顶部）：徽章 logo 描边色，按 `year` 映射。**2019=`--clr-board`；2020/2023/2024/2025/2026 当前为占位色，待用户最终确认**。导入到新年份（如 2027）须补一条。缺失年份回退 `--clr-board`。**注**：第一届（`ed.no===1`）在 `bvBadges()` 内被硬覆盖为金色 `--clr-gold` + 光晕（创始届特殊态），不走 `BV_YEAR_COLOR`。
+- **`BV_SLOTS`**（IIFE 顶部，走势图 X 轴**全局轴序**）：当前已覆盖 `1 2SF 2GF 3A…12A 13 14 15 16`（12B 报名但比赛取消，故无）。**导入的届次场次代码必须已在此数组中**——1–16 届的常规场次均已前瞻性列入，通常无需改。⚠️ 仅当某届出现**未列入的新场次代码**（如新增 `D` 组、或编号超出）时，才须把它按时间顺序插入 `BV_SLOTS`，否则该场次的点会从走势图消失。
+- **`LATEST_ED`**（bvSection 内，当前 `16`）：仅用于**概览卡「最近参赛」配色**——`ov.active_in === LATEST_ED` 才正常白、否则 `--clr-text-3` 弱化。**开新一届时改成新的最新届号**。（注：走势图的"最近场次"粉点 `is-latest` 现按**该成员最近参赛场次** `latestCode = BV_SLOTS[lastIdx]` 判定，**与 `LATEST_ED`/`16` 无关**，无需同步。）
+- **`BV_YEAR_COLOR`**（IIFE 顶部）：徽章 logo 描边色，按 `year` 映射。**2019=`--clr-board`；2020/2023/2024/2025/2026 当前为占位色，待用户最终确认**。导入到新年份须补一条；缺失年份回退 `--clr-board`。**注**：第一届（`ed.no===1`）在 `bvBadges()` 内硬覆盖为金色 `--clr-gold` + 光晕（创始届特殊态），不走 `BV_YEAR_COLOR`。
 
 ### `scripts/gen_member_pages.py`
 

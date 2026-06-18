@@ -16,6 +16,20 @@
 
 ---
 
+## [2026-06-18] — 第一~四届 intro 重写 + 导入 pipeline 文档固化
+
+### Content
+- 重写第一~四届详情页 intro（hero `summary`）：叙事风格、精简通顺、只点亮点+冠军（多组写各组冠军、不写亚季军/折算/联合选送等过程细节）。术语统一「混淆单曲」、引号用中文双引号。
+
+### Changed
+- `bv-results-render.js` `matchEng` 改 map 形式并补全 `C→GROUP C`/`E→ENTERTAINMENT`（原仅 SF/GF/A/B）——第 5 届起 C 组导入时 section 前缀不再退化为裸字母，未来导入零微调。
+
+### Docs（导入 pipeline 固化，目标：导入后续届次零渲染/布局微调）
+- `BARVISION_MEMBER.md §二` 重写为完整 SOP：**JSON schema 硬契约**（强调 `eid` + eid 键 points，根除 #140 类 bug）+ 机械步骤 + 导入后自查清单（校验命令 + 人工核对项）+ 零布局改动原则；§四补 `BV_SLOTS` 必查常量、修正 `LATEST_ED` 走势描述（latest-pink 现按成员最近场次）。
+- `edition-intros-2023-2025.md` 增「Intro 文案约定」节；CLAUDE.md #141 + #135 指针指向权威 SOP。
+
+---
+
 ## [2026-06-18] — 走势轴标签字号微调 + 手机端导航按钮箭头/文字成组
 
 ### Changed

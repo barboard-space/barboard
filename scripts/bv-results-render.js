@@ -443,9 +443,9 @@
   }
   // 场次英文段名（用于 multi 场次的 section-label 前缀）
   function matchEng(m) {
-    return m.match === 'SF' ? 'SEMI-FINAL' : m.match === 'GF' ? 'GRAND FINAL'
-      : m.match === 'A' ? 'GROUP A' : m.match === 'B' ? 'GROUP B'
-      : (m.match || esc(m.venue || ''));
+    // 场次代码 → section-label 英文前缀（多场次时用）；新增组别在此补，保持「GROUP X」一致
+    var MAP = { SF: 'SEMI-FINAL', GF: 'GRAND FINAL', A: 'GROUP A', B: 'GROUP B', C: 'GROUP C', E: 'ENTERTAINMENT' };
+    return MAP[m.match] || m.match || esc(m.venue || '');
   }
 
   // 竞赛式名次（同分同名次，如 1,2,2,4）
