@@ -34,7 +34,9 @@ def aggregate_barvision(eds):
                 nick = e.get("member")
                 if not nick:
                     continue
-                twelve = sum(1 for v in voters if v.get("points", {}).get(nick) == 12)
+                # points 键：三四届按 eid(JSON 中为字符串)，一二届按昵称
+                _pk = str(e["eid"]) if e.get("eid") is not None else nick
+                twelve = sum(1 for v in voters if v.get("points", {}).get(_pk) == 12)
                 rec = {
                     "year": ed["year"], "edition_no": ed["edition_no"],
                     "edition_name": ed["edition_name"], "version": ed["version"],

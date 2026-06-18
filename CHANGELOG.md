@@ -4,6 +4,18 @@
 
 ---
 
+## [2026-06-18] — 修复 12 分次数 / 计分板（votes.points 键混合）
+
+### Fixed
+- **成员页 12 分次数对三四届恒为 0**（如包妈 3A 第一名应 1 显示 0）：`aggregate_barvision` 用昵称查 `votes.points`，但三四届已改 `eid` 键。改为「`eid` 优先、回退昵称」取键。
+- **第一、二届详情页计分板矩阵分数格全空**：`bv-results-render.js` 用 `v.points[e.eid]`，而一二届无 `eid`（按昵称键）。`votingMatrix`/`twelveBlock` 两处改 `e.eid != null ? e.eid : e.member` 回退。
+- 已重跑 `gen_member_pages.py`；全量核对 143 条记录 twelve 与 JSON 0 不匹配；ed1 矩阵恢复（190 格有值 / 19 个 12 分）。
+
+### Docs
+- CLAUDE.md #140（记录 `votes.points` 键混合的通用取键规则）。
+
+---
+
 ## [2026-06-18] — 走势轴标签字号微调 + 手机端导航按钮箭头/文字成组
 
 ### Changed

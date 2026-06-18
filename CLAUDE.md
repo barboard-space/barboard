@@ -585,6 +585,10 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **走势图 X/Y 轴标签字号** `.mp-bv-trend__ylab,.mp-bv-trend__xlab` 13→**12px**（先试 11 偏小、最终 12；桌面手机同值，无端侧 override）。
     - **详情页上/下届导航按钮（手机端）箭头与文字成组**：`.bvr-nav .bvr-nav__btn` 手机端 `justify-content` 由 `space-between`（把箭头/文字推到按钮两端）改 **`center`**——箭头+文字以 `gap:8px` 成组居中，文字紧贴箭头（prev `← 名`、next `名 →`）。
     - ⚠️ 详情页 `bv-results-render.js` 无 `?v=`，浏览器会缓存旧 JS——预览验证改动需 `location.reload()` 仍可能用缓存，必要时注入 `<script src=...?cb=时间戳>` 重新执行 IIFE 验证。
+140. **`votes.points` 键「混合」导致的 12 分 / 计分板 bug（本次修复）**：⚠️ **各届 JSON 的 `votes.voters[].points` 键不统一**——**第一、二届按选送者昵称作键、entry 无 `eid`**；**第三、四届按 `eid`(字符串) 作键、entry 有 `eid`**（#137 只改了三四届的解析）。由此两个潜伏 bug：
+    - **gen_member_pages.py 的 12 分次数**：`aggregate_barvision` 旧用 `v.points.get(nick)`，对三四届（eid 键）恒取不到 → **twelve=0**（如包妈 3A 第一名应 1 显示 0）。修复：`_pk = str(e["eid"]) if e.get("eid") is not None else nick`，再 `points.get(_pk)`。
+    - **bv-results-render.js 计分板**：`votingMatrix` 的 `v.points[e.eid]` 与 `twelveBlock` 的 `byEid[e.eid]`，对一二届（无 eid）→ `e.eid=undefined` → **矩阵分数格全空**。修复：两处改 `e.eid != null ? e.eid : e.member` 回退（有 eid 用 eid、否则用昵称键）。
+    - **通用规则**：任何读 `votes.points` 的代码都必须用「`eid` 优先、回退 `member` 昵称」的取键方式，兼容混合数据。改后已重跑 `gen_member_pages.py`，并全量核对 **143 条记录 twelve 与 JSON 权威值 0 不匹配**；一二届详情页矩阵恢复（ed1 190 格有值 / 19 个 12 分）。
 
 ---
 

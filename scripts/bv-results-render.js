@@ -528,7 +528,7 @@
         var sep = vsep(i);
         // 混淆曲匿名弱化，不显示「禁自投」斜杠格（正常格处理，无票则空）
         if (!e.is_shadow && v.voter === e.member) return '<td class="self' + sep + '"></td>';
-        var p = v.points[e.eid];
+        var p = v.points[e.eid != null ? e.eid : e.member];  // eid 键(三四届)兼容昵称键(一二届)
         if (p == null) return '<td class="pt' + sep + '"></td>';
         return '<td class="pt' + (p === 12 ? ' pt--12' : '') + sep + '">' + p + '</td>';
       }).join('');
@@ -558,7 +558,7 @@
   // 12 分合并表：每首获 12 分的歌一行（按条目 eid 聚合，避免同名成员官方/混淆串台），区分评委/观众给分
   function twelveBlock(m) {
     var byEid = {};
-    (m.entries || []).forEach(function (e) { byEid[e.eid] = e; });
+    (m.entries || []).forEach(function (e) { byEid[e.eid != null ? e.eid : e.member] = e; });  // eid 键(三四届)兼容昵称键(一二届)
     var got = {};  // eid -> {jury:[], tele:[]}
     m.votes.voters.forEach(function (v) {
       Object.keys(v.points).forEach(function (r) {
