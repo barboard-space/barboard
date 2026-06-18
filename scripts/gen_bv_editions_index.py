@@ -22,13 +22,17 @@ for p in sorted(glob.glob(os.path.join(BASE, 'data', 'barvision', 'barvision-*',
     seen = {}
     for m in d['matches']:
         for e in m.get('entries', []):
-            if e.get('is_shadow'):  # 混淆曲不算正式参赛（含「未认领」伪成员），不计入名册
+            if e.get('is_shadow'):  # 混淆曲不算正式参赛（含「匿名」伪成员），不计入名册
                 continue
             nm = e.get('member')
-            if nm and nm not in seen:
-                info = members.get(nm, {}) or {}
-                seen[nm] = {'name': nm, 'id': e.get('member_id') or info.get('id'),
-                            'handle': info.get('handle', nm)}
+            if not nm:
+                continue
+            # 联合选送「A/B」：各自入册
+            for part in ([n.strip() for n in nm.split('/')] if '/' in nm else [nm]):
+                if part not in seen:
+                    info = members.get(part, {}) or {}
+                    seen[part] = {'name': part, 'id': info.get('id'),
+                                  'handle': info.get('handle', part)}
     no = d['edition_no']
     eds.append({
         'no': no, 'year': d['year'], 'version': d['version'],

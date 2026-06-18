@@ -555,6 +555,15 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **Jury/Tele 判定（重要）**：某大妈在该组**有 ≥1 首正式（非混淆）曲**→ Jury（选送者互投）；**只报混淆曲或未报**→ Tele（观众）。例：包妈 B 组仅 Daughtry(混淆)→ B 组按 Tele。
     - **「匿名」伪成员**（用户决策：数据层 + 独立详情页 + member.html 弱化卡）。**「匿名」涵盖两种情况：① 正式单曲匿名 ② 混淆单曲匿名**（赛后均无人认领选送者）。`member` 昵称 `匿名`、`member_id 0`，members 映射 `{id:0,handle:'匿名',unclaimed:true}`。`memberLink` 对 `m.unclaimed` 渲染弱化无 @、非斜体、→ `member/0.html`（结果概览用）；矩阵/12分用斜体 `.bvr-anon`。`gen_member_pages.py` 额外生成 `member/0.html`（**注意**：`aggregate_barvision` 旧 `nick=='匿名'` skip 已移除）；`member-render.js` 弱化分支：大名 `.mp-nickname--unclaimed`（font-body+text-3）、handle「参赛歌曲匿名选送者」、section-label「Barvision」、标题「匿名参赛歌曲」、说明「以下参赛歌曲在比赛结束后始终无人认领选送者，统一归档于此。」、无统计卡/走势图、仅混淆曲表。`gen_bv_editions_index.py` roster 跳过 `is_shadow`。**member.html 弱化卡（已建）**：`.ml-card--anon`，**仅 Barvision 筛选时显示、置于最后、不计入计数**（buildGrid 在 members 后追加，不进 visible）；大名「匿名」用 font-body 22px 但 `line-height:26px`（与正常卡 Bebas 26px 同高，使副标题「参赛歌曲匿名选送者」与其他卡「@handle」行等高）。
     - **新增一届流程（CSV 版）**：录 CSV → 改/写 `parse_bv_edition*.py` → 生成 JSON → 复制薄壳改 EDITION_SRC → barvision.html BUILT_EDITIONS + EDITIONS 卡 → 重跑 `gen_member_pages.py` + `gen_bv_editions_index.py`。语种 LANG 为人工/猜测（非英语需用户核对）。
+136. **Barvision 第四届导入（A/B 双组）+ 投票折算 / 联合选送（本次）**：
+    - **第四届（2019）已导入**：`scripts/parse_bv_edition4.py` 读两 CSV（`Barvision_4A.csv` 小众 / `Barvision_4B.csv` 中众）→ `regular-04.json`；薄壳 `barvision/2019/regular-04.html`、barvision.html BUILT_EDITIONS 加 Ⅳ。可妈=member 123。
+    - **泰妈 50% 折算（A 组）**：泰妈仅给前五喜好（12/10/8/7/6），计分按 50% 折算 → 数据层总分含 .5（如 94.5），全 A 组满足「总分 = 各票和 − 0.5×泰妈」。故 parse **score 直接取 CSV 总分**（不重算为 sum）；`jury_vote = sum(评委票)`、`tele_vote = score − jury`（自动反映折算，jury+tele=score）。**展示一律四舍五入到整数**（`fmtScore` 仍 `Math.round`，94.5→95）。说明 match 加 `note` 字段，**渲染在计分板矩阵之后**（与「斜体昵称」注合并为 `注1/注2`，见下）。
+    - **计分板矩阵注释（合并编号）**：`votingMatrix` 收集注释——A 组的泰妈折算 `m.note` + 有混淆曲时的「斜体昵称为混淆歌曲选送者」；1 条用「注：…」，≥2 条用「注1：… / 注2：…」（`<br>` 分隔）。`resultTable` 不再带注释。
+    - **计分板冻结窗格**：`.bvr-mtx` 桌面冻结「选送者+Total+Jury+Tele」前四列（`position:sticky`，`tot/sj/st` 的 `left` 偏移由 `stickyMatrixCols()` 量表头列宽写入 CSS 变量 `--mtx-l-tot/sj/st`，resize 重算）；**手机仅冻结选送者**（`@media(min-width:769px)` 才给 tot/sj/st sticky，否则 static）。
+    - **混淆曲选送者在计分板/12分的显示**：用 `memberLink`（外裹 `.bvr-anon` 斜体弱化）→ **桌面显 @handle、手机显昵称「X妈」**（靠既有 `.bvr-mtx .member::before`/`.bvr-12 .member::before` 移动端昵称规则）；有已知选送者显真名（如包妈混淆曲显 @包妈），匿名（id 0）显「匿名」。
+    - **联合选送「A/B」**（如 B 组 `麦妈/苏妈` 合报「Ride - Jump Jet」，投票也是一个联合列）：entry `member` 保留斜杠串（矩阵自投格、投票列匹配靠它）、`member_id=null`。`memberLink` 遇 `/` 拆分各自渲染（`.bvr-joint-sep` 斜杠分隔，用于矩阵/12分）；**结果表**用 `.bvr-joint`（flex 列）**两人上下排列**。聚合 `gen_member_pages.aggregate_barvision` 与 `gen_bv_editions_index` roster 均**按 `/` 拆分计入各自**（该曲同时进两人吧视、两人各入名册）。
+    - **第四届混淆命名**：rank「混淆N」+ 报名者「X2」（去尾数字得选送者，如 `雨妈2`→雨妈），**均有已知选送者（无匿名）**；名次自算并排（同 #135，`N*`）。**同并排名次的多首混淆曲**按分降序连续编号（如 B 组 Puddles 17→`23*`、Cheregazzina 12→`24*`）。
+    - **歌名分隔兼容**：`split_song` 同时支持 ` - ` 与 ` – `（en-dash，如「Iglooghost… – Lockii」）。
 
 ---
 

@@ -3,184 +3,202 @@
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 7,
   "best": 4,
-  "active_in": 3
+  "active_in": 4
  },
  "17": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 8,
   "best": 2,
-  "active_in": 3
+  "active_in": 4
  },
  "18": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 7,
   "best": 1,
-  "active_in": 3
+  "active_in": 4
  },
  "19": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 7,
   "best": 4,
-  "active_in": 3
+  "active_in": 4
  },
  "20": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 8,
   "best": 1,
-  "active_in": 3
+  "active_in": 4
  },
  "117": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
-  "best": 9,
-  "active_in": 3
+  "count": 8,
+  "best": 7,
+  "active_in": 4
  },
  "118": {
   "editions": [
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 2,
-  "best": 12,
-  "active_in": 3
+  "count": 4,
+  "best": 11,
+  "active_in": 4
  },
  "120": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 8,
   "best": 5,
-  "active_in": 3
+  "active_in": 4
  },
  "125": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 7,
   "best": 2,
-  "active_in": 3
+  "active_in": 4
  },
  "127": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 4,
+  "count": 5,
   "best": 2,
-  "active_in": 3
+  "active_in": 4
  },
  "130": {
   "editions": [
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 4,
-  "best": 3,
-  "active_in": 3
+  "count": 6,
+  "best": 2,
+  "active_in": 4
  },
  "131": {
   "editions": [
-   3
+   3,
+   4
+  ],
+  "active": false,
+  "count": 3,
+  "best": 6,
+  "active_in": 4
+ },
+ "133": {
+  "editions": [
+   3,
+   4
   ],
   "active": false,
   "count": 2,
   "best": 19,
-  "active_in": 3
- },
- "133": {
-  "editions": [
-   3
-  ],
-  "active": false,
-  "count": 1,
-  "best": 19,
-  "active_in": 3
+  "active_in": 4
  },
  "135": {
   "editions": [
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 3,
+  "count": 5,
   "best": 1,
-  "active_in": 3
+  "active_in": 4
  },
  "141": {
   "editions": [
-   1
+   1,
+   4
   ],
   "active": false,
-  "count": 1,
-  "best": 12,
-  "active_in": 1
+  "count": 2,
+  "best": 1,
+  "active_in": 4
  },
  "153": {
   "editions": [
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 4,
-  "best": 4,
-  "active_in": 3
+  "count": 6,
+  "best": 3,
+  "active_in": 4
  },
  "156": {
   "editions": [
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 2,
-  "best": 5,
-  "active_in": 3
+  "count": 4,
+  "best": 1,
+  "active_in": 4
  },
  "157": {
   "editions": [
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 2,
+  "count": 4,
   "best": 6,
-  "active_in": 3
+  "active_in": 4
  },
  "174": {
   "editions": [
@@ -195,64 +213,79 @@
  "176": {
   "editions": [
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 4,
+  "count": 6,
   "best": 8,
-  "active_in": 3
+  "active_in": 4
  },
  "190": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 8,
   "best": 1,
-  "active_in": 3
+  "active_in": 4
+ },
+ "191": {
+  "editions": [
+   4
+  ],
+  "active": false,
+  "count": 2,
+  "best": 19,
+  "active_in": 4
  },
  "195": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 7,
   "best": 2,
-  "active_in": 3
+  "active_in": 4
  },
  "295": {
   "editions": [
    1,
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 5,
+  "count": 7,
   "best": 1,
-  "active_in": 3
+  "active_in": 4
  },
  "326": {
   "editions": [
-   2
+   2,
+   4
   ],
   "active": false,
-  "count": 1,
-  "best": 19,
-  "active_in": 2
+  "count": 3,
+  "best": 3,
+  "active_in": 4
  },
  "770": {
   "editions": [
    2,
-   3
+   3,
+   4
   ],
   "active": false,
-  "count": 3,
+  "count": 5,
   "best": 6,
-  "active_in": 3
+  "active_in": 4
  },
  "0": {
   "editions": [

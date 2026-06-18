@@ -35,7 +35,7 @@ def aggregate_barvision(eds):
                 if not nick:
                     continue
                 twelve = sum(1 for v in voters if v.get("points", {}).get(nick) == 12)
-                per.setdefault(nick, []).append({
+                rec = {
                     "year": ed["year"], "edition_no": ed["edition_no"],
                     "edition_name": ed["edition_name"], "version": ed["version"],
                     "series": match if match else str(ed["edition_no"]),  # 综合赛=届次号
@@ -43,7 +43,10 @@ def aggregate_barvision(eds):
                     "language": e.get("language"),
                     "jury": e.get("jury_vote"), "tele": e.get("tele_vote"), "total": e.get("score"),
                     "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
-                })
+                }
+                # 联合选送「A/B」：该记录计入两人各自的吧视
+                for target in ([n.strip() for n in nick.split("/")] if "/" in nick else [nick]):
+                    per.setdefault(target, []).append(rec)
     out = {}
     for nick, entries in per.items():
         entries.sort(key=lambda x: (x["edition_no"], x["series"]))
