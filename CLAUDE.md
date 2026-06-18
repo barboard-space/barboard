@@ -526,6 +526,13 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **member.html**：筛选按钮 Indienation 后加 **Barvision**（`data-filter=bv`，金色激活态）；选中时显示**届数子筛选** `.ml-subfilters`（全部届 + 第N届，从 `BV_INDEX` 动态生成，状态 `currentBvEdition`）；数据加载改 `Promise.all([members.csv, member-bv-index.json])`；member 元组加 `spaceId`(m[6])；大名后 `.ml-bv-logo`（实心 `logo_center.png` / 空心 `logo_hollow.png`）。
     - **范围**：仅 14 位选送者有记录（只投票未选送的 5 位无）；先建结构 + 只填第一届，后续逐届累加（重跑脚本即更新）。**待确认**：活跃判定规则（现全空心）。
     - **后续精修（徽章 SVG 化 / 概览配色 / 可排序表 / 场次图例 / 响应式走势图）+ 导入新届流程 + 各组件样式速查 → 详见 `BARVISION_MEMBER.md`**（含导入须改的常量：`member-render.js` 的 `LATEST_ED`/`BV_YEAR_COLOR`、`gen_member_pages.py` 的 `BV_ACTIVE_SINCE_YEAR`）。
+132. **Barvision 第二届导入 + 详情页扩展（成员变动 / 上下届导航 / 多场 header / editions-index）**：
+    - **第二届（The 2nd Barvision，2019）已导入**：`scripts/parse_bv_edition2.py`（第二届 Excel 结构 = `2SF`/`2GF` 两 sheet 一体逐票矩阵，与第一届分离式不同）→ `data/barvision/barvision-2019/regular-02.json`（**SF 半决赛 + GF 决赛两场**，`matches[]` 双元素）。半决赛分数=评委会票(选送者互投)+评审团票(观众)，16 首全校验；决赛分数取 Excel 最终值（含半决赛加成、逐人公式不同，直接用、按分排名），jury/tele 为逐票和（观众=泰妈+草妈）。`LANG` 映射补语种、归一 `\xa0` 不间断空格、`院长→院妈`/`瑞玛→瑞妈`/`绿萌→萌妈`/`淋檬→柠妈`/`肥屎→肥妈`。`barvision/2019/regular-02.html` 薄壳、`barvision.html` BUILT_EDITIONS 加 Ⅱ。
+    - **届次索引** `scripts/gen_bv_editions_index.py` → `data/barvision/editions-index.json`（各届 `roster:[{name,id,handle}]` + 序列）。**改/加任意届 JSON 后须重跑**（供下两项）。
+    - **详情页成员变动 section**（`bv-results-render.js`，「赛制」后）：对比上一届 + 历史届 → 继续参赛 / 首次加入 / 回归（间隔后回来，连续参赛不算）/ 退出；`memberChangesBlock()`，状态色 继续蓝·首次紫·回归金·退出粉。
+    - **详情页上一届/下一届导航**（底部）：`navBlock()`，默认整体灰、hover 整组 `--clr-red-light` + 边框粉；届名 13px。
+    - **多场 header/TOC**：`matchEng(m)` → section-label 前缀 `SEMI-FINAL`/`GRAND FINAL`（title 保留「结果概览/投票详情」）；TOC 用「半决赛/决赛 + 结果概览/投票详情」。`bv-results-render.js` boot 改 `Promise.all([EDITION_SRC, editions-index.json])`。
+    - **来源** JSON `source` 省略文件格式（只保留文档名）；总分（含决赛小数）`fmtScore()` 一律四舍五入显示。
 
 ---
 

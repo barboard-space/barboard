@@ -31,6 +31,7 @@
   }
 
   var DATA = null;             // edition JSON
+  var EDIDX = { editions: [] }; // 届次索引（成员变动 / 上下届导航）
   function memberLink(nick, opts) {
     opts = opts || {};
     var m = DATA && DATA.members && DATA.members[nick];
@@ -38,6 +39,61 @@
     if (!m) return '<span class="member">' + label + '</span>';
     return '<a class="member" href="../../member/' + m.id + '.html" data-nickname="'
       + esc(nick) + '">' + label + '</a>';
+  }
+  // 用届次索引 roster 项（{name,id,handle}）渲染链接（不依赖当前届 members）
+  function memberLinkR(r) {
+    var label = '@' + esc(r.handle || r.name);
+    if (!r.id) return '<span class="member">' + label + '</span>';
+    return '<a class="member" href="../../member/' + r.id + '.html" data-nickname="' + esc(r.name) + '">' + label + '</a>';
+  }
+  function curIndex(d) {
+    var eds = (EDIDX && EDIDX.editions) || [];
+    for (var i = 0; i < eds.length; i++) if (eds[i].no === d.edition_no) return i;
+    return -1;
+  }
+  // 成员变动：对比上一届 + 历史届 → 继续/首次/回归/退出
+  function memberChangesBlock(d) {
+    var eds = (EDIDX && EDIDX.editions) || [];
+    var ci = curIndex(d);
+    if (ci < 0) return '';
+    var cur = eds[ci].roster || [];
+    var prevSet = {}, earlierSet = {}, curNames = {};
+    if (ci > 0) (eds[ci - 1].roster || []).forEach(function (r) { prevSet[r.name] = r; });
+    for (var j = 0; j < ci - 1; j++) (eds[j].roster || []).forEach(function (r) { earlierSet[r.name] = 1; });
+    var first = [], cont = [], ret = [], left = [];
+    cur.forEach(function (r) {
+      curNames[r.name] = 1;
+      if (prevSet[r.name]) cont.push(r);
+      else if (earlierSet[r.name]) ret.push(r);
+      else first.push(r);
+    });
+    Object.keys(prevSet).forEach(function (nm) { if (!curNames[nm]) left.push(prevSet[nm]); });
+    var rows = [
+      { cls: 'cont', label: '继续参赛', list: cont },
+      { cls: 'first', label: '首次加入', list: first },
+      { cls: 'ret', label: '回归', list: ret },
+      { cls: 'left', label: '退出', list: left },
+    ].filter(function (r) { return r.list.length; });
+    if (!rows.length) return '';
+    var body = rows.map(function (r) {
+      return '<tr class="bvr-mc--' + r.cls + '"><td><span class="bvr-mc__badge">' + r.label + '</span></td>' +
+        '<td class="bvr-mc__mem">' + r.list.map(memberLinkR).join('') + '</td>' +
+        '<td class="bvr-mc__n">' + r.list.length + '</td></tr>';
+    }).join('');
+    return '<div class="bvr-mc-wrap fade-up"><table class="bvr-mc"><thead><tr>' +
+      '<th>状态</th><th>成员</th><th>总计</th></tr></thead><tbody>' + body + '</tbody></table></div>';
+  }
+  // 上一届 / 下一届导航
+  function navBlock(d) {
+    var eds = (EDIDX && EDIDX.editions) || [];
+    var ci = curIndex(d);
+    if (ci < 0) return '';
+    var prev = ci > 0 ? eds[ci - 1] : null, next = ci < eds.length - 1 ? eds[ci + 1] : null;
+    if (!prev && !next) return '';
+    function nm(e) { return esc(e.name || ('第' + e.no + '届')); }
+    var L = prev ? '<a class="bvr-nav__btn bvr-nav__btn--prev" href="' + prev.href + '"><span class="bvr-nav__arrow">←</span><span><span class="bvr-nav__lbl">上一届</span><span class="bvr-nav__name">' + nm(prev) + '</span></span></a>' : '<span></span>';
+    var R = next ? '<a class="bvr-nav__btn bvr-nav__btn--next" href="' + next.href + '"><span><span class="bvr-nav__lbl">下一届</span><span class="bvr-nav__name">' + nm(next) + '</span></span><span class="bvr-nav__arrow">→</span></a>' : '<span></span>';
+    return '<nav class="bvr-nav section__inner fade-up">' + L + R + '</nav>';
   }
 
   /* ---------- CSS ---------- */
@@ -255,6 +311,29 @@
       .bvr-12__c + .bvr-12__c { margin-top:2px; }
       .bvr-12__c:empty { display:none; }
     }
+    .bvr-mc-wrap { overflow-x:auto; border:1px solid var(--clr-border); border-radius:10px; margin-top:8px; scrollbar-width:none; }
+    .bvr-mc-wrap::-webkit-scrollbar { display:none; }
+    .bvr-mc { width:100%; border-collapse:collapse; font-size:14px; min-width:340px; }
+    .bvr-mc th { text-align:left; font-size:11px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--clr-text-2); padding:12px 16px; background:var(--clr-surface); border-bottom:1px solid var(--clr-border-2); white-space:nowrap; }
+    .bvr-mc td { padding:12px 16px; border-bottom:1px solid var(--clr-border); vertical-align:middle; }
+    .bvr-mc tr:last-child td { border-bottom:none; }
+    .bvr-mc__badge { display:inline-block; font-size:12px; font-weight:600; padding:3px 12px; border-radius:5px; white-space:nowrap; }
+    .bvr-mc--cont  .bvr-mc__badge { color:var(--clr-board-light); background:rgba(111,158,195,0.12); }
+    .bvr-mc--first .bvr-mc__badge { color:var(--clr-violet-light); background:var(--clr-violet-dim); }
+    .bvr-mc--ret   .bvr-mc__badge { color:var(--clr-gold-light); background:rgba(245,200,64,0.12); }
+    .bvr-mc--left  .bvr-mc__badge { color:var(--clr-pink-light); background:var(--clr-pink-dim); }
+    .bvr-mc__mem { line-height:2.1; }
+    .bvr-mc__mem .member { margin-right:14px; }
+    .bvr-mc__n { font-family:var(--font-display); font-size:20px; color:var(--clr-text); text-align:center; width:60px; }
+    .bvr-nav { display:flex; justify-content:space-between; gap:16px; padding:52px 0 12px; }
+    .bvr-nav__btn { display:inline-flex; align-items:center; gap:14px; padding:8px 18px; line-height:1.25; border:1px solid var(--clr-border); border-radius:8px; background:var(--clr-surface); color:var(--clr-text-2); text-decoration:none; transition:border-color .2s,color .2s,background .2s; }
+    .bvr-nav__btn:hover { border-color:var(--clr-pink-light); color:var(--clr-text); background:var(--clr-surface-2); }
+    .bvr-nav__btn:hover .bvr-nav__arrow { color:var(--clr-pink-light); }
+    .bvr-nav__btn:hover .bvr-nav__name, .bvr-nav__btn:hover .bvr-nav__lbl { color:var(--clr-red-light); }
+    .bvr-nav__btn--next { text-align:right; }
+    .bvr-nav__arrow { font-size:18px; color:var(--clr-text-3); transition:color .2s; }
+    .bvr-nav__lbl { display:block; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--clr-text-3); transition:color .2s; }
+    .bvr-nav__name { display:block; font-size:13px; font-weight:600; color:var(--clr-text-3); transition:color .2s; }
     `;
     var st = document.createElement('style');
     st.textContent = css;
@@ -300,6 +379,10 @@
     if (m.venue) return esc(m.venue) + (m.match ? ' <span style="color:var(--clr-text-3)">(' + esc(m.match) + ')</span>' : '');
     if (m.match) return esc(m.match);
     return '';
+  }
+  // 场次英文段名（用于 multi 场次的 section-label 前缀）
+  function matchEng(m) {
+    return m.match === 'SF' ? 'SEMI-FINAL' : m.match === 'GF' ? 'GRAND FINAL' : (m.match || esc(m.venue || ''));
   }
 
   // 竞赛式名次（同分同名次，如 1,2,2,4）
@@ -553,8 +636,9 @@
   }
 
   /* ---------- render ---------- */
-  function render(d) {
+  function render(d, idx) {
     DATA = d;
+    EDIDX = idx || { editions: [] };
     document.title = d.edition_name + ' | Barvision';
     var root = document.getElementById('bvr-root');
     var html = buildHero(d);
@@ -564,15 +648,19 @@
     var rb = rulesBlock(d);
     if (rb) { html += section('rules', '赛制', 'Rules', '', rb); toc.push({ id: 'rules', label: '赛制' }); }
 
+    // 1.5) 成员变动
+    var mc = memberChangesBlock(d);
+    if (mc) { html += section('changes', '成员变动', 'Roster Changes', '', mc); toc.push({ id: 'changes', label: '成员变动' }); }
+
     // 2) 每个 match：结果概览 + Detailed voting results（Split / 矩阵 / 12 分）
     var multi = d.matches.length > 1;
     d.matches.forEach(function (m, mi) {
-      var mName = matchTitle(m).replace(/<[^>]+>/g, '');
-      var pfx = multi ? (mName + ' · ') : '';
+      var pfx = multi ? (matchEng(m) + ' ') : '';
+      var venue = esc(m.venue || '');
 
       var rid = 'result' + (multi ? mi : '');
       html += section(rid, pfx + '结果概览', 'Results', '', resultTable(m));
-      toc.push({ id: rid, label: (multi ? mName + ' 结果' : '结果概览') });
+      toc.push({ id: rid, label: (multi ? venue + '结果概览' : '结果概览') });
 
       var mtx = votingMatrix(m, '选送者');
       var dvr = '';
@@ -581,8 +669,11 @@
 
       var did = 'dvr' + (multi ? mi : '');
       html += section(did, pfx + '投票详情', 'Detailed Voting Results', '', dvr);
-      toc.push({ id: did, label: (multi ? mName + ' 投票' : '投票详情') });
+      toc.push({ id: did, label: (multi ? venue + '投票详情' : '投票详情') });
     });
+
+    // 3) 上一届 / 下一届
+    html += navBlock(d);
 
     root.innerHTML = html;
     buildTOC(toc);
@@ -595,7 +686,10 @@
   injectCSS();
   var src = (typeof EDITION_SRC !== 'undefined') ? EDITION_SRC : null;
   if (!src) { console.error('bv-results-render: EDITION_SRC 未定义'); return; }
-  fetch(src).then(function (r) { return r.json(); }).then(render)
+  Promise.all([
+    fetch(src).then(function (r) { return r.json(); }),
+    fetch('../../data/barvision/editions-index.json').then(function (r) { return r.json(); }).catch(function () { return { editions: [] }; })
+  ]).then(function (res) { render(res[0], res[1]); })
     .catch(function (e) { console.error('bv-results-render: 加载失败', e);
       var root = document.getElementById('bvr-root');
       if (root) root.innerHTML = '<section class="section"><div class="section__inner">' +

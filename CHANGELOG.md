@@ -4,6 +4,23 @@
 
 ---
 
+## [2026-06-17] — Barvision 详情页：成员变动 + 上下届导航 + header/TOC
+
+### Added
+- **成员变动 section**（详情页「赛制」后）：对比上一届 + 历史届 → 继续参赛 / 首次加入 / 回归（间隔后回归，连续参赛不算）/ 退出；@成员链接 + 人数。第一届全首次 14；第二届继续 13 / 首次 6 / 退出 1。状态色：继续蓝 / 首次紫 / 回归金 / 退出粉。
+- **上一届 / 下一届导航**（详情页底部按钮）：默认整体灰（text-3），hover 整组变粉红 `--clr-red-light` + 边框粉；届名 13px。
+- **届次索引** `scripts/gen_bv_editions_index.py` → `data/barvision/editions-index.json`（各届参赛名单 roster + 序列），供成员变动对比 + 上下届导航。**改/加任意届数据后须重跑**。
+
+### Changed
+- 详情页多场 header：场次段名用英文 **SEMI-FINAL / GRAND FINAL**（section-label），title 保留「结果概览/投票详情」。
+- 详情页 TOC：多场用「半决赛/决赛 + 结果概览/投票详情」。
+- JSON `source` 省略文件格式（如「来源：第二届贴吧歌曲大赛策划概念书」）。
+
+### Docs
+- CLAUDE.md #132 + DESIGN.md §六 补成员变动 / 导航 / header / `editions-index` 约定。
+
+---
+
 ## [2026-06-17] — 吧视走势图微调 + 总分取整 + 新令牌
 
 ### Changed
