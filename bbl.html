@@ -475,18 +475,23 @@
     /* ── Highlight card click-to-scroll ── */
     .bbl-hl-card--clickable { cursor: pointer; }
     .bbl-hl-card--clickable:active { transform: scale(0.98); }
-    .bbl-rank-active {
-      background: rgba(168,85,247,0.13) !important;
+    /* 高亮用叠加层伪元素，只动 opacity → 淡入/淡出都平滑，不触碰条目自身背景
+       (奖牌渐变/surface 底原样保留)，因此无「闪黑」也无末端跳变 */
+    .bbl-chart-list .chart-item { position: relative; }
+    .bbl-chart-list .chart-item::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: rgba(168,85,247,0.13);
       box-shadow: inset 0 0 0 1px rgba(168,85,247,0.35),
                   0 0 18px rgba(168,85,247,0.22),
-                  0 0 40px rgba(168,85,247,0.10) !important;
-      transition: none !important;
+                  0 0 40px rgba(168,85,247,0.10);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
     }
-    .bbl-rank-active.bbl-rank-fading {
-      background: transparent !important;
-      box-shadow: none !important;
-      transition: background 0.8s ease, box-shadow 0.8s ease !important;
-    }
+    .bbl-chart-list .chart-item.bbl-rank-active::after { opacity: 1; }
 
     /* ── Responsive ── */
     @media (max-width: 1024px) {
@@ -902,10 +907,7 @@
     if (!_activeRankEl) return;
     var el = _activeRankEl;
     _activeRankEl = null;
-    el.classList.add('bbl-rank-fading');
-    el.addEventListener('transitionend', function() {
-      el.classList.remove('bbl-rank-active', 'bbl-rank-fading');
-    }, { once: true });
+    el.classList.remove('bbl-rank-active');  // 直接移除高亮回到初始态（不再经 transparent 渐隐，避免闪黑）
   }
 
   function scrollToRank(rank) {
@@ -927,14 +929,12 @@
       var visibleH = window.innerHeight - navH;
       var top = el.getBoundingClientRect().top + window.scrollY - navH - (visibleH - el.offsetHeight) / 2;
       window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
-      // Clear previous highlight immediately (no fade)
+      // Clear previous highlight immediately
       if (_activeRankEl && _activeRankEl !== el) {
-        _activeRankEl.classList.remove('bbl-rank-active', 'bbl-rank-fading');
+        _activeRankEl.classList.remove('bbl-rank-active');
       }
-      // Apply persistent highlight (cancel any in-progress fade first)
+      // Apply persistent highlight
       _activeRankEl = el;
-      el.classList.remove('bbl-rank-fading');
-      void el.offsetWidth;
       el.classList.add('bbl-rank-active');
       // Register doc listener once; reuse if already present
       if (!_rankListenerAdded) {

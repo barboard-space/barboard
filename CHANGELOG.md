@@ -4,6 +4,24 @@
 
 ---
 
+## [2026-06-18] — 导航/页眉/高亮交互精修
+
+### Fixed
+- **BBL 亮点高亮「闪黑」**：旧淡出强制条目 `background:transparent` 过渡 0.8s，顶掉条目自身背景（奖牌渐变 / surface 底）露出深色页底 → 闪黑 + 末端跳变。改为叠加层伪元素 `.chart-item::after` 只过渡 `opacity 0.4s`，淡入/淡出都平滑、不触碰条目背景、无黑。
+- **footer logo 点击区过宽**：`.footer__logo` 加 `width:fit-content`，点击跳首页热区仅限 logo+字标（原撑满整列含右侧空白）。桌面/手机一致。
+- **详情页上下届导航离正文太远**：`.bvr-nav` 加 `margin-top:calc(48px - var(--gap-xl))` 抵消上一 section 底部 padding，距正文 148px → 48px（桌面/手机一致）。
+
+### Changed
+- **成员页页眉**：三级面包屑 → `.mp-eyebrow`「← Members」（与 barvision 详情页 eyebrow 统一，violet-light、`/member.html`）。
+- **详情页导航·手机端**：改 `grid` 两等分，单按钮（仅上一届或仅下一届）占半边、缺届占位 `.bvr-nav__spacer` 占住另一半。
+- **概览卡**：「夺冠场数」→「冠军场数」；括号 `(次数)`/混淆曲 `(n)` 与大数字间距改用 `margin-left:3px`（flex 折叠字面空格，须用 margin）。
+- **吧视徽章间距**：`.mp-bv-badge` `margin-left` 桌面 9→7px、手机 7→5px。
+
+### Docs
+- CLAUDE.md #109（eyebrow 映射加 member）+ #134（本批技术要点）；DESIGN.md §6.7 导航补间距/手机半边；BARVISION_MEMBER.md 概览卡更新。
+
+---
+
 ## [2026-06-18] — 详情页计分板/导航修复 + 成员页创始届徽章 + 多艺人格式
 
 ### Fixed

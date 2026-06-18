@@ -1671,6 +1671,7 @@ img {
   margin-top: 0 !important;
   margin-bottom: var(--logo-gap-cjk);
   text-decoration: none;
+  width: fit-content; /* 点击区仅限 logo+字标，不再撑满整列（含右侧空白） */
 }
 
 .footer__name {

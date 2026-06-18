@@ -311,10 +311,12 @@
       .bvr-12__c + .bvr-12__c { margin-top:2px; }
       .bvr-12__c:empty { display:none; }
 
-      /* 上一届/下一届：手机改竖排满宽，箭头推到按钮外缘；隐藏占位 spacer */
-      .bvr-nav { flex-direction:column; gap:10px; padding-top:36px; }
-      .bvr-nav__spacer { display:none; }
-      .bvr-nav__btn { justify-content:space-between; padding:11px 16px; }
+      /* 上一届/下一届：手机用 grid 两等分（各占半边）；缺一侧时占位 spacer 占住另一半格（视觉＝另一半按钮被隐藏）。
+         选择器加 .section__inner / 后代提权——media 块位于基础 .bvr-nav 定义之前，同特异度会被后写的基础规则盖掉（参 #36） */
+      .bvr-nav.section__inner { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; }
+      .bvr-nav .bvr-nav__btn { min-width:0; gap:8px; justify-content:space-between; padding:11px 12px; }
+      .bvr-nav .bvr-nav__btn > span:not(.bvr-nav__arrow) { min-width:0; }  /* 文本块可收缩 */
+      .bvr-nav .bvr-nav__name { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }  /* 超长届名省略号兜底 */
     }
     .bvr-mc-wrap { overflow-x:auto; border:1px solid var(--clr-border); border-radius:10px; margin-top:8px; scrollbar-width:none; }
     .bvr-mc-wrap::-webkit-scrollbar { display:none; }
@@ -330,7 +332,8 @@
     .bvr-mc__mem { line-height:2.1; }
     .bvr-mc__mem .member { margin-right:14px; }
     .bvr-mc__n { font-family:var(--font-display); font-size:20px; color:var(--clr-text); text-align:center; width:60px; }
-    .bvr-nav { display:flex; justify-content:space-between; gap:16px; padding:52px var(--gap-md) 12px; }
+    /* margin-top 负值抵消上一 .section 的底部 padding(var(--gap-xl))，使距正文约 48px（桌面/手机一致） */
+    .bvr-nav { display:flex; justify-content:space-between; gap:16px; margin-top:calc(48px - var(--gap-xl)); padding:0 var(--gap-md) 12px; }
     .bvr-nav__btn { display:inline-flex; align-items:center; gap:14px; padding:8px 18px; line-height:1.25; border:1px solid var(--clr-border); border-radius:8px; background:var(--clr-surface); color:var(--clr-text-2); text-decoration:none; transition:border-color .2s,color .2s,background .2s; }
     .bvr-nav__btn:hover { border-color:var(--clr-pink-light); color:var(--clr-text); background:var(--clr-surface-2); }
     .bvr-nav__btn:hover .bvr-nav__arrow { color:var(--clr-pink-light); }

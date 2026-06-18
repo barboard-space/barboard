@@ -6,10 +6,8 @@
     '.mp-hero{padding:calc(var(--nav-h) + 56px) 0 64px;position:relative;overflow:hidden}',
     '.mp-hero__glow{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 30% 0%,rgba(168,85,247,.18) 0%,transparent 60%),radial-gradient(ellipse 50% 40% at 80% 80%,rgba(0,180,255,.07) 0%,transparent 55%);pointer-events:none}',
     '.mp-hero__inner{position:relative;z-index:1}',
-    '.breadcrumb{font-size:12px;color:var(--clr-text-3);display:flex;align-items:center;gap:6px;margin-bottom:40px}',
-    '.breadcrumb a{color:var(--clr-text-3);transition:color .2s}',
-    '.breadcrumb a:hover{color:var(--clr-text-2)}',
-    '.breadcrumb__sep{opacity:.35}',
+    '.mp-eyebrow{font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--clr-violet-light);margin-bottom:40px;display:inline-flex;align-items:center;gap:8px;transition:color .2s;text-decoration:none}',
+    '.mp-eyebrow:hover{color:var(--clr-white)}',
     '.mp-card{display:grid;grid-template-columns:auto 1fr auto;gap:40px;align-items:start}',
     '.mp-avatar{width:120px;height:120px;border-radius:50%;overflow:hidden;border:2px solid var(--clr-border-2);background:var(--clr-surface-2);flex-shrink:0;position:relative}',
     '.mp-avatar img{width:100%;height:100%;object-fit:cover;display:block}',
@@ -17,7 +15,7 @@
     '.mp-avatar__ring{position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--clr-violet),var(--clr-accent));z-index:-1;opacity:.6}',
     '.mp-info{padding-top:8px}',
     '.mp-nickname{font-family:var(--font-display);font-size:48px;line-height:1;color:var(--clr-text);letter-spacing:.04em;margin-bottom:6px;display:flex;align-items:flex-start}',
-    '.mp-bv-badge{display:inline-block;flex-shrink:0;width:30px;height:29px;margin-left:9px}',
+    '.mp-bv-badge{display:inline-block;flex-shrink:0;width:30px;height:29px;margin-left:7px}',
     '.mp-bv-badge__mark{display:block;width:100%;height:100%}',
     '.mp-bv-badge__mark path{fill:currentColor}',
     '.mp-bv-badge__num{font-family:var(--font-display)}',
@@ -50,8 +48,8 @@
     '.mp-bv-stat{background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:8px;padding:15px 10px 11px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}',
     '.mp-bv-stat__v{font-family:var(--font-display);font-size:26px;line-height:1;color:var(--clr-text);min-height:26px;display:flex;align-items:center;justify-content:center}',
     '.mp-bv-stat__v--cjk{font-family:var(--font-body);font-size:20px;font-weight:600;letter-spacing:.02em}',
-    '.mp-bv-stat__v .sh{font-family:var(--font-body);font-size:13px;color:var(--clr-text-3);margin-left:1px}',
-    '.mp-bv-stat__v .mp-bv-rep{font-family:var(--font-body);font-size:14px;opacity:.85;margin-left:1px}',
+    '.mp-bv-stat__v .sh{font-family:var(--font-body);font-size:13px;color:var(--clr-text-3);margin-left:3px}',
+    '.mp-bv-stat__v .mp-bv-rep{font-family:var(--font-body);font-size:14px;opacity:.85;margin-left:3px}',
     '.mp-bv-stat__k{font-size:11px;color:var(--clr-text-2);margin-top:7px}',
     '.mp-bv-stat--active .mp-bv-stat__v{color:var(--clr-violet-light)}',
     '.mp-bv-trend{margin-top:52px}',
@@ -110,7 +108,7 @@
     '  .mp-avatar{width:96px;height:96px}',
     '  .mp-avatar__placeholder{font-size:38px !important}',
     '  .mp-nickname{font-size:36px}',
-    '  .mp-bv-badge{width:21.25px;height:20.4px;margin-left:7px}',
+    '  .mp-bv-badge{width:21.25px;height:20.4px;margin-left:5px}',
     '  .mp-bv-stats{gap:8px;grid-template-columns:repeat(auto-fit,minmax(72px,1fr))}',
     '  .mp-bv-stat{padding:12px 6px 8px}',
     '  .mp-bv-stat__v{font-size:21px;min-height:21px}',
@@ -303,7 +301,7 @@
     function dim0(val, color) { return val === 0 ? DIM : (color || ''); }
     var stats = [
       { v: (bestN == null ? '—' : bestN), rep: (bestRep > 1 ? bestRep : 0), k: '最佳名次', color: bestColor },
-      { v: ov.top1, sh: ov.top1_shadow, k: '夺冠场数', color: dim0(ov.top1, ov.top1 > 0 ? 'var(--clr-gold-light)' : '') },
+      { v: ov.top1, sh: ov.top1_shadow, k: '冠军场数', color: dim0(ov.top1, ov.top1 > 0 ? 'var(--clr-gold-light)' : '') },
       { v: ov.top3, sh: ov.top3_shadow, k: '前三场数', color: dim0(ov.top3) },
       { v: ov.entries, sh: ov.shadow, k: '参与场数', color: dim0(ov.entries) },
       { v: ov.twelve, k: '12 分次数', color: dim0(ov.twelve) },
@@ -342,13 +340,7 @@
     '<section class="mp-hero">' +
       '<div class="mp-hero__glow" aria-hidden="true"></div>' +
       '<div class="mp-hero__inner section__inner">' +
-        '<nav class="breadcrumb" aria-label="导航路径">' +
-          '<a href="/">Barboard</a>' +
-          '<span class="breadcrumb__sep">/</span>' +
-          '<a href="/member.html">Members</a>' +
-          '<span class="breadcrumb__sep">/</span>' +
-          '<span>' + nickname + '</span>' +
-        '</nav>' +
+        '<a class="mp-eyebrow fade-up" href="/member.html"><span>←</span><span>Members</span></a>' +
         '<div class="mp-card fade-up">' +
           '<div style="position:relative;display:inline-block;margin-top:8px">' +
             '<div class="mp-avatar__ring" style="position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--clr-violet),var(--clr-accent));opacity:.5;z-index:0"></div>' +
