@@ -87,7 +87,7 @@ def build_match(path, match, venue):
     jury_set = {d['member'] for d in data if not d['shadow']}
 
     entries = []
-    for d in data:
+    for i, d in enumerate(data):
         resolve(d['member'])
         is_joint = '/' in d['member']
         mid = None if is_joint else (MEMBERS.get(d['member'], {}).get('id'))
@@ -96,7 +96,7 @@ def build_match(path, match, venue):
         tele = round(score - jury, 1)
         tele = int(tele) if tele == int(tele) else tele
         entries.append({
-            'member': d['member'], 'member_id': mid,
+            'member': d['member'], 'member_id': mid, 'eid': i,
             'language': LANG.get(d['song'], '英语'),
             'artist': d['artist'], 'song': d['song'],
             'jury_vote': jury, 'tele_vote': tele, 'score': score,
@@ -116,16 +116,17 @@ def build_match(path, match, venue):
     for base, grp in by_base.items():
         grp.sort(key=lambda e: -e['score'])
         for i, e in enumerate(grp): e['rank'] = base + i
+    # 结果概览展示顺序：总分↓、同分正式在前混淆在后、正式内部观众分↓（混淆曲交错在名次位置）
     entries.sort(key=lambda e: (-e['score'], 1 if e['is_shadow'] else 0, -e['tele_vote']))
 
-    # votes：每投票人 → points{选送者:分}（含混淆曲、去自投）
+    # votes：每投票人 → points{条目eid:分}（按条目唯一键，避免同名成员官方/混淆曲串台；含混淆曲、去自投）
     voter_objs = []
     for v in voters:
         pts = {}
-        for d in data:
+        for i, d in enumerate(data):
             if v == d['member']: continue
             p = d['cells'].get(v)
-            if p is not None: pts[d['member']] = p
+            if p is not None: pts[i] = p
         if not pts: continue
         resolve(v)
         voter_objs.append({'voter': v, 'type': 'jury' if v in jury_set else 'tele', 'points': pts})
@@ -152,7 +153,7 @@ def main():
                       'note': 'A/B 两组独立计分排名；混淆曲不计入排名。A 组泰妈仅给前五喜好，计分 50% 折算（数据保留 .5，展示四舍五入到整数）。'},
         'matches': [
             {'match': 'A', 'venue': '小众组', 'entries': a_entries, 'votes': a_votes,
-             'note': '泰妈仅给出前五喜好（12/10/8/7/6），计分按 50% 折算'},
+             'note': '{m:泰妈} 仅给出前五喜好（12/10/8/7/6），计分按 50% 折算'},
             {'match': 'B', 'venue': '中众组', 'entries': b_entries, 'votes': b_votes},
         ],
     }

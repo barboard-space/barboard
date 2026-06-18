@@ -88,12 +88,12 @@ def build_match(path, match, venue):
     jury_set = {d['member'] for d in data if not d['shadow']}
 
     entries = []
-    for d in data:
+    for i, d in enumerate(data):
         mid = resolve(d['member'])
         jury = sum(p for v, p in d['cells'].items() if v in jury_set)
         tele = sum(p for v, p in d['cells'].items() if v not in jury_set)
         entries.append({
-            'member': d['member'], 'member_id': mid,
+            'member': d['member'], 'member_id': mid, 'eid': i,
             'language': LANG.get(d['song'], '英语'),
             'artist': d['artist'], 'song': d['song'],
             'jury_vote': jury, 'tele_vote': tele, 'score': d['total'],
@@ -108,17 +108,17 @@ def build_match(path, match, venue):
     for e in entries:
         if e['is_shadow']:
             e['rank'] = sum(1 for o in official if o['score'] >= e['score']) + 1
-    # 展示顺序：总分↓；同分时正式在前、混淆在后；正式内部观众分↓
+    # 结果概览展示顺序：总分↓、同分正式在前混淆在后、正式内部观众分↓（混淆曲交错在名次位置）
     entries.sort(key=lambda e: (-e['score'], 1 if e['is_shadow'] else 0, -e['tele_vote']))
 
-    # votes：每投票人 → points{选送者:分}（含混淆曲，供计分板显示；去自投）
+    # votes：每投票人 → points{条目eid:分}（按条目唯一键，避免同名成员官方/混淆曲串台；含混淆曲、去自投）
     voter_objs = []
     for v in voters:
         pts = {}
-        for d in data:
+        for i, d in enumerate(data):
             if v == d['member']: continue
             p = d['cells'].get(v)
-            if p is not None: pts[d['member']] = p
+            if p is not None: pts[i] = p
         if not pts: continue
         resolve(v)
         voter_objs.append({'voter': v, 'type': 'jury' if v in jury_set else 'tele', 'points': pts})

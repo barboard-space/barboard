@@ -208,13 +208,13 @@
     .bvr-row--3 .lang { color:rgba(224,160,100,0.8); }
     .bvr-tbl .pts--jury  { color:var(--clr-accent-light); }
     .bvr-tbl .pts--tele  { color:var(--clr-pink-light); }
-    .bvr-row--shadow td { background:rgba(255,255,255,0.02); color:var(--clr-text-3); }
+    .bvr-row--shadow td { background:#181820; color:var(--clr-text-3); }
     .bvr-num-shadow { font-family:var(--font-display); font-size:16px; font-weight:400; font-style:normal; position:relative; top:-3px; }
     .bvr-row--shadow .pts--jury, .bvr-row--shadow .pts--tele { color:var(--clr-text-3); }
     .bvr-row--shadow .pts--total { color:var(--clr-text-2); }
     .bvr-row--shadow .song, .bvr-row--shadow .artist { color:var(--clr-text-3); }
     .bvr-row--shadow .member { color:var(--clr-text-3); }
-    .bvr-shadow-tag { font-size:9px; border:1px solid var(--clr-border-2); border-radius:2px;
+    .bvr-shadow-tag { display:inline-block; white-space:nowrap; font-size:9px; border:1px solid var(--clr-border-2); border-radius:2px;
       padding:0 4px; margin-left:6px; color:var(--clr-text-3); font-style:normal; }
     .member--unclaimed { color:var(--clr-text-3); }
     .member--unclaimed:hover { color:var(--clr-text-2); }
@@ -334,17 +334,20 @@
       .bvr-12 .member::before  { content:attr(data-nickname); font-size:12px; }
       /* 结果概览：手机端横滑时冻结 名次/选送者/歌手 前三列（left 偏移由 JS 量列宽写入） */
       table.bvr-tbl { border-collapse:separate; border-spacing:0; }
-      .bvr-tbl thead th:nth-child(-n+3), .bvr-tbl tbody td:nth-child(-n+3) {
-        position:sticky; background:var(--clr-bg); z-index:2; }
+      .bvr-tbl thead th:nth-child(-n+3), .bvr-tbl tbody td:nth-child(-n+3) { position:sticky; z-index:2; }
+      .bvr-tbl tbody td:nth-child(-n+3) { background:var(--clr-bg); }       /* 正文冻结列底＝行底色(透明=bg) */
+      .bvr-tbl thead th:nth-child(-n+3) { background:var(--clr-surface); z-index:4; }  /* 表头冻结列底＝表头 surface（与滚动表头一致） */
       .bvr-tbl th:nth-child(1), .bvr-tbl td:nth-child(1) { left:0; }
       .bvr-tbl th:nth-child(2), .bvr-tbl td:nth-child(2) { left:var(--tbl-l-mem,28px); }
       .bvr-tbl th:nth-child(3), .bvr-tbl td:nth-child(3) { left:var(--tbl-l-art,90px); }
-      .bvr-tbl thead th:nth-child(-n+3) { z-index:4; }
-      /* 奖牌/混淆行：行渐变在固定列不可用，冻结列补近似纯色底（覆盖 tr 渐变；提权盖过默认 bg） */
+      /* 奖牌/混淆行：行渐变在固定列不可用，冻结列补纯色底（提权盖过默认 bg），与滚动列一致、完全不透明防漏光 */
       .bvr-tbl tbody .bvr-row--1 td:nth-child(-n+3) { background:linear-gradient(rgba(212,168,50,0.14),rgba(212,168,50,0.14)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--2 td:nth-child(-n+3) { background:linear-gradient(rgba(110,150,178,0.11),rgba(110,150,178,0.11)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--3 td:nth-child(-n+3) { background:linear-gradient(rgba(196,120,68,0.12),rgba(196,120,68,0.12)),var(--clr-bg); }
-      .bvr-tbl tbody .bvr-row--shadow td:nth-child(-n+3) { background:linear-gradient(rgba(255,255,255,0.02),rgba(255,255,255,0.02)),var(--clr-bg); }
+      .bvr-tbl tbody .bvr-row--shadow td:nth-child(-n+3) { background:#181820; }
+      /* 注释里的 @名在手机端也显示昵称 */
+      .bvr-mtx-note .member { font-size:0; }
+      .bvr-mtx-note .member::before { content:attr(data-nickname); font-size:11px; }
       /* 12 Points 改单列堆叠：每条目为对称 padding 块，内部行紧凑 */
       .bvr-12 { display:block; }
       .bvr-12e { display:block; border-top:1px solid var(--clr-border); padding:10px 14px; }
@@ -368,12 +371,12 @@
     .bvr-mc th { text-align:left; font-size:11px; font-weight:700; letter-spacing:0.05em; text-transform:uppercase; color:var(--clr-text-2); padding:12px 16px; background:var(--clr-surface); border-bottom:1px solid var(--clr-border-2); white-space:nowrap; }
     .bvr-mc td { padding:12px 16px; border-bottom:1px solid var(--clr-border); vertical-align:middle; }
     .bvr-mc tr:last-child td { border-bottom:none; }
-    .bvr-mc__badge { display:inline-block; font-size:12px; font-weight:600; padding:3px 12px; border-radius:5px; white-space:nowrap; }
+    .bvr-mc__badge { display:inline-block; font-size:11px; font-weight:600; padding:3px 12px; border-radius:5px; white-space:nowrap; }
     .bvr-mc--cont  .bvr-mc__badge { color:var(--clr-board-light); background:rgba(111,158,195,0.12); }
     .bvr-mc--first .bvr-mc__badge { color:var(--clr-violet-light); background:var(--clr-violet-dim); }
     .bvr-mc--ret   .bvr-mc__badge { color:var(--clr-gold-light); background:rgba(245,200,64,0.12); }
     .bvr-mc--left  .bvr-mc__badge { color:var(--clr-pink-light); background:var(--clr-pink-dim); }
-    .bvr-mc__mem { line-height:2.1; }
+    .bvr-mc__mem { line-height:2.1; font-size:11px; }
     .bvr-mc__mem .member { margin-right:14px; }
     .bvr-mc__n { font-family:var(--font-display); font-size:20px; color:var(--clr-text); text-align:center; width:60px; }
     /* margin-top 负值抵消上一 .section 的底部 padding(var(--gap-xl))，使距正文约 48px（桌面/手机一致） */
@@ -488,11 +491,13 @@
     // 默认顺序：行按评委投票人列顺序排列，使自投格连成主对角线
     var orderIdx = {};
     voters.forEach(function (v, i) { if (v.type === 'jury') orderIdx[v.voter] = i; });
-    var recips = m.entries.slice()  // 含混淆曲（弱化行排在末尾，orderIdx 缺省 999）
+    var recips = m.entries.slice()  // 含混淆曲：正式曲一律在前（按评委列序），混淆曲一律在最后（按分降序）
       .sort(function (a, b) {
+        var sa = a.is_shadow ? 1 : 0, sb = b.is_shadow ? 1 : 0;
+        if (sa !== sb) return sa - sb;
         var ia = orderIdx[a.member] != null ? orderIdx[a.member] : 999;
         var ib = orderIdx[b.member] != null ? orderIdx[b.member] : 999;
-        return ia - ib;
+        return (ia - ib) || (b.score - a.score);
       });
     function vsep(i) { return (i === 0 || i === firstTele) ? ' vsep' : ''; }
     var grpRow = '<tr>' +
@@ -511,7 +516,7 @@
       var cells = voters.map(function (v, i) {
         var sep = vsep(i);
         if (v.voter === e.member) return '<td class="self' + sep + '"></td>';
-        var p = v.points[e.member];
+        var p = v.points[e.eid];
         if (p == null) return '<td class="pt' + sep + '"></td>';
         return '<td class="pt' + (p === 12 ? ' pt--12' : '') + sep + '">' + p + '</td>';
       }).join('');
@@ -520,25 +525,29 @@
         '<td class="sj">' + fmtScore(e.jury_vote) + '</td>' +
         '<td class="st">' + fmtScore(e.tele_vote) + '</td>' + cells + '</tr>';
     }).join('');
-    var hasShadow = m.entries.some(function (e) { return e.is_shadow; });
     var notes = [];
-    if (m.note) notes.push(m.note);
-    if (hasShadow) notes.push('斜体昵称为混淆歌曲选送者');
-    var noteHtml = '';
-    if (notes.length === 1) noteHtml = '<p class="bvr-mtx-note fade-up">注：' + esc(notes[0]) + '</p>';
-    else if (notes.length > 1) noteHtml = '<div class="bvr-mtx-note fade-up">' +
-      notes.map(function (n, i) { return '注' + (i + 1) + '：' + esc(n); }).join('<br>') + '</div>';
+    if (m.note) notes.push(fmtNote(m.note));
+    if (m.entries.some(function (e) { return e.is_shadow; })) notes.push('斜体昵称为混淆歌曲选送者');
+    var noteHtml = notes.length === 1 ? '<p class="bvr-mtx-note fade-up">注：' + notes[0] + '</p>'
+      : notes.length > 1 ? '<div class="bvr-mtx-note fade-up">' + notes.map(function (n, i) { return '注' + (i + 1) + '：' + n; }).join('<br>') + '</div>' : '';
     return '<div class="bvr-scroll-hint">左右滑动查看完整计分板</div>' +
       '<div class="bvr-mw fade-up"><table class="bvr-mtx">' +
       '<thead>' + grpRow + colRow + '</thead><tbody>' + body + '</tbody></table></div>' +
       noteHtml;
   }
+  // 注释里的 {m:昵称} 渲染为 memberLink（桌面 @名 / 手机昵称）；其余文本转义
+  function fmtNote(s) {
+    return String(s).split(/(\{m:[^}]+\})/).map(function (part) {
+      var mm = part.match(/^\{m:([^}]+)\}$/);
+      return mm ? memberLink(mm[1]) : esc(part);
+    }).join('');
+  }
 
-  // 12 分合并表：每位获 12 分的选送者一行，区分评委 / 观众给分，给分者用 @名
+  // 12 分合并表：每首获 12 分的歌一行（按条目 eid 聚合，避免同名成员官方/混淆串台），区分评委/观众给分
   function twelveBlock(m) {
-    var got = {};  // recipient -> {jury:[], tele:[]}
-    var shadowSet = {};  // 混淆曲选送者在 12 Points 中显示为斜体「匿名」
-    (m.entries || []).forEach(function (e) { if (e.is_shadow) shadowSet[e.member] = 1; });
+    var byEid = {};
+    (m.entries || []).forEach(function (e) { byEid[e.eid] = e; });
+    var got = {};  // eid -> {jury:[], tele:[]}
     m.votes.voters.forEach(function (v) {
       Object.keys(v.points).forEach(function (r) {
         if (v.points[r] === 12) { (got[r] = got[r] || { jury: [], tele: [] })[v.type].push(v.voter); }
@@ -552,12 +561,17 @@
     function grp(type, arr) {
       return '<span class="bvr-12tag bvr-12tag--' + type + '">' + (type === 'jury' ? 'Jury' : 'Tele') + '</span>' + givers(arr);
     }
+    function recipLabel(eid) {
+      var e = byEid[eid]; if (!e) return memberLink(eid);
+      var lk = memberLink(e.member);
+      return e.is_shadow ? '<span class="bvr-anon">' + lk + '</span>' : lk;
+    }
     // 三列：选送者 | Jury 组 | Tele 组；无 Jury 时 Tele 占第二列
     var cells = recips.map(function (r) {
       var j = got[r].jury, t = got[r].tele, c2 = '', c3 = '';
       if (j.length) { c2 = grp('jury', j); if (t.length) c3 = grp('tele', t); }
       else if (t.length) { c2 = grp('tele', t); }
-      return '<div class="bvr-12e"><span class="bvr-12__r"><span class="bvr-12__n">' + (j.length + t.length) + '</span>' + (shadowSet[r] ? '<span class="bvr-anon">' + memberLink(r) + '</span>' : memberLink(r)) + '</span>' +
+      return '<div class="bvr-12e"><span class="bvr-12__r"><span class="bvr-12__n">' + (j.length + t.length) + '</span>' + recipLabel(r) + '</span>' +
         '<span class="bvr-12__c">' + c2 + '</span>' +
         '<span class="bvr-12__c">' + c3 + '</span></div>';
     }).join('');
@@ -751,8 +765,20 @@
     wireMatrixSort();
     stickyMatrixCols();
     stickyResultCols();
+    updateScrollHints();
     var _smt;
-    window.addEventListener('resize', function () { clearTimeout(_smt); _smt = setTimeout(function () { stickyMatrixCols(); stickyResultCols(); }, 150); });
+    window.addEventListener('resize', function () { clearTimeout(_smt); _smt = setTimeout(function () { stickyMatrixCols(); stickyResultCols(); updateScrollHints(); }, 150); });
+  }
+
+  // 「左右滑动…」提示：手机端常显；桌面端仅当表格确实溢出（需横滑）时显示
+  function updateScrollHints() {
+    var mobile = window.matchMedia('(max-width:768px)').matches;
+    document.querySelectorAll('.bvr-mw, .bvr-tw').forEach(function (wrap) {
+      var hint = wrap.previousElementSibling;
+      if (!hint || !hint.classList.contains('bvr-scroll-hint')) return;
+      var overflow = wrap.scrollWidth > wrap.clientWidth + 1;
+      hint.style.display = (mobile || overflow) ? 'block' : 'none';
+    });
   }
 
   // 结果概览冻结（仅手机）：量出 名次/选送者 列宽，写入 left 偏移，冻结 名次/选送者/歌手 三列

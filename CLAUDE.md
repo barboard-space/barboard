@@ -564,6 +564,16 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **联合选送「A/B」**（如 B 组 `麦妈/苏妈` 合报「Ride - Jump Jet」，投票也是一个联合列）：entry `member` 保留斜杠串（矩阵自投格、投票列匹配靠它）、`member_id=null`。`memberLink` 遇 `/` 拆分各自渲染（`.bvr-joint-sep` 斜杠分隔，用于矩阵/12分）；**结果表**用 `.bvr-joint`（flex 列）**两人上下排列**。聚合 `gen_member_pages.aggregate_barvision` 与 `gen_bv_editions_index` roster 均**按 `/` 拆分计入各自**（该曲同时进两人吧视、两人各入名册）。
     - **第四届混淆命名**：rank「混淆N」+ 报名者「X2」（去尾数字得选送者，如 `雨妈2`→雨妈），**均有已知选送者（无匿名）**；名次自算并排（同 #135，`N*`）。**同并排名次的多首混淆曲**按分降序连续编号（如 B 组 Puddles 17→`23*`、Cheregazzina 12→`24*`）。
     - **歌名分隔兼容**：`split_song` 同时支持 ` - ` 与 ` – `（en-dash，如「Iglooghost… – Lockii」）。
+137. **Barvision 详情页第二批微调（本次，部分仍待续调）**：
+    - **`votes.points` 改按条目 `eid` 作键**（不再按昵称）——修复第四届「同名成员同组既有正式曲又有混淆曲」（如 B 组晕妈 Josh Wilson 正式 + Ashley McBryde 混淆）的小分**串台** bug。parse 给每条 entry 加 `eid`（data 行索引），points `{eid:分}`；`votingMatrix` 用 `v.points[e.eid]`、`twelveBlock` 建 `byEid` 映射后 `memberLink(entry.member)`。
+    - **混淆曲位置（已与用户确认）**：**结果概览 = 交错**在名次位置（parse `entries` 按 `-score, 正式在前, -tele` 排，混淆曲 `N*` 落在其分数位）；**Scoreboard 矩阵 = 一律排在最后**（recips 排序 `is_shadow` 优先级最低、再 orderIdx、混淆组内按分降序）。12 分表也含混淆曲（eid 聚合）。
+    - **混淆行背景**：`rgba(255,255,255,.06)`（偏亮）→ 纯深灰实色 **`#181820`**（详情表/手机冻结列/成员页统一）；实色顺带修复手机冻结列**漏光**（半透明会透出滚动内容）。
+    - **手机冻结表头底色**：冻结表头由 `--clr-bg` 改 `--clr-surface`，与滚动表头一致（消除冻结/滚动窗格色差）。
+    - **泰妈折算注用 memberLink**：`m.note` 用 `{m:泰妈}` token，`fmtNote()` 渲染为 memberLink → 桌面 `@泰坦crazy`、手机 `泰妈`（`.bvr-mtx-note .member` 移动端昵称规则）。注：泰妈 handle=泰坦crazy(id131)，@Jeremy_BAg 实为包妈(id20)。
+    - **「混淆」标签防断行**：`.bvr-shadow-tag`/`.mp-bv-sh` 加 `display:inline-block; white-space:nowrap`。
+    - **成员变动表字号**：`.bvr-mc__badge`/`.bvr-mc__mem` 值字号统一为表头 `11px`。
+    - **桌面 Scoreboard 滚动提示**：`updateScrollHints()` 检测 `.bvr-mw`/`.bvr-tw` 溢出（`scrollWidth>clientWidth`）→ 桌面也显示「左右滑动…」提示（手机常显），render + resize 调用。
+    - ⚠️ **本批仍待用户进一步微调**（下一会话继续）；语种「器乐」已统一为「纯音乐」。
 
 ---
 
