@@ -538,7 +538,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **Scoreboard 对角线修复（重要）**：`votingMatrix()` 原假设 `m.votes.voters` 已「评委在前、观众在后」（`firstTele=juryN` + 分组 colspan + 对角线 `orderIdx` 都依赖此）；第二届按 Excel 原始列序输出导致评委/观众**交错**，分组表头错列 + 自投格不成对角线。修复：渲染时先 `voters.slice().sort((a,b)=>(a.type==='tele')-(b.type==='tele'))` 稳定分组（评委前/观众后），对第一届为 no-op。纯渲染健壮性修复、不动数据。
     - **12 Points 数字配色**：`.bvr-12__n` 由 `--clr-text` → `--clr-text-3`，与结果表「4 名及以后」名次同色。
     - **上下届导航对齐修复**：`.bvr-nav` 原 `padding:52px 0 12px` 的水平 `0` 覆盖了 `.section__inner` 的 `var(--gap-md)` 内边距，使导航比正文每侧宽 32px（桌面）/20px（手机）→ 按钮戳出内容边缘。修复：水平内边距改 `var(--gap-md)`（自动随断点 32/20）。**手机端**：导航改竖排满宽（`flex-direction:column`），缺届占位 `<span>` 加类 `bvr-nav__spacer` 并 `display:none`，按钮内 `justify-content:space-between` 把箭头推到外缘。
-    - **个人主页吧视徽章**：数字色全届统一 `var(--clr-text)`（原第一届 `--clr-board`/其余 `#fff`）；**创始届（`ed.no===1`）特殊态** class `mp-bv-badge--first`：五边形染金 `--clr-gold-light`（覆盖 `BV_YEAR_COLOR`）+ 金色双层 `drop-shadow` 光晕 + `mpBvFirstGlow` 3.2s 呼吸动画（`prefers-reduced-motion` 关闭），title 加「· 创始届」。详见 BARVISION_MEMBER.md。
+    - **个人主页吧视徽章**：数字色全届统一 `var(--clr-text)`（原第一届 `--clr-board`/其余 `#fff`）；**创始届（`ed.no===1`）特殊态** class `mp-bv-badge--first`：五边形染金 `--clr-gold`（覆盖 `BV_YEAR_COLOR`）+ 金色双层 `drop-shadow` 光晕 + `mpBvFirstGlow` 3.2s 呼吸动画（`prefers-reduced-motion` 关闭），title 加「· 创始届」。详见 BARVISION_MEMBER.md。
     - **多艺人合作曲数据修正**：按 #15 新规范修正 reg-01（Calipso 补 `(with Dardust)`）+ reg-02 六条 `/` 堆叠艺人（双 lead 用 `&`、feat 进歌名、正字法 Röyksopp/Sundfør/VanJess/GoldLink），重跑 `gen_member_pages.py` + `gen_bv_editions_index.py` 同步。
 
 ---

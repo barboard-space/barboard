@@ -22,8 +22,8 @@
     '.mp-bv-badge__mark path{fill:currentColor}',
     '.mp-bv-badge__num{font-family:var(--font-display)}',
     /* 创始届（第一届）金色光晕 + 缓慢呼吸，凸显其特别 */
-    '.mp-bv-badge--first{filter:drop-shadow(0 0 3px rgba(245,200,64,.5)) drop-shadow(0 0 8px rgba(245,200,64,.28));animation:mpBvFirstGlow 3.2s ease-in-out infinite}',
-    '@keyframes mpBvFirstGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(245,200,64,.42)) drop-shadow(0 0 7px rgba(245,200,64,.2))}50%{filter:drop-shadow(0 0 5px rgba(245,200,64,.72)) drop-shadow(0 0 13px rgba(245,200,64,.42))}}',
+    '.mp-bv-badge--first{filter:drop-shadow(0 0 3px rgba(212,168,50,.5)) drop-shadow(0 0 8px rgba(212,168,50,.28));animation:mpBvFirstGlow 3.2s ease-in-out infinite}',
+    '@keyframes mpBvFirstGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(212,168,50,.42)) drop-shadow(0 0 7px rgba(212,168,50,.2))}50%{filter:drop-shadow(0 0 5px rgba(212,168,50,.72)) drop-shadow(0 0 13px rgba(212,168,50,.42))}}',
     '@media (prefers-reduced-motion:reduce){.mp-bv-badge--first{animation:none}}',
     '.mp-handle{font-size:15px;color:var(--clr-text-2);margin-bottom:20px}',
     '.mp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}',
@@ -192,7 +192,7 @@
     list.sort(function (a, b) { return a.no - b.no; });
     return list.map(function (ed) {
       var first = ed.no === 1;  // 创始届：金色 + 光晕
-      var logoColor = first ? 'var(--clr-gold-light)' : (BV_YEAR_COLOR[ed.year] || 'var(--clr-board)');
+      var logoColor = first ? 'var(--clr-gold)' : (BV_YEAR_COLOR[ed.year] || 'var(--clr-board)');
       var numColor = 'var(--clr-text)';  // 徽章数字全站统一为 --clr-text
       var two = ed.no >= 10;
       var fs = two ? 300 : 360;

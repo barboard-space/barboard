@@ -14,7 +14,7 @@
 ### Changed
 - **Scoreboard 小分字体 +1px**：`.bvr-mtx td.pt`（含金色 12 分）显式 `font-size:12px`；Total/Jury/Tele（13px）不变。
 - **12 Points 数字配色**：`.bvr-12__n` `--clr-text` → `--clr-text-3`（与结果表「4 名及以后」名次同色）。
-- **个人主页吧视徽章**：数字色全届统一 `--clr-text`；**创始届（第一届）** 五边形染金 `--clr-gold-light` + 金色光晕 + `mpBvFirstGlow` 3.2s 呼吸动画（`prefers-reduced-motion` 关闭），class `mp-bv-badge--first`，title 加「· 创始届」。
+- **个人主页吧视徽章**：数字色全届统一 `--clr-text`；**创始届（第一届）** 五边形染金 `--clr-gold` + 金色光晕 + `mpBvFirstGlow` 3.2s 呼吸动画（`prefers-reduced-motion` 关闭），class `mp-bv-badge--first`，title 加「· 创始届」。
 
 ### Content
 - **多艺人合作曲格式修正**（按新规范 #15）：reg-01 Calipso 补 `(with Dardust)`；reg-02 六条 `/` 堆叠艺人改为双 lead `A & B` / feat 进歌名（`Agon & The Gitas`、`The Brummies & Kacey Musgraves`、`Röyksopp & Man Without Country — In the End (Lost Tapes) (feat. Susanne Sundfør)`、`VanJess — Through Enough (feat. GoldLink)`、`Little Simz — Selfish (feat. Cleo Sol)`、`Judah & the Lion — Pictures (feat. Kacey Musgraves)`），正字法修正。重跑 `gen_member_pages.py` + `gen_bv_editions_index.py`。

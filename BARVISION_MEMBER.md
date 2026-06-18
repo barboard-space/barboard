@@ -68,7 +68,7 @@
 ### `scripts/member-render.js`
 
 - **`LATEST_ED`**（bvSection 内，当前 `16`）：「最新一届」的届号。概览卡「最近参赛」== 此值才正常显示，否则用 `--clr-text-3` 弱化；走势点 `edition_no===16` 用 `--clr-red-light` 标记。**开新一届时改成新的最新届号**（并同步走势点 `is-latest` 判断里的 `16`）。
-- **`BV_YEAR_COLOR`**（IIFE 顶部）：徽章 logo 描边色，按 `year` 映射。**2019=`--clr-board`；2020/2023/2024/2025/2026 当前为占位色，待用户最终确认**。导入到新年份（如 2027）须补一条。缺失年份回退 `--clr-board`。**注**：第一届（`ed.no===1`）在 `bvBadges()` 内被硬覆盖为金色 `--clr-gold-light` + 光晕（创始届特殊态），不走 `BV_YEAR_COLOR`。
+- **`BV_YEAR_COLOR`**（IIFE 顶部）：徽章 logo 描边色，按 `year` 映射。**2019=`--clr-board`；2020/2023/2024/2025/2026 当前为占位色，待用户最终确认**。导入到新年份（如 2027）须补一条。缺失年份回退 `--clr-board`。**注**：第一届（`ed.no===1`）在 `bvBadges()` 内被硬覆盖为金色 `--clr-gold` + 光晕（创始届特殊态），不走 `BV_YEAR_COLOR`。
 
 ### `scripts/gen_member_pages.py`
 
@@ -81,7 +81,7 @@
 ### 1. 大名届数徽章 `bvBadges()`
 - 大名右上角，**每参加一届一个徽章**并排（数字=届号）；空心五边形 logo（inline SVG，path 同 `logo_hollow.svg`），`fill` 用 `BV_YEAR_COLOR[year]`（`currentColor`）。
 - 数字色：**全届统一 `--clr-text`**；两位数届号自动缩小字号（fs 360→300）并下移 baseline 居中。
-- **创始届（第一届）特殊态**（class `mp-bv-badge--first`）：五边形 logo 染金 `--clr-gold-light`（覆盖 `BV_YEAR_COLOR[2019]`）+ 金色双层 `drop-shadow` 光晕 + `mpBvFirstGlow` 3.2s 缓慢呼吸动画（`prefers-reduced-motion` 关闭），title 追加「· 创始届」。仅 `ed.no === 1` 命中。
+- **创始届（第一届）特殊态**（class `mp-bv-badge--first`）：五边形 logo 染金 `--clr-gold`（覆盖 `BV_YEAR_COLOR[2019]`）+ 金色双层 `drop-shadow` 光晕 + `mpBvFirstGlow` 3.2s 缓慢呼吸动画（`prefers-reduced-motion` 关闭），title 追加「· 创始届」。仅 `ed.no === 1` 命中。
 - **尺寸**：桌面 30×29px；**手机端缩小 15%**（≈21.25×20.4）、`margin-left` 离大名 **7px**（桌面 9px）。
 - 仅 `MEMBER_DATA.barvision` 存在且有 `edition_no` 时渲染。
 
