@@ -91,8 +91,8 @@
     var prev = ci > 0 ? eds[ci - 1] : null, next = ci < eds.length - 1 ? eds[ci + 1] : null;
     if (!prev && !next) return '';
     function nm(e) { return esc(e.name || ('第' + e.no + '届')); }
-    var L = prev ? '<a class="bvr-nav__btn bvr-nav__btn--prev" href="' + prev.href + '"><span class="bvr-nav__arrow">←</span><span><span class="bvr-nav__lbl">上一届</span><span class="bvr-nav__name">' + nm(prev) + '</span></span></a>' : '<span></span>';
-    var R = next ? '<a class="bvr-nav__btn bvr-nav__btn--next" href="' + next.href + '"><span><span class="bvr-nav__lbl">下一届</span><span class="bvr-nav__name">' + nm(next) + '</span></span><span class="bvr-nav__arrow">→</span></a>' : '<span></span>';
+    var L = prev ? '<a class="bvr-nav__btn bvr-nav__btn--prev" href="' + prev.href + '"><span class="bvr-nav__arrow">←</span><span><span class="bvr-nav__lbl">上一届</span><span class="bvr-nav__name">' + nm(prev) + '</span></span></a>' : '<span class="bvr-nav__spacer"></span>';
+    var R = next ? '<a class="bvr-nav__btn bvr-nav__btn--next" href="' + next.href + '"><span><span class="bvr-nav__lbl">下一届</span><span class="bvr-nav__name">' + nm(next) + '</span></span><span class="bvr-nav__arrow">→</span></a>' : '<span class="bvr-nav__spacer"></span>';
     return '<nav class="bvr-nav section__inner fade-up">' + L + R + '</nav>';
   }
 
@@ -223,7 +223,7 @@
     .bvr-mtx .st  { color:var(--clr-pink-light);    background:var(--clr-surface); }
     .bvr-mtx tbody .tot, .bvr-mtx tbody .sj, .bvr-mtx tbody .st { font-family:var(--font-body); font-size:13px; }
     .bvr-mtx .vsep { border-left:2px solid var(--clr-border-2); }
-    .bvr-mtx td.pt { color:var(--clr-text-2); }
+    .bvr-mtx td.pt { color:var(--clr-text-2); font-size:12px; }
     .bvr-mtx td.pt--12 { color:var(--clr-gold-light); font-weight:700; }
     .bvr-mtx td.self { background-color:rgba(255,255,255,0.05);
       background-image:repeating-linear-gradient(45deg,
@@ -238,7 +238,7 @@
     .bvr-12__r { display:flex; align-items:center; font-weight:600; white-space:nowrap; }
     .bvr-12__r .member { color:var(--clr-text); }
     .bvr-12__n { font-family:var(--font-display); font-weight:400; font-size:17px; line-height:1;
-      color:var(--clr-text); margin-right:10px; }
+      color:var(--clr-text-3); margin-right:10px; }  /* 与结果表「4 名及以后」名次同色 */
     .bvr-12__c { color:var(--clr-text-2); line-height:1.9; }
     .bvr-12__c .member { margin-right:10px; }
     .bvr-12tag { font-size:10px; font-weight:700; letter-spacing:0.04em; margin-right:6px; }
@@ -310,6 +310,11 @@
       .bvr-12__c { display:block; line-height:1.45; }
       .bvr-12__c + .bvr-12__c { margin-top:2px; }
       .bvr-12__c:empty { display:none; }
+
+      /* 上一届/下一届：手机改竖排满宽，箭头推到按钮外缘；隐藏占位 spacer */
+      .bvr-nav { flex-direction:column; gap:10px; padding-top:36px; }
+      .bvr-nav__spacer { display:none; }
+      .bvr-nav__btn { justify-content:space-between; padding:11px 16px; }
     }
     .bvr-mc-wrap { overflow-x:auto; border:1px solid var(--clr-border); border-radius:10px; margin-top:8px; scrollbar-width:none; }
     .bvr-mc-wrap::-webkit-scrollbar { display:none; }
@@ -325,7 +330,7 @@
     .bvr-mc__mem { line-height:2.1; }
     .bvr-mc__mem .member { margin-right:14px; }
     .bvr-mc__n { font-family:var(--font-display); font-size:20px; color:var(--clr-text); text-align:center; width:60px; }
-    .bvr-nav { display:flex; justify-content:space-between; gap:16px; padding:52px 0 12px; }
+    .bvr-nav { display:flex; justify-content:space-between; gap:16px; padding:52px var(--gap-md) 12px; }
     .bvr-nav__btn { display:inline-flex; align-items:center; gap:14px; padding:8px 18px; line-height:1.25; border:1px solid var(--clr-border); border-radius:8px; background:var(--clr-surface); color:var(--clr-text-2); text-decoration:none; transition:border-color .2s,color .2s,background .2s; }
     .bvr-nav__btn:hover { border-color:var(--clr-pink-light); color:var(--clr-text); background:var(--clr-surface-2); }
     .bvr-nav__btn:hover .bvr-nav__arrow { color:var(--clr-pink-light); }
@@ -422,7 +427,11 @@
 
   // 合并矩阵：分组表头(Jury Vote/Tele Vote) + 可排序前 4 列；默认按选送者排（自投格成主对角线）
   function votingMatrix(m, label) {
-    var voters = m.votes.voters;
+    // 数据中评委/观众可能交错（如第二届按 Excel 原始列序）；强制评委在前、观众在后，
+    // 保证分组表头(Jury/Tele Vote)跨列正确，且自投格连成主对角线（sort 在现代浏览器稳定，组内相对序不变）
+    var voters = m.votes.voters.slice().sort(function (a, b) {
+      return (a.type === 'tele' ? 1 : 0) - (b.type === 'tele' ? 1 : 0);
+    });
     if (!voters.length) return '';
     var juryN = voters.filter(function (v) { return v.type === 'jury'; }).length;
     var teleN = voters.length - juryN;

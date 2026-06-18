@@ -4,6 +4,26 @@
 
 ---
 
+## [2026-06-18] — 详情页计分板/导航修复 + 成员页创始届徽章 + 多艺人格式
+
+### Fixed
+- **Scoreboard 对角线**：第二届计分板因 `m.votes.voters` 评委/观众交错（Excel 原始列序），分组表头错列 + 自投格不成对角线。`votingMatrix()` 渲染时先稳定排序 voters（评委前/观众后），第一届为 no-op。SF(16)/GF(19) 对角线全对齐。
+- **上下届导航对齐**：`.bvr-nav` 水平内边距 `0` 覆盖了 `.section__inner` 的 `var(--gap-md)`，使按钮戳出正文边缘 32px（桌面）/20px（手机）。改为 `var(--gap-md)`，桌面两届均与内容对齐。
+- **导航移动端**：改竖排满宽（`flex-direction:column`），缺届占位 `<span>` 加类 `bvr-nav__spacer` 隐藏，按钮内 `space-between` 把箭头推到外缘。
+
+### Changed
+- **Scoreboard 小分字体 +1px**：`.bvr-mtx td.pt`（含金色 12 分）显式 `font-size:12px`；Total/Jury/Tele（13px）不变。
+- **12 Points 数字配色**：`.bvr-12__n` `--clr-text` → `--clr-text-3`（与结果表「4 名及以后」名次同色）。
+- **个人主页吧视徽章**：数字色全届统一 `--clr-text`；**创始届（第一届）** 五边形染金 `--clr-gold-light` + 金色光晕 + `mpBvFirstGlow` 3.2s 呼吸动画（`prefers-reduced-motion` 关闭），class `mp-bv-badge--first`，title 加「· 创始届」。
+
+### Content
+- **多艺人合作曲格式修正**（按新规范 #15）：reg-01 Calipso 补 `(with Dardust)`；reg-02 六条 `/` 堆叠艺人改为双 lead `A & B` / feat 进歌名（`Agon & The Gitas`、`The Brummies & Kacey Musgraves`、`Röyksopp & Man Without Country — In the End (Lost Tapes) (feat. Susanne Sundfør)`、`VanJess — Through Enough (feat. GoldLink)`、`Little Simz — Selfish (feat. Cleo Sol)`、`Judah & the Lion — Pictures (feat. Kacey Musgraves)`），正字法修正。重跑 `gen_member_pages.py` + `gen_bv_editions_index.py`。
+
+### Docs
+- CLAUDE.md #15 补多艺人合作曲格式规范、#133 记本次精修；BARVISION_MEMBER.md 补创始届徽章特殊态。
+
+---
+
 ## [2026-06-17] — Barvision 详情页：成员变动 + 上下届导航 + header/TOC
 
 ### Added

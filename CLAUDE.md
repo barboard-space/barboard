@@ -372,7 +372,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 12. **Section 高度**：`.barvision` 和 `.lab` 设置 `min-height: calc(100vh - 2 * var(--gap-xl))`，使 section 总高度约为 100vh（padding 由 `.section` 类统一提供，上下各 `var(--gap-xl)`）
 13. **DM Mono 无 CJK**：中文标签（如"最高排名"）必须用 `var(--font-body)`，否则字符不渲染。同一父元素内若 ASCII 行用 DM Mono、中文行需另指定字体，在中文子元素加 inline style：`<div style="font-family:var(--font-body);">第 N 期</div>`
 14. **BBL label 映射**：`fetch_bbl.py` 中 `LABEL_MAP = {"3": "peak", "4": "re-entry", "6": "new"}`（原始文档 3/6 写反，已修正）
-15. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号
+15. **歌曲引用格式**：全站统一使用「艺人 — 歌名」格式，不使用书名号。**多艺人合作曲规范**（已与用户确认）：① **lead + feat**：feat 歌手以 `(feat. X)` 写进**歌名**，主歌手放艺人位（例：`Charlie Charles` — `Calipso (with Dardust) (feat. Sfera Ebbasta, Mahmood & Fabri Fibra)`；非 feat 的合作者用 `(with X)`）；② **多位 lead，或 feat 含多位**：2 位用 `A & B`，>2 位用牛津式 `A, B, C & D`（末位 `&`，其余逗号）；③ **原始数据常用 `/` 堆叠艺人、无 lead/feat 之分**——遇同一首歌多位艺人**必须先向用户确认** lead/feat 归属再录入，不可擅自判定。正字法须正确（Röyksopp / Susanne Sundfør / VanJess / GoldLink 等，禁 ASCII 简化，参 #119）。改赛果 JSON 后重跑 `gen_member_pages.py` + `gen_bv_editions_index.py` 同步。
 16. **成员提及**：榜吧成员名统一用 `<a class="member" href="[相对路径]/member/7.html" data-nickname="昵称">@username</a>`。href 用**相对路径**（file:// 兼容），不用绝对路径（绝对路径在 file:// 下解析到磁盘根）。`data-nickname` 由 nav.js 的 `initMemberTooltips()` 读取，显示 JS tooltip（挂在 `<body>`，`position:fixed`，`transform:translate(-50%,calc(-100% - 7px))`，opacity fade 0.18s）。PC hover 色变 `--clr-violet-light`，移动端点击跳转。当前成员：`@williw_`（威妈）→ `member/7.html`
 17. **移动端 Nav**：`nav--open` class 加在 `<nav>` 上控制 `.nav__drawer` 显隐；汉堡/X 图标用 `opacity + transform` 过渡（不用 `display:none/block`），两图标均 `position:absolute`，按钮设 `width:30px; height:30px` 撑容器；drawer 用 `opacity/visibility/transform` 过渡（0.32s）
 18. **Nav scrolled backdrop-filter 陷阱**：`.nav.scrolled` 的毛玻璃效果必须用 `::before` 伪元素实现，不能直接在 `.nav` 上写 `backdrop-filter`——否则 nav 建立新 stacking context，内部 `position:fixed` 的 drawer 会相对 nav 而非 viewport 定位，导致滚动后无法正确展开
@@ -533,6 +533,13 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **详情页上一届/下一届导航**（底部）：`navBlock()`，默认整体灰、hover 整组 `--clr-red-light` + 边框粉；届名 13px。
     - **多场 header/TOC**：`matchEng(m)` → section-label 前缀 `SEMI-FINAL`/`GRAND FINAL`（title 保留「结果概览/投票详情」）；TOC 用「半决赛/决赛 + 结果概览/投票详情」。`bv-results-render.js` boot 改 `Promise.all([EDITION_SRC, editions-index.json])`。
     - **来源** JSON `source` 省略文件格式（只保留文档名）；总分（含决赛小数）`fmtScore()` 一律四舍五入显示。
+133. **Barvision 详情页 + 成员页若干精修（本次）**：
+    - **Scoreboard 小分字体**：`.bvr-mtx td.pt`（每位投票人给出的小分，含金色 `pt--12`）显式 `font-size:12px`（原继承 11px，+1px）；Total/Jury/Tele（`.tot/.sj/.st` 13px）不受影响。
+    - **Scoreboard 对角线修复（重要）**：`votingMatrix()` 原假设 `m.votes.voters` 已「评委在前、观众在后」（`firstTele=juryN` + 分组 colspan + 对角线 `orderIdx` 都依赖此）；第二届按 Excel 原始列序输出导致评委/观众**交错**，分组表头错列 + 自投格不成对角线。修复：渲染时先 `voters.slice().sort((a,b)=>(a.type==='tele')-(b.type==='tele'))` 稳定分组（评委前/观众后），对第一届为 no-op。纯渲染健壮性修复、不动数据。
+    - **12 Points 数字配色**：`.bvr-12__n` 由 `--clr-text` → `--clr-text-3`，与结果表「4 名及以后」名次同色。
+    - **上下届导航对齐修复**：`.bvr-nav` 原 `padding:52px 0 12px` 的水平 `0` 覆盖了 `.section__inner` 的 `var(--gap-md)` 内边距，使导航比正文每侧宽 32px（桌面）/20px（手机）→ 按钮戳出内容边缘。修复：水平内边距改 `var(--gap-md)`（自动随断点 32/20）。**手机端**：导航改竖排满宽（`flex-direction:column`），缺届占位 `<span>` 加类 `bvr-nav__spacer` 并 `display:none`，按钮内 `justify-content:space-between` 把箭头推到外缘。
+    - **个人主页吧视徽章**：数字色全届统一 `var(--clr-text)`（原第一届 `--clr-board`/其余 `#fff`）；**创始届（`ed.no===1`）特殊态** class `mp-bv-badge--first`：五边形染金 `--clr-gold-light`（覆盖 `BV_YEAR_COLOR`）+ 金色双层 `drop-shadow` 光晕 + `mpBvFirstGlow` 3.2s 呼吸动画（`prefers-reduced-motion` 关闭），title 加「· 创始届」。详见 BARVISION_MEMBER.md。
+    - **多艺人合作曲数据修正**：按 #15 新规范修正 reg-01（Calipso 补 `(with Dardust)`）+ reg-02 六条 `/` 堆叠艺人（双 lead 用 `&`、feat 进歌名、正字法 Röyksopp/Sundfør/VanJess/GoldLink），重跑 `gen_member_pages.py` + `gen_bv_editions_index.py` 同步。
 
 ---
 

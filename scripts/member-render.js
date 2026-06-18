@@ -21,6 +21,10 @@
     '.mp-bv-badge__mark{display:block;width:100%;height:100%}',
     '.mp-bv-badge__mark path{fill:currentColor}',
     '.mp-bv-badge__num{font-family:var(--font-display)}',
+    /* 创始届（第一届）金色光晕 + 缓慢呼吸，凸显其特别 */
+    '.mp-bv-badge--first{filter:drop-shadow(0 0 3px rgba(245,200,64,.5)) drop-shadow(0 0 8px rgba(245,200,64,.28));animation:mpBvFirstGlow 3.2s ease-in-out infinite}',
+    '@keyframes mpBvFirstGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(245,200,64,.42)) drop-shadow(0 0 7px rgba(245,200,64,.2))}50%{filter:drop-shadow(0 0 5px rgba(245,200,64,.72)) drop-shadow(0 0 13px rgba(245,200,64,.42))}}',
+    '@media (prefers-reduced-motion:reduce){.mp-bv-badge--first{animation:none}}',
     '.mp-handle{font-size:15px;color:var(--clr-text-2);margin-bottom:20px}',
     '.mp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}',
     '.mp-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:1px solid var(--clr-border-2);color:var(--clr-text-2);background:var(--clr-surface)}',
@@ -187,13 +191,14 @@
     if (!list.length) return '';
     list.sort(function (a, b) { return a.no - b.no; });
     return list.map(function (ed) {
-      var logoColor = BV_YEAR_COLOR[ed.year] || 'var(--clr-board)';
-      var numColor = ed.no === 1 ? 'var(--clr-board)' : '#fff';
+      var first = ed.no === 1;  // 创始届：金色 + 光晕
+      var logoColor = first ? 'var(--clr-gold-light)' : (BV_YEAR_COLOR[ed.year] || 'var(--clr-board)');
+      var numColor = 'var(--clr-text)';  // 徽章数字全站统一为 --clr-text
       var two = ed.no >= 10;
       var fs = two ? 300 : 360;
       var x = 382;
       var y = two ? 497 : 518;
-      return '<span class="mp-bv-badge" title="第' + ed.no + '届 Barvision" style="color:' + logoColor + '">' +
+      return '<span class="mp-bv-badge' + (first ? ' mp-bv-badge--first' : '') + '" title="第' + ed.no + '届 Barvision' + (first ? ' · 创始届' : '') + '" style="color:' + logoColor + '">' +
         '<svg class="mp-bv-badge__mark" viewBox="0 0 770 746" aria-hidden="true">' +
           '<path d="' + LOGO_HOLLOW_PATH + '"/>' +
           '<text class="mp-bv-badge__num" x="' + x + '" y="' + y + '" text-anchor="middle" style="fill:' + numColor + ';font-size:' + fs + 'px">' + ed.no + '</text>' +
