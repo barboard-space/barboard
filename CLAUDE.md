@@ -579,6 +579,11 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **混淆背景令牌 `--clr-shadow-bg`**（`style.css :root`，值 `#0c0a18`，背景族）：取代 `#181820`，详情页结果表 + 手机冻结列 + 成员页吧视表混淆行统一引用（不透明实色、冻结列不漏光）。值经多轮微调定为 `#0c0a18`。
     - **最弱化文字令牌 `--clr-text-4`**（`style.css :root`，值 `#6a6488`，文字阶梯）：① 原首页 hero 下滑提示三处硬编码 `#6a6488`（`.hero__scroll-hint`/`.scroll-hint-text`/`.scroll-chevrons`）改用此令牌；② 混淆单曲在**结果概览 + 个人主页记录**的字体颜色（整行含名次 `N*`、语种、「混淆」标签）统一 `--clr-text-4`（结果概览名次/语种需各加 `.bvr-row--shadow .num/.lang` 覆盖 `.bvr-tbl .num/.lang` 的 0,2,0）；③ 成员页走势图混淆点描边/连接虚线/弱化 `#N`/legend 空心圈也用之。
     - **成员页历届排名走势图 `drawBvTrend` 完整重写**（详见 `BARVISION_MEMBER.md §五.5`）：全局场次轴 `BV_SLOTS`（含缺席留位+竖虚线）、占满全宽（场次多才横滚）、同 X 多 Y（正式实心/混淆空心/同曲同心圆）、连续参赛才连线（实线 `--clr-accent-glow`/混淆段虚线）、点配色 金>粉(最近)>蓝、`#N` 同名次去重+弱化 10.5px、legend（SVG circle 与图内逐项一致）、自建 tooltip（桌面 hover 跟随光标右下 / 手机点击）。H=320。⚠️ 预览 resize 不模拟触屏，手机点击 tooltip 仅真机可验。
+139. **计分板手机端文字膨胀修复 + 联合投票人表头简化 + 走势图轴标签字号（本次）**：
+    - **计分板「Jury Vote」比「Tele Vote」字号大（仅真机手机端）**：根因 = 移动端 `text-size-adjust` **文字自动膨胀**——「Jury Vote」跨很多列(宽 colspan)被浏览器判为正文放大，「Tele Vote」窄列不放大；**桌面/预览模拟器不触发，故 computed 测得一致、查不出**。修复：`table.bvr-mtx` 与 `table.bvr-tbl` 加 `-webkit-text-size-adjust:100%; text-size-adjust:100%` 禁用膨胀。**此类「真机大小不一致但桌面测得一致」问题优先怀疑 text-size-adjust**。
+    - **联合投票人横向表头简化**：`votingMatrix` 的 `colRow` 中，含 `/` 的联合投票人列（如 `麦妈/苏妈`）显示时去各段末尾「妈」→ `麦/苏`（省空间）；单人投票人保持全名。纵向选送者列(rcp) 仍用 `memberLink` 拆分不变。
+    - **走势图 X/Y 轴标签字号** `.mp-bv-trend__ylab,.mp-bv-trend__xlab` 13→**11px**（两端各 -2px，无端侧 override）。
+    - ⚠️ 详情页 `bv-results-render.js` 无 `?v=`，浏览器会缓存旧 JS——预览验证改动需 `location.reload()` 仍可能用缓存，必要时注入 `<script src=...?cb=时间戳>` 重新执行 IIFE 验证。
 
 ---
 

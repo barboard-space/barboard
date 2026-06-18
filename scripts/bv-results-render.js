@@ -145,7 +145,8 @@
     /* 隐藏横向滚动条（保留滑动；靠「左右滑动」提示引导） */
     .bvr-tw, .bvr-mw { scrollbar-width:none; -ms-overflow-style:none; }
     .bvr-tw::-webkit-scrollbar, .bvr-mw::-webkit-scrollbar { display:none; }
-    table.bvr-tbl { width:100%; border-collapse:collapse; font-size:13px; min-width:560px; }
+    table.bvr-tbl { width:100%; border-collapse:collapse; font-size:13px; min-width:560px;
+      -webkit-text-size-adjust:100%; text-size-adjust:100%; }
     .bvr-tbl th { font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:0.06em;
       text-transform:uppercase; color:var(--clr-text-2); text-align:left; padding:11px 14px;
       background:var(--clr-surface); border-bottom:1px solid var(--clr-border-2); white-space:nowrap; }
@@ -234,7 +235,8 @@
     /* ----- matrix ----- */
     .bvr-mw { overflow-x:auto; border:1px solid var(--clr-border); border-radius:8px;
       display:inline-block; max-width:100%; vertical-align:top; }
-    table.bvr-mtx { border-collapse:separate; border-spacing:0; font-size:11px; font-family:var(--font-mono); }
+    table.bvr-mtx { border-collapse:separate; border-spacing:0; font-size:11px; font-family:var(--font-mono);
+      -webkit-text-size-adjust:100%; text-size-adjust:100%; }  /* 禁移动端文字自动膨胀：防宽 colspan 的「Jury Vote」比窄「Tele Vote」被放大 */
     /* 单元格只画右/下边框（左/上边框由 .bvr-mw 外框提供）——避免折叠边框被粘性列盖不住而漏光 */
     .bvr-mtx th, .bvr-mtx td { border-right:1px solid var(--clr-border); border-bottom:1px solid var(--clr-border);
       padding:5px 7px; text-align:center; white-space:nowrap; }
@@ -515,7 +517,11 @@
       '</tr>';
     var colRow = '<tr>' +
       voters.map(function (v, i) {
-        return '<th class="' + (v.type === 'tele' ? 'vt' : 'vj') + vsep(i) + '">' + esc(v.voter) + '</th>';
+        // 合报投票人「A妈/B妈」→「A/B」（去各段末尾「妈」省空间）；单人保持全名
+        var lbl = v.voter.indexOf('/') > -1
+          ? v.voter.split('/').map(function (s) { return esc(s.trim().replace(/妈$/, '')); }).join('/')
+          : esc(v.voter);
+        return '<th class="' + (v.type === 'tele' ? 'vt' : 'vj') + vsep(i) + '">' + lbl + '</th>';
       }).join('') + '</tr>';
     var body = recips.map(function (e) {
       var cells = voters.map(function (v, i) {
