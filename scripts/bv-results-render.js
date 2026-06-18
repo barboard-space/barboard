@@ -247,13 +247,11 @@
     .bvr-mtx .tot { color:var(--clr-text); font-weight:700; background:var(--clr-surface); }
     .bvr-mtx .sj  { color:var(--clr-accent-light); background:var(--clr-surface); }
     .bvr-mtx .st  { color:var(--clr-pink-light);    background:var(--clr-surface); }
-    /* 计分板冻结窗格：桌面冻结 选送者+Total+Jury+Tele（left 偏移由 JS 量列宽写入）；手机仅冻结选送者 */
-    @media (min-width:769px) {
-      .bvr-mtx .tot { position:sticky; left:var(--mtx-l-tot,0); z-index:2; }
-      .bvr-mtx .sj  { position:sticky; left:var(--mtx-l-sj,0);  z-index:2; }
-      .bvr-mtx .st  { position:sticky; left:var(--mtx-l-st,0);  z-index:2; }
-      .bvr-mtx thead .rcp, .bvr-mtx thead .tot, .bvr-mtx thead .sj, .bvr-mtx thead .st { z-index:5; }
-    }
+    /* 计分板冻结窗格：桌面与手机均冻结 选送者+Total+Jury+Tele（left 偏移由 JS 量列宽写入） */
+    .bvr-mtx .tot { position:sticky; left:var(--mtx-l-tot,0); z-index:2; }
+    .bvr-mtx .sj  { position:sticky; left:var(--mtx-l-sj,0);  z-index:2; }
+    .bvr-mtx .st  { position:sticky; left:var(--mtx-l-st,0);  z-index:2; }
+    .bvr-mtx thead .rcp, .bvr-mtx thead .tot, .bvr-mtx thead .sj, .bvr-mtx thead .st { z-index:5; }
     .bvr-mtx tbody .tot, .bvr-mtx tbody .sj, .bvr-mtx tbody .st { font-family:var(--font-body); font-size:13px; }
     .bvr-mtx .vsep { border-left:2px solid var(--clr-border-2); }
     .bvr-mtx td.pt { color:var(--clr-text-2); font-size:12px; }
@@ -334,6 +332,19 @@
       .bvr-tbl .member::before { content:attr(data-nickname); font-size:13px; }
       .bvr-mtx .member::before { content:attr(data-nickname); font-size:11px; }
       .bvr-12 .member::before  { content:attr(data-nickname); font-size:12px; }
+      /* 结果概览：手机端横滑时冻结 名次/选送者/歌手 前三列（left 偏移由 JS 量列宽写入） */
+      table.bvr-tbl { border-collapse:separate; border-spacing:0; }
+      .bvr-tbl thead th:nth-child(-n+3), .bvr-tbl tbody td:nth-child(-n+3) {
+        position:sticky; background:var(--clr-bg); z-index:2; }
+      .bvr-tbl th:nth-child(1), .bvr-tbl td:nth-child(1) { left:0; }
+      .bvr-tbl th:nth-child(2), .bvr-tbl td:nth-child(2) { left:var(--tbl-l-mem,28px); }
+      .bvr-tbl th:nth-child(3), .bvr-tbl td:nth-child(3) { left:var(--tbl-l-art,90px); }
+      .bvr-tbl thead th:nth-child(-n+3) { z-index:4; }
+      /* 奖牌/混淆行：行渐变在固定列不可用，冻结列补近似纯色底（覆盖 tr 渐变；提权盖过默认 bg） */
+      .bvr-tbl tbody .bvr-row--1 td:nth-child(-n+3) { background:linear-gradient(rgba(212,168,50,0.14),rgba(212,168,50,0.14)),var(--clr-bg); }
+      .bvr-tbl tbody .bvr-row--2 td:nth-child(-n+3) { background:linear-gradient(rgba(110,150,178,0.11),rgba(110,150,178,0.11)),var(--clr-bg); }
+      .bvr-tbl tbody .bvr-row--3 td:nth-child(-n+3) { background:linear-gradient(rgba(196,120,68,0.12),rgba(196,120,68,0.12)),var(--clr-bg); }
+      .bvr-tbl tbody .bvr-row--shadow td:nth-child(-n+3) { background:linear-gradient(rgba(255,255,255,0.02),rgba(255,255,255,0.02)),var(--clr-bg); }
       /* 12 Points 改单列堆叠：每条目为对称 padding 块，内部行紧凑 */
       .bvr-12 { display:block; }
       .bvr-12e { display:block; border-top:1px solid var(--clr-border); padding:10px 14px; }
@@ -739,15 +750,25 @@
     wireSortable();
     wireMatrixSort();
     stickyMatrixCols();
+    stickyResultCols();
     var _smt;
-    window.addEventListener('resize', function () { clearTimeout(_smt); _smt = setTimeout(stickyMatrixCols, 150); });
+    window.addEventListener('resize', function () { clearTimeout(_smt); _smt = setTimeout(function () { stickyMatrixCols(); stickyResultCols(); }, 150); });
   }
 
-  // 计分板冻结：桌面量出 选送者/Total/Jury 列宽，写入 left 偏移（Tele 及之前列冻结）；手机仅靠 CSS 冻结选送者
+  // 结果概览冻结（仅手机）：量出 名次/选送者 列宽，写入 left 偏移，冻结 名次/选送者/歌手 三列
+  function stickyResultCols() {
+    if (window.matchMedia('(min-width:769px)').matches) return;
+    document.querySelectorAll('.bvr-tbl').forEach(function (tbl) {
+      var row = tbl.tBodies[0] && tbl.tBodies[0].rows[0]; if (!row || row.cells.length < 2) return;
+      var lMem = row.cells[0].offsetWidth, lArt = lMem + row.cells[1].offsetWidth;
+      tbl.style.setProperty('--tbl-l-mem', lMem + 'px');
+      tbl.style.setProperty('--tbl-l-art', lArt + 'px');
+    });
+  }
+
+  // 计分板冻结（桌面+手机统一）：量出 选送者/Total/Jury 列宽，写入 left 偏移，冻结至 Tele 列
   function stickyMatrixCols() {
-    var desk = window.matchMedia('(min-width:769px)').matches;
     document.querySelectorAll('.bvr-mtx').forEach(function (tbl) {
-      if (!desk) { tbl.style.removeProperty('--mtx-l-tot'); tbl.style.removeProperty('--mtx-l-sj'); tbl.style.removeProperty('--mtx-l-st'); return; }
       var hr = tbl.tHead && tbl.tHead.rows[0]; if (!hr) return;
       var rcp = hr.querySelector('.rcp'), tot = hr.querySelector('.tot'), sj = hr.querySelector('.sj');
       if (!rcp || !tot || !sj) return;
