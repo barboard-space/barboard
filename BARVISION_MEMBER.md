@@ -123,7 +123,7 @@
 - 未参赛场次：X 标签弱化 `--clr-text-4`（`.is-absent`）+ 该 x 处一条竖直细虚线 `.mp-bv-trend__absent`（`stroke:var(--clr-border)` 与横向网格同色、`stroke-dasharray:6 5`）。
 - **跨缺席不连线**（仅相邻两 slot **均参赛**才连）。
 
-**(c) 几何 / 占满全宽 / 滚动**：`padL42 padR24 padT36 padB48 H320 minSlotW56`。`W = max(容器clientWidth, padL+padR+(n-1)*minSlotW)` → **少场次占满容器全宽**（点 `lo+(hi-lo)*i/(n-1)` 均匀分布、两端内缩 6%、单点居中），**每格挤到 < 56px（手机窄屏 / 未来 20+ 场）才扩宽** → 外层 `.mp-bv-trend__sc`（`overflow-x:auto`）横向滚动。`svg width/height/viewBox` 均设为像素值 1:1（字号恒定）。监听 `window resize` 重绘。Y 轴倒置（第 1 名在顶），范围 `1 → maxRank+1`，3 条参考线（1/中/max）。X/Y 轴标签（`.mp-bv-trend__xlab` / `.mp-bv-trend__ylab`）**11px mono**（桌面手机同值）。
+**(c) 几何 / 占满全宽 / 滚动**：`padL42 padR24 padT36 padB48 H320 minSlotW56`。`W = max(容器clientWidth, padL+padR+(n-1)*minSlotW)` → **少场次占满容器全宽**（点 `lo+(hi-lo)*i/(n-1)` 均匀分布、两端内缩 6%、单点居中），**每格挤到 < 56px（手机窄屏 / 未来 20+ 场）才扩宽** → 外层 `.mp-bv-trend__sc`（`overflow-x:auto`）横向滚动。`svg width/height/viewBox` 均设为像素值 1:1（字号恒定）。监听 `window resize` 重绘。Y 轴倒置（第 1 名在顶），范围 `1 → maxRank+1`，3 条参考线（1/中/max）。X/Y 轴标签（`.mp-bv-trend__xlab` / `.mp-bv-trend__ylab`）**12px mono**（桌面手机同值）。
 
 **(d) 同一场次多首歌（一个 X 多个 Y）**：
 - **正式曲**：实心 `r4`（`.mp-bv-trend__dot`）；同场多首正式时**较差者**（rank 大）加 `.is-dim`（`opacity .65`）。

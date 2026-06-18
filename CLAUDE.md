@@ -582,7 +582,8 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
 139. **计分板手机端文字膨胀修复 + 联合投票人表头简化 + 走势图轴标签字号（本次）**：
     - **计分板「Jury Vote」比「Tele Vote」字号大（仅真机手机端）**：根因 = 移动端 `text-size-adjust` **文字自动膨胀**——「Jury Vote」跨很多列(宽 colspan)被浏览器判为正文放大，「Tele Vote」窄列不放大；**桌面/预览模拟器不触发，故 computed 测得一致、查不出**。修复：`table.bvr-mtx` 与 `table.bvr-tbl` 加 `-webkit-text-size-adjust:100%; text-size-adjust:100%` 禁用膨胀。**此类「真机大小不一致但桌面测得一致」问题优先怀疑 text-size-adjust**。
     - **联合投票人横向表头简化**：`votingMatrix` 的 `colRow` 中，含 `/` 的联合投票人列（如 `麦妈/苏妈`）显示时去各段末尾「妈」→ `麦/苏`（省空间）；单人投票人保持全名。纵向选送者列(rcp) 仍用 `memberLink` 拆分不变。
-    - **走势图 X/Y 轴标签字号** `.mp-bv-trend__ylab,.mp-bv-trend__xlab` 13→**11px**（两端各 -2px，无端侧 override）。
+    - **走势图 X/Y 轴标签字号** `.mp-bv-trend__ylab,.mp-bv-trend__xlab` 13→**12px**（先试 11 偏小、最终 12；桌面手机同值，无端侧 override）。
+    - **详情页上/下届导航按钮（手机端）箭头与文字成组**：`.bvr-nav .bvr-nav__btn` 手机端 `justify-content` 由 `space-between`（把箭头/文字推到按钮两端）改 **`center`**——箭头+文字以 `gap:8px` 成组居中，文字紧贴箭头（prev `← 名`、next `名 →`）。
     - ⚠️ 详情页 `bv-results-render.js` 无 `?v=`，浏览器会缓存旧 JS——预览验证改动需 `location.reload()` 仍可能用缓存，必要时注入 `<script src=...?cb=时间戳>` 重新执行 IIFE 验证。
 
 ---

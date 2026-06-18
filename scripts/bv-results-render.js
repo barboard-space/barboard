@@ -367,7 +367,7 @@
       /* 上一届/下一届：手机用 grid 两等分（各占半边）；缺一侧时占位 spacer 占住另一半格（视觉＝另一半按钮被隐藏）。
          选择器加 .section__inner / 后代提权——media 块位于基础 .bvr-nav 定义之前，同特异度会被后写的基础规则盖掉（参 #36） */
       .bvr-nav.section__inner { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:10px; }
-      .bvr-nav .bvr-nav__btn { min-width:0; gap:8px; justify-content:space-between; padding:11px 12px; }
+      .bvr-nav .bvr-nav__btn { min-width:0; gap:8px; justify-content:center; padding:11px 12px; }
       .bvr-nav .bvr-nav__btn > span:not(.bvr-nav__arrow) { min-width:0; }  /* 文本块可收缩 */
       .bvr-nav .bvr-nav__name { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }  /* 超长届名省略号兜底 */
     }

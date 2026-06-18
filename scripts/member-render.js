@@ -68,7 +68,7 @@
     '.mp-bv-trend__rank{fill:var(--clr-text-2);font-family:var(--font-mono);font-size:12px}',
     '.mp-bv-trend__rank.is-weak{font-size:10.5px;fill:var(--clr-text-4)}',
     '.mp-bv-trend__grid{stroke:var(--clr-border);stroke-width:1}',
-    '.mp-bv-trend__ylab,.mp-bv-trend__xlab{fill:var(--clr-text-3);font-family:var(--font-mono);font-size:11px}',
+    '.mp-bv-trend__ylab,.mp-bv-trend__xlab{fill:var(--clr-text-3);font-family:var(--font-mono);font-size:12px}',
     '.mp-bv-trend__xlab.is-absent{fill:var(--clr-text-4)}',
     '.mp-bv-trend__absent{stroke:var(--clr-border);stroke-width:1;stroke-dasharray:6 5}',
     '.mp-bv-trend__edge{stroke:var(--clr-accent-glow);stroke-width:2;fill:none}',
