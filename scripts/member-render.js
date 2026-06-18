@@ -55,17 +55,34 @@
     '.mp-bv-stat__k{font-size:11px;color:var(--clr-text-2);margin-top:7px}',
     '.mp-bv-stat--active .mp-bv-stat__v{color:var(--clr-violet-light)}',
     '.mp-bv-trend{margin-top:52px}',
-    '.mp-bv-trend__title{font-size:13px;font-weight:600;color:var(--clr-text-2);margin-bottom:8px}',
+    '.mp-bv-trend__hd{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;margin-bottom:12px}',
+    '.mp-bv-trend__title{font-size:13px;font-weight:600;color:var(--clr-text-2)}',
+    '.mp-bv-trend__legend{display:flex;gap:14px;font-size:11px;color:var(--clr-text-3)}',
+    '.mp-bv-lg{display:inline-flex;align-items:center;gap:5px}',
+    '.mp-bv-lg__ic{width:15px;height:15px;flex-shrink:0;display:block}',
+    '.mp-bv-lg__t{position:relative;top:1px}',
+    '.mp-bv-trend__sc{overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin}',
+    '.mp-bv-trend__sc::-webkit-scrollbar{height:6px}',
+    '.mp-bv-trend__sc::-webkit-scrollbar-thumb{background:var(--clr-border-2);border-radius:3px}',
+    '.mp-bv-trend__svg{display:block;overflow:visible}',
     '.mp-bv-trend__rank{fill:var(--clr-text-2);font-family:var(--font-mono);font-size:12px}',
-    '.mp-bv-trend__svg{width:100%;height:auto;display:block;overflow:visible}',
+    '.mp-bv-trend__rank.is-weak{font-size:10.5px;fill:var(--clr-text-4)}',
     '.mp-bv-trend__grid{stroke:var(--clr-border);stroke-width:1}',
     '.mp-bv-trend__ylab,.mp-bv-trend__xlab{fill:var(--clr-text-3);font-family:var(--font-mono);font-size:13px}',
-    '.mp-bv-trend__edge{stroke:var(--clr-accent-line);stroke-width:2;fill:none}',
-    '.mp-bv-trend__edge.is-dim{stroke:var(--clr-text-3);stroke-width:2;stroke-dasharray:5 4;opacity:.6}',
+    '.mp-bv-trend__xlab.is-absent{fill:var(--clr-text-4)}',
+    '.mp-bv-trend__absent{stroke:var(--clr-border);stroke-width:1;stroke-dasharray:6 5}',
+    '.mp-bv-trend__edge{stroke:var(--clr-accent-glow);stroke-width:2;fill:none}',
+    '.mp-bv-trend__edge.is-dashed{stroke:var(--clr-text-4);stroke-width:1.5;stroke-dasharray:5 4;opacity:.65}',
     '.mp-bv-trend__dot{fill:var(--clr-accent-light)}',
     '.mp-bv-trend__dot.is-champ{fill:var(--clr-gold-light)}',
-    '.mp-bv-trend__dot.is-latest{fill:var(--clr-red-light)}',
-    '.mp-bv-trend__dot.is-shadow{fill:var(--clr-bg);stroke:var(--clr-text-3);stroke-width:1.6;opacity:.7}',
+    '.mp-bv-trend__dot.is-latest{fill:var(--clr-pink-light)}',
+    '.mp-bv-trend__dot.is-dim{opacity:.65}',
+    '.mp-bv-trend__shadow{fill:var(--clr-bg);stroke:var(--clr-text-4);stroke-width:1.6}',
+    '.mp-bv-trend__inner{fill:none;stroke:var(--clr-bg);stroke-width:1.2}',
+    '.mp-bv-trend__hit{fill:transparent;cursor:pointer}',
+    '.mp-bv-tip{position:fixed;z-index:200;pointer-events:none;background:var(--clr-surface-2);border:1px solid var(--clr-border-2);border-radius:6px;padding:7px 10px;font-size:12px;line-height:1.55;color:var(--clr-text);box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;transition:opacity .15s;white-space:nowrap}',
+    '.mp-bv-tip.is-on{opacity:1}',
+    '.mp-bv-tip__row--sh{color:var(--clr-text-3)}',
     '.mp-bv-tw{overflow-x:auto;border:1px solid var(--clr-border);border-radius:8px;scrollbar-width:none}',
     '.mp-bv-tw::-webkit-scrollbar{display:none}',
     'table.mp-bv-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}',
@@ -101,11 +118,11 @@
     '.mp-bv-row--1 .rk{color:var(--clr-gold-light)}',
     '.mp-bv-row--2 .rk{color:var(--clr-silver)}',
     '.mp-bv-row--3 .rk{color:var(--clr-bronze)}',
-    '.mp-bv-tbl .mp-bv-row--shadow td{color:var(--clr-text-3);background:#181820}',
-    '.mp-bv-row--shadow .mp-bv-ed{color:var(--clr-text-3)}',
+    '.mp-bv-tbl .mp-bv-row--shadow td{color:var(--clr-text-4);background:var(--clr-shadow-bg)}',
+    '.mp-bv-row--shadow .mp-bv-ed{color:var(--clr-text-4)}',
     '.mp-bv-row--shadow .rk{font-weight:400;font-size:13px}',
-    '.mp-bv-row--shadow .rk .rk-sh{display:inline-block;transform:translateX(2px)}',
-    '.mp-bv-sh{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-3);margin-left:5px}',
+    '.mp-bv-row--shadow .rk .rk-sh{display:inline-block;transform:translate(2px,-1px)}',
+    '.mp-bv-sh{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-4);margin-left:5px}',
     '@media (max-width:600px){',
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
     '  .mp-links{grid-column:1/-1;flex-direction:row}',
@@ -222,11 +239,13 @@
         '<td class="artist">' + esc(e.artist) + '</td>' +
         '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + '</td>' +
         '<td class="num2">' + (e.total == null ? '—' : Math.round(e.total)) + '</td>' +
-        '<td class="num2">' + (e.twelve ? e.twelve : '—') + '</td>' +
+        '<td class="num2">' + (e.twelve || 0) + '</td>' +
         '</tr>';
     }).join('');
   }
   var BV_SERIES_ORDER = { A: 1, B: 2, C: 3, SF: 4, GF: 5, E: 6 };
+  // 全局场次序列（X 轴轴序）：1=首届单场；2 起 SF/GF；3–11 分组 A/B(/C)；12 仅 A（12B 报名但比赛取消）；13–16 单场（16 即将举办）
+  var BV_SLOTS = ['1', '2SF', '2GF', '3A', '3B', '4A', '4B', '5A', '5B', '5C', '6A', '6B', '6C', '7A', '7B', '7C', '8A', '8B', '9A', '9B', '10A', '10B', '11A', '11B', '12A', '13', '14', '15', '16'];
   function bvSeriesRank(s) { var k = String(s).toUpperCase(); return BV_SERIES_ORDER[k] != null ? BV_SERIES_ORDER[k] : (parseInt(s, 10) || 99); }
   function sortBvEntries(list, key, dir) {
     var arr = list.slice();
@@ -254,45 +273,180 @@
     var has = (bv.entries || []).some(function (e) { return e.rank != null; });
     if (!has) return '';
     return '<div class="mp-bv-trend fade-up" style="transition-delay:.32s">' +
-      '<div class="mp-bv-trend__title">历届排名走势</div>' +
-      '<svg class="mp-bv-trend__svg" role="img" aria-label="历届排名走势"></svg>' +
+      '<div class="mp-bv-trend__hd">' +
+        '<span class="mp-bv-trend__title">历届排名走势</span>' +
+        '<span class="mp-bv-trend__legend">' +
+          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4" fill="var(--clr-accent-light)"/></svg><span class="mp-bv-lg__t">正式单曲</span></span>' +
+          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
+        '</span>' +
+      '</div>' +
+      '<div class="mp-bv-trend__sc"><svg class="mp-bv-trend__svg" role="img" aria-label="历届排名走势"></svg></div>' +
     '</div>';
   }
   function drawBvTrend() {
     var svg = document.querySelector('.mp-bv-trend__svg');
     if (!svg || !d.barvision) return;
-    var list = sortBvEntries(d.barvision.entries || [], 'edition', 'asc').filter(function (e) { return e.rank != null; });
-    if (!list.length) return;
-    var n = list.length;
-    var maxRank = Math.max.apply(null, list.map(function (e) { return e.rank; }));
+    var entries = (d.barvision.entries || []).filter(function (e) { return e.rank != null; });
+    if (!entries.length) return;
+
+    // 按场次代码（届号+场次，如 5C / 13）分组——同一 X 可有多首
+    var byCode = {};
+    entries.forEach(function (e) { var c = bvXLabel(e); (byCode[c] = byCode[c] || []).push(e); });
+
+    // 在全局场次序列中定位该成员参赛区间 [first, last]（含中间缺席场次）
+    var part = [];
+    BV_SLOTS.forEach(function (code, idx) { if (byCode[code]) part.push(idx); });
+    if (!part.length) return;
+    var firstIdx = part[0], lastIdx = part[part.length - 1];
+    var slots = BV_SLOTS.slice(firstIdx, lastIdx + 1);
+    var n = slots.length;
+    var latestCode = BV_SLOTS[lastIdx];  // 该成员最近参赛场次（粉色高亮）
+
+    var maxRank = Math.max.apply(null, entries.map(function (e) { return e.rank; }));
     var yMax = maxRank + 1;
-    var W = Math.round(svg.clientWidth || svg.getBoundingClientRect().width) || 600;
-    var H = 180, padL = 36, padR = 20, padT = 28, padB = 38;
-    var plotW = W - padL - padR, plotH = H - padT - padB;
-    function xAt(i) { var ins = plotW * 0.08, lo = padL + ins, hi = W - padR - ins; return n === 1 ? padL + plotW / 2 : lo + (hi - lo) * i / (n - 1); }
+
+    var padL = 42, padR = 24, padT = 36, padB = 48, H = 320, minSlotW = 56;
+    // 占满容器全宽；场次多到每格 < minSlotW 时才扩宽 → 横向滚动
+    var sc = svg.parentNode;
+    var contW = (sc && sc.clientWidth) || 600;
+    var W = Math.max(contW, padL + padR + (n > 1 ? (n - 1) * minSlotW : minSlotW));
+    var plotH = H - padT - padB;
+    function xAt(i) {
+      if (n === 1) return W / 2;
+      var inset = (W - padL - padR) * 0.06;  // 首尾点距边缘留 6%
+      var lo = padL + inset, hi = W - padR - inset;
+      return lo + (hi - lo) * i / (n - 1);
+    }
     function yAt(r) { return padT + plotH * (r - 1) / (yMax - 1); }
+    function dotCls(e, latest) { return e.rank === 1 ? 'is-champ' : (latest ? 'is-latest' : ''); }
+
     var out = '';
+    // Y 网格 + 刻度
     var yvals = [1]; if (yMax >= 4) yvals.push(Math.round(yMax / 2)); yvals.push(yMax);
     yvals = yvals.filter(function (v, i, a) { return a.indexOf(v) === i; });
     yvals.forEach(function (r) {
       out += '<line x1="' + padL + '" y1="' + yAt(r).toFixed(1) + '" x2="' + (W - padR) + '" y2="' + yAt(r).toFixed(1) + '" class="mp-bv-trend__grid"/>';
       out += '<text x="' + (padL - 9) + '" y="' + (yAt(r) + 5).toFixed(1) + '" text-anchor="end" class="mp-bv-trend__ylab">' + r + '</text>';
     });
-    for (var i = 0; i < n - 1; i++) {
-      var a = list[i], b = list[i + 1], dim = a.is_shadow || b.is_shadow;
-      out += '<line x1="' + xAt(i).toFixed(1) + '" y1="' + yAt(a.rank).toFixed(1) + '" x2="' + xAt(i + 1).toFixed(1) + '" y2="' + yAt(b.rank).toFixed(1) + '" class="mp-bv-trend__edge' + (dim ? ' is-dim' : '') + '"/>';
-    }
-    list.forEach(function (e, i) {
-      var cx = xAt(i).toFixed(1), cy = yAt(e.rank);
-      var tip = esc((e.artist || '') + ' — ' + (e.song || ''));
-      out += '<text x="' + cx + '" y="' + (cy - 11).toFixed(1) + '" text-anchor="middle" class="mp-bv-trend__rank">#' + e.rank + '</text>';
-      var dotCls = e.is_shadow ? ' is-shadow' : (e.rank === 1 ? ' is-champ' : (e.edition_no === 16 ? ' is-latest' : ''));
-      out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="4" class="mp-bv-trend__dot' + dotCls + '"/>';
-      out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="12" fill="transparent" data-tooltip="' + tip + '"/>';
-      out += '<text x="' + cx + '" y="' + (H - padB + 15) + '" text-anchor="middle" class="mp-bv-trend__xlab">' + esc(bvXLabel(e)) + '</text>';
+
+    // 每个 slot 的数据（正式按名次升序、混淆按名次升序；代表点用于连线）
+    var sd = slots.map(function (code, i) {
+      var es = byCode[code], o = { code: code, x: xAt(i), part: !!es, latest: code === latestCode };
+      if (es) {
+        o.official = es.filter(function (e) { return !e.is_shadow; }).sort(function (a, b) { return a.rank - b.rank; });
+        o.shadow = es.filter(function (e) { return e.is_shadow; }).sort(function (a, b) { return a.rank - b.rank; });
+        var rep = o.official.length ? o.official[0] : o.shadow[0];
+        o.repRank = rep.rank; o.repSolid = o.official.length > 0;
+      }
+      return o;
     });
+
+    // 缺席场次：竖直细虚线
+    sd.forEach(function (s) {
+      if (!s.part) out += '<line x1="' + s.x.toFixed(1) + '" y1="' + padT + '" x2="' + s.x.toFixed(1) + '" y2="' + (H - padB) + '" class="mp-bv-trend__absent"/>';
+    });
+
+    // 连线：仅相邻两 slot 均参赛（连续参赛）才连；端点任一为空心(纯混淆)→虚线
+    for (var i = 0; i < n - 1; i++) {
+      var s1 = sd[i], s2 = sd[i + 1];
+      if (s1.part && s2.part) {
+        var dashed = !s1.repSolid || !s2.repSolid;
+        out += '<line x1="' + s1.x.toFixed(1) + '" y1="' + yAt(s1.repRank).toFixed(1) + '" x2="' + s2.x.toFixed(1) + '" y2="' + yAt(s2.repRank).toFixed(1) + '" class="mp-bv-trend__edge' + (dashed ? ' is-dashed' : '') + '"/>';
+      }
+    }
+
+    // X 轴标签（缺席弱化）
+    sd.forEach(function (s) {
+      out += '<text x="' + s.x.toFixed(1) + '" y="' + (H - padB + 16) + '" text-anchor="middle" class="mp-bv-trend__xlab' + (s.part ? '' : ' is-absent') + '">' + esc(s.code) + '</text>';
+    });
+
+    // 点 + 名次 + hit 区
+    function tipText(e) { return esc((e.artist || '') + ' — ' + (e.song || '')); }
+    function rankLabel(cx, cy, r, weak) { return '<text x="' + cx + '" y="' + (cy - 11).toFixed(1) + '" text-anchor="middle" class="mp-bv-trend__rank' + (weak ? ' is-weak' : '') + '">#' + r + '</text>'; }
+    function hit(cx, cy, tip) { return '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="13" class="mp-bv-trend__hit" data-tip="' + tip + '"/>'; }
+
+    sd.forEach(function (s) {
+      if (!s.part) return;
+      var cx = s.x.toFixed(1);
+      var marks = [];  // 收集本场次各点 {rank,cy,weak}：弱化＝混淆曲 / 较差的正式曲
+      // 正式+混淆为同一首歌（如 5C 同曲既正式又混淆夺冠）→ 实心内嵌空心圈
+      var same = s.official.length === 1 && s.shadow.length === 1 &&
+        s.official[0].song === s.shadow[0].song && s.official[0].artist === s.shadow[0].artist;
+      if (same) {
+        var e = s.official[0], cy = yAt(e.rank);
+        out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="4" class="mp-bv-trend__dot ' + dotCls(e, s.latest) + '"/>';
+        out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="2" class="mp-bv-trend__inner"/>';
+        out += hit(cx, cy, tipText(e));
+        marks.push({ rank: e.rank, cy: cy, weak: false });
+      } else {
+        // 正式曲：实心 4px；多首中较差的点弱化（opacity .65）
+        s.official.forEach(function (e, oi) {
+          var cy = yAt(e.rank);
+          out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="4" class="mp-bv-trend__dot ' + dotCls(e, s.latest) + (oi > 0 ? ' is-dim' : '') + '"/>';
+          out += hit(cx, cy, tipText(e));
+          marks.push({ rank: e.rank, cy: cy, weak: oi > 0 });
+        });
+        // 混淆曲：空心 3px（fill 背景色遮线）
+        s.shadow.forEach(function (e) {
+          var cy = yAt(e.rank);
+          out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="3" class="mp-bv-trend__shadow"/>';
+          out += hit(cx, cy, tipText(e));
+          marks.push({ rank: e.rank, cy: cy, weak: true });
+        });
+      }
+      // #N：同名次只画一个（该名次有任一非弱化点则正常，否则缩小+text-4 弱化）
+      var byRank = {};
+      marks.forEach(function (m) {
+        if (!byRank[m.rank]) byRank[m.rank] = { cy: m.cy, weak: m.weak };
+        else byRank[m.rank].weak = byRank[m.rank].weak && m.weak;
+      });
+      Object.keys(byRank).forEach(function (rk) { out += rankLabel(cx, byRank[rk].cy, rk, byRank[rk].weak); });
+    });
+
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
     svg.innerHTML = out;
+    initBvTip();
+  }
+
+  // 走势图 tooltip：桌面 hover、手机点击；元素与事件仅初始化一次（SVG 重绘不重复绑定）
+  function initBvTip() {
+    var svg = document.querySelector('.mp-bv-trend__svg');
+    if (!svg) return;
+    var tip = document.querySelector('.mp-bv-tip');
+    if (!tip) { tip = document.createElement('div'); tip.className = 'mp-bv-tip'; document.body.appendChild(tip); }
+    if (svg.dataset.tipBound) return;
+    svg.dataset.tipBound = '1';
+    var touch = window.matchMedia('(hover:none),(pointer:coarse)').matches;
+    function fill(el) { tip.textContent = el.getAttribute('data-tip') || ''; }
+    function place(x, y) {
+      var w = tip.offsetWidth, h = tip.offsetHeight;
+      var L = x + 22; if (L + w > window.innerWidth - 8) L = x - w - 22;  // 右侧放不下→翻到左侧
+      if (L < 8) L = 8;
+      var T = Math.min(Math.max(8, y - h / 2 + 12), window.innerHeight - h - 8);  // 居中基础上略向下偏移
+      tip.style.left = L + 'px'; tip.style.top = T + 'px';
+    }
+    function show(el, x, y) { fill(el); tip.classList.add('is-on'); place(x, y); }
+    function hide() { tip.classList.remove('is-on'); }
+    if (touch) {
+      document.addEventListener('click', function (ev) {
+        var h = ev.target.closest && ev.target.closest('.mp-bv-trend__hit');
+        if (h) { var b = h.getBoundingClientRect(); show(h, b.left + b.width / 2, b.top + b.height / 2); ev.stopPropagation(); }
+        else hide();
+      });
+    } else {
+      // 跟随鼠标（正右、垂直居中于光标）
+      svg.addEventListener('mouseover', function (ev) {
+        var h = ev.target.closest && ev.target.closest('.mp-bv-trend__hit');
+        if (h) show(h, ev.clientX, ev.clientY);
+      });
+      svg.addEventListener('mousemove', function (ev) { if (tip.classList.contains('is-on')) place(ev.clientX, ev.clientY); });
+      svg.addEventListener('mouseout', function (ev) {
+        var h = ev.target.closest && ev.target.closest('.mp-bv-trend__hit');
+        if (h) hide();
+      });
+    }
   }
   function bvSection(bv) {
     var ov = bv.overview;

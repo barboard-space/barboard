@@ -111,14 +111,43 @@
 ### 4. 场次代码图例 `.mp-bv-legend`
 表格之后、走势之前，紧贴表格（`margin-top:14px`）。文案：`注：A 小众 · B 中众 · C 大众 · SF 半决赛 · GF 决赛 · E 娱乐版` + `.mp-bv-legend__ex`「（如 7A = 第 7 届小众组）」**（手机隐藏）**；**无句号**。`barvision/hof.html` 的 `.bv-legend` 用同样改法（「场次代码」→「注」、括号补充包 `.bv-legend__ex` 手机隐藏、`· ` 替代原句号分隔「划线条目」说明）——两处文案保持一致。
 
-### 5. 历届排名走势图 `bvTrend()` + `drawBvTrend()`（响应式 SVG）
-- **响应式核心**：`bvTrend()` 只输出空 `<svg>`；`drawBvTrend()` 在渲染后读 `svg.clientWidth` 作为 viewBox 宽度（**viewBox = 实际像素宽，1:1**），高固定 180；监听 `window resize` 重绘。这样字号恒 13px、X 轴点间距按屏宽自适应、桌面手机都完整展示**不横滚**。
-- **每场一个点**（`rank != null`）；**X 标签** `bvXLabel`：无组别=纯届号（`1`），有组别=届+组（`7A`、`2GF`）。
-- **横向不贴边**：`xAt` 两端各内缩 `plotW * 0.08`（点/标签离边缘留白）；单点居中。网格参考线仍满宽。
-- **Y 轴倒置**（第 1 名在顶），范围 1 → `maxRank + 1`。
-- **连线**：正常段 `stroke:var(--clr-accent-line)`（= `rgba(0,180,255,0.24)`，淡蓝、宽 2px）；涉及混淆曲的段用弱化虚线（`.is-dim`）。
-- **点配色优先级**：混淆曲（空心弱化）> 第一名 `is-champ` 金 > 第 16 届 `is-latest` `--clr-red-light` > 默认 `--clr-accent-light`。
-- 点上方显示 `#名次`；hover 透明大热区（r12）+ `data-tooltip="歌手 — 歌名"`（站内 `initDataTooltips`，移动端禁用 hover）。
+### 5. 历届排名走势图 `bvTrend()` + `drawBvTrend()` + `initBvTip()`（全宽 SVG，重写版）
+
+> 2026-06 重写：从「每场一点、按屏宽自适应」改为 **全局场次轴 + 占满全宽（场次多才横滚）+ 缺席留位**。
+
+**(a) X 轴 = 全局场次序列 `BV_SLOTS`**（模块常量，**X 轴轴序**，`12B` 报名但比赛取消故排除）：
+`1 2SF 2GF 3A 3B 4A 4B 5A 5B 5C 6A 6B 6C 7A 7B 7C 8A 8B 9A 9B 10A 10B 11A 11B 12A 13 14 15 16`。
+每个 entry 的场次代码 = `bvXLabel(e)`（无组别=纯届号 `1`/`13`，有组别=届+组 `7A`/`2GF`）。按代码 `byCode` 分组（**同一场次代码可有多首**）。
+
+**(b) 绘制区间 + 缺席**：在 `BV_SLOTS` 中定位该成员**首场→最近一场**的 index 区间，`slots = BV_SLOTS.slice(first, last+1)`（含中间未参赛场次）。
+- 未参赛场次：X 标签弱化 `--clr-text-4`（`.is-absent`）+ 该 x 处一条竖直细虚线 `.mp-bv-trend__absent`（`stroke:var(--clr-border)` 与横向网格同色、`stroke-dasharray:6 5`）。
+- **跨缺席不连线**（仅相邻两 slot **均参赛**才连）。
+
+**(c) 几何 / 占满全宽 / 滚动**：`padL42 padR24 padT36 padB48 H320 minSlotW56`。`W = max(容器clientWidth, padL+padR+(n-1)*minSlotW)` → **少场次占满容器全宽**（点 `lo+(hi-lo)*i/(n-1)` 均匀分布、两端内缩 6%、单点居中），**每格挤到 < 56px（手机窄屏 / 未来 20+ 场）才扩宽** → 外层 `.mp-bv-trend__sc`（`overflow-x:auto`）横向滚动。`svg width/height/viewBox` 均设为像素值 1:1（字号恒定）。监听 `window resize` 重绘。Y 轴倒置（第 1 名在顶），范围 `1 → maxRank+1`，3 条参考线（1/中/max）。
+
+**(d) 同一场次多首歌（一个 X 多个 Y）**：
+- **正式曲**：实心 `r4`（`.mp-bv-trend__dot`）；同场多首正式时**较差者**（rank 大）加 `.is-dim`（`opacity .65`）。
+- **混淆曲**：空心 `r3`（`.mp-bv-trend__shadow`）——**`fill:var(--clr-bg)`（不透明，遮住穿过的连线）+ `stroke:var(--clr-text-4)` `stroke-width:1.6`**。
+- **正式+混淆同一首歌**（同 artist+song，如 5C 同曲既正式又混淆夺冠）：实心点 + 内嵌空心小圈 `.mp-bv-trend__inner`（`r2 fill:none stroke:var(--clr-bg)`），单点单 tooltip。
+
+**(e) 点配色**（仅正式/实心点）：`rank===1` → 金 `.is-champ`；否则该成员**最近场次**（`code===BV_SLOTS[lastIdx]`）→ 粉 `.is-latest`（`--clr-pink-light`）；否则蓝 `--clr-accent-light`。混淆空心点恒 `--clr-text-4` 描边。
+
+**(f) 连线**：仅连相邻**均参赛**的两 slot 的「代表点」（多 Y 时代表点 = 有正式则取最好正式，否则取混淆）。
+- 两端代表点均实心 → **实线** `.mp-bv-trend__edge`：`stroke:var(--clr-accent-glow)`（= `rgba(0,180,255,0.30)`，**不再叠 opacity**）、`stroke-width:2`。
+- 任一端为空心（纯混淆场次）→ **虚线** `.is-dashed`：`stroke:var(--clr-text-4)` `stroke-width:1.5` `stroke-dasharray:5 4` `opacity:.65`。
+
+**(g) `#N` 名次标签**（点上方）：
+- 正常（最好的正式点）：`.mp-bv-trend__rank` 12px `--clr-text-2`。
+- **弱化**（混淆曲 / 较差的正式曲）：`.is-weak` **10.5px `--clr-text-4`**。
+- **同场次相同名次只画一个 `#N`**（按 slot 内 rank 去重；该 rank 有任一非弱化点则用正常样式，否则弱化）。
+
+**(h) 图例 `.mp-bv-trend__legend`**（标题行右侧，`.mp-bv-trend__hd` 两端对齐）：`● 正式单曲` / `○ 混淆单曲`，圆点用 **inline SVG circle**（非 CSS border——border 会被取整成 1px）以与图内点**逐项一致**：正式 `r4 fill accent-light`；混淆 `r3.2 stroke text-4 stroke-width1.6 fill bg`（外径 3.2+0.8=4，与正式 r4 **同大**）。文字包 `.mp-bv-lg__t`（`position:relative;top:1px` 下移 1px 与圆点视觉对齐）。
+
+**(i) Tooltip `initBvTip()`**（自建 `.mp-bv-tip`，`position:fixed`，**元素+事件仅初始化一次**，SVG 重绘不重复绑定）：
+- 内容 = `歌手 — 歌名`（**不再带「（混淆）」后缀**——正式/混淆由图例区分）。透明大热区 `.mp-bv-trend__hit`（`r13`）承载 `data-tip`。
+- **桌面**（默认）：`mouseover` 显示 + `mousemove` 跟随光标，`place()` 定位在**光标右下**（右偏 +22、垂直居中后再下移 +12），右侧放不下则翻到左侧。
+- **手机**（`(hover:none),(pointer:coarse)`）：**点击**数据点显示（锚定点中心右侧）、点击别处隐藏。
+- ⚠️ 预览（resize 模拟手机）不上报 `pointer:coarse`，故预览里走桌面 hover；手机点击路径只能真机验证。
 
 ### 6. 总分显示
 - **总分（score）一律四舍五入为整数显示**，数据 JSON 保留原值（决赛含加成的小数如 140.44 → 显示 140）。详情页 `bv-results-render.js` 的 `fmtScore()` + 成员页参赛表 `Math.round(e.total)`。
@@ -136,5 +165,5 @@
 - **改 `.js`（member-render.js）后预览有缓存**：导航 URL 加 `?fresh=时间戳` 让浏览器重取。
 - 成员页有 **Dev Gate**：预览前 `sessionStorage.setItem('barboard_dev','1')`。
 - 成员页**截图工具常超时**（动画/SVG），验证改用 DOM 测量。
-- 手机端：表格 `overflow-x:auto` 横滚、概览卡自适应列、hero 卡片 `@media(max-width:600px)` 单列、走势图响应式不横滚——均已处理，导入数据不需额外动手机适配。
+- 手机端：表格 `overflow-x:auto` 横滚、概览卡自适应列、hero 卡片 `@media(max-width:600px)` 单列、**走势图占满全宽、场次多到挤不下时横向滚动**（已验证 375px 下 7 场可左右滑动到底）——均已处理，导入数据不需额外动手机适配。
 - 当前仅第一届数据，多数大妈单场 → 走势单点、徽章单个、排序无差异；录入多届后自然成线/多徽章/可排序。

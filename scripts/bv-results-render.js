@@ -134,7 +134,7 @@
 
     .bvr-sec__hd { margin-bottom:40px; }
     .bvr-sec__sub { font-size:13px; color:var(--clr-text-2); margin-bottom:20px; line-height:1.6; max-width:680px; }
-    .bvr-dvr-sub { font-family:var(--font-body); font-weight:700; font-size:12px; letter-spacing:0.03em;
+    .bvr-dvr-sub { font-family:var(--font-body); font-weight:700; font-size:18px; letter-spacing:0.03em;
       margin:48px 0 12px; }
     .bvr-dvr-sub:first-child { margin-top:0; }
     .bvr-mtx-cap { font-family:var(--font-body); font-size:11px; font-weight:700; letter-spacing:0.08em;
@@ -208,14 +208,16 @@
     .bvr-row--3 .lang { color:rgba(224,160,100,0.8); }
     .bvr-tbl .pts--jury  { color:var(--clr-accent-light); }
     .bvr-tbl .pts--tele  { color:var(--clr-pink-light); }
-    .bvr-row--shadow td { background:#181820; color:var(--clr-text-3); }
-    .bvr-num-shadow { font-family:var(--font-display); font-size:16px; font-weight:400; font-style:normal; position:relative; top:-3px; }
-    .bvr-row--shadow .pts--jury, .bvr-row--shadow .pts--tele { color:var(--clr-text-3); }
-    .bvr-row--shadow .pts--total { color:var(--clr-text-2); }
-    .bvr-row--shadow .song, .bvr-row--shadow .artist { color:var(--clr-text-3); }
-    .bvr-row--shadow .member { color:var(--clr-text-3); }
+    .bvr-row--shadow td { background:var(--clr-shadow-bg); color:var(--clr-text-4); }
+    .bvr-num-shadow { font-family:var(--font-display); font-size:16px; font-weight:400; font-style:normal; position:relative; top:-4px; }
+    .bvr-row--shadow .pts--jury, .bvr-row--shadow .pts--tele { color:var(--clr-text-4); }
+    .bvr-row--shadow .pts--total { color:var(--clr-text-4); }
+    .bvr-row--shadow .song, .bvr-row--shadow .artist { color:var(--clr-text-4); }
+    .bvr-row--shadow .member { color:var(--clr-text-4); }
+    .bvr-row--shadow .num { color:var(--clr-text-4); }  /* 覆盖 .bvr-tbl .num 默认 text-3，使名次与整行一致弱化 */
+    .bvr-row--shadow .lang { color:var(--clr-text-4); }  /* 覆盖 .bvr-tbl .lang 默认 text-3 */
     .bvr-shadow-tag { display:inline-block; white-space:nowrap; font-size:9px; border:1px solid var(--clr-border-2); border-radius:2px;
-      padding:0 4px; margin-left:6px; color:var(--clr-text-3); font-style:normal; }
+      padding:0 4px; margin-left:6px; color:var(--clr-text-4); font-style:normal; }
     .member--unclaimed { color:var(--clr-text-3); }
     .member--unclaimed:hover { color:var(--clr-text-2); }
     /* 计分板内的混淆曲行：弱化（仍显示其得票），选送者显示斜体「匿名」 */
@@ -268,6 +270,7 @@
     .bvr-12e:last-child .bvr-12__r, .bvr-12e:last-child .bvr-12__c { border-bottom:none; }
     .bvr-12__r { display:flex; align-items:center; font-weight:600; white-space:nowrap; }
     .bvr-12__r .member { color:var(--clr-text); }
+    .bvr-12__r .bvr-anon .member { color:var(--clr-text-3); }  /* 混淆选送者：保留斜体、颜色弱化为 text-3 */
     .bvr-12__n { font-family:var(--font-display); font-weight:400; font-size:17px; line-height:1;
       color:var(--clr-text-3); margin-right:10px; }  /* 与结果表「4 名及以后」名次同色 */
     .bvr-12__c { color:var(--clr-text-2); line-height:1.9; }
@@ -309,13 +312,14 @@
     .bvr-toc__item--active::after { opacity:1; animation:bvr-breathe 3s ease-in-out infinite; }
     @keyframes bvr-breathe { 0%,100%{opacity:1;transform:translateY(-50%) scale(1);} 50%{opacity:0.35;transform:translateY(-50%) scale(0.65);} }
 
-    /* 宽表横向滚动提示（仅手机显示） */
-    .bvr-scroll-hint { display:none; }
+    /* 宽表横向滚动提示（手机常显 / 桌面溢出时由 JS 显示）——格式与「注」(.bvr-mtx-note) 一致 */
+    .bvr-scroll-hint { display:none; font-size:11px; color:var(--clr-text-3); margin-bottom:7px; }
 
     @media (max-width:768px) {
       .bvr-toc { display:none; }
-      .bvr-scroll-hint { display:block; font-size:11px; color:var(--clr-text-3);
-        letter-spacing:0.04em; margin-bottom:7px; }
+      .bvr-scroll-hint { display:block; }
+      /* Scoreboard / 12 Points 子标题：手机端略收字号 + 上间距（桌面 18px / 48px） */
+      .bvr-dvr-sub { font-size:16px; margin-top:36px; }
 
       /* 结果概览：保留横向滚动表，手机端压缩间距 + 分数字号统一为歌手/歌名大小(13px，#除外) */
       .bvr-tbl tbody td { padding-top:8px; padding-bottom:8px; }
@@ -344,7 +348,7 @@
       .bvr-tbl tbody .bvr-row--1 td:nth-child(-n+3) { background:linear-gradient(rgba(212,168,50,0.14),rgba(212,168,50,0.14)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--2 td:nth-child(-n+3) { background:linear-gradient(rgba(110,150,178,0.11),rgba(110,150,178,0.11)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--3 td:nth-child(-n+3) { background:linear-gradient(rgba(196,120,68,0.12),rgba(196,120,68,0.12)),var(--clr-bg); }
-      .bvr-tbl tbody .bvr-row--shadow td:nth-child(-n+3) { background:#181820; }
+      .bvr-tbl tbody .bvr-row--shadow td:nth-child(-n+3) { background:var(--clr-shadow-bg); }
       /* 注释里的 @名在手机端也显示昵称 */
       .bvr-mtx-note .member { font-size:0; }
       .bvr-mtx-note .member::before { content:attr(data-nickname); font-size:11px; }
@@ -376,7 +380,7 @@
     .bvr-mc--first .bvr-mc__badge { color:var(--clr-violet-light); background:var(--clr-violet-dim); }
     .bvr-mc--ret   .bvr-mc__badge { color:var(--clr-gold-light); background:rgba(245,200,64,0.12); }
     .bvr-mc--left  .bvr-mc__badge { color:var(--clr-pink-light); background:var(--clr-pink-dim); }
-    .bvr-mc__mem { line-height:2.1; font-size:11px; }
+    .bvr-mc__mem { line-height:2.1; font-size:12px; }
     .bvr-mc__mem .member { margin-right:14px; }
     .bvr-mc__n { font-family:var(--font-display); font-size:20px; color:var(--clr-text); text-align:center; width:60px; }
     /* margin-top 负值抵消上一 .section 的底部 padding(var(--gap-xl))，使距正文约 48px（桌面/手机一致） */
@@ -491,10 +495,11 @@
     // 默认顺序：行按评委投票人列顺序排列，使自投格连成主对角线
     var orderIdx = {};
     voters.forEach(function (v, i) { if (v.type === 'jury') orderIdx[v.voter] = i; });
-    var recips = m.entries.slice()  // 含混淆曲：正式曲一律在前（按评委列序），混淆曲一律在最后（按分降序）
+    var recips = m.entries.slice()  // 含混淆曲：正式曲一律在前（按评委列序），混淆曲一律在最后（一律按分降序）
       .sort(function (a, b) {
         var sa = a.is_shadow ? 1 : 0, sb = b.is_shadow ? 1 : 0;
         if (sa !== sb) return sa - sb;
+        if (sa === 1) return (b.score || 0) - (a.score || 0);  // 混淆曲间一律按总分由高到低（不受 orderIdx 干扰）
         var ia = orderIdx[a.member] != null ? orderIdx[a.member] : 999;
         var ib = orderIdx[b.member] != null ? orderIdx[b.member] : 999;
         return (ia - ib) || (b.score - a.score);
@@ -515,7 +520,8 @@
     var body = recips.map(function (e) {
       var cells = voters.map(function (v, i) {
         var sep = vsep(i);
-        if (v.voter === e.member) return '<td class="self' + sep + '"></td>';
+        // 混淆曲匿名弱化，不显示「禁自投」斜杠格（正常格处理，无票则空）
+        if (!e.is_shadow && v.voter === e.member) return '<td class="self' + sep + '"></td>';
         var p = v.points[e.eid];
         if (p == null) return '<td class="pt' + sep + '"></td>';
         return '<td class="pt' + (p === 12 ? ' pt--12' : '') + sep + '">' + p + '</td>';

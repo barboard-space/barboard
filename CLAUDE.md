@@ -574,6 +574,11 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **成员变动表字号**：`.bvr-mc__badge`/`.bvr-mc__mem` 值字号统一为表头 `11px`。
     - **桌面 Scoreboard 滚动提示**：`updateScrollHints()` 检测 `.bvr-mw`/`.bvr-tw` 溢出（`scrollWidth>clientWidth`）→ 桌面也显示「左右滑动…」提示（手机常显），render + resize 调用。
     - ⚠️ **本批仍待用户进一步微调**（下一会话继续）；语种「器乐」已统一为「纯音乐」。
+138. **详情页微调收尾 + 混淆配色令牌化 + 成员页走势图重写（本次）**：
+    - **详情页（`bv-results-render.js`）**：① `Scoreboard`/`12 Points` 子标题 `.bvr-dvr-sub` 字号 12→**18px**（手机 `@media` 内 16px）；② 「左右滑动…」提示 `.bvr-scroll-hint` 视觉样式（11px/`--clr-text-3`/mb7）移到 base，与「注」`.bvr-mtx-note` 一致（手机 media 仅留 `display:block`）；③ 混淆曲在 **Scoreboard 矩阵内一律按总分降序**（`votingMatrix` recips 排序：shadow 间 `return b.score-a.score`，不受 orderIdx 干扰）；④ 混淆行**不显示自投斜杠格**（`if(!e.is_shadow && v.voter===e.member)`）；⑤ **12 Points 混淆选送者**保留斜体、色弱化 `--clr-text-3`（新增 `.bvr-12__r .bvr-anon .member` 0,3,0 覆盖 `.bvr-12__r .member` 白）。
+    - **混淆背景令牌 `--clr-shadow-bg`**（`style.css :root`，值 `#0c0a18`，背景族）：取代 `#181820`，详情页结果表 + 手机冻结列 + 成员页吧视表混淆行统一引用（不透明实色、冻结列不漏光）。值经多轮微调定为 `#0c0a18`。
+    - **最弱化文字令牌 `--clr-text-4`**（`style.css :root`，值 `#6a6488`，文字阶梯）：① 原首页 hero 下滑提示三处硬编码 `#6a6488`（`.hero__scroll-hint`/`.scroll-hint-text`/`.scroll-chevrons`）改用此令牌；② 混淆单曲在**结果概览 + 个人主页记录**的字体颜色（整行含名次 `N*`、语种、「混淆」标签）统一 `--clr-text-4`（结果概览名次/语种需各加 `.bvr-row--shadow .num/.lang` 覆盖 `.bvr-tbl .num/.lang` 的 0,2,0）；③ 成员页走势图混淆点描边/连接虚线/弱化 `#N`/legend 空心圈也用之。
+    - **成员页历届排名走势图 `drawBvTrend` 完整重写**（详见 `BARVISION_MEMBER.md §五.5`）：全局场次轴 `BV_SLOTS`（含缺席留位+竖虚线）、占满全宽（场次多才横滚）、同 X 多 Y（正式实心/混淆空心/同曲同心圆）、连续参赛才连线（实线 `--clr-accent-glow`/混淆段虚线）、点配色 金>粉(最近)>蓝、`#N` 同名次去重+弱化 10.5px、legend（SVG circle 与图内逐项一致）、自建 tooltip（桌面 hover 跟随光标右下 / 手机点击）。H=320。⚠️ 预览 resize 不模拟触屏，手机点击 tooltip 仅真机可验。
 
 ---
 

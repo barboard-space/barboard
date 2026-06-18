@@ -18,6 +18,7 @@
   --clr-bg-3:       #10101e;
   --clr-surface:    #141422;
   --clr-surface-2:  #1a1a2e;
+  --clr-shadow-bg:  #0c0a18;   /* 混淆（影子）单曲行背景：比 bg-2 略深偏紫，融入底色不凸显 */
   --clr-border:     rgba(180,160,255,0.14);
   --clr-border-2:   rgba(180,160,255,0.26);
 
@@ -52,6 +53,7 @@
   --clr-text:       #f0eeff;
   --clr-text-2:     #C2BBDF;
   --clr-text-3:     #A39BC2;
+  --clr-text-4:     #6a6488;   /* 最弱化文字：首页 hero 下滑提示 / 混淆（影子）单曲文字 */
 
   /* ── Semantic aliases ── */
   --clr-red:        var(--clr-pink);
@@ -2204,7 +2206,7 @@ body:has(.nav--open) .back-to-top {
   flex-direction: column;
   align-items: center;
   gap: 4px;
-  color: #6a6488;
+  color: var(--clr-text-4);
   white-space: nowrap;
   opacity: 1;
   transition: opacity 0.5s ease;
@@ -2222,13 +2224,13 @@ body:has(.nav--open) .back-to-top {
 .scroll-hint-text {
   font-size: 11px;
   letter-spacing: 0.12em;
-  color: #6a6488;
+  color: var(--clr-text-4);
 }
 
 /* SVG 双箭头 — 整体一起运动 */
 .scroll-chevrons {
   display: block;
-  color: #6a6488;
+  color: var(--clr-text-4);
   animation: chevron-bounce 1.6s ease-in-out infinite;
   margin-bottom: 4px;
   margin-top: 16px;
