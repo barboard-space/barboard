@@ -224,6 +224,10 @@
       min-height: 15px;
       margin-top: -2px;
     }
+    /* 「匿名」伪成员卡：弱化；匿名为中文需 font-body（Bebas 无法渲染 CJK） */
+    .ml-card--anon { opacity: 0.82; }
+    .ml-card--anon .ml-card__nickname { font-family: var(--font-body); font-size: 22px; font-weight: 700; color: var(--clr-text-3); }
+    .ml-card--anon .ml-card__handle { color: var(--clr-text-3); }
     .ml-card__badges {
       display: flex;
       flex-wrap: wrap;
@@ -611,7 +615,7 @@
       if (firstLoad) firstLoad = false;
       if (isFirst) { count.style.transition = 'none'; count.style.opacity = '0'; count.style.transform = 'translateY(8px)'; }
 
-      grid.innerHTML = members.map(function(m) {
+      var gridHtml = members.map(function(m) {
         var name = m[0], bId = m[1], groups = m[2], mtId = m[3], biliId = m[4], page = m[5], spaceId = m[6];
         var bv = BV_INDEX[spaceId];
         var q = search ? search.toLowerCase() : '';
@@ -647,6 +651,16 @@
           (foot ? '<div class="ml-card__foot">' + foot + '</div>' : '') +
           '</div>';
       }).join('');
+
+      // 「匿名」伪成员卡：仅 Barvision 筛选时显示、置于最后、不计入计数
+      var anonInfo = BV_INDEX['0'];
+      var anonShow = filter === 'bv' && anonInfo &&
+        (currentBvEdition == null || (anonInfo.editions || []).indexOf(currentBvEdition) !== -1) &&
+        (!search || '匿名'.indexOf(search.toLowerCase()) !== -1);
+      gridHtml += '<div class="ml-card ml-card--anon ml-card--link ml-card-enter' + (anonShow ? '' : ' hidden') + '" onclick="location.href=\'member/0.html\'" tabindex="0" role="link">' +
+        '<div class="ml-card__nickname">匿名</div>' +
+        '<div class="ml-card__handle">参赛歌曲匿名选送者</div></div>';
+      grid.innerHTML = gridHtml;
 
       var showAll = filter === 'all' && !search;
       var targetNum = showAll ? members.length : visible;

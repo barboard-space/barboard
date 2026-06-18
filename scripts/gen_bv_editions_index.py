@@ -22,6 +22,8 @@ for p in sorted(glob.glob(os.path.join(BASE, 'data', 'barvision', 'barvision-*',
     seen = {}
     for m in d['matches']:
         for e in m.get('entries', []):
+            if e.get('is_shadow'):  # 混淆曲不算正式参赛（含「未认领」伪成员），不计入名册
+                continue
             nm = e.get('member')
             if nm and nm not in seen:
                 info = members.get(nm, {}) or {}

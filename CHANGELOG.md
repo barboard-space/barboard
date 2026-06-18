@@ -4,6 +4,22 @@
 
 ---
 
+## [2026-06-18] — Barvision 第三届导入 + 混淆曲/未认领伪成员
+
+### Added
+- **第三届（2019，A 小众组 / B 中众组）赛果**：`scripts/parse_bv_edition3.py` 读两 CSV → `data/barvision/barvision-2019/regular-03.json`（双 match A/B，校验和 42 行全过）；薄壳 `barvision/2019/regular-03.html`；barvision.html BUILT_EDITIONS 加 Ⅲ；`matchEng` 加 GROUP A / GROUP B。
+- **混淆曲（is_shadow）体系**：非正式、不计排名。结果概览=灰行弱化（不斜体）+「混淆」标 + 名次 `N*`（DM Mono）+ Jury/Tele `opacity:.65`、总分 `--clr-text-2`；Scoreboard 矩阵 + 12 Points **均纳入混淆曲**，选送者显示**斜体昵称**（已知者真实昵称/匿名者「匿名」），矩阵后附注「斜体昵称为混淆歌曲选送者」；成员页混淆行名次 `N*`、统一 `--clr-text-3`、走势含混淆点。overview 12 分次数排除混淆。Jury/Tele：有正式曲=Jury，仅混淆/未报=Tele。
+- **名次打破规则**：正式曲 总分↓、同分观众分↓（欧视并列规则）；混淆曲并排名次（如 Omar 5、Daughtry 18）。
+- **「匿名」伪成员**（涵盖①正式单曲匿名②混淆单曲匿名）：id 0、`member/0.html` 独立详情页（大名弱化、文案「匿名参赛歌曲」）；member.html **`.ml-card--anon` 弱化卡**（仅 Barvision 筛选显示、置尾、不计数）；`gen_member_pages.py` 生成 0.html（移除旧 `匿名` skip）、`gen_bv_editions_index.py` roster 跳过 is_shadow。
+
+### Changed
+- 第三届已聚合进真实成员页（如包妈：A 组 Bob Moses 冠军 + B 组 Daughtry 混淆曲）；参赛大妈 20 → 26。
+
+### Docs
+- CLAUDE.md #135、DESIGN.md §6.7、BARVISION_MEMBER.md §7 记混淆曲/匿名/Jury-Tele/名次规则。
+
+---
+
 ## [2026-06-18] — 导航/页眉/高亮交互精修
 
 ### Fixed

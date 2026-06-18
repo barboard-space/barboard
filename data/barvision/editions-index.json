@@ -182,6 +182,125 @@
      "handle": "天神院院长"
     }
    ]
+  },
+  {
+   "no": 3,
+   "year": 2019,
+   "version": "regular",
+   "name": "The 3rd Barvision",
+   "href": "/barvision/2019/regular-03.html",
+   "roster": [
+    {
+     "name": "包妈",
+     "id": 20,
+     "handle": "Jeremy_BAg"
+    },
+    {
+     "name": "苏妈",
+     "id": 127,
+     "handle": "莫扎特_伦苏"
+    },
+    {
+     "name": "田妈",
+     "id": 295,
+     "handle": "FREEMAN"
+    },
+    {
+     "name": "柠妈",
+     "id": 19,
+     "handle": "LemonSheeran"
+    },
+    {
+     "name": "杰妈",
+     "id": 156,
+     "handle": "jh201013"
+    },
+    {
+     "name": "布妈",
+     "id": 157,
+     "handle": "Vivienne-Eliza"
+    },
+    {
+     "name": "嘟妈",
+     "id": 190,
+     "handle": "DDDDDope"
+    },
+    {
+     "name": "萌妈",
+     "id": 125,
+     "handle": "绿荫夏语"
+    },
+    {
+     "name": "雨妈",
+     "id": 17,
+     "handle": "Lee翼雨"
+    },
+    {
+     "name": "小妈",
+     "id": 153,
+     "handle": "Jeoli音乐"
+    },
+    {
+     "name": "音妈",
+     "id": 770,
+     "handle": "环球颖音"
+    },
+    {
+     "name": "猴妈",
+     "id": 18,
+     "handle": "Voiiz"
+    },
+    {
+     "name": "城妈",
+     "id": 120,
+     "handle": "MarekTotti"
+    },
+    {
+     "name": "锴妈",
+     "id": 12,
+     "handle": "WillKris锴"
+    },
+    {
+     "name": "X妈",
+     "id": 195,
+     "handle": "没有XX不科学"
+    },
+    {
+     "name": "乐妈",
+     "id": 176,
+     "handle": "Coke"
+    },
+    {
+     "name": "瑞妈",
+     "id": 135,
+     "handle": "Jefferyat19"
+    },
+    {
+     "name": "麦妈",
+     "id": 130,
+     "handle": "Tandiny"
+    },
+    {
+     "name": "N妈",
+     "id": 133,
+     "handle": "rihanavy"
+    },
+    {
+     "name": "泰妈",
+     "id": 131,
+     "handle": "泰坦crazy"
+    },
+    {
+     "name": "晕妈",
+     "id": 117,
+     "handle": "dizzyhugh"
+    },
+    {
+     "name": "兔妈",
+     "id": 118,
+     "handle": "Razbit"
+    }
+   ]
   }
  ]
 }

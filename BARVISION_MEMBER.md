@@ -123,6 +123,11 @@
 ### 6. 总分显示
 - **总分（score）一律四舍五入为整数显示**，数据 JSON 保留原值（决赛含加成的小数如 140.44 → 显示 140）。详情页 `bv-results-render.js` 的 `fmtScore()` + 成员页参赛表 `Math.round(e.total)`。
 
+### 7. 混淆曲 `is_shadow` + 「未认领」伪成员（第三届起）
+- **混淆曲**：`entries[].is_shadow=true`，非正式项目、不计入排名。成员页参赛表 `renderBvRows` 已弱化（`.mp-bv-row--shadow` 灰斜体 +「混淆」标）；概览 `aggregate_barvision` 把 shadow 与 official 分开统计（`shadow`/`top1_shadow`/`top3_shadow`，参与场数显示 `official(shadow)`），shadow **不计入** best/top1/top3/official/twelve（12 分次数也只 sum official）。成员页参赛表混淆行：名次 `N*`（**不加粗、比正常小 2px=13px**；值包 `.rk-sh` span 并 `translateX(2px)` 右移——只移值不移单元格背景，故 transform 加在 span 而非 td）、**不斜体、统一 `--clr-text-3`**（含届次链接，CSS 用 `.mp-bv-tbl .mp-bv-row--shadow td` 提权盖过 `.song/.artist`）；走势图含混淆点（is-shadow 样式），rank 用 parse 的并排名次（与表一致）。
+- **「匿名」伪成员**（涵盖①正式单曲匿名②混淆单曲匿名，赛后无人认领）：昵称 `匿名`、id `0`。`gen_member_pages.py` 额外生成 `member/0.html`（`MEMBER_DATA={nickname:'匿名',unclaimed:true,…}`；⚠️ `aggregate_barvision` 旧 `nick=='匿名'` skip 已移除）；`member-render.js` `d.unclaimed` 分支——大名 `.mp-nickname--unclaimed`（font-body+text-3）、handle「参赛歌曲匿名选送者」、label「Barvision」、标题「匿名参赛歌曲」、说明「以下参赛歌曲在比赛结束后始终无人认领选送者，统一归档于此。」、无统计卡/走势图、仅混淆曲表。`gen_bv_editions_index.py` roster 跳过 is_shadow。**member.html 弱化卡（已建）**：`.ml-card--anon`，buildGrid 在 members 后追加，**仅 Barvision 筛选时显示、置尾、不计入计数**。
+- 详情页侧的混淆/未认领约定见 `DESIGN.md §6.7` 与 `CLAUDE.md #135`。
+
 ---
 
 ## 六、其它注意

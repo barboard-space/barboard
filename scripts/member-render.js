@@ -24,6 +24,8 @@
     '@keyframes mpBvFirstGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(212,168,50,.42)) drop-shadow(0 0 7px rgba(212,168,50,.2))}50%{filter:drop-shadow(0 0 5px rgba(212,168,50,.72)) drop-shadow(0 0 13px rgba(212,168,50,.42))}}',
     '@media (prefers-reduced-motion:reduce){.mp-bv-badge--first{animation:none}}',
     '.mp-handle{font-size:15px;color:var(--clr-text-2);margin-bottom:20px}',
+    '.mp-nickname--unclaimed{font-family:var(--font-body);font-size:34px;font-weight:700;color:var(--clr-text-3);letter-spacing:.02em}',
+    '.mp-bv-note{font-size:13px;color:var(--clr-text-3);line-height:1.65;margin-bottom:22px;max-width:680px}',
     '.mp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}',
     '.mp-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:4px 10px;border-radius:4px;border:1px solid var(--clr-border-2);color:var(--clr-text-2);background:var(--clr-surface)}',
     '.mp-tag--violet{border-color:rgba(168,85,247,.4);color:var(--clr-violet-light);background:rgba(168,85,247,.08)}',
@@ -99,7 +101,10 @@
     '.mp-bv-row--1 .rk{color:var(--clr-gold-light)}',
     '.mp-bv-row--2 .rk{color:var(--clr-silver)}',
     '.mp-bv-row--3 .rk{color:var(--clr-bronze)}',
-    '.mp-bv-row--shadow td{color:var(--clr-text-3);font-style:italic;background:rgba(255,255,255,.02)}',
+    '.mp-bv-tbl .mp-bv-row--shadow td{color:var(--clr-text-3);background:rgba(255,255,255,.02)}',
+    '.mp-bv-row--shadow .mp-bv-ed{color:var(--clr-text-3)}',
+    '.mp-bv-row--shadow .rk{font-weight:400;font-size:13px}',
+    '.mp-bv-row--shadow .rk .rk-sh{display:inline-block;transform:translateX(2px)}',
     '.mp-bv-sh{font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-3);margin-left:5px}',
     '@media (max-width:600px){',
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
@@ -211,7 +216,7 @@
       var href = '../barvision/' + e.year + '/' + e.version + '-' + nn + '.html';
       var seriesLabel = /^[0-9]+$/.test(String(e.series)) ? '-' : esc(e.series);
       return '<tr class="' + cls + '">' +
-        '<td class="rk">' + (e.is_shadow ? '·' : (e.rank == null ? '—' : e.rank)) + '</td>' +
+        '<td class="rk">' + (e.rank == null ? '—' : (e.is_shadow ? '<span class="rk-sh">' + e.rank + '*</span>' : e.rank)) + '</td>' +
         '<td class="ed"><a class="mp-bv-ed" href="' + href + '">第 ' + e.edition_no + ' 届</a></td>' +
         '<td class="num2">' + seriesLabel + '</td>' +
         '<td class="artist">' + esc(e.artist) + '</td>' +
@@ -318,16 +323,22 @@
     }).join('');
     var rows = renderBvRows(sortBvEntries(bv.entries, 'edition', 'asc'));
     var TRI = '<svg class="mp-bv-tri" viewBox="0 0 10 14" aria-hidden="true"><path class="up" d="M5 0L9 5H1Z"/><path class="dn" d="M5 14L1 9H9Z"/></svg>';
+    var unclaimed = arguments[1];
+    var label = 'Barvision';
+    var title = unclaimed ? '匿名参赛歌曲' : '吧视参赛记录';
+    var topBlock = unclaimed
+      ? '<p class="mp-bv-note fade-up" style="transition-delay:.2s">以下参赛歌曲在比赛结束后始终无人认领选送者，统一归档于此。</p>'
+      : '<div class="mp-bv-stats fade-up" style="transition-delay:.2s">' + statsHtml + '</div>';
     return '<section class="mp-section">' +
       '<div class="section__inner">' +
-        '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">Barvision</div>' +
-        '<div class="mp-section-title fade-up" style="transition-delay:.15s">吧视参赛记录</div>' +
-        '<div class="mp-bv-stats fade-up" style="transition-delay:.2s">' + statsHtml + '</div>' +
+        '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">' + label + '</div>' +
+        '<div class="mp-section-title fade-up" style="transition-delay:.15s">' + title + '</div>' +
+        topBlock +
         '<div class="mp-bv-tw fade-up" style="transition-delay:.25s"><table class="mp-bv-tbl"><thead><tr>' +
           '<th class="sortable ta-c" data-sort="rank">名次' + TRI + '</th><th class="sortable ta-c" data-sort="edition">届次' + TRI + '</th><th class="ta-c">场次</th><th>歌手</th><th>歌名</th><th class="sortable ta-c" data-sort="total">总分' + TRI + '</th><th class="sortable ta-c" data-sort="twelve">12分' + TRI + '</th>' +
         '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
         '<p class="mp-bv-legend fade-up" style="transition-delay:.3s">注：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版<span class="mp-bv-legend__ex">（如 <code>7A</code> = 第 7 届小众组）</span></p>' +
-        bvTrend(bv) +
+        (unclaimed ? '' : bvTrend(bv)) +
       '</div>' +
     '</section>';
   }
@@ -336,28 +347,40 @@
   var root = document.getElementById('mp-root');
   if (!root) return;
 
-  root.innerHTML =
-    '<section class="mp-hero">' +
-      '<div class="mp-hero__glow" aria-hidden="true"></div>' +
-      '<div class="mp-hero__inner section__inner">' +
-        '<a class="mp-eyebrow fade-up" href="/member.html"><span>←</span><span>Members</span></a>' +
-        '<div class="mp-card fade-up">' +
-          '<div style="position:relative;display:inline-block;margin-top:8px">' +
-            '<div class="mp-avatar__ring" style="position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--clr-violet),var(--clr-accent));opacity:.5;z-index:0"></div>' +
-            '<div class="mp-avatar">' +
-              '<div class="mp-avatar__placeholder" style="' + phStyle + '">' + ph + '</div>' +
-            '</div>' +
-          '</div>' +
-          '<div class="mp-info">' +
-            '<div class="mp-nickname">' + nickname + (d.barvision ? bvBadges(d.barvision) : '') + '</div>' +
-            (handle ? '<div class="mp-handle">@' + handle + '</div>' : '') +
-            (badges ? '<div class="mp-tags">' + badges + '</div>' : '') +
-          '</div>' +
-          (links ? '<div class="mp-links">' + links + '</div>' : '') +
+  // 未认领伪成员：大名弱化、无头像/标签/外链；否则正常 hero
+  var heroHtml = d.unclaimed
+    ? '<section class="mp-hero mp-hero--unclaimed">' +
+        '<div class="mp-hero__inner section__inner">' +
+          '<a class="mp-eyebrow fade-up" href="/member.html"><span>←</span><span>Members</span></a>' +
+          '<div class="mp-card fade-up"><div class="mp-info">' +
+            '<div class="mp-nickname mp-nickname--unclaimed">匿名</div>' +
+            '<div class="mp-handle">参赛歌曲匿名选送者</div>' +
+          '</div></div>' +
         '</div>' +
-      '</div>' +
-    '</section>' +
-    (d.barvision ? bvSection(d.barvision) :
+      '</section>'
+    : '<section class="mp-hero">' +
+        '<div class="mp-hero__glow" aria-hidden="true"></div>' +
+        '<div class="mp-hero__inner section__inner">' +
+          '<a class="mp-eyebrow fade-up" href="/member.html"><span>←</span><span>Members</span></a>' +
+          '<div class="mp-card fade-up">' +
+            '<div style="position:relative;display:inline-block;margin-top:8px">' +
+              '<div class="mp-avatar__ring" style="position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--clr-violet),var(--clr-accent));opacity:.5;z-index:0"></div>' +
+              '<div class="mp-avatar">' +
+                '<div class="mp-avatar__placeholder" style="' + phStyle + '">' + ph + '</div>' +
+              '</div>' +
+            '</div>' +
+            '<div class="mp-info">' +
+              '<div class="mp-nickname">' + nickname + (d.barvision ? bvBadges(d.barvision) : '') + '</div>' +
+              (handle ? '<div class="mp-handle">@' + handle + '</div>' : '') +
+              (badges ? '<div class="mp-tags">' + badges + '</div>' : '') +
+            '</div>' +
+            (links ? '<div class="mp-links">' + links + '</div>' : '') +
+          '</div>' +
+        '</div>' +
+      '</section>';
+
+  root.innerHTML = heroHtml +
+    (d.barvision ? bvSection(d.barvision, d.unclaimed) :
       '<section class="mp-section">' +
         '<div class="section__inner">' +
           '<div class="mp-section-label fade-up" style="transition-delay:.05s">Works</div>' +

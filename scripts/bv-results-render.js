@@ -35,6 +35,11 @@
   function memberLink(nick, opts) {
     opts = opts || {};
     var m = DATA && DATA.members && DATA.members[nick];
+    // 未认领（混淆曲赛后无人认领）：弱化、无 @、链接到伪成员页 member/0.html
+    if (m && m.unclaimed) {
+      return '<a class="member member--unclaimed" href="../../member/' + m.id + '.html" data-nickname="'
+        + esc(nick) + '">' + esc(nick) + '</a>';
+    }
     var label = opts.nick ? esc(nick) : ('@' + esc(m ? m.handle : nick));
     if (!m) return '<span class="member">' + label + '</span>';
     return '<a class="member" href="../../member/' + m.id + '.html" data-nickname="'
@@ -198,10 +203,20 @@
     .bvr-row--3 .lang { color:rgba(224,160,100,0.8); }
     .bvr-tbl .pts--jury  { color:var(--clr-accent-light); }
     .bvr-tbl .pts--tele  { color:var(--clr-pink-light); }
-    .bvr-row--shadow td { background:rgba(255,255,255,0.02); color:var(--clr-text-3); font-style:italic; }
+    .bvr-row--shadow td { background:rgba(255,255,255,0.02); color:var(--clr-text-3); }
+    .bvr-num-shadow { font-family:var(--font-display); font-size:16px; font-weight:400; font-style:normal; position:relative; top:-3px; }
+    .bvr-row--shadow .pts--jury, .bvr-row--shadow .pts--tele { color:var(--clr-text-3); }
+    .bvr-row--shadow .pts--total { color:var(--clr-text-2); }
     .bvr-row--shadow .song, .bvr-row--shadow .artist { color:var(--clr-text-3); }
+    .bvr-row--shadow .member { color:var(--clr-text-3); }
     .bvr-shadow-tag { font-size:9px; border:1px solid var(--clr-border-2); border-radius:2px;
       padding:0 4px; margin-left:6px; color:var(--clr-text-3); font-style:normal; }
+    .member--unclaimed { color:var(--clr-text-3); }
+    .member--unclaimed:hover { color:var(--clr-text-2); }
+    /* 计分板内的混淆曲行：弱化（仍显示其得票），选送者显示斜体「匿名」 */
+    .bvr-mtx tbody tr.bvr-mtx-row--shadow td { color:var(--clr-text-3) !important; }
+    .bvr-anon { font-style:italic; color:var(--clr-text-3); }
+    .bvr-mtx-note { font-size:11px; color:var(--clr-text-3); margin-top:8px; }
 
     /* ----- matrix ----- */
     .bvr-mw { overflow-x:auto; border:1px solid var(--clr-border); border-radius:8px;
@@ -390,7 +405,9 @@
   }
   // 场次英文段名（用于 multi 场次的 section-label 前缀）
   function matchEng(m) {
-    return m.match === 'SF' ? 'SEMI-FINAL' : m.match === 'GF' ? 'GRAND FINAL' : (m.match || esc(m.venue || ''));
+    return m.match === 'SF' ? 'SEMI-FINAL' : m.match === 'GF' ? 'GRAND FINAL'
+      : m.match === 'A' ? 'GROUP A' : m.match === 'B' ? 'GROUP B'
+      : (m.match || esc(m.venue || ''));
   }
 
   // 竞赛式名次（同分同名次，如 1,2,2,4）
@@ -409,7 +426,7 @@
     var rows = m.entries.map(function (e) {
       var cls = e.is_shadow ? 'bvr-row--shadow' : (e.rank <= 3 ? 'bvr-row--' + e.rank : '');
       return '<tr class="' + cls + '">' +
-        '<td class="num"><span>' + (e.is_shadow ? '·' : esc(e.rank)) + '</span></td>' +
+        '<td class="num"><span>' + (e.is_shadow ? '<span class="bvr-num-shadow">' + esc(e.rank) + '*</span>' : esc(e.rank)) + '</span></td>' +
         '<td>' + memberLink(e.member) + '</td>' +
         '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
         '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + '</td>' +
@@ -442,7 +459,7 @@
     // 默认顺序：行按评委投票人列顺序排列，使自投格连成主对角线
     var orderIdx = {};
     voters.forEach(function (v, i) { if (v.type === 'jury') orderIdx[v.voter] = i; });
-    var recips = m.entries.filter(function (e) { return !e.is_shadow; }).slice()
+    var recips = m.entries.slice()  // 含混淆曲（弱化行排在末尾，orderIdx 缺省 999）
       .sort(function (a, b) {
         var ia = orderIdx[a.member] != null ? orderIdx[a.member] : 999;
         var ib = orderIdx[b.member] != null ? orderIdx[b.member] : 999;
@@ -469,19 +486,23 @@
         if (p == null) return '<td class="pt' + sep + '"></td>';
         return '<td class="pt' + (p === 12 ? ' pt--12' : '') + sep + '">' + p + '</td>';
       }).join('');
-      return '<tr><td class="rcp">' + memberLink(e.member) + '</td>' +
+      return '<tr' + (e.is_shadow ? ' class="bvr-mtx-row--shadow"' : '') + '><td class="rcp">' + (e.is_shadow ? '<i class="bvr-anon">' + esc(e.member) + '</i>' : memberLink(e.member)) + '</td>' +
         '<td class="tot">' + fmtScore(e.score) + '</td>' +
         '<td class="sj">' + fmtScore(e.jury_vote) + '</td>' +
         '<td class="st">' + fmtScore(e.tele_vote) + '</td>' + cells + '</tr>';
     }).join('');
+    var hasShadow = m.entries.some(function (e) { return e.is_shadow; });
     return '<div class="bvr-scroll-hint">左右滑动查看完整计分板</div>' +
       '<div class="bvr-mw fade-up"><table class="bvr-mtx">' +
-      '<thead>' + grpRow + colRow + '</thead><tbody>' + body + '</tbody></table></div>';
+      '<thead>' + grpRow + colRow + '</thead><tbody>' + body + '</tbody></table></div>' +
+      (hasShadow ? '<p class="bvr-mtx-note fade-up">注：斜体昵称为混淆歌曲选送者</p>' : '');
   }
 
   // 12 分合并表：每位获 12 分的选送者一行，区分评委 / 观众给分，给分者用 @名
   function twelveBlock(m) {
     var got = {};  // recipient -> {jury:[], tele:[]}
+    var shadowSet = {};  // 混淆曲选送者在 12 Points 中显示为斜体「匿名」
+    (m.entries || []).forEach(function (e) { if (e.is_shadow) shadowSet[e.member] = 1; });
     m.votes.voters.forEach(function (v) {
       Object.keys(v.points).forEach(function (r) {
         if (v.points[r] === 12) { (got[r] = got[r] || { jury: [], tele: [] })[v.type].push(v.voter); }
@@ -500,7 +521,7 @@
       var j = got[r].jury, t = got[r].tele, c2 = '', c3 = '';
       if (j.length) { c2 = grp('jury', j); if (t.length) c3 = grp('tele', t); }
       else if (t.length) { c2 = grp('tele', t); }
-      return '<div class="bvr-12e"><span class="bvr-12__r"><span class="bvr-12__n">' + (j.length + t.length) + '</span>' + memberLink(r) + '</span>' +
+      return '<div class="bvr-12e"><span class="bvr-12__r"><span class="bvr-12__n">' + (j.length + t.length) + '</span>' + (shadowSet[r] ? '<i class="bvr-anon">' + esc(r) + '</i>' : memberLink(r)) + '</span>' +
         '<span class="bvr-12__c">' + c2 + '</span>' +
         '<span class="bvr-12__c">' + c3 + '</span></div>';
     }).join('');

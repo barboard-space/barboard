@@ -32,7 +32,7 @@ def aggregate_barvision(eds):
             voters = m.get("votes", {}).get("voters", [])
             for e in m.get("entries", []):
                 nick = e.get("member")
-                if not nick or nick == "匿名":
+                if not nick:
                     continue
                 twelve = sum(1 for v in voters if v.get("points", {}).get(nick) == 12)
                 per.setdefault(nick, []).append({
@@ -59,7 +59,7 @@ def aggregate_barvision(eds):
                 "top3_shadow": sum(1 for x in shadow if x["rank"] and x["rank"] <= 3),
                 "entries": len(official),
                 "shadow": len(shadow),
-                "twelve": sum(x["twelve"] for x in entries),
+                "twelve": sum(x["twelve"] for x in official),  # 混淆曲的 12 分不计入正式统计
                 "debut": min(x["edition_no"] for x in entries),
                 "active_in": max(x["edition_no"] for x in entries),
                 "active": max(x["year"] for x in entries) >= BV_ACTIVE_SINCE_YEAR,
@@ -173,6 +173,21 @@ def main():
 
             space_ids.append(space_id)
             print(f"  {space_id}.html — {nickname}")
+
+    # 「匿名」伪成员（混淆曲赛后无人认领）→ member/0.html（大名弱化、仅列歌曲）
+    unclaimed = bv_by_nick.get("匿名")
+    if unclaimed:
+        u_data = {"nickname": "匿名", "unclaimed": True, "barvision": unclaimed}
+        u_json = json.dumps(u_data, ensure_ascii=False, separators=(",", ":"))
+        with open(os.path.join(member_dir, "0.html"), "w", encoding="utf-8") as out:
+            out.write(TEMPLATE.replace("PLACEHOLDER", u_json))
+        ov = unclaimed["overview"]
+        bv_index["0"] = {
+            "editions": sorted(set(e["edition_no"] for e in unclaimed["entries"])),
+            "active": False, "count": ov["shadow"], "best": None,
+            "active_in": ov["active_in"], "unclaimed": True,
+        }
+        print(f"  0.html — 匿名（伪成员，{ov['shadow']} 首混淆曲）")
 
     idx_path = os.path.join(base, "data", "barvision", "member-bv-index.json")
     with open(idx_path, "w", encoding="utf-8") as f:
