@@ -7,7 +7,7 @@
 ## [2026-06-19] — 动画/布局微调（详情页 + 成员页 + barvision.html）
 
 ### Fixed
-- **详情页「Scoreboard」「12 Points」子标题无入场动画**：`.bvr-dvr-sub` 缺 `fade-up` class → 瞬间弹出（下方表格淡入，不协调）。两标题（每组各 1，三组共 6 个）加 `fade-up`，随 `observeFades` 的 IO 滚动触发，与计分板/12分表一同淡入。`.bvr-dvr-sub` 自身无 `transition`，不覆盖 fade-up 的 opacity/transform 过渡。
+- **详情页投票详情段入场动画逆序**：`section()` 的 body 块为 `.section__inner` 直接子节点，触发 style.css 全局 `.fade-up:nth-child(2..6)` 延迟泄漏；child 7（12 分表）无规则→延迟 0s 最先淡入，注/12 Points（child 5/6，.4/.5s）反而落后 → 逆序。注入 `.bvr-sec .section__inner > .fade-up{transition-delay:0s}` 清零（直接子选择器不动 header 错落），改由 IO 按滚动位置自上而下触发。子标题（Scoreboard/12 Points）+ 两处滚动提示补 `fade-up`；`updateScrollHints` 显示提示时 `toggle('visible')` 令其淡入。
 - **手机端 barvision.html 娱乐版竖排**：`@media (max-width:465px)` 把 `.bv-unplugged-grid` 误设为 `1fr` → 4 卡竖排。改回 `repeat(4,1fr)`（仅 @media 内，桌面零影响）。
 
 ### Style

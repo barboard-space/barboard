@@ -318,6 +318,9 @@
 
     /* 宽表横向滚动提示（手机常显 / 桌面溢出时由 JS 显示）——格式与「注」(.bvr-mtx-note) 一致 */
     .bvr-scroll-hint { display:none; font-size:11px; color:var(--clr-text-3); margin-bottom:7px; }
+    /* section body 内的 fade-up（.section__inner 直接子节点）清零 style.css 泄漏的 :nth-child 错落延迟，
+       使其纯靠 IntersectionObserver 按滚动位置自上而下逐个淡入（header 的 label/title 嵌在 .bvr-sec__hd 内、不受影响、保留错落） */
+    .bvr-sec .section__inner > .fade-up { transition-delay: 0s; }
 
     @media (max-width:768px) {
       .bvr-toc { display:none; }
@@ -477,7 +480,7 @@
         '<td class="pts pts--total" data-v="' + (e.score == null ? -1 : e.score) + '">' + fmtScore(e.score) + '</td>' +
         '</tr>';
     }).join('');
-    return '<div class="bvr-scroll-hint">左右滑动查看完整结果</div>' +
+    return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整结果</div>' +
       '<div class="bvr-tw fade-up"><table class="bvr-tbl"><thead><tr>' +
       '<th>名次</th><th>选送者</th><th>歌手</th><th>歌名</th><th>语种</th>' +
       '<th class="th-jury" style="text-align:center">Jury</th>' +
@@ -544,7 +547,7 @@
     if (m.entries.some(function (e) { return e.is_shadow; })) notes.push('斜体昵称为混淆歌曲选送者');
     var noteHtml = notes.length === 1 ? '<p class="bvr-mtx-note fade-up">注：' + notes[0] + '</p>'
       : notes.length > 1 ? '<div class="bvr-mtx-note fade-up">' + notes.map(function (n, i) { return '注' + (i + 1) + '：' + n; }).join('<br>') + '</div>' : '';
-    return '<div class="bvr-scroll-hint">左右滑动查看完整计分板</div>' +
+    return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整计分板</div>' +
       '<div class="bvr-mw fade-up"><table class="bvr-mtx">' +
       '<thead>' + grpRow + colRow + '</thead><tbody>' + body + '</tbody></table></div>' +
       noteHtml;
@@ -791,7 +794,10 @@
       var hint = wrap.previousElementSibling;
       if (!hint || !hint.classList.contains('bvr-scroll-hint')) return;
       var overflow = wrap.scrollWidth > wrap.clientWidth + 1;
-      hint.style.display = (mobile || overflow) ? 'block' : 'none';
+      var show = mobile || overflow;
+      hint.style.display = show ? 'block' : 'none';
+      // 提示带 fade-up（opacity:0），显示时补 visible 令其淡入（IO 对 display:none 不触发）
+      hint.classList.toggle('visible', show);
     });
   }
 
