@@ -4,6 +4,22 @@
 
 ---
 
+## [2026-06-19] — Barvision 第八届导入（2020，A/B 两组）
+
+### Added
+- `scripts/parse_bv_edition8.py`（两 CSV）→ `data/barvision/barvision-2020/regular-08.json`；薄壳 `barvision/2020/regular-08.html`；`barvision.html` BUILT_EDITIONS 加 Ⅷ。仅 A/B 两组（无 C）；歌曲列「艺人 - 歌名」拆分、语种由 CSV 提供；混淆仅 8A 2 首。
+- **神妈 = 匿名大妈**（神妈/隐妈/神隐妈→「匿名」id 0 unclaimed）；本届匿名含正式曲（Deafheaven 8A#10、Peggy Gou 8B#3 + Foxing 混淆），归档进 `member/0.html`。
+- **8B 合报 + 50% 投票折算**：雨妈/兔妈 合报 Foals — Exits、包妈/泰妈 合报 Sylar — All or Nothing；4 人可分别投票但投票 ×50%（CSV 已半值）。score=含半值各票和（带 .5 小数）；`votes.points` 存折算前 12 分原始版（计分板显原始分、Total 显折算后、加注）；排名按小数比较、显示四舍五入。复用 ed5/ed7 折算渲染模式，零渲染改动。
+
+### Changed
+- `scripts/gen_bv_editions_index.py`：roster/成员变动跳过「匿名」/unclaimed（避免匿名正式曲误入名册）。
+- `recompute_bv_ranks.py --write`（ed8 0 变化）+ `gen_member_pages.py` + `gen_bv_editions_index.py`（第八届 roster 22 人）。
+
+### Fixed
+- 导入后自查：eid 全 OK、raw 全 == 分数、12 分次数交叉核对 350 条 0 不匹配、详情页预览无报错。8B 布妈行 X妈 列脏字符 `·` 按 0 处理。源 CSV typo 修正（`TEXT_FIX`）：`Cali Y EI Dandee → Cali Y El Dandee`。
+
+---
+
 ## [2026-06-19] — 动画/布局微调（详情页 + 成员页 + barvision.html）
 
 ### Fixed

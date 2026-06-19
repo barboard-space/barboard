@@ -29,6 +29,9 @@ for p in sorted(glob.glob(os.path.join(BASE, 'data', 'barvision', 'barvision-*',
                 continue
             # 联合选送「A/B」：各自入册
             for part in ([n.strip() for n in nm.split('/')] if '/' in nm else [nm]):
+                # 「匿名」伪成员（id 0 unclaimed）不计入名册 / 成员变动（即便其正式曲，如第八届神妈匿名）
+                if part == '匿名' or (members.get(part, {}) or {}).get('unclaimed'):
+                    continue
                 if part not in seen:
                     info = members.get(part, {}) or {}
                     seen[part] = {'name': part, 'id': info.get('id'),

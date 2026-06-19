@@ -802,6 +802,125 @@
      "handle": "天神院院长"
     }
    ]
+  },
+  {
+   "no": 8,
+   "year": 2020,
+   "version": "regular",
+   "name": "The 8th Barvision",
+   "href": "/barvision/2020/regular-08.html",
+   "roster": [
+    {
+     "name": "雨妈",
+     "id": 17,
+     "handle": "Lee翼雨"
+    },
+    {
+     "name": "鹿妈",
+     "id": 165,
+     "handle": "Leevai"
+    },
+    {
+     "name": "萌妈",
+     "id": 125,
+     "handle": "绿荫夏语"
+    },
+    {
+     "name": "X妈",
+     "id": 195,
+     "handle": "没有XX不科学"
+    },
+    {
+     "name": "城妈",
+     "id": 120,
+     "handle": "MarekTotti"
+    },
+    {
+     "name": "团妈",
+     "id": 68,
+     "handle": "不动团子"
+    },
+    {
+     "name": "兔妈",
+     "id": 118,
+     "handle": "Razbit"
+    },
+    {
+     "name": "小妈",
+     "id": 153,
+     "handle": "Jeoli音乐"
+    },
+    {
+     "name": "雀妈",
+     "id": 189,
+     "handle": "雀妈"
+    },
+    {
+     "name": "锴妈",
+     "id": 12,
+     "handle": "WillKris锴"
+    },
+    {
+     "name": "清妈",
+     "id": 172,
+     "handle": "清清Ghonwx1012"
+    },
+    {
+     "name": "猴妈",
+     "id": 18,
+     "handle": "Voiiz"
+    },
+    {
+     "name": "包妈",
+     "id": 20,
+     "handle": "Jeremy_BAg"
+    },
+    {
+     "name": "布妈",
+     "id": 157,
+     "handle": "Vivienne-Eliza"
+    },
+    {
+     "name": "田妈",
+     "id": 295,
+     "handle": "FREEMAN"
+    },
+    {
+     "name": "院妈",
+     "id": 326,
+     "handle": "天神院院长"
+    },
+    {
+     "name": "杰妈",
+     "id": 156,
+     "handle": "jh201013"
+    },
+    {
+     "name": "奶妈",
+     "id": 102,
+     "handle": "奶儿少爷"
+    },
+    {
+     "name": "柠妈",
+     "id": 19,
+     "handle": "LemonSheeran"
+    },
+    {
+     "name": "晕妈",
+     "id": 117,
+     "handle": "dizzyhugh"
+    },
+    {
+     "name": "洛妈",
+     "id": 124,
+     "handle": "Lolo_sara"
+    },
+    {
+     "name": "泰妈",
+     "id": 131,
+     "handle": "泰坦crazy"
+    }
+   ]
   }
  ]
 }

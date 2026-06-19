@@ -1,0 +1,1654 @@
+{
+ "year": 2020,
+ "edition_no": 8,
+ "edition_name": "The 8th Barvision",
+ "cn_name": "第八届欧美流行歌曲个人榜吧歌曲大赛",
+ "version": "regular",
+ "city": "",
+ "host": "",
+ "motto": "",
+ "summary": "第八届 Barvision 设 A（小众）、B（中众）两组并行，各组独立计分与排名。本届共 28 位成员选送 40 首正式作品，小众组冠军是雨妈选送的 Dorian Electra — Man to Man（128 分），中众组冠军为小妈选送的 Jessie Ware — Spotlight（110 分）。中众组 雨妈与兔妈、包妈与泰妈 分别合报参赛。",
+ "rules": {
+  "submission": "针对 lead 艺人分 A（小众）/ B（中众）两组报名；A、B 组各设 2 个混淆项名额（先报先得、每位评委最多 1 首）。报名私戳小妈并对所报歌曲保密。",
+  "niche_standard": [
+   "A 小众｜云村评论≤600·收藏≤7500(华语20k)·Spotify 月听众≤2.1M/单曲≤5M·YT 订阅≤2M/MV≤7.5M·BB·UK 无 Top100·MT 进榜≤5",
+   "B 中众｜评论≤2000·收藏≤30000(华语40k)·月听众≤8M/单曲≤28M·YT≤6M/MV≤35M·BB·UK 最高 20·MT≤10",
+   "lead 艺人无格莱美四大通类提名；报名歌曲不得进过吧半年榜/年终榜 Top100",
+   "feat 艺人 BB Hot100/UK 限制：A 组无 Top50 或在榜>24 周 · B 组无 Top10 或>40 周",
+   "发行时间 2016.8.28–2020.2.28"
+  ],
+  "format": "A、B 两组分开比赛、独立计分与排名，最终成绩不综合各组。混淆项参与评分但不计入排名。",
+  "voting": "欧视制（计分 12/10/8/7/6/5/4/3/2/1）；每位评委上交 Top12 排名；选送者互投为 Jury、其余观众为 Tele。报名参赛的评委必须提交排名，否则其歌曲取消最终排名资格。中众组合报搭档（雨妈/兔妈、包妈/泰妈）四人可分别投票，投票按 50% 折算计入最终得分。"
+ },
+ "source": "第八届赛果（8A 小众 / 8B 中众 逐票汇总）",
+ "members": {
+  "X妈": {
+   "id": 195,
+   "handle": "没有XX不科学"
+  },
+  "兔妈": {
+   "id": 118,
+   "handle": "Razbit"
+  },
+  "包妈": {
+   "id": 20,
+   "handle": "Jeremy_BAg"
+  },
+  "匿名": {
+   "id": 0,
+   "handle": "匿名",
+   "unclaimed": true
+  },
+  "可妈": {
+   "id": 123,
+   "handle": "曹可可KE"
+  },
+  "团妈": {
+   "id": 68,
+   "handle": "不动团子"
+  },
+  "城妈": {
+   "id": 120,
+   "handle": "MarekTotti"
+  },
+  "奶妈": {
+   "id": 102,
+   "handle": "奶儿少爷"
+  },
+  "小妈": {
+   "id": 153,
+   "handle": "Jeoli音乐"
+  },
+  "布妈": {
+   "id": 157,
+   "handle": "Vivienne-Eliza"
+  },
+  "晕妈": {
+   "id": 117,
+   "handle": "dizzyhugh"
+  },
+  "杰妈": {
+   "id": 156,
+   "handle": "jh201013"
+  },
+  "柠妈": {
+   "id": 19,
+   "handle": "LemonSheeran"
+  },
+  "泰妈": {
+   "id": 131,
+   "handle": "泰坦crazy"
+  },
+  "洛妈": {
+   "id": 124,
+   "handle": "Lolo_sara"
+  },
+  "清妈": {
+   "id": 172,
+   "handle": "清清Ghonwx1012"
+  },
+  "火妈": {
+   "id": 129,
+   "handle": "fire_storm"
+  },
+  "猴妈": {
+   "id": 18,
+   "handle": "Voiiz"
+  },
+  "瑞妈": {
+   "id": 135,
+   "handle": "Jefferyat19"
+  },
+  "田妈": {
+   "id": 295,
+   "handle": "FREEMAN"
+  },
+  "草妈": {
+   "id": 141,
+   "handle": "Twentee"
+  },
+  "萌妈": {
+   "id": 125,
+   "handle": "绿荫夏语"
+  },
+  "锴妈": {
+   "id": 12,
+   "handle": "WillKris锴"
+  },
+  "院妈": {
+   "id": 326,
+   "handle": "天神院院长"
+  },
+  "雀妈": {
+   "id": 189,
+   "handle": "雀妈"
+  },
+  "雨妈": {
+   "id": 17,
+   "handle": "Lee翼雨"
+  },
+  "音妈": {
+   "id": 770,
+   "handle": "环球颖音"
+  },
+  "鹿妈": {
+   "id": 165,
+   "handle": "Leevai"
+  }
+ },
+ "vote_rule": {
+  "scale": [
+   12,
+   10,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1
+  ],
+  "jury": "选送者互投",
+  "tele": "观众",
+  "note": "A/B 两组独立计分排名；混淆单曲不计入排名；中众组合报搭档（雨妈/兔妈、包妈/泰妈）四人可分别投票，投票按 50% 折算计入最终得分（计分板格内为折算前 12 分原始分）。"
+ },
+ "matches": [
+  {
+   "match": "A",
+   "venue": "小众组",
+   "entries": [
+    {
+     "member": "雨妈",
+     "member_id": 17,
+     "eid": 0,
+     "language": "英语",
+     "artist": "Dorian Electra",
+     "song": "Man to Man",
+     "jury_vote": 99,
+     "tele_vote": 29,
+     "score": 128,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 1
+    },
+    {
+     "member": "鹿妈",
+     "member_id": 165,
+     "eid": 1,
+     "language": "英语",
+     "artist": "Typhoon",
+     "song": "Empiricist",
+     "jury_vote": 84,
+     "tele_vote": 27,
+     "score": 111,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 2
+    },
+    {
+     "member": "萌妈",
+     "member_id": 125,
+     "eid": 2,
+     "language": "英语",
+     "artist": "Flor",
+     "song": "rely",
+     "jury_vote": 71,
+     "tele_vote": 35,
+     "score": 106,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 3
+    },
+    {
+     "member": "X妈",
+     "member_id": 195,
+     "eid": 3,
+     "language": "英语",
+     "artist": "Lola Marsh",
+     "song": "Only for a Moment",
+     "jury_vote": 76,
+     "tele_vote": 27,
+     "score": 103,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 4
+    },
+    {
+     "member": "城妈",
+     "member_id": 120,
+     "eid": 4,
+     "language": "英语",
+     "artist": "SONIKKU & Chester Lockhart",
+     "song": "Remember To Forget Me",
+     "jury_vote": 63,
+     "tele_vote": 39,
+     "score": 102,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 5
+    },
+    {
+     "member": "团妈",
+     "member_id": 68,
+     "eid": 5,
+     "language": "英语",
+     "artist": "Phlake",
+     "song": "Gone (feat. Alina Baraz)",
+     "jury_vote": 81,
+     "tele_vote": 19,
+     "score": 100,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 6
+    },
+    {
+     "member": "兔妈",
+     "member_id": 118,
+     "eid": 6,
+     "language": "英语",
+     "artist": "Rina Sawayama",
+     "song": "XS",
+     "jury_vote": 64,
+     "tele_vote": 24,
+     "score": 88,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 7
+    },
+    {
+     "member": "小妈",
+     "member_id": 153,
+     "eid": 7,
+     "language": "英语",
+     "artist": "SOPHIE",
+     "song": "It's Okay to Cry",
+     "jury_vote": 38,
+     "tele_vote": 47,
+     "score": 85,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 8
+    },
+    {
+     "member": "雀妈",
+     "member_id": 189,
+     "eid": 8,
+     "language": "英语",
+     "artist": "H.I.M.",
+     "song": "Habits",
+     "jury_vote": 62,
+     "tele_vote": 23,
+     "score": 85,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 9
+    },
+    {
+     "member": "匿名",
+     "member_id": 0,
+     "eid": 9,
+     "language": "英语",
+     "artist": "Foxing",
+     "song": "Nearer My God",
+     "jury_vote": 72,
+     "tele_vote": 12,
+     "score": 84,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": true,
+     "rank": 10
+    },
+    {
+     "member": "匿名",
+     "member_id": 0,
+     "eid": 10,
+     "language": "英语",
+     "artist": "Deafheaven",
+     "song": "Night People",
+     "jury_vote": 70,
+     "tele_vote": 11,
+     "score": 81,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 10
+    },
+    {
+     "member": "锴妈",
+     "member_id": 12,
+     "eid": 11,
+     "language": "越南语",
+     "artist": "Trọng Hiếu",
+     "song": "Anh Đổ Rồi Đấy",
+     "jury_vote": 49,
+     "tele_vote": 22,
+     "score": 71,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 11
+    },
+    {
+     "member": "清妈",
+     "member_id": 172,
+     "eid": 12,
+     "language": "英语",
+     "artist": "Dopha",
+     "song": "September Till June",
+     "jury_vote": 52,
+     "tele_vote": 11,
+     "score": 63,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 12
+    },
+    {
+     "member": "猴妈",
+     "member_id": 18,
+     "eid": 13,
+     "language": "英语",
+     "artist": "Lady Bee",
+     "song": "Overdose (feat. Oktavian)",
+     "jury_vote": 40,
+     "tele_vote": 20,
+     "score": 60,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 13
+    },
+    {
+     "member": "包妈",
+     "member_id": 20,
+     "eid": 14,
+     "language": "英语",
+     "artist": "SHVPES",
+     "song": "One Man Army",
+     "jury_vote": 41,
+     "tele_vote": 16,
+     "score": 57,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 14
+    },
+    {
+     "member": "布妈",
+     "member_id": 157,
+     "eid": 15,
+     "language": "英语",
+     "artist": "D Smoke",
+     "song": "Top of The Morning",
+     "jury_vote": 34,
+     "tele_vote": 19,
+     "score": 53,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 15
+    },
+    {
+     "member": "田妈",
+     "member_id": 295,
+     "eid": 16,
+     "language": "英语",
+     "artist": "Matt Ferranti",
+     "song": "Outta My Radio",
+     "jury_vote": 29,
+     "tele_vote": 23,
+     "score": 52,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 16
+    },
+    {
+     "member": "院妈",
+     "member_id": 326,
+     "eid": 17,
+     "language": "中文",
+     "artist": "雨锟",
+     "song": "童木之语",
+     "jury_vote": 40,
+     "tele_vote": 6,
+     "score": 46,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 17
+    },
+    {
+     "member": "杰妈",
+     "member_id": 156,
+     "eid": 18,
+     "language": "中文",
+     "artist": "黎智坚措 & 旺姆",
+     "song": "妈妈",
+     "jury_vote": 40,
+     "tele_vote": 5,
+     "score": 45,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 18
+    },
+    {
+     "member": "雀妈",
+     "member_id": 189,
+     "eid": 19,
+     "language": "英语",
+     "artist": "Michael Seyer & Bane's World",
+     "song": "lookin thru ur window",
+     "jury_vote": 15,
+     "tele_vote": 24,
+     "score": 39,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": true,
+     "rank": 19
+    },
+    {
+     "member": "奶妈",
+     "member_id": 102,
+     "eid": 20,
+     "language": "中文",
+     "artist": "孟根花",
+     "song": "失恋的牧马人",
+     "jury_vote": 11,
+     "tele_vote": 3,
+     "score": 14,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 19
+    }
+   ],
+   "votes": {
+    "scale": [
+     12,
+     10,
+     8,
+     7,
+     6,
+     5,
+     4,
+     3,
+     2,
+     1
+    ],
+    "voters": [
+     {
+      "voter": "院妈",
+      "type": "jury",
+      "points": {
+       "0": 3,
+       "1": 1,
+       "2": 4,
+       "3": 7,
+       "5": 12,
+       "8": 5,
+       "12": 8,
+       "14": 2,
+       "15": 6,
+       "18": 10
+      }
+     },
+     {
+      "voter": "小妈",
+      "type": "jury",
+      "points": {
+       "0": 4,
+       "1": 7,
+       "4": 3,
+       "5": 8,
+       "6": 6,
+       "10": 12,
+       "12": 10,
+       "13": 2,
+       "14": 5,
+       "17": 1,
+       "19": 4
+      }
+     },
+     {
+      "voter": "奶妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 12,
+       "2": 3,
+       "9": 6,
+       "11": 2,
+       "12": 1,
+       "13": 8,
+       "14": 4,
+       "16": 7,
+       "17": 10,
+       "18": 5
+      }
+     },
+     {
+      "voter": "团妈",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 12,
+       "7": 8,
+       "10": 7,
+       "11": 3,
+       "12": 1,
+       "15": 6,
+       "17": 4,
+       "18": 5,
+       "19": 6,
+       "20": 2
+      }
+     },
+     {
+      "voter": "草妈",
+      "type": "tele",
+      "points": {
+       "1": 7,
+       "2": 10,
+       "4": 8,
+       "6": 2,
+       "7": 12,
+       "12": 3,
+       "13": 5,
+       "14": 4,
+       "17": 6,
+       "18": 1,
+       "19": 5
+      }
+     },
+     {
+      "voter": "城妈",
+      "type": "jury",
+      "points": {
+       "0": 5,
+       "1": 6,
+       "2": 3,
+       "5": 1,
+       "6": 7,
+       "8": 10,
+       "10": 2,
+       "11": 12,
+       "15": 4,
+       "16": 8
+      }
+     },
+     {
+      "voter": "雀妈",
+      "type": "jury",
+      "points": {
+       "3": 12,
+       "4": 5,
+       "5": 8,
+       "6": 4,
+       "7": 3,
+       "9": 12,
+       "10": 2,
+       "12": 10,
+       "14": 6,
+       "17": 7,
+       "18": 1
+      }
+     },
+     {
+      "voter": "瑞妈",
+      "type": "tele",
+      "points": {
+       "0": 5,
+       "1": 7,
+       "3": 6,
+       "4": 10,
+       "6": 2,
+       "7": 12,
+       "8": 4,
+       "11": 3,
+       "13": 8,
+       "15": 1,
+       "19": 10
+      }
+     },
+     {
+      "voter": "布妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "2": 4,
+       "3": 3,
+       "4": 5,
+       "5": 8,
+       "6": 10,
+       "7": 1,
+       "8": 12,
+       "13": 2,
+       "14": 7
+      }
+     },
+     {
+      "voter": "杰妈",
+      "type": "jury",
+      "points": {
+       "2": 12,
+       "3": 3,
+       "6": 7,
+       "7": 1,
+       "8": 10,
+       "9": 8,
+       "10": 6,
+       "11": 2,
+       "12": 5,
+       "13": 4,
+       "17": 8
+      }
+     },
+     {
+      "voter": "萌妈",
+      "type": "jury",
+      "points": {
+       "0": 4,
+       "1": 7,
+       "3": 12,
+       "5": 6,
+       "9": 10,
+       "10": 10,
+       "11": 5,
+       "12": 2,
+       "13": 3,
+       "16": 1,
+       "18": 8
+      }
+     },
+     {
+      "voter": "柠妈",
+      "type": "tele",
+      "points": {
+       "0": 1,
+       "2": 6,
+       "3": 4,
+       "4": 2,
+       "5": 8,
+       "7": 7,
+       "8": 10,
+       "11": 3,
+       "12": 5,
+       "16": 12
+      }
+     },
+     {
+      "voter": "锴妈",
+      "type": "jury",
+      "points": {
+       "0": 5,
+       "1": 1,
+       "2": 12,
+       "3": 10,
+       "4": 7,
+       "5": 8,
+       "7": 6,
+       "8": 2,
+       "9": 6,
+       "13": 3,
+       "18": 4
+      }
+     },
+     {
+      "voter": "包妈",
+      "type": "jury",
+      "points": {
+       "0": 1,
+       "1": 10,
+       "2": 2,
+       "4": 3,
+       "5": 12,
+       "8": 4,
+       "10": 7,
+       "11": 8,
+       "13": 5,
+       "20": 6
+      }
+     },
+     {
+      "voter": "洛妈",
+      "type": "tele",
+      "points": {
+       "0": 8,
+       "2": 12,
+       "4": 7,
+       "7": 4,
+       "8": 2,
+       "9": 1,
+       "11": 5,
+       "12": 1,
+       "15": 6,
+       "16": 10,
+       "20": 3
+      }
+     },
+     {
+      "voter": "泰妈",
+      "type": "tele",
+      "points": {
+       "1": 10,
+       "2": 7,
+       "3": 8,
+       "4": 2,
+       "6": 6,
+       "9": 8,
+       "11": 5,
+       "13": 3,
+       "14": 12,
+       "16": 1,
+       "18": 4
+      }
+     },
+     {
+      "voter": "可妈",
+      "type": "tele",
+      "points": {
+       "0": 12,
+       "1": 2,
+       "3": 5,
+       "4": 10,
+       "5": 3,
+       "6": 8,
+       "10": 1,
+       "11": 6,
+       "13": 4,
+       "15": 7,
+       "19": 1
+      }
+     },
+     {
+      "voter": "兔妈",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 4,
+       "2": 5,
+       "3": 6,
+       "4": 10,
+       "8": 3,
+       "9": 2,
+       "13": 7,
+       "14": 2,
+       "15": 8,
+       "20": 1
+      }
+     },
+     {
+      "voter": "清妈",
+      "type": "jury",
+      "points": {
+       "0": 7,
+       "1": 12,
+       "2": 6,
+       "3": 8,
+       "5": 1,
+       "6": 3,
+       "7": 2,
+       "8": 5,
+       "9": 3,
+       "10": 10,
+       "15": 4
+      }
+     },
+     {
+      "voter": "猴妈",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "2": 7,
+       "3": 8,
+       "4": 10,
+       "6": 6,
+       "7": 2,
+       "9": 5,
+       "11": 3,
+       "12": 4,
+       "14": 1,
+       "16": 5
+      }
+     },
+     {
+      "voter": "鹿妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "2": 5,
+       "4": 8,
+       "5": 4,
+       "6": 10,
+       "7": 12,
+       "8": 3,
+       "9": 5,
+       "10": 7,
+       "11": 1,
+       "15": 2,
+       "19": 5
+      }
+     },
+     {
+      "voter": "X妈",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "2": 1,
+       "7": 3,
+       "8": 2,
+       "9": 10,
+       "10": 7,
+       "12": 6,
+       "13": 5,
+       "14": 8,
+       "15": 4,
+       "17": 10
+      }
+     },
+     {
+      "voter": "田妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 12,
+       "2": 4,
+       "3": 7,
+       "5": 8,
+       "6": 10,
+       "8": 2,
+       "9": 5,
+       "11": 3,
+       "12": 5,
+       "13": 1
+      }
+     },
+     {
+      "voter": "音妈",
+      "type": "tele",
+      "points": {
+       "0": 3,
+       "1": 1,
+       "3": 4,
+       "5": 8,
+       "6": 6,
+       "7": 12,
+       "8": 7,
+       "9": 3,
+       "10": 10,
+       "12": 2,
+       "15": 5,
+       "19": 8
+      }
+     },
+     {
+      "voter": "雨妈",
+      "type": "jury",
+      "points": {
+       "2": 3,
+       "4": 12,
+       "5": 5,
+       "6": 1,
+       "8": 4,
+       "11": 10,
+       "14": 6,
+       "16": 8,
+       "18": 7,
+       "20": 2
+      }
+     }
+    ]
+   }
+  },
+  {
+   "match": "B",
+   "venue": "中众组",
+   "entries": [
+    {
+     "member": "小妈",
+     "member_id": 153,
+     "eid": 0,
+     "language": "英语",
+     "artist": "Jessie Ware",
+     "song": "Spotlight",
+     "jury_vote": 93,
+     "tele_vote": 17,
+     "score": 110,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 1
+    },
+    {
+     "member": "城妈",
+     "member_id": 120,
+     "eid": 1,
+     "language": "英语",
+     "artist": "Alexander 23",
+     "song": "I Hate You So Much",
+     "jury_vote": 84.0,
+     "tele_vote": 16.0,
+     "score": 100,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 2
+    },
+    {
+     "member": "匿名",
+     "member_id": 0,
+     "eid": 2,
+     "language": "韩语",
+     "artist": "Peggy Gou",
+     "song": "Starry Night",
+     "jury_vote": 87,
+     "tele_vote": 7,
+     "score": 94,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 3
+    },
+    {
+     "member": "清妈",
+     "member_id": 172,
+     "eid": 3,
+     "language": "西班牙语",
+     "artist": "Aitana & Cali Y El Dandee",
+     "song": "+",
+     "jury_vote": 79.0,
+     "tele_vote": 10.0,
+     "score": 89,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 4
+    },
+    {
+     "member": "雨妈/兔妈",
+     "member_id": null,
+     "eid": 4,
+     "language": "英语",
+     "artist": "Foals",
+     "song": "Exits",
+     "jury_vote": 74.5,
+     "tele_vote": 12.0,
+     "score": 86.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 5
+    },
+    {
+     "member": "柠妈",
+     "member_id": 19,
+     "eid": 5,
+     "language": "英语",
+     "artist": "Gracie Abrams",
+     "song": "21",
+     "jury_vote": 85.5,
+     "tele_vote": 0.0,
+     "score": 85.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 6
+    },
+    {
+     "member": "奶妈",
+     "member_id": 102,
+     "eid": 6,
+     "language": "英语",
+     "artist": "Vansire",
+     "song": "Eleven Weeks",
+     "jury_vote": 62.5,
+     "tele_vote": 2.0,
+     "score": 64.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 7
+    },
+    {
+     "member": "田妈",
+     "member_id": 295,
+     "eid": 7,
+     "language": "英语 法语",
+     "artist": "Christine and the Queens",
+     "song": "People, I've been sad",
+     "jury_vote": 54,
+     "tele_vote": 10,
+     "score": 64,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 8
+    },
+    {
+     "member": "杰妈",
+     "member_id": 156,
+     "eid": 8,
+     "language": "英语",
+     "artist": "Karmin",
+     "song": "Easy Money",
+     "jury_vote": 61,
+     "tele_vote": 0,
+     "score": 61,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 9
+    },
+    {
+     "member": "锴妈",
+     "member_id": 12,
+     "eid": 9,
+     "language": "英语",
+     "artist": "Familiar",
+     "song": "Innate Beauty",
+     "jury_vote": 58.5,
+     "tele_vote": 0.0,
+     "score": 58.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 10
+    },
+    {
+     "member": "晕妈",
+     "member_id": 117,
+     "eid": 10,
+     "language": "英语",
+     "artist": "ODIE",
+     "song": "In My Head",
+     "jury_vote": 55,
+     "tele_vote": 2,
+     "score": 57,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 11
+    },
+    {
+     "member": "X妈",
+     "member_id": 195,
+     "eid": 11,
+     "language": "法语",
+     "artist": "Pomme",
+     "song": "anxiété",
+     "jury_vote": 47.0,
+     "tele_vote": 8.0,
+     "score": 55,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 12
+    },
+    {
+     "member": "团妈",
+     "member_id": 68,
+     "eid": 12,
+     "language": "英语",
+     "artist": "Keaton Henson",
+     "song": "Polyhymnia",
+     "jury_vote": 54,
+     "tele_vote": 0,
+     "score": 54,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 13
+    },
+    {
+     "member": "鹿妈",
+     "member_id": 165,
+     "eid": 13,
+     "language": "中文",
+     "artist": "白日密语",
+     "song": "Klein Blue",
+     "jury_vote": 53.5,
+     "tele_vote": 0.0,
+     "score": 53.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 14
+    },
+    {
+     "member": "猴妈",
+     "member_id": 18,
+     "eid": 14,
+     "language": "英语",
+     "artist": "ZACHARY",
+     "song": "Gimme! Gimme! Gimme!",
+     "jury_vote": 52.5,
+     "tele_vote": 0.0,
+     "score": 52.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 15
+    },
+    {
+     "member": "萌妈",
+     "member_id": 125,
+     "eid": 15,
+     "language": "英语",
+     "artist": "Matt Maeson",
+     "song": "Go Easy",
+     "jury_vote": 51.5,
+     "tele_vote": 0.0,
+     "score": 51.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 16
+    },
+    {
+     "member": "洛妈",
+     "member_id": 124,
+     "eid": 16,
+     "language": "法语",
+     "artist": "RIDSA",
+     "song": "Laisser couler",
+     "jury_vote": 50,
+     "tele_vote": 0,
+     "score": 50,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 17
+    },
+    {
+     "member": "雀妈",
+     "member_id": 189,
+     "eid": 17,
+     "language": "英语",
+     "artist": "The Last Shadow Puppets",
+     "song": "Aviation",
+     "jury_vote": 29.5,
+     "tele_vote": 13.0,
+     "score": 42.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 18
+    },
+    {
+     "member": "院妈",
+     "member_id": 326,
+     "eid": 18,
+     "language": "中文",
+     "artist": "和平和浪",
+     "song": "丽园便利店",
+     "jury_vote": 30,
+     "tele_vote": 9,
+     "score": 39,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 19
+    },
+    {
+     "member": "布妈",
+     "member_id": 157,
+     "eid": 19,
+     "language": "英语",
+     "artist": "Princess Nokia",
+     "song": "Green Eggs & Ham",
+     "jury_vote": 25,
+     "tele_vote": 8,
+     "score": 33,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 20
+    },
+    {
+     "member": "包妈/泰妈",
+     "member_id": null,
+     "eid": 20,
+     "language": "英语",
+     "artist": "Sylar",
+     "song": "All or Nothing",
+     "jury_vote": 31,
+     "tele_vote": 2,
+     "score": 33,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 21
+    }
+   ],
+   "votes": {
+    "scale": [
+     12,
+     10,
+     8,
+     7,
+     6,
+     5,
+     4,
+     3,
+     2,
+     1
+    ],
+    "voters": [
+     {
+      "voter": "布妈",
+      "type": "jury",
+      "points": {
+       "0": 4,
+       "1": 2,
+       "2": 10,
+       "4": 5,
+       "6": 8,
+       "14": 12,
+       "15": 3,
+       "17": 6,
+       "18": 7,
+       "20": 1
+      }
+     },
+     {
+      "voter": "雨妈",
+      "type": "jury",
+      "points": {
+       "0": 8,
+       "1": 12,
+       "3": 7.0,
+       "7": 2,
+       "8": 4,
+       "11": 3.0,
+       "14": 5.0,
+       "15": 1.0,
+       "18": 10,
+       "20": 6
+      }
+     },
+     {
+      "voter": "院妈",
+      "type": "jury",
+      "points": {
+       "0": 1,
+       "1": 10,
+       "3": 6,
+       "4": 4,
+       "5": 12,
+       "7": 3,
+       "10": 7,
+       "13": 8,
+       "15": 5,
+       "20": 2
+      }
+     },
+     {
+      "voter": "晕妈",
+      "type": "jury",
+      "points": {
+       "2": 10,
+       "3": 12,
+       "5": 8,
+       "7": 4,
+       "9": 3,
+       "12": 6,
+       "14": 5,
+       "15": 1,
+       "16": 7,
+       "17": 2
+      }
+     },
+     {
+      "voter": "奶妈",
+      "type": "jury",
+      "points": {
+       "3": 12,
+       "5": 5,
+       "8": 4,
+       "9": 7,
+       "10": 3,
+       "14": 10,
+       "15": 2,
+       "16": 8,
+       "17": 1,
+       "18": 6
+      }
+     },
+     {
+      "voter": "柠妈",
+      "type": "jury",
+      "points": {
+       "1": 6,
+       "2": 10,
+       "3": 8,
+       "6": 3,
+       "7": 7,
+       "8": 2,
+       "9": 4,
+       "14": 12,
+       "15": 1,
+       "18": 5
+      }
+     },
+     {
+      "voter": "匿名",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 7,
+       "4": 5,
+       "5": 3,
+       "7": 6,
+       "8": 2,
+       "10": 8,
+       "11": 1,
+       "13": 10,
+       "19": 4
+      }
+     },
+     {
+      "voter": "兔妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 1.0,
+       "2": 4,
+       "3": 3.0,
+       "5": 8,
+       "8": 12,
+       "9": 7.0,
+       "11": 5.0,
+       "14": 10,
+       "20": 2
+      }
+     },
+     {
+      "voter": "小妈",
+      "type": "jury",
+      "points": {
+       "2": 12,
+       "4": 4,
+       "5": 5,
+       "7": 1,
+       "8": 6,
+       "10": 3,
+       "11": 8,
+       "12": 7,
+       "13": 2,
+       "17": 10
+      }
+     },
+     {
+      "voter": "火妈",
+      "type": "tele",
+      "points": {
+       "0": 5,
+       "1": 12,
+       "3": 10,
+       "4": 6,
+       "6": 2,
+       "7": 7,
+       "10": 1,
+       "11": 8,
+       "17": 3,
+       "18": 4
+      }
+     },
+     {
+      "voter": "猴妈",
+      "type": "jury",
+      "points": {
+       "1": 8,
+       "3": 6,
+       "5": 12,
+       "7": 2,
+       "8": 7,
+       "9": 5,
+       "12": 4,
+       "13": 3,
+       "15": 10,
+       "16": 1
+      }
+     },
+     {
+      "voter": "锴妈",
+      "type": "jury",
+      "points": {
+       "1": 6,
+       "4": 3,
+       "5": 5,
+       "7": 1,
+       "10": 7,
+       "14": 2,
+       "15": 8,
+       "16": 10,
+       "17": 4,
+       "20": 12
+      }
+     },
+     {
+      "voter": "雀妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "2": 3,
+       "5": 7,
+       "7": 4,
+       "9": 2,
+       "10": 12,
+       "12": 10,
+       "13": 1,
+       "16": 5,
+       "19": 8
+      }
+     },
+     {
+      "voter": "田妈",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 2,
+       "4": 12,
+       "5": 7,
+       "8": 1,
+       "9": 6,
+       "11": 5,
+       "15": 4,
+       "16": 3,
+       "20": 8
+      }
+     },
+     {
+      "voter": "音妈",
+      "type": "tele",
+      "points": {
+       "0": 12,
+       "1": 4,
+       "2": 7,
+       "4": 6,
+       "7": 3,
+       "10": 1,
+       "17": 10,
+       "18": 5,
+       "19": 8,
+       "20": 2
+      }
+     },
+     {
+      "voter": "包妈",
+      "type": "jury",
+      "points": {
+       "0": 2,
+       "1": 4,
+       "2": 10,
+       "4": 7.0,
+       "5": 1.0,
+       "9": 6,
+       "10": 12,
+       "13": 8,
+       "15": 3.0,
+       "17": 5.0
+      }
+     },
+     {
+      "voter": "城妈",
+      "type": "jury",
+      "points": {
+       "0": 1,
+       "2": 3,
+       "3": 8,
+       "6": 12,
+       "7": 2,
+       "9": 6,
+       "10": 4,
+       "11": 7,
+       "12": 5,
+       "16": 10
+      }
+     },
+     {
+      "voter": "洛妈",
+      "type": "jury",
+      "points": {
+       "0": 1,
+       "1": 12,
+       "2": 10,
+       "3": 6,
+       "4": 2,
+       "6": 5,
+       "9": 3,
+       "11": 8,
+       "15": 7,
+       "20": 4
+      }
+     },
+     {
+      "voter": "泰妈",
+      "type": "jury",
+      "points": {
+       "1": 1.0,
+       "4": 12,
+       "6": 7.0,
+       "8": 10,
+       "9": 8,
+       "13": 3.0,
+       "14": 6,
+       "15": 5.0,
+       "16": 4,
+       "18": 2
+      }
+     },
+     {
+      "voter": "清妈",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 6,
+       "4": 4,
+       "5": 7,
+       "6": 8,
+       "7": 5,
+       "8": 10,
+       "11": 3,
+       "14": 1,
+       "15": 2
+      }
+     },
+     {
+      "voter": "鹿妈",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "2": 6,
+       "4": 2,
+       "6": 12,
+       "7": 7,
+       "11": 3,
+       "12": 4,
+       "17": 1,
+       "18": 5,
+       "19": 8
+      }
+     },
+     {
+      "voter": "杰妈",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "3": 10,
+       "5": 6,
+       "7": 3,
+       "9": 5,
+       "11": 4,
+       "12": 8,
+       "13": 7,
+       "15": 1,
+       "17": 2
+      }
+     },
+     {
+      "voter": "萌妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 7,
+       "2": 3,
+       "4": 12,
+       "6": 8,
+       "8": 4,
+       "9": 5,
+       "13": 10,
+       "16": 2,
+       "18": 1
+      }
+     },
+     {
+      "voter": "团妈",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 8,
+       "2": 6,
+       "4": 12,
+       "11": 4,
+       "13": 7,
+       "15": 3,
+       "16": 2,
+       "17": 1,
+       "19": 5
+      }
+     },
+     {
+      "voter": "X妈",
+      "type": "jury",
+      "points": {
+       "1": 1,
+       "2": 7,
+       "3": 6,
+       "5": 4,
+       "6": 3,
+       "7": 8,
+       "8": 12,
+       "9": 2,
+       "10": 5,
+       "12": 10
+      }
+     }
+    ]
+   },
+   "note": "本组 雨妈、兔妈、包妈、泰妈 为合报搭档（雨妈/兔妈 合报 Foals — Exits、包妈/泰妈 合报 Sylar — All or Nothing），四人可分别投票但其投票均按 50% 折算计入最终得分；计分板各格显示折算前的原始投票分（12 分制），最终得分（Total）为折算后。"
+  }
+ ]
+}
