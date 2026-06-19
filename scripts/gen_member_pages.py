@@ -47,6 +47,7 @@ def aggregate_barvision(eds):
                     "rank": e.get("rank"), "song": e.get("song"), "artist": e.get("artist"),
                     "language": e.get("language"),
                     "jury": e.get("jury_vote"), "tele": e.get("tele_vote"), "total": e.get("score"),
+                    "juryN": sum(1 for v in voters if v.get("type") == "jury"),  # 该场评委人数（算单评委平均分用）
                     "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
                     "joint": "/" in nick,  # 联合选送（合报）
                     "canceled": bool(m.get("canceled") or e.get("canceled")),  # 取消的组(12B)：仅展示、不计统计/走势
@@ -65,17 +66,23 @@ def aggregate_barvision(eds):
         official = [x for x in stat if not x["is_shadow"]]
         shadow = [x for x in stat if x["is_shadow"]]
         ranks = [x["rank"] for x in official if x["rank"]]
+        # 单评委平均分（仅正式单曲）：每曲 jury_vote/该场评委数 → 再对各曲求均值（理想区间 0–12）
+        jpers = [x["jury"] / x["juryN"] for x in official if x.get("juryN") and x["jury"] is not None]
         eds_stat = stat or entries  # 仅有取消条目的成员，debut/active 兜底用全部
         out[nick] = {
             "overview": {
                 "best": (min(ranks) if ranks else None),
+                "avg": (round(sum(ranks) / len(ranks), 2) if ranks else None),  # 平均名次（正式单曲，两位小数）
                 "top1": sum(1 for x in official if x["rank"] == 1),
                 "top1_shadow": sum(1 for x in shadow if x["rank"] == 1),
                 "top3": sum(1 for x in official if x["rank"] and x["rank"] <= 3),
                 "top3_shadow": sum(1 for x in shadow if x["rank"] and x["rank"] <= 3),
+                "top10": sum(1 for x in official if x["rank"] and x["rank"] <= 10),
+                "top10_shadow": sum(1 for x in shadow if x["rank"] and x["rank"] <= 10),
                 "entries": len(official),
                 "shadow": len(shadow),
                 "twelve": sum(x["twelve"] for x in official),  # 混淆曲的 12 分不计入正式统计
+                "jury_avg": (round(sum(jpers) / len(jpers), 2) if jpers else None),  # 评委平均分（单评委均分，正式单曲，两位小数）
                 "debut": min(x["edition_no"] for x in eds_stat),
                 "active_in": max(x["edition_no"] for x in eds_stat),
                 "active": max(x["year"] for x in eds_stat) >= BV_ACTIVE_SINCE_YEAR,

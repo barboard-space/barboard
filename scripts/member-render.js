@@ -50,17 +50,23 @@
     '.mp-work-card__desc{font-size:12px;color:var(--clr-text-2);line-height:1.5}',
     '.mp-todo{font-size:13px;color:var(--clr-text-3);padding:32px;border:1px dashed var(--clr-border);border-radius:8px;text-align:center}',
     /* 吧视 板块 */
-    '.mp-bv-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(88px,1fr));gap:10px;margin-bottom:26px}',
+    '.mp-bv-stats{display:grid;grid-template-columns:repeat(8,1fr);gap:10px;margin-bottom:26px}',
     '.mp-bv-stat{background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:8px;padding:15px 10px 11px;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center}',
     '.mp-bv-stat__v{font-family:var(--font-display);font-size:26px;line-height:1;color:var(--clr-text);min-height:26px;display:flex;align-items:center;justify-content:center}',
     '.mp-bv-stat__v--cjk{font-family:var(--font-body);font-size:20px;font-weight:600;letter-spacing:.02em}',
     '.mp-bv-stat__v .sh{font-family:var(--font-body);font-size:13px;color:var(--clr-text-3);margin-left:3px}',
-    '.mp-bv-stat__v .mp-bv-rep{font-family:var(--font-body);font-size:14px;opacity:.85;margin-left:3px}',
+    '.mp-bv-stat__v .mp-bv-rep{font-family:var(--font-body);font-weight:400;font-size:14px;color:var(--clr-text-3);margin-left:3px}',
     '.mp-bv-stat__k{font-size:11px;color:var(--clr-text-2);margin-top:7px}',
     '.mp-bv-stat--active .mp-bv-stat__v{color:var(--clr-violet-light)}',
     '.mp-bv-trend{margin-top:52px}',
     '.mp-bv-trend__hd{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;margin-bottom:12px}',
     '.mp-bv-trend__title{font-size:13px;font-weight:600;color:var(--clr-text-2)}',
+    '.mp-bv-trend__hd-r{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap}',
+    '.mp-bv-export{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--clr-violet);background:var(--clr-violet-dim);border:1px solid rgba(168,85,247,.4);border-radius:5px;padding:4px 10px;cursor:pointer;transition:background .18s,border-color .18s,color .18s}',
+    '.mp-bv-export:hover{background:rgba(168,85,247,.2);border-color:var(--clr-violet);color:var(--clr-violet-light)}',
+    '.mp-bv-export[disabled]{opacity:.55;cursor:default}',
+    '.mp-bv-export svg{display:block}',
+    '@media (hover:none),(pointer:coarse){.mp-bv-export:hover{background:var(--clr-violet-dim);border-color:rgba(168,85,247,.4)}}',
     '.mp-bv-trend__legend{display:flex;gap:14px;font-size:11px;color:var(--clr-text-3)}',
     '.mp-bv-lg{display:inline-flex;align-items:center;gap:5px}',
     '.mp-bv-lg__ic{width:15px;height:15px;flex-shrink:0;display:block}',
@@ -71,7 +77,7 @@
     '.mp-bv-trend__svg{display:block;overflow:visible}',
     '.mp-bv-trend__svg *{pointer-events:none}',  /* 仅 hit 圆可交互，标签/连线/网格不拦截点击 */
     '.mp-bv-trend__avg{stroke:var(--clr-violet-glow);stroke-width:1.5;stroke-dasharray:6 4}',
-    '.mp-bv-trend__avglab{fill:var(--clr-violet-light);font-family:var(--font-body);font-size:11px;font-weight:600;opacity:.65}',
+    '.mp-bv-trend__avglab{fill:var(--clr-violet-light);font-family:var(--font-body);font-size:11px;font-weight:600;opacity:.85}',
     '.mp-bv-trend__rank{fill:var(--clr-text-2);font-family:var(--font-mono);font-size:12px}',
     '.mp-bv-trend__rank.is-weak{font-size:10.5px;fill:var(--clr-text-4)}',
     '.mp-bv-trend__grid{stroke:var(--clr-border);stroke-width:1}',
@@ -137,14 +143,16 @@
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
     '  .mp-links{grid-column:1/-1;flex-direction:row}',
     '  .mp-link{flex:1}',
-    '  .mp-avatar{width:80px;height:80px}',
-    '  .mp-avatar__placeholder{font-size:32px !important}',
+    /* 头像随视口自适应（让信息列宽度据此变化，徽章按其宽度算出每行 10 个） */
+    '  .mp-avatar{width:clamp(64px,21vw,88px);height:clamp(64px,21vw,88px)}',
+    '  .mp-avatar__placeholder{font-size:clamp(26px,8.5vw,36px) !important}',
     '  .mp-nickname{font-size:36px;align-items:baseline}',
     /* 手机：@名 移到大名右边（同行 baseline 对齐），徽章组整组换到大名下方一行 */
     '  .mp-nickname .mp-handle{order:1;flex-basis:auto;margin-left:10px}',
-    '  .mp-nickname .mp-bv-badges{order:2;flex-basis:100%}',
-    '  .mp-bv-badge{width:20px;height:19.4px;margin-left:4px}',
-    '  .mp-bv-stats{gap:8px;grid-template-columns:repeat(auto-fit,minmax(72px,1fr))}',
+    '  .mp-nickname .mp-bv-badges{order:2;flex-basis:100%;width:100%;gap:4px}',
+    /* 每行固定 10 个：徽章宽 =（组宽 − 9×4px 间距）/10，随屏宽缩放；第 11 个换行 */
+    '  .mp-bv-badge{width:calc((100% - 36px) / 10);height:auto;aspect-ratio:770 / 746;margin-left:0}',
+    '  .mp-bv-stats{gap:8px;grid-template-columns:repeat(4,1fr)}',
     '  .mp-bv-stat{padding:12px 6px 8px}',
     '  .mp-bv-stat__v{font-size:21px;min-height:21px}',
     '  .mp-bv-stat__v--cjk{font-size:16px}',
@@ -289,9 +297,15 @@
     return '<div class="mp-bv-trend fade-up" style="transition-delay:.42s">' +
       '<div class="mp-bv-trend__hd">' +
         '<span class="mp-bv-trend__title">历届排名走势</span>' +
-        '<span class="mp-bv-trend__legend">' +
-          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4" fill="var(--clr-accent-light)"/></svg><span class="mp-bv-lg__t">正式单曲</span></span>' +
-          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
+        '<span class="mp-bv-trend__hd-r">' +
+          '<span class="mp-bv-trend__legend">' +
+            '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4" fill="var(--clr-accent-light)"/></svg><span class="mp-bv-lg__t">正式单曲</span></span>' +
+            '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
+          '</span>' +
+          '<button type="button" class="mp-bv-export" aria-label="导出走势图为图片">' +
+            '<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 1.5v8m0 0L4.8 6.3M8 9.5l3.2-3.2M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+            '<span>导出图片</span>' +
+          '</button>' +
         '</span>' +
       '</div>' +
       '<div class="mp-bv-trend__sc"><svg class="mp-bv-trend__svg" role="img" aria-label="历届排名走势"></svg></div>' +
@@ -438,6 +452,85 @@
   }
 
   // 走势图 tooltip：桌面 hover、手机点击；元素与事件仅初始化一次（SVG 重绘不重复绑定）
+  /* ── 走势图导出 PNG（纯前端：内联计算样式 + 嵌入字体 + 头部水印；下载或手机 Web Share）── */
+  function bvCssVar(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+  var _bvFontCssP = null;
+  function bvEmbedFontCss() {  // 把走势图用到的本地字体 base64 内嵌，导出时文字才保真；失败则优雅降级为系统字体
+    if (_bvFontCssP) return _bvFontCssP;
+    var fonts = [
+      ['DM Mono', '400', '../assets/fonts/DM_Mono/DMMono-Regular.ttf'],
+      ['DM Sans', '400', '../assets/fonts/DM_Sans/static/DMSans-Regular.ttf'],
+      ['DM Sans', '600', '../assets/fonts/DM_Sans/static/DMSans-SemiBold.ttf']
+    ];
+    _bvFontCssP = Promise.all(fonts.map(function (f) {
+      return fetch(f[2]).then(function (r) { return r.arrayBuffer(); }).then(function (buf) {
+        var bytes = new Uint8Array(buf), bin = '', CH = 0x8000;
+        for (var i = 0; i < bytes.length; i += CH) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + CH));
+        return "@font-face{font-family:'" + f[0] + "';font-weight:" + f[1] + ";font-style:normal;src:url(data:font/ttf;base64," + btoa(bin) + ") format('truetype')}";
+      }).catch(function () { return ''; });
+    })).then(function (parts) { return parts.join(''); });
+    return _bvFontCssP;
+  }
+  function bvInlineStyles(src, dst) {  // 把 class/var() 解析后的实际样式内联到克隆 SVG，使其自包含
+    var cs = getComputedStyle(src);
+    var props = ['fill', 'stroke', 'stroke-width', 'stroke-dasharray', 'stroke-linecap', 'stroke-linejoin', 'opacity', 'fill-opacity', 'stroke-opacity', 'font-family', 'font-size', 'font-weight', 'font-style', 'text-anchor', 'letter-spacing'];
+    var s = '';
+    for (var i = 0; i < props.length; i++) { var v = cs.getPropertyValue(props[i]); if (v) s += props[i] + ':' + v + ';'; }
+    dst.setAttribute('style', s + (dst.getAttribute('style') || ''));
+    var sc = src.children, dc = dst.children;
+    for (var j = 0; j < sc.length; j++) if (dc[j]) bvInlineStyles(sc[j], dc[j]);
+  }
+  function bvShareOrDownload(blob, name) {
+    var fname = 'Barvision-' + (name || '走势') + '.png';
+    try {
+      var file = new File([blob], fname, { type: 'image/png' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        navigator.share({ files: [file], title: (name || '') + ' · Barvision 历届走势' }).catch(function () {});
+        return;
+      }
+    } catch (e) {}
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+  }
+  function exportBvTrendPng(btn) {
+    var svg = document.querySelector('.mp-bv-trend__svg');
+    if (!svg) return;
+    var orig = btn.innerHTML, lab = btn.querySelector('span');
+    btn.disabled = true; if (lab) lab.textContent = '生成中…';
+    function restore() { btn.disabled = false; btn.innerHTML = orig; }
+    bvEmbedFontCss().then(function (fontCss) {
+      var W = svg.viewBox.baseVal.width || svg.clientWidth || 800, H = svg.viewBox.baseVal.height || 320;
+      var clone = svg.cloneNode(true);
+      bvInlineStyles(svg, clone);
+      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+      clone.setAttribute('width', W); clone.setAttribute('height', H);
+      if (fontCss) { var st = document.createElementNS('http://www.w3.org/2000/svg', 'style'); st.textContent = fontCss; clone.insertBefore(st, clone.firstChild); }
+      var xml = new XMLSerializer().serializeToString(clone);
+      var url = URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml;charset=utf-8' }));
+      var img = new Image();
+      img.onload = function () {
+        var SC = 2, M = 32, HEAD = 92, FOOT = 22, cw = W + M * 2, ch = HEAD + H + FOOT;
+        var cv = document.createElement('canvas'); cv.width = cw * SC; cv.height = ch * SC;
+        var ctx = cv.getContext('2d'); ctx.scale(SC, SC);
+        ctx.fillStyle = bvCssVar('--clr-bg') || '#080812'; ctx.fillRect(0, 0, cw, ch);
+        var name = (d.nickname || '').toString();
+        ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
+        ctx.fillStyle = bvCssVar('--clr-text') || '#fff'; ctx.font = "700 30px 'DM Sans','Segoe UI',sans-serif";
+        ctx.fillText(name, M, 46);
+        ctx.fillStyle = bvCssVar('--clr-violet-light') || '#c084fc'; ctx.font = "600 13px 'DM Sans',sans-serif";
+        ctx.fillText('BARVISION · 历届排名走势', M, 70);
+        ctx.fillStyle = bvCssVar('--clr-text-3') || '#A39BC2'; ctx.font = "500 12px 'DM Sans',sans-serif"; ctx.textAlign = 'right';
+        ctx.fillText('barboard.space', cw - M, 70); ctx.textAlign = 'left';
+        ctx.drawImage(img, M, HEAD, W, H);
+        URL.revokeObjectURL(url);
+        cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, name); restore(); }, 'image/png');
+      };
+      img.onerror = function () { URL.revokeObjectURL(url); restore(); };
+      img.src = url;
+    }).catch(restore);
+  }
+
   function initBvTip() {
     var svg = document.querySelector('.mp-bv-trend__svg');
     if (!svg) return;
@@ -488,16 +581,20 @@
     if (bestN != null) (bv.entries || []).forEach(function (e) { if (!e.is_shadow && e.rank === bestN) bestRep++; });
     var bestColor = bestN === 1 ? 'var(--clr-gold-light)' : bestN === 2 ? 'var(--clr-silver)' : bestN === 3 ? 'var(--clr-bronze)' : '';
     var DIM = 'var(--clr-text-3)';
-    var LATEST_ED = 16;
     function dim0(val, color) { return val === 0 ? DIM : (color || ''); }
+    function f2(v) { return v == null ? '—' : Number(v).toFixed(2); }  // 两位小数；空值→—
+    // 8 张卡（仅统计正式单曲，不含混淆）：A 组（前 4）名次/分数维度，B 组（后 4）场次计数维度
     var stats = [
+      // A 组
       { v: (bestN == null ? '—' : bestN), rep: (bestRep > 1 ? bestRep : 0), k: '最佳名次', color: bestColor },
+      { v: f2(ov.avg), k: '平均名次', color: (ov.avg == null ? DIM : '') },
+      { v: ov.twelve, k: '12 分次数', color: dim0(ov.twelve) },
+      { v: f2(ov.jury_avg), k: '评委平均分', color: (ov.jury_avg == null ? DIM : '') },
+      // B 组：主数字为正式曲数，混淆曲用括号 (n) 单独标注（不并入主数）
       { v: ov.top1, sh: ov.top1_shadow, k: '冠军场数', color: dim0(ov.top1, ov.top1 > 0 ? 'var(--clr-gold-light)' : '') },
       { v: ov.top3, sh: ov.top3_shadow, k: '前三场数', color: dim0(ov.top3) },
-      { v: ov.entries, sh: ov.shadow, k: '参与场数', color: dim0(ov.entries) },
-      { v: ov.twelve, k: '12 分次数', color: dim0(ov.twelve) },
-      { v: '第 ' + ov.debut + ' 届', k: '首次参赛' },
-      { v: '第 ' + ov.active_in + ' 届', k: '最近参赛', color: (ov.active_in === LATEST_ED ? '' : DIM) }
+      { v: ov.top10, sh: ov.top10_shadow, k: '前十场数', color: dim0(ov.top10) },
+      { v: ov.entries, sh: ov.shadow, k: '参与场数', color: dim0(ov.entries) }
     ];
     var statsHtml = stats.map(function (s) {
       var rep = s.rep ? '<span class="mp-bv-rep">(' + s.rep + ')</span>' : '';
@@ -615,6 +712,8 @@
       bvApply();
     }
     drawBvTrend();
+    var _exp = document.querySelector('.mp-bv-export');
+    if (_exp) _exp.addEventListener('click', function () { exportBvTrendPng(_exp); });
     var _bvtt;
     window.addEventListener('resize', function () { clearTimeout(_bvtt); _bvtt = setTimeout(drawBvTrend, 150); });
   }
