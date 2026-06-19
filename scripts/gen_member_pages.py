@@ -175,7 +175,8 @@ def main():
                 data["barvision"] = bv
                 ov = bv["overview"]
                 bv_index[str(space_id)] = {
-                    "editions": sorted(set(e["edition_no"] for e in bv["entries"])),
+                    # 仅报名取消组（如 12B）不算参加该届——与届徽章规则一致，排除 canceled
+                    "editions": sorted(set(e["edition_no"] for e in bv["entries"] if not e.get("canceled"))),
                     "active": ov["active"], "count": ov["entries"] + ov["shadow"],
                     "best": ov["best"], "active_in": ov["active_in"],
                 }
@@ -199,7 +200,7 @@ def main():
             out.write(TEMPLATE.replace("PLACEHOLDER", u_json))
         ov = unclaimed["overview"]
         bv_index["0"] = {
-            "editions": sorted(set(e["edition_no"] for e in unclaimed["entries"])),
+            "editions": sorted(set(e["edition_no"] for e in unclaimed["entries"] if not e.get("canceled"))),
             "active": False, "count": ov["shadow"], "best": None,
             "active_in": ov["active_in"], "unclaimed": True,
         }

@@ -180,11 +180,12 @@ def build_12B():
     ents = []
     for r in rows[1:]:
         if len(r) <= ci_lang or not r[ci_sub].strip(): continue
-        member = norm_name(re.sub(r'混淆', '', r[ci_sub]).strip())  # 本届取消混淆，剥离
+        is_sh = '混淆' in r[ci_sub]  # 12B 选送名单中的「X混淆」= 混淆曲，保留标记（取消组不计成绩，标记仅供展示）
+        member = norm_name(re.sub(r'混淆', '', r[ci_sub]).strip())
         resolve(member)
         ents.append(dict(member=member, member_id=mid_of(member),
                          artist=r[ci_art].strip(), song=fix_feat(r[ci_song].strip()),
-                         language=r[ci_lang].strip() or '英语', canceled=True))
+                         language=r[ci_lang].strip() or '英语', is_shadow=is_sh, canceled=True))
     ents.sort(key=lambda e: sort_key_12b(e['member']))
     for i, e in enumerate(ents): e['eid'] = i
     return {'match': 'B', 'venue': '中众组', 'canceled': True, 'entries': ents,

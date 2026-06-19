@@ -464,7 +464,7 @@
     var rows = m.entries.map(function (e) {
       return '<tr><td class="canc-by">' + memberLink(e.member) + '</td>' +
         '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
-        '<td class="song">' + esc(e.song) + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint-tag">合报</span>' : '') + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + '</td>' +
         '<td class="lang">' + esc(e.language || '') + '</td></tr>';
     }).join('');
     return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整名单</div>' +
@@ -486,7 +486,7 @@
         '<td class="num"><span>' + (e.is_shadow ? '<span class="bvr-num-shadow">' + esc(e.rank) + '*</span>' : esc(e.rank)) + '</span></td>' +
         '<td>' + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint">' + e.member.split('/').map(function (n) { return memberLink(n.trim()); }).join('') + '</span>' : memberLink(e.member)) + '</td>' +
         '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
-        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint-tag">合报</span>' : '') + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + '</td>' +
         '<td class="lang">' + esc(e.language || '') + '</td>' +
         ptsCell('pts--jury', e.jury_vote, pool, 'jury_vote', e) +
         (hasTele ? ptsCell('pts--tele', e.tele_vote, pool, 'tele_vote', e) : '') +

@@ -14,7 +14,11 @@
     '.mp-avatar__placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--clr-violet-light);background:linear-gradient(135deg,var(--clr-surface) 0%,var(--clr-surface-2) 100%);letter-spacing:0}',
     '.mp-avatar__ring{position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--clr-violet),var(--clr-accent));z-index:-1;opacity:.6}',
     '.mp-info{padding-top:8px}',
-    '.mp-nickname{font-family:var(--font-display);font-size:48px;line-height:1;color:var(--clr-text);letter-spacing:.04em;margin-bottom:6px;display:flex;align-items:flex-start}',
+    '.mp-nickname{font-family:var(--font-display);font-size:48px;line-height:1;color:var(--clr-text);letter-spacing:.04em;margin-bottom:18px;display:flex;align-items:flex-start;flex-wrap:wrap;row-gap:6px}',
+    '.mp-nickname__name{white-space:nowrap}',
+    '.mp-bv-badges{display:inline-flex;flex-wrap:wrap;align-items:flex-start;row-gap:4px;order:1}',
+    /* 桌面：@名 在大名下方自成一行（badges 与大名同行在上） */
+    '.mp-nickname .mp-handle{order:2;flex-basis:100%;margin-bottom:0}',
     '.mp-bv-badge{display:inline-block;flex-shrink:0;width:30px;height:29px;margin-left:7px}',
     '.mp-bv-badge__mark{display:block;width:100%;height:100%}',
     '.mp-bv-badge__mark path{fill:currentColor}',
@@ -23,7 +27,7 @@
     '.mp-bv-badge--first{filter:drop-shadow(0 0 3px rgba(212,168,50,.5)) drop-shadow(0 0 8px rgba(212,168,50,.28));animation:mpBvFirstGlow 3.2s ease-in-out infinite}',
     '@keyframes mpBvFirstGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(212,168,50,.42)) drop-shadow(0 0 7px rgba(212,168,50,.2))}50%{filter:drop-shadow(0 0 5px rgba(212,168,50,.72)) drop-shadow(0 0 13px rgba(212,168,50,.42))}}',
     '@media (prefers-reduced-motion:reduce){.mp-bv-badge--first{animation:none}}',
-    '.mp-handle{font-size:15px;color:var(--clr-text-2);margin-bottom:20px}',
+    '.mp-handle{font-family:var(--font-body);font-size:15px;color:var(--clr-text-2);margin-bottom:20px}',
     '.mp-nickname--unclaimed{font-family:var(--font-body);font-size:34px;font-weight:700;color:var(--clr-text-3);letter-spacing:.02em}',
     '.mp-bv-note{font-size:13px;color:var(--clr-text-3);line-height:1.65;margin-bottom:22px;max-width:680px}',
     '.mp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}',
@@ -65,6 +69,9 @@
     '.mp-bv-trend__sc::-webkit-scrollbar{height:6px}',
     '.mp-bv-trend__sc::-webkit-scrollbar-thumb{background:var(--clr-border-2);border-radius:3px}',
     '.mp-bv-trend__svg{display:block;overflow:visible}',
+    '.mp-bv-trend__svg *{pointer-events:none}',  /* 仅 hit 圆可交互，标签/连线/网格不拦截点击 */
+    '.mp-bv-trend__avg{stroke:var(--clr-violet-glow);stroke-width:1.5;stroke-dasharray:6 4}',
+    '.mp-bv-trend__avglab{fill:var(--clr-violet-light);font-family:var(--font-body);font-size:11px;font-weight:600;opacity:.65}',
     '.mp-bv-trend__rank{fill:var(--clr-text-2);font-family:var(--font-mono);font-size:12px}',
     '.mp-bv-trend__rank.is-weak{font-size:10.5px;fill:var(--clr-text-4)}',
     '.mp-bv-trend__grid{stroke:var(--clr-border);stroke-width:1}',
@@ -79,7 +86,7 @@
     '.mp-bv-trend__dot.is-dim{opacity:.65}',
     '.mp-bv-trend__shadow{fill:var(--clr-bg);stroke:var(--clr-text-4);stroke-width:1.6}',
     '.mp-bv-trend__shadow-ring{fill:none;stroke:var(--clr-text-4);stroke-width:1.6}',
-    '.mp-bv-trend__hit{fill:transparent;cursor:pointer}',
+    '.mp-bv-trend__hit{fill:transparent;cursor:pointer;pointer-events:all}',
     '.mp-bv-tip{position:fixed;z-index:200;pointer-events:none;background:var(--clr-surface-2);border:1px solid var(--clr-border-2);border-radius:6px;padding:7px 10px;font-size:12px;line-height:1.55;color:var(--clr-text);box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;transition:opacity .15s;white-space:nowrap}',
     '.mp-bv-tip.is-on{opacity:1}',
     '.mp-bv-tip__row--sh{color:var(--clr-text-3)}',
@@ -130,10 +137,13 @@
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
     '  .mp-links{grid-column:1/-1;flex-direction:row}',
     '  .mp-link{flex:1}',
-    '  .mp-avatar{width:96px;height:96px}',
-    '  .mp-avatar__placeholder{font-size:38px !important}',
-    '  .mp-nickname{font-size:36px}',
-    '  .mp-bv-badge{width:21.25px;height:20.4px;margin-left:5px}',
+    '  .mp-avatar{width:80px;height:80px}',
+    '  .mp-avatar__placeholder{font-size:32px !important}',
+    '  .mp-nickname{font-size:36px;align-items:baseline}',
+    /* 手机：@名 移到大名右边（同行 baseline 对齐），徽章组整组换到大名下方一行 */
+    '  .mp-nickname .mp-handle{order:1;flex-basis:auto;margin-left:10px}',
+    '  .mp-nickname .mp-bv-badges{order:2;flex-basis:100%}',
+    '  .mp-bv-badge{width:20px;height:19.4px;margin-left:4px}',
     '  .mp-bv-stats{gap:8px;grid-template-columns:repeat(auto-fit,minmax(72px,1fr))}',
     '  .mp-bv-stat{padding:12px 6px 8px}',
     '  .mp-bv-stat__v{font-size:21px;min-height:21px}',
@@ -209,6 +219,7 @@
   function bvBadges(bv) {
     var seen = {}, list = [];
     (bv.entries || []).forEach(function (e) {
+      if (e.canceled) return;  // 仅报名取消组（如 12B）不计入届徽章——须参加正式比赛才获该届徽章
       if (e.edition_no != null && !seen[e.edition_no]) { seen[e.edition_no] = 1; list.push({ no: e.edition_no, year: e.year }); }
     });
     if (!list.length) return '';
@@ -240,7 +251,7 @@
         '<td class="ed"><a class="mp-bv-ed" href="' + href + '">第 ' + e.edition_no + ' 届</a></td>' +
         '<td class="num2">' + seriesLabel + '</td>' +
         '<td class="artist">' + esc(e.artist) + '</td>' +
-        '<td class="song">' + esc(e.song) + (e.canceled ? '<span class="mp-bv-canceled">取消</span>' : '') + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + (e.joint ? '<span class="mp-bv-joint">合报</span>' : '') + (e.persona && e.persona !== '匿名' ? '<span class="mp-bv-persona">' + esc(e.persona) + '</span>' : '') + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.joint ? '<span class="mp-bv-joint">合报</span>' : '') + (e.persona && e.persona !== '匿名' ? '<span class="mp-bv-persona">' + esc(e.persona) + '</span>' : '') + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + (e.canceled ? '<span class="mp-bv-canceled">取消</span>' : '') + '</td>' +
         '<td class="num2">' + (e.total == null ? '—' : Math.round(e.total)) + '</td>' +
         '<td class="num2">' + (e.canceled ? '—' : (e.twelve || 0)) + '</td>' +
         '</tr>';
@@ -308,7 +319,7 @@
     var maxRank = Math.max.apply(null, entries.map(function (e) { return e.rank; }));
     var yMax = maxRank + 1;
 
-    var padL = 42, padR = 24, padT = 36, padB = 48, H = 320, minSlotW = 56;
+    var padL = 24, padR = 14, padT = 36, padB = 48, H = 320, minSlotW = 36;
     // 占满容器全宽；场次多到每格 < minSlotW 时才扩宽 → 横向滚动
     var sc = svg.parentNode;
     var contW = (sc && sc.clientWidth) || 600;
@@ -316,8 +327,10 @@
     var plotH = H - padT - padB;
     function xAt(i) {
       if (n === 1) return W / 2;
-      var inset = (W - padL - padR) * 0.06;  // 首尾点距边缘留 6%
-      var lo = padL + inset, hi = W - padR - inset;
+      // 网格线/平均线保持全宽（padL..W-padR）。数据点不对称内收：
+      // 左侧多收（让「平均 X.XX」标注落在空档、不与首点 #N 标签重合），右侧仅微收（末点更贴右、不浪费宽度）
+      var insetL = Math.min(64, (W - padL - padR) * 0.13), insetR = 16;
+      var lo = padL + insetL, hi = W - padR - insetR;
       return lo + (hi - lo) * i / (n - 1);
     }
     function yAt(r) { return padT + plotH * (r - 1) / (yMax - 1); }
@@ -331,6 +344,15 @@
       out += '<line x1="' + padL + '" y1="' + yAt(r).toFixed(1) + '" x2="' + (W - padR) + '" y2="' + yAt(r).toFixed(1) + '" class="mp-bv-trend__grid"/>';
       out += '<text x="' + (padL - 9) + '" y="' + (yAt(r) + 5).toFixed(1) + '" text-anchor="end" class="mp-bv-trend__ylab">' + r + '</text>';
     });
+
+    // 平均排名虚线（仅正式单曲；横线左端上方标注两位小数，紫色调）
+    var offRanks = entries.filter(function (e) { return !e.is_shadow; }).map(function (e) { return e.rank; });
+    if (offRanks.length) {
+      var avg = offRanks.reduce(function (a, b) { return a + b; }, 0) / offRanks.length;
+      var ay = yAt(avg);
+      out += '<line x1="' + padL + '" y1="' + ay.toFixed(1) + '" x2="' + (W - padR) + '" y2="' + ay.toFixed(1) + '" class="mp-bv-trend__avg"/>';
+      out += '<text x="' + (padL + 2) + '" y="' + (ay - 6).toFixed(1) + '" text-anchor="start" class="mp-bv-trend__avglab">平均 ' + avg.toFixed(2) + '</text>';
+    }
 
     // 每个 slot 的数据（正式按名次升序、混淆按名次升序；代表点用于连线）
     var sd = slots.map(function (code, i) {
@@ -365,7 +387,7 @@
 
     // 点 + 名次 + hit 区
     function tipText(e) { return esc((e.artist || '') + ' — ' + (e.song || '')); }
-    function rankLabel(cx, cy, r, weak) { return '<text x="' + cx + '" y="' + (cy - 11).toFixed(1) + '" text-anchor="middle" class="mp-bv-trend__rank' + (weak ? ' is-weak' : '') + '">#' + r + '</text>'; }
+    function rankLabel(cx, cy, r, weak, below) { var ly = below ? (cy + 17) : (cy - 11); return '<text x="' + cx + '" y="' + ly.toFixed(1) + '" text-anchor="middle" class="mp-bv-trend__rank' + (weak ? ' is-weak' : '') + '">#' + r + '</text>'; }
     function hit(cx, cy, tip) { return '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="13" class="mp-bv-trend__hit" data-tip="' + tip + '"/>'; }
 
     sd.forEach(function (s) {
@@ -402,7 +424,10 @@
         if (!byRank[m.rank]) byRank[m.rank] = { cy: m.cy, weak: m.weak };
         else byRank[m.rank].weak = byRank[m.rank].weak && m.weak;
       });
-      Object.keys(byRank).forEach(function (rk) { out += rankLabel(cx, byRank[rk].cy, rk, byRank[rk].weak); });
+      // 同 X 多个名次：相差≤3 时标签上下交替错开，避免重合并露出下方点的 hit 区
+      var lab = Object.keys(byRank).map(function (rk) { return { rank: +rk, cy: byRank[rk].cy, weak: byRank[rk].weak }; }).sort(function (a, b) { return a.cy - b.cy; });
+      var stagger = lab.length >= 2 && (lab[lab.length - 1].rank - lab[0].rank) <= 3;
+      lab.forEach(function (L, li) { out += rankLabel(cx, L.cy, L.rank, L.weak, stagger && (li % 2 === 1)); });
     });
 
     svg.setAttribute('width', W);
@@ -509,6 +534,7 @@
   if (!root) return;
 
   // 未认领伪成员：大名弱化、无头像/标签/外链；否则正常 hero
+  var bvBadgeHtml = d.barvision ? bvBadges(d.barvision) : '';
   var heroHtml = d.unclaimed
     ? '<section class="mp-hero mp-hero--unclaimed">' +
         '<div class="mp-hero__inner section__inner">' +
@@ -531,8 +557,7 @@
               '</div>' +
             '</div>' +
             '<div class="mp-info">' +
-              '<div class="mp-nickname">' + nickname + (d.barvision ? bvBadges(d.barvision) : '') + '</div>' +
-              (handle ? '<div class="mp-handle">@' + handle + '</div>' : '') +
+              '<div class="mp-nickname"><span class="mp-nickname__name">' + nickname + '</span>' + (handle ? '<span class="mp-handle">@' + handle + '</span>' : '') + (bvBadgeHtml ? '<span class="mp-bv-badges">' + bvBadgeHtml + '</span>' : '') + '</div>' +
               (badges ? '<div class="mp-tags">' + badges + '</div>' : '') +
             '</div>' +
             (links ? '<div class="mp-links">' + links + '</div>' : '') +

@@ -4,6 +4,24 @@
 
 ---
 
+## [2026-06-19] — ed1–12 成果微调（标签顺序 / 12B 混淆 / 届徽章 / 滚动条 / 走势图 / 手机端 hero）
+
+### Changed
+- **标签顺序统一为 合报 → (匿名#N) → 混淆 → 取消**（详情页结果概览 `bv-results-render.js`、成员页参赛表 `member-render.js`；匿名页 persona 标签置于混淆/取消之前）。
+- **12B（取消组）混淆曲恢复「混淆」标签**：`parse_bv_edition12.py` `build_12B` 不再剥离「混淆」、改设 `is_shadow`（包妈/虎妈/团妈/雨妈 4 首）；详情页 `canceledList()`（选送名单）与成员页参赛表均显示「混淆」标。重跑全管线。
+- **届徽章规则**：仅参加正式比赛才获该届徽章——`member-render.js` `bvBadges` 收集届号时跳过 `canceled`；`gen_member_pages.py` 的 member-bv-index `editions` 同步排除 canceled-only 届（只报 12B 的奶妈/柠妈/虎妈不得 12 届徽章，参加 12A 的包妈/雨妈保留）。
+- **历届排名走势图**（`member-render.js` `drawBvTrend`）：数据点抵拢两边（左 inset 大、右仅微收，桌面 `minSlotW 56→36` 免滚动）；新增**平均排名虚线**（仅正式单曲，全宽=网格线、位于折线下层、`--clr-violet-glow` 配色、左端上方标注「平均 X.XX」opacity .65）；同 X 名次相差 ≤3 的 `#N` 标签**上下交替错开**；所有非 hit 元素 `pointer-events:none`（修复靠下点无法 hover/点击）。
+- **手机端成员主页 hero**：徽章组移到大名**下方**、`@名` 移到大名**右边**（flex `order` + `flex-basis:100%` 切换桌面/手机两套排布，桌面不变）；徽章可换行不溢出（独立 `.mp-bv-badges` 容器）、手机徽章 20px、头像 96→80px。
+- 全站滚动条主题化（`style.css`）：暗色细条 + 软紫滑块（`--clr-violet-dim`），hover → `--clr-violet-glow` 带 `background-color` 过渡；`style.css?v=` 升 3.0.10 → **3.0.12**（index/bbl/bbl·hof/styleguide）。
+
+### Fixed
+- `.mp-handle` 移入 `.mp-nickname` 后误继承 Bebas Neue 变全大写「@LEE」→ 显式 `font-family:var(--font-body)` 恢复。
+
+### Notes
+- ⚠️ ed12 summary/rules 仍含「本届取消混淆」（对实际举办的 12A 成立，12A 混淆=0）；12B 仅存档名单含 4 首混淆标——文案张力待用户定夺是否改措辞。
+
+---
+
 ## [2026-06-19] — Barvision 第十二届导入（2020 收官，A 办/B 取消）— 2020 全部完成
 
 ### Added

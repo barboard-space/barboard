@@ -718,6 +718,7 @@
      "artist": "BRONSON",
      "song": "Keep Moving",
      "language": "英语",
+     "is_shadow": true,
      "canceled": true,
      "eid": 0
     },
@@ -727,6 +728,7 @@
      "artist": "Robert Ellis",
      "song": "When You're Away",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 1
     },
@@ -736,6 +738,7 @@
      "artist": "Billy Lemos",
      "song": "12:34:00 AM (feat. Omar Apollo & Maxwell Young)",
      "language": "英语",
+     "is_shadow": true,
      "canceled": true,
      "eid": 2
     },
@@ -745,6 +748,7 @@
      "artist": "The War on Drugs",
      "song": "Thinking of a Place",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 3
     },
@@ -754,6 +758,7 @@
      "artist": "Bigflo & Oli",
      "song": "Dommage",
      "language": "法语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 4
     },
@@ -763,6 +768,7 @@
      "artist": "家入レオ",
      "song": "未完成",
      "language": "日语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 5
     },
@@ -772,6 +778,7 @@
      "artist": "Circa Waves",
      "song": "Times Won’t Change Me",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 6
     },
@@ -781,6 +788,7 @@
      "artist": "OutroEu & Melim",
      "song": "Oceana",
      "language": "葡萄牙语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 7
     },
@@ -790,6 +798,7 @@
      "artist": "Bob Moses & ZHU",
      "song": "Desire",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 8
     },
@@ -799,6 +808,7 @@
      "artist": "Ben Montague",
      "song": "Best of You",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 9
     },
@@ -808,6 +818,7 @@
      "artist": "100 Gecs",
      "song": "Stupid Horse",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 10
     },
@@ -817,6 +828,7 @@
      "artist": "Yo Trane",
      "song": "Pullin Up",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 11
     },
@@ -826,6 +838,7 @@
      "artist": "Clueso",
      "song": "Tanzen",
      "language": "德语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 12
     },
@@ -835,6 +848,7 @@
      "artist": "Garden City Movement",
      "song": "The Best of Times?",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 13
     },
@@ -844,6 +858,7 @@
      "artist": "Omar Apollo",
      "song": "Stayback Remix (feat. Bootsy Collins)",
      "language": "英语",
+     "is_shadow": true,
      "canceled": true,
      "eid": 14
     },
@@ -853,6 +868,7 @@
      "artist": "The Avalanches",
      "song": "Frankie Sinatra",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 15
     },
@@ -862,6 +878,7 @@
      "artist": "Numcha",
      "song": "Dirty Shoes",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 16
     },
@@ -871,6 +888,7 @@
      "artist": "Sergey Babkin",
      "song": "Де би я",
      "language": "乌克兰语",
+     "is_shadow": true,
      "canceled": true,
      "eid": 17
     },
@@ -880,6 +898,7 @@
      "artist": "Direct & Essenger",
      "song": "Labyrinth",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 18
     },
@@ -889,6 +908,7 @@
      "artist": "Arca",
      "song": "KLK (feat. Rosalía)",
      "language": "西班牙语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 19
     },
@@ -898,6 +918,7 @@
      "artist": "Angel Olsen",
      "song": "Shup Up Kiss Me",
      "language": "英语",
+     "is_shadow": false,
      "canceled": true,
      "eid": 20
     }
