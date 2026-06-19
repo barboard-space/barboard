@@ -4,9 +4,10 @@
 
 ---
 
-## [2026-06-19] — 成员页 overview 八卡两组 + 走势图导出 PNG（Step 1）+ 手机端徽章/走势图续调
+## [2026-06-19] — 成员页 overview 八卡两组 + 走势图/完整记录导出 PNG（Step 1+2）+ 手机端徽章/走势图续调
 
 ### Added
+- **完整记录导出（Step 2）**：走势图标题栏新增「导出完整记录」按钮 → `exportBvCardPng()` 纯前端 canvas 合成一张分享卡（3552×2274）：头部（头像渐变环+昵称首字 + 大名 + @handle + 届徽章行 Path2D 五边形按年配色）+ 8 张统计卡（2×4，含混淆括号）+ 走势图（小标题+图例+高清图）+ 左下 logo 品牌。抽出共享 helper `bvTrendToImage`/`bvDrawLegend`/`bvDrawBrand`，Step 1 重构复用。两按钮：导出走势图 / 导出完整记录。
 - **走势图导出图片功能（Step 1）**：走势图标题栏「导出图片」按钮 → 纯前端 `exportBvTrendPng()` 把 SVG 走势图导出为 2x PNG（克隆 SVG + 内联计算样式解析 `var()` + 懒加载 base64 嵌入 DM Mono/DM Sans 保真 + canvas 加暗底/头部大名/「BARVISION · 历届排名走势」/`barboard.space` 水印）。手机优先 `navigator.share({files})` 唤起微信/QQ，否则下载；零外部服务。验证生成 2400×868 PNG。**Step 2（完整记录分享卡）待做。**
 - 成员页 overview **8 张卡、分 A/B 两组**（桌面一排先 A 后 B、手机 A 上 B 下）：A 组 最佳名次/平均名次/12分次数/评委平均分；B 组 冠军场数/前三场数/前十场数/参与场数。新增聚合字段 `avg`(平均名次)/`top10`+`top10_shadow`(前十)/`jury_avg`(单评委平均分)。
 

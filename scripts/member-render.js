@@ -302,9 +302,13 @@
             '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4" fill="var(--clr-accent-light)"/></svg><span class="mp-bv-lg__t">正式单曲</span></span>' +
             '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
           '</span>' +
-          '<button type="button" class="mp-bv-export" aria-label="导出走势图为图片">' +
+          '<button type="button" class="mp-bv-export" data-exp="trend" aria-label="导出走势图为图片">' +
             '<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 1.5v8m0 0L4.8 6.3M8 9.5l3.2-3.2M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-            '<span>导出图片</span>' +
+            '<span>导出走势图</span>' +
+          '</button>' +
+          '<button type="button" class="mp-bv-export" data-exp="card" aria-label="导出完整记录为图片">' +
+            '<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 1.5v8m0 0L4.8 6.3M8 9.5l3.2-3.2M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+            '<span>导出完整记录</span>' +
           '</button>' +
         '</span>' +
       '</div>' +
@@ -511,76 +515,184 @@
     }
     dl();
   }
+  // 走势图克隆为高分辨率 Image（按 forceW 固定宽度重绘后立即恢复响应式；返回 {img,W,H,free}）
+  function bvTrendToImage(fontCss, SC, forceW) {
+    var svg = document.querySelector('.mp-bv-trend__svg');
+    drawBvTrend(forceW);
+    var W = svg.viewBox.baseVal.width || forceW, H = svg.viewBox.baseVal.height || 320;
+    var clone = svg.cloneNode(true);
+    bvInlineStyles(svg, clone);
+    drawBvTrend();  // 立即恢复响应式宽度（同一任务内无可见闪烁）
+    clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
+    clone.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    clone.setAttribute('width', W * SC); clone.setAttribute('height', H * SC);
+    if (fontCss) { var st = document.createElementNS('http://www.w3.org/2000/svg', 'style'); st.textContent = fontCss; clone.insertBefore(st, clone.firstChild); }
+    var url = URL.createObjectURL(new Blob([new XMLSerializer().serializeToString(clone)], { type: 'image/svg+xml;charset=utf-8' }));
+    return new Promise(function (resolve, reject) {
+      var img = new Image();
+      img.onload = function () { resolve({ img: img, W: W, H: H, free: function () { URL.revokeObjectURL(url); } }); };
+      img.onerror = function () { URL.revokeObjectURL(url); reject(new Error('svg')); };
+      img.src = url;
+    });
+  }
+  // 图例（正式/混淆）：右端对齐 rightX、垂直居中 cyc（坐标均为设备像素）
+  function bvDrawLegend(ctx, rightX, cyc, SC) {
+    ctx.font = (13 * SC) + "px 'DM Sans',sans-serif"; ctx.textAlign = 'left';
+    var leg = [
+      { t: '正式单曲', hollow: false, c: bvCssVar('--clr-accent-light') || '#7fd4ff' },
+      { t: '混淆单曲', hollow: true, c: bvCssVar('--clr-bg') || '#080812', s: bvCssVar('--clr-text-4') || '#6a6488' }
+    ];
+    var lr = 4.5 * SC, ldg = 6 * SC, lig = 18 * SC;
+    var lw = leg.map(function (it) { return 2 * lr + ldg + ctx.measureText(it.t).width; });
+    var lx = rightX - lw.reduce(function (a, b) { return a + b; }, 0) - lig * (leg.length - 1);
+    ctx.textBaseline = 'middle';
+    leg.forEach(function (it, i) {
+      ctx.beginPath(); ctx.arc(lx + lr, cyc, lr, 0, 2 * Math.PI);
+      ctx.fillStyle = it.c; ctx.fill();
+      if (it.hollow) { ctx.lineWidth = 1.6 * SC; ctx.strokeStyle = it.s; ctx.stroke(); }
+      ctx.fillStyle = bvCssVar('--clr-text-3') || '#A39BC2';
+      ctx.fillText(it.t, lx + 2 * lr + ldg, cyc);
+      lx += lw[i] + lig;
+    });
+    ctx.textBaseline = 'alphabetic';
+  }
+  // 品牌：logo + barboard.space，从 x 起、垂直居中 cyc（设备像素）
+  function bvDrawBrand(ctx, x, cyc, SC, logo) {
+    var bx = x;
+    if (logo && logo.naturalWidth) {
+      var lh = 22 * SC, lwd = lh * (logo.naturalWidth / logo.naturalHeight);
+      ctx.drawImage(logo, x, cyc - lh / 2, lwd, lh);
+      bx = x + lwd + 8 * SC;
+    }
+    ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = '600 ' + (14 * SC) + "px 'DM Sans',sans-serif";
+    ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+    ctx.fillText('barboard.space', bx, cyc + 2 * SC);
+    ctx.textBaseline = 'alphabetic';
+  }
   function exportBvTrendPng(btn) {
     var svg = document.querySelector('.mp-bv-trend__svg');
     if (!svg) return;
     var orig = btn.innerHTML, lab = btn.querySelector('span');
     btn.disabled = true; if (lab) lab.textContent = '生成中…';
     function restore() { btn.disabled = false; btn.innerHTML = orig; }
+    var SC = 3;
     Promise.all([bvEmbedFontCss(), bvLoadLogo()]).then(function (res) {
       var fontCss = res[0], logo = res[1];
-      var SC = 3, EXPORT_W = 1120;  // SC=高分辨率倍率（直接以 W*SC 像素栅格化）；EXPORT_W=固定逻辑宽度，手机也得到桌面级宽幅
-      drawBvTrend(EXPORT_W);  // 按固定宽度重绘（不依赖设备视口）
-      var W = svg.viewBox.baseVal.width || EXPORT_W, H = svg.viewBox.baseVal.height || 320;
-      var clone = svg.cloneNode(true);
-      bvInlineStyles(svg, clone);
-      drawBvTrend();  // 立即恢复响应式宽度（与上一次重绘在同一任务内，无可见闪烁）
-      clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-      clone.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
-      clone.setAttribute('width', W * SC); clone.setAttribute('height', H * SC);
-      if (fontCss) { var st = document.createElementNS('http://www.w3.org/2000/svg', 'style'); st.textContent = fontCss; clone.insertBefore(st, clone.firstChild); }
-      var xml = new XMLSerializer().serializeToString(clone);
-      var url = URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml;charset=utf-8' }));
-      var img = new Image();
-      img.onload = function () {
-        var M = 32 * SC, HEAD = 92 * SC, FOOT = 46 * SC, cw = W * SC + M * 2, ch = HEAD + H * SC + FOOT;
+      return bvTrendToImage(fontCss, SC, 1120).then(function (t) {
+        var M = 32 * SC, HEAD = 92 * SC, FOOT = 46 * SC, cw = t.W * SC + M * 2, ch = HEAD + t.H * SC + FOOT;
         var cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
         var ctx = cv.getContext('2d');
         ctx.fillStyle = bvCssVar('--clr-bg') || '#080812'; ctx.fillRect(0, 0, cw, ch);
-        var name = (d.nickname || '').toString();
+        var name = (nickname || '').toString();
         ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
         ctx.fillStyle = bvCssVar('--clr-text') || '#fff'; ctx.font = '700 ' + (30 * SC) + "px 'DM Sans','Segoe UI',sans-serif";
         ctx.fillText(name, M, 46 * SC);
         ctx.fillStyle = bvCssVar('--clr-violet-light') || '#c084fc'; ctx.font = '600 ' + (13 * SC) + "px 'DM Sans',sans-serif";
         ctx.fillText('BARVISION · 历届排名走势', M, 70 * SC);
-        // 图例（正式单曲实心 / 混淆单曲空心）：右上角，与屏上头部图例对应
-        ctx.textAlign = 'left';
-        ctx.font = (13 * SC) + "px 'DM Sans',sans-serif";
-        var leg = [
-          { t: '正式单曲', hollow: false, c: bvCssVar('--clr-accent-light') || '#7fd4ff' },
-          { t: '混淆单曲', hollow: true, c: bvCssVar('--clr-bg') || '#080812', s: bvCssVar('--clr-text-4') || '#6a6488' }
-        ];
-        var lr = 4.5 * SC, ldg = 6 * SC, lig = 18 * SC;
-        var lw = leg.map(function (it) { return 2 * lr + ldg + ctx.measureText(it.t).width; });
-        var lx = cw - M - lw.reduce(function (a, b) { return a + b; }, 0) - lig * (leg.length - 1);
-        var ly = 38 * SC;
-        ctx.textBaseline = 'middle';
-        leg.forEach(function (it, i) {
-          ctx.beginPath(); ctx.arc(lx + lr, ly, lr, 0, 2 * Math.PI);
-          ctx.fillStyle = it.c; ctx.fill();
-          if (it.hollow) { ctx.lineWidth = 1.6 * SC; ctx.strokeStyle = it.s; ctx.stroke(); }
-          ctx.fillStyle = bvCssVar('--clr-text-3') || '#A39BC2';
-          ctx.fillText(it.t, lx + 2 * lr + ldg, ly);
-          lx += lw[i] + lig;
-        });
-        ctx.textBaseline = 'alphabetic';
-        ctx.drawImage(img, M, HEAD, W * SC, H * SC);
-        // 左下角品牌：logo + 网站地址（logo 略大于文字）
-        var by = HEAD + H * SC + FOOT / 2, bx = M;
-        if (logo && logo.naturalWidth) {
-          var lh2 = 22 * SC, lw2 = lh2 * (logo.naturalWidth / logo.naturalHeight);
-          ctx.drawImage(logo, M, by - lh2 / 2, lw2, lh2);
-          bx = M + lw2 + 8 * SC;
-        }
-        ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = '600 ' + (14 * SC) + "px 'DM Sans',sans-serif";
-        ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-        ctx.fillText('barboard.space', bx, by + 2 * SC);
-        ctx.textBaseline = 'alphabetic';
-        URL.revokeObjectURL(url);
+        bvDrawLegend(ctx, cw - M, 38 * SC, SC);
+        ctx.drawImage(t.img, M, HEAD, t.W * SC, t.H * SC);
+        bvDrawBrand(ctx, M, HEAD + t.H * SC + FOOT / 2, SC, logo);
+        t.free();
         cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, name); restore(); }, 'image/png');
-      };
-      img.onerror = function () { URL.revokeObjectURL(url); restore(); };
-      img.src = url;
+      });
+    }).catch(restore);
+  }
+  function exportBvCardPng(btn) {
+    var svg = document.querySelector('.mp-bv-trend__svg');
+    if (!svg || !d.barvision) return;
+    var orig = btn.innerHTML, lab = btn.querySelector('span');
+    btn.disabled = true; if (lab) lab.textContent = '生成中…';
+    function restore() { btn.disabled = false; btn.innerHTML = orig; }
+    var SC = 3;
+    function P(v) { return v * SC; }
+    function rrect(c, x, y, w, h, r) { c.beginPath(); c.moveTo(x + r, y); c.arcTo(x + w, y, x + w, y + h, r); c.arcTo(x + w, y + h, x, y + h, r); c.arcTo(x, y + h, x, y, r); c.arcTo(x, y, x + w, y, r); c.closePath(); }
+    function rcolor(c) { var m = /var\((--[\w-]+)\)/.exec(c); return m ? bvCssVar(m[1]) : c; }
+    Promise.all([bvEmbedFontCss(), bvLoadLogo()]).then(function (res) {
+      var fontCss = res[0], logo = res[1];
+      return bvTrendToImage(fontCss, SC, 1120).then(function (t) {
+        var timg = t.img, W = t.W, H = t.H, ov = d.barvision.overview;
+        // ── 布局（逻辑 px）──
+        var M = 32, GAP = 26, AV = 88, headTop = 32, textX = M + AV + 24;
+        var name = (nickname || '').toString(), hdl = handle ? ('@' + handle) : '';
+        var seen = {}, badges = [];
+        (d.barvision.entries || []).forEach(function (e) { if (e.canceled) return; if (e.edition_no != null && !seen[e.edition_no]) { seen[e.edition_no] = 1; badges.push({ no: e.edition_no, year: e.year }); } });
+        badges.sort(function (a, b) { return a.no - b.no; });
+        var badgeY = headTop + 56, badgeS = 28, badgeGap = 7;
+        var headerBottom = Math.max(headTop + AV, badgeY + badgeS * 746 / 770);
+        var statsTop = headerBottom + GAP, cardGap = 14, cardW = (W - cardGap * 3) / 4, cardH = 78, rowGap = 14;
+        var statsBottom = statsTop + cardH * 2 + rowGap;
+        var trendTop = statsBottom + GAP, trendLabelY = trendTop + 12, chartTop = trendTop + 30, trendBottom = chartTop + H;
+        var footMid = trendBottom + 22 + 16, chL = trendBottom + 22 + 36 + 8, cw = W + M * 2;
+        // ── 画布 ──
+        var cv = document.createElement('canvas'); cv.width = cw * SC; cv.height = chL * SC;
+        var ctx = cv.getContext('2d');
+        ctx.fillStyle = bvCssVar('--clr-bg') || '#080812'; ctx.fillRect(0, 0, cv.width, cv.height);
+        // ── 头像 ──
+        var acx = P(M + AV / 2), acy = P(headTop + AV / 2);
+        var grd = ctx.createLinearGradient(acx - P(AV / 2), acy - P(AV / 2), acx + P(AV / 2), acy + P(AV / 2));
+        grd.addColorStop(0, bvCssVar('--clr-violet') || '#a855f7'); grd.addColorStop(1, bvCssVar('--clr-accent') || '#00b4ff');
+        ctx.beginPath(); ctx.arc(acx, acy, P(AV / 2 + 3), 0, 2 * Math.PI); ctx.fillStyle = grd; ctx.fill();
+        ctx.beginPath(); ctx.arc(acx, acy, P(AV / 2), 0, 2 * Math.PI); ctx.fillStyle = bvCssVar('--clr-surface-2') || '#1a1a2e'; ctx.fill();
+        ctx.fillStyle = bvCssVar('--clr-violet-light') || '#c084fc'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.font = phIsCJK ? ('700 ' + P(40) + "px 'DM Sans',sans-serif") : (P(46) + "px 'Bebas Neue',sans-serif");
+        ctx.fillText(ph, acx, acy + P(phIsCJK ? 2 : 3));
+        // ── 名 + @ ──
+        ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = bvCssVar('--clr-text') || '#fff'; ctx.font = '700 ' + P(34) + "px 'DM Sans','Segoe UI',sans-serif";
+        ctx.fillText(name, P(textX), P(headTop + 36));
+        var nameW = ctx.measureText(name).width;
+        if (hdl) { ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = P(15) + "px 'DM Sans',sans-serif"; ctx.fillText(hdl, P(textX) + nameW + P(12), P(headTop + 36)); }
+        // ── 徽章 ──
+        badges.forEach(function (ed, i) {
+          var col = rcolor(ed.no === 1 ? 'var(--clr-gold)' : (BV_YEAR_COLOR[ed.year] || 'var(--clr-board)'));
+          ctx.save(); ctx.translate(P(textX) + i * P(badgeS + badgeGap), P(badgeY)); var s = P(badgeS) / 770; ctx.scale(s, s);
+          ctx.fillStyle = col; ctx.fill(new Path2D(LOGO_HOLLOW_PATH));
+          ctx.fillStyle = bvCssVar('--clr-text') || '#fff'; var two = ed.no >= 10;
+          ctx.font = (two ? 300 : 360) + "px 'Bebas Neue',sans-serif"; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
+          ctx.fillText(String(ed.no), 382, two ? 497 : 518);
+          ctx.restore();
+        });
+        // ── 8 张统计卡 ──
+        var GOLD = bvCssVar('--clr-gold-light'), SILVER = bvCssVar('--clr-silver'), BRONZE = bvCssVar('--clr-bronze'), DIM = bvCssVar('--clr-text-3');
+        function f2(v) { return v == null ? '—' : Number(v).toFixed(2); }
+        var bestN = ov.best, bestColor = bestN === 1 ? GOLD : bestN === 2 ? SILVER : bestN === 3 ? BRONZE : '';
+        var bestRep = 0; if (bestN != null) (d.barvision.entries || []).forEach(function (e) { if (!e.is_shadow && e.rank === bestN) bestRep++; });
+        var cards = [
+          { n: (bestN == null ? '—' : String(bestN)), p: (bestRep > 1 ? bestRep : 0), k: '最佳名次', c: bestColor },
+          { n: f2(ov.avg), k: '平均名次' },
+          { n: String(ov.twelve), k: '12 分次数', c: ov.twelve === 0 ? DIM : '' },
+          { n: f2(ov.jury_avg), k: '评委平均分' },
+          { n: String(ov.top1), p: ov.top1_shadow, k: '冠军场数', c: ov.top1 > 0 ? GOLD : DIM },
+          { n: String(ov.top3), p: ov.top3_shadow, k: '前三场数', c: ov.top3 === 0 ? DIM : '' },
+          { n: String(ov.top10), p: ov.top10_shadow, k: '前十场数', c: ov.top10 === 0 ? DIM : '' },
+          { n: String(ov.entries), p: ov.shadow, k: '参与场数', c: ov.entries === 0 ? DIM : '' }
+        ];
+        cards.forEach(function (cd, i) {
+          var x = P(M + (i % 4) * (cardW + cardGap)), y = P(statsTop + Math.floor(i / 4) * (cardH + rowGap)), w = P(cardW), h = P(cardH);
+          rrect(ctx, x, y, w, h, P(8)); ctx.fillStyle = bvCssVar('--clr-surface') || '#12121f'; ctx.fill();
+          ctx.lineWidth = P(1); ctx.strokeStyle = bvCssVar('--clr-border') || '#262636'; ctx.stroke();
+          var numCJK = /[一-鿿]/.test(cd.n);
+          var numFont = numCJK ? ('700 ' + P(20) + "px 'DM Sans',sans-serif") : (P(30) + "px 'Bebas Neue',sans-serif");
+          ctx.font = numFont; ctx.textBaseline = 'alphabetic'; var nw = ctx.measureText(cd.n).width;
+          var pStr = cd.p ? ('(' + cd.p + ')') : '', pw = 0;
+          if (pStr) { ctx.font = P(13) + "px 'DM Sans',sans-serif"; pw = ctx.measureText(pStr).width + P(3); }
+          var sx = x + w / 2 - (nw + pw) / 2, numY = y + P(46);
+          ctx.textAlign = 'left'; ctx.font = numFont; ctx.fillStyle = cd.c || bvCssVar('--clr-text') || '#fff'; ctx.fillText(cd.n, sx, numY);
+          if (pStr) { ctx.font = P(13) + "px 'DM Sans',sans-serif"; ctx.fillStyle = DIM; ctx.fillText(pStr, sx + nw + P(3), numY); }
+          ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = P(12) + "px 'DM Sans',sans-serif"; ctx.textAlign = 'center';
+          ctx.fillText(cd.k, x + w / 2, y + h - P(13));
+        });
+        // ── 走势图（小标题 + 图例 + 图）──
+        ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+        ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = '600 ' + P(13) + "px 'DM Sans',sans-serif";
+        ctx.fillText('历届排名走势', P(M), P(trendLabelY + 4));
+        bvDrawLegend(ctx, P(M + W), P(trendLabelY), SC);
+        ctx.drawImage(timg, P(M), P(chartTop), W * SC, H * SC);
+        // ── 品牌脚 ──
+        bvDrawBrand(ctx, P(M), P(footMid), SC, logo);
+        t.free();
+        cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, name); restore(); }, 'image/png');
+      });
     }).catch(restore);
   }
 
@@ -765,8 +877,9 @@
       bvApply();
     }
     drawBvTrend();
-    var _exp = document.querySelector('.mp-bv-export');
-    if (_exp) _exp.addEventListener('click', function () { exportBvTrendPng(_exp); });
+    Array.prototype.forEach.call(document.querySelectorAll('.mp-bv-export'), function (b) {
+      b.addEventListener('click', function () { (b.dataset.exp === 'card' ? exportBvCardPng : exportBvTrendPng)(b); });
+    });
     var _bvtt;
     window.addEventListener('resize', function () { clearTimeout(_bvtt); _bvtt = setTimeout(drawBvTrend, 150); });
   }
