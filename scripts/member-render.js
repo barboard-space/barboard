@@ -311,7 +311,7 @@
       '<div class="mp-bv-trend__sc"><svg class="mp-bv-trend__svg" role="img" aria-label="历届排名走势"></svg></div>' +
     '</div>';
   }
-  function drawBvTrend() {
+  function drawBvTrend(forceW) {  // forceW：导出时传入固定逻辑宽度，使各设备产出一致的宽幅高清图
     var svg = document.querySelector('.mp-bv-trend__svg');
     if (!svg || !d.barvision) return;
     var entries = (d.barvision.entries || []).filter(function (e) { return e.rank != null; });
@@ -336,7 +336,7 @@
     var padL = 24, padR = 14, padT = 36, padB = 48, H = 320, minSlotW = 36;
     // 占满容器全宽；场次多到每格 < minSlotW 时才扩宽 → 横向滚动
     var sc = svg.parentNode;
-    var contW = (sc && sc.clientWidth) || 600;
+    var contW = forceW || (sc && sc.clientWidth) || 600;
     var W = Math.max(contW, padL + padR + (n > 1 ? (n - 1) * minSlotW : minSlotW));
     var plotH = H - padT - padB;
     function xAt(i) {
@@ -482,16 +482,23 @@
   }
   function bvShareOrDownload(blob, name) {
     var fname = 'Barvision-' + (name || '走势') + '.png';
-    try {
-      var file = new File([blob], fname, { type: 'image/png' });
-      if (navigator.canShare && navigator.canShare({ files: [file] })) {
-        navigator.share({ files: [file], title: (name || '') + ' · Barvision 历届走势' }).catch(function () {});
-        return;
-      }
-    } catch (e) {}
-    var url = URL.createObjectURL(blob);
-    var a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    function dl() {
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1500);
+    }
+    // 仅手机/触屏用系统分享（唤起微信/QQ）；桌面（Windows 的 canShare 也为 true）一律直接下载
+    var touch = window.matchMedia('(hover:none),(pointer:coarse)').matches;
+    if (touch) {
+      try {
+        var file = new File([blob], fname, { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          navigator.share({ files: [file], title: (name || '') + ' · Barvision 历届走势' }).catch(function () {});
+          return;
+        }
+      } catch (e) {}
+    }
+    dl();
   }
   function exportBvTrendPng(btn) {
     var svg = document.querySelector('.mp-bv-trend__svg');
@@ -500,29 +507,33 @@
     btn.disabled = true; if (lab) lab.textContent = '生成中…';
     function restore() { btn.disabled = false; btn.innerHTML = orig; }
     bvEmbedFontCss().then(function (fontCss) {
-      var W = svg.viewBox.baseVal.width || svg.clientWidth || 800, H = svg.viewBox.baseVal.height || 320;
+      var SC = 3, EXPORT_W = 1120;  // SC=高分辨率倍率（直接以 W*SC 像素栅格化）；EXPORT_W=固定逻辑宽度，手机也得到桌面级宽幅
+      drawBvTrend(EXPORT_W);  // 按固定宽度重绘（不依赖设备视口）
+      var W = svg.viewBox.baseVal.width || EXPORT_W, H = svg.viewBox.baseVal.height || 320;
       var clone = svg.cloneNode(true);
       bvInlineStyles(svg, clone);
+      drawBvTrend();  // 立即恢复响应式宽度（与上一次重绘在同一任务内，无可见闪烁）
       clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
-      clone.setAttribute('width', W); clone.setAttribute('height', H);
+      clone.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+      clone.setAttribute('width', W * SC); clone.setAttribute('height', H * SC);
       if (fontCss) { var st = document.createElementNS('http://www.w3.org/2000/svg', 'style'); st.textContent = fontCss; clone.insertBefore(st, clone.firstChild); }
       var xml = new XMLSerializer().serializeToString(clone);
       var url = URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml;charset=utf-8' }));
       var img = new Image();
       img.onload = function () {
-        var SC = 2, M = 32, HEAD = 92, FOOT = 22, cw = W + M * 2, ch = HEAD + H + FOOT;
-        var cv = document.createElement('canvas'); cv.width = cw * SC; cv.height = ch * SC;
-        var ctx = cv.getContext('2d'); ctx.scale(SC, SC);
+        var M = 32 * SC, HEAD = 92 * SC, FOOT = 22 * SC, cw = W * SC + M * 2, ch = HEAD + H * SC + FOOT;
+        var cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
+        var ctx = cv.getContext('2d');
         ctx.fillStyle = bvCssVar('--clr-bg') || '#080812'; ctx.fillRect(0, 0, cw, ch);
         var name = (d.nickname || '').toString();
         ctx.textBaseline = 'alphabetic'; ctx.textAlign = 'left';
-        ctx.fillStyle = bvCssVar('--clr-text') || '#fff'; ctx.font = "700 30px 'DM Sans','Segoe UI',sans-serif";
-        ctx.fillText(name, M, 46);
-        ctx.fillStyle = bvCssVar('--clr-violet-light') || '#c084fc'; ctx.font = "600 13px 'DM Sans',sans-serif";
-        ctx.fillText('BARVISION · 历届排名走势', M, 70);
-        ctx.fillStyle = bvCssVar('--clr-text-3') || '#A39BC2'; ctx.font = "500 12px 'DM Sans',sans-serif"; ctx.textAlign = 'right';
-        ctx.fillText('barboard.space', cw - M, 70); ctx.textAlign = 'left';
-        ctx.drawImage(img, M, HEAD, W, H);
+        ctx.fillStyle = bvCssVar('--clr-text') || '#fff'; ctx.font = '700 ' + (30 * SC) + "px 'DM Sans','Segoe UI',sans-serif";
+        ctx.fillText(name, M, 46 * SC);
+        ctx.fillStyle = bvCssVar('--clr-violet-light') || '#c084fc'; ctx.font = '600 ' + (13 * SC) + "px 'DM Sans',sans-serif";
+        ctx.fillText('BARVISION · 历届排名走势', M, 70 * SC);
+        ctx.fillStyle = bvCssVar('--clr-text-3') || '#A39BC2'; ctx.font = '500 ' + (12 * SC) + "px 'DM Sans',sans-serif"; ctx.textAlign = 'right';
+        ctx.fillText('barboard.space', cw - M, 70 * SC); ctx.textAlign = 'left';
+        ctx.drawImage(img, M, HEAD, W * SC, H * SC);
         URL.revokeObjectURL(url);
         cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, name); restore(); }, 'image/png');
       };
