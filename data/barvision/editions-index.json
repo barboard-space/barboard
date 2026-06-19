@@ -1149,6 +1149,249 @@
      "handle": "泰坦crazy"
     }
    ]
+  },
+  {
+   "no": 11,
+   "year": 2020,
+   "version": "regular",
+   "name": "The 11th Barvision",
+   "href": "/barvision/2020/regular-11.html",
+   "roster": [
+    {
+     "name": "田妈",
+     "id": 295,
+     "handle": "FREEMAN"
+    },
+    {
+     "name": "城妈",
+     "id": 120,
+     "handle": "MarekTotti"
+    },
+    {
+     "name": "锴妈",
+     "id": 12,
+     "handle": "WillKris锴"
+    },
+    {
+     "name": "季妈",
+     "id": 170,
+     "handle": "季风"
+    },
+    {
+     "name": "奶妈",
+     "id": 102,
+     "handle": "奶儿少爷"
+    },
+    {
+     "name": "团妈",
+     "id": 68,
+     "handle": "不动团子"
+    },
+    {
+     "name": "猴妈",
+     "id": 18,
+     "handle": "Voiiz"
+    },
+    {
+     "name": "薯妈",
+     "id": 191,
+     "handle": "薯妈"
+    },
+    {
+     "name": "院妈",
+     "id": 326,
+     "handle": "天神院院长"
+    },
+    {
+     "name": "Z妈",
+     "id": 138,
+     "handle": "lovezedd"
+    },
+    {
+     "name": "小妈",
+     "id": 153,
+     "handle": "Jeoli音乐"
+    },
+    {
+     "name": "泰妈",
+     "id": 131,
+     "handle": "泰坦crazy"
+    },
+    {
+     "name": "布妈",
+     "id": 157,
+     "handle": "Vivienne-Eliza"
+    },
+    {
+     "name": "洛妈",
+     "id": 124,
+     "handle": "Lolo_sara"
+    },
+    {
+     "name": "包妈",
+     "id": 20,
+     "handle": "Jeremy_BAg"
+    },
+    {
+     "name": "兔妈",
+     "id": 118,
+     "handle": "Razbit"
+    },
+    {
+     "name": "雨妈",
+     "id": 17,
+     "handle": "Lee翼雨"
+    },
+    {
+     "name": "雀妈",
+     "id": 189,
+     "handle": "雀妈"
+    },
+    {
+     "name": "晕妈",
+     "id": 117,
+     "handle": "dizzyhugh"
+    },
+    {
+     "name": "鹿妈",
+     "id": 165,
+     "handle": "Leevai"
+    },
+    {
+     "name": "杰妈",
+     "id": 156,
+     "handle": "jh201013"
+    },
+    {
+     "name": "乐妈",
+     "id": 176,
+     "handle": "Coke"
+    },
+    {
+     "name": "A妈",
+     "id": 132,
+     "handle": "AloneAlien_"
+    },
+    {
+     "name": "柠妈",
+     "id": 19,
+     "handle": "LemonSheeran"
+    },
+    {
+     "name": "雪妈",
+     "id": 109,
+     "handle": "Sprite"
+    },
+    {
+     "name": "虎妈",
+     "id": 111,
+     "handle": "老白虎qwq"
+    }
+   ]
+  },
+  {
+   "no": 12,
+   "year": 2020,
+   "version": "regular",
+   "name": "The 12th Barvision",
+   "href": "/barvision/2020/regular-12.html",
+   "roster": [
+    {
+     "name": "城妈",
+     "id": 120,
+     "handle": "MarekTotti"
+    },
+    {
+     "name": "季妈",
+     "id": 170,
+     "handle": "季风"
+    },
+    {
+     "name": "萌妈",
+     "id": 125,
+     "handle": "绿荫夏语"
+    },
+    {
+     "name": "雨妈",
+     "id": 17,
+     "handle": "Lee翼雨"
+    },
+    {
+     "name": "包妈",
+     "id": 20,
+     "handle": "Jeremy_BAg"
+    },
+    {
+     "name": "Z妈",
+     "id": 138,
+     "handle": "lovezedd"
+    },
+    {
+     "name": "杰妈",
+     "id": 156,
+     "handle": "jh201013"
+    },
+    {
+     "name": "小妈",
+     "id": 153,
+     "handle": "Jeoli音乐"
+    },
+    {
+     "name": "雪妈",
+     "id": 109,
+     "handle": "Sprite"
+    },
+    {
+     "name": "田妈",
+     "id": 295,
+     "handle": "FREEMAN"
+    },
+    {
+     "name": "洛妈",
+     "id": 124,
+     "handle": "Lolo_sara"
+    },
+    {
+     "name": "锴妈",
+     "id": 12,
+     "handle": "WillKris锴"
+    },
+    {
+     "name": "团妈",
+     "id": 68,
+     "handle": "不动团子"
+    },
+    {
+     "name": "苏妈",
+     "id": 127,
+     "handle": "莫扎特_伦苏"
+    },
+    {
+     "name": "晕妈",
+     "id": 117,
+     "handle": "dizzyhugh"
+    },
+    {
+     "name": "A妈",
+     "id": 132,
+     "handle": "AloneAlien_"
+    },
+    {
+     "name": "虎妈",
+     "id": 111,
+     "handle": "老白虎qwq"
+    },
+    {
+     "name": "奶妈",
+     "id": 102,
+     "handle": "奶儿少爷"
+    },
+    {
+     "name": "柠妈",
+     "id": 19,
+     "handle": "LemonSheeran"
+    }
+   ]
   }
  ]
 }

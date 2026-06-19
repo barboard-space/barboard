@@ -125,6 +125,7 @@
     '.mp-bv-sh{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-4);margin-left:5px}',
     '.mp-bv-joint{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-3);margin-left:5px}',
     '.mp-bv-persona{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-violet);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-violet-light);margin-left:5px}',
+    '.mp-bv-canceled{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-4);margin-left:5px}',
     '@media (max-width:600px){',
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
     '  .mp-links{grid-column:1/-1;flex-direction:row}',
@@ -230,7 +231,7 @@
   }
   function renderBvRows(list) {
     return list.map(function (e) {
-      var cls = e.is_shadow ? 'mp-bv-row--shadow' : (e.rank && e.rank <= 3 ? 'mp-bv-row--' + e.rank : '');
+      var cls = (e.is_shadow || e.canceled) ? 'mp-bv-row--shadow' : (e.rank && e.rank <= 3 ? 'mp-bv-row--' + e.rank : '');
       var nn = e.edition_no < 10 ? '0' + e.edition_no : e.edition_no;
       var href = '../barvision/' + e.year + '/' + e.version + '-' + nn + '.html';
       var seriesLabel = /^[0-9]+$/.test(String(e.series)) ? '-' : esc(e.series);
@@ -239,9 +240,9 @@
         '<td class="ed"><a class="mp-bv-ed" href="' + href + '">第 ' + e.edition_no + ' 届</a></td>' +
         '<td class="num2">' + seriesLabel + '</td>' +
         '<td class="artist">' + esc(e.artist) + '</td>' +
-        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + (e.joint ? '<span class="mp-bv-joint">合报</span>' : '') + (e.persona && e.persona !== '匿名' ? '<span class="mp-bv-persona">' + esc(e.persona) + '</span>' : '') + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.canceled ? '<span class="mp-bv-canceled">取消</span>' : '') + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + (e.joint ? '<span class="mp-bv-joint">合报</span>' : '') + (e.persona && e.persona !== '匿名' ? '<span class="mp-bv-persona">' + esc(e.persona) + '</span>' : '') + '</td>' +
         '<td class="num2">' + (e.total == null ? '—' : Math.round(e.total)) + '</td>' +
-        '<td class="num2">' + (e.twelve || 0) + '</td>' +
+        '<td class="num2">' + (e.canceled ? '—' : (e.twelve || 0)) + '</td>' +
         '</tr>';
     }).join('');
   }

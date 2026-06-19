@@ -4,6 +4,32 @@
 
 ---
 
+## [2026-06-19] — Barvision 第十二届导入（2020 收官，A 办/B 取消）— 2020 全部完成
+
+### Added
+- `scripts/parse_bv_edition12.py` → `regular-12.json` + 薄壳 + BUILT_EDITIONS Ⅻ。有规则书（rules 已填）。**至此第 1–12 届全部导入**。
+- **12A**：萌妈/雨妈 合报分开投票各 ×0.5（计分板 ×2 还原）；Z妈 只投前8 ×0.8 折算（计分板显折算小数、最高格记 12）；苏妈/晕妈 未提交排名得分折算（数据 ~70%，规则书写 50%，以总分为准）；匿名 神妈=#11、裸名匿名=#12；max 模式 12 分。
+- **12B（报名后取消）**：match `canceled:true`，仅选送名单（按选送者大名排序：中文拼音 A-Z 前、字母名后）；详情页 `canceledList()` 渲染『选送名单』section；成员页参赛表灰行 + 「取消」标 + 名次/总分/12分「—」；不计走势/统计/名册；匿名 神妈=#13。
+
+### Changed
+- `recompute_bv_ranks.py` 跳过 canceled 匹配；`number_anon.py` 裸名「匿名」非混淆→编号、混淆→不编号（ed3 无人认领保持裸名）；`gen_member_pages` 聚合加 canceled 字段并从统计中排除；`member-render` canceled 行 + `.mp-bv-canceled` CSS；`bv-results-render` canceled 分支 + `canceledList()`。
+
+### Fixed
+- 自查：12 分次数交叉核对 488 条 0 不匹配、ed12 编号 #11/#12/#13、ed3 裸名匿名未被重编、12B 取消行/名单正常、全 data 无「」、预览无报错。
+
+---
+
+## [2026-06-19] — Barvision 第十一届导入（2020，A/B 两组）
+
+### Added
+- `scripts/parse_bv_edition11.py` → `regular-11.json` + 薄壳 + BUILT_EDITIONS Ⅺ。同九/十届框架（无规则书、score=总分、max 模式 12 分）。本届：artist/song 独立两列（Artist(s)/Title，不拆分）；无混淆/无折算/无半值；11A 雨妈/雀妈 合报且**合体给分（联合投票一票 100% 计入、不折算）**；匿名续编 11A 匿名1=#7/匿名2=#8、11B 神妈=#9(选送 Best To You)/隐妈三号=#10(Girls)。
+- `is_anon` 扩为「含匿名/含隐妈/∈{神妈,神隐妈}」；`ALIASES` 加 `隐妈3号→隐妈三号`；`norm_name` 处理空格分隔的联合名。
+
+### Fixed
+- 自查：12 分次数交叉核对 470 条 0 不匹配、合报双计入、详情页匿名#7–#10 正常、无原始匿名名残留与控制台报错。
+
+---
+
 ## [2026-06-19] — Barvision 第十届导入（2020，A/B 两组）
 
 ### Added

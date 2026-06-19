@@ -1,0 +1,911 @@
+{
+ "year": 2020,
+ "edition_no": 12,
+ "edition_name": "The 12th Barvision",
+ "cn_name": "第十二届欧美流行歌曲个人榜吧歌曲大赛",
+ "version": "regular",
+ "city": "",
+ "host": "雨妈",
+ "motto": "",
+ "summary": "第十二届 Barvision 是 2020 年的收官之届，A 小众组如期举办、B 中众组报名后因故取消。A 组冠军是城妈选送的 The Magic Gang — Take Back The Track；本届取消混淆，萌妈与雨妈 合报参赛。B 组的选送名单一并存档展示。",
+ "rules": {
+  "submission": "分 A（小众）/ B（中众）两组报名（同艺人第二次选送须报 B 组）；发行时间 2016.1.1–2020.9.30；lead 艺人无 BB Hot100/UK Top100、≤1 项格莱美通类提名、≤2 首吧视常规版 Top10，feat 艺人无 BB/UK Top20 或在榜>40 周；报名歌曲不得进≥3 名参赛评委的任何年榜、或任一评委年榜 Top20。本届取消混淆。",
+  "niche_standard": [
+   "A 小众｜云村评论≤750·收藏≤10000·Spotify 月听众≤3M/单曲≤6M·YT 英语 订阅≤2M/MV≤7.5M·小语种≤7.5M/50M",
+   "B 中众｜评论≤2000·收藏≤35000·月听众≤10M/单曲≤40M·YT 英语≤8M/80M·小语种≤25M",
+   "匿名参赛每组≤2 人、按先后用“隐妈X号”命名，不得选上榜歌、不享加分、拿单组第一即自动曝光"
+  ],
+  "format": "A、B 两组分开比赛、独立计分与排名；本届 B 组报名后因故取消举办，仅存档选送名单。",
+  "voting": "欧视制（计分 12/10/8/7/6/5/4/3/2/1）；每位评委上交 Top10 排名；未提交排名扣除其选送歌曲 50% 分数；合报可合榜或将每人排名分数减半（≤2 人合报）。"
+ },
+ "source": "第十二届吧视报名总则（最终版）+ 12A 逐票汇总 / 12B 选送名单",
+ "members": {
+  "A妈": {
+   "id": 132,
+   "handle": "AloneAlien_"
+  },
+  "Z妈": {
+   "id": 138,
+   "handle": "lovezedd"
+  },
+  "包妈": {
+   "id": 20,
+   "handle": "Jeremy_BAg"
+  },
+  "匿名": {
+   "id": 0,
+   "handle": "匿名",
+   "unclaimed": true
+  },
+  "团妈": {
+   "id": 68,
+   "handle": "不动团子"
+  },
+  "城妈": {
+   "id": 120,
+   "handle": "MarekTotti"
+  },
+  "奶妈": {
+   "id": 102,
+   "handle": "奶儿少爷"
+  },
+  "季妈": {
+   "id": 170,
+   "handle": "季风"
+  },
+  "小妈": {
+   "id": 153,
+   "handle": "Jeoli音乐"
+  },
+  "晕妈": {
+   "id": 117,
+   "handle": "dizzyhugh"
+  },
+  "杰妈": {
+   "id": 156,
+   "handle": "jh201013"
+  },
+  "柠妈": {
+   "id": 19,
+   "handle": "LemonSheeran"
+  },
+  "泰妈": {
+   "id": 131,
+   "handle": "泰坦crazy"
+  },
+  "洛妈": {
+   "id": 124,
+   "handle": "Lolo_sara"
+  },
+  "田妈": {
+   "id": 295,
+   "handle": "FREEMAN"
+  },
+  "苏妈": {
+   "id": 127,
+   "handle": "莫扎特_伦苏"
+  },
+  "萌妈": {
+   "id": 125,
+   "handle": "绿荫夏语"
+  },
+  "虎妈": {
+   "id": 111,
+   "handle": "老白虎qwq"
+  },
+  "锴妈": {
+   "id": 12,
+   "handle": "WillKris锴"
+  },
+  "雨妈": {
+   "id": 17,
+   "handle": "Lee翼雨"
+  },
+  "雪妈": {
+   "id": 109,
+   "handle": "Sprite"
+  },
+  "匿名#11": {
+   "id": 0,
+   "handle": "匿名#11",
+   "unclaimed": true,
+   "alias": "神妈"
+  },
+  "匿名#12": {
+   "id": 0,
+   "handle": "匿名#12",
+   "unclaimed": true,
+   "alias": "匿名"
+  },
+  "匿名#13": {
+   "id": 0,
+   "handle": "匿名#13",
+   "unclaimed": true,
+   "alias": "神妈"
+  }
+ },
+ "vote_rule": {
+  "scale": [
+   12,
+   10,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1
+  ],
+  "jury": "选送者互投",
+  "tele": "观众",
+  "note": "12A：萌妈/雨妈 合报且分开投票各 50% 折算（计分板 ×2 还原）、Z妈 只投前8按 80% 折算（计分板显折算小数、最高格记 12）、未提交排名者得分折算；12 分取各投票人投出最高分的正式曲。12B 报名后取消，仅存选送名单。"
+ },
+ "matches": [
+  {
+   "match": "A",
+   "venue": "小众组",
+   "entries": [
+    {
+     "member": "城妈",
+     "member_id": 120,
+     "eid": 0,
+     "language": "英语",
+     "artist": "The Magic Gang",
+     "song": "Take Back The Track",
+     "jury_vote": 94.9,
+     "tele_vote": 15.0,
+     "score": 110,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 1
+    },
+    {
+     "member": "季妈",
+     "member_id": 170,
+     "eid": 1,
+     "language": "英语",
+     "artist": "Hinds",
+     "song": "Good Bad Times",
+     "jury_vote": 87,
+     "tele_vote": 5,
+     "score": 92,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 2
+    },
+    {
+     "member": "萌妈/雨妈",
+     "member_id": null,
+     "eid": 2,
+     "language": "罗马尼亚语",
+     "artist": "Carla's Dreams",
+     "song": "Secrete",
+     "jury_vote": 67,
+     "tele_vote": 24,
+     "score": 91,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 3
+    },
+    {
+     "member": "匿名#11",
+     "member_id": 0,
+     "eid": 3,
+     "language": "英语",
+     "artist": "Owen Pallett",
+     "song": "A Bloody Morning",
+     "jury_vote": 72.3,
+     "tele_vote": 3.0,
+     "score": 75.3,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 4
+    },
+    {
+     "member": "包妈",
+     "member_id": 20,
+     "eid": 4,
+     "language": "英语",
+     "artist": "Inhaler",
+     "song": "We Have to Move On",
+     "jury_vote": 55.5,
+     "tele_vote": 11.0,
+     "score": 66.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 5
+    },
+    {
+     "member": "Z妈",
+     "member_id": 138,
+     "eid": 5,
+     "language": "英语",
+     "artist": "Arlo Parks",
+     "song": "Black Dog",
+     "jury_vote": 63.5,
+     "tele_vote": 0.0,
+     "score": 63.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 6
+    },
+    {
+     "member": "杰妈",
+     "member_id": 156,
+     "eid": 6,
+     "language": "纯音乐",
+     "artist": "Philip Glass & Paul Leonard-Morgan",
+     "song": "Blink of an Eye",
+     "jury_vote": 47,
+     "tele_vote": 8,
+     "score": 55,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 7
+    },
+    {
+     "member": "小妈",
+     "member_id": 153,
+     "eid": 7,
+     "language": "英语",
+     "artist": "Spoon",
+     "song": "First Caress",
+     "jury_vote": 46,
+     "tele_vote": 8,
+     "score": 54,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 8
+    },
+    {
+     "member": "雪妈",
+     "member_id": 109,
+     "eid": 8,
+     "language": "英语",
+     "artist": "Orkid",
+     "song": "Lay Low",
+     "jury_vote": 52.1,
+     "tele_vote": 0.0,
+     "score": 52.1,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 9
+    },
+    {
+     "member": "匿名#12",
+     "member_id": 0,
+     "eid": 9,
+     "language": "英语",
+     "artist": "塔尔Tar",
+     "song": "Running",
+     "jury_vote": 40.5,
+     "tele_vote": 3.0,
+     "score": 43.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 10
+    },
+    {
+     "member": "田妈",
+     "member_id": 295,
+     "eid": 10,
+     "language": "英语",
+     "artist": "Hot Country Knights",
+     "song": "Pick Her Up (feat. Travis Tritt)",
+     "jury_vote": 35,
+     "tele_vote": 8,
+     "score": 43,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 11
+    },
+    {
+     "member": "洛妈",
+     "member_id": 124,
+     "eid": 11,
+     "language": "英语",
+     "artist": "The Dead Tongues",
+     "song": "Déjá Vu",
+     "jury_vote": 37,
+     "tele_vote": 4,
+     "score": 41,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 12
+    },
+    {
+     "member": "锴妈",
+     "member_id": 12,
+     "eid": 12,
+     "language": "英语",
+     "artist": "ieuan",
+     "song": "Nicotine",
+     "jury_vote": 27.2,
+     "tele_vote": 10.0,
+     "score": 37.2,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 13
+    },
+    {
+     "member": "团妈",
+     "member_id": 68,
+     "eid": 13,
+     "language": "纯音乐",
+     "artist": "Jazzinuf",
+     "song": "1001 Nights (feat. Hippo Dreams)",
+     "jury_vote": 19.5,
+     "tele_vote": 7.0,
+     "score": 26.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 14
+    },
+    {
+     "member": "苏妈",
+     "member_id": 127,
+     "eid": 14,
+     "language": "英语",
+     "artist": "Austra",
+     "song": "I am not waiting (Claptone Remix)",
+     "jury_vote": 23.4,
+     "tele_vote": 3.0,
+     "score": 18.5,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 15
+    },
+    {
+     "member": "晕妈",
+     "member_id": 117,
+     "eid": 15,
+     "language": "英语",
+     "artist": "Kito",
+     "song": "Alone With You (feat. AlunaGeorge)",
+     "jury_vote": 23.1,
+     "tele_vote": 0.0,
+     "score": 16.2,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 16
+    },
+    {
+     "member": "A妈",
+     "member_id": 132,
+     "eid": 16,
+     "language": "中文",
+     "artist": "杨永聪",
+     "song": "没有伞的人",
+     "jury_vote": 7,
+     "tele_vote": 7,
+     "score": 14,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 17
+    }
+   ],
+   "votes": {
+    "scale": [
+     12,
+     10,
+     8,
+     7,
+     6,
+     5,
+     4,
+     3,
+     2,
+     1
+    ],
+    "voters": [
+     {
+      "voter": "Z妈",
+      "type": "jury",
+      "points": {
+       "0": 2.4,
+       "1": 8,
+       "3": 4.8,
+       "6": 4,
+       "8": 5.6,
+       "12": 3.2,
+       "14": 6.4,
+       "15": 12
+      },
+      "top": 15
+     },
+     {
+      "voter": "城妈",
+      "type": "jury",
+      "points": {
+       "2": 10,
+       "3": 12,
+       "4": 5,
+       "5": 7,
+       "6": 3,
+       "7": 4,
+       "8": 1,
+       "11": 8,
+       "12": 6,
+       "16": 2
+      },
+      "top": 3
+     },
+     {
+      "voter": "锴妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 4,
+       "2": 8,
+       "4": 10,
+       "7": 12,
+       "8": 5,
+       "9": 7,
+       "13": 1,
+       "14": 2,
+       "15": 3
+      },
+      "top": 7
+     },
+     {
+      "voter": "洛妈",
+      "type": "jury",
+      "points": {
+       "0": 7,
+       "2": 12,
+       "3": 4,
+       "4": 1,
+       "6": 6,
+       "8": 8,
+       "10": 10,
+       "12": 3,
+       "13": 2,
+       "16": 5
+      },
+      "top": 2
+     },
+     {
+      "voter": "奶妈",
+      "type": "tele",
+      "points": {
+       "0": 5,
+       "2": 12,
+       "3": 3,
+       "4": 4,
+       "6": 8,
+       "10": 2,
+       "12": 10,
+       "13": 6,
+       "14": 1,
+       "16": 7
+      },
+      "top": 2
+     },
+     {
+      "voter": "匿名#11",
+      "type": "jury",
+      "points": {
+       "0": 8,
+       "1": 12,
+       "4": 3,
+       "5": 7,
+       "6": 6,
+       "7": 4,
+       "8": 5,
+       "9": 1,
+       "11": 10,
+       "15": 2
+      },
+      "top": 1
+     },
+     {
+      "voter": "泰妈",
+      "type": "tele",
+      "points": {
+       "0": 10,
+       "1": 5,
+       "2": 12,
+       "4": 7,
+       "7": 8,
+       "9": 3,
+       "10": 6,
+       "11": 4,
+       "13": 1,
+       "14": 2
+      },
+      "top": 2
+     },
+     {
+      "voter": "雪妈",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 6,
+       "2": 10,
+       "4": 7,
+       "5": 8,
+       "7": 5,
+       "10": 3,
+       "12": 2,
+       "13": 1,
+       "15": 4
+      },
+      "top": 0
+     },
+     {
+      "voter": "萌妈",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 12,
+       "3": 7.0,
+       "4": 2,
+       "5": 6,
+       "6": 8,
+       "9": 5.0,
+       "11": 4,
+       "13": 3.0,
+       "15": 1.0
+      },
+      "top": 1
+     },
+     {
+      "voter": "包妈",
+      "type": "jury",
+      "points": {
+       "0": 8,
+       "1": 6,
+       "2": 4,
+       "3": 10,
+       "5": 1,
+       "6": 3,
+       "7": 12,
+       "8": 2,
+       "9": 7,
+       "10": 5
+      },
+      "top": 7
+     },
+     {
+      "voter": "雨妈",
+      "type": "jury",
+      "points": {
+       "0": 7.0,
+       "1": 8,
+       "4": 3.0,
+       "5": 5.0,
+       "7": 2,
+       "8": 1.0,
+       "9": 6,
+       "10": 12,
+       "13": 4,
+       "14": 10
+      },
+      "top": 10
+     },
+     {
+      "voter": "A妈",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 12,
+       "2": 8,
+       "3": 7,
+       "4": 4,
+       "5": 2,
+       "7": 6,
+       "8": 3,
+       "13": 1,
+       "14": 5
+      },
+      "top": 1
+     },
+     {
+      "voter": "团妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 4,
+       "2": 3,
+       "3": 1,
+       "5": 10,
+       "6": 7,
+       "8": 5,
+       "9": 8,
+       "12": 12,
+       "14": 2
+      },
+      "top": 12
+     },
+     {
+      "voter": "田妈",
+      "type": "jury",
+      "points": {
+       "0": 2,
+       "1": 8,
+       "2": 6,
+       "3": 12,
+       "4": 3,
+       "5": 4,
+       "6": 7,
+       "8": 5,
+       "9": 1,
+       "11": 10
+      },
+      "top": 3
+     },
+     {
+      "voter": "季妈",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "2": 6,
+       "4": 3,
+       "5": 1,
+       "6": 2,
+       "8": 4,
+       "9": 8,
+       "10": 5,
+       "11": 7,
+       "13": 10
+      },
+      "top": 0
+     },
+     {
+      "voter": "小妈",
+      "type": "jury",
+      "points": {
+       "0": 7,
+       "1": 10,
+       "3": 8,
+       "4": 12,
+       "5": 6,
+       "6": 5,
+       "10": 2,
+       "13": 1,
+       "14": 3,
+       "15": 4
+      },
+      "top": 4
+     },
+     {
+      "voter": "杰妈",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 7,
+       "3": 10,
+       "4": 5,
+       "5": 12,
+       "7": 2,
+       "8": 8,
+       "9": 3,
+       "10": 4,
+       "12": 1
+      },
+      "top": 5
+     }
+    ]
+   },
+   "note": "萌妈、雨妈 合报参赛、二人分开投票各按 50% 折算计入（计分板中该二人投票列为 ×2 还原后的原始分）；Z妈 仅投出前 8（非前 10），其投票按 80% 折算（计分板显折算后小数、其最高一格记为 12）。苏妈、晕妈 未提交完整排名，其选送歌曲得分折算。"
+  },
+  {
+   "match": "B",
+   "venue": "中众组",
+   "canceled": true,
+   "entries": [
+    {
+     "member": "包妈",
+     "member_id": 20,
+     "artist": "BRONSON",
+     "song": "Keep Moving",
+     "language": "英语",
+     "canceled": true,
+     "eid": 0
+    },
+    {
+     "member": "城妈",
+     "member_id": 120,
+     "artist": "Robert Ellis",
+     "song": "When You're Away",
+     "language": "英语",
+     "canceled": true,
+     "eid": 1
+    },
+    {
+     "member": "虎妈",
+     "member_id": 111,
+     "artist": "Billy Lemos",
+     "song": "12:34:00 AM (feat. Omar Apollo & Maxwell Young)",
+     "language": "英语",
+     "canceled": true,
+     "eid": 2
+    },
+    {
+     "member": "虎妈",
+     "member_id": 111,
+     "artist": "The War on Drugs",
+     "song": "Thinking of a Place",
+     "language": "英语",
+     "canceled": true,
+     "eid": 3
+    },
+    {
+     "member": "季妈",
+     "member_id": 170,
+     "artist": "Bigflo & Oli",
+     "song": "Dommage",
+     "language": "法语",
+     "canceled": true,
+     "eid": 4
+    },
+    {
+     "member": "杰妈",
+     "member_id": 156,
+     "artist": "家入レオ",
+     "song": "未完成",
+     "language": "日语",
+     "canceled": true,
+     "eid": 5
+    },
+    {
+     "member": "锴妈",
+     "member_id": 12,
+     "artist": "Circa Waves",
+     "song": "Times Won’t Change Me",
+     "language": "英语",
+     "canceled": true,
+     "eid": 6
+    },
+    {
+     "member": "洛妈",
+     "member_id": 124,
+     "artist": "OutroEu & Melim",
+     "song": "Oceana",
+     "language": "葡萄牙语",
+     "canceled": true,
+     "eid": 7
+    },
+    {
+     "member": "萌妈",
+     "member_id": 125,
+     "artist": "Bob Moses & ZHU",
+     "song": "Desire",
+     "language": "英语",
+     "canceled": true,
+     "eid": 8
+    },
+    {
+     "member": "奶妈",
+     "member_id": 102,
+     "artist": "Ben Montague",
+     "song": "Best of You",
+     "language": "英语",
+     "canceled": true,
+     "eid": 9
+    },
+    {
+     "member": "匿名#13",
+     "member_id": 0,
+     "artist": "100 Gecs",
+     "song": "Stupid Horse",
+     "language": "英语",
+     "canceled": true,
+     "eid": 10
+    },
+    {
+     "member": "柠妈",
+     "member_id": 19,
+     "artist": "Yo Trane",
+     "song": "Pullin Up",
+     "language": "英语",
+     "canceled": true,
+     "eid": 11
+    },
+    {
+     "member": "田妈",
+     "member_id": 295,
+     "artist": "Clueso",
+     "song": "Tanzen",
+     "language": "德语",
+     "canceled": true,
+     "eid": 12
+    },
+    {
+     "member": "团妈",
+     "member_id": 68,
+     "artist": "Garden City Movement",
+     "song": "The Best of Times?",
+     "language": "英语",
+     "canceled": true,
+     "eid": 13
+    },
+    {
+     "member": "团妈",
+     "member_id": 68,
+     "artist": "Omar Apollo",
+     "song": "Stayback Remix (feat. Bootsy Collins)",
+     "language": "英语",
+     "canceled": true,
+     "eid": 14
+    },
+    {
+     "member": "小妈",
+     "member_id": 153,
+     "artist": "The Avalanches",
+     "song": "Frankie Sinatra",
+     "language": "英语",
+     "canceled": true,
+     "eid": 15
+    },
+    {
+     "member": "雪妈",
+     "member_id": 109,
+     "artist": "Numcha",
+     "song": "Dirty Shoes",
+     "language": "英语",
+     "canceled": true,
+     "eid": 16
+    },
+    {
+     "member": "雨妈",
+     "member_id": 17,
+     "artist": "Sergey Babkin",
+     "song": "Де би я",
+     "language": "乌克兰语",
+     "canceled": true,
+     "eid": 17
+    },
+    {
+     "member": "雨妈/包妈",
+     "member_id": null,
+     "artist": "Direct & Essenger",
+     "song": "Labyrinth",
+     "language": "英语",
+     "canceled": true,
+     "eid": 18
+    },
+    {
+     "member": "A妈",
+     "member_id": 132,
+     "artist": "Arca",
+     "song": "KLK (feat. Rosalía)",
+     "language": "西班牙语",
+     "canceled": true,
+     "eid": 19
+    },
+    {
+     "member": "Z妈",
+     "member_id": 138,
+     "artist": "Angel Olsen",
+     "song": "Shup Up Kiss Me",
+     "language": "英语",
+     "canceled": true,
+     "eid": 20
+    }
+   ],
+   "votes": {
+    "scale": [],
+    "voters": []
+   }
+  }
+ ]
+}

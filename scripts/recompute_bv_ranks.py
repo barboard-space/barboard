@@ -28,6 +28,7 @@ def rank_key(e, voters, ord_idx):
     return (-e['score'], -(e.get('tele_vote') or 0), -len(pts)) + tuple(-x for x in hist) + (order,)
 
 def recompute(match):
+    if match.get('canceled'): return []  # 取消的组（如 12B）：仅选送名单、无名次，跳过
     entries = match['entries']
     voters = match.get('votes', {}).get('voters', [])
     ordmap = {id(e): i for i, e in enumerate(entries)}  # ed1/2 无 eid 的 running-order 兜底

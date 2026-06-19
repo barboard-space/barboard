@@ -24,12 +24,15 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WRITE = '--write' in sys.argv
 LABEL_RE = re.compile(r'^匿名#\d+$')
 
-def alias_of(members, s):
-    """member/voter 串 s 的具名匿名身份别名；通用『匿名』或非匿名返回 None。"""
+def alias_of(members, s, is_shadow=False):
+    """member/voter 串 s 的可编号匿名身份别名；不可编号(非匿名/混淆裸名)返回 None。
+    - 已编号『匿名#N』→ 存的原别名（幂等重算）；神妈/隐妈… → s 本身。
+    - 裸名『匿名』：**非混淆**(正式选送/投票)→ 视作具名身份『匿名』编号；**混淆**(第3/4届无人认领)→ None 不编号。"""
     info = members.get(s, {}) or {}
     if not info.get('unclaimed'): return None
-    if s == '匿名': return None
-    return info.get('alias', s)  # 已编号→存的原别名；否则 s 本身即别名(神妈/隐妈)
+    if LABEL_RE.match(s): return info.get('alias', s)
+    if s == '匿名': return None if is_shadow else '匿名'
+    return info.get('alias', s)
 
 def main():
     eds = []
@@ -44,7 +47,7 @@ def main():
         for m in d.get('matches', []):
             order = []; seen = set()  # 同场内身份首次出现顺序（先 entries 后 voters）
             for e in m.get('entries', []):
-                a = alias_of(members, e.get('member', ''))
+                a = alias_of(members, e.get('member', ''), e.get('is_shadow', False))
                 if a and a not in seen: seen.add(a); order.append(a)
             for v in m.get('votes', {}).get('voters', []):
                 a = alias_of(members, v.get('voter', ''))
@@ -54,7 +57,7 @@ def main():
                 counter += 1; lab = '匿名#%d' % counter
                 a2lab[a] = lab; label_alias[lab] = a
             for e in m.get('entries', []):
-                a = alias_of(members, e.get('member', ''))
+                a = alias_of(members, e.get('member', ''), e.get('is_shadow', False))
                 if a in a2lab: e['member'] = a2lab[a]; e['member_id'] = 0
             for v in m.get('votes', {}).get('voters', []):
                 a = alias_of(members, v.get('voter', ''))

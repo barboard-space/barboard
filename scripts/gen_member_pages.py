@@ -49,6 +49,7 @@ def aggregate_barvision(eds):
                     "jury": e.get("jury_vote"), "tele": e.get("tele_vote"), "total": e.get("score"),
                     "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
                     "joint": "/" in nick,  # 联合选送（合报）
+                    "canceled": bool(m.get("canceled") or e.get("canceled")),  # 取消的组(12B)：仅展示、不计统计/走势
                 }
                 members_map = ed.get("members", {}) or {}
                 # 联合选送「A/B」：该记录计入两人各自的吧视；匿名身份(神妈/隐妈/匿名…)统一归 member/0、带 persona 标签区分
@@ -60,9 +61,11 @@ def aggregate_barvision(eds):
     out = {}
     for nick, entries in per.items():
         entries.sort(key=lambda x: (x["edition_no"], x["series"]))
-        official = [x for x in entries if not x["is_shadow"]]
-        shadow = [x for x in entries if x["is_shadow"]]
+        stat = [x for x in entries if not x.get("canceled")]  # 取消组不计入任何统计
+        official = [x for x in stat if not x["is_shadow"]]
+        shadow = [x for x in stat if x["is_shadow"]]
         ranks = [x["rank"] for x in official if x["rank"]]
+        eds_stat = stat or entries  # 仅有取消条目的成员，debut/active 兜底用全部
         out[nick] = {
             "overview": {
                 "best": (min(ranks) if ranks else None),
@@ -73,9 +76,9 @@ def aggregate_barvision(eds):
                 "entries": len(official),
                 "shadow": len(shadow),
                 "twelve": sum(x["twelve"] for x in official),  # 混淆曲的 12 分不计入正式统计
-                "debut": min(x["edition_no"] for x in entries),
-                "active_in": max(x["edition_no"] for x in entries),
-                "active": max(x["year"] for x in entries) >= BV_ACTIVE_SINCE_YEAR,
+                "debut": min(x["edition_no"] for x in eds_stat),
+                "active_in": max(x["edition_no"] for x in eds_stat),
+                "active": max(x["year"] for x in eds_stat) >= BV_ACTIVE_SINCE_YEAR,
             },
             "entries": entries,
         }

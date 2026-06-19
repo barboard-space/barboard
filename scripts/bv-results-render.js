@@ -459,6 +459,19 @@
     for (var i = 0; i < arr.length; i++) if ((arr[i][key] || 0) > v) n++;
     return n + 1;
   }
+  // 取消组（12B）：选送名单（选送者 / 歌手 / 歌名 / 语种），entries 已按选送者大名排序
+  function canceledList(m) {
+    var rows = m.entries.map(function (e) {
+      return '<tr><td class="canc-by">' + memberLink(e.member) + '</td>' +
+        '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
+        '<td class="lang">' + esc(e.language || '') + '</td></tr>';
+    }).join('');
+    return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整名单</div>' +
+      '<div class="bvr-tw fade-up"><table class="bvr-tbl bvr-canc"><thead><tr>' +
+      '<th>选送者</th><th>歌手</th><th>歌名</th><th>语种</th></tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+
   function ptsCell(cls, val, rankArr, key, e) {
     var rank = (e.is_shadow || val == null) ? '' : '<span class="pts-rank">#' + compRank(rankArr, key, val) + '</span>';
     return '<td class="pts ' + cls + '" data-v="' + (val == null ? -1 : val) + '">' +
@@ -764,6 +777,15 @@
     d.matches.forEach(function (m, mi) {
       var pfx = multi ? (matchEng(m) + ' ') : '';
       var venue = esc(m.venue || '');
+
+      // 取消的组（如 12B）：仅展示选送名单（已按选送者排序），无结果/计分板/12分
+      if (m.canceled) {
+        var cid = 'canceled' + (multi ? mi : '');
+        html += section(cid, pfx + '选送名单', 'Submissions · Canceled',
+          '本组报名后因故未举办，仅存档选送名单（按选送者大名排序）。', canceledList(m));
+        toc.push({ id: cid, label: (multi ? venue : '') + '选送名单' });
+        return;
+      }
 
       var rid = 'result' + (multi ? mi : '');
       html += section(rid, pfx + '结果概览', 'Results', '', resultTable(m));

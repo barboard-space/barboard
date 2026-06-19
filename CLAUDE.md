@@ -50,7 +50,7 @@
 - `barvision/2019/regular-01.html` — **Barvision 历届详情页（第一届，已完成，模板基准）**；薄壳 + 共享 `scripts/bv-results-render.js` + `data/barvision/barvision-2019/regular-01.json`；板块 赛制/结果概览/Scoreboard 矩阵/12 Points + 页内 TOC；可点表头排序、桌面+手机两端已打磨；解析脚本 `scripts/parse_bv_edition.py`；详见开发注意事项 **#130**。barvision.html 届次卡 Ⅰ 已接入链接（`BUILT_EDITIONS`）
 
 ### 待建页面（按优先级）
-- **Barvision 历史成绩数据体系（进行中，见 #129）**：完整赛果表（逐届录入）+ 历届详情页（从 barvision.html 届次卡片点入）+ 成员主页「吧视」板块 + HOF 历届前三改版 + 数据核对
+- **Barvision 历史成绩数据体系（进行中，见 #129–#153）**：**第 1–12 届已全部导入**（2019 五届 + 2020 七届）。**⚠️ 下一步不是直接导第 13 届——先「微调之前所做的成果」（ed1–12 详情页/成员页/匿名编号/取消组等打磨，下个会话做）**，之后再导第 13 届（2023 重启，一年一届、不分组、有城市；intro 备稿见 `data/barvision/edition-intros-2023-2025.md`）。剩余：HOF 历届前三改版 + 全量数据核对
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -637,6 +637,16 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **10B 匿名多身份**：CSV 用「匿名1」(选送 Little Help + 投票=jury)、「匿名2」(仅观众投票=tele)。parser `is_anon` 识别 `神妈/隐妈/神隐妈 + 匿名\d*`（含「匿名」「匿名1」「匿名2」）→ id 0 unclaimed 保留别名；`number_anon.py` 全局续编为 **匿名#5(=匿名1)、匿名#6(=匿名2)**（接 ed8/9 的 #1–#4）。4 混淆：田/团/雨/猴。10B 无折算/无半值、小分为标准欧视值。
     - **⚠️ summary 不引用匿名编号**（编号由 number_anon 后定，parser 阶段未知）：parser `cstr` 对匿名冠军用「一位匿名成员」泛称（否则会把临时别名「匿名1」写死进 summary）。
     - 季风→季妈(170) 笔误已并入（ALIASES）；苏妈/晕妈/麦妈 70% 折算系数据自动检测、用户未明示（已加注，可校正）。自查：12 分次数交叉核对 **424 条 0 不匹配**、合报双计入、member/0 含匿名#5、详情页无 匿名1/2 残留与报错。
+152. **第十一届（2020，A/B 两组）已导入**：`scripts/parse_bv_edition11.py` → `regular-11.json` + 薄壳 + BUILT_EDITIONS Ⅺ。同九/十届框架（无规则书 rules `{}`、score=总分、max 模式 12 分）。本届特点：
+    - **列 `选送者 / Artist(s) / Title / 语种`**：artist/song 为**独立两列**（不拆分、不反序，区别于 ed10 的「歌名-歌手」合并反序）。**无混淆、无折算、无半值**，小分接近标准欧视值（仍按 max 模式 12 分）。
+    - **11A 联合「雨妈 雀妈」合报（空格分隔）= 合体给分**：一个联合投票列、**100% 计入、不折算**（区别于 ed10 分开投票×0.5）。`norm_name` 把空格/&// 分隔的名字归一为 `A/B`（member 与 voter 同）；`jury_set` 额外加完整串「雨妈/雀妈」以匹配联合投票列（voter `v in jury_set` 判 jury）。
+    - **匿名身份**：`is_anon` 扩为 **含「匿名」/含「隐妈」/∈{神妈,神隐妈}**（覆盖 神妈/隐妈/隐妈三号/匿名N）；`ALIASES` 加 `隐妈3号→隐妈三号`（投票列与选送列归一为同一身份）。number_anon 续编：11A 匿名1=#7/匿名2=#8、11B **神妈=#9（选送 Best To You #4，先出现）、隐妈三号=#10（Girls #11）**。⚠️ 神妈在 11B 是**选送者**（非仅投票）——首问误判已更正。
+    - Z妈(138)/A妈(132)/虎妈(111)/圈妈(108)/雪妈(109) 均在册真成员。自查：12 分次数交叉核对 **470 条 0 不匹配**、合报双计入、详情页匿名#7–#10 正常、无原始匿名名残留与报错。
+153. **第十二届（2020 收官届，A 办/B 取消）已导入**：`scripts/parse_bv_edition12.py` → `regular-12.json` + 薄壳 + BUILT_EDITIONS Ⅻ。**2020 全部 7 届（6–12）导入完毕**。**有规则书**（rules 已填：A/B 阈值、本届取消混淆、Top10、未提交扣分、合报可减半、匿名≤2/组"隐妈X号"）。
+    - **12A（已办，列 排名/选送者/艺人/歌曲/语种/[投票人]/总分）**：score=总分、max 模式 12 分。**萌妈/雨妈 合报、分开投票各 ×0.5**（计分板 ×2 还原）。**Z妈 只投前 8 → 投票 ×0.8 折算**：CSV 已折，`disp` 把她**最大值那格设为 12**、其余原样小数（计分板显折算小数+最高格 12；score 用 CSV 实际值）。**苏妈/晕妈 未提交完整排名 → 得分折算**（数据约 ×0.7；⚠️ 规则书写「扣 50%」但数据是 70%，以 总分 为准，已加注）。匿名 神妈=匿名#11、裸名「匿名」(塔尔Tar 正式曲)=匿名#12。
+    - **⭐ 12B（报名后取消，列 选送者/艺人/歌曲/语种，无投票/分数/名次）**：match `canceled:true`，entries 仅 member/artist/song/lang/eid，**parser 按选送者大名排序**（中文拼音 A-Z 在前、字母名 A-Z 在后、匿名按「匿」ni 位；脚本内 `PY` 小型拼音表，因无 pypinyin）。12B 匿名 神妈(100 Gecs)=匿名#13。**双重呈现**：① 详情页 `canceledList()` 渲染『选送名单』section（选送者/歌手/歌名/语种，跳过结果/计分板/12分）；② 成员页参赛表 `mp-bv-row--shadow` 灰行 + `.mp-bv-canceled`「取消」标 + 名次/总分/12分 均「—」。**不计入走势/统计/名册**。
+    - **配套通用改动（向后兼容）**：`recompute_bv_ranks.py` 跳过 `canceled` 匹配；`number_anon.py` 的 `alias_of` 加 `is_shadow` 参数——**裸名「匿名」非混淆→编号（ed12 塔尔Tar=#12），混淆→不编号（ed3 无人认领的保持裸名）**；`gen_member_pages` 聚合加 `canceled` 字段、统计(best/top1/3/entries/twelve/debut/active)全部排除 canceled（仅有取消条目者 debut/active 兜底用全部）；`member-render` renderBvRows canceled 分支 + `.mp-bv-canceled` CSS；`bv-results-render` boot 加 canceled 分支 + `canceledList()`。
+    - 自查：12 分次数交叉核对 **488 条 0 不匹配**、合报双计入、ed12 编号 #11/#12/#13、ed3 裸名匿名未被重编、12B 取消行/名单正常、全 data 无「」、详情页/成员页预览无报错。⚠️ 两处数据自动检测/与规则书出入（已加注、可校正）：苏妈/晕妈 折算系数（数据 70% vs 规则书 50%）、12B 神妈编为 #13（取消组的匿名仍按规则 +1）。
 
 ## 对话交接工作流
 
