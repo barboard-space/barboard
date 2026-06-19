@@ -471,6 +471,17 @@
     })).then(function (parts) { return parts.join(''); });
     return _bvFontCssP;
   }
+  var _bvLogoP = null;
+  function bvLoadLogo() {  // 预加载站点 logo（同源 PNG，drawImage 不污染 canvas）；失败返回 null 优雅降级
+    if (_bvLogoP) return _bvLogoP;
+    _bvLogoP = new Promise(function (res) {
+      var im = new Image();
+      im.onload = function () { res(im); };
+      im.onerror = function () { res(null); };
+      im.src = '../assets/images/logo_center.png';
+    });
+    return _bvLogoP;
+  }
   function bvInlineStyles(src, dst) {  // 把 class/var() 解析后的实际样式内联到克隆 SVG，使其自包含
     var cs = getComputedStyle(src);
     var props = ['fill', 'stroke', 'stroke-width', 'stroke-dasharray', 'stroke-linecap', 'stroke-linejoin', 'opacity', 'fill-opacity', 'stroke-opacity', 'font-family', 'font-size', 'font-weight', 'font-style', 'text-anchor', 'letter-spacing'];
@@ -506,7 +517,8 @@
     var orig = btn.innerHTML, lab = btn.querySelector('span');
     btn.disabled = true; if (lab) lab.textContent = '生成中…';
     function restore() { btn.disabled = false; btn.innerHTML = orig; }
-    bvEmbedFontCss().then(function (fontCss) {
+    Promise.all([bvEmbedFontCss(), bvLoadLogo()]).then(function (res) {
+      var fontCss = res[0], logo = res[1];
       var SC = 3, EXPORT_W = 1120;  // SC=高分辨率倍率（直接以 W*SC 像素栅格化）；EXPORT_W=固定逻辑宽度，手机也得到桌面级宽幅
       drawBvTrend(EXPORT_W);  // 按固定宽度重绘（不依赖设备视口）
       var W = svg.viewBox.baseVal.width || EXPORT_W, H = svg.viewBox.baseVal.height || 320;
@@ -521,7 +533,7 @@
       var url = URL.createObjectURL(new Blob([xml], { type: 'image/svg+xml;charset=utf-8' }));
       var img = new Image();
       img.onload = function () {
-        var M = 32 * SC, HEAD = 92 * SC, FOOT = 22 * SC, cw = W * SC + M * 2, ch = HEAD + H * SC + FOOT;
+        var M = 32 * SC, HEAD = 92 * SC, FOOT = 46 * SC, cw = W * SC + M * 2, ch = HEAD + H * SC + FOOT;
         var cv = document.createElement('canvas'); cv.width = cw; cv.height = ch;
         var ctx = cv.getContext('2d');
         ctx.fillStyle = bvCssVar('--clr-bg') || '#080812'; ctx.fillRect(0, 0, cw, ch);
@@ -531,9 +543,39 @@
         ctx.fillText(name, M, 46 * SC);
         ctx.fillStyle = bvCssVar('--clr-violet-light') || '#c084fc'; ctx.font = '600 ' + (13 * SC) + "px 'DM Sans',sans-serif";
         ctx.fillText('BARVISION · 历届排名走势', M, 70 * SC);
-        ctx.fillStyle = bvCssVar('--clr-text-3') || '#A39BC2'; ctx.font = '500 ' + (12 * SC) + "px 'DM Sans',sans-serif"; ctx.textAlign = 'right';
-        ctx.fillText('barboard.space', cw - M, 70 * SC); ctx.textAlign = 'left';
+        // 图例（正式单曲实心 / 混淆单曲空心）：右上角，与屏上头部图例对应
+        ctx.textAlign = 'left';
+        ctx.font = (13 * SC) + "px 'DM Sans',sans-serif";
+        var leg = [
+          { t: '正式单曲', hollow: false, c: bvCssVar('--clr-accent-light') || '#7fd4ff' },
+          { t: '混淆单曲', hollow: true, c: bvCssVar('--clr-bg') || '#080812', s: bvCssVar('--clr-text-4') || '#6a6488' }
+        ];
+        var lr = 4.5 * SC, ldg = 6 * SC, lig = 18 * SC;
+        var lw = leg.map(function (it) { return 2 * lr + ldg + ctx.measureText(it.t).width; });
+        var lx = cw - M - lw.reduce(function (a, b) { return a + b; }, 0) - lig * (leg.length - 1);
+        var ly = 38 * SC;
+        ctx.textBaseline = 'middle';
+        leg.forEach(function (it, i) {
+          ctx.beginPath(); ctx.arc(lx + lr, ly, lr, 0, 2 * Math.PI);
+          ctx.fillStyle = it.c; ctx.fill();
+          if (it.hollow) { ctx.lineWidth = 1.6 * SC; ctx.strokeStyle = it.s; ctx.stroke(); }
+          ctx.fillStyle = bvCssVar('--clr-text-3') || '#A39BC2';
+          ctx.fillText(it.t, lx + 2 * lr + ldg, ly);
+          lx += lw[i] + lig;
+        });
+        ctx.textBaseline = 'alphabetic';
         ctx.drawImage(img, M, HEAD, W * SC, H * SC);
+        // 左下角品牌：logo + 网站地址（logo 略大于文字）
+        var by = HEAD + H * SC + FOOT / 2, bx = M;
+        if (logo && logo.naturalWidth) {
+          var lh2 = 22 * SC, lw2 = lh2 * (logo.naturalWidth / logo.naturalHeight);
+          ctx.drawImage(logo, M, by - lh2 / 2, lw2, lh2);
+          bx = M + lw2 + 8 * SC;
+        }
+        ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = '600 ' + (14 * SC) + "px 'DM Sans',sans-serif";
+        ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
+        ctx.fillText('barboard.space', bx, by + 2 * SC);
+        ctx.textBaseline = 'alphabetic';
         URL.revokeObjectURL(url);
         cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, name); restore(); }, 'image/png');
       };
