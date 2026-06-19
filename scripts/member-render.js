@@ -78,7 +78,7 @@
     '.mp-bv-trend__dot.is-latest{fill:var(--clr-pink-light)}',
     '.mp-bv-trend__dot.is-dim{opacity:.65}',
     '.mp-bv-trend__shadow{fill:var(--clr-bg);stroke:var(--clr-text-4);stroke-width:1.6}',
-    '.mp-bv-trend__inner{fill:none;stroke:var(--clr-bg);stroke-width:1.2}',
+    '.mp-bv-trend__shadow-ring{fill:none;stroke:var(--clr-text-4);stroke-width:1.6}',
     '.mp-bv-trend__hit{fill:transparent;cursor:pointer}',
     '.mp-bv-tip{position:fixed;z-index:200;pointer-events:none;background:var(--clr-surface-2);border:1px solid var(--clr-border-2);border-radius:6px;padding:7px 10px;font-size:12px;line-height:1.55;color:var(--clr-text);box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;transition:opacity .15s;white-space:nowrap}',
     '.mp-bv-tip.is-on{opacity:1}',
@@ -369,14 +369,13 @@
       if (!s.part) return;
       var cx = s.x.toFixed(1);
       var marks = [];  // 收集本场次各点 {rank,cy,weak}：弱化＝混淆曲 / 较差的正式曲
-      // 正式+混淆为同一首歌（如 5C 同曲既正式又混淆夺冠）→ 实心内嵌空心圈
-      var same = s.official.length === 1 && s.shadow.length === 1 &&
-        s.official[0].song === s.shadow[0].song && s.official[0].artist === s.shadow[0].artist;
-      if (same) {
-        var e = s.official[0], cy = yAt(e.rank);
-        out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="4" class="mp-bv-trend__dot ' + dotCls(e, s.latest) + '"/>';
-        out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="2" class="mp-bv-trend__inner"/>';
-        out += hit(cx, cy, tipText(e));
+      // 特例：同一选送者「1 正式 + 1 混淆」名次相同（同 X 同 Y，如 5C 雨妈双第一）→ 实心(正式)不变 + 外套混淆圆环
+      var coincide = s.official.length === 1 && s.shadow.length === 1 && s.official[0].rank === s.shadow[0].rank;
+      if (coincide) {
+        var e = s.official[0], sh = s.shadow[0], cy = yAt(e.rank);
+        out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="6.5" class="mp-bv-trend__shadow-ring"/>';  // 外环 = 混淆单曲
+        out += '<circle cx="' + cx + '" cy="' + cy.toFixed(1) + '" r="4" class="mp-bv-trend__dot ' + dotCls(e, s.latest) + '"/>';  // 实心 = 正式单曲
+        out += hit(cx, cy, tipText(e) + '\n' + tipText(sh));
         marks.push({ rank: e.rank, cy: cy, weak: false });
       } else {
         // 正式曲：实心 4px；多首中较差的点弱化（opacity .65）
@@ -419,7 +418,12 @@
     if (svg.dataset.tipBound) return;
     svg.dataset.tipBound = '1';
     var touch = window.matchMedia('(hover:none),(pointer:coarse)').matches;
-    function fill(el) { tip.textContent = el.getAttribute('data-tip') || ''; }
+    function fill(el) {
+      var t = el.getAttribute('data-tip') || '';
+      if (t.indexOf('\n') < 0) { tip.textContent = t; return; }
+      tip.innerHTML = '';
+      t.split('\n').forEach(function (r) { var div = document.createElement('div'); div.textContent = r; tip.appendChild(div); });
+    }
     function place(x, y) {
       var w = tip.offsetWidth, h = tip.offsetHeight;
       var L = x + 22; if (L + w > window.innerWidth - 8) L = x - w - 22;  // 右侧放不下→翻到左侧

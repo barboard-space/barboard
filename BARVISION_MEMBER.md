@@ -170,7 +170,7 @@
 **(d) 同一场次多首歌（一个 X 多个 Y）**：
 - **正式曲**：实心 `r4`（`.mp-bv-trend__dot`）；同场多首正式时**较差者**（rank 大）加 `.is-dim`（`opacity .65`）。
 - **混淆曲**：空心 `r3`（`.mp-bv-trend__shadow`）——**`fill:var(--clr-bg)`（不透明，遮住穿过的连线）+ `stroke:var(--clr-text-4)` `stroke-width:1.6`**。
-- **正式+混淆同一首歌**（同 artist+song，如 5C 同曲既正式又混淆夺冠）：实心点 + 内嵌空心小圈 `.mp-bv-trend__inner`（`r2 fill:none stroke:var(--clr-bg)`），单点单 tooltip。
+- **特例：同一选送者「1 正式 + 1 混淆」名次相同**（同 X 同 Y，如 5C 雨妈 K. Michelle 正式 #1 + Brantley Gilbert 混淆 #1*）：**实心点(正式)不变 + 外套混淆圆环** `.mp-bv-trend__shadow-ring`（`r6.5 fill:none stroke:var(--clr-text-4) 1.6`），tooltip 两行（正式 / 混淆）。条件 `official[0].rank===shadow[0].rank`（不要求同歌）。一~五届仅此 1 例。
 
 **(e) 点配色**（仅正式/实心点）：`rank===1` → 金 `.is-champ`；否则该成员**最近场次**（`code===BV_SLOTS[lastIdx]`）→ 粉 `.is-latest`（`--clr-pink-light`）；否则蓝 `--clr-accent-light`。混淆空心点恒 `--clr-text-4` 描边。
 
