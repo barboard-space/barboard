@@ -25,10 +25,10 @@ BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRCDIR = r'D:\Genius\Barvision\Barvision 2019-2020\常规版\Barvision 8'
 OUT = os.path.join(BASE, 'data', 'barvision', 'barvision-2020', 'regular-08.json')
 GROUPS = [('Barvision_8A.csv', 'A', '小众组'), ('Barvision_8B.csv', 'B', '中众组')]
-ALIASES = {'淋檬': '柠妈', '柠檬': '柠妈', '绿萌': '萌妈', '院长': '院妈', '可乐': '乐妈',
-           '神妈': '匿名', '隐妈': '匿名', '神隐妈': '匿名'}  # 神妈=匿名大妈（id 0 unclaimed，与用户确认）
+ALIASES = {'淋檬': '柠妈', '柠檬': '柠妈', '绿萌': '萌妈', '院长': '院妈', '可乐': '乐妈'}
 HALVED_B = {'雨妈', '兔妈', '包妈', '泰妈'}  # 仅 B 组：这 4 人投票 ×0.5（CSV 已半值，points 还原 ×2）
-ANON = '匿名'; ANON_INFO = {'id': 0, 'handle': '匿名', 'unclaimed': True}
+# 匿名身份：保留各自别名(神妈/隐妈…)、共用 id 0 unclaimed；全局编号(匿名#N)由 number_anon.py 统一改写
+ANON_PERSONAS = {'神妈', '隐妈', '神隐妈', '匿名'}
 # 源 CSV typo 修正（用户核对版）；键 (artist, song) 用拆分+fix_feat 后的值匹配
 TEXT_FIX = {
     ('Aitana & Cali Y EI Dandee', '+'): ('Aitana & Cali Y El Dandee', '+'),  # EI → El（El Dandee）
@@ -54,8 +54,8 @@ def resolve(nick):
     parts = nick.split('/') if '/' in nick else [nick]
     rid = None
     for p in parts:
-        if p == ANON:
-            SEEN[ANON] = ANON_INFO
+        if p in ANON_PERSONAS:
+            SEEN[p] = {'id': 0, 'handle': p, 'unclaimed': True}
             if rid is None and '/' not in nick: rid = 0
             continue
         info = MEMBERS.get(p)
@@ -67,7 +67,7 @@ def resolve(nick):
 
 def mid_of(member):
     if '/' in member: return None
-    if member == ANON: return 0
+    if member in ANON_PERSONAS: return 0
     return MEMBERS.get(member, {}).get('id')
 
 def load_csv(fn):

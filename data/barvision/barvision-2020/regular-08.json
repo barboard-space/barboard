@@ -34,11 +34,6 @@
    "id": 20,
    "handle": "Jeremy_BAg"
   },
-  "匿名": {
-   "id": 0,
-   "handle": "匿名",
-   "unclaimed": true
-  },
   "可妈": {
    "id": 123,
    "handle": "曹可可KE"
@@ -134,6 +129,18 @@
   "鹿妈": {
    "id": 165,
    "handle": "Leevai"
+  },
+  "匿名#1": {
+   "id": 0,
+   "handle": "匿名#1",
+   "unclaimed": true,
+   "alias": "神妈"
+  },
+  "匿名#2": {
+   "id": 0,
+   "handle": "匿名#2",
+   "unclaimed": true,
+   "alias": "神妈"
   }
  },
  "vote_rule": {
@@ -294,7 +301,7 @@
      "rank": 9
     },
     {
-     "member": "匿名",
+     "member": "匿名#1",
      "member_id": 0,
      "eid": 9,
      "language": "英语",
@@ -309,7 +316,7 @@
      "rank": 10
     },
     {
-     "member": "匿名",
+     "member": "匿名#1",
      "member_id": 0,
      "eid": 10,
      "language": "英语",
@@ -947,7 +954,7 @@
      "rank": 2
     },
     {
-     "member": "匿名",
+     "member": "匿名#2",
      "member_id": 0,
      "eid": 2,
      "language": "韩语",
@@ -1343,7 +1350,7 @@
       }
      },
      {
-      "voter": "匿名",
+      "voter": "匿名#2",
       "type": "jury",
       "points": {
        "0": 12,

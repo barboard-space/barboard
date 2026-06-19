@@ -34,9 +34,12 @@ def aggregate_barvision(eds):
                 nick = e.get("member")
                 if not nick:
                     continue
-                # points 键：三四届按 eid(JSON 中为字符串)，一二届按昵称
-                _pk = str(e["eid"]) if e.get("eid") is not None else nick
-                twelve = sum(1 for v in voters if v.get("points", {}).get(_pk) == 12)
+                # 12 分次数：九届(max 模式)=投票人最高正式曲 v.top；其余=points==12(eid 键/一二届昵称键)
+                if any(v.get("top") is not None for v in voters):
+                    twelve = sum(1 for v in voters if v.get("top") == e.get("eid"))
+                else:
+                    _pk = str(e["eid"]) if e.get("eid") is not None else nick
+                    twelve = sum(1 for v in voters if v.get("points", {}).get(_pk) == 12)
                 rec = {
                     "year": ed["year"], "edition_no": ed["edition_no"],
                     "edition_name": ed["edition_name"], "version": ed["version"],
@@ -47,9 +50,13 @@ def aggregate_barvision(eds):
                     "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
                     "joint": "/" in nick,  # 联合选送（合报）
                 }
-                # 联合选送「A/B」：该记录计入两人各自的吧视
+                members_map = ed.get("members", {}) or {}
+                # 联合选送「A/B」：该记录计入两人各自的吧视；匿名身份(神妈/隐妈/匿名…)统一归 member/0、带 persona 标签区分
                 for target in ([n.strip() for n in nick.split("/")] if "/" in nick else [nick]):
-                    per.setdefault(target, []).append(rec)
+                    if (members_map.get(target, {}) or {}).get("unclaimed"):
+                        per.setdefault("匿名", []).append(dict(rec, persona=target))
+                    else:
+                        per.setdefault(target, []).append(rec)
     out = {}
     for nick, entries in per.items():
         entries.sort(key=lambda x: (x["edition_no"], x["series"]))

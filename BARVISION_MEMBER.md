@@ -61,6 +61,7 @@
 3. **`barvision.html`**：`BUILT_EDITIONS` 加该届 href（届次卡变可点）；如该届卡片尚未存在则补 `EDITIONS` 卡。
 4. **核对/改常量**（§四）：`BV_SLOTS`（新场次代码是否已含）、`LATEST_ED`（最新届号）、`BV_YEAR_COLOR`（新年份配色）、`BV_ACTIVE_SINCE_YEAR`。
 5. **重算名次**：`python scripts/recompute_bv_ranks.py --write`（全局 Eurovision 平局规则，权威名次；默认 dry-run 看变化，加 `--write` 落盘）。
+5.5. **匿名编号**（有匿名大妈的届必跑）：`python scripts/number_anon.py --write`（全局把具名匿名身份 神妈/隐妈… 按 (届,场,首现序) 编号为「匿名#N」并改写 member/voter/members；幂等；详见 CLAUDE.md #150）。
 6. **重跑两脚本**：`python scripts/gen_member_pages.py`（聚合进成员页 + 刷新 `member-bv-index.json`）+ `python scripts/gen_bv_editions_index.py`（刷新 `editions-index.json`，供成员变动 / 上下届导航）。
 7. **校验**（§2.3）。完成——成员页徽章/概览/可排序表/走势图、详情页结果表/计分板/12分/上下届导航全部自动反映。
 

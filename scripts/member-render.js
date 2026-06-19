@@ -124,6 +124,7 @@
     '.mp-bv-row--shadow .rk .rk-sh{display:inline-block;transform:translate(2px,-1px)}',
     '.mp-bv-sh{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-4);margin-left:5px}',
     '.mp-bv-joint{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-3);margin-left:5px}',
+    '.mp-bv-persona{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-violet);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-violet-light);margin-left:5px}',
     '@media (max-width:600px){',
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
     '  .mp-links{grid-column:1/-1;flex-direction:row}',
@@ -238,7 +239,7 @@
         '<td class="ed"><a class="mp-bv-ed" href="' + href + '">第 ' + e.edition_no + ' 届</a></td>' +
         '<td class="num2">' + seriesLabel + '</td>' +
         '<td class="artist">' + esc(e.artist) + '</td>' +
-        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + (e.joint ? '<span class="mp-bv-joint">合报</span>' : '') + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + (e.joint ? '<span class="mp-bv-joint">合报</span>' : '') + (e.persona && e.persona !== '匿名' ? '<span class="mp-bv-persona">' + esc(e.persona) + '</span>' : '') + '</td>' +
         '<td class="num2">' + (e.total == null ? '—' : Math.round(e.total)) + '</td>' +
         '<td class="num2">' + (e.twelve || 0) + '</td>' +
         '</tr>';

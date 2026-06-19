@@ -535,7 +535,9 @@
         if (!e.is_shadow && v.voter === e.member) return '<td class="self' + sep + '"></td>';
         var p = v.points[e.eid != null ? e.eid : e.member];  // eid 键(三四届)兼容昵称键(一二届)
         if (p == null || p === 0) return '<td class="pt' + sep + '"></td>';  // 0 分不显示
-        return '<td class="pt' + (p === 12 ? ' pt--12' : '') + sep + '">' + p + '</td>';
+        // 金标：常规届=该格 12 分；max 模式(九届，小分为任意小数)=该投票人最高正式曲(v.top)
+        var hi = (v.top != null) ? (e.eid === v.top) : (p === 12);
+        return '<td class="pt' + (hi ? ' pt--12' : '') + sep + '">' + p + '</td>';
       }).join('');
       return '<tr' + (e.is_shadow ? ' class="bvr-mtx-row--shadow"' : '') + '><td class="rcp">' + (e.is_shadow ? '<span class="bvr-anon">' + memberLink(e.member) + '</span>' : memberLink(e.member)) + '</td>' +
         '<td class="tot">' + fmtScore(e.score) + '</td>' +
@@ -565,10 +567,15 @@
     var byEid = {};
     (m.entries || []).forEach(function (e) { byEid[e.eid != null ? e.eid : e.member] = e; });  // eid 键(三四届)兼容昵称键(一二届)
     var got = {};  // eid -> {jury:[], tele:[]}
+    var maxMode = (m.votes.voters || []).some(function (v) { return v.top != null; });  // 九届：12 分=投票人最高正式曲
     m.votes.voters.forEach(function (v) {
-      Object.keys(v.points).forEach(function (r) {
-        if (v.points[r] === 12) { (got[r] = got[r] || { jury: [], tele: [] })[v.type].push(v.voter); }
-      });
+      if (maxMode) {
+        if (v.top != null) { (got[v.top] = got[v.top] || { jury: [], tele: [] })[v.type].push(v.voter); }
+      } else {
+        Object.keys(v.points).forEach(function (r) {
+          if (v.points[r] === 12) { (got[r] = got[r] || { jury: [], tele: [] })[v.type].push(v.voter); }
+        });
+      }
     });
     var recips = Object.keys(got).sort(function (a, b) {
       return (got[b].jury.length + got[b].tele.length) - (got[a].jury.length + got[a].tele.length);
@@ -613,7 +620,7 @@
     var r = d.rules || {};
     var dl = '';
     if (r.submission) dl += '<dt>报名</dt><dd>' + esc(r.submission) + '</dd>';
-    if (r.niche_standard) dl += '<dt>要求</dt><dd><span class="niche">' +
+    if (r.niche_standard && r.niche_standard.length) dl += '<dt>要求</dt><dd><span class="niche">' +
       r.niche_standard.map(function (x) { return '<code>' + esc(x) + '</code>'; }).join('') + '</span></dd>';
     if (r.format) dl += '<dt>赛制</dt><dd>' + esc(r.format) + '</dd>';
     if (r.voting) dl += '<dt>投票</dt><dd>' + esc(r.voting) + '</dd>';

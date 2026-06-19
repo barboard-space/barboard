@@ -4,6 +4,49 @@
 
 ---
 
+## [2026-06-19] — Barvision 第十届导入（2020，A/B 两组）
+
+### Added
+- `scripts/parse_bv_edition10.py` → `regular-10.json` + 薄壳 + BUILT_EDITIONS Ⅹ。同第九届（无规则书、任意小数、score=总分、max 模式 12 分）。新点：列「歌名-歌手」反序拆分；10A 雨妈/包妈 合报+投票 50% 折算（×2 还原）、苏妈/晕妈/麦妈 未投票 70% 折算、混淆票可再投；10B 匿名多身份（匿名1 选送+投票、匿名2 仅观众投票）经 `number_anon.py` 续编为 匿名#5/#6；4 混淆田/团/雨/猴。
+- `number_anon.py` 的 `匿名\d*` 识别覆盖 CSV 的「匿名1/匿名2」；parser `cstr` 对匿名冠军用「一位匿名成员」泛称（summary 不写死临时别名）。
+
+### Fixed
+- 季风→季妈(170) 笔误并入。自查：12 分次数交叉核对 424 条 0 不匹配、合报双计入、member/0 含匿名#5、详情页无匿名1/2 残留与控制台报错。
+
+---
+
+## [2026-06-19] — 匿名大妈改为全局编号「匿名#N」
+
+### Added
+- `scripts/number_anon.py`（全局、幂等、`--write`）：把具名匿名身份（神妈/隐妈…）按 **(届号↑→场次→同场首现序) 每次出现 +1** 编号为「匿名#N」，改写各届 JSON 的 entry.member/voter/members（members 存 `alias` 供幂等重算）。通用「匿名」（第3/4届真正无人认领）不编号。当前：ed8 神妈=匿名#1(8A)/#2(8B)、ed9 神妈=匿名#3(9A)/隐妈=匿名#4(9B)。
+
+### Changed
+- `parse_bv_edition8.py`：改回保留匿名 persona（`ANON_PERSONAS`，不再 `神妈→匿名` 并入通用匿名）→ 重新导入 ed8。
+- 因 member 串已是「匿名#N」，详情页/计分板/12分/成员页直接显示，**零渲染改动**；member-render 的 `.mp-bv-persona` 标签现显示「匿名#N」。
+- 导入新届 SOP 新增第 5.5 步 `number_anon.py --write`（recompute 之后、gen 之前）。
+
+### Fixed
+- 验证：number_anon 幂等、ed8/ed9 JSON 无 神妈/隐妈 残留、详情页显示匿名#1–#4、member/0 各条带 persona 标签、12 分交叉核对 385 条 0 不匹配、预览无报错。
+
+---
+
+## [2026-06-19] — Barvision 第九届导入（2020，A/B 两组）+ 多身份匿名 / max 模式 12 分
+
+### Added
+- `scripts/parse_bv_edition9.py` → `data/barvision/barvision-2020/regular-09.json` + 薄壳 + BUILT_EDITIONS Ⅸ。本届无规则书、折算规则多不可考（小分为任意小数，按原始记录呈现，总分为权威 score）。
+- **多身份匿名**：9A 神妈、9B 隐妈 均归「匿名」(id 0 unclaimed)，但保留各自别名 + `persona` 标签区分（member/0 合并展示、详情页显别名链 /0）。`gen_member_pages` 路由 unclaimed 身份进「匿名」桶 + persona；`member-render.js` 新增 `.mp-bv-persona` 标签。
+- **max 模式 12 分**：本届 12 分 = 每位投票人投票列中数值最高的正式曲（混淆不计）。parser 存 `votes.voters[].top=eid`；`bv-results-render.js`（计分板金标 + twelveBlock）与 `gen_member_pages`（twelve）按 top 统计，向后兼容（无 top 走 points==12）。
+- 9A 奶妈/雨妈 合报 + 投票 50% 折算（计分板 ×2 还原显示）；9B 晕妈未投票其歌 70% 折算。
+
+### Changed
+- `bv-results-render.js` `rulesBlock`：`if(r.niche_standard)` 加 `&& .length`（空数组不再渲染空「要求」行）→ ed9 rules `{}` 正确跳过赛制板块。
+- recompute(0 变化) + gen_member_pages + gen_bv_editions_index（第九届 roster 20 人）。
+
+### Fixed
+- 自查：eid OK、12 分次数交叉核对 385 条 0 不匹配、合报双计入、member/0 含神妈/隐妈、详情页预览无报错。
+
+---
+
 ## [2026-06-19] — Barvision 2026 附加赛改名（海选突围赛 / 外卡突围赛）
 
 ### Content
