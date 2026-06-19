@@ -73,10 +73,10 @@
 - **12 分次数交叉核对**（成员页 twelve vs JSON 权威值，应 0 不匹配）：见 #140 用过的核对脚本（按 `eid` 优先、回退 `member` 取键统计，逐条比对各 `member/*.html`）。
 - **人工核对**：① 语种 `language`（非英语）；② 多艺人 lead/feat 归属（#15，不确定先问用户）；③ 混淆并排名次是否正确；④ 联合选送 `member` 斜杠串是否两人都进了名册/吧视；⑤ intro `summary` 是否符合 #141 文案约定。
 
-**已导入届次**：第一~五届（均 2019）。`regular-01` 单场综合赛；`regular-02` SF+GF 两场；`regular-03`/`regular-04` A/B 双组；`regular-05` A/B/C 三组。
+**已导入届次**：第一~五届（2019，`data/barvision/barvision-2019/`）+ 第六届（**2020**，`barvision-2020/regular-06.json` + 薄壳 `barvision/2020/regular-06.html`）。`regular-01` 单场综合赛；`regular-02` SF+GF 两场；`regular-03`/`regular-04` A/B 双组；`regular-05`/`regular-06` A/B/C 三组。⚠️ **目录/薄壳按届次年份**（2019 五届 / 2020 起七届）。
 
 **⚠️ 各届 Excel 结构不同 → 各自解析脚本**（仅 parse 层按届适配，下游不动）：
-- `parse_bv_edition.py`=第一届（「参赛信息」+「投票」两 sheet 分离）；`parse_bv_edition2.py`=第二届（`2SF`/`2GF` 一体 sheet）；`parse_bv_edition3.py`=第三届（A/B 两 CSV）；`parse_bv_edition4.py`=第四届（A/B 两 CSV + 泰妈折算 + 联合选送）；`parse_bv_edition5.py`=第五届（A/B/C 三 CSV + 70% 折算 + 混淆再投 + `OVERRIDE` 按行覆盖 artist/song/language）。
+- `parse_bv_edition.py`=第一届（「参赛信息」+「投票」两 sheet 分离）；`parse_bv_edition2.py`=第二届（`2SF`/`2GF` 一体 sheet）；`parse_bv_edition3.py`=第三届（A/B 两 CSV）；`parse_bv_edition4.py`=第四届（A/B 两 CSV + 泰妈折算 + 联合选送）；`parse_bv_edition5.py`=第五届（A/B/C 三 CSV + 70% 折算 + 混淆再投 + `OVERRIDE` 按行覆盖 artist/song/language）；`parse_bv_edition6.py`=第六届（2020，A/B/C 三 CSV；**歌曲列「艺人 - 歌名」合并需拆分** + **语种由 CSV 提供**不猜 + 6A 空缺用 `0`/6B·6C 留空均视无票 + 无折算）。
 - **第五届新机制**：① **混淆再投**——投混淆曲的票可由该投票人等额再投一正式曲，原始矩阵已含再投票，正式曲分=列和、直接读；② **70% 折算**——选送却未投评委票者（昵称不在该组投票人列），其曲 score=round(各票和×0.7)，Jury/Tele 显原始票、总分折算，计分板注释写原始总分；③ artist/song/language 由源 CSV 损坏（Excel `#`、gbk 丢特殊字符），改用 `OVERRIDE` 表（按 CSV 行序一一对应、用户核对版）覆盖，含重音/feat 规范/多语言（空格分隔）。
 - 通则：选送者互投=`jury`，非选送投票人=`tele`；Excel 的「观众总分」等汇总列不用，以我们逐票加总为准。**新届脚本务必给 entry 赋 `eid` 并用 eid 键写 points**（早期脚本若复制，注意补上）。
 

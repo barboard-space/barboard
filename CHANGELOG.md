@@ -4,6 +4,28 @@
 
 ---
 
+## [2026-06-19] — 第五/六届赛制规则补全（据官方报名总则 docx）
+
+### Content
+- 据 `第五届吧视报名总则…docx` / `第六届吧视报名总则.docx` 补全两届 `rules`（submission/niche_standard×5/format/voting，替换原占位）：三组小众/中众/大众阈值表（云村/Spotify/YT/榜单）、lead/feat 限制、混淆项名额（五届每组 2 个 / 六届 AB 各 2 个·C 不设）、投票（五届 Top10 / 六届 AB Top12·C Top10）、选送须投票否则取消资格。
+- 改 `parse_bv_edition5/6.py` 的 rules → 重跑 parser + `recompute_bv_ranks.py --write`（名次不变，10 条仍为既有平局结果）。
+
+---
+
+## [2026-06-19] — Barvision 第六届导入（2020，A/B/C 三组）
+
+### Added
+- **第六届（2020）赛果**：`parse_bv_edition6.py`（三 CSV）→ `data/barvision/barvision-2020/regular-06.json`（2020 起新目录）；薄壳 `barvision/2020/regular-06.html`；barvision.html BUILT_EDITIONS 加 Ⅵ。
+- 本届格式：歌曲列「艺人 - 歌名」合并（拆分）、语种由 CSV 提供、6A 空缺用 0（视无票）、无折算。混淆曲 6A/6B 各 2 首。
+
+### Verified
+- 22 成员全解析（新增威妈/鹿妈/蛋妈/奶妈/嘟妈在册，柠檬/绿萌归一）；recompute 4 条平局变化；ed6 12 分核对 53 条 0 不匹配；详情页/成员页零渲染改动。
+
+### Docs
+- CLAUDE.md #145；BARVISION_MEMBER.md（已导入届次 + 解析脚本 + 年份目录约定）。
+
+---
+
 ## [2026-06-19] — 走势图特例：同选送者正式+混淆名次相同 → 外环
 
 ### Changed（`member-render.js` 走势图）

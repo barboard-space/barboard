@@ -601,6 +601,10 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **计分板默认排序**：**正式曲按结果概览名次在前**（`m.entries` 官方序，total↓/tele↓；**取代**原先按投票人列序 `orderIdx` 的排法），**混淆曲一律排其后、内部按总分降序**（统一规则，不再交错）；**投票人列按其官方曲名次升序重排**（`idxOf[member]`，评委在前观众在后）→ 自投格沿主对角线（已验证 ed5 三组列下标连续、ed2 SF/GF 单调对角）。混淆行无自投格。
 144. **名次平局规则（Eurovision 级联）+ `recompute_bv_ranks.py`（全局，本次）**：正式曲名次同 total 分时逐级打破——① tele 总分↓ ② 给分人数(jury+tele)↓ ③ 12/10/8/7/6/5/4/3/2/1 分布↓ ④ running order(eid)↑。**实现为 `scripts/recompute_bv_ranks.py`**（在各届 JSON 上重算名次+并排混淆名次+展示序；幂等；默认 dry-run、`--write` 落盘）——**导入新届 SOP 第 5 步必跑**（取代 parse 内的临时名次；parse 的 rank 仅临时）。一二届无 eid，④ 用当前 entries 顺序兜底（本次未用到④）。
     - 本次对一~五届应用，10 条名次变化：ed5 三组同分互换（73/64/76，均判据②给分人数打破）+ ed2 SF Contagious/The Feeling（49 同分，判据②）+ **ed2 SF 顺带修正一处旧错**（Per Sempre 71 分原被错排在 Part Of Growing Up 70 分之后 → 按分纠正为 #8/#9）。已重跑 gen_member_pages，全 10 条 JSON 与成员页一致。
+145. **第六届（2020，A/B/C 三组）已导入**：`scripts/parse_bv_edition6.py`（三 CSV）→ **`data/barvision/barvision-2020/regular-06.json`**（⚠️ 2020 年起新目录 `barvision-2020/`；薄壳 `barvision/2020/regular-06.html`）；barvision.html BUILT_EDITIONS 加 Ⅵ（EDITIONS 卡 VI/2020 本就有）。**editions 6–12 均 2020 年**。本届格式特点（与五届不同）：
+    - **歌曲列「艺人 - 歌名」合并**需拆分（`split_song` 正则 ` - `/` -`/`- `，避开 `P3GI-13` 等内部连字符）；**语种由 CSV 提供**（不再猜/不需 OVERRIDE）；**6A 空缺用 `0`、6B/6C 留空**——均视无票（只取正分，自投也 0）。
+    - **无折算**（三组总分=各正分和，已校验）；混淆曲 6A 2 首 / 6B 2 首 / 6C 0 首。昵称归一加 `柠檬→柠妈`（与 `淋檬→柠妈` 并存）；新成员 威妈/鹿妈/蛋妈/奶妈/嘟妈 均在册（0 未解析）。
+    - 导入后跑 `recompute_bv_ranks.py --write`：ed6 4 条平局变化（A53/B60 判据②给分人数打破；A88/C62/C54 判据① tele）。ed6 12 分次数交叉核对 53 条 0 不匹配；详情页/成员页正常、零渲染改动。
 
 ## 对话交接工作流
 
