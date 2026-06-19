@@ -590,8 +590,17 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **bv-results-render.js 计分板**：`votingMatrix` 的 `v.points[e.eid]` 与 `twelveBlock` 的 `byEid[e.eid]`，对一二届（无 eid）→ `e.eid=undefined` → **矩阵分数格全空**。修复：两处改 `e.eid != null ? e.eid : e.member` 回退（有 eid 用 eid、否则用昵称键）。
     - **通用规则**：任何读 `votes.points` 的代码都必须用「`eid` 优先、回退 `member` 昵称」的取键方式，兼容混合数据。改后已重跑 `gen_member_pages.py`，并全量核对 **143 条记录 twelve 与 JSON 权威值 0 不匹配**；一二届详情页矩阵恢复（ed1 190 格有值 / 19 个 12 分）。
 141. **详情页 intro（届次 `summary`）文案约定**：第一~四届 intro 已重写为叙事风格（详情页 hero `d.summary`，纯文本经 esc）。**完整约定见 `data/barvision/edition-intros-2023-2025.md`「Intro 文案约定」节**，要点：通顺精简不堆砌规则（规则归 Rules 板块）、只写亮点+冠军（多组写各组冠军、不写亚季军/分数过程细节）、术语统一**「混淆单曲」**、**引号统一中文双引号 “”（不用「」）**、`艺人 — 歌名`+昵称、2019 为一年多届（避「年度」、无城市/主办勿编造）。该文件同时存了第 13–15 届（2023–2025）intro 备稿，供导入时填入。
-
----
+142. **第五届（2019，A/B/C 三组）已导入**：`scripts/parse_bv_edition5.py`（三 CSV `Barvision_5A/5B/5C.csv`）→ `regular-05.json`；薄壳 `barvision/2019/regular-05.html`；barvision.html BUILT_EDITIONS 加 Ⅴ。按 §二 SOP 走，**零渲染/布局改动**（详情页/成员页全数据驱动）。本届三个新点：
+    - **混淆再投机制**：投票人投给混淆单曲的票，因混淆曲不计正式，可**等额再投一正式曲**。原始矩阵已包含再投的票（投正式曲那票就在矩阵里），故正式曲分=该列各票和、直接读即可、无需特殊处理。
+    - **70% 折算（选送未投票惩罚）**：选送了歌却未投出评委票者（昵称不在该组投票人列），按欧视自限原则其曲 `score=round(各票和×0.7)`；**Jury/Tele 显原始票（和≠score）、总分显折算后**，计分板 `note` 写明三人原始总分。本届为 5C 的 麦妈/X妈/草妈。识别：CSV「总分」≈各票和×0.7。`parse_bv_edition5.py` 自动检测。
+    - **源 CSV 标题损坏 → `OVERRIDE` 覆盖**：Excel 把过宽数字显示成 `#######`、gbk 丢失重音/特殊字符（`?`）。改用 `OVERRIDE` 表（按各组 CSV **数据行顺序**一一对应、用户核对版）覆盖 artist/song/language——含重音（Árstíðir/Julien Doré/déjà vu）、feat 规范（#15）、多语言空格分隔（如 `日语 英语`）。score/成员/投票仍取自矩阵。**这是异构/脏源 CSV 的通用兜底法**：行序对齐 + 整表覆盖文本字段。
+    - 5B「Sakima — God Fearing Men」CSV 总分 55 系漏加（应 58）；parser 一律按各票和算 → 自动修正。
+143. **详情页三表术语 + 0 分/Tele 列/计分板排序规则（本次，全局）**：⚠️ **用户术语约定**：「**计分板**」=Scoreboard 矩阵(`.bvr-mtx`)、「**结果概览**」=Results 表(`.bvr-tbl`)、「**12 分**」=12 Points 表(`.bvr-12`)——以后据此定位，勿改错表。本次 `bv-results-render.js` 改（**所有届详情页生效**）：
+    - **0 分显示**：仅**计分板的每格小分(`.pt`)** 的 0 不显示；计分板 Total/Jury/Tele 冻结列、**结果概览所有列**的 0 **照常显示**。
+    - **Tele 列隐藏**：某场 **tele 投票人数=0**（`hasTele=teleN>0`）时，**计分板与结果概览的 Tele 列整列隐藏**（表头+单元格；计分板连 `.st` 冻结列）。tele 人数>0 的场（如 ed5 A 组有观众薯妈、ed1/2 等）Tele 列照常显示（含 0 值 + #N）。
+    - **计分板默认排序**：**正式曲按结果概览名次在前**（`m.entries` 官方序，total↓/tele↓；**取代**原先按投票人列序 `orderIdx` 的排法），**混淆曲一律排其后、内部按总分降序**（统一规则，不再交错）；**投票人列按其官方曲名次升序重排**（`idxOf[member]`，评委在前观众在后）→ 自投格沿主对角线（已验证 ed5 三组列下标连续、ed2 SF/GF 单调对角）。混淆行无自投格。
+144. **名次平局规则（Eurovision 级联）+ `recompute_bv_ranks.py`（全局，本次）**：正式曲名次同 total 分时逐级打破——① tele 总分↓ ② 给分人数(jury+tele)↓ ③ 12/10/8/7/6/5/4/3/2/1 分布↓ ④ running order(eid)↑。**实现为 `scripts/recompute_bv_ranks.py`**（在各届 JSON 上重算名次+并排混淆名次+展示序；幂等；默认 dry-run、`--write` 落盘）——**导入新届 SOP 第 5 步必跑**（取代 parse 内的临时名次；parse 的 rank 仅临时）。一二届无 eid，④ 用当前 entries 顺序兜底（本次未用到④）。
+    - 本次对一~五届应用，10 条名次变化：ed5 三组同分互换（73/64/76，均判据②给分人数打破）+ ed2 SF Contagious/The Feeling（49 同分，判据②）+ **ed2 SF 顺带修正一处旧错**（Per Sempre 71 分原被错排在 Part Of Growing Up 70 分之后 → 按分纠正为 #8/#9）。已重跑 gen_member_pages，全 10 条 JSON 与成员页一致。
 
 ## 对话交接工作流
 

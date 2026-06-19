@@ -232,20 +232,6 @@
      "rank": 7
     },
     {
-     "member": "田妈",
-     "member_id": 295,
-     "language": "英语",
-     "artist": "Kip Moore",
-     "song": "Part Of Growing Up",
-     "jury_vote": 60,
-     "tele_vote": 10,
-     "score": 70,
-     "support_rate": 0.6,
-     "high_rate": 0.15,
-     "is_shadow": false,
-     "rank": 8
-    },
-    {
      "member": "晕妈",
      "member_id": 117,
      "language": "意大利语",
@@ -256,6 +242,20 @@
      "score": 71,
      "support_rate": 0.55,
      "high_rate": 0.2,
+     "is_shadow": false,
+     "rank": 8
+    },
+    {
+     "member": "田妈",
+     "member_id": 295,
+     "language": "英语",
+     "artist": "Kip Moore",
+     "song": "Part Of Growing Up",
+     "jury_vote": 60,
+     "tele_vote": 10,
+     "score": 70,
+     "support_rate": 0.6,
+     "high_rate": 0.15,
      "is_shadow": false,
      "rank": 9
     },
@@ -316,20 +316,6 @@
      "rank": 13
     },
     {
-     "member": "猴妈",
-     "member_id": 18,
-     "language": "英语",
-     "artist": "Tor Miller",
-     "song": "The Feeling",
-     "jury_vote": 37,
-     "tele_vote": 12,
-     "score": 49,
-     "support_rate": 0.45,
-     "high_rate": 0.15,
-     "is_shadow": false,
-     "rank": 14
-    },
-    {
      "member": "包妈",
      "member_id": 20,
      "language": "英语",
@@ -339,6 +325,20 @@
      "tele_vote": 12,
      "score": 49,
      "support_rate": 0.5,
+     "high_rate": 0.15,
+     "is_shadow": false,
+     "rank": 14
+    },
+    {
+     "member": "猴妈",
+     "member_id": 18,
+     "language": "英语",
+     "artist": "Tor Miller",
+     "song": "The Feeling",
+     "jury_vote": 37,
+     "tele_vote": 12,
+     "score": 49,
+     "support_rate": 0.45,
      "high_rate": 0.15,
      "is_shadow": false,
      "rank": 15

@@ -44,7 +44,7 @@
 |------|------|------|
 | `eid` | ✅ | **该 entry 在本 match 的 0 基行索引**。⚠️ **新届必须输出**——`votes.points` 按它作键、下游矩阵/12分/12分次数全靠它。（一二届历史遗留无 eid，下游靠"eid 优先、回退 member"兼容，新届勿再省。） |
 | `member` | ✅ | 选送者昵称（规范化，见 ALIASES）；**联合选送写 `A妈/B妈` 斜杠串**（下游按 `/` 拆分计入各人）；匿名混淆曲写 `匿名` 且 members 映射 `{id:0,unclaimed:true}`。 |
-| `rank` | ✅ | 正式曲：连续 `1..N`，同分按 tele↓ 打破（欧视规则）。混淆曲：**并排名次** = 不低于其分的正式曲数 + 1（不计正式排名序列），见 #135。 |
+| `rank` | ✅ | 正式曲：连续 `1..N`。**名次以 `recompute_bv_ranks.py` 为权威**（parse 产出的 rank 仅临时，导入后必跑该脚本重算）——同 total 分按 **Eurovision 平局级联**打破：① tele 总分↓ ② 给分人数(jury+tele)↓ ③ 12/10/8…分布↓ ④ running order(eid)↑。混淆曲：**并排名次** = 不低于其分的正式曲数 + 1，见 #135。 |
 | `is_shadow` | ✅ | 混淆单曲 `true`，否则 `false`。 |
 | `score` | ✅ | 总分。**决赛含半决赛加成时直接取 Excel 值、按它排名**，不要求 `jury+tele==score`；常规场要求并应校验。 |
 | `jury_vote` / `tele_vote` | ✅ | 评委票(选送者互投) / 观众票(非选送者)。泰妈式折算：`score` 取折算后值，`tele = score - jury`（见 #136）。 |
@@ -60,8 +60,9 @@
 2. **薄壳页**：复制 `barvision/<年>/<版本>-NN.html`，改 `var EDITION_SRC` 指向新 JSON（路径 `../../`）。
 3. **`barvision.html`**：`BUILT_EDITIONS` 加该届 href（届次卡变可点）；如该届卡片尚未存在则补 `EDITIONS` 卡。
 4. **核对/改常量**（§四）：`BV_SLOTS`（新场次代码是否已含）、`LATEST_ED`（最新届号）、`BV_YEAR_COLOR`（新年份配色）、`BV_ACTIVE_SINCE_YEAR`。
-5. **重跑两脚本**：`python scripts/gen_member_pages.py`（聚合进成员页 + 刷新 `member-bv-index.json`）+ `python scripts/gen_bv_editions_index.py`（刷新 `editions-index.json`，供成员变动 / 上下届导航）。
-6. **校验**（§2.3）。完成——成员页徽章/概览/可排序表/走势图、详情页结果表/计分板/12分/上下届导航全部自动反映。
+5. **重算名次**：`python scripts/recompute_bv_ranks.py --write`（全局 Eurovision 平局规则，权威名次；默认 dry-run 看变化，加 `--write` 落盘）。
+6. **重跑两脚本**：`python scripts/gen_member_pages.py`（聚合进成员页 + 刷新 `member-bv-index.json`）+ `python scripts/gen_bv_editions_index.py`（刷新 `editions-index.json`，供成员变动 / 上下届导航）。
+7. **校验**（§2.3）。完成——成员页徽章/概览/可排序表/走势图、详情页结果表/计分板/12分/上下届导航全部自动反映。
 
 ### 2.3 导入后自查清单（命令 + 人工核对）
 
@@ -72,10 +73,11 @@
 - **12 分次数交叉核对**（成员页 twelve vs JSON 权威值，应 0 不匹配）：见 #140 用过的核对脚本（按 `eid` 优先、回退 `member` 取键统计，逐条比对各 `member/*.html`）。
 - **人工核对**：① 语种 `language`（非英语）；② 多艺人 lead/feat 归属（#15，不确定先问用户）；③ 混淆并排名次是否正确；④ 联合选送 `member` 斜杠串是否两人都进了名册/吧视；⑤ intro `summary` 是否符合 #141 文案约定。
 
-**已导入届次**：第一~四届（均 2019）。`regular-01` 单场综合赛；`regular-02` SF+GF 两场；`regular-03`/`regular-04` A/B 双组。
+**已导入届次**：第一~五届（均 2019）。`regular-01` 单场综合赛；`regular-02` SF+GF 两场；`regular-03`/`regular-04` A/B 双组；`regular-05` A/B/C 三组。
 
 **⚠️ 各届 Excel 结构不同 → 各自解析脚本**（仅 parse 层按届适配，下游不动）：
-- `parse_bv_edition.py`=第一届（「参赛信息」+「投票」两 sheet 分离）；`parse_bv_edition2.py`=第二届（`2SF`/`2GF` 一体 sheet）；`parse_bv_edition3.py`=第三届（A/B 两 CSV）；`parse_bv_edition4.py`=第四届（A/B 两 CSV + 泰妈折算 + 联合选送）。
+- `parse_bv_edition.py`=第一届（「参赛信息」+「投票」两 sheet 分离）；`parse_bv_edition2.py`=第二届（`2SF`/`2GF` 一体 sheet）；`parse_bv_edition3.py`=第三届（A/B 两 CSV）；`parse_bv_edition4.py`=第四届（A/B 两 CSV + 泰妈折算 + 联合选送）；`parse_bv_edition5.py`=第五届（A/B/C 三 CSV + 70% 折算 + 混淆再投 + `OVERRIDE` 按行覆盖 artist/song/language）。
+- **第五届新机制**：① **混淆再投**——投混淆曲的票可由该投票人等额再投一正式曲，原始矩阵已含再投票，正式曲分=列和、直接读；② **70% 折算**——选送却未投评委票者（昵称不在该组投票人列），其曲 score=round(各票和×0.7)，Jury/Tele 显原始票、总分折算，计分板注释写原始总分；③ artist/song/language 由源 CSV 损坏（Excel `#`、gbk 丢特殊字符），改用 `OVERRIDE` 表（按 CSV 行序一一对应、用户核对版）覆盖，含重音/feat 规范/多语言（空格分隔）。
 - 通则：选送者互投=`jury`，非选送投票人=`tele`；Excel 的「观众总分」等汇总列不用，以我们逐票加总为准。**新届脚本务必给 entry 赋 `eid` 并用 eid 键写 points**（早期脚本若复制，注意补上）。
 
 ---

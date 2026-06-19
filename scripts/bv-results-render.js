@@ -461,6 +461,7 @@
   }
   function resultTable(m) {
     var pool = m.entries.filter(function (e) { return !e.is_shadow; });  // 排名只在正式曲目间统计
+    var hasTele = (m.votes.voters || []).some(function (v) { return v.type === 'tele'; });  // 该场有无观众分
     var rows = m.entries.map(function (e) {
       var cls = e.is_shadow ? 'bvr-row--shadow' : (e.rank <= 3 ? 'bvr-row--' + e.rank : '');
       return '<tr class="' + cls + '">' +
@@ -470,7 +471,7 @@
         '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + '</td>' +
         '<td class="lang">' + esc(e.language || '') + '</td>' +
         ptsCell('pts--jury', e.jury_vote, pool, 'jury_vote', e) +
-        ptsCell('pts--tele', e.tele_vote, pool, 'tele_vote', e) +
+        (hasTele ? ptsCell('pts--tele', e.tele_vote, pool, 'tele_vote', e) : '') +
         '<td class="pts pts--total" data-v="' + (e.score == null ? -1 : e.score) + '">' + fmtScore(e.score) + '</td>' +
         '</tr>';
     }).join('');
@@ -478,40 +479,39 @@
       '<div class="bvr-tw fade-up"><table class="bvr-tbl"><thead><tr>' +
       '<th>名次</th><th>选送者</th><th>歌手</th><th>歌名</th><th>语种</th>' +
       '<th class="th-jury" style="text-align:center">Jury</th>' +
-      '<th class="th-tele" style="text-align:center">Tele</th>' +
+      (hasTele ? '<th class="th-tele" style="text-align:center">Tele</th>' : '') +
       '<th class="th-pts" style="text-align:center">PTS</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>';
   }
 
   // 合并矩阵：分组表头(Jury Vote/Tele Vote) + 可排序前 4 列；默认按选送者排（自投格成主对角线）
   function votingMatrix(m, label) {
-    // 数据中评委/观众可能交错（如第二届按 Excel 原始列序）；强制评委在前、观众在后，
-    // 保证分组表头(Jury/Tele Vote)跨列正确，且自投格连成主对角线（sort 在现代浏览器稳定，组内相对序不变）
+    // 行顺序：正式曲按结果概览名次在前（m.entries 已按 total↓/tele↓ 排），混淆曲一律排其后、内部按总分降序
+    var recips = m.entries.filter(function (e) { return !e.is_shadow; })
+      .concat(m.entries.filter(function (e) { return e.is_shadow; })
+        .sort(function (a, b) { return (b.score || 0) - (a.score || 0); }));
+    // 每位选送者(其官方曲)在 Results 中的位置 → 给评委投票人列排序，使列序与行序一致（对角线）
+    var idxOf = {};
+    m.entries.forEach(function (e, i) { if (!e.is_shadow && idxOf[e.member] == null) idxOf[e.member] = i; });
+    // 投票人列：评委在前(按其官方曲 Results 名次升序)、观众在后 → 自投格沿对角线
     var voters = m.votes.voters.slice().sort(function (a, b) {
-      return (a.type === 'tele' ? 1 : 0) - (b.type === 'tele' ? 1 : 0);
+      var ta = (a.type === 'tele') ? 1 : 0, tb = (b.type === 'tele') ? 1 : 0;
+      if (ta !== tb) return ta - tb;
+      var ia = idxOf[a.voter] != null ? idxOf[a.voter] : 9999;
+      var ib = idxOf[b.voter] != null ? idxOf[b.voter] : 9999;
+      return ia - ib;
     });
     if (!voters.length) return '';
     var juryN = voters.filter(function (v) { return v.type === 'jury'; }).length;
     var teleN = voters.length - juryN;
-    var firstTele = juryN;  // voters 顺序：评委在前、观众在后
-    // 默认顺序：行按评委投票人列顺序排列，使自投格连成主对角线
-    var orderIdx = {};
-    voters.forEach(function (v, i) { if (v.type === 'jury') orderIdx[v.voter] = i; });
-    var recips = m.entries.slice()  // 含混淆曲：正式曲一律在前（按评委列序），混淆曲一律在最后（一律按分降序）
-      .sort(function (a, b) {
-        var sa = a.is_shadow ? 1 : 0, sb = b.is_shadow ? 1 : 0;
-        if (sa !== sb) return sa - sb;
-        if (sa === 1) return (b.score || 0) - (a.score || 0);  // 混淆曲间一律按总分由高到低（不受 orderIdx 干扰）
-        var ia = orderIdx[a.member] != null ? orderIdx[a.member] : 999;
-        var ib = orderIdx[b.member] != null ? orderIdx[b.member] : 999;
-        return (ia - ib) || (b.score - a.score);
-      });
+    var firstTele = juryN;
+    var hasTele = teleN > 0;  // 观众投票人数为 0 → 隐藏 Tele 列（计分板 + 结果概览）
     function vsep(i) { return (i === 0 || i === firstTele) ? ' vsep' : ''; }
     var grpRow = '<tr>' +
       '<th class="rcp bvr-th-sort" rowspan="2" data-msort="rcp">' + esc(label) + '</th>' +
       '<th class="tot bvr-th-sort" rowspan="2" data-msort="tot">Total</th>' +
       '<th class="sj bvr-th-sort" rowspan="2" data-msort="sj">Jury</th>' +
-      '<th class="st bvr-th-sort" rowspan="2" data-msort="st">Tele</th>' +
+      (hasTele ? '<th class="st bvr-th-sort" rowspan="2" data-msort="st">Tele</th>' : '') +
       (juryN ? '<th class="mtx-grp mtx-grp--jury vsep" colspan="' + juryN + '">Jury Vote</th>' : '') +
       (teleN ? '<th class="mtx-grp mtx-grp--tele vsep" colspan="' + teleN + '">Tele Vote</th>' : '') +
       '</tr>';
@@ -529,13 +529,13 @@
         // 混淆曲匿名弱化，不显示「禁自投」斜杠格（正常格处理，无票则空）
         if (!e.is_shadow && v.voter === e.member) return '<td class="self' + sep + '"></td>';
         var p = v.points[e.eid != null ? e.eid : e.member];  // eid 键(三四届)兼容昵称键(一二届)
-        if (p == null) return '<td class="pt' + sep + '"></td>';
+        if (p == null || p === 0) return '<td class="pt' + sep + '"></td>';  // 0 分不显示
         return '<td class="pt' + (p === 12 ? ' pt--12' : '') + sep + '">' + p + '</td>';
       }).join('');
       return '<tr' + (e.is_shadow ? ' class="bvr-mtx-row--shadow"' : '') + '><td class="rcp">' + (e.is_shadow ? '<span class="bvr-anon">' + memberLink(e.member) + '</span>' : memberLink(e.member)) + '</td>' +
         '<td class="tot">' + fmtScore(e.score) + '</td>' +
         '<td class="sj">' + fmtScore(e.jury_vote) + '</td>' +
-        '<td class="st">' + fmtScore(e.tele_vote) + '</td>' + cells + '</tr>';
+        (hasTele ? '<td class="st">' + fmtScore(e.tele_vote) + '</td>' : '') + cells + '</tr>';
     }).join('');
     var notes = [];
     if (m.note) notes.push(fmtNote(m.note));

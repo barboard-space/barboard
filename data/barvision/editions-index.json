@@ -435,6 +435,135 @@
      "handle": "泰坦crazy"
     }
    ]
+  },
+  {
+   "no": 5,
+   "year": 2019,
+   "version": "regular",
+   "name": "The 5th Barvision",
+   "href": "/barvision/2019/regular-05.html",
+   "roster": [
+    {
+     "name": "包妈",
+     "id": 20,
+     "handle": "Jeremy_BAg"
+    },
+    {
+     "name": "音妈",
+     "id": 770,
+     "handle": "环球颖音"
+    },
+    {
+     "name": "雨妈",
+     "id": 17,
+     "handle": "Lee翼雨"
+    },
+    {
+     "name": "布妈",
+     "id": 157,
+     "handle": "Vivienne-Eliza"
+    },
+    {
+     "name": "锴妈",
+     "id": 12,
+     "handle": "WillKris锴"
+    },
+    {
+     "name": "猴妈",
+     "id": 18,
+     "handle": "Voiiz"
+    },
+    {
+     "name": "小妈",
+     "id": 153,
+     "handle": "Jeoli音乐"
+    },
+    {
+     "name": "瑞妈",
+     "id": 135,
+     "handle": "Jefferyat19"
+    },
+    {
+     "name": "X妈",
+     "id": 195,
+     "handle": "没有XX不科学"
+    },
+    {
+     "name": "麦妈",
+     "id": 130,
+     "handle": "Tandiny"
+    },
+    {
+     "name": "兔妈",
+     "id": 118,
+     "handle": "Razbit"
+    },
+    {
+     "name": "嘟妈",
+     "id": 190,
+     "handle": "DDDDDope"
+    },
+    {
+     "name": "柠妈",
+     "id": 19,
+     "handle": "LemonSheeran"
+    },
+    {
+     "name": "草妈",
+     "id": 141,
+     "handle": "Twentee"
+    },
+    {
+     "name": "晕妈",
+     "id": 117,
+     "handle": "dizzyhugh"
+    },
+    {
+     "name": "乐妈",
+     "id": 176,
+     "handle": "Coke"
+    },
+    {
+     "name": "田妈",
+     "id": 295,
+     "handle": "FREEMAN"
+    },
+    {
+     "name": "城妈",
+     "id": 120,
+     "handle": "MarekTotti"
+    },
+    {
+     "name": "萌妈",
+     "id": 125,
+     "handle": "绿荫夏语"
+    },
+    {
+     "name": "杰妈",
+     "id": 156,
+     "handle": "jh201013"
+    },
+    {
+     "name": "院妈",
+     "id": 326,
+     "handle": "天神院院长"
+    },
+    {
+     "name": "薯妈",
+     "id": 191,
+     "handle": "薯妈"
+    },
+    {
+     "name": "泰妈",
+     "id": 131,
+     "handle": "泰坦crazy"
+    },
+    {
+     "name": "雀妈",
+     "id": 189,
+     "handle": "雀妈"
+    }
+   ]
   }
  ]
 }

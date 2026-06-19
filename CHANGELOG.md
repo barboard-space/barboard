@@ -16,6 +16,52 @@
 
 ---
 
+## [2026-06-18] — 名次 Eurovision 平局规则（全局）+ recompute_bv_ranks.py
+
+### Added
+- `scripts/recompute_bv_ranks.py`：按 Eurovision 平局级联（① tele↓ ② 给分人数↓ ③ 12/10/8…分布↓ ④ running order↑）在各届 JSON 上重算正式曲名次（幂等、`--write` 落盘）。导入 SOP 新增第 5 步必跑。
+
+### Fixed / Changed
+- 对一~五届应用，10 条名次变化：ed5 三组同分互换（73/64/76，均判据②给分人数打破）+ ed2 SF Contagious/The Feeling（49 同分）+ **ed2 SF 修正旧错**（Per Sempre 71 分原被错排在 Part Of Growing Up 70 分之后 → 纠正 #8/#9）。
+- 重跑 gen_member_pages：10 条 JSON 与成员页名次一致；幂等校验 0 变化。
+
+### Docs
+- CLAUDE.md #144；BARVISION_MEMBER.md（rank 字段说明 + SOP 第 5 步）。
+
+---
+
+## [2026-06-18] — 详情页计分板/结果概览渲染规则（全局）
+
+### Changed（`bv-results-render.js`，所有届详情页生效）
+- **计分板小分 0 不显示**：仅计分板每格小分(`.pt`)隐藏 0；计分板 Total/Jury/Tele 列与结果概览所有列的 0 照常显示。
+- **Tele 列隐藏**：某场 tele 投票人数=0 时，计分板 + 结果概览的 Tele 列整列隐藏（表头+单元格+计分板 `.st` 冻结列）。
+- **计分板默认排序改为结果概览名次顺序**（正式曲 total↓/同分 tele↓ 在前，混淆曲一律排其后、内部按总分降序），投票人列按官方曲名次重排 → 自投格沿主对角线（原先按投票人列序、显得无序）。
+- 术语约定记入 CLAUDE.md #143：计分板=Scoreboard / 结果概览=Results / 12 分=12 Points。
+
+### Docs
+- CLAUDE.md #143。
+
+---
+
+## [2026-06-18] — Barvision 第五届导入（A/B/C 三组）
+
+### Added
+- **第五届（2019，A 小众 / B 中众 / C 大众 三组）赛果**：`parse_bv_edition5.py`（三 CSV）→ `regular-05.json`；薄壳 `barvision/2019/regular-05.html`；barvision.html BUILT_EDITIONS 加 Ⅴ。
+- **混淆再投机制**：投混淆曲的票可由投票人等额再投一正式曲（原始矩阵已含再投票，正式曲分=列和直接读）。
+- **70% 折算**：选送却未投评委票者（5C 麦妈/X妈/草妈）其曲总分×70%；Jury/Tele 显原始票、总分折算，计分板注释写原始总分（89/41/26）。
+- **`OVERRIDE` 文本覆盖**：源 CSV 标题损坏（Excel `#######`、gbk 丢重音/特殊字符），按 CSV 行序整表覆盖 artist/song/language（用户核对版，含重音/feat 规范/多语言空格分隔）。
+
+### Fixed
+- 5B「Sakima — God Fearing Men」总分 55（漏加）→ 按各票和修正为 58。
+
+### Verified
+- 25 成员全解析；ed5 12 分次数交叉核对 74 条 0 不匹配；详情页三组矩阵/折算注释/混淆曲渲染正常。**零渲染/布局改动**（数据驱动，SOP 兑现）。
+
+### Docs
+- CLAUDE.md #142；BARVISION_MEMBER.md 已导入届次/解析脚本清单/第五届新机制。
+
+---
+
 ## [2026-06-18] — 第一~四届 intro 重写 + 导入 pipeline 文档固化
 
 ### Content
