@@ -158,8 +158,8 @@ def build_match(fn, group, venue):
     disc = [(e['member'], e['_raw']) for e in entries if e['_discount']]
     note = None
     if disc:
-        names = '、'.join('%s（原始总分 %g）' % (m, r) for m, r in disc)
-        note = '%s 选送歌曲但未提交评委排名，其得分按总分 70%% 折算（%s）。' % (
+        names = '、'.join('%s原始总分 %g' % (m, r) for m, r in disc)
+        note = '%s 选送了歌曲却未提交评委排名，其得分按总分的 70%% 折算（%s）。' % (
             '、'.join(m for m, _ in disc), names)
     voter_objs = []
     for v in voters:

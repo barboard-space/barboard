@@ -237,7 +237,7 @@ def main():
         if pen:
             names = '、'.join('{m:%s}' % m for m, *_ in pen)
             origs = '、'.join('{m:%s} %g' % (m, raw) for m, s, raw in pen)
-            mobj['note'] = '%s 选送歌曲但未投出评委票，按欧视自限原则其总分折算为原始总分的 70%%。原始总分：%s。' % (names, origs)
+            mobj['note'] = '%s 选送了歌曲却未投出评委票，按欧视自限原则其总分折算为原始总分的 70%%。原始总分：%s。' % (names, origs)
         matches.append(mobj)
 
     cA, cB, cC = (champ(matches[0]['entries']), champ(matches[1]['entries']), champ(matches[2]['entries']))

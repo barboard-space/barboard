@@ -176,8 +176,8 @@ def build_match(fn, group, venue):
     note = None
     if group == 'B':
         note = ('本组 雨妈、兔妈、包妈、泰妈 为合报搭档（雨妈/兔妈 合报 Foals — Exits、'
-                '包妈/泰妈 合报 Sylar — All or Nothing），四人可分别投票但其投票均按 50% 折算计入最终得分；'
-                '计分板各格显示折算前的原始投票分（12 分制），最终得分（Total）为折算后。')
+                '包妈/泰妈 合报 Sylar — All or Nothing），四人可分别投票，但其投票均按 50% 折算计入最终得分；'
+                '计分板各格显示折算前的原始投票分（12 分制），最终得分（Total）为折算后分数。')
     return entries, {'scale': [12, 10, 8, 7, 6, 5, 4, 3, 2, 1], 'voters': voter_objs}, note
 
 def champ(ents):
