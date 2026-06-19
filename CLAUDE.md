@@ -605,6 +605,21 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **歌曲列「艺人 - 歌名」合并**需拆分（`split_song` 正则 ` - `/` -`/`- `，避开 `P3GI-13` 等内部连字符）；**语种由 CSV 提供**（不再猜/不需 OVERRIDE）；**6A 空缺用 `0`、6B/6C 留空**——均视无票（只取正分，自投也 0）。
     - **无折算**（三组总分=各正分和，已校验）；混淆曲 6A 2 首 / 6B 2 首 / 6C 0 首。昵称归一加 `柠檬→柠妈`（与 `淋檬→柠妈` 并存）；新成员 威妈/鹿妈/蛋妈/奶妈/嘟妈 均在册（0 未解析）。
     - 导入后跑 `recompute_bv_ranks.py --write`：ed6 4 条平局变化（A53/B60 判据②给分人数打破；A88/C62/C54 判据① tele）。ed6 12 分次数交叉核对 53 条 0 不匹配；详情页/成员页正常、零渲染改动。
+146. **第七届（2020，A/B/C 三组）已导入**：`scripts/parse_bv_edition7.py`（三 CSV）→ **`data/barvision/barvision-2020/regular-07.json`**；薄壳 `barvision/2020/regular-07.html`；BUILT_EDITIONS 加 Ⅶ（VII 卡本就有）。**零渲染/布局改动**（详情页/成员页全数据驱动）。本届格式特点（与六届不同 + 两个新数据特征，均与用户确认）：
+    - **列布局每组不同**：7A=`选送评委/歌手/歌名/语种/[投票人]/总评分`（**无「最终得分」列**、无折算、无并列）；7B·7C=`名次/歌手/歌名/选送评委/语种/[投票人]/总评分/最终得分`。歌手/歌名已独立两列（无需拆分）。→ parse 用列名 `index()` 通用定位，投票人列 = `语种` 右侧至 `总评分` 之间。语种由 CSV 提供。
+    - **混淆仅 7A 3 首**（选送评委含「混淆」）；7B/7C 无混淆。
+    - **70% 折算检测改用「最终得分 < raw×0.95」**（不再靠「选送者是否在投票列」——因 7C **蛋妈未投票但未折算**，旧法会误判）。折算行：score=最终得分(折算值)、Jury/Tele 显原始票、计分板 note 写原始总分。本届 7B 苏妈(80→56)/蛋妈(47→32.9)、7C 鹿妈(54→37.8)。
+    - **⭐ 7C「最终得分」带支持率小数**（约半数行，如 Highwire 83→83.1、Belong to You 81→81.9；本质≈支持率/票数决胜，整数部分=总评分票数和；7B 另有官方并列名次如 The Hails/FIDLAR 并列第10）。**用户决策（#143/#144 既有哲学）**：**总分显示=真实票数和（整数），名次由全局 `recompute_bv_ranks.py` Eurovision 级联决定、小数丢弃**（个别官方并列/小数决胜名次可能与官方公布微异——如并列第10被拆 10/11，已接受）。故 parse **非折算行 score=raw 整数（丢 7C 小数）、折算行 score=折算值**。
+    - **⭐ 联合投票人「雨&布」**（雨妈+布妈 合投一票，一整列；此前只见联合*选送*第四届，联合*投票*头一次）。**用户决策**：登记为联合投票人 `雨妈/布妈`（type=Jury，因雨妈是 7C 选送者），**且该首 Belong to You（CSV 选送者仅写"雨妈"）改登记为 雨妈/布妈 合报**（`member_id=null`，下游按 `/` 拆分计入两人吧视、两人各入 roster）。parse 用 `JOINT_VOTER={'雨&布':'雨妈/布妈'}` + `SUBMIT_JOINT={('C','雨妈'):'雨妈/布妈'}`，自投格靠两者归一同串匹配。
+    - **feat 规范化** `(ft.X)→(feat. X)`（#15，`FEAT_RE`）。
+    - 导入后 `recompute_bv_ranks.py --write`：ed7 仅 2 条平局变化（A 组 音妈/奶妈 同分 48 按判据②给分人数打破，奶妈10人>音妈9人→#18）。`gen_member_pages.py`（第七届 roster 25 人）+ `gen_bv_editions_index.py`（届数 7）。自查：eid 全 OK、raw 全==总评分、12 分次数交叉核对 **308 条 0 不匹配**、详情页预览无报错。
+    - **源 CSV typo 已按用户核对修正**（parse 脚本 `TEXT_FIX` 表，键 `(artist, song)`）：`Decoraion→Decoration`、`Ben Haziewood→Ben Hazlewood`、`Talerich-Conquistas→Conquistas`(去歌名艺人冗余)、`The Rubens, Vic Mensa→The Rubens & Vic Mensa`(双 lead)。
+147. **合报单曲「合报」标签（全局，本次）**：所有联合选送（member 含 `/`，如 雨妈/布妈、麦妈/苏妈）的单曲，在**结果概览**（详情页 `bv-results-render.js` `resultTable`）和**个人主页参赛表**（`member-render.js` `renderBvRows`）的**歌名后**加「合报」标签——样式同「混淆」标签（`.bvr-joint-tag` / `.mp-bv-joint`：9px、`border-2`、`radius:2px`），仅**颜色改为 `--clr-text-3`**（混淆标是 `--clr-text-4`）。判定：结果概览用 `e.member.indexOf('/')>-1`；成员页用聚合时新增的 `e.joint` 字段（`gen_member_pages.py` 的 `rec["joint"]="/" in nick`，故**改聚合后须重跑 `gen_member_pages.py`**）。当前命中 4 条记录（ed4「Jump Jet」麦妈/苏妈 + ed7「Belong to You」雨妈/布妈，各 2 人）。
+148. **动画/布局微调 + 预览验证要点（本次）**：
+    - **详情页「Scoreboard」「12 Points」子标题需 `fade-up`**：`.bvr-dvr-sub` 原缺 `fade-up` class → 瞬现（下方表格淡入、不协调）。已加 `fade-up`（每场 2 个、三组共 6），随 `observeFades` 的 IO 滚动触发。`.bvr-dvr-sub` 自身无 `transition`、不覆盖 fade-up 过渡。**通则：detail/member 页 section body 内新加的块级元素若要入场动画，必须带 `fade-up` class**（本页 body 内 fade-up 都不带 inline delay、靠滚动逐个触发）。
+    - **成员页吧视图例归组到表格**：`.mp-bv-legend`（场次代码注释）是参赛表脚注，fade-up 延迟由 `.3s`→`.28s`（紧跟表格 `.25s`），走势图 `.32s`→`.42s`（拉开），`margin-top:14px→8px` 贴紧表格。详见 BARVISION_MEMBER.md §5.4。
+    - **手机端 barvision.html 娱乐版竖排修复**：`@media (max-width:465px)` 误把 `.bv-unplugged-grid` 设为 `1fr` → 改回 `repeat(4,1fr)`（4 卡横排，仅 @media 内）。
+    - **⚠️ 预览验证陷阱（重要）**：Claude 预览标签页常处于 `document.hidden===true`（后台、未前台绘制），此时**浏览器冻结所有 CSS transition 与 IntersectionObserver**——表现为「全页 fade-up 卡在 opacity:0、IO 不触发、0 元素 visible、截图超时」。**这不代表代码坏**。验证 fade-up 是否生效的可靠方法：① 检查元素是否带 `fade-up` class + computed `transition` 含 `opacity,transform`；② 新建一个 `.fade-up.visible` 临时 div 读 computed opacity（应为 1）验证层叠规则；③ 用 DOM 测量而非截图。`fade-up` 规则全在 `style.css` 的 `@media (prefers-reduced-motion: no-preference)` 内。
 
 ## 对话交接工作流
 

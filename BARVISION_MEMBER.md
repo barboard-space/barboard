@@ -151,7 +151,7 @@
 - 微调：名次左移（首列 `padding-left:4px`）、场次 `padding-left:11px`、歌手 `padding-left:14px`、歌名 `padding-left:8px`；表头数字列居中靠 `.ta-c` + `::before` 占位平衡三角。
 
 ### 4. 场次代码图例 `.mp-bv-legend`
-表格之后、走势之前，紧贴表格（`margin-top:14px`）。文案：`注：A 小众 · B 中众 · C 大众 · SF 半决赛 · GF 决赛 · E 娱乐版` + `.mp-bv-legend__ex`「（如 7A = 第 7 届小众组）」**（手机隐藏）**；**无句号**。`barvision/hof.html` 的 `.bv-legend` 用同样改法（「场次代码」→「注」、括号补充包 `.bv-legend__ex` 手机隐藏、`· ` 替代原句号分隔「划线条目」说明）——两处文案保持一致。
+表格之后、走势之前，**是表格的脚注**：紧贴表格（`margin-top:8px`），且 **fade-up 入场延迟与表格成一组**（表格 `.25s` → 图例 `.28s`，间隔仅 0.03s；走势图则拉到 `.42s` 明确分开、视觉上靠自身 `margin-top:52px` 与图例隔开）。文案：`注：A 小众 · B 中众 · C 大众 · SF 半决赛 · GF 决赛 · E 娱乐版` + `.mp-bv-legend__ex`「（如 7A = 第 7 届小众组）」**（手机隐藏）**；**无句号**。`barvision/hof.html` 的 `.bv-legend` 用同样改法（「场次代码」→「注」、括号补充包 `.bv-legend__ex` 手机隐藏、`· ` 替代原句号分隔「划线条目」说明）——两处文案保持一致。
 
 ### 5. 历届排名走势图 `bvTrend()` + `drawBvTrend()` + `initBvTip()`（全宽 SVG，重写版）
 

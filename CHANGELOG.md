@@ -4,6 +4,35 @@
 
 ---
 
+## [2026-06-19] — 动画/布局微调（详情页 + 成员页 + barvision.html）
+
+### Fixed
+- **详情页「Scoreboard」「12 Points」子标题无入场动画**：`.bvr-dvr-sub` 缺 `fade-up` class → 瞬间弹出（下方表格淡入，不协调）。两标题（每组各 1，三组共 6 个）加 `fade-up`，随 `observeFades` 的 IO 滚动触发，与计分板/12分表一同淡入。`.bvr-dvr-sub` 自身无 `transition`，不覆盖 fade-up 的 opacity/transform 过渡。
+- **手机端 barvision.html 娱乐版竖排**：`@media (max-width:465px)` 把 `.bv-unplugged-grid` 误设为 `1fr` → 4 卡竖排。改回 `repeat(4,1fr)`（仅 @media 内，桌面零影响）。
+
+### Style
+- **成员页吧视图例归组到表格**：`.mp-bv-legend`（场次代码注释）是参赛表脚注，原 fade-up 延迟 `.3s` 几乎与走势图 `.32s` 同时。改图例 `.28s`（紧跟表格 `.25s`）、走势图 `.42s`（拉开），`margin-top:14px→8px` 贴紧表格。
+
+---
+
+## [2026-06-19] — Barvision 第七届导入（2020，A/B/C 三组）
+
+### Added
+- `scripts/parse_bv_edition7.py`：解析 7A/7B/7C 三 CSV → `data/barvision/barvision-2020/regular-07.json`。本届新数据特征：① 列布局每组不同（7A 无「最终得分」列；7B/7C 有），用列名 `index()` 通用定位；② 70% 折算用「最终得分 < raw×0.95」检测（不靠"是否在投票列"，因 7C 蛋妈未投但未折算）——7B 苏妈/蛋妈、7C 鹿妈；③ 7C「最终得分」带支持率小数（83→83.1 等），按用户决定**丢弃、总分取整数票数和**，名次交全局 `recompute_bv_ranks.py`；④ **联合投票人「雨&布」**登记为 `雨妈/布妈`(Jury)，且 Belong to You 改登记为 雨妈/布妈**合报**（计入两人吧视）；⑤ feat 规范化 `(ft.X)→(feat. X)`；混淆仅 7A 3 首。
+- 薄壳 `barvision/2020/regular-07.html`；`barvision.html` BUILT_EDITIONS 加 Ⅶ（VII 卡本就有）。
+
+### Changed
+- 重跑 `recompute_bv_ranks.py --write`（ed7 2 条平局变化：A 组 音妈/奶妈 同分 48 按给分人数打破）+ `gen_member_pages.py` + `gen_bv_editions_index.py`（第七届 roster 25 人）。
+
+### Fixed
+- 导入后自查：eid 全 OK、raw 全 == 总评分、12 分次数交叉核对 308 条 0 不匹配；详情页预览无控制台报错。
+- 源 CSV typo 按用户核对修正（`TEXT_FIX` 表）：Decoraion→Decoration、Ben Haziewood→Ben Hazlewood、Talerich-Conquistas→Conquistas、The Rubens, Vic Mensa→The Rubens & Vic Mensa。
+
+### Style
+- **合报单曲「合报」标签（全局，#147）**：联合选送单曲（member 含 `/`）在结果概览（`bv-results-render.js`）和个人主页参赛表（`member-render.js`）歌名后加「合报」标签，样式同「混淆」、颜色改 `--clr-text-3`。`gen_member_pages.py` 聚合新增 `joint` 字段。命中 ed4「Jump Jet」+ ed7「Belong to You」共 4 条记录。
+
+---
+
 ## [2026-06-19] — 第五/六届赛制规则补全（据官方报名总则 docx）
 
 ### Content

@@ -45,6 +45,7 @@ def aggregate_barvision(eds):
                     "language": e.get("language"),
                     "jury": e.get("jury_vote"), "tele": e.get("tele_vote"), "total": e.get("score"),
                     "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
+                    "joint": "/" in nick,  # 联合选送（合报）
                 }
                 # 联合选送「A/B」：该记录计入两人各自的吧视
                 for target in ([n.strip() for n in nick.split("/")] if "/" in nick else [nick]):

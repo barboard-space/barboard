@@ -219,6 +219,8 @@
     .bvr-row--shadow .lang { color:var(--clr-text-4); }  /* 覆盖 .bvr-tbl .lang 默认 text-3 */
     .bvr-shadow-tag { display:inline-block; white-space:nowrap; font-size:9px; border:1px solid var(--clr-border-2); border-radius:2px;
       padding:0 4px; margin-left:6px; color:var(--clr-text-4); font-style:normal; }
+    .bvr-joint-tag { display:inline-block; white-space:nowrap; font-size:9px; border:1px solid var(--clr-border-2); border-radius:2px;
+      padding:0 4px; margin-left:6px; color:var(--clr-text-3); font-style:normal; }
     .member--unclaimed { color:var(--clr-text-3); }
     .member--unclaimed:hover { color:var(--clr-text-2); }
     /* 计分板内的混淆曲行：弱化（仍显示其得票），选送者显示斜体「匿名」 */
@@ -468,7 +470,7 @@
         '<td class="num"><span>' + (e.is_shadow ? '<span class="bvr-num-shadow">' + esc(e.rank) + '*</span>' : esc(e.rank)) + '</span></td>' +
         '<td>' + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint">' + e.member.split('/').map(function (n) { return memberLink(n.trim()); }).join('') + '</span>' : memberLink(e.member)) + '</td>' +
         '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
-        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="bvr-shadow-tag">混淆</span>' : '') + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
         '<td class="lang">' + esc(e.language || '') + '</td>' +
         ptsCell('pts--jury', e.jury_vote, pool, 'jury_vote', e) +
         (hasTele ? ptsCell('pts--tele', e.tele_vote, pool, 'tele_vote', e) : '') +
@@ -759,8 +761,8 @@
 
       var mtx = votingMatrix(m, '选送者');
       var dvr = '';
-      if (mtx) dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--matrix">Scoreboard</div>' + mtx;
-      dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--12">12 Points</div>' + twelveBlock(m);
+      if (mtx) dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--matrix fade-up">Scoreboard</div>' + mtx;
+      dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--12 fade-up">12 Points</div>' + twelveBlock(m);
 
       var did = 'dvr' + (multi ? mi : '');
       html += section(did, pfx + '投票详情', 'Detailed Voting Results', '', dvr);

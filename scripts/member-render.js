@@ -106,7 +106,7 @@
     '.mp-bv-tbl th:nth-child(3),.mp-bv-tbl td:nth-child(3){padding-left:11px}',
     '.mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4){padding-left:14px;width:400px}',
     '.mp-bv-tbl th:nth-child(5),.mp-bv-tbl td:nth-child(5){padding-left:8px}',
-    '.mp-bv-legend{font-size:11px;color:var(--clr-text-3);line-height:1.8;margin-top:14px}',
+    '.mp-bv-legend{font-size:11px;color:var(--clr-text-3);line-height:1.8;margin-top:8px}',
     '.mp-bv-legend code{font-family:var(--font-mono);color:var(--clr-text-2);background:var(--clr-surface);padding:0 5px;border-radius:3px;margin:0 1px}',
     '.mp-bv-tbl tr:last-child td{border-bottom:none}',
     '.mp-bv-tbl .rk{font-family:var(--font-body);font-size:15px;font-weight:600;line-height:1;color:var(--clr-text-3);text-align:center;width:42px}',
@@ -123,6 +123,7 @@
     '.mp-bv-row--shadow .rk{font-weight:400;font-size:13px}',
     '.mp-bv-row--shadow .rk .rk-sh{display:inline-block;transform:translate(2px,-1px)}',
     '.mp-bv-sh{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-4);margin-left:5px}',
+    '.mp-bv-joint{display:inline-block;white-space:nowrap;font-size:9px;border:1px solid var(--clr-border-2);border-radius:2px;padding:0 4px;font-style:normal;color:var(--clr-text-3);margin-left:5px}',
     '@media (max-width:600px){',
     '  .mp-card{grid-template-columns:auto 1fr;gap:24px;grid-template-rows:auto auto}',
     '  .mp-links{grid-column:1/-1;flex-direction:row}',
@@ -237,7 +238,7 @@
         '<td class="ed"><a class="mp-bv-ed" href="' + href + '">第 ' + e.edition_no + ' 届</a></td>' +
         '<td class="num2">' + seriesLabel + '</td>' +
         '<td class="artist">' + esc(e.artist) + '</td>' +
-        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + '</td>' +
+        '<td class="song">' + esc(e.song) + (e.is_shadow ? '<span class="mp-bv-sh">混淆</span>' : '') + (e.joint ? '<span class="mp-bv-joint">合报</span>' : '') + '</td>' +
         '<td class="num2">' + (e.total == null ? '—' : Math.round(e.total)) + '</td>' +
         '<td class="num2">' + (e.twelve || 0) + '</td>' +
         '</tr>';
@@ -272,7 +273,7 @@
   function bvTrend(bv) {
     var has = (bv.entries || []).some(function (e) { return e.rank != null; });
     if (!has) return '';
-    return '<div class="mp-bv-trend fade-up" style="transition-delay:.32s">' +
+    return '<div class="mp-bv-trend fade-up" style="transition-delay:.42s">' +
       '<div class="mp-bv-trend__hd">' +
         '<span class="mp-bv-trend__title">历届排名走势</span>' +
         '<span class="mp-bv-trend__legend">' +
@@ -495,7 +496,7 @@
         '<div class="mp-bv-tw fade-up" style="transition-delay:.25s"><table class="mp-bv-tbl"><thead><tr>' +
           '<th class="sortable ta-c" data-sort="rank">名次' + TRI + '</th><th class="sortable ta-c" data-sort="edition">届次' + TRI + '</th><th class="ta-c">场次</th><th>歌手</th><th>歌名</th><th class="sortable ta-c" data-sort="total">总分' + TRI + '</th><th class="sortable ta-c" data-sort="twelve">12分' + TRI + '</th>' +
         '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
-        '<p class="mp-bv-legend fade-up" style="transition-delay:.3s">注：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版<span class="mp-bv-legend__ex">（如 <code>7A</code> = 第 7 届小众组）</span></p>' +
+        '<p class="mp-bv-legend fade-up" style="transition-delay:.28s">注：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版<span class="mp-bv-legend__ex">（如 <code>7A</code> = 第 7 届小众组）</span></p>' +
         (unclaimed ? '' : bvTrend(bv)) +
       '</div>' +
     '</section>';
