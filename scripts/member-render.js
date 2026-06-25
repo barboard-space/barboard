@@ -561,7 +561,7 @@
     }
     ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = '600 ' + (14 * SC) + "px 'DM Sans',sans-serif";
     ctx.textAlign = 'left'; ctx.textBaseline = 'middle';
-    ctx.fillText('barboard.space', bx, cyc + 2 * SC);
+    ctx.fillText('barboard.space', bx, cyc + 1 * SC);
     ctx.textBaseline = 'alphabetic';
   }
   function exportBvTrendPng(btn) {
