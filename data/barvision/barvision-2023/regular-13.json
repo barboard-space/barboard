@@ -1,0 +1,2163 @@
+{
+ "year": 2023,
+ "edition_no": 13,
+ "edition_name": "Barvision Qiqihar 2023",
+ "cn_name": "第十三届欧美流行歌曲个人榜吧歌曲大赛",
+ "version": "regular",
+ "city": "齐齐哈尔",
+ "host": "雨妈",
+ "motto": "",
+ "summary": "Barvision Qiqihar 2023 是第 13 届 Barvision 歌曲大赛，停办两年后由雨妈发起承办、威妈包装宣传，于 2023 年在齐齐哈尔举办的重启首届。27 位成员各选送一首歌曲，经两轮半决赛筛选出 18 首晋级总决赛，由评审团与观众投票共同决出冠军。最终羊妈选送的 Best Frenz & Joywave — “Flatline” 以 159 分（评审 124 + 观众 35）夺冠并创下当时 Barvision 最高总分纪录；猴妈选送的 Raynes — “Drive You Back Home”（121 分）与风妈选送的 Haley Blais — “The Cabin”（105 分）分列亚、季军。",
+ "rules": {
+  "submission": "匿名参赛、私信主办方报名；每人限报 1 首并自动成为评委；发行时间 2020.1.1–2023.9.17；lead 艺人无 BB Hot100/UK Top100、未进 Billboard Artist 100、≤1 项格莱美通类提名、≤2 首吧视常规版 Top10；作品不得进 BB Hot100/Global200/UK 单曲榜、专辑不得进 BB200、不得进任一 BarBoard 官方榜 Top100 或评委年/半年榜。",
+  "niche_standard": [
+   "云村评论 ≤1000 · 艺人粉丝 ≤1万",
+   "Spotify 月听众 ≤500万 · 单曲播放 ≤1000万",
+   "YouTube 英语 订阅 ≤400万/MV ≤1500万 · 非英语 ≤800万/≤3000万"
+  ],
+  "format": "两轮半决赛各取前 9 名晋级（共 18 首）进入总决赛；评委（选送成员）+ 观众（未选送成员）投票。",
+  "voting": "每位评委交 Top10 排名，按 12/10/8/7/6/5/4/3/2/1 赋分；未按时提交者其选送歌曲得分折半。"
+ },
+ "source": "第十三届吧视报名总则 + 23-SF1/SF2.csv（半决赛逐票）+ Grand Final 总表（决赛逐票）",
+ "members": {
+  "E": {
+   "id": 659,
+   "handle": "Echoes"
+  },
+  "N": {
+   "id": 133,
+   "handle": "rihanavy"
+  },
+  "S": {
+   "id": 27,
+   "handle": "哈哈哈时光机"
+  },
+  "T": {
+   "id": 115,
+   "handle": "iTAP_II"
+  },
+  "兔": {
+   "id": 118,
+   "handle": "Razbit"
+  },
+  "包": {
+   "id": 20,
+   "handle": "Jeremy_BAg"
+  },
+  "城": {
+   "id": 120,
+   "handle": "MarekTotti"
+  },
+  "奶": {
+   "id": 102,
+   "handle": "奶儿少爷"
+  },
+  "威": {
+   "id": 7,
+   "handle": "williw_"
+  },
+  "布": {
+   "id": 157,
+   "handle": "Vivienne-Eliza"
+  },
+  "文": {
+   "id": 116,
+   "handle": "SummertimeDawns"
+  },
+  "星": {
+   "id": 45,
+   "handle": "白矮星爱吃东西"
+  },
+  "晕": {
+   "id": 117,
+   "handle": "dizzyhugh"
+  },
+  "杰": {
+   "id": 156,
+   "handle": "jh201013"
+  },
+  "松": {
+   "id": 105,
+   "handle": "Squirrel松鼠"
+  },
+  "柠": {
+   "id": 19,
+   "handle": "LemonSheeran"
+  },
+  "汞": {
+   "id": 103,
+   "handle": "Hg"
+  },
+  "泰": {
+   "id": 131,
+   "handle": "泰坦crazy"
+  },
+  "狼": {
+   "id": 113,
+   "handle": "Aaowu_"
+  },
+  "猴": {
+   "id": 18,
+   "handle": "Voiiz"
+  },
+  "瑞": {
+   "id": 135,
+   "handle": "Jefferyat19"
+  },
+  "羊": {
+   "id": 100,
+   "handle": "SeafishYANG"
+  },
+  "芬": {
+   "id": 110,
+   "handle": "Stephen"
+  },
+  "萌": {
+   "id": 125,
+   "handle": "绿荫夏语"
+  },
+  "锴": {
+   "id": 12,
+   "handle": "WillKris锴"
+  },
+  "院": {
+   "id": 326,
+   "handle": "天神院院长"
+  },
+  "雨": {
+   "id": 17,
+   "handle": "Lee翼雨"
+  },
+  "霜": {
+   "id": 121,
+   "handle": "inje白霜"
+  },
+  "韩": {
+   "id": 67,
+   "handle": "SouthkoreaBall"
+  },
+  "音": {
+   "id": 770,
+   "handle": "环球颖音"
+  },
+  "风": {
+   "id": 154,
+   "handle": "Durden"
+  },
+  "鲤": {
+   "id": 181,
+   "handle": "ly_dly"
+  },
+  "鸽": {
+   "id": 160,
+   "handle": "Phoerienies"
+  },
+  "麦": {
+   "id": 130,
+   "handle": "Tandiny"
+  }
+ },
+ "vote_rule": {
+  "scale": [
+   12,
+   10,
+   8,
+   7,
+   6,
+   5,
+   4,
+   3,
+   2,
+   1
+  ],
+  "jury": "选送成员互投",
+  "tele": "未选送成员（观众）",
+  "note": "半决赛 jury=本场选送者、tele=其余投票人；决赛 jury 20 人 + 观众 6 人（音/城/布/兔/T/鸽）；狼/锴 50% 折算（小分为折前）。"
+ },
+ "matches": [
+  {
+   "match": "SF1",
+   "venue": "半决赛一",
+   "entries": [
+    {
+     "eid": 0,
+     "member": "雨",
+     "member_id": 17,
+     "artist": "Joywave",
+     "song": "Buy American",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 73,
+     "tele_vote": 69,
+     "score": 142.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 1,
+     "qualified": true
+    },
+    {
+     "eid": 1,
+     "member": "汞",
+     "member_id": 103,
+     "artist": "William Michael Morgan",
+     "song": "In Walked You",
+     "language": "英语",
+     "genre": "country",
+     "jury_vote": 69,
+     "tele_vote": 72,
+     "score": 141.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 2,
+     "qualified": true
+    },
+    {
+     "eid": 2,
+     "member": "韩",
+     "member_id": 67,
+     "artist": "Stefan",
+     "song": "Seotud Kaed",
+     "language": "爱沙尼亚语",
+     "genre": "pop",
+     "jury_vote": 83,
+     "tele_vote": 55,
+     "score": 138.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 3,
+     "qualified": true
+    },
+    {
+     "eid": 3,
+     "member": "S",
+     "member_id": 27,
+     "artist": "Cri, Half Moon Run",
+     "song": "Astray",
+     "language": "英语",
+     "genre": "dance",
+     "jury_vote": 74,
+     "tele_vote": 63,
+     "score": 137.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 4,
+     "qualified": true
+    },
+    {
+     "eid": 4,
+     "member": "柠",
+     "member_id": 19,
+     "artist": "Rene Miller",
+     "song": "Concrete Heart",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 77,
+     "tele_vote": 40,
+     "score": 117.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 5,
+     "qualified": true
+    },
+    {
+     "eid": 5,
+     "member": "狼",
+     "member_id": 113,
+     "artist": "Thomas Headon",
+     "song": "not saying goodbye",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 65,
+     "tele_vote": 50,
+     "score": 115.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 6,
+     "qualified": true
+    },
+    {
+     "eid": 6,
+     "member": "瑞",
+     "member_id": 135,
+     "artist": "Susanne Sundfor",
+     "song": "leikara ljóð",
+     "language": "冰岛语",
+     "genre": "alternative",
+     "jury_vote": 39,
+     "tele_vote": 72,
+     "score": 111.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 7,
+     "qualified": true
+    },
+    {
+     "eid": 7,
+     "member": "包",
+     "member_id": 20,
+     "artist": "See You Next Year, EKKSTACY, Mike Dean",
+     "song": "I Guess",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 53,
+     "tele_vote": 52,
+     "score": 105.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 8,
+     "qualified": true
+    },
+    {
+     "eid": 8,
+     "member": "泰",
+     "member_id": 131,
+     "artist": "Comastatic",
+     "song": "back4blood",
+     "language": "英语",
+     "genre": "rock",
+     "jury_vote": 64,
+     "tele_vote": 30,
+     "score": 94.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 9,
+     "qualified": true
+    },
+    {
+     "eid": 9,
+     "member": "N",
+     "member_id": 133,
+     "artist": "Georgia",
+     "song": "It's Euphoric",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 55,
+     "tele_vote": 38,
+     "score": 93.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 10,
+     "qualified": false
+    },
+    {
+     "eid": 10,
+     "member": "霜",
+     "member_id": 121,
+     "artist": "Pauline Chagne",
+     "song": "Nuit Pauline",
+     "language": "法语",
+     "genre": "pop",
+     "jury_vote": 28,
+     "tele_vote": 60,
+     "score": 88.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 11,
+     "qualified": false
+    },
+    {
+     "eid": 11,
+     "member": "麦",
+     "member_id": 130,
+     "artist": "Dylan Fraser",
+     "song": "2030 Revolution",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 47,
+     "tele_vote": 23,
+     "score": 70.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 12,
+     "qualified": false
+    },
+    {
+     "eid": 12,
+     "member": "奶",
+     "member_id": 102,
+     "artist": "Jack Kays, Travis Barker",
+     "song": "Dirty Money",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 27,
+     "tele_vote": 14,
+     "score": 41.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 13,
+     "qualified": false
+    }
+   ],
+   "votes": {
+    "scale": [
+     12,
+     10,
+     8,
+     7,
+     6,
+     5,
+     4,
+     3,
+     2,
+     1
+    ],
+    "voters": [
+     {
+      "voter": "N",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 6,
+       "2": 7,
+       "3": 4,
+       "4": 1,
+       "5": 5,
+       "6": 12,
+       "7": 8,
+       "10": 2,
+       "12": 3
+      }
+     },
+     {
+      "voter": "S",
+      "type": "jury",
+      "points": {
+       "0": 3,
+       "1": 4,
+       "2": 6,
+       "4": 12,
+       "5": 10,
+       "7": 5,
+       "8": 2,
+       "9": 8,
+       "10": 1,
+       "11": 7
+      }
+     },
+     {
+      "voter": "包",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 5,
+       "2": 8,
+       "3": 10,
+       "4": 7,
+       "5": 6,
+       "6": 4,
+       "9": 3,
+       "10": 2,
+       "11": 1
+      }
+     },
+     {
+      "voter": "奶",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 5,
+       "2": 7,
+       "3": 2,
+       "4": 12,
+       "5": 8,
+       "6": 4,
+       "7": 3,
+       "8": 10,
+       "11": 1
+      }
+     },
+     {
+      "voter": "柠",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 10,
+       "2": 8,
+       "3": 7,
+       "5": 12,
+       "8": 5,
+       "9": 1,
+       "10": 4,
+       "11": 2,
+       "12": 3
+      }
+     },
+     {
+      "voter": "汞",
+      "type": "jury",
+      "points": {
+       "0": 2,
+       "2": 12,
+       "3": 3,
+       "4": 7,
+       "5": 5,
+       "7": 1,
+       "8": 10,
+       "9": 8,
+       "11": 4,
+       "12": 6
+      }
+     },
+     {
+      "voter": "泰",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 3,
+       "2": 7,
+       "3": 5,
+       "5": 6,
+       "6": 2,
+       "7": 10,
+       "9": 8,
+       "10": 4,
+       "11": 1
+      }
+     },
+     {
+      "voter": "狼",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "2": 5,
+       "3": 7,
+       "4": 8,
+       "6": 3,
+       "7": 4,
+       "8": 12,
+       "9": 1,
+       "11": 10,
+       "12": 2
+      }
+     },
+     {
+      "voter": "瑞",
+      "type": "jury",
+      "points": {
+       "1": 3,
+       "2": 4,
+       "3": 10,
+       "5": 2,
+       "7": 1,
+       "8": 5,
+       "9": 6,
+       "10": 8,
+       "11": 12,
+       "12": 7
+      }
+     },
+     {
+      "voter": "雨",
+      "type": "jury",
+      "points": {
+       "1": 3,
+       "2": 7,
+       "4": 12,
+       "6": 5,
+       "7": 8,
+       "8": 10,
+       "9": 6,
+       "10": 1,
+       "11": 2,
+       "12": 4
+      }
+     },
+     {
+      "voter": "霜",
+      "type": "jury",
+      "points": {
+       "1": 12,
+       "2": 8,
+       "3": 7,
+       "4": 3,
+       "6": 5,
+       "7": 6,
+       "8": 4,
+       "9": 10,
+       "11": 2,
+       "12": 1
+      }
+     },
+     {
+      "voter": "韩",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 8,
+       "3": 7,
+       "4": 12,
+       "5": 3,
+       "6": 2,
+       "8": 1,
+       "9": 4,
+       "10": 6,
+       "11": 5
+      }
+     },
+     {
+      "voter": "麦",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 10,
+       "2": 4,
+       "3": 12,
+       "4": 3,
+       "5": 8,
+       "6": 2,
+       "7": 7,
+       "8": 5,
+       "12": 1
+      }
+     },
+     {
+      "voter": "E",
+      "type": "tele",
+      "points": {
+       "0": 4,
+       "1": 2,
+       "2": 8,
+       "4": 3,
+       "5": 7,
+       "6": 12,
+       "7": 10,
+       "8": 1,
+       "9": 6,
+       "11": 5
+      }
+     },
+     {
+      "voter": "城",
+      "type": "tele",
+      "points": {
+       "0": 8,
+       "1": 6,
+       "2": 3,
+       "3": 10,
+       "5": 5,
+       "6": 12,
+       "7": 4,
+       "9": 7,
+       "10": 1,
+       "11": 2
+      }
+     },
+     {
+      "voter": "威",
+      "type": "tele",
+      "points": {
+       "0": 12,
+       "1": 10,
+       "2": 4,
+       "3": 8,
+       "4": 5,
+       "5": 3,
+       "6": 2,
+       "8": 6,
+       "10": 7,
+       "11": 1
+      }
+     },
+     {
+      "voter": "星",
+      "type": "tele",
+      "points": {
+       "0": 10,
+       "1": 4,
+       "2": 8,
+       "3": 3,
+       "5": 1,
+       "6": 12,
+       "7": 5,
+       "9": 6,
+       "10": 7,
+       "11": 2
+      }
+     },
+     {
+      "voter": "晕",
+      "type": "tele",
+      "points": {
+       "0": 4,
+       "1": 12,
+       "2": 8,
+       "3": 5,
+       "4": 3,
+       "5": 7,
+       "7": 2,
+       "8": 1,
+       "10": 10,
+       "12": 6
+      }
+     },
+     {
+      "voter": "松",
+      "type": "tele",
+      "points": {
+       "0": 4,
+       "1": 7,
+       "2": 12,
+       "3": 2,
+       "4": 6,
+       "5": 10,
+       "6": 1,
+       "7": 5,
+       "8": 8,
+       "11": 3
+      }
+     },
+     {
+      "voter": "羊",
+      "type": "tele",
+      "points": {
+       "0": 2,
+       "2": 1,
+       "3": 12,
+       "4": 3,
+       "5": 7,
+       "6": 10,
+       "7": 6,
+       "8": 4,
+       "9": 8,
+       "11": 5
+      }
+     },
+     {
+      "voter": "芬",
+      "type": "tele",
+      "points": {
+       "0": 7,
+       "1": 8,
+       "2": 3,
+       "3": 4,
+       "4": 6,
+       "7": 5,
+       "8": 10,
+       "9": 1,
+       "10": 12,
+       "11": 2
+      }
+     },
+     {
+      "voter": "萌",
+      "type": "tele",
+      "points": {
+       "0": 6,
+       "1": 3,
+       "2": 7,
+       "3": 5,
+       "4": 10,
+       "5": 2,
+       "6": 1,
+       "7": 8,
+       "9": 4,
+       "10": 12
+      }
+     },
+     {
+      "voter": "音",
+      "type": "tele",
+      "points": {
+       "0": 5,
+       "1": 8,
+       "3": 10,
+       "4": 4,
+       "5": 2,
+       "6": 12,
+       "7": 7,
+       "9": 1,
+       "10": 3,
+       "12": 6
+      }
+     },
+     {
+      "voter": "风",
+      "type": "tele",
+      "points": {
+       "0": 7,
+       "1": 12,
+       "2": 1,
+       "3": 4,
+       "5": 6,
+       "6": 10,
+       "9": 5,
+       "10": 8,
+       "11": 3,
+       "12": 2
+      }
+     }
+    ]
+   }
+  },
+  {
+   "match": "SF2",
+   "venue": "半决赛二",
+   "entries": [
+    {
+     "eid": 0,
+     "member": "羊",
+     "member_id": 100,
+     "artist": "Best Frenz & Joywave",
+     "song": "Flatline",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 105,
+     "tele_vote": 59,
+     "score": 164.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 1,
+     "qualified": true
+    },
+    {
+     "eid": 1,
+     "member": "猴",
+     "member_id": 18,
+     "artist": "Raynes",
+     "song": "Drive You Back Home",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 80,
+     "tele_vote": 57,
+     "score": 137.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 2,
+     "qualified": true
+    },
+    {
+     "eid": 2,
+     "member": "风",
+     "member_id": 154,
+     "artist": "Haley Blais",
+     "song": "The Cabin",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 77,
+     "tele_vote": 29,
+     "score": 106.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 3,
+     "qualified": true
+    },
+    {
+     "eid": 3,
+     "member": "芬",
+     "member_id": 110,
+     "artist": "Rook Monroe",
+     "song": "Jolie",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 57,
+     "tele_vote": 48,
+     "score": 105.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 4,
+     "qualified": true
+    },
+    {
+     "eid": 4,
+     "member": "星",
+     "member_id": 45,
+     "artist": "Emperor X",
+     "song": "Freeway in Heaven",
+     "language": "英语",
+     "genre": "rock",
+     "jury_vote": 72,
+     "tele_vote": 32,
+     "score": 104.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 5,
+     "qualified": true
+    },
+    {
+     "eid": 5,
+     "member": "晕",
+     "member_id": 117,
+     "artist": "Alvaro De Luna & Rayden",
+     "song": "Sin Antifaz",
+     "language": "西班牙语",
+     "genre": "pop",
+     "jury_vote": 53,
+     "tele_vote": 38,
+     "score": 91.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 6,
+     "qualified": true
+    },
+    {
+     "eid": 6,
+     "member": "威",
+     "member_id": 7,
+     "artist": "Sam Dew",
+     "song": "Thinking of You",
+     "language": "英语",
+     "genre": "r&b/soul",
+     "jury_vote": 46,
+     "tele_vote": 39,
+     "score": 85.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 7,
+     "qualified": true
+    },
+    {
+     "eid": 7,
+     "member": "杰",
+     "member_id": 156,
+     "artist": "Hannah Grace",
+     "song": "Closer",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 56,
+     "tele_vote": 28,
+     "score": 84.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 8,
+     "qualified": true
+    },
+    {
+     "eid": 8,
+     "member": "锴",
+     "member_id": 12,
+     "artist": "Aaron Childs",
+     "song": "No Rewrites",
+     "language": "英语",
+     "genre": "funk",
+     "jury_vote": 53,
+     "tele_vote": 29,
+     "score": 82.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 9,
+     "qualified": true
+    },
+    {
+     "eid": 9,
+     "member": "文",
+     "member_id": 116,
+     "artist": "Juliette Armanet",
+     "song": "Flamme",
+     "language": "法语",
+     "genre": "french pop",
+     "jury_vote": 47,
+     "tele_vote": 34,
+     "score": 81.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 10,
+     "qualified": false
+    },
+    {
+     "eid": 10,
+     "member": "松",
+     "member_id": 105,
+     "artist": "Alexa Cappelli",
+     "song": "Temporary",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 58,
+     "tele_vote": 22,
+     "score": 80.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 11,
+     "qualified": false
+    },
+    {
+     "eid": 11,
+     "member": "E",
+     "member_id": 659,
+     "artist": "Relay Tapes",
+     "song": "Looks Like Rain",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 53,
+     "tele_vote": 23,
+     "score": 76.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 12,
+     "qualified": false
+    },
+    {
+     "eid": 12,
+     "member": "鲤",
+     "member_id": 181,
+     "artist": "Dardan",
+     "song": "Pse",
+     "language": "阿尔巴尼亚语",
+     "genre": "hip-hop/rap",
+     "jury_vote": 26,
+     "tele_vote": 23,
+     "score": 49.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 13,
+     "qualified": false
+    },
+    {
+     "eid": 13,
+     "member": "萌",
+     "member_id": 125,
+     "artist": "Hania Rani",
+     "song": "Hello",
+     "language": "英语",
+     "genre": "electronic",
+     "jury_vote": 29,
+     "tele_vote": 3,
+     "score": 32.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 14,
+     "qualified": false
+    }
+   ],
+   "votes": {
+    "scale": [
+     12,
+     10,
+     8,
+     7,
+     6,
+     5,
+     4,
+     3,
+     2,
+     1
+    ],
+    "voters": [
+     {
+      "voter": "E",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 6,
+       "2": 12,
+       "3": 8,
+       "4": 7,
+       "6": 2,
+       "7": 5,
+       "8": 1,
+       "9": 4,
+       "10": 3
+      }
+     },
+     {
+      "voter": "威",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 8,
+       "2": 6,
+       "4": 7,
+       "7": 5,
+       "8": 12,
+       "9": 3,
+       "10": 4,
+       "11": 1,
+       "12": 2
+      }
+     },
+     {
+      "voter": "文",
+      "type": "jury",
+      "points": {
+       "0": 7,
+       "1": 10,
+       "2": 12,
+       "3": 6,
+       "4": 5,
+       "5": 2,
+       "7": 8,
+       "10": 3,
+       "11": 1,
+       "12": 4
+      }
+     },
+     {
+      "voter": "星",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "2": 12,
+       "3": 4,
+       "5": 1,
+       "6": 7,
+       "7": 2,
+       "8": 5,
+       "9": 3,
+       "11": 6,
+       "13": 8
+      }
+     },
+     {
+      "voter": "晕",
+      "type": "jury",
+      "points": {
+       "0": 5,
+       "1": 10,
+       "2": 6,
+       "3": 4,
+       "4": 3,
+       "6": 1,
+       "8": 8,
+       "10": 12,
+       "11": 2,
+       "12": 7
+      }
+     },
+     {
+      "voter": "杰",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 10,
+       "2": 12,
+       "3": 2,
+       "4": 7,
+       "8": 5,
+       "9": 3,
+       "10": 4,
+       "11": 8,
+       "12": 1
+      }
+     },
+     {
+      "voter": "松",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 10,
+       "2": 3,
+       "3": 1,
+       "4": 4,
+       "5": 8,
+       "6": 12,
+       "8": 5,
+       "11": 2,
+       "12": 7
+      }
+     },
+     {
+      "voter": "猴",
+      "type": "jury",
+      "points": {
+       "0": 7,
+       "2": 1,
+       "3": 12,
+       "6": 4,
+       "7": 6,
+       "8": 8,
+       "9": 3,
+       "10": 10,
+       "11": 5,
+       "12": 2
+      }
+     },
+     {
+      "voter": "羊",
+      "type": "jury",
+      "points": {
+       "2": 8,
+       "3": 1,
+       "4": 7,
+       "5": 3,
+       "7": 10,
+       "8": 2,
+       "9": 5,
+       "10": 6,
+       "11": 12,
+       "13": 4
+      }
+     },
+     {
+      "voter": "芬",
+      "type": "jury",
+      "points": {
+       "0": 10,
+       "1": 8,
+       "4": 7,
+       "5": 12,
+       "6": 5,
+       "7": 2,
+       "8": 6,
+       "9": 3,
+       "10": 4,
+       "12": 1
+      }
+     },
+     {
+      "voter": "萌",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "2": 5,
+       "3": 8,
+       "4": 7,
+       "5": 10,
+       "6": 6,
+       "7": 4,
+       "9": 2,
+       "10": 3,
+       "11": 1
+      }
+     },
+     {
+      "voter": "锴",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 10,
+       "4": 8,
+       "5": 7,
+       "6": 6,
+       "7": 3,
+       "9": 4,
+       "10": 1,
+       "11": 5,
+       "12": 2
+      }
+     },
+     {
+      "voter": "风",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 8,
+       "3": 3,
+       "4": 10,
+       "6": 1,
+       "7": 4,
+       "9": 5,
+       "10": 2,
+       "11": 7,
+       "13": 12
+      }
+     },
+     {
+      "voter": "鲤",
+      "type": "jury",
+      "points": {
+       "0": 4,
+       "3": 8,
+       "5": 10,
+       "6": 2,
+       "7": 7,
+       "8": 1,
+       "9": 12,
+       "10": 6,
+       "11": 3,
+       "13": 5
+      }
+     },
+     {
+      "voter": "N",
+      "type": "tele",
+      "points": {
+       "0": 1,
+       "1": 7,
+       "2": 12,
+       "3": 5,
+       "4": 10,
+       "6": 3,
+       "7": 4,
+       "8": 8,
+       "9": 2,
+       "11": 6
+      }
+     },
+     {
+      "voter": "S",
+      "type": "tele",
+      "points": {
+       "0": 12,
+       "1": 8,
+       "2": 10,
+       "3": 2,
+       "6": 1,
+       "7": 3,
+       "9": 6,
+       "10": 7,
+       "11": 5,
+       "12": 4
+      }
+     },
+     {
+      "voter": "包",
+      "type": "tele",
+      "points": {
+       "0": 8,
+       "1": 12,
+       "2": 4,
+       "4": 5,
+       "5": 3,
+       "6": 10,
+       "9": 6,
+       "10": 2,
+       "11": 7,
+       "13": 1
+      }
+     },
+     {
+      "voter": "布",
+      "type": "tele",
+      "points": {
+       "0": 5,
+       "2": 1,
+       "3": 8,
+       "4": 3,
+       "5": 2,
+       "6": 10,
+       "8": 7,
+       "9": 6,
+       "11": 4,
+       "12": 12
+      }
+     },
+     {
+      "voter": "汞",
+      "type": "tele",
+      "points": {
+       "0": 7,
+       "1": 8,
+       "3": 10,
+       "4": 1,
+       "5": 12,
+       "7": 3,
+       "8": 4,
+       "9": 2,
+       "10": 5,
+       "12": 6
+      }
+     },
+     {
+      "voter": "泰",
+      "type": "tele",
+      "points": {
+       "0": 12,
+       "1": 5,
+       "3": 10,
+       "4": 8,
+       "5": 4,
+       "7": 3,
+       "8": 6,
+       "9": 7,
+       "10": 2,
+       "11": 1
+      }
+     },
+     {
+      "voter": "院",
+      "type": "tele",
+      "points": {
+       "0": 6,
+       "1": 7,
+       "2": 2,
+       "3": 8,
+       "4": 1,
+       "5": 10,
+       "6": 3,
+       "7": 12,
+       "8": 4,
+       "9": 5
+      }
+     },
+     {
+      "voter": "雨",
+      "type": "tele",
+      "points": {
+       "0": 8,
+       "1": 10,
+       "3": 5,
+       "4": 4,
+       "5": 7,
+       "6": 12,
+       "7": 3,
+       "10": 6,
+       "12": 1,
+       "13": 2
+      }
+     }
+    ]
+   }
+  },
+  {
+   "match": "GF",
+   "venue": "总决赛",
+   "note": "狼、锴 因未按时提交投票，其选送歌曲总分按 50% 折算计入最终成绩；计分板内评委分 / 观众分为折算前原始分（狼 83 / 28、锴 36 / 18）。",
+   "entries": [
+    {
+     "eid": 0,
+     "member": "泰",
+     "member_id": 131,
+     "artist": "Comastatic",
+     "song": "back4blood",
+     "language": "英语",
+     "genre": "rock",
+     "jury_vote": 55.0,
+     "tele_vote": 26.0,
+     "score": 81.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 10,
+     "overall_rank": 10
+    },
+    {
+     "eid": 1,
+     "member": "锴",
+     "member_id": 12,
+     "artist": "Aaron Childs",
+     "song": "No Rewrites",
+     "language": "英语",
+     "genre": "funk",
+     "jury_vote": 36.0,
+     "tele_vote": 18.0,
+     "score": 27,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 18,
+     "overall_rank": 18
+    },
+    {
+     "eid": 2,
+     "member": "S",
+     "member_id": 27,
+     "artist": "Cri, Half Moon Run",
+     "song": "Astray",
+     "language": "英语",
+     "genre": "dance",
+     "jury_vote": 57.0,
+     "tele_vote": 34.0,
+     "score": 91.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 5,
+     "overall_rank": 5
+    },
+    {
+     "eid": 3,
+     "member": "杰",
+     "member_id": 156,
+     "artist": "Hannah Grace",
+     "song": "Closer",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 30.0,
+     "tele_vote": 7.0,
+     "score": 37.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 17,
+     "overall_rank": 17
+    },
+    {
+     "eid": 4,
+     "member": "威",
+     "member_id": 7,
+     "artist": "Sam Dew",
+     "song": "Thinking of You",
+     "language": "英语",
+     "genre": "r&b/soul",
+     "jury_vote": 45.0,
+     "tele_vote": 24.0,
+     "score": 69.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 13,
+     "overall_rank": 13
+    },
+    {
+     "eid": 5,
+     "member": "瑞",
+     "member_id": 135,
+     "artist": "Susanne Sundfor",
+     "song": "leikara ljóð",
+     "language": "冰岛语",
+     "genre": "alternative",
+     "jury_vote": 47.0,
+     "tele_vote": 30.0,
+     "score": 77.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 12,
+     "overall_rank": 12
+    },
+    {
+     "eid": 6,
+     "member": "晕",
+     "member_id": 117,
+     "artist": "Alvaro De Luna & Rayden",
+     "song": "Sin Antifaz",
+     "language": "西班牙语",
+     "genre": "pop",
+     "jury_vote": 49.0,
+     "tele_vote": 5.0,
+     "score": 54.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 15,
+     "overall_rank": 15
+    },
+    {
+     "eid": 7,
+     "member": "芬",
+     "member_id": 110,
+     "artist": "Rook Monroe",
+     "song": "Jolie",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 75.0,
+     "tele_vote": 21.0,
+     "score": 96.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 4,
+     "overall_rank": 4
+    },
+    {
+     "eid": 8,
+     "member": "狼",
+     "member_id": 113,
+     "artist": "Thomas Headon",
+     "song": "not saying goodbye",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 83.0,
+     "tele_vote": 28.0,
+     "score": 56,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 14,
+     "overall_rank": 14
+    },
+    {
+     "eid": 9,
+     "member": "柠",
+     "member_id": 19,
+     "artist": "Rene Miller",
+     "song": "Concrete Heart",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 79.0,
+     "tele_vote": 0.0,
+     "score": 79.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 11,
+     "overall_rank": 11
+    },
+    {
+     "eid": 10,
+     "member": "包",
+     "member_id": 20,
+     "artist": "See You Next Year, EKKSTACY, Mike Dean",
+     "song": "I Guess",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 33.0,
+     "tele_vote": 8.0,
+     "score": 41.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 16,
+     "overall_rank": 16
+    },
+    {
+     "eid": 11,
+     "member": "星",
+     "member_id": 45,
+     "artist": "Emperor X",
+     "song": "Freeway in Heaven",
+     "language": "英语",
+     "genre": "rock",
+     "jury_vote": 60.0,
+     "tele_vote": 24.0,
+     "score": 84.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 6,
+     "overall_rank": 6
+    },
+    {
+     "eid": 12,
+     "member": "汞",
+     "member_id": 103,
+     "artist": "William Michael Morgan",
+     "song": "In Walked You",
+     "language": "英语",
+     "genre": "country",
+     "jury_vote": 64.0,
+     "tele_vote": 19.0,
+     "score": 83.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 8,
+     "overall_rank": 8
+    },
+    {
+     "eid": 13,
+     "member": "猴",
+     "member_id": 18,
+     "artist": "Raynes",
+     "song": "Drive You Back Home",
+     "language": "英语",
+     "genre": "pop",
+     "jury_vote": 107.0,
+     "tele_vote": 14.0,
+     "score": 121.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 2,
+     "overall_rank": 2
+    },
+    {
+     "eid": 14,
+     "member": "雨",
+     "member_id": 17,
+     "artist": "Joywave",
+     "song": "Buy American",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 66.0,
+     "tele_vote": 16.0,
+     "score": 82.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 9,
+     "overall_rank": 9
+    },
+    {
+     "eid": 15,
+     "member": "韩",
+     "member_id": 67,
+     "artist": "Stefan",
+     "song": "Seotud Kaed",
+     "language": "爱沙尼亚语",
+     "genre": "pop",
+     "jury_vote": 76.0,
+     "tele_vote": 8.0,
+     "score": 84.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 7,
+     "overall_rank": 7
+    },
+    {
+     "eid": 16,
+     "member": "羊",
+     "member_id": 100,
+     "artist": "Best Frenz & Joywave",
+     "song": "Flatline",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 124.0,
+     "tele_vote": 35.0,
+     "score": 159.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 1,
+     "overall_rank": 1
+    },
+    {
+     "eid": 17,
+     "member": "风",
+     "member_id": 154,
+     "artist": "Haley Blais",
+     "song": "The Cabin",
+     "language": "英语",
+     "genre": "alternative",
+     "jury_vote": 74.0,
+     "tele_vote": 31.0,
+     "score": 105.0,
+     "support_rate": null,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 3,
+     "overall_rank": 3
+    }
+   ],
+   "votes": {
+    "scale": [
+     12,
+     10,
+     8,
+     7,
+     6,
+     5,
+     4,
+     3,
+     2,
+     1
+    ],
+    "voters": [
+     {
+      "voter": "E",
+      "type": "jury",
+      "points": {
+       "1": 1,
+       "3": 2,
+       "4": 3,
+       "5": 8,
+       "7": 6,
+       "8": 4,
+       "11": 5,
+       "13": 7,
+       "16": 10,
+       "17": 12
+      }
+     },
+     {
+      "voter": "S",
+      "type": "jury",
+      "points": {
+       "0": 2,
+       "7": 5,
+       "8": 10,
+       "9": 12,
+       "10": 1,
+       "13": 4,
+       "14": 6,
+       "15": 3,
+       "16": 8,
+       "17": 7
+      }
+     },
+     {
+      "voter": "包",
+      "type": "jury",
+      "points": {
+       "0": 1,
+       "2": 5,
+       "4": 7,
+       "5": 2,
+       "8": 3,
+       "11": 4,
+       "13": 12,
+       "14": 6,
+       "15": 8,
+       "16": 10
+      }
+     },
+     {
+      "voter": "奶",
+      "type": "jury",
+      "points": {
+       "0": 5,
+       "5": 2,
+       "7": 8,
+       "8": 10,
+       "9": 12,
+       "12": 4,
+       "13": 3,
+       "14": 7,
+       "15": 6,
+       "16": 1
+      }
+     },
+     {
+      "voter": "威",
+      "type": "jury",
+      "points": {
+       "1": 12,
+       "2": 4,
+       "3": 1,
+       "8": 2,
+       "9": 3,
+       "11": 5,
+       "13": 10,
+       "14": 7,
+       "16": 8,
+       "17": 6
+      }
+     },
+     {
+      "voter": "星",
+      "type": "jury",
+      "points": {
+       "1": 1,
+       "4": 7,
+       "5": 10,
+       "7": 2,
+       "10": 3,
+       "12": 5,
+       "14": 6,
+       "15": 4,
+       "16": 8,
+       "17": 12
+      }
+     },
+     {
+      "voter": "晕",
+      "type": "jury",
+      "points": {
+       "7": 6,
+       "8": 7,
+       "9": 2,
+       "10": 1,
+       "12": 12,
+       "13": 10,
+       "14": 4,
+       "15": 8,
+       "16": 5,
+       "17": 3
+      }
+     },
+     {
+      "voter": "杰",
+      "type": "jury",
+      "points": {
+       "1": 5,
+       "2": 6,
+       "5": 12,
+       "7": 3,
+       "9": 4,
+       "11": 2,
+       "12": 7,
+       "13": 8,
+       "16": 1,
+       "17": 10
+      }
+     },
+     {
+      "voter": "松",
+      "type": "jury",
+      "points": {
+       "0": 3,
+       "2": 1,
+       "4": 12,
+       "6": 6,
+       "8": 10,
+       "9": 5,
+       "12": 4,
+       "13": 7,
+       "15": 8,
+       "16": 2
+      }
+     },
+     {
+      "voter": "柠",
+      "type": "jury",
+      "points": {
+       "0": 4,
+       "1": 6,
+       "2": 5,
+       "7": 3,
+       "8": 10,
+       "12": 8,
+       "13": 12,
+       "14": 2,
+       "15": 7,
+       "16": 1
+      }
+     },
+     {
+      "voter": "汞",
+      "type": "jury",
+      "points": {
+       "0": 6,
+       "1": 2,
+       "2": 4,
+       "6": 12,
+       "7": 8,
+       "8": 5,
+       "9": 7,
+       "13": 1,
+       "15": 10,
+       "16": 3
+      }
+     },
+     {
+      "voter": "泰",
+      "type": "jury",
+      "points": {
+       "1": 1,
+       "6": 2,
+       "7": 5,
+       "8": 4,
+       "10": 8,
+       "11": 6,
+       "13": 3,
+       "14": 12,
+       "15": 7,
+       "16": 10
+      }
+     },
+     {
+      "voter": "猴",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "1": 5,
+       "3": 6,
+       "4": 1,
+       "7": 10,
+       "8": 7,
+       "9": 4,
+       "12": 3,
+       "16": 8,
+       "17": 2
+      }
+     },
+     {
+      "voter": "瑞",
+      "type": "jury",
+      "points": {
+       "0": 12,
+       "2": 7,
+       "7": 3,
+       "10": 1,
+       "11": 8,
+       "13": 5,
+       "14": 2,
+       "15": 4,
+       "16": 6,
+       "17": 10
+      }
+     },
+     {
+      "voter": "羊",
+      "type": "jury",
+      "points": {
+       "0": 1,
+       "2": 12,
+       "3": 10,
+       "5": 6,
+       "6": 3,
+       "8": 5,
+       "9": 2,
+       "10": 4,
+       "11": 7,
+       "17": 8
+      }
+     },
+     {
+      "voter": "芬",
+      "type": "jury",
+      "points": {
+       "0": 8,
+       "1": 2,
+       "6": 12,
+       "9": 4,
+       "10": 3,
+       "11": 6,
+       "12": 5,
+       "13": 7,
+       "14": 1,
+       "16": 10
+      }
+     },
+     {
+      "voter": "萌",
+      "type": "jury",
+      "points": {
+       "2": 6,
+       "4": 1,
+       "6": 10,
+       "7": 8,
+       "9": 2,
+       "10": 7,
+       "11": 5,
+       "14": 3,
+       "15": 4,
+       "16": 12
+      }
+     },
+     {
+      "voter": "雨",
+      "type": "jury",
+      "points": {
+       "4": 12,
+       "5": 1,
+       "6": 4,
+       "7": 3,
+       "9": 10,
+       "10": 5,
+       "11": 2,
+       "13": 6,
+       "15": 7,
+       "16": 8
+      }
+     },
+     {
+      "voter": "韩",
+      "type": "jury",
+      "points": {
+       "0": 1,
+       "2": 7,
+       "3": 5,
+       "5": 2,
+       "8": 3,
+       "9": 12,
+       "12": 8,
+       "14": 10,
+       "16": 6,
+       "17": 4
+      }
+     },
+     {
+      "voter": "风",
+      "type": "jury",
+      "points": {
+       "1": 1,
+       "3": 6,
+       "4": 2,
+       "5": 4,
+       "7": 5,
+       "8": 3,
+       "11": 10,
+       "12": 8,
+       "13": 12,
+       "16": 7
+      }
+     },
+     {
+      "voter": "T",
+      "type": "tele",
+      "points": {
+       "0": 8,
+       "1": 6,
+       "2": 12,
+       "5": 10,
+       "8": 5,
+       "10": 1,
+       "11": 2,
+       "13": 3,
+       "16": 4,
+       "17": 7
+      }
+     },
+     {
+      "voter": "兔",
+      "type": "tele",
+      "points": {
+       "0": 10,
+       "2": 6,
+       "3": 2,
+       "8": 1,
+       "12": 4,
+       "13": 7,
+       "14": 5,
+       "15": 8,
+       "16": 12,
+       "17": 3
+      }
+     },
+     {
+      "voter": "城",
+      "type": "tele",
+      "points": {
+       "2": 6,
+       "5": 7,
+       "7": 1,
+       "8": 2,
+       "11": 10,
+       "12": 3,
+       "13": 4,
+       "14": 8,
+       "16": 5,
+       "17": 12
+      }
+     },
+     {
+      "voter": "布",
+      "type": "tele",
+      "points": {
+       "0": 4,
+       "1": 7,
+       "2": 3,
+       "4": 12,
+       "6": 5,
+       "7": 10,
+       "8": 8,
+       "11": 2,
+       "16": 6,
+       "17": 1
+      }
+     },
+     {
+      "voter": "音",
+      "type": "tele",
+      "points": {
+       "1": 5,
+       "2": 7,
+       "3": 3,
+       "4": 4,
+       "5": 12,
+       "10": 2,
+       "11": 10,
+       "12": 6,
+       "16": 1,
+       "17": 8
+      }
+     },
+     {
+      "voter": "鸽",
+      "type": "tele",
+      "points": {
+       "0": 4,
+       "3": 2,
+       "4": 8,
+       "5": 1,
+       "7": 10,
+       "8": 12,
+       "10": 5,
+       "12": 6,
+       "14": 3,
+       "16": 7
+      }
+     }
+    ]
+   }
+  }
+ ]
+}
