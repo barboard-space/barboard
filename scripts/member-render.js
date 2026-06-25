@@ -42,6 +42,10 @@
     '.mp-section{padding:56px 0 64px;border-top:1px solid var(--clr-border)}',
     '.mp-section-label{font-family:var(--font-mono);font-size:10px;letter-spacing:.32em;text-transform:uppercase;color:var(--clr-violet-light);margin-bottom:12px}',
     '.mp-section-title{font-family:var(--font-display);font-size:28px;letter-spacing:.06em;color:var(--clr-text);margin-bottom:28px}',
+    /* 吧视标题行：标题左 + 导出按钮右 */
+    '.mp-bv-titlebar{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;margin-bottom:28px}',
+    '.mp-bv-titlebar .mp-section-title{margin-bottom:0}',
+    '.mp-bv-exports{display:flex;align-items:center;gap:8px;flex-wrap:wrap}',
     '.mp-works-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}',
     '.mp-work-card{background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:8px;padding:20px;text-decoration:none;display:block;transition:border-color .2s,background .2s}',
     '.mp-work-card:hover{border-color:var(--clr-border-2);background:var(--clr-surface-2)}',
@@ -62,11 +66,12 @@
     '.mp-bv-trend__hd{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;flex-wrap:wrap;margin-bottom:12px}',
     '.mp-bv-trend__title{font-size:13px;font-weight:600;color:var(--clr-text-2)}',
     '.mp-bv-trend__hd-r{display:flex;align-items:center;gap:8px 16px;flex-wrap:wrap}',
-    '.mp-bv-export{display:inline-flex;align-items:center;gap:5px;font-family:var(--font-body);font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--clr-violet);background:var(--clr-violet-dim);border:1px solid rgba(168,85,247,.4);border-radius:5px;padding:4px 10px;cursor:pointer;transition:background .18s,border-color .18s,color .18s}',
-    '.mp-bv-export:hover{background:rgba(168,85,247,.2);border-color:var(--clr-violet);color:var(--clr-violet-light)}',
+    /* 与 .mp-link（Bilibili/Musictrack 按钮）同款样式 */
+    '.mp-bv-export{display:inline-flex;align-items:center;gap:6px;font-family:var(--font-body);font-size:12px;font-weight:500;color:var(--clr-text-2);background:var(--clr-surface);border:1px solid var(--clr-border);border-radius:6px;padding:3px 14px;cursor:pointer;transition:border-color .2s,color .2s,background .2s}',
+    '.mp-bv-export:hover{border-color:var(--clr-border-2);color:var(--clr-text);background:var(--clr-surface-2)}',
     '.mp-bv-export[disabled]{opacity:.55;cursor:default}',
     '.mp-bv-export svg{display:block}',
-    '@media (hover:none),(pointer:coarse){.mp-bv-export:hover{background:var(--clr-violet-dim);border-color:rgba(168,85,247,.4)}}',
+    '@media (hover:none),(pointer:coarse){.mp-bv-export:hover{border-color:var(--clr-border);color:var(--clr-text-2);background:var(--clr-surface)}}',
     '.mp-bv-trend__legend{display:flex;gap:14px;font-size:11px;color:var(--clr-text-3)}',
     '.mp-bv-lg{display:inline-flex;align-items:center;gap:5px}',
     '.mp-bv-lg__ic{width:15px;height:15px;flex-shrink:0;display:block}',
@@ -297,19 +302,9 @@
     return '<div class="mp-bv-trend fade-up" style="transition-delay:.42s">' +
       '<div class="mp-bv-trend__hd">' +
         '<span class="mp-bv-trend__title">历届排名走势</span>' +
-        '<span class="mp-bv-trend__hd-r">' +
-          '<span class="mp-bv-trend__legend">' +
-            '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4" fill="var(--clr-accent-light)"/></svg><span class="mp-bv-lg__t">正式单曲</span></span>' +
-            '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
-          '</span>' +
-          '<button type="button" class="mp-bv-export" data-exp="trend" aria-label="导出走势图为图片">' +
-            '<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 1.5v8m0 0L4.8 6.3M8 9.5l3.2-3.2M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-            '<span>导出走势图</span>' +
-          '</button>' +
-          '<button type="button" class="mp-bv-export" data-exp="card" aria-label="导出完整记录为图片">' +
-            '<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 1.5v8m0 0L4.8 6.3M8 9.5l3.2-3.2M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
-            '<span>导出完整记录</span>' +
-          '</button>' +
+        '<span class="mp-bv-trend__legend">' +
+          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4" fill="var(--clr-accent-light)"/></svg><span class="mp-bv-lg__t">正式单曲</span></span>' +
+          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
         '</span>' +
       '</div>' +
       '<div class="mp-bv-trend__sc"><svg class="mp-bv-trend__svg" role="img" aria-label="历届排名走势"></svg></div>' +
@@ -597,7 +592,7 @@
       });
     }).catch(restore);
   }
-  function exportBvCardPng(btn) {
+  function exportBvCardPng(btn, withTable) {
     var svg = document.querySelector('.mp-bv-trend__svg');
     if (!svg || !d.barvision) return;
     var orig = btn.innerHTML, lab = btn.querySelector('span');
@@ -619,10 +614,15 @@
         badges.sort(function (a, b) { return a.no - b.no; });
         var badgeY = headTop + 56, badgeS = 28, badgeGap = 7;
         var headerBottom = Math.max(headTop + AV, badgeY + badgeS * 746 / 770);
-        var statsTop = headerBottom + GAP, cardGap = 14, cardW = (W - cardGap * 3) / 4, cardH = 78, rowGap = 14;
-        var statsBottom = statsTop + cardH * 2 + rowGap;
+        var statsTop = headerBottom + GAP, cardGap = 10, cardW = (W - cardGap * 7) / 8, cardH = 84;  // 8 张一排
+        var statsBottom = statsTop + cardH;
         var trendTop = statsBottom + GAP, trendLabelY = trendTop + 12, chartTop = trendTop + 30, trendBottom = chartTop + H;
-        var footMid = trendBottom + 22 + 16, chL = trendBottom + 22 + 36 + 8, cw = W + M * 2;
+        var tblRows = withTable ? sortBvEntries(d.barvision.entries, 'edition', 'asc') : [];
+        var TBL_HEAD = 40, TBL_ROW = 38;
+        var tableLabelY = trendBottom + 28, tableTop = trendBottom + 46;
+        var tableBottom = tableTop + TBL_HEAD + tblRows.length * TBL_ROW;
+        var contentBottom = withTable ? tableBottom : trendBottom;
+        var footMid = contentBottom + 22 + 16, chL = contentBottom + 22 + 36 + 8, cw = W + M * 2;
         // ── 画布 ──
         var cv = document.createElement('canvas'); cv.width = cw * SC; cv.height = chL * SC;
         var ctx = cv.getContext('2d');
@@ -661,26 +661,29 @@
           { n: (bestN == null ? '—' : String(bestN)), p: (bestRep > 1 ? bestRep : 0), k: '最佳名次', c: bestColor },
           { n: f2(ov.avg), k: '平均名次' },
           { n: String(ov.twelve), k: '12 分次数', c: ov.twelve === 0 ? DIM : '' },
-          { n: f2(ov.jury_avg), k: '评委平均分' },
+          { n: f2(ov.jury_avg), k: 'Jury 均分' },
           { n: String(ov.top1), p: ov.top1_shadow, k: '冠军场数', c: ov.top1 > 0 ? GOLD : DIM },
           { n: String(ov.top3), p: ov.top3_shadow, k: '前三场数', c: ov.top3 === 0 ? DIM : '' },
           { n: String(ov.top10), p: ov.top10_shadow, k: '前十场数', c: ov.top10 === 0 ? DIM : '' },
           { n: String(ov.entries), p: ov.shadow, k: '参与场数', c: ov.entries === 0 ? DIM : '' }
         ];
         cards.forEach(function (cd, i) {
-          var x = P(M + (i % 4) * (cardW + cardGap)), y = P(statsTop + Math.floor(i / 4) * (cardH + rowGap)), w = P(cardW), h = P(cardH);
+          var x = P(M + i * (cardW + cardGap)), y = P(statsTop), w = P(cardW), h = P(cardH);
           rrect(ctx, x, y, w, h, P(8)); ctx.fillStyle = bvCssVar('--clr-surface') || '#12121f'; ctx.fill();
           ctx.lineWidth = P(1); ctx.strokeStyle = bvCssVar('--clr-border') || '#262636'; ctx.stroke();
           var numCJK = /[一-鿿]/.test(cd.n);
           var numFont = numCJK ? ('700 ' + P(20) + "px 'DM Sans',sans-serif") : (P(30) + "px 'Bebas Neue',sans-serif");
-          ctx.font = numFont; ctx.textBaseline = 'alphabetic'; var nw = ctx.measureText(cd.n).width;
+          var numX = x + w / 2, numY = y + P(41), labelY = y + h - P(21);  // 数字+标签块整体垂直居中
+          // 括号(混淆/达成次数)参与居中：数字+括号作为一组居中，与标签共享中轴
+          ctx.font = numFont; var nw = ctx.measureText(cd.n).width;
           var pStr = cd.p ? ('(' + cd.p + ')') : '', pw = 0;
           if (pStr) { ctx.font = P(13) + "px 'DM Sans',sans-serif"; pw = ctx.measureText(pStr).width + P(3); }
-          var sx = x + w / 2 - (nw + pw) / 2, numY = y + P(46);
-          ctx.textAlign = 'left'; ctx.font = numFont; ctx.fillStyle = cd.c || bvCssVar('--clr-text') || '#fff'; ctx.fillText(cd.n, sx, numY);
-          if (pStr) { ctx.font = P(13) + "px 'DM Sans',sans-serif"; ctx.fillStyle = DIM; ctx.fillText(pStr, sx + nw + P(3), numY); }
+          var sx = numX - (nw + pw) / 2;
+          ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+          ctx.font = numFont; ctx.fillStyle = cd.c || bvCssVar('--clr-text') || '#fff'; ctx.fillText(cd.n, sx, numY);
+          if (pStr) { ctx.font = P(13) + "px 'DM Sans',sans-serif"; ctx.fillStyle = DIM; ctx.fillText('(' + cd.p + ')', sx + nw + P(3), numY); }
           ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = P(12) + "px 'DM Sans',sans-serif"; ctx.textAlign = 'center';
-          ctx.fillText(cd.k, x + w / 2, y + h - P(13));
+          ctx.fillText(cd.k, numX, labelY);
         });
         // ── 走势图（小标题 + 图例 + 图）──
         ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
@@ -688,6 +691,63 @@
         ctx.fillText('历届排名走势', P(M), P(trendLabelY + 4));
         bvDrawLegend(ctx, P(M + W), P(trendLabelY), SC);
         ctx.drawImage(timg, P(M), P(chartTop), W * SC, H * SC);
+        // ── 历史成绩列表（仅 withTable）──
+        if (withTable) {
+          ctx.textAlign = 'left'; ctx.textBaseline = 'alphabetic';
+          ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = '600 ' + P(13) + "px 'DM Sans',sans-serif";
+          ctx.fillText('历届参赛记录', P(M), P(tableLabelY + 4));
+          var x0 = P(M), wpx = P(W);
+          var cRank = 50, cEd = 78, cSer = 56, cArt = 300, cTot = 84, cTw = 64, cSong = W - (cRank + cEd + cSer + cArt + cTot + cTw);
+          var cwid = [cRank, cEd, cSer, cArt, cSong, cTot, cTw], cleft = [0]; for (var ci = 0; ci < 6; ci++) cleft.push(cleft[ci] + cwid[ci]);
+          var cenCol = [1, 1, 1, 0, 0, 1, 1];
+          function clip(s, maxLg) { s = String(s == null ? '' : s); var mx = P(maxLg); if (ctx.measureText(s).width <= mx) return s; while (s.length > 1 && ctx.measureText(s + '…').width > mx) s = s.slice(0, -1); return s + '…'; }
+          function tag(txt, col, x, cy) { ctx.font = P(10) + "px 'DM Sans',sans-serif"; var tw = ctx.measureText(txt).width, px = P(4), h = P(15), w = tw + px * 2, y = cy - h / 2; rrect(ctx, x, y, w, h, P(2)); ctx.lineWidth = P(1); ctx.strokeStyle = (txt && txt.charAt(0) === '匿') ? (bvCssVar('--clr-violet') || '#a855f7') : (bvCssVar('--clr-border-2') || '#444'); ctx.stroke(); ctx.fillStyle = col; ctx.textAlign = 'left'; ctx.textBaseline = 'middle'; ctx.fillText(txt, x + px, cy + P(0.5)); return x + w + P(5); }
+          // 表头
+          ctx.fillStyle = bvCssVar('--clr-surface') || '#12121f'; ctx.fillRect(x0, P(tableTop), wpx, P(TBL_HEAD));
+          ctx.strokeStyle = bvCssVar('--clr-border-2') || '#444'; ctx.lineWidth = P(1);
+          ctx.beginPath(); ctx.moveTo(x0, P(tableTop + TBL_HEAD)); ctx.lineTo(x0 + wpx, P(tableTop + TBL_HEAD)); ctx.stroke();
+          var heads = ['名次', '届次', '场次', '歌手', '歌名', '总分', '12分'];
+          ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = '700 ' + P(11) + "px 'DM Sans',sans-serif"; ctx.textBaseline = 'middle';
+          heads.forEach(function (h, i) { var lx = M + cleft[i]; if (cenCol[i]) { ctx.textAlign = 'center'; ctx.fillText(h, P(lx + cwid[i] / 2), P(tableTop + TBL_HEAD / 2)); } else { ctx.textAlign = 'left'; ctx.fillText(h, P(lx + 10), P(tableTop + TBL_HEAD / 2)); } });
+          // 数据行
+          tblRows.forEach(function (e, ri) {
+            var ry = tableTop + TBL_HEAD + ri * TBL_ROW, midY = P(ry + TBL_ROW / 2), sh = e.is_shadow || e.canceled;
+            if (sh) { ctx.fillStyle = bvCssVar('--clr-shadow-bg') || '#0c0a18'; ctx.fillRect(x0, P(ry), wpx, P(TBL_ROW)); }
+            ctx.strokeStyle = bvCssVar('--clr-border') || '#262636'; ctx.lineWidth = P(1);
+            ctx.beginPath(); ctx.moveTo(x0, P(ry + TBL_ROW)); ctx.lineTo(x0 + wpx, P(ry + TBL_ROW)); ctx.stroke();
+            var def = sh ? bvCssVar('--clr-text-4') : bvCssVar('--clr-text'), t3 = sh ? bvCssVar('--clr-text-4') : bvCssVar('--clr-text-3');
+            ctx.textBaseline = 'middle';
+            // 名次
+            var rc = sh ? bvCssVar('--clr-text-4') : (e.rank === 1 ? bvCssVar('--clr-gold-light') : e.rank === 2 ? bvCssVar('--clr-silver') : e.rank === 3 ? bvCssVar('--clr-bronze') : bvCssVar('--clr-text-3'));
+            ctx.fillStyle = rc; ctx.textAlign = 'center';
+            // 名次为空（—）用固定字体，不随混淆与否变化，避免横杠粗细/长短不一
+            var rankTxt, rankFont;
+            if (e.rank == null) { rankTxt = '—'; rankFont = '600 ' + P(15) + "px 'DM Sans',sans-serif"; }
+            else if (e.is_shadow) { rankTxt = e.rank + '*'; rankFont = '400 ' + P(13) + "px 'DM Sans',sans-serif"; }
+            else { rankTxt = String(e.rank); rankFont = '600 ' + P(15) + "px 'DM Sans',sans-serif"; }
+            ctx.font = rankFont; ctx.fillText(rankTxt, P(M + cleft[0] + cwid[0] / 2), midY);
+            // 届次
+            ctx.fillStyle = sh ? bvCssVar('--clr-text-4') : (bvCssVar('--clr-board-light') || '#8fb8d8'); ctx.font = P(13) + "px 'DM Sans',sans-serif"; ctx.textAlign = 'center';
+            ctx.fillText('第 ' + e.edition_no + ' 届', P(M + cleft[1] + cwid[1] / 2), midY);
+            // 场次
+            ctx.fillStyle = t3; ctx.fillText(/^[0-9]+$/.test(String(e.series)) ? '-' : String(e.series), P(M + cleft[2] + cwid[2] / 2), midY);
+            // 歌手
+            ctx.fillStyle = def; ctx.textAlign = 'left'; ctx.font = P(13) + "px 'DM Sans',sans-serif";
+            ctx.fillText(clip(e.artist, cArt - 16), P(M + cleft[3] + 10), midY);
+            // 歌名 + 标签
+            var songT = clip(e.song, cSong - 96); ctx.fillStyle = def; ctx.fillText(songT, P(M + cleft[4] + 8), midY);
+            var tx = P(M + cleft[4] + 8) + ctx.measureText(songT).width + P(6);
+            if (e.joint) tx = tag('合报', t3, tx, midY);
+            if (e.persona && e.persona !== '匿名') tx = tag(e.persona, bvCssVar('--clr-violet-light') || '#c084fc', tx, midY);
+            if (e.is_shadow) tx = tag('混淆', bvCssVar('--clr-text-4') || '#6a6488', tx, midY);
+            if (e.canceled) tx = tag('取消', bvCssVar('--clr-text-4') || '#6a6488', tx, midY);
+            // 总分
+            ctx.fillStyle = def; ctx.textAlign = 'center'; ctx.font = P(13) + "px 'DM Sans',sans-serif";
+            ctx.fillText(e.total == null ? '—' : String(Math.round(e.total)), P(M + cleft[5] + cwid[5] / 2), midY);
+            // 12分
+            ctx.fillStyle = t3; ctx.fillText(e.canceled ? '—' : String(e.twelve || 0), P(M + cleft[6] + cwid[6] / 2), midY);
+          });
+        }
         // ── 品牌脚 ──
         bvDrawBrand(ctx, P(M), P(footMid), SC, logo);
         t.free();
@@ -754,7 +814,7 @@
       { v: (bestN == null ? '—' : bestN), rep: (bestRep > 1 ? bestRep : 0), k: '最佳名次', color: bestColor },
       { v: f2(ov.avg), k: '平均名次', color: (ov.avg == null ? DIM : '') },
       { v: ov.twelve, k: '12 分次数', color: dim0(ov.twelve) },
-      { v: f2(ov.jury_avg), k: '评委平均分', color: (ov.jury_avg == null ? DIM : '') },
+      { v: f2(ov.jury_avg), k: 'Jury 均分', color: (ov.jury_avg == null ? DIM : '') },
       // B 组：主数字为正式曲数，混淆曲用括号 (n) 单独标注（不并入主数）
       { v: ov.top1, sh: ov.top1_shadow, k: '冠军场数', color: dim0(ov.top1, ov.top1 > 0 ? 'var(--clr-gold-light)' : '') },
       { v: ov.top3, sh: ov.top3_shadow, k: '前三场数', color: dim0(ov.top3) },
@@ -774,13 +834,20 @@
     var unclaimed = arguments[1];
     var label = 'Barvision';
     var title = unclaimed ? '匿名参赛歌曲' : '吧视参赛记录';
+    var hasTrend = !unclaimed && (bv.entries || []).some(function (e) { return e.rank != null; });
+    function expBtn(exp, lab) {
+      return '<button type="button" class="mp-bv-export" data-exp="' + exp + '" aria-label="' + lab + '为图片">' +
+        '<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true"><path d="M8 1.5v8m0 0L4.8 6.3M8 9.5l3.2-3.2M2.5 13.5h11" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '<span>' + lab + '</span></button>';
+    }
+    var exportBar = hasTrend ? '<span class="mp-bv-exports">' + expBtn('card', '导出走势图') + expBtn('full', '导出完整记录') + '</span>' : '';
     var topBlock = unclaimed
       ? '<p class="mp-bv-note fade-up" style="transition-delay:.2s">以下参赛歌曲在比赛结束后始终无人认领选送者，统一归档于此。</p>'
       : '<div class="mp-bv-stats fade-up" style="transition-delay:.2s">' + statsHtml + '</div>';
     return '<section class="mp-section">' +
       '<div class="section__inner">' +
         '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">' + label + '</div>' +
-        '<div class="mp-section-title fade-up" style="transition-delay:.15s">' + title + '</div>' +
+        '<div class="mp-bv-titlebar fade-up" style="transition-delay:.15s"><span class="mp-section-title">' + title + '</span>' + exportBar + '</div>' +
         topBlock +
         '<div class="mp-bv-tw fade-up" style="transition-delay:.25s"><table class="mp-bv-tbl"><thead><tr>' +
           '<th class="sortable ta-c" data-sort="rank">名次' + TRI + '</th><th class="sortable ta-c" data-sort="edition">届次' + TRI + '</th><th class="ta-c">场次</th><th>歌手</th><th>歌名</th><th class="sortable ta-c" data-sort="total">总分' + TRI + '</th><th class="sortable ta-c" data-sort="twelve">12分' + TRI + '</th>' +
@@ -878,7 +945,11 @@
     }
     drawBvTrend();
     Array.prototype.forEach.call(document.querySelectorAll('.mp-bv-export'), function (b) {
-      b.addEventListener('click', function () { (b.dataset.exp === 'card' ? exportBvCardPng : exportBvTrendPng)(b); });
+      b.addEventListener('click', function () {
+        if (b.dataset.exp === 'card') exportBvCardPng(b, false);
+        else if (b.dataset.exp === 'full') exportBvCardPng(b, true);
+        else exportBvTrendPng(b);
+      });
     });
     var _bvtt;
     window.addEventListener('resize', function () { clearTimeout(_bvtt); _bvtt = setTimeout(drawBvTrend, 150); });
