@@ -38,12 +38,23 @@
   var BV_THEME = {
     2023: {
       poster: '../../assets/images/barvision/2023/poster.png',
+      posterMobile: '../../assets/images/barvision/2023/bg.png',  // 手机端 hero 底（无 logo；cover 裁切下完整 logo 显示不全）
       c1: '#f84d39',   // 珊瑚红（主）
       c2: '#1b2f31',   // 墨绿（深，结构 / hero 辉光）
       c2l: '#fbb1a9',  // 浅珊瑚（徽章 / SF2 标识——海报浅红色，取代原墨绿）
       c3: '#fbb1a9',   // 浅珊瑚
       glow: 'radial-gradient(ellipse 78% 58% at 50% 0%, rgba(248,77,57,0.17) 0%, transparent 60%),' +
             'radial-gradient(ellipse 46% 52% at 100% 96%, rgba(60,122,107,0.15) 0%, transparent 55%)'
+    },
+    2024: {
+      poster: '../../assets/images/barvision/2024/poster.png',  // 蓝版 + logo（hero 背景）
+      posterMobile: '../../assets/images/barvision/2024/bg-blue.png',  // 手机端 hero 底（蓝色无 logo）
+      c1: '#f13b8d',   // 深粉（主：eyebrow / 年份 / meta）
+      c2: '#09184e',   // 深 navy（辅助次选 / hero 辉光底）
+      c2l: '#fc91c1',  // 浅粉（徽章 / 次要）
+      c3: '#fc91c1',   // 浅粉（hero 简介正文）
+      glow: 'radial-gradient(ellipse 78% 58% at 50% 0%, rgba(241,59,141,0.16) 0%, transparent 60%),' +
+            'radial-gradient(ellipse 46% 52% at 0% 100%, rgba(36,53,115,0.22) 0%, transparent 55%)'
     }
   };
   function theme(d) { return (d && BV_THEME[d.year]) || null; }
@@ -380,8 +391,10 @@
 
     /* ----- TOC (沿用 hof) ----- */
     .bvr-toc { position:fixed; right:19px; bottom:90px; z-index:90; display:flex; flex-direction:column;
-      gap:1px; opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
+      align-items:flex-end; gap:10px; opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
     .bvr-toc--visible { opacity:1; visibility:visible; }
+    .bvr-toc__list { display:flex; flex-direction:column; gap:1px; }
+    .bvr-toc__toggle { display:none; }  /* 桌面不显示悬浮按钮；手机端 @media 内启用 */
     .bvr-toc__item { font-family:var(--font-body); font-size:11px; color:var(--clr-text-3); cursor:pointer;
       padding:3px 13px 3px 0; position:relative; transition:color 0.15s; line-height:1.5; white-space:nowrap;
       user-select:none; text-align:right; }
@@ -399,7 +412,22 @@
     .bvr-sec .section__inner > .fade-up { transition-delay: 0s; }
 
     @media (max-width:768px) {
-      .bvr-toc { display:none; }
+      /* 移动端：TOC 改为悬浮按钮（对齐 back-to-top 风格），点开弹出目录面板，置于 back-to-top 上方 */
+      .bvr-toc { right:20px; bottom:66px; z-index:210; gap:10px; }
+      .bvr-toc__toggle { display:flex; align-items:center; justify-content:center; width:42px; height:42px;
+        background:rgba(20,20,34,0.5); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+        border:1px solid var(--clr-border-2); border-radius:4px; color:rgba(192,132,252,0.65); cursor:pointer;
+        padding:0; transition:color 0.25s,border-color 0.25s,box-shadow 0.25s; }
+      .bvr-toc__toggle svg { width:18px; height:18px; }
+      .bvr-toc--open .bvr-toc__toggle { color:var(--clr-violet-light); border-color:var(--clr-violet-light); }
+      .bvr-toc__list { display:none; min-width:148px; max-height:62vh; overflow-y:auto;
+        background:rgba(20,20,34,0.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+        border:1px solid var(--clr-border-2); border-radius:6px; padding:6px;
+        box-shadow:0 8px 28px rgba(0,0,0,0.4); }
+      .bvr-toc--open .bvr-toc__list { display:flex; }
+      .bvr-toc__item { text-align:left; font-size:13px; padding:9px 13px; border-radius:4px; }
+      .bvr-toc__item::after { display:none; }  /* 面板内不用呼吸点 */
+      .bvr-toc__item--active { color:var(--clr-violet-light); background:rgba(168,85,247,0.12); }
       .bvr-scroll-hint { display:block; }
       /* Scoreboard / 12 Points 子标题：手机端略收字号 + 上间距（桌面 18px / 48px） */
       .bvr-dvr-sub { font-size:16px; margin-top:36px; }
@@ -482,8 +510,8 @@
     /* ===== 2023+ 主题届：海报作背景的 hero（经典模板 + 海报底图 + 渐变遮罩） ===== */
     .bvr-hero--bg { position:relative; overflow:hidden; padding:var(--nav-h) 0 48px;
       min-height:72vh; display:flex; align-items:center; }  /* 海报 16:9，给足视口高度并垂直居中内容 */
-    .bvr-hero__poster { position:absolute; inset:0; background-size:cover; background-position:center;
-      pointer-events:none; }
+    .bvr-hero__poster { position:absolute; inset:0; background-image:var(--bvt-poster);
+      background-size:cover; background-position:right center; pointer-events:none; }  /* 右锚定：缩放裁切时优先保右侧 logo 完整 */
     /* 左侧深、右侧透出海报；底部加深，保证文字可读 */
     .bvr-hero__scrim { position:absolute; inset:0; pointer-events:none; background:
       linear-gradient(90deg, rgba(8,8,18,0.88) 0%, rgba(8,8,18,0.72) 26%, rgba(8,8,18,0.18) 66%, rgba(8,8,18,0.05) 100%),
@@ -640,6 +668,8 @@
       .bvr-sb-title { font-size:11px; }
 
       /* 主题届 hero（poster）：收高、标题收小、遮罩改竖向（整体加深保证密集流光底图上文字可读，中段略透出底图） */
+      /* 手机屏放不下完整背景 logo → 改用无 logo 的 bg 版（posterMobile），居中铺满 */
+      .bvr-hero__poster { background-image:var(--bvt-poster-m); background-position:center; }
       .bvr-hero--bg { min-height:auto; padding:calc(var(--nav-h) + 30px) 0 40px; }
       .bvr-hero--bg .bvr-title { font-size:clamp(34px,10.5vw,52px); line-height:1.02; }
       .bvr-hero__scrim { background:
@@ -672,7 +702,8 @@
     var name = esc(d.edition_name).replace(/(\d+(?:st|nd|rd|th))/i, '<span class="bvr-ord">$1</span>');
     // 主题届（2023+）：内容布局参考 2026/events.html hero（eyebrow + 城市/年份标题 + 竖分隔 meta + 简介），海报作背景铺底
     if (th) {
-      var vars = '--bvt-c1:' + th.c1 + ';--bvt-c2:' + th.c2 + ';--bvt-c2l:' + th.c2l + ';--bvt-c3:' + th.c3 + ';';
+      var vars = '--bvt-c1:' + th.c1 + ';--bvt-c2:' + th.c2 + ';--bvt-c2l:' + th.c2l + ';--bvt-c3:' + th.c3 +
+        ";--bvt-poster:url('" + th.poster + "');--bvt-poster-m:url('" + (th.posterMobile || th.poster) + "');";
       // 城市英文名：从 edition_name 去掉「Barvision」前缀与年份（如 Barvision Qiqihar 2023 → Qiqihar）
       var cityEn = (d.edition_name || '').replace(/^Barvision\s+/i, '').replace(/\s*\d{4}\s*$/, '').trim() || esc(d.city || '');
       var mi = [];
@@ -681,7 +712,7 @@
       if (d.host) mi.push('<span class="bvr-hero__mi">主办：' + linkMentions(esc(d.host)) + '</span>');
       if (d.motto) mi.push('<span class="bvr-hero__mi">' + esc(d.motto) + '</span>');
       return '<section class="bvr-hero bvr-hero--bg" style="' + vars + '">' +
-        '<div class="bvr-hero__poster" style="background-image:url(\'' + th.poster + '\')"></div>' +
+        '<div class="bvr-hero__poster"></div>' +
         '<div class="bvr-hero__scrim"></div>' +
         '<div class="bvr-hero__inner section__inner">' + eyebrow +
         '<h1 class="bvr-title fade-up" style="transition-delay:0.08s;">' + esc(cityEn) + '<br><span class="bvr-hero__yr">' + esc(d.year) + '</span></h1>' +
@@ -1191,11 +1222,18 @@
     var nav = document.createElement('nav');
     nav.className = 'bvr-toc';
     nav.setAttribute('aria-label', '页内目录');
-    nav.innerHTML = items.map(function (it) {
+    var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
+    nav.innerHTML = '<div class="bvr-toc__list">' + items.map(function (it) {
       return '<div class="bvr-toc__item" data-target="' + it.id + '">' + esc(it.label) + '</div>';
-    }).join('');
+    }).join('') + '</div>' +
+      '<button class="bvr-toc__toggle" type="button" aria-label="页内目录">' + ICON + '</button>';
     document.body.appendChild(nav);
     nav.classList.add('bvr-toc--visible');  // hero 较短，目录加载即显示（不绑定滚动阈值）
+
+    // 移动端悬浮按钮：点击展开/收起目录面板；点条目或点面板外部自动收起（桌面端 toggle 隐藏、list 常显，--open 无副作用）
+    var toggle = nav.querySelector('.bvr-toc__toggle');
+    toggle.addEventListener('click', function (e) { e.stopPropagation(); nav.classList.toggle('bvr-toc--open'); });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) nav.classList.remove('bvr-toc--open'); });
 
     var els = Array.prototype.slice.call(nav.querySelectorAll('.bvr-toc__item'));
     var navH = 72, suppress = false, timer = null;
@@ -1216,6 +1254,7 @@
       it.addEventListener('click', function () {
         var t = document.getElementById(it.dataset.target);
         if (!t) return;
+        nav.classList.remove('bvr-toc--open');  // 移动端：点条目后收起面板
         suppress = true; clearTimeout(timer);
         els.forEach(function (x) { x.classList.toggle('bvr-toc__item--active', x === it); });
         window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });

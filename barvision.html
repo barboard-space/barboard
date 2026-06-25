@@ -457,6 +457,7 @@
     '/barvision/2020/11.html',
     '/barvision/2020/12.html',
     '/barvision/2023/13.html',
+    '/barvision/2024/14.html',
   ]);
   function romanToInt(r) {
     var map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 }, n = 0;
@@ -477,7 +478,7 @@
     var el = document.getElementById('bvRecentArchiveGrid');
     if (!el) return;
     var recent = EDITIONS.filter(function(ed) { return ed.year >= 2023; });
-    var RECENT_BG = { 2023: 'assets/images/barvision/2023/bg.png' };  // 卡片上半部分主视觉背景（按届补充）
+    var RECENT_BG = { 2023: 'assets/images/barvision/2023/bg.png', 2024: 'assets/images/barvision/2024/bg-pink.png' };  // 卡片上半部分主视觉背景（按届补充）
     el.innerHTML = recent.map(function(ed, i) {
       var logoSrc = 'assets/images/barvision_logo_' + ed.year + '.svg';
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';

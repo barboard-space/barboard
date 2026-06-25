@@ -1,0 +1,19 @@
+{
+ "year": 2024,
+ "edition_no": 14,
+ "edition_name": "Barvision Tonghua 2024",
+ "cn_name": "第十四届欧美流行歌曲个人榜吧歌曲大赛",
+ "version": "regular",
+ "city": "通化",
+ "host": "羊妈",
+ "motto": "",
+ "summary": "第十四届吧视于 2024 年在通化举办，由羊妈主办、威妈协办。26 位成员选送 28 首歌曲，经两场半决赛后共有 18 首进入决赛，并由评审团与观众投票共决冠军。\n\n最终，S妈选送的 “Pretender” 以 266 分夺冠，刷新吧视历史最高总分纪录；雨妈的 “Eyes Wide” 与 A妈的 “Honeycrash” 分列亚、季军。",
+ "_stub": "临时占位：仅 hero 元数据，matches 待 parser 填充（试 hero 蓝底+粉字用）",
+ "members": {
+  "S妈": { "id": 27, "handle": "哈哈哈时光机" },
+  "羊妈": { "id": 100, "handle": "SeafishYANG" },
+  "威妈": { "id": 7, "handle": "williw_" },
+  "雨妈": { "id": 17, "handle": "Lee翼雨" }
+ },
+ "matches": []
+}

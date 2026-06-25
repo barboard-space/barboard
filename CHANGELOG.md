@@ -4,6 +4,18 @@
 
 ---
 
+## [2026-06-25] — 第 14 届(Tonghua 2024)主视觉/主题/hero + 移动端悬浮 TOC + 文案
+
+### Added
+- **第 14 届 Tonghua 2024 导入（第一阶段：主题/hero）**：素材 `assets/images/barvision/2024/{poster(蓝版+logo),bg-pink,bg-blue}.png`；`BV_THEME[2024]`（hero 蓝底 + 粉字：c1 深粉 #f13b8d / c2 navy #09184e / c2l·c3 浅粉 #fc91c1 / posterMobile=bg-blue）、`BV_STRIPE[2024]`=[浅粉,中粉]、`RECENT_BG[2024]`=bg-pink、`BUILT_EDITIONS`+14.html；薄壳 `barvision/2024/14.html` + `regular-14.json`（**hero 元数据 stub，matches 空，待 parser 填数据**）。
+- **移动端悬浮 TOC（所有吧视详情页通用）**：`bv-results-render.js` 的 TOC 在手机端收为悬浮按钮（对齐 back-to-top 风格，置于其上方），点开弹出 glass 目录面板、点条目滚动定位+收起、点外部收起；桌面端 TOC 不变。
+
+### Changed
+- **hero poster 通用机制（2023+2024）**：`BV_THEME` 加 `posterMobile`，poster 背景走 CSS 变量；桌面 `.bvr-hero__poster` `background-position:right center`（裁切优先保右侧 logo）；手机端切无 logo 的 bg 版（2024→bg-blue / 2023→bg.png）居中。
+- **文案**：2023+2024 intro「经两场半决赛后共有 18 首进入决赛，并由…共决冠军」+「最终，」加逗号；2024 删「（评审 123 + 观众 143）」及多余空格。2023「匿名」去重（全文留 1 处；参赛与报名第二处删、SF1/SF2「匿名投票与 Top 10 排名制」→「Top 10 排名制」）。⚠️ 用户否决 2023 赛制/summary 大幅精简，只做匿名去重。
+
+---
+
 ## [2026-06-25] — 2026 主视觉接入 + 2023 详情页相关链接 / 手机端优化 / 收尾微调
 
 ### Added

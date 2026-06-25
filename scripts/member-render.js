@@ -233,7 +233,8 @@
   };
   // 2023+ 主题双色：徽章 logo 改 45° 双色斜条纹（与详情页 BV_THEME 一致）。导入新年份补一条。
   var BV_STRIPE = {
-    2023: ['#f84d39', '#fbb1a9']  // 珊瑚红 / 浅珊瑚（海报浅红色）
+    2023: ['#f84d39', '#fbb1a9'],  // 珊瑚红 / 浅珊瑚（海报浅红色）
+    2024: ['#fc91c1', '#f961a6']   // 浅粉 / 中粉
   };
   function bvStripeDefs(id, c1, c2) {
     return '<defs><pattern id="' + id + '" width="240" height="240" patternUnits="userSpaceOnUse" patternTransform="translate(0,26) rotate(60)">' +
