@@ -7,7 +7,7 @@
  "city": "齐齐哈尔",
  "host": "雨妈",
  "motto": "",
- "summary": "停办两年后，第十三届吧视于 2023 年在齐齐哈尔重新举办。本届吧视由雨妈发起承办、威妈包装宣传，27 位成员各选送一首歌曲，经两场半决赛筛出 18 首进入决赛，由评审团与观众投票共决冠军。\n\n最终羊妈选送的 “Flatline” 以 159 分夺冠，刷新当时吧视最高总分纪录；猴妈的 “Drive You Back Home” 与风妈的 “The Cabin” 分列亚、季军。",
+ "summary": "停办两年后，第十三届吧视于 2023 年在齐齐哈尔重新举办。本届吧视由雨妈发起承办，威妈包装宣传。27 位成员各选送一首歌曲，经两场半决赛筛出 18 首进入决赛，由评审团与观众投票共决冠军。\n\n最终羊妈选送的 “Flatline” 以 159 分夺冠，刷新当时吧视最高总分纪录；猴妈的 “Drive You Back Home” 与风妈的 “The Cabin” 分列亚、季军。",
  "visual_design": "Barvision Qiqihar 2023 的主视觉由威妈设计，以齐齐哈尔的工业属性为灵感，构建出由立体几何块面交错构成的抽象空间。设计采用冷绿色、珊瑚红与深灰蓝三色对比构图，营造出强烈的秩序感与纵深感。纵向变化的图形仿佛音波跃动的高楼，也如同垂直搭建的舞台装置，象征城市与音乐的共振。本届是 Barvision 首次尝试以构成式图形语言为主轴，确立了系列视觉风格向理性、空间与系统感演化的转折点。",
  "rules": {
   "sections": [
@@ -75,7 +75,7 @@
    {
     "title": "投票与评分",
     "body": [
-     "每位评委需在每轮比赛中提交一份 Top10 排名，按下表赋分："
+     "每位评委需在每轮比赛中提交一份 Top 10 排名，按下表赋分："
     ],
     "scoring": {
      "ranks": [
@@ -111,6 +111,23 @@
   ]
  },
  "source": "第十三届吧视报名总则 + 23-SF1/SF2.csv（半决赛逐票）+ Grand Final 总表（决赛逐票）",
+ "links": {
+  "replays": [
+   { "label": "Barvision Qiqihar 2023 Grand Final", "url": "https://www.bilibili.com/video/BV12C4y1L7nC/" },
+   { "label": "Barvision Qiqihar 2023 Semi-Final 1", "url": "https://www.bilibili.com/video/BV1LK4y1c7HW/" },
+   { "label": "Barvision Qiqihar 2023 Semi-Final 2", "url": "https://www.bilibili.com/video/BV1rF411175S/" }
+  ],
+  "playlists": [
+   { "platform": "Spotify", "items": [
+    { "label": "Barvision Qiqihar 2023 Final Results Spotify Playlist", "url": "https://open.spotify.com/playlist/2lcZ1EOhkZslBh2vljSExb?si=65935e9419394b75" },
+    { "label": "Barvision Qiqihar 2023 Semi-Final 1 Spotify Playlist", "url": "https://open.spotify.com/playlist/1HXnYAbRwTImBA7t0EDUcX?si=f3334fda949a4f9a" },
+    { "label": "Barvision Qiqihar 2023 Semi-Final 2 Spotify Playlist", "url": "https://open.spotify.com/playlist/1QNYP6pCfdlYnFntAFPW4d?si=d41c879d3b1d4f10" }
+   ] },
+   { "platform": "网易云音乐", "items": [
+    { "label": "BarVision Qiqihar 2023 Results NetEase Music Playlist", "url": "http://163cn.tv/HWeyXTz" }
+   ] }
+  ]
+ },
  "members": {
   "E妈": {
    "id": 659,
@@ -270,7 +287,7 @@
   {
    "match": "SF1",
    "venue": "半决赛一",
-   "summary": "第一场半决赛共有 13 首参赛作品，采用匿名投票与 Top10 排名制，最终决出 9 首晋级总决赛的作品。本场得分最高的是 Joywave 演唱的 “Buy American”，以 142 分位居首位；William Michael Morgan 的 “In Walked You” 与 Stefan 的 “Seotud Käed” 分别以 141 分和 138 分紧随其后。晋级作品风格多样，涵盖流行摇滚、美国乡村与欧洲流行等多种风格。",
+   "summary": "第一场半决赛共有 13 首参赛作品，采用匿名投票与 Top 10 排名制，最终决出 9 首晋级总决赛的作品。本场得分最高的是 Joywave 演唱的 “Buy American”，以 142 分位居首位；William Michael Morgan 的 “In Walked You” 与 Stefan 的 “Seotud Käed” 分别以 141 分和 138 分紧随其后。晋级作品风格多样，涵盖流行摇滚、美国乡村与欧洲流行等多种风格。",
    "entries": [
     {
      "eid": 0,
@@ -367,7 +384,7 @@
      "member": "狼妈",
      "member_id": 113,
      "artist": "Thomas Headon",
-     "song": "not saying goodbye",
+     "song": "not saying goodbye :(",
      "language": "英语",
      "genre": "Pop",
      "jury_vote": 65,
@@ -915,7 +932,7 @@
   {
    "match": "SF2",
    "venue": "半决赛二",
-   "summary": "第二场半决赛共有 14 首参赛作品，同样采用匿名投票与 Top10 排名制，最终决出 9 首晋级总决赛的作品。本场表现最突出的是 Best Frenz & Joywave 带来的 “Flatline”，以 164 分的高分夺得第一；Raynes 的 “Drive You Back Home”（137 分）与 Haley Blais 的 “The Cabin”（106 分）分列第二、第三。",
+   "summary": "第二场半决赛共有 14 首参赛作品，同样采用匿名投票与 Top 10 排名制，最终决出 9 首晋级总决赛的作品。本场表现最突出的是 Best Frenz & Joywave 带来的 “Flatline”，以 164 分的高分夺得第一；Raynes 的 “Drive You Back Home”（137 分）与 Haley Blais 的 “The Cabin”（106 分）分列第二、第三。",
    "entries": [
     {
      "eid": 0,
@@ -1547,7 +1564,7 @@
   {
    "match": "GF",
    "venue": "总决赛",
-   "summary": "总决赛于北京时间 2023 年 10 月 4 日 21:00 举行，共有 18 首歌曲入围。投票由来自各参赛作品选送者的 20 位评审团成员，以及 6 位来自未选送歌曲成员的观众票参与者共同完成；每位评委从决赛入围歌曲中选出个人 Top10，并依名次由高到低赋予 12、10、8、7、6、5、4、3、2、1 分计入成绩。其中，狼妈与锴妈因未能按时提交个人投票，其所选送歌曲的总票数折半计入最终成绩。\n\n羊妈凭借 Best Frenz & Joywave 共同演绎的 “Flatline” 赢得比赛，该作品在评委票中获得 124 分、在观众票中获得 35 分，以总分 159 分夺冠，并在当时创下 Barvision 最高得分纪录；这一纪录在一年后的 Barvision Tonghua 2024 中被 S妈以 266 分打破。羊妈也成为继猴妈、瑞妈、A妈之后，第四位首次参加 Barvision 即夺冠的成员。\n\n第二名是猴妈选送、Raynes 演唱的 “Drive You Back Home”，以评委票 107 分、观众票 14 分合计 121 分位居次席；季军为风妈带来、Haley Blais 演唱的 “The Cabin”，最终以 105 分名列第三。",
+   "summary": "总决赛于北京时间 2023 年 10 月 4 日 21:00 举行，共有 18 首歌曲入围。投票由来自各参赛作品选送者的 20 位评审团成员，以及 6 位来自未选送歌曲成员的观众票参与者共同完成；每位评委从决赛入围歌曲中选出个人 Top 10，并依名次由高到低赋予 12、10、8、7、6、5、4、3、2、1 分计入成绩。其中，狼妈与锴妈因未能按时提交个人投票，其所选送歌曲的总票数折半计入最终成绩。\n\n羊妈凭借 Best Frenz & Joywave 共同演绎的 “Flatline” 赢得比赛，该作品在评委票中获得 124 分、在观众票中获得 35 分，以总分 159 分夺冠，并在当时创下 Barvision 最高得分纪录；这一纪录在一年后的 Barvision Tonghua 2024 中被 S妈以 266 分打破。羊妈也成为继猴妈、瑞妈、A妈之后，第四位首次参加 Barvision 即夺冠的成员。\n\n第二名是猴妈选送、Raynes 演唱的 “Drive You Back Home”，以评委票 107 分、观众票 14 分合计 121 分位居次席；季军为风妈带来、Haley Blais 演唱的 “The Cabin”，最终以 105 分名列第三。",
    "note": "狼妈、锴妈 因未按时提交投票，其选送歌曲总分按 50% 折算计入最终成绩；计分板内评委分 / 观众分为折算前原始分（狼妈 83 / 28、锴妈 36 / 18）。",
    "entries": [
     {
@@ -1789,7 +1806,7 @@
      "member": "狼妈",
      "member_id": 113,
      "artist": "Thomas Headon",
-     "song": "not saying goodbye",
+     "song": "not saying goodbye :(",
      "language": "英语",
      "genre": "Pop",
      "jury_vote": 83.0,

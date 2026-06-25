@@ -88,7 +88,9 @@
     .bv-current-card {
       display: grid; grid-template-columns: 1fr auto;
       gap: 36px;
-      background: linear-gradient(135deg, #0a0820 0%, #16104a 45%, #0c0a32 100%);
+      /* 2026 主视觉 bg（无文字）作底图，铺满无边界；padding-box 防半透明 border 透出亮边 */
+      background: url('assets/images/barvision/2026/bg.png') center / cover no-repeat;
+      background-clip: padding-box;
       border: 1px solid rgba(100,140,230,0.55);
       border-radius: 8px;
       padding: 48px 32px;
@@ -96,16 +98,18 @@
       box-shadow: 0 0 0 1px rgba(120,160,240,0.08), 0 0 32px rgba(100,120,220,0.16), 0 0 80px rgba(100,80,200,0.10);
       margin-top: var(--gap-md);
       margin-bottom: var(--gap-md);
-      transition: border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
     }
+    /* 暗罩：左深右浅 + 底部加深，保证左列文字与右列 logo 可读 */
     .bv-current-card::before {
       content: ''; position: absolute; inset: 0;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-      background-size: 32px 32px;
+      background:
+        linear-gradient(135deg, rgba(8,8,20,0.85) 0%, rgba(10,10,30,0.66) 42%, rgba(8,8,26,0.40) 100%),
+        linear-gradient(0deg, rgba(8,8,18,0.45) 0%, transparent 45%);
       pointer-events: none;
+      transition: opacity 0.4s ease;
     }
+    .bv-current-card:hover::before { opacity: 0.82; }
     .bv-current-card::after {
       content: ''; position: absolute; inset: 0;
       background: linear-gradient(108deg,
@@ -127,7 +131,6 @@
                   0 0 52px rgba(168,85,247,0.36),
                   0 0 100px rgba(139,52,220,0.16),
                   inset 0 0 28px rgba(168,85,247,0.05);
-      background: linear-gradient(135deg, #0c0a26 0%, #1d1558 45%, #110e38 100%);
     }
     .bv-current-card__left {
       position: relative; z-index: 1;

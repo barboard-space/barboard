@@ -511,8 +511,11 @@
     var sc = src.children, dc = dst.children;
     for (var j = 0; j < sc.length; j++) if (dc[j]) bvInlineStyles(sc[j], dc[j]);
   }
-  function bvShareOrDownload(blob, name) {
-    var fname = 'Barvision-' + (name || '走势') + '.png';
+  function bvShareOrDownload(blob, label) {
+    // 文件名：妈名-Barvision-项目（妈名 = 昵称去尾「妈」，如 雨妈→雨）
+    var who = (nickname || '').toString().replace(/妈$/, '');
+    label = label || '走势';
+    var fname = (who ? who + '-' : '') + 'Barvision-' + label + '.png';
     function dl() {
       var url = URL.createObjectURL(blob);
       var a = document.createElement('a'); a.href = url; a.download = fname; document.body.appendChild(a); a.click(); a.remove();
@@ -524,7 +527,7 @@
       try {
         var file = new File([blob], fname, { type: 'image/png' });
         if (navigator.canShare && navigator.canShare({ files: [file] })) {
-          navigator.share({ files: [file], title: (name || '') + ' · Barvision 历届走势' }).catch(function () {});
+          navigator.share({ files: [file], title: (nickname || '') + ' · Barvision ' + label }).catch(function () {});
           return;
         }
       } catch (e) {}
@@ -609,7 +612,7 @@
         ctx.drawImage(t.img, M, HEAD, t.W * SC, t.H * SC);
         bvDrawBrand(ctx, M, HEAD + t.H * SC + FOOT / 2, SC, logo);
         t.free();
-        cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, name); restore(); }, 'image/png');
+        cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, '走势'); restore(); }, 'image/png');
       });
     }).catch(restore);
   }
@@ -784,7 +787,7 @@
         // ── 品牌脚 ──
         bvDrawBrand(ctx, P(M), P(footMid), SC, logo);
         t.free();
-        cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, name); restore(); }, 'image/png');
+        cv.toBlob(function (blob) { if (blob) bvShareOrDownload(blob, withTable ? '完整记录' : '走势'); restore(); }, 'image/png');
       });
     }).catch(restore);
   }

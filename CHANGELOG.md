@@ -4,6 +4,42 @@
 
 ---
 
+## [2026-06-25] — 2026 主视觉接入 + 2023 详情页相关链接 / 手机端优化 / 收尾微调
+
+### Added
+- **2026 主视觉接入**：`barvision/2026/events.html` hero 用 `poster.png` 作背景（`.ev-hero__poster` + `.ev-hero__scrim`，移除右列 SVG logo 改单列、去 grid/水印、留辉光）；`barvision.html` XVI 当届大卡用 `bg.png` 作底图（cover + `background-clip:padding-box`，`::before` 改暗罩渐变去网格纹）。素材 `assets/images/barvision/2026/{poster,bg}.png`。
+- **2023 详情页「相关链接」section**（数据驱动，任意届 `d.links` 存在即渲染，2024/2025 复用）：`regular-13.json` 顶层加 `links{replays[], playlists[{platform,items[]}]}`；`bv-results-render.js` 新增 `linksBlock(d)`（直播回放 + 歌单链接分平台），section 置于最终赛果后、TOC 加「相关链接」；CSS `.bvr-links__*`。
+
+### Changed
+- **Hero scrim 调浅**（2023 详情页 `.bvr-hero__scrim` + events.html `.ev-hero__scrim` 同值）：左 0.94/0.80→0.88/0.72、右 0.30/0.14→0.18/0.05（logo 更明显）、底 0.78→0.72。
+- **2023 hero meta**：@名（meta + 简介）回归 `.member` 全局榜吧蓝 #8FBEE3（删 hero 3 条主题色覆盖）；meta 文字 `.bvr-hero__mi` 由 c3 浅珊瑚改 c1 珊瑚红 #f84d39（与 eyebrow 同色）@ 0.85（color-mix）。
+- **赛制赋分表**：分数 12 保留金色（`.bvr-rule__sc--top`），10–1 改白色 `--clr-text`。
+- **全站「Top10」→「Top 10」**（投票排名类）：regular-01/02/03/04/05/06/07/12 voting + regular-13 rules/SF1/SF2/GF summary 加空格；资格门槛类（Top100/50/20/「无 Top10 单曲」）保留不动。
+
+### Style（手机端，均锁 `@media max-width:768px`）
+- **参赛名单选送者**：桌面 @handle / 手机 X妈（`entryListBlock` 去 `{nick:true}`）。
+- **参赛名单 + 总成绩单**：手机端取消冻结列（`position:static`），完全左右滑动。
+- **总成绩单值字号收小**：#16px / 选送者12px / 歌手12px / 歌名11px。
+- **手机 hero(poster)**：`min-height:auto`、标题 `clamp(34,10.5vw,52)`、scrim 改竖向加深保证可读。
+- **barvision.html 主按钮**：去掉粉色辉光（box-shadow 紫色 only），修右侧"露底粉色"（根因=box-shadow 粉色分量，非渐变末端）。
+
+### Content
+- 狼妈选送 Thomas Headon 歌名修正为 `not saying goodbye :(`（SF1 + GF 两处；重跑 `gen_member_pages.py` 同步成员页）。
+- 2023 intro 标点微调：「发起承办、…包装宣传，27 位」→「发起承办，…包装宣传。27 位」。
+
+### Investigated（非 bug）
+- 「ed13 缺成员变动 + 上下届导航」经查为**预览端浏览器缓存假象**：boot 无 cache-bust fetch `editions-index.json`，预览 http.server 不发 Cache-Control → 浏览器缓存了 ed13 加入前的旧索引（12 届）→ `curIndex(ed13)=-1` → 两块返回空。磁盘文件实为 13 届含 ed13、代码正确，**线上 fresh 访问正常、无需改代码**。
+
+### Removed / Chore（精简清理）
+- `style.css?v=` 升 **3.0.13**（index/bbl/bbl·hof/styleguide 4 文件，同步手机端 `.btn--primary` 去粉辉光改动）。
+- 删除死代码 `bv-results-render.js` 的 `introsBlock()` 函数 + `.bvr-intro*` CSS（6 条）——从未被调用、各届无 `entries[].intro` 字段（CLAUDE.md #130「保留备用」决定作废）。`.bvr-empty` 保留（twelveBlock 共用）。
+- 只读审计（Explore 代理）确认项目已较精简：无备份/临时文件、无重复 CSS class 定义、结构合理；`data/barvision/barvision-archive/`（领奖台 CSV，已被各届 JSON 取代）+ 4 个 git 未跟踪空目录为可清候选，待用户确认是否删 archive 数据。
+
+### Docs
+- CLAUDE.md #159（本次综述，部分修订 #158）、#122 版本号更新为 3.0.13、#130 标注 introsBlock 已删；memory 新增「events.html 更新日期自动同步」约定 + 更正 ed13「非 bug」。
+
+---
+
 ## [2026-06-25] — 第十三届详情页设计定稿（hero / 各表 / 配色 多轮精修）
 
 ### Changed

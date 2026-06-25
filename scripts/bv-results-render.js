@@ -365,13 +365,7 @@
     .bvr-12tag--jury { color:var(--clr-accent-light); }
     .bvr-12tag--tele { color:var(--clr-pink-light); }
 
-    /* ----- intros / rules ----- */
-    .bvr-intro { border:1px solid var(--clr-border); border-radius:8px; padding:16px 18px; margin-bottom:10px; }
-    .bvr-intro__hd { display:flex; align-items:baseline; gap:10px; flex-wrap:wrap; margin-bottom:6px; }
-    .bvr-intro__song { font-size:14px; font-weight:700; color:var(--clr-text); }
-    .bvr-intro__artist { font-size:12px; color:var(--clr-text-2); }
-    .bvr-intro__by { font-size:11px; color:var(--clr-text-3); margin-left:auto; }
-    .bvr-intro__txt { font-size:13px; color:var(--clr-text-2); line-height:1.7; white-space:pre-wrap; }
+    /* ----- empty state ----- */
     .bvr-empty { font-size:13px; color:var(--clr-text-3); border:1px dashed var(--clr-border-2);
       border-radius:8px; padding:18px; text-align:center; }
     .bvr-rules { border:1px solid var(--clr-border); border-radius:8px; padding:18px 20px; }
@@ -438,6 +432,8 @@
       .bvr-tbl tbody .bvr-row--2 td:nth-child(-n+3) { background:linear-gradient(rgba(110,150,178,0.11),rgba(110,150,178,0.11)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--3 td:nth-child(-n+3) { background:linear-gradient(rgba(196,120,68,0.12),rgba(196,120,68,0.12)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--shadow td:nth-child(-n+3) { background:var(--clr-shadow-bg); }
+      /* 参赛名单（.bvr-el）：不冻结，完全左右滑动（覆盖上面 .bvr-tbl 前三列 sticky） */
+      .bvr-el thead th:nth-child(-n+3), .bvr-el tbody td:nth-child(-n+3) { position:static; }
       /* 注释里的 @名在手机端也显示昵称 */
       .bvr-mtx-note .member { font-size:0; }
       .bvr-mtx-note .member::before { content:attr(data-nickname); font-size:11px; }
@@ -490,23 +486,21 @@
       pointer-events:none; }
     /* 左侧深、右侧透出海报；底部加深，保证文字可读 */
     .bvr-hero__scrim { position:absolute; inset:0; pointer-events:none; background:
-      linear-gradient(90deg, rgba(8,8,18,0.94) 0%, rgba(8,8,18,0.80) 26%, rgba(8,8,18,0.30) 66%, rgba(8,8,18,0.14) 100%),
-      linear-gradient(0deg, rgba(8,8,18,0.78) 0%, transparent 40%); }
+      linear-gradient(90deg, rgba(8,8,18,0.88) 0%, rgba(8,8,18,0.72) 26%, rgba(8,8,18,0.18) 66%, rgba(8,8,18,0.05) 100%),
+      linear-gradient(0deg, rgba(8,8,18,0.72) 0%, transparent 40%); }
     .bvr-hero--bg .bvr-hero__inner { position:relative; z-index:2; margin-top:0; width:100%; }
     /* 配色统一到当年主题色（eyebrow / 年份 / 简介成员链接），仅 2023+ 主题 hero */
     .bvr-hero--bg .bvr-eyebrow { color:var(--bvt-c1, var(--clr-violet-light)); }
     .bvr-hero--bg .bvr-eyebrow:hover { color:var(--clr-white); }
-    .bvr-hero--bg .bvr-hero__desc .member { color:var(--bvt-c3, var(--clr-board-light)); }
-    .bvr-hero--bg .bvr-hero__desc .member:hover { color:var(--bvt-c1, var(--clr-white)); }
+    /* hero 简介/meta 内 @名沿用 .member 全局默认样式（榜吧蓝），不套主题色 */
     /* 城市/年份标题（参考 events.html：城市换行 + 年份强调为主题色） */
     .bvr-hero--bg .bvr-title { margin-bottom:0; }
     .bvr-hero__yr { color:var(--bvt-c1, var(--clr-pink-light)); }
     /* meta：竖分隔线（参考 events.html .ev-meta） */
     .bvr-hero__meta { display:flex; flex-wrap:wrap; align-items:center; margin-top:20px; }
-    .bvr-hero__mi { font-size:12px; color:var(--bvt-c3, var(--clr-text-3)); padding-right:14px; margin-right:14px;
+    .bvr-hero__mi { font-size:12px; color:color-mix(in srgb, var(--bvt-c1, var(--clr-text-3)) 85%, transparent); padding-right:14px; margin-right:14px;
       border-right:1px solid var(--clr-border); white-space:nowrap; }
     .bvr-hero__mi:last-child { border-right:none; margin-right:0; padding-right:0; }
-    .bvr-hero__mi .member { color:var(--bvt-c1, var(--clr-text-2)); }
     .bvr-hero__desc { margin-top:18px; }
     .bvr-hero__p { font-size:15px; line-height:1.75; color:var(--bvt-c3, var(--clr-text-2)); max-width:680px; margin:0 0 12px; }
     .bvr-hero__p:last-child { margin-bottom:0; }
@@ -550,7 +544,8 @@
     .bvr-rule__score th { font-family:var(--font-body); font-weight:700; color:var(--clr-text-2);
       background:var(--clr-surface); min-width:56px; }
     .bvr-rule__score tr:first-child td { color:var(--clr-text-3); }
-    .bvr-rule__score .bvr-rule__sc { color:var(--clr-gold-light); font-weight:700; }
+    .bvr-rule__score .bvr-rule__sc { color:var(--clr-text); font-weight:700; }
+    .bvr-rule__score .bvr-rule__sc--top { color:var(--clr-gold-light); }
     .bvr-rule__foot { font-size:12px; line-height:1.7; color:var(--clr-text-3); margin:10px 0 0; max-width:780px; }
     .bvr-rule__foot + .bvr-rule__foot { margin-top:4px; }
     .bvr-rules--rich .bvr-src { margin-top:18px; }
@@ -619,19 +614,39 @@
     .bvr-sb-poll__it { display:inline-flex; align-items:baseline; gap:7px; }
     .bvr-sb-poll__t { font-size:12px; color:var(--clr-text-2); }
     .bvr-sb-poll__n { font-family:var(--font-display); font-size:18px; line-height:1; color:var(--clr-text-2); }
+
+    /* ===== 相关链接（直播回放 / 歌单） ===== */
+    .bvr-links__grp { margin-bottom:26px; }
+    .bvr-links__grp:last-child { margin-bottom:0; }
+    .bvr-links__h { font-family:var(--font-body); font-size:16px; font-weight:700; color:var(--clr-text);
+      margin:0 0 14px; padding-left:11px; border-left:3px solid var(--clr-violet); }
+    .bvr-links__sub { margin:0 0 16px; }
+    .bvr-links__sub:last-child { margin-bottom:0; }
+    .bvr-links__subh { font-family:var(--font-body); font-size:13px; font-weight:700;
+      color:var(--clr-violet-light); letter-spacing:0.02em; margin:0 0 9px; }
+    .bvr-links__list { display:flex; flex-direction:column; gap:8px; align-items:flex-start; }
+    .bvr-link { font-size:14px; color:var(--clr-text-2); text-decoration:underline;
+      text-decoration-color:var(--clr-border-2); text-underline-offset:3px;
+      transition:color 0.18s, text-decoration-color 0.18s; }
+    .bvr-link:hover { color:var(--clr-violet-light); text-decoration-color:var(--clr-violet-light); }
+
     @media (max-width:768px) {
-      /* 冻结 # + 选送者 + 参赛作品 三列；其余横滑（用 class 选择器，避开两行表头的 nth-child 误命中） */
-      .bvr-sb td.bvr-sb-rank, .bvr-sb td.bvr-sb-by, .bvr-sb td.bvr-sb-song,
-      .bvr-sb th.bvr-sb-rank, .bvr-sb th.bvr-sb-by, .bvr-sb th.bvr-sb-song { position:sticky; z-index:2; }
-      .bvr-sb td.bvr-sb-rank, .bvr-sb td.bvr-sb-by, .bvr-sb td.bvr-sb-song { background:var(--clr-bg); }
-      .bvr-sb th.bvr-sb-rank, .bvr-sb th.bvr-sb-by, .bvr-sb th.bvr-sb-song { z-index:4; }
-      .bvr-sb .bvr-sb-rank { left:0; }
-      .bvr-sb .bvr-sb-by   { left:var(--sb-l-by,28px); }
-      .bvr-sb .bvr-sb-song { left:var(--sb-l-song,72px); }
-      td.bvr-sb-song { min-width:140px; }
-      .bvr-sb-row--1 td.bvr-sb-rank, .bvr-sb-row--1 td.bvr-sb-by, .bvr-sb-row--1 td.bvr-sb-song { background:linear-gradient(rgba(212,168,50,0.14),rgba(212,168,50,0.14)),var(--clr-bg); }
-      .bvr-sb-row--2 td.bvr-sb-rank, .bvr-sb-row--2 td.bvr-sb-by, .bvr-sb-row--2 td.bvr-sb-song { background:linear-gradient(rgba(110,150,178,0.11),rgba(110,150,178,0.11)),var(--clr-bg); }
-      .bvr-sb-row--3 td.bvr-sb-rank, .bvr-sb-row--3 td.bvr-sb-by, .bvr-sb-row--3 td.bvr-sb-song { background:linear-gradient(rgba(196,120,68,0.12),rgba(196,120,68,0.12)),var(--clr-bg); }
+      /* 总成绩单：不冻结，完全左右滑动；#/选送者/参赛作品 值字号收小 */
+      td.bvr-sb-song { min-width:150px; }
+      .bvr-sb-rank { font-size:16px; padding-left:12px; padding-right:6px; }
+      .bvr-sb-rank span { transform:translateY(1px); }
+      td.bvr-sb-by, .bvr-sb-by .member { font-size:12px; }
+      .bvr-sb-artist { font-size:12px; }
+      .bvr-sb-title { font-size:11px; }
+
+      /* 主题届 hero（poster）：收高、标题收小、遮罩改竖向（整体加深保证密集流光底图上文字可读，中段略透出底图） */
+      .bvr-hero--bg { min-height:auto; padding:calc(var(--nav-h) + 30px) 0 40px; }
+      .bvr-hero--bg .bvr-title { font-size:clamp(34px,10.5vw,52px); line-height:1.02; }
+      .bvr-hero__scrim { background:
+        linear-gradient(180deg, rgba(8,8,18,0.86) 0%, rgba(8,8,18,0.76) 48%, rgba(8,8,18,0.90) 100%); }
+      .bvr-hero__meta { margin-top:16px; }
+      .bvr-hero__desc { margin-top:14px; }
+      .bvr-hero__p { font-size:14px; line-height:1.7; }
     }
     `;
     var st = document.createElement('style');
@@ -989,20 +1004,6 @@
     return '<div class="bvr-12 fade-up">' + cells + '</div>';
   }
 
-  function introsBlock(m) {
-    var withIntro = m.entries.filter(function (e) { return e.intro; });
-    if (!withIntro.length) {
-      return '<div class="bvr-empty fade-up">本届歌曲介绍待补充。</div>';
-    }
-    return withIntro.map(function (e) {
-      return '<div class="bvr-intro fade-up"><div class="bvr-intro__hd">' +
-        '<span class="bvr-intro__song">' + esc(e.song) + '</span>' +
-        '<span class="bvr-intro__artist">' + esc(e.artist) + '</span>' +
-        '<span class="bvr-intro__by">' + memberLink(e.member, { nick: true }) + '</span></div>' +
-        '<div class="bvr-intro__txt">' + esc(e.intro) + '</div></div>';
-    }).join('');
-  }
-
   function rulesBlock(d) {
     var r = d.rules || {};
     // 结构化规则（2023+）：分节 + 列表 + 平台数据表 + 赋分表
@@ -1044,7 +1045,7 @@
     var scoring = '';
     if (s.scoring) {
       var rk = s.scoring.ranks.map(function (x) { return '<td>' + x + '</td>'; }).join('');
-      var sc = s.scoring.scores.map(function (x) { return '<td class="bvr-rule__sc">' + x + '</td>'; }).join('');
+      var sc = s.scoring.scores.map(function (x, i) { return '<td class="bvr-rule__sc' + (i === 0 ? ' bvr-rule__sc--top' : '') + '">' + x + '</td>'; }).join('');
       scoring = '<div class="bvr-rule__tw"><table class="bvr-rule__score"><tbody>' +
         '<tr><th>排名</th>' + rk + '</tr><tr><th>分数</th>' + sc + '</tr></tbody></table></div>';
     }
@@ -1071,8 +1072,8 @@
     });
     var rows = all.map(function (e) {
       var by = e.member.indexOf('/') > -1
-        ? '<span class="bvr-joint">' + e.member.split('/').map(function (n) { return memberLink(n.trim(), { nick: true }); }).join('') + '</span>'
-        : memberLink(e.member, { nick: true });
+        ? '<span class="bvr-joint">' + e.member.split('/').map(function (n) { return memberLink(n.trim()); }).join('') + '</span>'
+        : memberLink(e.member);
       return '<tr><td class="bvr-el__by">' + by + '</td>' +
         '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
         '<td class="song">' + esc(e.song) + (e.member.indexOf('/') > -1 ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
@@ -1083,6 +1084,27 @@
       '<div class="bvr-tw fade-up"><table class="bvr-tbl bvr-el"><thead><tr>' +
       '<th>选送者</th><th>歌手</th><th>歌曲名</th><th>语言</th><th>流派</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>';
+  }
+  // 相关链接（直播回放 + 歌单链接，分平台）；任意届 d.links 存在即渲染
+  function linksBlock(d) {
+    var L = d.links;
+    if (!L) return '';
+    function row(it) {
+      return '<a class="bvr-link" href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.label) + '</a>';
+    }
+    var out = '';
+    if (L.replays && L.replays.length) {
+      out += '<div class="bvr-links__grp fade-up"><h3 class="bvr-links__h">直播回放</h3>' +
+        '<div class="bvr-links__list">' + L.replays.map(row).join('') + '</div></div>';
+    }
+    if (L.playlists && L.playlists.length) {
+      var subs = L.playlists.map(function (p) {
+        return '<div class="bvr-links__sub"><h4 class="bvr-links__subh">' + esc(p.platform) + '</h4>' +
+          '<div class="bvr-links__list">' + (p.items || []).map(row).join('') + '</div></div>';
+      }).join('');
+      out += '<div class="bvr-links__grp fade-up"><h3 class="bvr-links__h">歌单链接</h3>' + subs + '</div>';
+    }
+    return out;
   }
   // 总成绩单（年度制）：每首一行，合并 GF + 各自半决赛（得分 / 得票率 / 票数），对标官方 Final Results
   function scoreboardBlock(d) {
@@ -1359,6 +1381,10 @@
     // 2.5) 最终赛果（年度制：合并 SF + GF 的完整成绩）
     var sb = scoreboardBlock(d);
     if (sb) { html += section('scoreboard', '最终赛果', 'Scoreboard', '', sb); toc.push({ id: 'scoreboard', label: '最终赛果' }); }
+
+    // 2.6) 相关链接（直播回放 / 歌单）——任意届 d.links 存在即渲染
+    var lk = linksBlock(d);
+    if (lk) { html += section('links', '相关链接', 'Related Links', '', lk); toc.push({ id: 'links', label: '相关链接' }); }
 
     // 3) 上一届 / 下一届
     html += navBlock(d);

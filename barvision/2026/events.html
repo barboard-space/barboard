@@ -23,23 +23,21 @@
         radial-gradient(ellipse 50% 60% at 0%  100%, rgba(224,64,160,0.10) 0%, transparent 55%),
         radial-gradient(ellipse 35% 40% at 100% 50%, rgba(0,180,255,0.06)  0%, transparent 50%);
     }
-    .ev-hero__grid {
+    /* 2026 主视觉海报作背景 + 渐变遮罩（左深右透出 logo，底部加深保证文字可读） */
+    .ev-hero__poster {
       position: absolute; inset: 0; pointer-events: none;
-      background-image:
-        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
-      background-size: 48px 48px;
+      background-image: url('../../assets/images/barvision/2026/poster.png');
+      background-size: cover; background-position: center;
     }
-    .ev-hero__watermark {
-      position: absolute; right: -10px; bottom: -10px;
-      font-family: var(--font-display); font-size: 200px; line-height: 1;
-      letter-spacing: -0.02em; color: rgba(168,85,247,0.04);
-      pointer-events: none; user-select: none;
+    .ev-hero__scrim {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(8,8,18,0.88) 0%, rgba(8,8,18,0.72) 26%, rgba(8,8,18,0.18) 66%, rgba(8,8,18,0.05) 100%),
+        linear-gradient(0deg, rgba(8,8,18,0.72) 0%, transparent 40%);
     }
     .ev-hero__inner { position: relative; z-index: 2; }
     .ev-hero__layout {
-      display: grid; grid-template-columns: 1fr 400px;
-      gap: var(--gap-xl); align-items: center; margin-top: 12px;
+      max-width: 620px; margin-top: 12px;
     }
     .ev-eyebrow {
       font-size: 11px; font-weight: 600; letter-spacing: 0.28em;
@@ -85,11 +83,6 @@
       color: var(--clr-pink-light); line-height: 1;
     }
     .ev-cd-unit { font-size: 12px; opacity: 0.55; margin: 0 1px; }
-    .ev-logo-wrap { display: flex; align-items: center; justify-content: center; }
-    .ev-logo {
-      width: 100%; max-width: 400px; height: auto;
-      filter: drop-shadow(0 0 40px rgba(168,85,247,0.20)) drop-shadow(0 0 80px rgba(139,52,220,0.10));
-    }
     @media (prefers-reduced-motion: no-preference) {
       @keyframes ev-hero-in {
         from { opacity: 0; transform: translateY(20px); }
@@ -102,7 +95,6 @@
       .ev-hero__cta    { animation: ev-hero-in 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both; }
       .ev-countdown    { animation: ev-hero-in 0.55s 0.44s cubic-bezier(0.22,1,0.36,1) both; }
       .ev-updated      { animation: ev-hero-in 0.50s 0.53s cubic-bezier(0.22,1,0.36,1) both; }
-      .ev-logo-wrap    { animation: ev-hero-in 0.70s 0.20s cubic-bezier(0.22,1,0.36,1) both; }
     }
 
     /* ═══ Shared section chrome ═══ */
@@ -416,8 +408,6 @@
 
     /* ═══ Responsive ═══ */
     @media (max-width: 960px) {
-      .ev-hero__layout    { grid-template-columns: 1fr; }
-      .ev-logo-wrap       { display: none; }
       .ev-submit-layout   { grid-template-columns: 1fr; gap: 32px; }
       .submit-panel       { position: static; }
       .ev-elig-layout     { grid-template-columns: 1fr; gap: 36px; }
@@ -505,9 +495,9 @@
 
 <!-- ═══ HERO ═══ -->
 <section class="ev-hero">
+  <div class="ev-hero__poster" aria-hidden="true"></div>
+  <div class="ev-hero__scrim" aria-hidden="true"></div>
   <div class="ev-hero__glow" aria-hidden="true"></div>
-  <div class="ev-hero__grid" aria-hidden="true"></div>
-  <div class="ev-hero__watermark" aria-hidden="true">BARVISION</div>
   <div class="section__inner ev-hero__inner">
     <div class="ev-hero__layout">
 
@@ -535,11 +525,7 @@
           <span class="ev-countdown__label" id="heroCountdownLabel">距提交通道开启还有</span>
           <span class="ev-countdown__digits" id="heroCountdown">—</span>
         </div>
-        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-06-01</span></p>
-      </div>
-
-      <div class="ev-logo-wrap">
-        <img src="../../assets/images/barvision_logo_2026.svg" class="ev-logo" alt="Barvision Chongqing 2026">
+        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-06-25</span></p>
       </div>
 
     </div>
