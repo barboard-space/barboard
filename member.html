@@ -757,7 +757,7 @@
       Object.keys(BV_INDEX).forEach(function(id) {
         (BV_INDEX[id].editions || []).forEach(function(e) { if (eds.indexOf(e) < 0) eds.push(e); });
       });
-      eds.sort(function(a, b) { return a - b; });
+      eds.sort(function(a, b) { return b - a; });  // 倒序（最新届在前）；「全部」仍固定置顶
       var dd = document.getElementById('mlBvDd');
       var menu = document.getElementById('mlBvDdMenu');
       var trigger = document.getElementById('mlBvDdTrigger');

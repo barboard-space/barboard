@@ -4,6 +4,44 @@
 
 ---
 
+## [2026-06-25] — 第十三届详情页设计定稿（hero / 各表 / 配色 多轮精修）
+
+### Changed
+- **Hero 重设计**：海报作整屏背景（`.bvr-hero--bg`，72vh + 渐变遮罩，遮罩左移露出右侧 logo）+ events.html 内容布局（城市/年份标题、竖分隔 meta、简介）；hero 配色全部主题色（`--bvt-c1/c3`，仅 hero，下方板块保持默认）；简介精简为 2 段并入 hero（移除独立 Intro 板块）。
+- **结果概览 Results**：列序改 `R/O｜选送者｜歌手｜歌名｜语种｜JURY｜TELE｜PTS｜PLACE`；SF 不用金银铜、改「前 9 晋级」紫色高亮 + 行内「晋级」标；JURY/TELE 分按各列名次弱化（`--clr-accent-soft`/`--clr-pink-soft`）。
+- **计分板**：GF 拆评委/观众两表、SF 合并一表；三表加可排序 R/O 列、选送者列取消排序、Total/Jury/Tele 可排序；SF 未晋级行弱化。
+- **总成绩单 Scoreboard**：参赛作品拆「选送者｜歌手/歌名」两列；加 Jury/Tele/Voters 列（各列最大值高亮白）；前三名金银铜 tint；SF 徽章 SF1=`--clr-pink-deep`#8a2548 / SF2=`--clr-cta-3`；边框统一 1px；poll 行优化为 Bebas 数字。
+- **赛制**：去掉来源；平台数据表 caption 与平台名样式对调（caption 更醒目）。
+- **路径命名**：详情页改 `barvision/<年>/<届号>.html`（去 `regular-` + 前导零；娱乐版 `<届号>e`）。
+- **成员页**：Jury 均分改统计「广义 12 分」（2024 起才有独立观众分）；徽章 60° 双色斜条纹（下移 1px）；字号统一；`@名`字距 .02em；走势未进决赛点用 soft 色。
+- **barvision.html**：2023 卡上半用主视觉 `bg.png`（`background-clip:padding-box` 修底部亮边）；近届卡 hover 增强；前 12 届 hover 改粉色 `--clr-pink-light`；修复 fade-up 覆盖卡片 hover 过渡（#64）。
+- 简介/概况文案精简、成员统一写「X妈」（自动转 @handle）。
+
+### Added
+- style.css 令牌 `--clr-accent-soft`/`--clr-pink-soft`/`--clr-pink-deep`。
+- 详情页完整设计规范见 CLAUDE.md #158（各表/板块样式·配色，2024/2025 复用基准）。
+
+---
+
+## [2026-06-25] — 第十三届（Qiqihar 2023）详情页 + 成员页 + 总成绩单（2023+ 年度制通用）
+
+### Added
+- **2023+ 年度制详情页（通用，2024/2025 复用）** `scripts/bv-results-render.js`：① `BV_THEME[year]` 主题表 → 主题届渲染**海报 banner hero**（珊瑚红 #f84d39 / 墨绿）+ 独立**简介/视觉设计** section；② 结构化 `rules.sections`（参赛报名 / 资格含**平台数据表** / **赋分表**）；③ **参赛名单**板块（含流派列，按选送者 ASCII→拼音排序）；④ **计分板 jury/tele 拆两张**（年度制每场评委矩阵 + 观众矩阵；旧届仍合并单表）；⑤ **总成绩单 Scoreboard**（合并 GF+SF 每首一行：得分/得票率/票数 + SF 场次徽章 SF1 珊瑚红/SF2 墨绿 + TOTAL POLL）；⑥ 每场概况 + GF 折算注；`matchEng` 补 SF1/SF2。
+- **派生字段进 `recompute_bv_ranks.py`**（管线 step 5）：`support_rate`（得票率，分母=Σ折前 jury+tele）+ `voters`（给分人数）对所有届算；`overall_rank`（年度制：GF 1–18 + 半决赛淘汰按得票率降序 19–N）。与官方计分板逐项精确吻合。
+- **成员页**：`gen_member_pages.py` 年度制 **SF→GF 收敛**（每人一条记录、rank=overall_rank）；`member-render.js` 2023+ 徽章 logo 改 **45° 双色斜条纹**（主题双色，SVG `<pattern>` + 导出 PNG canvas 同步）。
+- 薄壳 `barvision/2023/regular-13.html`；`barvision.html` BUILT_EDITIONS 加 ⅩⅢ、`buildRecentArchiveGrid` 补链接逻辑（XIII 卡可点）。
+
+### Changed
+- **详情页路径命名规范**：薄壳 HTML 改为 `barvision/<年>/<届号>.html`（去 `regular-` 前缀 + 去前导零，如 `regular-13.html`→`13.html`；娱乐版将用 `<届号>e.html`）。已重命名 1–13 届全部薄壳，`editionHref`/`gen_bv_editions_index`/`member-render` 链接同步；JSON 数据文件名不变。
+- SF 结果概览微调：列序改 `R/O…JURY TELE PTS PLACE`；TOC 每场合并一条英文标题（Semi-Final 1/2、Grand Final）；晋级配色改紫；计分板未晋级行弱化（选送者 0.75 / 分数 0.65）；结果概览 JURY/TELE 分按各列名次弱化为新令牌 `--clr-accent-soft`/`--clr-pink-soft`；徽章斜条纹 60° + 浅珊瑚双色。
+- `aggregate_barvision` **改为按 space_id 聚合**（经各届 members 映射解析 id）——修复 ed13 单字昵称（萌/羊/S）与早期「X妈」不合并；对未来年度制通用。
+- `regular-13.json` 转为手工维护：`summary` 改 3 段叙事、新增 `visual_design`、`rules` 结构化、每 match 加 `summary`、genre 规范展示态、多艺人/正字法按 #15/#119 修正、狼 GF score 存真实折算 55.5。
+
+### Verified
+- 桌面 + 手机预览：主题 hero / 规则表 / 参赛名单 / SF1·SF2·GF 拆分计分板（含冻结列）/ 总成绩单（与官方 Final Results 一致）/ 成员页收敛 + 斜条纹徽章 + 走势单点。旧届（ed5 三组制）零回归。
+
+---
+
 ## [2026-06-25] — 第十三届（Qiqihar 2023）数据层导入
 
 ### Added

@@ -27,7 +27,7 @@
     '.mp-bv-badge--first{filter:drop-shadow(0 0 3px rgba(212,168,50,.5)) drop-shadow(0 0 8px rgba(212,168,50,.28));animation:mpBvFirstGlow 3.2s ease-in-out infinite}',
     '@keyframes mpBvFirstGlow{0%,100%{filter:drop-shadow(0 0 3px rgba(212,168,50,.42)) drop-shadow(0 0 7px rgba(212,168,50,.2))}50%{filter:drop-shadow(0 0 5px rgba(212,168,50,.72)) drop-shadow(0 0 13px rgba(212,168,50,.42))}}',
     '@media (prefers-reduced-motion:reduce){.mp-bv-badge--first{animation:none}}',
-    '.mp-handle{font-family:var(--font-body);font-size:15px;color:var(--clr-text-2);margin-bottom:20px}',
+    '.mp-handle{font-family:var(--font-body);font-size:15px;color:var(--clr-text-2);margin-bottom:20px;letter-spacing:.02em}',
     '.mp-nickname--unclaimed{font-family:var(--font-body);font-size:34px;font-weight:700;color:var(--clr-text-3);letter-spacing:.02em}',
     '.mp-bv-note{font-size:13px;color:var(--clr-text-3);line-height:1.65;margin-bottom:22px;max-width:680px}',
     '.mp-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}',
@@ -94,6 +94,8 @@
     '.mp-bv-trend__dot{fill:var(--clr-accent-light)}',
     '.mp-bv-trend__dot.is-champ{fill:var(--clr-gold-light)}',
     '.mp-bv-trend__dot.is-latest{fill:var(--clr-pink-light)}',
+    '.mp-bv-trend__dot.is-soft{fill:var(--clr-accent-soft)}',  /* 年度制未进决赛的正式曲 */
+    '.mp-bv-trend__dot.is-soft.is-latest{fill:var(--clr-pink-soft)}',
     '.mp-bv-trend__dot.is-dim{opacity:.65}',
     '.mp-bv-trend__shadow{fill:var(--clr-bg);stroke:var(--clr-text-4);stroke-width:1.6}',
     '.mp-bv-trend__shadow-ring{fill:none;stroke:var(--clr-text-4);stroke-width:1.6}',
@@ -229,6 +231,15 @@
     2025: 'var(--clr-team-cun)',
     2026: 'var(--clr-accent)'
   };
+  // 2023+ 主题双色：徽章 logo 改 45° 双色斜条纹（与详情页 BV_THEME 一致）。导入新年份补一条。
+  var BV_STRIPE = {
+    2023: ['#f84d39', '#fbb1a9']  // 珊瑚红 / 浅珊瑚（海报浅红色）
+  };
+  function bvStripeDefs(id, c1, c2) {
+    return '<defs><pattern id="' + id + '" width="240" height="240" patternUnits="userSpaceOnUse" patternTransform="translate(0,26) rotate(60)">' +
+      '<rect width="120" height="240" fill="' + c1 + '"/>' +
+      '<rect x="120" width="120" height="240" fill="' + c2 + '"/></pattern></defs>';
+  }
   function bvBadges(bv) {
     var seen = {}, list = [];
     (bv.entries || []).forEach(function (e) {
@@ -239,15 +250,20 @@
     list.sort(function (a, b) { return a.no - b.no; });
     return list.map(function (ed) {
       var first = ed.no === 1;  // 创始届：金色 + 光晕
+      var stripe = !first && BV_STRIPE[ed.year];  // 2023+ 双色斜条纹
       var logoColor = first ? 'var(--clr-gold)' : (BV_YEAR_COLOR[ed.year] || 'var(--clr-board)');
       var numColor = 'var(--clr-text)';  // 徽章数字全站统一为 --clr-text
-      var two = ed.no >= 10;
-      var fs = two ? 300 : 360;
+      var fs = 300;  // 一位/两位数字号统一（1-9 与 10-13 一致）
       var x = 382;
-      var y = two ? 497 : 518;
+      var y = 497;
+      var pid = 'bvstr-' + ed.no;
+      // 条纹款：path 用 pattern fill（inline style 覆盖 CSS 的 fill:currentColor）
+      var pathTag = stripe
+        ? bvStripeDefs(pid, stripe[0], stripe[1]) + '<path d="' + LOGO_HOLLOW_PATH + '" style="fill:url(#' + pid + ')"/>'
+        : '<path d="' + LOGO_HOLLOW_PATH + '"/>';
       return '<span class="mp-bv-badge' + (first ? ' mp-bv-badge--first' : '') + '" title="第' + ed.no + '届 Barvision' + (first ? ' · 创始届' : '') + '" style="color:' + logoColor + '">' +
         '<svg class="mp-bv-badge__mark" viewBox="0 0 770 746" aria-hidden="true">' +
-          '<path d="' + LOGO_HOLLOW_PATH + '"/>' +
+          pathTag +
           '<text class="mp-bv-badge__num" x="' + x + '" y="' + y + '" text-anchor="middle" style="fill:' + numColor + ';font-size:' + fs + 'px">' + ed.no + '</text>' +
         '</svg>' +
       '</span>';
@@ -256,8 +272,8 @@
   function renderBvRows(list) {
     return list.map(function (e) {
       var cls = (e.is_shadow || e.canceled) ? 'mp-bv-row--shadow' : (e.rank && e.rank <= 3 ? 'mp-bv-row--' + e.rank : '');
-      var nn = e.edition_no < 10 ? '0' + e.edition_no : e.edition_no;
-      var href = '../barvision/' + e.year + '/' + e.version + '-' + nn + '.html';
+      // 详情页路径：去届号前导零 + 娱乐版加 e 后缀（如 13.html / 1e.html）
+      var href = '../barvision/' + e.year + '/' + e.edition_no + (e.version === 'unplugged' ? 'e' : '') + '.html';
       var seriesLabel = /^[0-9]+$/.test(String(e.series)) ? '-' : esc(e.series);
       return '<tr class="' + cls + '">' +
         '<td class="rk">' + (e.rank == null ? '—' : (e.is_shadow ? '<span class="rk-sh">' + e.rank + '*</span>' : e.rank)) + '</td>' +
@@ -304,7 +320,7 @@
         '<span class="mp-bv-trend__title">历届排名走势</span>' +
         '<span class="mp-bv-trend__legend">' +
           '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4" fill="var(--clr-accent-light)"/></svg><span class="mp-bv-lg__t">正式单曲</span></span>' +
-          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="7.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
+          '<span class="mp-bv-lg"><svg class="mp-bv-lg__ic" viewBox="0 0 15 15" aria-hidden="true"><circle cx="7.5" cy="8.5" r="3.2" fill="var(--clr-bg)" stroke="var(--clr-text-4)" stroke-width="1.6"/></svg><span class="mp-bv-lg__t">混淆单曲</span></span>' +
         '</span>' +
       '</div>' +
       '<div class="mp-bv-trend__sc"><svg class="mp-bv-trend__svg" role="img" aria-label="历届排名走势"></svg></div>' +
@@ -347,7 +363,12 @@
       return lo + (hi - lo) * i / (n - 1);
     }
     function yAt(r) { return padT + plotH * (r - 1) / (yMax - 1); }
-    function dotCls(e, latest) { return e.rank === 1 ? 'is-champ' : (latest ? 'is-latest' : ''); }
+    // 点配色：冠军金 / 最近场次粉 / 否则蓝；年度制未进决赛的正式曲(final===false) → soft 弱化色
+    function dotCls(e, latest) {
+      var c = e.rank === 1 ? 'is-champ' : (latest ? 'is-latest' : '');
+      if (e.final === false) c = (c + ' is-soft').trim();
+      return c;
+    }
 
     var out = '';
     // Y 网格 + 刻度
@@ -644,12 +665,24 @@
         if (hdl) { ctx.fillStyle = bvCssVar('--clr-text-2') || '#A299C8'; ctx.font = P(15) + "px 'DM Sans',sans-serif"; ctx.fillText(hdl, P(textX) + nameW + P(12), P(headTop + 36)); }
         // ── 徽章 ──
         badges.forEach(function (ed, i) {
+          var stripe = ed.no !== 1 && BV_STRIPE[ed.year];  // 2023+ 双色斜条纹
           var col = rcolor(ed.no === 1 ? 'var(--clr-gold)' : (BV_YEAR_COLOR[ed.year] || 'var(--clr-board)'));
           ctx.save(); ctx.translate(P(textX) + i * P(badgeS + badgeGap), P(badgeY)); var s = P(badgeS) / 770; ctx.scale(s, s);
-          ctx.fillStyle = col; ctx.fill(new Path2D(LOGO_HOLLOW_PATH));
-          ctx.fillStyle = bvCssVar('--clr-text') || '#fff'; var two = ed.no >= 10;
-          ctx.font = (two ? 300 : 360) + "px 'Bebas Neue',sans-serif"; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';
-          ctx.fillText(String(ed.no), 382, two ? 497 : 518);
+          if (stripe) {  // 裁剪到 logo 形状 → 条纹整体下移 ≈1px → 60° 旋转后画交替竖带
+            ctx.save(); ctx.clip(new Path2D(LOGO_HOLLOW_PATH));
+            ctx.translate(0, 26);  // 条纹起点下移 ≈1px（viewBox 746/29px）
+            ctx.translate(385, 373); ctx.rotate(Math.PI / 3); ctx.translate(-385, -373);
+            for (var bx = -900; bx < 1500; bx += 240) {
+              ctx.fillStyle = stripe[0]; ctx.fillRect(bx, -900, 120, 2400);
+              ctx.fillStyle = stripe[1]; ctx.fillRect(bx + 120, -900, 120, 2400);
+            }
+            ctx.restore();
+          } else {
+            ctx.fillStyle = col; ctx.fill(new Path2D(LOGO_HOLLOW_PATH));
+          }
+          ctx.fillStyle = bvCssVar('--clr-text') || '#fff';
+          ctx.font = "300px 'Bebas Neue',sans-serif"; ctx.textAlign = 'center'; ctx.textBaseline = 'alphabetic';  // 一位/两位字号统一
+          ctx.fillText(String(ed.no), 382, 497);
           ctx.restore();
         });
         // ── 8 张统计卡 ──

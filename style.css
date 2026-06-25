@@ -28,12 +28,15 @@
   --clr-accent-glow:  rgba(0,180,255,0.30);
   --clr-accent-line:  rgba(0,180,255,0.24);
   --clr-accent-dim:   rgba(0,180,255,0.12);
+  --clr-accent-soft:  #1e6789;   /* 弱化但仍可辨（=accent-light 50% 合成于 bg 的不透明等效）：吧视未晋级评委分 */
 
   /* ── Secondary — Neon Pink/Magenta（片头粉紫线条）── */
   --clr-pink:         #e040a0;
   --clr-pink-light:   #f060b8;
   --clr-pink-glow:    rgba(224,64,160,0.30);
   --clr-pink-dim:     rgba(224,64,160,0.12);
+  --clr-pink-soft:    #7c3465;   /* 弱化但仍可辨（=pink-light 50% 合成于 bg 的不透明等效）：吧视未晋级观众分 */
+  --clr-pink-deep:    #8a2548;   /* 深绛红（偏红、略暗）：吧视 Scoreboard SF1 徽章 */
 
   /* ── Tertiary — Mid Violet（蓝粉之间的过渡）── */
   --clr-violet:       #a855f7;

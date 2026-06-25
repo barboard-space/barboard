@@ -12,6 +12,8 @@ import os
 
 # 活跃判定：最近参赛年份 ≥ 此值 → active（member.html 用实心 logo，否则空心）
 BV_ACTIVE_SINCE_YEAR = 2024
+# 观众分(tele)自此年起改为 20 票制（非 1-12 分），不计入「广义 12 分」均分；此前 jury/tele 均为 1-12 制
+BV_TELE_SINCE_YEAR = 2024
 
 
 def load_bv_editions(base):
@@ -23,42 +25,77 @@ def load_bv_editions(base):
     return eds
 
 
+def is_annual_ed(matches):
+    """2023+ 年度制：两轮半决赛 + 决赛"""
+    codes = {m.get("match") for m in matches}
+    return {"SF1", "SF2", "GF"} <= codes
+
+
+def _emit_bv(per, ed, m, e, series, rank, final=None):
+    """把一条 entry 聚合进 per（含 12 分次数、合报拆分、匿名归并）。
+    final：年度制(SF1/SF2/GF)标记是否进决赛（True 决赛曲 / False 半决赛淘汰曲）；旧届为 None 不写。"""
+    nick = e.get("member")
+    if not nick:
+        return
+    voters = m.get("votes", {}).get("voters", [])
+    # 12 分次数：九届(max 模式)=投票人最高正式曲 v.top；其余=points==12(eid 键/一二届昵称键)
+    if any(v.get("top") is not None for v in voters):
+        twelve = sum(1 for v in voters if v.get("top") == e.get("eid"))
+    else:
+        _pk = str(e["eid"]) if e.get("eid") is not None else nick
+        twelve = sum(1 for v in voters if v.get("points", {}).get(_pk) == 12)
+    rec = {
+        "year": ed["year"], "edition_no": ed["edition_no"],
+        "edition_name": ed["edition_name"], "version": ed["version"],
+        "series": series,
+        "rank": rank, "song": e.get("song"), "artist": e.get("artist"),
+        "language": e.get("language"),
+        "jury": e.get("jury_vote"), "tele": e.get("tele_vote"), "total": e.get("score"),
+        "juryN": sum(1 for v in voters if v.get("type") == "jury"),  # 该场评委人数（算单评委平均分用）
+        "teleN": sum(1 for v in voters if v.get("type") == "tele"),  # 该场观众人数（2024 前观众分也是 1-12 制，并入广义 12 分均分）
+        "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
+        "joint": "/" in nick,  # 联合选送（合报）
+        "canceled": bool(m.get("canceled") or e.get("canceled")),  # 取消的组(12B)：仅展示、不计统计/走势
+    }
+    if final is not None:
+        rec["final"] = final  # 年度制：是否进决赛（走势图未进决赛正式曲用 soft 配色）
+    members_map = ed.get("members", {}) or {}
+    # 按 space_id 聚合（而非昵称）——使各届昵称形式不一（如 ed13 单字「萌」vs 早期「萌妈」）的
+    # 同一人自动合并到其 id 下。联合选送「A/B」拆分各自计入；匿名(unclaimed)统一归 member/0。
+    for target in ([n.strip() for n in nick.split("/")] if "/" in nick else [nick]):
+        info = members_map.get(target, {}) or {}
+        if info.get("unclaimed"):
+            per.setdefault("匿名", []).append(dict(rec, persona=target))
+        elif info.get("id") is not None:
+            per.setdefault(str(info["id"]), []).append(rec)
+        else:
+            per.setdefault(target, []).append(rec)  # 兜底：members 缺该昵称（不应发生），按名保留
+
+
 def aggregate_barvision(eds):
-    """{规范昵称: {overview, entries[]}}（含 12 分次数、混淆曲计数）"""
+    """{规范昵称: {overview, entries[]}}（含 12 分次数、混淆曲计数）。
+    年度制(2023+)：每位成员合并为一条记录（series=届号、rank=overall_rank）——
+    进决赛者取 GF 数据，半决赛淘汰者取其 SF 数据；旧分组制保持每场一条记录。"""
     per = {}
     for ed in eds:
-        for m in ed.get("matches", []):
-            match = (m.get("match") or "").strip()
-            voters = m.get("votes", {}).get("voters", [])
-            for e in m.get("entries", []):
-                nick = e.get("member")
-                if not nick:
-                    continue
-                # 12 分次数：九届(max 模式)=投票人最高正式曲 v.top；其余=points==12(eid 键/一二届昵称键)
-                if any(v.get("top") is not None for v in voters):
-                    twelve = sum(1 for v in voters if v.get("top") == e.get("eid"))
-                else:
-                    _pk = str(e["eid"]) if e.get("eid") is not None else nick
-                    twelve = sum(1 for v in voters if v.get("points", {}).get(_pk) == 12)
-                rec = {
-                    "year": ed["year"], "edition_no": ed["edition_no"],
-                    "edition_name": ed["edition_name"], "version": ed["version"],
-                    "series": match if match else str(ed["edition_no"]),  # 综合赛=届次号
-                    "rank": e.get("rank"), "song": e.get("song"), "artist": e.get("artist"),
-                    "language": e.get("language"),
-                    "jury": e.get("jury_vote"), "tele": e.get("tele_vote"), "total": e.get("score"),
-                    "juryN": sum(1 for v in voters if v.get("type") == "jury"),  # 该场评委人数（算单评委平均分用）
-                    "twelve": twelve, "is_shadow": bool(e.get("is_shadow")),
-                    "joint": "/" in nick,  # 联合选送（合报）
-                    "canceled": bool(m.get("canceled") or e.get("canceled")),  # 取消的组(12B)：仅展示、不计统计/走势
-                }
-                members_map = ed.get("members", {}) or {}
-                # 联合选送「A/B」：该记录计入两人各自的吧视；匿名身份(神妈/隐妈/匿名…)统一归 member/0、带 persona 标签区分
-                for target in ([n.strip() for n in nick.split("/")] if "/" in nick else [nick]):
-                    if (members_map.get(target, {}) or {}).get("unclaimed"):
-                        per.setdefault("匿名", []).append(dict(rec, persona=target))
-                    else:
-                        per.setdefault(target, []).append(rec)
+        matches = ed.get("matches", [])
+        if is_annual_ed(matches):
+            no = str(ed["edition_no"])
+            gf = next((m for m in matches if m.get("match") == "GF"), None)
+            if gf:
+                for e in gf["entries"]:
+                    _emit_bv(per, ed, gf, e, no, e.get("overall_rank"), final=True)
+            for m in matches:
+                if m.get("match") in ("SF1", "SF2"):
+                    for e in m["entries"]:
+                        if not e.get("qualified"):  # 淘汰曲用其半决赛数据 + overall_rank
+                            _emit_bv(per, ed, m, e, no, e.get("overall_rank"), final=False)
+        else:
+            for m in matches:
+                match = (m.get("match") or "").strip()
+                series = match if match else str(ed["edition_no"])  # 综合赛=届次号
+                for e in m.get("entries", []):
+                    _emit_bv(per, ed, m, e, series, e.get("rank"))
     out = {}
     for nick, entries in per.items():
         entries.sort(key=lambda x: (x["edition_no"], x["series"]))
@@ -66,8 +103,18 @@ def aggregate_barvision(eds):
         official = [x for x in stat if not x["is_shadow"]]
         shadow = [x for x in stat if x["is_shadow"]]
         ranks = [x["rank"] for x in official if x["rank"]]
-        # 单评委平均分（仅正式单曲）：每曲 jury_vote/该场评委数 → 再对各曲求均值（理想区间 0–12）
-        jpers = [x["jury"] / x["juryN"] for x in official if x.get("juryN") and x["jury"] is not None]
+        # Jury 均分（广义 12 分，仅正式单曲）：统计所有 1-12 制投票——2024 前观众分(tele)也是 1-12 制故并入；
+        # 2024 起观众分改 20 票制不计。每曲 (12分票总和)/(12分票人数) → 再对各曲求均值（理想 0–12）。
+        # 年度制收敛后该曲已携带其进/未进决赛对应阶段(GF/SF)的 jury/tele 数据。
+        jpers = []
+        for x in official:
+            if x.get("jury") is None or not x.get("juryN"):
+                continue
+            s, n = x["jury"], x["juryN"]
+            if x["year"] < BV_TELE_SINCE_YEAR and x.get("tele") is not None:  # 2024 前 tele 也是 1-12 制
+                s += x["tele"]; n += (x.get("teleN") or 0)
+            if n:
+                jpers.append(s / n)
         eds_stat = stat or entries  # 仅有取消条目的成员，debut/active 兜底用全部
         out[nick] = {
             "overview": {
@@ -140,7 +187,7 @@ def main():
     member_dir = os.path.join(base, "member")
     os.makedirs(member_dir, exist_ok=True)
 
-    bv_by_nick = aggregate_barvision(load_bv_editions(base))
+    bv_by_id = aggregate_barvision(load_bv_editions(base))  # 现按 space_id(字符串) 聚合
     bv_index = {}  # space_id -> {editions, active, count, best}
 
     space_ids = []
@@ -177,7 +224,7 @@ def main():
             if chart_id:
                 data["chart_id"] = chart_id
 
-            bv = bv_by_nick.get(nickname)
+            bv = bv_by_id.get(str(space_id))
             if bv:
                 data["barvision"] = bv
                 ov = bv["overview"]
@@ -199,7 +246,7 @@ def main():
             print(f"  {space_id}.html — {nickname}")
 
     # 「匿名」伪成员（混淆曲赛后无人认领）→ member/0.html（大名弱化、仅列歌曲）
-    unclaimed = bv_by_nick.get("匿名")
+    unclaimed = bv_by_id.get("匿名")
     if unclaimed:
         u_data = {"nickname": "匿名", "unclaimed": True, "barvision": unclaimed}
         u_json = json.dumps(u_data, ensure_ascii=False, separators=(",", ":"))

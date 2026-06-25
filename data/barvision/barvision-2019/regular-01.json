@@ -132,9 +132,10 @@
      "jury_vote": 92,
      "tele_vote": 36,
      "score": 128,
-     "support_rate": 1,
+     "support_rate": 11.62,
      "is_shadow": false,
-     "high_rate": 0.3888888888888889
+     "high_rate": 0.3888888888888889,
+     "voters": 18
     },
     {
      "rank": 2,
@@ -146,9 +147,10 @@
      "jury_vote": 77,
      "tele_vote": 44,
      "score": 121,
-     "support_rate": 0.8888888888888888,
+     "support_rate": 10.98,
      "is_shadow": false,
-     "high_rate": 0.3333333333333333
+     "high_rate": 0.3333333333333333,
+     "voters": 16
     },
     {
      "rank": 3,
@@ -160,9 +162,10 @@
      "jury_vote": 84,
      "tele_vote": 26,
      "score": 110,
-     "support_rate": 0.8888888888888888,
+     "support_rate": 9.98,
      "is_shadow": false,
-     "high_rate": 0.3888888888888889
+     "high_rate": 0.3888888888888889,
+     "voters": 16
     },
     {
      "rank": 4,
@@ -174,9 +177,10 @@
      "jury_vote": 73,
      "tele_vote": 24,
      "score": 97,
-     "support_rate": 0.7777777777777778,
+     "support_rate": 8.8,
      "is_shadow": false,
-     "high_rate": 0.3888888888888889
+     "high_rate": 0.3888888888888889,
+     "voters": 14
     },
     {
      "rank": 5,
@@ -188,9 +192,10 @@
      "jury_vote": 63,
      "tele_vote": 24,
      "score": 87,
-     "support_rate": 0.8333333333333334,
+     "support_rate": 7.89,
      "is_shadow": false,
-     "high_rate": 0.2222222222222222
+     "high_rate": 0.2222222222222222,
+     "voters": 15
     },
     {
      "rank": 6,
@@ -202,9 +207,10 @@
      "jury_vote": 71,
      "tele_vote": 12,
      "score": 83,
-     "support_rate": 0.7777777777777778,
+     "support_rate": 7.53,
      "is_shadow": false,
-     "high_rate": 0.16666666666666666
+     "high_rate": 0.16666666666666666,
+     "voters": 14
     },
     {
      "rank": 7,
@@ -216,9 +222,10 @@
      "jury_vote": 52,
      "tele_vote": 28,
      "score": 80,
-     "support_rate": 0.6666666666666666,
+     "support_rate": 7.26,
      "is_shadow": false,
-     "high_rate": 0.3333333333333333
+     "high_rate": 0.3333333333333333,
+     "voters": 12
     },
     {
      "rank": 8,
@@ -230,9 +237,10 @@
      "jury_vote": 50,
      "tele_vote": 28,
      "score": 78,
-     "support_rate": 0.8333333333333334,
+     "support_rate": 7.08,
      "is_shadow": false,
-     "high_rate": 0.16666666666666666
+     "high_rate": 0.16666666666666666,
+     "voters": 15
     },
     {
      "rank": 9,
@@ -244,9 +252,10 @@
      "jury_vote": 45,
      "tele_vote": 17,
      "score": 62,
-     "support_rate": 0.8333333333333334,
+     "support_rate": 5.63,
      "is_shadow": false,
-     "high_rate": 0.1111111111111111
+     "high_rate": 0.1111111111111111,
+     "voters": 15
     },
     {
      "rank": 10,
@@ -258,9 +267,10 @@
      "jury_vote": 46,
      "tele_vote": 13,
      "score": 59,
-     "support_rate": 0.8888888888888888,
+     "support_rate": 5.35,
      "is_shadow": false,
-     "high_rate": 0.16666666666666666
+     "high_rate": 0.16666666666666666,
+     "voters": 16
     },
     {
      "rank": 11,
@@ -272,9 +282,10 @@
      "jury_vote": 49,
      "tele_vote": 8,
      "score": 57,
-     "support_rate": 0.6111111111111112,
+     "support_rate": 5.17,
      "is_shadow": false,
-     "high_rate": 0.2222222222222222
+     "high_rate": 0.2222222222222222,
+     "voters": 11
     },
     {
      "rank": 12,
@@ -286,9 +297,10 @@
      "jury_vote": 46,
      "tele_vote": 10,
      "score": 56,
-     "support_rate": 0.7222222222222222,
+     "support_rate": 5.08,
      "is_shadow": false,
-     "high_rate": 0.05555555555555555
+     "high_rate": 0.05555555555555555,
+     "voters": 13
     },
     {
      "rank": 13,
@@ -300,9 +312,10 @@
      "jury_vote": 35,
      "tele_vote": 10,
      "score": 45,
-     "support_rate": 0.5,
+     "support_rate": 4.08,
      "is_shadow": false,
-     "high_rate": 0.05555555555555555
+     "high_rate": 0.05555555555555555,
+     "voters": 9
     },
     {
      "rank": 14,
@@ -314,9 +327,10 @@
      "jury_vote": 29,
      "tele_vote": 10,
      "score": 39,
-     "support_rate": 0.3333333333333333,
+     "support_rate": 3.54,
      "is_shadow": false,
-     "high_rate": 0.16666666666666666
+     "high_rate": 0.16666666666666666,
+     "voters": 6
     }
    ],
    "votes": {

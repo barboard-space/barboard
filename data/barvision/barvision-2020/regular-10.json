@@ -152,10 +152,11 @@
      "jury_vote": 78,
      "tele_vote": 10,
      "score": 88,
-     "support_rate": null,
+     "support_rate": 7.51,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 1
+     "rank": 1,
+     "voters": 13
     },
     {
      "member": "田妈",
@@ -167,10 +168,11 @@
      "jury_vote": 71.5,
      "tele_vote": 7.0,
      "score": 78.5,
-     "support_rate": null,
+     "support_rate": 6.7,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 2
+     "rank": 2,
+     "voters": 14
     },
     {
      "member": "柠妈",
@@ -182,10 +184,11 @@
      "jury_vote": 75,
      "tele_vote": 1,
      "score": 76,
-     "support_rate": null,
+     "support_rate": 6.48,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 3
+     "rank": 3,
+     "voters": 14
     },
     {
      "member": "雨妈/包妈",
@@ -197,10 +200,11 @@
      "jury_vote": 58,
      "tele_vote": 12,
      "score": 70,
-     "support_rate": null,
+     "support_rate": 5.97,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 4
+     "rank": 4,
+     "voters": 9
     },
     {
      "member": "雨妈/包妈",
@@ -212,10 +216,11 @@
      "jury_vote": 62,
      "tele_vote": 8,
      "score": 70,
-     "support_rate": null,
+     "support_rate": 5.97,
      "high_rate": null,
      "is_shadow": true,
-     "rank": 5
+     "rank": 5,
+     "voters": 12
     },
     {
      "member": "苏妈",
@@ -227,10 +232,11 @@
      "jury_vote": 85.5,
      "tele_vote": 2.0,
      "score": 61.25,
-     "support_rate": null,
+     "support_rate": 5.23,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 5
+     "rank": 5,
+     "voters": 14
     },
     {
      "member": "院妈",
@@ -242,10 +248,11 @@
      "jury_vote": 55,
      "tele_vote": 6,
      "score": 61,
-     "support_rate": null,
+     "support_rate": 5.2,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 6
+     "rank": 6,
+     "voters": 9
     },
     {
      "member": "杰妈",
@@ -257,10 +264,11 @@
      "jury_vote": 57.0,
      "tele_vote": 4.0,
      "score": 61,
-     "support_rate": null,
+     "support_rate": 5.2,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 7
+     "rank": 7,
+     "voters": 14
     },
     {
      "member": "季妈",
@@ -272,10 +280,11 @@
      "jury_vote": 55.5,
      "tele_vote": 5.0,
      "score": 60.5,
-     "support_rate": null,
+     "support_rate": 5.16,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 8
+     "rank": 8,
+     "voters": 12
     },
     {
      "member": "晕妈",
@@ -287,10 +296,11 @@
      "jury_vote": 82,
      "tele_vote": 3,
      "score": 59.5,
-     "support_rate": null,
+     "support_rate": 5.08,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 9
+     "rank": 9,
+     "voters": 14
     },
     {
      "member": "麦妈",
@@ -302,10 +312,11 @@
      "jury_vote": 64,
      "tele_vote": 12,
      "score": 53.2,
-     "support_rate": null,
+     "support_rate": 4.54,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 10
+     "rank": 10,
+     "voters": 9
     },
     {
      "member": "洛妈",
@@ -317,10 +328,11 @@
      "jury_vote": 38.5,
      "tele_vote": 13.0,
      "score": 51.5,
-     "support_rate": null,
+     "support_rate": 4.39,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 11
+     "rank": 11,
+     "voters": 10
     },
     {
      "member": "瑞妈",
@@ -332,10 +344,11 @@
      "jury_vote": 41.5,
      "tele_vote": 5.0,
      "score": 46.5,
-     "support_rate": null,
+     "support_rate": 3.97,
      "high_rate": null,
      "is_shadow": true,
-     "rank": 12
+     "rank": 12,
+     "voters": 9
     },
     {
      "member": "乐妈",
@@ -347,10 +360,11 @@
      "jury_vote": 35.5,
      "tele_vote": 8.0,
      "score": 43.5,
-     "support_rate": null,
+     "support_rate": 3.71,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 12
+     "rank": 12,
+     "voters": 10
     },
     {
      "member": "团妈",
@@ -362,10 +376,11 @@
      "jury_vote": 35,
      "tele_vote": 2,
      "score": 37,
-     "support_rate": null,
+     "support_rate": 3.16,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 13
+     "rank": 13,
+     "voters": 10
     },
     {
      "member": "薯妈",
@@ -377,10 +392,11 @@
      "jury_vote": 30,
      "tele_vote": 4,
      "score": 34,
-     "support_rate": null,
+     "support_rate": 2.9,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 14
+     "rank": 14,
+     "voters": 6
     },
     {
      "member": "城妈",
@@ -392,10 +408,11 @@
      "jury_vote": 33,
      "tele_vote": 0,
      "score": 33,
-     "support_rate": null,
+     "support_rate": 2.82,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 15
+     "rank": 15,
+     "voters": 5
     },
     {
      "member": "奶妈",
@@ -407,10 +424,11 @@
      "jury_vote": 30,
      "tele_vote": 0,
      "score": 30,
-     "support_rate": null,
+     "support_rate": 2.56,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 16
+     "rank": 16,
+     "voters": 7
     },
     {
      "member": "小妈",
@@ -422,10 +440,11 @@
      "jury_vote": 22,
      "tele_vote": 5,
      "score": 27,
-     "support_rate": null,
+     "support_rate": 2.3,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 17
+     "rank": 17,
+     "voters": 9
     },
     {
      "member": "瑞妈",
@@ -437,10 +456,11 @@
      "jury_vote": 7,
      "tele_vote": 14,
      "score": 21,
-     "support_rate": null,
+     "support_rate": 1.79,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 18
+     "rank": 18,
+     "voters": 5
     },
     {
      "member": "猴妈",
@@ -452,10 +472,11 @@
      "jury_vote": 18,
      "tele_vote": 0,
      "score": 18,
-     "support_rate": null,
+     "support_rate": 1.54,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 19
+     "rank": 19,
+     "voters": 5
     },
     {
      "member": "城妈",
@@ -467,10 +488,11 @@
      "jury_vote": 14,
      "tele_vote": 3,
      "score": 17,
-     "support_rate": null,
+     "support_rate": 1.45,
      "high_rate": null,
      "is_shadow": true,
-     "rank": 20
+     "rank": 20,
+     "voters": 3
     }
    ],
    "votes": {
@@ -851,10 +873,11 @@
      "jury_vote": 115,
      "tele_vote": 6,
      "score": 121,
-     "support_rate": null,
+     "support_rate": 9.04,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 1
+     "rank": 1,
+     "voters": 16
     },
     {
      "member": "雨妈",
@@ -866,10 +889,11 @@
      "jury_vote": 85,
      "tele_vote": 10,
      "score": 95,
-     "support_rate": null,
+     "support_rate": 7.1,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 2
+     "rank": 2,
+     "voters": 14
     },
     {
      "member": "田妈",
@@ -881,10 +905,11 @@
      "jury_vote": 82,
      "tele_vote": 2,
      "score": 84,
-     "support_rate": null,
+     "support_rate": 6.28,
      "high_rate": null,
      "is_shadow": true,
-     "rank": 3
+     "rank": 3,
+     "voters": 16
     },
     {
      "member": "杰妈",
@@ -896,10 +921,11 @@
      "jury_vote": 74,
      "tele_vote": 9,
      "score": 83,
-     "support_rate": null,
+     "support_rate": 6.2,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 3
+     "rank": 3,
+     "voters": 13
     },
     {
      "member": "雀妈",
@@ -911,10 +937,11 @@
      "jury_vote": 80,
      "tele_vote": 3,
      "score": 83,
-     "support_rate": null,
+     "support_rate": 6.2,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 4
+     "rank": 4,
+     "voters": 14
     },
     {
      "member": "城妈",
@@ -926,10 +953,11 @@
      "jury_vote": 74,
      "tele_vote": 1,
      "score": 75,
-     "support_rate": null,
+     "support_rate": 5.61,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 5
+     "rank": 5,
+     "voters": 10
     },
     {
      "member": "泰妈",
@@ -941,10 +969,11 @@
      "jury_vote": 66,
      "tele_vote": 6,
      "score": 72,
-     "support_rate": null,
+     "support_rate": 5.38,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 6
+     "rank": 6,
+     "voters": 15
     },
     {
      "member": "柠妈",
@@ -956,10 +985,11 @@
      "jury_vote": 68,
      "tele_vote": 3,
      "score": 71,
-     "support_rate": null,
+     "support_rate": 5.31,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 7
+     "rank": 7,
+     "voters": 13
     },
     {
      "member": "包妈",
@@ -971,10 +1001,11 @@
      "jury_vote": 64,
      "tele_vote": 4,
      "score": 68,
-     "support_rate": null,
+     "support_rate": 5.08,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 8
+     "rank": 8,
+     "voters": 11
     },
     {
      "member": "洛妈",
@@ -986,10 +1017,11 @@
      "jury_vote": 51,
      "tele_vote": 7,
      "score": 58,
-     "support_rate": null,
+     "support_rate": 4.33,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 9
+     "rank": 9,
+     "voters": 9
     },
     {
      "member": "瑞妈",
@@ -1001,10 +1033,11 @@
      "jury_vote": 45,
      "tele_vote": 12,
      "score": 57,
-     "support_rate": null,
+     "support_rate": 4.26,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 10
+     "rank": 10,
+     "voters": 10
     },
     {
      "member": "猴妈",
@@ -1016,10 +1049,11 @@
      "jury_vote": 45,
      "tele_vote": 8,
      "score": 53,
-     "support_rate": null,
+     "support_rate": 3.96,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 11
+     "rank": 11,
+     "voters": 12
     },
     {
      "member": "团妈",
@@ -1031,10 +1065,11 @@
      "jury_vote": 44,
      "tele_vote": 8,
      "score": 52,
-     "support_rate": null,
+     "support_rate": 3.89,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 12
+     "rank": 12,
+     "voters": 8
     },
     {
      "member": "锴妈",
@@ -1046,10 +1081,11 @@
      "jury_vote": 42,
      "tele_vote": 5,
      "score": 47,
-     "support_rate": null,
+     "support_rate": 3.51,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 13
+     "rank": 13,
+     "voters": 10
     },
     {
      "member": "季妈",
@@ -1061,10 +1097,11 @@
      "jury_vote": 43,
      "tele_vote": 4,
      "score": 47,
-     "support_rate": null,
+     "support_rate": 3.51,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 14
+     "rank": 14,
+     "voters": 11
     },
     {
      "member": "薯妈",
@@ -1076,10 +1113,11 @@
      "jury_vote": 31,
      "tele_vote": 12,
      "score": 43,
-     "support_rate": null,
+     "support_rate": 3.21,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 15
+     "rank": 15,
+     "voters": 8
     },
     {
      "member": "田妈",
@@ -1091,10 +1129,11 @@
      "jury_vote": 27,
      "tele_vote": 15,
      "score": 42,
-     "support_rate": null,
+     "support_rate": 3.14,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 16
+     "rank": 16,
+     "voters": 7
     },
     {
      "member": "奶妈",
@@ -1106,10 +1145,11 @@
      "jury_vote": 40,
      "tele_vote": 0,
      "score": 40,
-     "support_rate": null,
+     "support_rate": 2.99,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 17
+     "rank": 17,
+     "voters": 7
     },
     {
      "member": "团妈",
@@ -1121,10 +1161,11 @@
      "jury_vote": 36,
      "tele_vote": 2,
      "score": 38,
-     "support_rate": null,
+     "support_rate": 2.84,
      "high_rate": null,
      "is_shadow": true,
-     "rank": 18
+     "rank": 18,
+     "voters": 7
     },
     {
      "member": "雨妈",
@@ -1136,10 +1177,11 @@
      "jury_vote": 22,
      "tele_vote": 13,
      "score": 35,
-     "support_rate": null,
+     "support_rate": 2.62,
      "high_rate": null,
      "is_shadow": true,
-     "rank": 19
+     "rank": 19,
+     "voters": 9
     },
     {
      "member": "小妈",
@@ -1151,10 +1193,11 @@
      "jury_vote": 32,
      "tele_vote": 1,
      "score": 33,
-     "support_rate": null,
+     "support_rate": 2.47,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 18
+     "rank": 18,
+     "voters": 9
     },
     {
      "member": "院妈",
@@ -1166,10 +1209,11 @@
      "jury_vote": 26,
      "tele_vote": 0,
      "score": 26,
-     "support_rate": null,
+     "support_rate": 1.94,
      "high_rate": null,
      "is_shadow": false,
-     "rank": 19
+     "rank": 19,
+     "voters": 5
     },
     {
      "member": "猴妈",
@@ -1181,10 +1225,11 @@
      "jury_vote": 15,
      "tele_vote": 0,
      "score": 15,
-     "support_rate": null,
+     "support_rate": 1.12,
      "high_rate": null,
      "is_shadow": true,
-     "rank": 20
+     "rank": 20,
+     "voters": 3
     }
    ],
    "votes": {

@@ -57,7 +57,7 @@
 ### 2.2 步骤
 
 1. **解析 Excel → JSON**：各届 Excel 结构不同，按需复制/改 `scripts/parse_bv_edition*.py`（见文末「各届解析差异」），产出严格符合 §2.1 的 JSON。**务必输出 `eid` + eid 键 points**。
-2. **薄壳页**：复制 `barvision/<年>/<版本>-NN.html`，改 `var EDITION_SRC` 指向新 JSON（路径 `../../`）。
+2. **薄壳页**：复制为 `barvision/<年>/<届号>.html`（**新命名规范**：常规版=届号去前导零，如 `13.html`；娱乐版=届号+`e`，如 `1e.html`；不再用 `regular-NN.html`），改 `var EDITION_SRC` 指向新 JSON（路径 `../../`，**JSON 数据文件名仍为 `<版本>-NN.json` 不变**）。
 3. **`barvision.html`**：`BUILT_EDITIONS` 加该届 href（届次卡变可点）；如该届卡片尚未存在则补 `EDITIONS` 卡。
 4. **核对/改常量**（§四）：`BV_SLOTS`（新场次代码是否已含）、`LATEST_ED`（最新届号）、`BV_YEAR_COLOR`（新年份配色）、`BV_ACTIVE_SINCE_YEAR`。
 5. **重算名次**：`python scripts/recompute_bv_ranks.py --write`（全局 Eurovision 平局规则，权威名次；默认 dry-run 看变化，加 `--write` 落盘）。
@@ -116,6 +116,12 @@
 ### `scripts/gen_member_pages.py`
 
 - **`BV_ACTIVE_SINCE_YEAR`**（当前 `2024`）：最近参赛年份 ≥ 此 → `active=true`（member.html 实心徽章），否则空心。规则待用户最终确认。
+
+### 2023+ 年度制额外常量（CLAUDE.md #157，第 14/15 届导入须补）
+
+- **`bv-results-render.js` 的 `BV_THEME[year]`**：海报路径 + 主题双色（c1/c2/c2l/c3/glow）。主题届 hero 渲染海报 banner、总成绩单 SF 徽章用 c1/c2l。缺则回退通用紫色 hero。
+- **`member-render.js` 的 `BV_STRIPE[year]`**：`[c1, c2]` → 该年徽章 logo 改 45° 双色斜条纹（同步导出 PNG canvas）。缺则回退 `BV_YEAR_COLOR` 纯色。
+- 年度制（matches=SF1/SF2/GF）的成员页**收敛**、计分板**拆块**、`overall_rank`/`support_rate`/`voters` **派生**全自动（`recompute_bv_ranks.py` + `gen_member_pages.py` 的 `is_annual_ed`），导入时无需改这些逻辑——只要 JSON 符合契约（含 `qualified`、折算曲 score 折后/jury_vote·tele_vote 折前）。
 
 ---
 

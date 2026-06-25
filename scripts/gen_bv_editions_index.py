@@ -40,7 +40,7 @@ for p in sorted(glob.glob(os.path.join(BASE, 'data', 'barvision', 'barvision-*',
     eds.append({
         'no': no, 'year': d['year'], 'version': d['version'],
         'name': d.get('edition_name', ''),
-        'href': '/barvision/%d/%s-%02d.html' % (d['year'], d['version'], no),
+        'href': '/barvision/%d/%d%s.html' % (d['year'], no, 'e' if d['version'] == 'unplugged' else ''),
         'roster': list(seen.values()),
     })
 eds.sort(key=lambda x: x['no'])

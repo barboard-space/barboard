@@ -175,12 +175,14 @@
       background: var(--clr-surface);
       border: 1px solid var(--clr-border);
       border-radius: 6px; overflow: hidden;
-      transition: border-color 0.2s, box-shadow 0.2s;
+      transition: border-color 0.25s, box-shadow 0.25s, transform 0.25s;
     }
     .bv-arch-card:hover {
-      border-color: var(--clr-border-2);
-      box-shadow: 0 0 16px rgba(168,85,247,0.07);
+      border-color: var(--clr-violet);
+      box-shadow: 0 10px 32px rgba(168,85,247,0.26);
+      transform: translateY(-3px);
     }
+    .bv-arch-card:hover .bv-arch-card__logo img { opacity: 1; }
 
     .bv-recent-archive-grid {
       display: grid; grid-template-columns: repeat(3, 1fr);
@@ -203,8 +205,16 @@
     .bv-arch-card--recent .bv-arch-card__logo img {
       width: 100%; max-width: 200px; height: auto; position: relative; z-index: 1;
       filter: drop-shadow(0 0 16px rgba(168,85,247,0.18));
-      opacity: 0.85;
+      opacity: 0.85; transition: opacity 0.25s;
     }
+    /* 主视觉背景图版（如 2023）：海报作上半部分底图 + 暗罩保证 logo 可读 */
+    .bv-arch-card--recent .bv-arch-card__logo--img { background-size: cover; background-position: center;
+      background-clip: padding-box; }  /* 不绘到半透明 border-bottom 下，避免底部亮边 */
+    .bv-arch-card--recent .bv-arch-card__logo--img::before {
+      background-image: linear-gradient(rgba(8,8,18,0.40), rgba(8,8,18,0.58)); background-size: auto;
+    }
+    .bv-arch-card--recent .bv-arch-card__logo--img img { opacity: 0.95;
+      filter: drop-shadow(0 2px 10px rgba(0,0,0,0.55)); }
 
     /* 2019-2020 及娱乐版卡片暂无详情页，禁用 pointer 光标 */
     .bv-archive-grid .edition-card,
@@ -215,13 +225,26 @@
     /* 已建详情页的卡片：恢复可点 pointer + 紫色 hover */
     .bv-archive-grid .edition-card--link,
     .bv-unplugged-grid .edition-card--link { cursor: pointer; }
-    .bv-archive-grid .edition-card--link:hover,
+    .bv-archive-grid .edition-card--link:hover {
+      border-color: var(--clr-pink-light); background: var(--clr-surface);
+    }
     .bv-unplugged-grid .edition-card--link:hover {
       border-color: var(--clr-violet); background: var(--clr-surface);
     }
     .edition-card--link .edition-card__num { transition: color 0.2s; }
-    .bv-archive-grid .edition-card--link:hover .edition-card__num,
+    .bv-archive-grid .edition-card--link:hover .edition-card__num { color: var(--clr-pink-light); }
     .bv-unplugged-grid .edition-card--link:hover .edition-card__num { color: var(--clr-violet-light); }
+    /* fade-up 的 transition(opacity/transform) 覆盖了卡片自带 border/background 过渡(#64)——提权恢复，
+       并保留 opacity/transform 不破坏入场动画；仅在允许动效时生效 */
+    @media (prefers-reduced-motion: no-preference) {
+      .bv-archive-grid .edition-card.fade-up,
+      .bv-unplugged-grid .edition-card.fade-up {
+        transition: border-color 0.2s ease, background 0.2s ease, opacity 0.2s ease, transform 0.2s ease;
+      }
+      .bv-arch-card.fade-up {
+        transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease, opacity 0.2s ease;
+      }
+    }
 
     /* Unplugged subsection */
     .bv-unplugged-grid .edition-card__num { color: var(--clr-violet-light); }
@@ -418,18 +441,19 @@
   // ── 详情页链接 ───────────────────────────────────────────────
   // 已建好详情页的届次（href 形式）；建好新一届就把 href 加进来，对应卡片自动可点
   var BUILT_EDITIONS = new Set([
-    '/barvision/2019/regular-01.html',
-    '/barvision/2019/regular-02.html',
-    '/barvision/2019/regular-03.html',
-    '/barvision/2019/regular-04.html',
-    '/barvision/2019/regular-05.html',
-    '/barvision/2020/regular-06.html',
-    '/barvision/2020/regular-07.html',
-    '/barvision/2020/regular-08.html',
-    '/barvision/2020/regular-09.html',
-    '/barvision/2020/regular-10.html',
-    '/barvision/2020/regular-11.html',
-    '/barvision/2020/regular-12.html',
+    '/barvision/2019/1.html',
+    '/barvision/2019/2.html',
+    '/barvision/2019/3.html',
+    '/barvision/2019/4.html',
+    '/barvision/2019/5.html',
+    '/barvision/2020/6.html',
+    '/barvision/2020/7.html',
+    '/barvision/2020/8.html',
+    '/barvision/2020/9.html',
+    '/barvision/2020/10.html',
+    '/barvision/2020/11.html',
+    '/barvision/2020/12.html',
+    '/barvision/2023/13.html',
   ]);
   function romanToInt(r) {
     var map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 }, n = 0;
@@ -441,7 +465,8 @@
   }
   function editionHref(year, version, roman) {
     var n = romanToInt(roman);
-    return '/barvision/' + year + '/' + version + '-' + (n < 10 ? '0' + n : n) + '.html';
+    // 路径：去届号前导零 + 娱乐版加 e 后缀（如 /barvision/2023/13.html、/barvision/2020/1e.html）
+    return '/barvision/' + year + '/' + n + (version === 'unplugged' ? 'e' : '') + '.html';
   }
 
   // ── Build functions ──────────────────────────────────────────
@@ -449,11 +474,18 @@
     var el = document.getElementById('bvRecentArchiveGrid');
     if (!el) return;
     var recent = EDITIONS.filter(function(ed) { return ed.year >= 2023; });
+    var RECENT_BG = { 2023: 'assets/images/barvision/2023/bg.png' };  // 卡片上半部分主视觉背景（按届补充）
     el.innerHTML = recent.map(function(ed, i) {
       var logoSrc = 'assets/images/barvision_logo_' + ed.year + '.svg';
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';
-      return '<div class="bv-arch-card bv-arch-card--recent fade-up" style="transition-delay:' + (i * 0.10).toFixed(2) + 's;">' +
-        '<div class="bv-arch-card__logo">' +
+      var href = editionHref(ed.year, 'regular', ed.roman);
+      var link = BUILT_EDITIONS.has(href);
+      var bg = RECENT_BG[ed.year];
+      return '<div class="bv-arch-card bv-arch-card--recent fade-up' + (link ? ' edition-card--link' : '') + '"' +
+        (link ? ' onclick="location.href=\'' + href + '\'"' : '') +
+        ' style="transition-delay:' + (i * 0.10).toFixed(2) + 's;">' +
+        '<div class="bv-arch-card__logo' + (bg ? ' bv-arch-card__logo--img' : '') + '"' +
+          (bg ? ' style="background-image:url(\'' + bg + '\')"' : '') + '>' +
           '<img src="' + logoSrc + '" alt="Barvision ' + ed.year + '">' +
         '</div>' +
         '<div style="text-align:center;padding:14px 16px;">' +

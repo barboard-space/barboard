@@ -56,6 +56,47 @@ def recompute(match):
             changes.append((old.get(ok), e['rank'], e.get('member'), e.get('song')))
     return changes
 
+ANNUAL = {'SF1', 'SF2', 'GF'}  # 2023+ 年度制（两轮半决赛 + 决赛）
+
+def derive_rates(d):
+    """每 entry 派生 support_rate(得票率%) + voters(给该曲投分的人数)。
+    得票率分母 = 本场各曲「投出总分」=Σ(jury+tele)（折算前原始分，故 GF 折算曲分母仍计折前）；
+    分子 = 该曲 score（折算后展示分）。对所有届都算，旧分组制虽不展示亦无害。"""
+    for m in d.get('matches', []):
+        if m.get('canceled'):
+            continue
+        entries = m.get('entries', [])
+        voters = m.get('votes', {}).get('voters', [])
+        cast_total = sum((e.get('jury_vote') or 0) + (e.get('tele_vote') or 0) for e in entries)
+        for e in entries:
+            k = pkey(e)
+            e['voters'] = sum(1 for v in voters if (v.get('points', {}).get(k) or 0) > 0)
+            e['support_rate'] = round(100 * (e.get('score') or 0) / cast_total, 2) if cast_total else None
+
+def derive_overall(d):
+    """年度制（SF1/SF2/GF）：每首一个跨场总排名 overall_rank。
+    GF 18 首 = GF 名次 1..18；半决赛淘汰曲跨两场按 support_rate(得票率) 降序排 19..N。
+    晋级 SF 条目不带 overall_rank（其届成绩取自 GF 记录）。旧分组制不处理。"""
+    matches = d.get('matches', [])
+    if not ANNUAL <= {m.get('match') for m in matches}:
+        return
+    gf = next((m for m in matches if m.get('match') == 'GF'), None)
+    base = len(gf['entries']) if gf else 18
+    if gf:
+        for e in gf['entries']:
+            e['overall_rank'] = e['rank']
+    elim = []
+    for m in matches:
+        if m.get('match') in ('SF1', 'SF2'):
+            for e in m['entries']:
+                if e.get('qualified'):
+                    e.pop('overall_rank', None)  # 晋级者无总排名（取自 GF）
+                else:
+                    elim.append(e)
+    elim.sort(key=lambda e: (-(e.get('support_rate') or 0), -(e.get('score') or 0)))
+    for i, e in enumerate(elim, base + 1):
+        e['overall_rank'] = i
+
 def main():
     total = 0
     for f in sorted(glob.glob(os.path.join(BASE, 'data/barvision/barvision-*/*.json'))):
@@ -66,6 +107,8 @@ def main():
         for m in d['matches']:
             for old_r, new_r, mem, song in recompute(m):
                 fch.append('  [%s%s] #%s→#%s %s — %s' % (m.get('match', ''), '', old_r, new_r, mem, song))
+        derive_rates(d)
+        derive_overall(d)
         if fch:
             print('%s（第%s届）' % (os.path.basename(f), d.get('edition_no')))
             print('\n'.join(fch))

@@ -5,7 +5,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 1st Barvision",
-   "href": "/barvision/2019/regular-01.html",
+   "href": "/barvision/2019/1.html",
    "roster": [
     {
      "name": "猴妈",
@@ -84,7 +84,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 2nd Barvision",
-   "href": "/barvision/2019/regular-02.html",
+   "href": "/barvision/2019/2.html",
    "roster": [
     {
      "name": "嘟妈",
@@ -188,7 +188,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 3rd Barvision",
-   "href": "/barvision/2019/regular-03.html",
+   "href": "/barvision/2019/3.html",
    "roster": [
     {
      "name": "包妈",
@@ -307,7 +307,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 4th Barvision",
-   "href": "/barvision/2019/regular-04.html",
+   "href": "/barvision/2019/4.html",
    "roster": [
     {
      "name": "草妈",
@@ -441,7 +441,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 5th Barvision",
-   "href": "/barvision/2019/regular-05.html",
+   "href": "/barvision/2019/5.html",
    "roster": [
     {
      "name": "包妈",
@@ -570,7 +570,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 6th Barvision",
-   "href": "/barvision/2020/regular-06.html",
+   "href": "/barvision/2020/6.html",
    "roster": [
     {
      "name": "萌妈",
@@ -674,7 +674,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 7th Barvision",
-   "href": "/barvision/2020/regular-07.html",
+   "href": "/barvision/2020/7.html",
    "roster": [
     {
      "name": "雨妈",
@@ -808,7 +808,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 8th Barvision",
-   "href": "/barvision/2020/regular-08.html",
+   "href": "/barvision/2020/8.html",
    "roster": [
     {
      "name": "雨妈",
@@ -927,7 +927,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 9th Barvision",
-   "href": "/barvision/2020/regular-09.html",
+   "href": "/barvision/2020/9.html",
    "roster": [
     {
      "name": "布妈",
@@ -1036,7 +1036,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 10th Barvision",
-   "href": "/barvision/2020/regular-10.html",
+   "href": "/barvision/2020/10.html",
    "roster": [
     {
      "name": "锴妈",
@@ -1155,7 +1155,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 11th Barvision",
-   "href": "/barvision/2020/regular-11.html",
+   "href": "/barvision/2020/11.html",
    "roster": [
     {
      "name": "田妈",
@@ -1294,7 +1294,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 12th Barvision",
-   "href": "/barvision/2020/regular-12.html",
+   "href": "/barvision/2020/12.html",
    "roster": [
     {
      "name": "城妈",
@@ -1390,6 +1390,150 @@
      "name": "柠妈",
      "id": 19,
      "handle": "LemonSheeran"
+    }
+   ]
+  },
+  {
+   "no": 13,
+   "year": 2023,
+   "version": "regular",
+   "name": "Barvision Qiqihar 2023",
+   "href": "/barvision/2023/13.html",
+   "roster": [
+    {
+     "name": "雨妈",
+     "id": 17,
+     "handle": "Lee翼雨"
+    },
+    {
+     "name": "汞妈",
+     "id": 103,
+     "handle": "Hg"
+    },
+    {
+     "name": "韩妈",
+     "id": 67,
+     "handle": "SouthkoreaBall"
+    },
+    {
+     "name": "S妈",
+     "id": 27,
+     "handle": "哈哈哈时光机"
+    },
+    {
+     "name": "柠妈",
+     "id": 19,
+     "handle": "LemonSheeran"
+    },
+    {
+     "name": "狼妈",
+     "id": 113,
+     "handle": "Aaowu_"
+    },
+    {
+     "name": "瑞妈",
+     "id": 135,
+     "handle": "Jefferyat19"
+    },
+    {
+     "name": "包妈",
+     "id": 20,
+     "handle": "Jeremy_BAg"
+    },
+    {
+     "name": "泰妈",
+     "id": 131,
+     "handle": "泰坦crazy"
+    },
+    {
+     "name": "N妈",
+     "id": 133,
+     "handle": "rihanavy"
+    },
+    {
+     "name": "霜妈",
+     "id": 121,
+     "handle": "inje白霜"
+    },
+    {
+     "name": "麦妈",
+     "id": 130,
+     "handle": "Tandiny"
+    },
+    {
+     "name": "奶妈",
+     "id": 102,
+     "handle": "奶儿少爷"
+    },
+    {
+     "name": "羊妈",
+     "id": 100,
+     "handle": "SeafishYANG"
+    },
+    {
+     "name": "猴妈",
+     "id": 18,
+     "handle": "Voiiz"
+    },
+    {
+     "name": "风妈",
+     "id": 154,
+     "handle": "Durden"
+    },
+    {
+     "name": "芬妈",
+     "id": 110,
+     "handle": "Stephen"
+    },
+    {
+     "name": "星妈",
+     "id": 45,
+     "handle": "白矮星爱吃东西"
+    },
+    {
+     "name": "晕妈",
+     "id": 117,
+     "handle": "dizzyhugh"
+    },
+    {
+     "name": "威妈",
+     "id": 7,
+     "handle": "williw_"
+    },
+    {
+     "name": "杰妈",
+     "id": 156,
+     "handle": "jh201013"
+    },
+    {
+     "name": "锴妈",
+     "id": 12,
+     "handle": "WillKris锴"
+    },
+    {
+     "name": "文妈",
+     "id": 116,
+     "handle": "SummertimeDawns"
+    },
+    {
+     "name": "松妈",
+     "id": 105,
+     "handle": "Squirrel松鼠"
+    },
+    {
+     "name": "E妈",
+     "id": 659,
+     "handle": "Echoes"
+    },
+    {
+     "name": "鲤妈",
+     "id": 181,
+     "handle": "ly_dly"
+    },
+    {
+     "name": "萌妈",
+     "id": 125,
+     "handle": "绿荫夏语"
     }
    ]
   }

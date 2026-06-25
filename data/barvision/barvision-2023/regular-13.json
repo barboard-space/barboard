@@ -7,152 +7,244 @@
  "city": "齐齐哈尔",
  "host": "雨妈",
  "motto": "",
- "summary": "Barvision Qiqihar 2023 是第 13 届 Barvision 歌曲大赛，停办两年后由雨妈发起承办、威妈包装宣传，于 2023 年在齐齐哈尔举办的重启首届。27 位成员各选送一首歌曲，经两轮半决赛筛选出 18 首晋级总决赛，由评审团与观众投票共同决出冠军。最终羊妈选送的 Best Frenz & Joywave — “Flatline” 以 159 分（评审 124 + 观众 35）夺冠并创下当时 Barvision 最高总分纪录；猴妈选送的 Raynes — “Drive You Back Home”（121 分）与风妈选送的 Haley Blais — “The Cabin”（105 分）分列亚、季军。",
+ "summary": "停办两年后，第十三届吧视于 2023 年在齐齐哈尔重新举办。本届吧视由雨妈发起承办、威妈包装宣传，27 位成员各选送一首歌曲，经两场半决赛筛出 18 首进入决赛，由评审团与观众投票共决冠军。\n\n最终羊妈选送的 “Flatline” 以 159 分夺冠，刷新当时吧视最高总分纪录；猴妈的 “Drive You Back Home” 与风妈的 “The Cabin” 分列亚、季军。",
+ "visual_design": "Barvision Qiqihar 2023 的主视觉由威妈设计，以齐齐哈尔的工业属性为灵感，构建出由立体几何块面交错构成的抽象空间。设计采用冷绿色、珊瑚红与深灰蓝三色对比构图，营造出强烈的秩序感与纵深感。纵向变化的图形仿佛音波跃动的高楼，也如同垂直搭建的舞台装置，象征城市与音乐的共振。本届是 Barvision 首次尝试以构成式图形语言为主轴，确立了系列视觉风格向理性、空间与系统感演化的转折点。",
  "rules": {
-  "submission": "匿名参赛、私信主办方报名；每人限报 1 首并自动成为评委；发行时间 2020.1.1–2023.9.17；lead 艺人无 BB Hot100/UK Top100、未进 Billboard Artist 100、≤1 项格莱美通类提名、≤2 首吧视常规版 Top10；作品不得进 BB Hot100/Global200/UK 单曲榜、专辑不得进 BB200、不得进任一 BarBoard 官方榜 Top100 或评委年/半年榜。",
-  "niche_standard": [
-   "云村评论 ≤1000 · 艺人粉丝 ≤1万",
-   "Spotify 月听众 ≤500万 · 单曲播放 ≤1000万",
-   "YouTube 英语 订阅 ≤400万/MV ≤1500万 · 非英语 ≤800万/≤3000万"
-  ],
-  "format": "两轮半决赛各取前 9 名晋级（共 18 首）进入总决赛；评委（选送成员）+ 观众（未选送成员）投票。",
-  "voting": "每位评委交 Top10 排名，按 12/10/8/7/6/5/4/3/2/1 赋分；未按时提交者其选送歌曲得分折半。"
+  "sections": [
+   {
+    "title": "参赛与报名",
+    "body": [
+     "Barvision 2023 采用匿名参赛制，所有成员需通过私信方式将参赛歌曲报名提交给主办方雨妈，每位成员仅可报名一首。报名后，参赛者自动成为本届赛事评委，并承担评审投票义务。为保障赛事公正性，比赛全程要求匿名参赛，参赛信息不得提前泄露；所有报名信息将在投票结束、结果揭晓前由主办方统一公开。",
+     "报名通道关闭前，每位参赛者有一次主动更换歌曲的机会。允许最多两人共同报名一首作品，合报者可选择合并榜单，也可由主办方将每人提交的排名分数减半处理。若报名作品出现重复，双方可联系主办方协调合报事宜。"
+    ]
+   },
+   {
+    "title": "参赛歌曲资格",
+    "body": [
+     "为保障公平性，参赛歌曲需满足以下所有条件："
+    ],
+    "list": [
+     {
+      "k": "发布时间",
+      "v": "2020 年 1 月 1 日至 2023 年 9 月 17 日之间"
+     },
+     {
+      "k": "艺人资格",
+      "v": "艺人不得曾获得 Barvision 前三名，未曾进入 Billboard Artist 100"
+     },
+     {
+      "k": "作品成绩限制",
+      "v": "",
+      "sublist": [
+       "作品不得进入 Billboard Hot 100、Global 200、UK Official Singles Chart",
+       "所属专辑不得入选 Billboard 200",
+       "不得获得格莱美或 “吧莱美” 提名",
+       "不得进入任何 BarBoard 官方榜单（总榜或分榜）Top 100，或其他评委年榜或半年榜"
+      ]
+     }
+    ],
+    "table": {
+     "caption": "平台数据限制",
+     "rows": [
+      [
+       "网易云音乐",
+       "评论数 ≤ 1000",
+       "艺人粉丝 ≤ 1 万"
+      ],
+      [
+       "Spotify",
+       "月听众 ≤ 500 万",
+       "单曲播放量 ≤ 1000 万"
+      ],
+      [
+       "YouTube（英语歌曲）",
+       "官方频道订阅 ≤ 400 万",
+       "MV 播放量 ≤ 1500 万"
+      ],
+      [
+       "YouTube（非英语歌曲）",
+       "官方频道订阅 ≤ 800 万",
+       "MV 播放量 ≤ 3000 万"
+      ]
+     ]
+    },
+    "foot": [
+     "如对参赛作品资格有异议，评委或观众需在名单公布后 72 小时内提出并提供证据。"
+    ]
+   },
+   {
+    "title": "投票与评分",
+    "body": [
+     "每位评委需在每轮比赛中提交一份 Top10 排名，按下表赋分："
+    ],
+    "scoring": {
+     "ranks": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+     ],
+     "scores": [
+      12,
+      10,
+      8,
+      7,
+      6,
+      5,
+      4,
+      3,
+      2,
+      1
+     ]
+    },
+    "foot": [
+     "如评委未在规定时间内提交投票，其参赛歌曲本轮得分将减半处理。",
+     "所有投票需保持独立、公正，不得在投票期间泄露自己或他人排名，或评论参赛作品。"
+    ]
+   }
+  ]
  },
  "source": "第十三届吧视报名总则 + 23-SF1/SF2.csv（半决赛逐票）+ Grand Final 总表（决赛逐票）",
  "members": {
-  "E": {
+  "E妈": {
    "id": 659,
    "handle": "Echoes"
   },
-  "N": {
+  "N妈": {
    "id": 133,
    "handle": "rihanavy"
   },
-  "S": {
+  "S妈": {
    "id": 27,
    "handle": "哈哈哈时光机"
   },
-  "T": {
+  "T妈": {
    "id": 115,
    "handle": "iTAP_II"
   },
-  "兔": {
+  "兔妈": {
    "id": 118,
    "handle": "Razbit"
   },
-  "包": {
+  "包妈": {
    "id": 20,
    "handle": "Jeremy_BAg"
   },
-  "城": {
+  "城妈": {
    "id": 120,
    "handle": "MarekTotti"
   },
-  "奶": {
+  "奶妈": {
    "id": 102,
    "handle": "奶儿少爷"
   },
-  "威": {
+  "威妈": {
    "id": 7,
    "handle": "williw_"
   },
-  "布": {
+  "布妈": {
    "id": 157,
    "handle": "Vivienne-Eliza"
   },
-  "文": {
+  "文妈": {
    "id": 116,
    "handle": "SummertimeDawns"
   },
-  "星": {
+  "星妈": {
    "id": 45,
    "handle": "白矮星爱吃东西"
   },
-  "晕": {
+  "晕妈": {
    "id": 117,
    "handle": "dizzyhugh"
   },
-  "杰": {
+  "杰妈": {
    "id": 156,
    "handle": "jh201013"
   },
-  "松": {
+  "松妈": {
    "id": 105,
    "handle": "Squirrel松鼠"
   },
-  "柠": {
+  "柠妈": {
    "id": 19,
    "handle": "LemonSheeran"
   },
-  "汞": {
+  "汞妈": {
    "id": 103,
    "handle": "Hg"
   },
-  "泰": {
+  "泰妈": {
    "id": 131,
    "handle": "泰坦crazy"
   },
-  "狼": {
+  "狼妈": {
    "id": 113,
    "handle": "Aaowu_"
   },
-  "猴": {
+  "猴妈": {
    "id": 18,
    "handle": "Voiiz"
   },
-  "瑞": {
+  "瑞妈": {
    "id": 135,
    "handle": "Jefferyat19"
   },
-  "羊": {
+  "羊妈": {
    "id": 100,
    "handle": "SeafishYANG"
   },
-  "芬": {
+  "芬妈": {
    "id": 110,
    "handle": "Stephen"
   },
-  "萌": {
+  "萌妈": {
    "id": 125,
    "handle": "绿荫夏语"
   },
-  "锴": {
+  "锴妈": {
    "id": 12,
    "handle": "WillKris锴"
   },
-  "院": {
+  "院妈": {
    "id": 326,
    "handle": "天神院院长"
   },
-  "雨": {
+  "雨妈": {
    "id": 17,
    "handle": "Lee翼雨"
   },
-  "霜": {
+  "霜妈": {
    "id": 121,
    "handle": "inje白霜"
   },
-  "韩": {
+  "韩妈": {
    "id": 67,
    "handle": "SouthkoreaBall"
   },
-  "音": {
+  "音妈": {
    "id": 770,
    "handle": "环球颖音"
   },
-  "风": {
+  "风妈": {
    "id": 154,
    "handle": "Durden"
   },
-  "鲤": {
+  "鲤妈": {
    "id": 181,
    "handle": "ly_dly"
   },
-  "鸽": {
+  "鸽妈": {
    "id": 160,
    "handle": "Phoerienies"
   },
-  "麦": {
+  "麦妈": {
    "id": 130,
    "handle": "Tandiny"
   }
@@ -178,227 +270,245 @@
   {
    "match": "SF1",
    "venue": "半决赛一",
+   "summary": "第一场半决赛共有 13 首参赛作品，采用匿名投票与 Top10 排名制，最终决出 9 首晋级总决赛的作品。本场得分最高的是 Joywave 演唱的 “Buy American”，以 142 分位居首位；William Michael Morgan 的 “In Walked You” 与 Stefan 的 “Seotud Käed” 分别以 141 分和 138 分紧随其后。晋级作品风格多样，涵盖流行摇滚、美国乡村与欧洲流行等多种风格。",
    "entries": [
     {
      "eid": 0,
-     "member": "雨",
+     "member": "雨妈",
      "member_id": 17,
      "artist": "Joywave",
      "song": "Buy American",
      "language": "英语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 73,
      "tele_vote": 69,
      "score": 142.0,
-     "support_rate": null,
+     "support_rate": 10.2,
      "high_rate": null,
      "is_shadow": false,
      "rank": 1,
-     "qualified": true
+     "qualified": true,
+     "voters": 21
     },
     {
      "eid": 1,
-     "member": "汞",
+     "member": "汞妈",
      "member_id": 103,
      "artist": "William Michael Morgan",
      "song": "In Walked You",
      "language": "英语",
-     "genre": "country",
+     "genre": "Country",
      "jury_vote": 69,
      "tele_vote": 72,
      "score": 141.0,
-     "support_rate": null,
+     "support_rate": 10.13,
      "high_rate": null,
      "is_shadow": false,
      "rank": 2,
-     "qualified": true
+     "qualified": true,
+     "voters": 21
     },
     {
      "eid": 2,
-     "member": "韩",
+     "member": "韩妈",
      "member_id": 67,
      "artist": "Stefan",
-     "song": "Seotud Kaed",
+     "song": "Seotud Käed",
      "language": "爱沙尼亚语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 83,
      "tele_vote": 55,
      "score": 138.0,
-     "support_rate": null,
+     "support_rate": 9.91,
      "high_rate": null,
      "is_shadow": false,
      "rank": 3,
-     "qualified": true
+     "qualified": true,
+     "voters": 22
     },
     {
      "eid": 3,
-     "member": "S",
+     "member": "S妈",
      "member_id": 27,
-     "artist": "Cri, Half Moon Run",
-     "song": "Astray",
+     "artist": "CRi",
+     "song": "Astray (feat. Half Moon Run)",
      "language": "英语",
-     "genre": "dance",
+     "genre": "Dance",
      "jury_vote": 74,
      "tele_vote": 63,
      "score": 137.0,
-     "support_rate": null,
+     "support_rate": 9.84,
      "high_rate": null,
      "is_shadow": false,
      "rank": 4,
-     "qualified": true
+     "qualified": true,
+     "voters": 21
     },
     {
      "eid": 4,
-     "member": "柠",
+     "member": "柠妈",
      "member_id": 19,
      "artist": "Rene Miller",
      "song": "Concrete Heart",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 77,
      "tele_vote": 40,
      "score": 117.0,
-     "support_rate": null,
+     "support_rate": 8.41,
      "high_rate": null,
      "is_shadow": false,
      "rank": 5,
-     "qualified": true
+     "qualified": true,
+     "voters": 18
     },
     {
      "eid": 5,
-     "member": "狼",
+     "member": "狼妈",
      "member_id": 113,
      "artist": "Thomas Headon",
      "song": "not saying goodbye",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 65,
      "tele_vote": 50,
      "score": 115.0,
-     "support_rate": null,
+     "support_rate": 8.26,
      "high_rate": null,
      "is_shadow": false,
      "rank": 6,
-     "qualified": true
+     "qualified": true,
+     "voters": 20
     },
     {
      "eid": 6,
-     "member": "瑞",
+     "member": "瑞妈",
      "member_id": 135,
-     "artist": "Susanne Sundfor",
+     "artist": "Susanne Sundfør",
      "song": "leikara ljóð",
      "language": "冰岛语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 39,
      "tele_vote": 72,
      "score": 111.0,
-     "support_rate": null,
+     "support_rate": 7.97,
      "high_rate": null,
      "is_shadow": false,
      "rank": 7,
-     "qualified": true
+     "qualified": true,
+     "voters": 18
     },
     {
      "eid": 7,
-     "member": "包",
+     "member": "包妈",
      "member_id": 20,
-     "artist": "See You Next Year, EKKSTACY, Mike Dean",
+     "artist": "See You Next Year, EKKSTACY & Mike Dean",
      "song": "I Guess",
      "language": "英语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 53,
      "tele_vote": 52,
      "score": 105.0,
-     "support_rate": null,
+     "support_rate": 7.54,
      "high_rate": null,
      "is_shadow": false,
      "rank": 8,
-     "qualified": true
+     "qualified": true,
+     "voters": 19
     },
     {
      "eid": 8,
-     "member": "泰",
+     "member": "泰妈",
      "member_id": 131,
      "artist": "Comastatic",
      "song": "back4blood",
      "language": "英语",
-     "genre": "rock",
+     "genre": "Rock",
      "jury_vote": 64,
      "tele_vote": 30,
      "score": 94.0,
-     "support_rate": null,
+     "support_rate": 6.75,
      "high_rate": null,
      "is_shadow": false,
      "rank": 9,
-     "qualified": true
+     "qualified": true,
+     "voters": 16
     },
     {
      "eid": 9,
-     "member": "N",
+     "member": "N妈",
      "member_id": 133,
      "artist": "Georgia",
      "song": "It's Euphoric",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 55,
      "tele_vote": 38,
      "score": 93.0,
-     "support_rate": null,
+     "support_rate": 6.68,
      "high_rate": null,
      "is_shadow": false,
      "rank": 10,
-     "qualified": false
+     "qualified": false,
+     "voters": 18,
+     "overall_rank": 19
     },
     {
      "eid": 10,
-     "member": "霜",
+     "member": "霜妈",
      "member_id": 121,
      "artist": "Pauline Chagne",
      "song": "Nuit Pauline",
      "language": "法语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 28,
      "tele_vote": 60,
      "score": 88.0,
-     "support_rate": null,
+     "support_rate": 6.32,
      "high_rate": null,
      "is_shadow": false,
      "rank": 11,
-     "qualified": false
+     "qualified": false,
+     "voters": 16,
+     "overall_rank": 21
     },
     {
      "eid": 11,
-     "member": "麦",
+     "member": "麦妈",
      "member_id": 130,
      "artist": "Dylan Fraser",
      "song": "2030 Revolution",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 47,
      "tele_vote": 23,
      "score": 70.0,
-     "support_rate": null,
+     "support_rate": 5.03,
      "high_rate": null,
      "is_shadow": false,
      "rank": 12,
-     "qualified": false
+     "qualified": false,
+     "voters": 19,
+     "overall_rank": 24
     },
     {
      "eid": 12,
-     "member": "奶",
+     "member": "奶妈",
      "member_id": 102,
-     "artist": "Jack Kays, Travis Barker",
+     "artist": "Jack Kays & Travis Barker",
      "song": "Dirty Money",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 27,
      "tele_vote": 14,
      "score": 41.0,
-     "support_rate": null,
+     "support_rate": 2.95,
      "high_rate": null,
      "is_shadow": false,
      "rank": 13,
-     "qualified": false
+     "qualified": false,
+     "voters": 11,
+     "overall_rank": 26
     }
    ],
    "votes": {
@@ -416,7 +526,7 @@
     ],
     "voters": [
      {
-      "voter": "N",
+      "voter": "N妈",
       "type": "jury",
       "points": {
        "0": 10,
@@ -432,7 +542,7 @@
       }
      },
      {
-      "voter": "S",
+      "voter": "S妈",
       "type": "jury",
       "points": {
        "0": 3,
@@ -448,7 +558,7 @@
       }
      },
      {
-      "voter": "包",
+      "voter": "包妈",
       "type": "jury",
       "points": {
        "0": 12,
@@ -464,7 +574,7 @@
       }
      },
      {
-      "voter": "奶",
+      "voter": "奶妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -480,7 +590,7 @@
       }
      },
      {
-      "voter": "柠",
+      "voter": "柠妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -496,7 +606,7 @@
       }
      },
      {
-      "voter": "汞",
+      "voter": "汞妈",
       "type": "jury",
       "points": {
        "0": 2,
@@ -512,7 +622,7 @@
       }
      },
      {
-      "voter": "泰",
+      "voter": "泰妈",
       "type": "jury",
       "points": {
        "0": 12,
@@ -528,7 +638,7 @@
       }
      },
      {
-      "voter": "狼",
+      "voter": "狼妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -544,7 +654,7 @@
       }
      },
      {
-      "voter": "瑞",
+      "voter": "瑞妈",
       "type": "jury",
       "points": {
        "1": 3,
@@ -560,7 +670,7 @@
       }
      },
      {
-      "voter": "雨",
+      "voter": "雨妈",
       "type": "jury",
       "points": {
        "1": 3,
@@ -576,7 +686,7 @@
       }
      },
      {
-      "voter": "霜",
+      "voter": "霜妈",
       "type": "jury",
       "points": {
        "1": 12,
@@ -592,7 +702,7 @@
       }
      },
      {
-      "voter": "韩",
+      "voter": "韩妈",
       "type": "jury",
       "points": {
        "0": 10,
@@ -608,7 +718,7 @@
       }
      },
      {
-      "voter": "麦",
+      "voter": "麦妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -624,7 +734,7 @@
       }
      },
      {
-      "voter": "E",
+      "voter": "E妈",
       "type": "tele",
       "points": {
        "0": 4,
@@ -640,7 +750,7 @@
       }
      },
      {
-      "voter": "城",
+      "voter": "城妈",
       "type": "tele",
       "points": {
        "0": 8,
@@ -656,7 +766,7 @@
       }
      },
      {
-      "voter": "威",
+      "voter": "威妈",
       "type": "tele",
       "points": {
        "0": 12,
@@ -672,7 +782,7 @@
       }
      },
      {
-      "voter": "星",
+      "voter": "星妈",
       "type": "tele",
       "points": {
        "0": 10,
@@ -688,7 +798,7 @@
       }
      },
      {
-      "voter": "晕",
+      "voter": "晕妈",
       "type": "tele",
       "points": {
        "0": 4,
@@ -704,7 +814,7 @@
       }
      },
      {
-      "voter": "松",
+      "voter": "松妈",
       "type": "tele",
       "points": {
        "0": 4,
@@ -720,7 +830,7 @@
       }
      },
      {
-      "voter": "羊",
+      "voter": "羊妈",
       "type": "tele",
       "points": {
        "0": 2,
@@ -736,7 +846,7 @@
       }
      },
      {
-      "voter": "芬",
+      "voter": "芬妈",
       "type": "tele",
       "points": {
        "0": 7,
@@ -752,7 +862,7 @@
       }
      },
      {
-      "voter": "萌",
+      "voter": "萌妈",
       "type": "tele",
       "points": {
        "0": 6,
@@ -768,7 +878,7 @@
       }
      },
      {
-      "voter": "音",
+      "voter": "音妈",
       "type": "tele",
       "points": {
        "0": 5,
@@ -784,7 +894,7 @@
       }
      },
      {
-      "voter": "风",
+      "voter": "风妈",
       "type": "tele",
       "points": {
        "0": 7,
@@ -805,244 +915,264 @@
   {
    "match": "SF2",
    "venue": "半决赛二",
+   "summary": "第二场半决赛共有 14 首参赛作品，同样采用匿名投票与 Top10 排名制，最终决出 9 首晋级总决赛的作品。本场表现最突出的是 Best Frenz & Joywave 带来的 “Flatline”，以 164 分的高分夺得第一；Raynes 的 “Drive You Back Home”（137 分）与 Haley Blais 的 “The Cabin”（106 分）分列第二、第三。",
    "entries": [
     {
      "eid": 0,
-     "member": "羊",
+     "member": "羊妈",
      "member_id": 100,
      "artist": "Best Frenz & Joywave",
      "song": "Flatline",
      "language": "英语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 105,
      "tele_vote": 59,
      "score": 164.0,
-     "support_rate": null,
+     "support_rate": 12.85,
      "high_rate": null,
      "is_shadow": false,
      "rank": 1,
-     "qualified": true
+     "qualified": true,
+     "voters": 21
     },
     {
      "eid": 1,
-     "member": "猴",
+     "member": "猴妈",
      "member_id": 18,
      "artist": "Raynes",
      "song": "Drive You Back Home",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 80,
      "tele_vote": 57,
      "score": 137.0,
-     "support_rate": null,
+     "support_rate": 10.74,
      "high_rate": null,
      "is_shadow": false,
      "rank": 2,
-     "qualified": true
+     "qualified": true,
+     "voters": 16
     },
     {
      "eid": 2,
-     "member": "风",
+     "member": "风妈",
      "member_id": 154,
      "artist": "Haley Blais",
      "song": "The Cabin",
      "language": "英语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 77,
      "tele_vote": 29,
      "score": 106.0,
-     "support_rate": null,
+     "support_rate": 8.31,
      "high_rate": null,
      "is_shadow": false,
      "rank": 3,
-     "qualified": true
+     "qualified": true,
+     "voters": 15
     },
     {
      "eid": 3,
-     "member": "芬",
+     "member": "芬妈",
      "member_id": 110,
      "artist": "Rook Monroe",
      "song": "Jolie",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 57,
      "tele_vote": 48,
      "score": 105.0,
-     "support_rate": null,
+     "support_rate": 8.23,
      "high_rate": null,
      "is_shadow": false,
      "rank": 4,
-     "qualified": true
+     "qualified": true,
+     "voters": 18
     },
     {
      "eid": 4,
-     "member": "星",
+     "member": "星妈",
      "member_id": 45,
      "artist": "Emperor X",
      "song": "Freeway in Heaven",
      "language": "英语",
-     "genre": "rock",
+     "genre": "Rock",
      "jury_vote": 72,
      "tele_vote": 32,
      "score": 104.0,
-     "support_rate": null,
+     "support_rate": 8.15,
      "high_rate": null,
      "is_shadow": false,
      "rank": 5,
-     "qualified": true
+     "qualified": true,
+     "voters": 18
     },
     {
      "eid": 5,
-     "member": "晕",
+     "member": "晕妈",
      "member_id": 117,
-     "artist": "Alvaro De Luna & Rayden",
-     "song": "Sin Antifaz",
+     "artist": "Alvaro De Luna",
+     "song": "Sin Antifaz (feat. Rayden)",
      "language": "西班牙语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 53,
      "tele_vote": 38,
      "score": 91.0,
-     "support_rate": null,
+     "support_rate": 7.13,
      "high_rate": null,
      "is_shadow": false,
      "rank": 6,
-     "qualified": true
+     "qualified": true,
+     "voters": 14
     },
     {
      "eid": 6,
-     "member": "威",
+     "member": "威妈",
      "member_id": 7,
      "artist": "Sam Dew",
      "song": "Thinking of You",
      "language": "英语",
-     "genre": "r&b/soul",
+     "genre": "R&B/Soul",
      "jury_vote": 46,
      "tele_vote": 39,
      "score": 85.0,
-     "support_rate": null,
+     "support_rate": 6.66,
      "high_rate": null,
      "is_shadow": false,
      "rank": 7,
-     "qualified": true
+     "qualified": true,
+     "voters": 16
     },
     {
      "eid": 7,
-     "member": "杰",
+     "member": "杰妈",
      "member_id": 156,
      "artist": "Hannah Grace",
      "song": "Closer",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 56,
      "tele_vote": 28,
      "score": 84.0,
-     "support_rate": null,
+     "support_rate": 6.58,
      "high_rate": null,
      "is_shadow": false,
      "rank": 8,
-     "qualified": true
+     "qualified": true,
+     "voters": 17
     },
     {
      "eid": 8,
-     "member": "锴",
+     "member": "锴妈",
      "member_id": 12,
      "artist": "Aaron Childs",
      "song": "No Rewrites",
      "language": "英语",
-     "genre": "funk",
+     "genre": "Funk",
      "jury_vote": 53,
      "tele_vote": 29,
      "score": 82.0,
-     "support_rate": null,
+     "support_rate": 6.43,
      "high_rate": null,
      "is_shadow": false,
      "rank": 9,
-     "qualified": true
+     "qualified": true,
+     "voters": 15
     },
     {
      "eid": 9,
-     "member": "文",
+     "member": "文妈",
      "member_id": 116,
      "artist": "Juliette Armanet",
      "song": "Flamme",
      "language": "法语",
-     "genre": "french pop",
+     "genre": "French Pop",
      "jury_vote": 47,
      "tele_vote": 34,
      "score": 81.0,
-     "support_rate": null,
+     "support_rate": 6.35,
      "high_rate": null,
      "is_shadow": false,
      "rank": 10,
-     "qualified": false
+     "qualified": false,
+     "voters": 18,
+     "overall_rank": 20
     },
     {
      "eid": 10,
-     "member": "松",
+     "member": "松妈",
      "member_id": 105,
      "artist": "Alexa Cappelli",
      "song": "Temporary",
      "language": "英语",
-     "genre": "pop",
+     "genre": "Pop",
      "jury_vote": 58,
      "tele_vote": 22,
      "score": 80.0,
-     "support_rate": null,
+     "support_rate": 6.27,
      "high_rate": null,
      "is_shadow": false,
      "rank": 11,
-     "qualified": false
+     "qualified": false,
+     "voters": 17,
+     "overall_rank": 22
     },
     {
      "eid": 11,
-     "member": "E",
+     "member": "E妈",
      "member_id": 659,
      "artist": "Relay Tapes",
      "song": "Looks Like Rain",
      "language": "英语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 53,
      "tele_vote": 23,
      "score": 76.0,
-     "support_rate": null,
+     "support_rate": 5.96,
      "high_rate": null,
      "is_shadow": false,
      "rank": 12,
-     "qualified": false
+     "qualified": false,
+     "voters": 17,
+     "overall_rank": 23
     },
     {
      "eid": 12,
-     "member": "鲤",
+     "member": "鲤妈",
      "member_id": 181,
      "artist": "Dardan",
      "song": "Pse",
      "language": "阿尔巴尼亚语",
-     "genre": "hip-hop/rap",
+     "genre": "Hip-Hop/Rap",
      "jury_vote": 26,
      "tele_vote": 23,
      "score": 49.0,
-     "support_rate": null,
+     "support_rate": 3.84,
      "high_rate": null,
      "is_shadow": false,
      "rank": 13,
-     "qualified": false
+     "qualified": false,
+     "voters": 12,
+     "overall_rank": 25
     },
     {
      "eid": 13,
-     "member": "萌",
+     "member": "萌妈",
      "member_id": 125,
      "artist": "Hania Rani",
      "song": "Hello",
      "language": "英语",
-     "genre": "electronic",
+     "genre": "Electronic",
      "jury_vote": 29,
      "tele_vote": 3,
      "score": 32.0,
-     "support_rate": null,
+     "support_rate": 2.51,
      "high_rate": null,
      "is_shadow": false,
      "rank": 14,
-     "qualified": false
+     "qualified": false,
+     "voters": 6,
+     "overall_rank": 27
     }
    ],
    "votes": {
@@ -1060,7 +1190,7 @@
     ],
     "voters": [
      {
-      "voter": "E",
+      "voter": "E妈",
       "type": "jury",
       "points": {
        "0": 10,
@@ -1076,7 +1206,7 @@
       }
      },
      {
-      "voter": "威",
+      "voter": "威妈",
       "type": "jury",
       "points": {
        "0": 10,
@@ -1092,7 +1222,7 @@
       }
      },
      {
-      "voter": "文",
+      "voter": "文妈",
       "type": "jury",
       "points": {
        "0": 7,
@@ -1108,7 +1238,7 @@
       }
      },
      {
-      "voter": "星",
+      "voter": "星妈",
       "type": "jury",
       "points": {
        "0": 10,
@@ -1124,7 +1254,7 @@
       }
      },
      {
-      "voter": "晕",
+      "voter": "晕妈",
       "type": "jury",
       "points": {
        "0": 5,
@@ -1140,7 +1270,7 @@
       }
      },
      {
-      "voter": "杰",
+      "voter": "杰妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -1156,7 +1286,7 @@
       }
      },
      {
-      "voter": "松",
+      "voter": "松妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -1172,7 +1302,7 @@
       }
      },
      {
-      "voter": "猴",
+      "voter": "猴妈",
       "type": "jury",
       "points": {
        "0": 7,
@@ -1188,7 +1318,7 @@
       }
      },
      {
-      "voter": "羊",
+      "voter": "羊妈",
       "type": "jury",
       "points": {
        "2": 8,
@@ -1204,7 +1334,7 @@
       }
      },
      {
-      "voter": "芬",
+      "voter": "芬妈",
       "type": "jury",
       "points": {
        "0": 10,
@@ -1220,7 +1350,7 @@
       }
      },
      {
-      "voter": "萌",
+      "voter": "萌妈",
       "type": "jury",
       "points": {
        "0": 12,
@@ -1236,7 +1366,7 @@
       }
      },
      {
-      "voter": "锴",
+      "voter": "锴妈",
       "type": "jury",
       "points": {
        "0": 12,
@@ -1252,7 +1382,7 @@
       }
      },
      {
-      "voter": "风",
+      "voter": "风妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -1268,7 +1398,7 @@
       }
      },
      {
-      "voter": "鲤",
+      "voter": "鲤妈",
       "type": "jury",
       "points": {
        "0": 4,
@@ -1284,7 +1414,7 @@
       }
      },
      {
-      "voter": "N",
+      "voter": "N妈",
       "type": "tele",
       "points": {
        "0": 1,
@@ -1300,7 +1430,7 @@
       }
      },
      {
-      "voter": "S",
+      "voter": "S妈",
       "type": "tele",
       "points": {
        "0": 12,
@@ -1316,7 +1446,7 @@
       }
      },
      {
-      "voter": "包",
+      "voter": "包妈",
       "type": "tele",
       "points": {
        "0": 8,
@@ -1332,7 +1462,7 @@
       }
      },
      {
-      "voter": "布",
+      "voter": "布妈",
       "type": "tele",
       "points": {
        "0": 5,
@@ -1348,7 +1478,7 @@
       }
      },
      {
-      "voter": "汞",
+      "voter": "汞妈",
       "type": "tele",
       "points": {
        "0": 7,
@@ -1364,7 +1494,7 @@
       }
      },
      {
-      "voter": "泰",
+      "voter": "泰妈",
       "type": "tele",
       "points": {
        "0": 12,
@@ -1380,7 +1510,7 @@
       }
      },
      {
-      "voter": "院",
+      "voter": "院妈",
       "type": "tele",
       "points": {
        "0": 6,
@@ -1396,7 +1526,7 @@
       }
      },
      {
-      "voter": "雨",
+      "voter": "雨妈",
       "type": "tele",
       "points": {
        "0": 8,
@@ -1417,313 +1547,332 @@
   {
    "match": "GF",
    "venue": "总决赛",
-   "note": "狼、锴 因未按时提交投票，其选送歌曲总分按 50% 折算计入最终成绩；计分板内评委分 / 观众分为折算前原始分（狼 83 / 28、锴 36 / 18）。",
+   "summary": "总决赛于北京时间 2023 年 10 月 4 日 21:00 举行，共有 18 首歌曲入围。投票由来自各参赛作品选送者的 20 位评审团成员，以及 6 位来自未选送歌曲成员的观众票参与者共同完成；每位评委从决赛入围歌曲中选出个人 Top10，并依名次由高到低赋予 12、10、8、7、6、5、4、3、2、1 分计入成绩。其中，狼妈与锴妈因未能按时提交个人投票，其所选送歌曲的总票数折半计入最终成绩。\n\n羊妈凭借 Best Frenz & Joywave 共同演绎的 “Flatline” 赢得比赛，该作品在评委票中获得 124 分、在观众票中获得 35 分，以总分 159 分夺冠，并在当时创下 Barvision 最高得分纪录；这一纪录在一年后的 Barvision Tonghua 2024 中被 S妈以 266 分打破。羊妈也成为继猴妈、瑞妈、A妈之后，第四位首次参加 Barvision 即夺冠的成员。\n\n第二名是猴妈选送、Raynes 演唱的 “Drive You Back Home”，以评委票 107 分、观众票 14 分合计 121 分位居次席；季军为风妈带来、Haley Blais 演唱的 “The Cabin”，最终以 105 分名列第三。",
+   "note": "狼妈、锴妈 因未按时提交投票，其选送歌曲总分按 50% 折算计入最终成绩；计分板内评委分 / 观众分为折算前原始分（狼妈 83 / 28、锴妈 36 / 18）。",
    "entries": [
     {
-     "eid": 0,
-     "member": "泰",
-     "member_id": 131,
-     "artist": "Comastatic",
-     "song": "back4blood",
-     "language": "英语",
-     "genre": "rock",
-     "jury_vote": 55.0,
-     "tele_vote": 26.0,
-     "score": 81.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 10,
-     "overall_rank": 10
-    },
-    {
-     "eid": 1,
-     "member": "锴",
-     "member_id": 12,
-     "artist": "Aaron Childs",
-     "song": "No Rewrites",
-     "language": "英语",
-     "genre": "funk",
-     "jury_vote": 36.0,
-     "tele_vote": 18.0,
-     "score": 27,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 18,
-     "overall_rank": 18
-    },
-    {
-     "eid": 2,
-     "member": "S",
-     "member_id": 27,
-     "artist": "Cri, Half Moon Run",
-     "song": "Astray",
-     "language": "英语",
-     "genre": "dance",
-     "jury_vote": 57.0,
-     "tele_vote": 34.0,
-     "score": 91.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 5,
-     "overall_rank": 5
-    },
-    {
-     "eid": 3,
-     "member": "杰",
-     "member_id": 156,
-     "artist": "Hannah Grace",
-     "song": "Closer",
-     "language": "英语",
-     "genre": "pop",
-     "jury_vote": 30.0,
-     "tele_vote": 7.0,
-     "score": 37.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 17,
-     "overall_rank": 17
-    },
-    {
-     "eid": 4,
-     "member": "威",
-     "member_id": 7,
-     "artist": "Sam Dew",
-     "song": "Thinking of You",
-     "language": "英语",
-     "genre": "r&b/soul",
-     "jury_vote": 45.0,
-     "tele_vote": 24.0,
-     "score": 69.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 13,
-     "overall_rank": 13
-    },
-    {
-     "eid": 5,
-     "member": "瑞",
-     "member_id": 135,
-     "artist": "Susanne Sundfor",
-     "song": "leikara ljóð",
-     "language": "冰岛语",
-     "genre": "alternative",
-     "jury_vote": 47.0,
-     "tele_vote": 30.0,
-     "score": 77.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 12,
-     "overall_rank": 12
-    },
-    {
-     "eid": 6,
-     "member": "晕",
-     "member_id": 117,
-     "artist": "Alvaro De Luna & Rayden",
-     "song": "Sin Antifaz",
-     "language": "西班牙语",
-     "genre": "pop",
-     "jury_vote": 49.0,
-     "tele_vote": 5.0,
-     "score": 54.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 15,
-     "overall_rank": 15
-    },
-    {
-     "eid": 7,
-     "member": "芬",
-     "member_id": 110,
-     "artist": "Rook Monroe",
-     "song": "Jolie",
-     "language": "英语",
-     "genre": "pop",
-     "jury_vote": 75.0,
-     "tele_vote": 21.0,
-     "score": 96.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 4,
-     "overall_rank": 4
-    },
-    {
-     "eid": 8,
-     "member": "狼",
-     "member_id": 113,
-     "artist": "Thomas Headon",
-     "song": "not saying goodbye",
-     "language": "英语",
-     "genre": "pop",
-     "jury_vote": 83.0,
-     "tele_vote": 28.0,
-     "score": 56,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 14,
-     "overall_rank": 14
-    },
-    {
-     "eid": 9,
-     "member": "柠",
-     "member_id": 19,
-     "artist": "Rene Miller",
-     "song": "Concrete Heart",
-     "language": "英语",
-     "genre": "pop",
-     "jury_vote": 79.0,
-     "tele_vote": 0.0,
-     "score": 79.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 11,
-     "overall_rank": 11
-    },
-    {
-     "eid": 10,
-     "member": "包",
-     "member_id": 20,
-     "artist": "See You Next Year, EKKSTACY, Mike Dean",
-     "song": "I Guess",
-     "language": "英语",
-     "genre": "alternative",
-     "jury_vote": 33.0,
-     "tele_vote": 8.0,
-     "score": 41.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 16,
-     "overall_rank": 16
-    },
-    {
-     "eid": 11,
-     "member": "星",
-     "member_id": 45,
-     "artist": "Emperor X",
-     "song": "Freeway in Heaven",
-     "language": "英语",
-     "genre": "rock",
-     "jury_vote": 60.0,
-     "tele_vote": 24.0,
-     "score": 84.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 6,
-     "overall_rank": 6
-    },
-    {
-     "eid": 12,
-     "member": "汞",
-     "member_id": 103,
-     "artist": "William Michael Morgan",
-     "song": "In Walked You",
-     "language": "英语",
-     "genre": "country",
-     "jury_vote": 64.0,
-     "tele_vote": 19.0,
-     "score": 83.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 8,
-     "overall_rank": 8
-    },
-    {
-     "eid": 13,
-     "member": "猴",
-     "member_id": 18,
-     "artist": "Raynes",
-     "song": "Drive You Back Home",
-     "language": "英语",
-     "genre": "pop",
-     "jury_vote": 107.0,
-     "tele_vote": 14.0,
-     "score": 121.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 2,
-     "overall_rank": 2
-    },
-    {
-     "eid": 14,
-     "member": "雨",
-     "member_id": 17,
-     "artist": "Joywave",
-     "song": "Buy American",
-     "language": "英语",
-     "genre": "alternative",
-     "jury_vote": 66.0,
-     "tele_vote": 16.0,
-     "score": 82.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 9,
-     "overall_rank": 9
-    },
-    {
-     "eid": 15,
-     "member": "韩",
-     "member_id": 67,
-     "artist": "Stefan",
-     "song": "Seotud Kaed",
-     "language": "爱沙尼亚语",
-     "genre": "pop",
-     "jury_vote": 76.0,
-     "tele_vote": 8.0,
-     "score": 84.0,
-     "support_rate": null,
-     "high_rate": null,
-     "is_shadow": false,
-     "rank": 7,
-     "overall_rank": 7
-    },
-    {
      "eid": 16,
-     "member": "羊",
+     "member": "羊妈",
      "member_id": 100,
      "artist": "Best Frenz & Joywave",
      "song": "Flatline",
      "language": "英语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 124.0,
      "tele_vote": 35.0,
      "score": 159.0,
-     "support_rate": null,
+     "support_rate": 10.54,
      "high_rate": null,
      "is_shadow": false,
      "rank": 1,
-     "overall_rank": 1
+     "overall_rank": 1,
+     "voters": 25
+    },
+    {
+     "eid": 13,
+     "member": "猴妈",
+     "member_id": 18,
+     "artist": "Raynes",
+     "song": "Drive You Back Home",
+     "language": "英语",
+     "genre": "Pop",
+     "jury_vote": 107.0,
+     "tele_vote": 14.0,
+     "score": 121.0,
+     "support_rate": 8.02,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 2,
+     "overall_rank": 2,
+     "voters": 18
     },
     {
      "eid": 17,
-     "member": "风",
+     "member": "风妈",
      "member_id": 154,
      "artist": "Haley Blais",
      "song": "The Cabin",
      "language": "英语",
-     "genre": "alternative",
+     "genre": "Alternative",
      "jury_vote": 74.0,
      "tele_vote": 31.0,
      "score": 105.0,
-     "support_rate": null,
+     "support_rate": 6.96,
      "high_rate": null,
      "is_shadow": false,
      "rank": 3,
-     "overall_rank": 3
+     "overall_rank": 3,
+     "voters": 15
+    },
+    {
+     "eid": 7,
+     "member": "芬妈",
+     "member_id": 110,
+     "artist": "Rook Monroe",
+     "song": "Jolie",
+     "language": "英语",
+     "genre": "Pop",
+     "jury_vote": 75.0,
+     "tele_vote": 21.0,
+     "score": 96.0,
+     "support_rate": 6.37,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 4,
+     "overall_rank": 4,
+     "voters": 17
+    },
+    {
+     "eid": 2,
+     "member": "S妈",
+     "member_id": 27,
+     "artist": "CRi",
+     "song": "Astray (feat. Half Moon Run)",
+     "language": "英语",
+     "genre": "Dance",
+     "jury_vote": 57.0,
+     "tele_vote": 34.0,
+     "score": 91.0,
+     "support_rate": 6.03,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 5,
+     "overall_rank": 5,
+     "voters": 15
+    },
+    {
+     "eid": 11,
+     "member": "星妈",
+     "member_id": 45,
+     "artist": "Emperor X",
+     "song": "Freeway in Heaven",
+     "language": "英语",
+     "genre": "Rock",
+     "jury_vote": 60.0,
+     "tele_vote": 24.0,
+     "score": 84.0,
+     "support_rate": 5.57,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 6,
+     "overall_rank": 6,
+     "voters": 15
+    },
+    {
+     "eid": 15,
+     "member": "韩妈",
+     "member_id": 67,
+     "artist": "Stefan",
+     "song": "Seotud Käed",
+     "language": "爱沙尼亚语",
+     "genre": "Pop",
+     "jury_vote": 76.0,
+     "tele_vote": 8.0,
+     "score": 84.0,
+     "support_rate": 5.57,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 7,
+     "overall_rank": 7,
+     "voters": 13
+    },
+    {
+     "eid": 12,
+     "member": "汞妈",
+     "member_id": 103,
+     "artist": "William Michael Morgan",
+     "song": "In Walked You",
+     "language": "英语",
+     "genre": "Country",
+     "jury_vote": 64.0,
+     "tele_vote": 19.0,
+     "score": 83.0,
+     "support_rate": 5.5,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 8,
+     "overall_rank": 8,
+     "voters": 14
+    },
+    {
+     "eid": 14,
+     "member": "雨妈",
+     "member_id": 17,
+     "artist": "Joywave",
+     "song": "Buy American",
+     "language": "英语",
+     "genre": "Alternative",
+     "jury_vote": 66.0,
+     "tele_vote": 16.0,
+     "score": 82.0,
+     "support_rate": 5.44,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 9,
+     "overall_rank": 9,
+     "voters": 15
+    },
+    {
+     "eid": 0,
+     "member": "泰妈",
+     "member_id": 131,
+     "artist": "Comastatic",
+     "song": "back4blood",
+     "language": "英语",
+     "genre": "Rock",
+     "jury_vote": 55.0,
+     "tele_vote": 26.0,
+     "score": 81.0,
+     "support_rate": 5.37,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 10,
+     "overall_rank": 10,
+     "voters": 15
+    },
+    {
+     "eid": 9,
+     "member": "柠妈",
+     "member_id": 19,
+     "artist": "Rene Miller",
+     "song": "Concrete Heart",
+     "language": "英语",
+     "genre": "Pop",
+     "jury_vote": 79.0,
+     "tele_vote": 0.0,
+     "score": 79.0,
+     "support_rate": 5.24,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 11,
+     "overall_rank": 11,
+     "voters": 13
+    },
+    {
+     "eid": 5,
+     "member": "瑞妈",
+     "member_id": 135,
+     "artist": "Susanne Sundfør",
+     "song": "leikara ljóð",
+     "language": "冰岛语",
+     "genre": "Alternative",
+     "jury_vote": 47.0,
+     "tele_vote": 30.0,
+     "score": 77.0,
+     "support_rate": 5.11,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 12,
+     "overall_rank": 12,
+     "voters": 13
+    },
+    {
+     "eid": 4,
+     "member": "威妈",
+     "member_id": 7,
+     "artist": "Sam Dew",
+     "song": "Thinking of You",
+     "language": "英语",
+     "genre": "R&B/Soul",
+     "jury_vote": 45.0,
+     "tele_vote": 24.0,
+     "score": 69.0,
+     "support_rate": 4.58,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 13,
+     "overall_rank": 13,
+     "voters": 11
+    },
+    {
+     "eid": 8,
+     "member": "狼妈",
+     "member_id": 113,
+     "artist": "Thomas Headon",
+     "song": "not saying goodbye",
+     "language": "英语",
+     "genre": "Pop",
+     "jury_vote": 83.0,
+     "tele_vote": 28.0,
+     "score": 55.5,
+     "support_rate": 3.68,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 14,
+     "overall_rank": 14,
+     "voters": 19
+    },
+    {
+     "eid": 6,
+     "member": "晕妈",
+     "member_id": 117,
+     "artist": "Alvaro De Luna",
+     "song": "Sin Antifaz (feat. Rayden)",
+     "language": "西班牙语",
+     "genre": "Pop",
+     "jury_vote": 49.0,
+     "tele_vote": 5.0,
+     "score": 54.0,
+     "support_rate": 3.58,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 15,
+     "overall_rank": 15,
+     "voters": 8
+    },
+    {
+     "eid": 10,
+     "member": "包妈",
+     "member_id": 20,
+     "artist": "See You Next Year, EKKSTACY & Mike Dean",
+     "song": "I Guess",
+     "language": "英语",
+     "genre": "Alternative",
+     "jury_vote": 33.0,
+     "tele_vote": 8.0,
+     "score": 41.0,
+     "support_rate": 2.72,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 16,
+     "overall_rank": 16,
+     "voters": 12
+    },
+    {
+     "eid": 3,
+     "member": "杰妈",
+     "member_id": 156,
+     "artist": "Hannah Grace",
+     "song": "Closer",
+     "language": "英语",
+     "genre": "Pop",
+     "jury_vote": 30.0,
+     "tele_vote": 7.0,
+     "score": 37.0,
+     "support_rate": 2.45,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 17,
+     "overall_rank": 17,
+     "voters": 9
+    },
+    {
+     "eid": 1,
+     "member": "锴妈",
+     "member_id": 12,
+     "artist": "Aaron Childs",
+     "song": "No Rewrites",
+     "language": "英语",
+     "genre": "Funk",
+     "jury_vote": 36.0,
+     "tele_vote": 18.0,
+     "score": 27,
+     "support_rate": 1.79,
+     "high_rate": null,
+     "is_shadow": false,
+     "rank": 18,
+     "overall_rank": 18,
+     "voters": 13
     }
    ],
    "votes": {
@@ -1741,7 +1890,7 @@
     ],
     "voters": [
      {
-      "voter": "E",
+      "voter": "E妈",
       "type": "jury",
       "points": {
        "1": 1,
@@ -1757,7 +1906,7 @@
       }
      },
      {
-      "voter": "S",
+      "voter": "S妈",
       "type": "jury",
       "points": {
        "0": 2,
@@ -1773,7 +1922,7 @@
       }
      },
      {
-      "voter": "包",
+      "voter": "包妈",
       "type": "jury",
       "points": {
        "0": 1,
@@ -1789,7 +1938,7 @@
       }
      },
      {
-      "voter": "奶",
+      "voter": "奶妈",
       "type": "jury",
       "points": {
        "0": 5,
@@ -1805,7 +1954,7 @@
       }
      },
      {
-      "voter": "威",
+      "voter": "威妈",
       "type": "jury",
       "points": {
        "1": 12,
@@ -1821,7 +1970,7 @@
       }
      },
      {
-      "voter": "星",
+      "voter": "星妈",
       "type": "jury",
       "points": {
        "1": 1,
@@ -1837,7 +1986,7 @@
       }
      },
      {
-      "voter": "晕",
+      "voter": "晕妈",
       "type": "jury",
       "points": {
        "7": 6,
@@ -1853,7 +2002,7 @@
       }
      },
      {
-      "voter": "杰",
+      "voter": "杰妈",
       "type": "jury",
       "points": {
        "1": 5,
@@ -1869,7 +2018,7 @@
       }
      },
      {
-      "voter": "松",
+      "voter": "松妈",
       "type": "jury",
       "points": {
        "0": 3,
@@ -1885,7 +2034,7 @@
       }
      },
      {
-      "voter": "柠",
+      "voter": "柠妈",
       "type": "jury",
       "points": {
        "0": 4,
@@ -1901,7 +2050,7 @@
       }
      },
      {
-      "voter": "汞",
+      "voter": "汞妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -1917,7 +2066,7 @@
       }
      },
      {
-      "voter": "泰",
+      "voter": "泰妈",
       "type": "jury",
       "points": {
        "1": 1,
@@ -1933,7 +2082,7 @@
       }
      },
      {
-      "voter": "猴",
+      "voter": "猴妈",
       "type": "jury",
       "points": {
        "0": 12,
@@ -1949,7 +2098,7 @@
       }
      },
      {
-      "voter": "瑞",
+      "voter": "瑞妈",
       "type": "jury",
       "points": {
        "0": 12,
@@ -1965,7 +2114,7 @@
       }
      },
      {
-      "voter": "羊",
+      "voter": "羊妈",
       "type": "jury",
       "points": {
        "0": 1,
@@ -1981,7 +2130,7 @@
       }
      },
      {
-      "voter": "芬",
+      "voter": "芬妈",
       "type": "jury",
       "points": {
        "0": 8,
@@ -1997,7 +2146,7 @@
       }
      },
      {
-      "voter": "萌",
+      "voter": "萌妈",
       "type": "jury",
       "points": {
        "2": 6,
@@ -2013,7 +2162,7 @@
       }
      },
      {
-      "voter": "雨",
+      "voter": "雨妈",
       "type": "jury",
       "points": {
        "4": 12,
@@ -2029,7 +2178,7 @@
       }
      },
      {
-      "voter": "韩",
+      "voter": "韩妈",
       "type": "jury",
       "points": {
        "0": 1,
@@ -2045,7 +2194,7 @@
       }
      },
      {
-      "voter": "风",
+      "voter": "风妈",
       "type": "jury",
       "points": {
        "1": 1,
@@ -2061,7 +2210,7 @@
       }
      },
      {
-      "voter": "T",
+      "voter": "T妈",
       "type": "tele",
       "points": {
        "0": 8,
@@ -2077,7 +2226,7 @@
       }
      },
      {
-      "voter": "兔",
+      "voter": "兔妈",
       "type": "tele",
       "points": {
        "0": 10,
@@ -2093,7 +2242,7 @@
       }
      },
      {
-      "voter": "城",
+      "voter": "城妈",
       "type": "tele",
       "points": {
        "2": 6,
@@ -2109,7 +2258,7 @@
       }
      },
      {
-      "voter": "布",
+      "voter": "布妈",
       "type": "tele",
       "points": {
        "0": 4,
@@ -2125,7 +2274,7 @@
       }
      },
      {
-      "voter": "音",
+      "voter": "音妈",
       "type": "tele",
       "points": {
        "1": 5,
@@ -2141,7 +2290,7 @@
       }
      },
      {
-      "voter": "鸽",
+      "voter": "鸽妈",
       "type": "tele",
       "points": {
        "0": 4,
