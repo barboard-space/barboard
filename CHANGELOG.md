@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-06-25] — 第十三届（Qiqihar 2023）数据层导入
+
+### Added
+- **第 13 届数据层**：`scripts/parse_bv_edition13.py` → `data/barvision/barvision-2023/regular-13.json`。2023 重启新格式：三场 SF1/SF2/GF（27 首→半决赛各前 9 晋级→决赛 18），jury+tele 逐票（eid 键）。SF 读干净 CSV、GF 读 Grand Final 总表；半决赛 jury=本场选送者/tele=其余、决赛 jury20+观众6（音城布兔T鸽）；狼/锴 50% 折算（小分折前、score 折后）；总排名 1–27；含 language/genre、Q-NQ。校验全过（GF 冠军 羊159、12 分摘要对齐 Notion）。收录 2023 主视觉资产。
+- **⚠️ 仅数据层**：2023+ 详情页/渲染（主题化 hero + 数据组件 + jury/tele 拆分计分板 + 参赛名单/规则板块 + 成员页 SF→GF 收敛）**待建**，见 CLAUDE.md #156。
+
+---
+
 ## [2026-06-25] — 导出按钮整合到标题行 + 完整记录含成绩列表 + 导出卡居中/样式打磨
 
 ### Added
