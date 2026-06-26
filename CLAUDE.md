@@ -51,6 +51,7 @@
 
 ### 待建页面（按优先级）
 - **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**下一步：第 16 届（Chongqing 2026，进行中）赛后导入**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
+- **⭐ 第 16 届（Chongqing 2026，进行中）「本届实时更新页」（新需求，下一会话）**：与现有 `barvision/2026/events.html`（赛事详情：规则/赛程/EmailJS 报名表，见 #108–#112/#127）**分开**，新建一个**实时更新/动态页**，记录：① 截至目前的**报名情况**（已报名成员/曲目，随报名滚动更新）；② 各**办海选大妈的海选进展**（哪些成员在办海选、各海选状态/时间线——参考 ed15 `regular-15.json` 的 `auditions` 结构 + #163 「海选阶段」section 渲染）。③ 这些动态条目**同步到首页 updates**（`data/main-page/updates.json` → index.html `renderUpdates()`，见「BBL 动态更新架构」+ #31/#42 `show_after` 字段）。建议数据驱动（如 `data/barvision/barvision-2026/live.json`）；页面/数据 schema 待与用户敲定。
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
