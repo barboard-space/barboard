@@ -71,6 +71,10 @@
         .join('<span class="bvr-joint-sep">/</span>');
     }
     var m = DATA && DATA.members && DATA.members[nick];
+    // 外部投票人（非榜吧成员，如 Watermelonnew）：弱化、无 @、无链接、无 tooltip
+    if (m && m.external) {
+      return '<span class="bvr-ext">' + esc(nick) + '</span>';
+    }
     // 未认领（混淆曲赛后无人认领）：弱化、无 @、链接到伪成员页 member/0.html
     if (m && m.unclaimed) {
       return '<a class="member member--unclaimed" href="../../member/' + m.id + '.html" data-nickname="'
@@ -287,6 +291,8 @@
       padding:0 4px; margin-left:6px; color:var(--clr-text-3); font-style:normal; }
     .member--unclaimed { color:var(--clr-text-3); }
     .member--unclaimed:hover { color:var(--clr-text-2); }
+    /* 外部投票人（非榜吧成员）：弱化斜体、无链接、无 tooltip */
+    .bvr-ext { color:var(--clr-text-3); font-style:italic; }
     /* 计分板内的混淆曲行：弱化（仍显示其得票），选送者显示斜体「匿名」 */
     .bvr-mtx tbody tr.bvr-mtx-row--shadow td { color:var(--clr-text-3) !important; }
     .bvr-anon, .bvr-anon .member { font-style:italic; }
@@ -583,7 +589,7 @@
     .bvr-el__genre { font-size:11px; color:var(--clr-text-3); white-space:nowrap; }
 
     /* ===== 总成绩单（年度制） ===== */
-    .bvr-sb { width:100%; border-collapse:separate; border-spacing:0; font-size:13px; min-width:1000px; }
+    .bvr-sb { width:100%; border-collapse:separate; border-spacing:0; font-size:13px; min-width:1120px; }
     .bvr-sb th { font-family:var(--font-body); font-weight:700; font-size:11px; letter-spacing:0.04em;
       text-transform:uppercase; color:var(--clr-text-2); padding:8px 12px; background:var(--clr-surface);
       border-bottom:1px solid var(--clr-border); white-space:nowrap; text-align:center; }
@@ -604,9 +610,11 @@
     /* 歌手（上，主行）/ 歌名（下，--clr-text-2） */
     .bvr-sb-artist { display:block; font-weight:700; color:var(--clr-text); }
     .bvr-sb-title { display:block; font-size:12px; color:var(--clr-text-2); margin-top:1px; }
-    .bvr-sb-pts { font-family:var(--font-body); font-weight:700; font-size:15px; color:var(--clr-text); }
+    .bvr-sb-pts { font-family:var(--font-body); font-weight:700; font-size:14px; color:var(--clr-text); }  /* GF points 字号与 SF(.is-sf 14px) 一致；颜色/字重不变 */
     .bvr-sb-rate { font-family:var(--font-mono); font-size:12px; color:var(--clr-text-2); }
     .bvr-sb-vot { font-family:var(--font-mono); font-size:12px; color:var(--clr-text-3); }
+    /* 观众票（20 票制届：观众分右侧的原始票数） */
+    .bvr-sb-raw { margin-left:6px; font-family:var(--font-mono); font-size:10px; color:var(--clr-text-3); }
     .bvr-sb-pts.is-sf { color:var(--clr-text-2); font-weight:600; font-size:14px; }
     .bvr-sb-rate.is-sf, .bvr-sb-vot.is-sf { color:var(--clr-text-3); }
     /* Jury/Tele 与 Rate 同色（GF=text-2 / SF=text-3），不透明 */
@@ -966,13 +974,14 @@
         : esc(v.voter);
       return '<th class="' + (only === 'tele' ? 'vt' : 'vj') + (i === 0 ? ' vsep' : '') + '">' + lbl + '</th>';
     }).join('') + '</tr>';
+    var voteMode = (only === 'tele' && m.tele_mode === 'votes');  // 观众 20 票制：无 12 分金标，仅显票数
     var body = recips.map(function (e) {
       var cells = voters.map(function (v, i) {
         var sep = i === 0 ? ' vsep' : '';
         if (only === 'jury' && v.voter === e.member) return '<td class="self' + sep + '"></td>';  // 自投格
         var p = v.points[e.eid != null ? e.eid : e.member];
         if (p == null || p === 0) return '<td class="pt' + sep + '"></td>';
-        var hi = (v.top != null) ? (e.eid === v.top) : (p === 12);
+        var hi = voteMode ? false : ((v.top != null) ? (e.eid === v.top) : (p === 12));
         return '<td class="pt' + (hi ? ' pt--12' : '') + sep + '">' + p + '</td>';
       }).join('');
       var sub = only === 'jury' ? e.jury_vote : e.tele_vote;
@@ -1001,7 +1010,9 @@
     (m.entries || []).forEach(function (e) { byEid[e.eid != null ? e.eid : e.member] = e; });  // eid 键(三四届)兼容昵称键(一二届)
     var got = {};  // eid -> {jury:[], tele:[]}
     var maxMode = (m.votes.voters || []).some(function (v) { return v.top != null; });  // 九届：12 分=投票人最高正式曲
+    var voteMode = m.tele_mode === 'votes';  // 2024+ 决赛观众 20 票制：观众不设 12 分，仅评委计入
     m.votes.voters.forEach(function (v) {
+      if (voteMode && v.type === 'tele') return;
       if (maxMode) {
         if (v.top != null) { (got[v.top] = got[v.top] || { jury: [], tele: [] })[v.type].push(v.voter); }
       } else {
@@ -1128,6 +1139,10 @@
       out += '<div class="bvr-links__grp fade-up"><h3 class="bvr-links__h">直播回放</h3>' +
         '<div class="bvr-links__list">' + L.replays.map(row).join('') + '</div></div>';
     }
+    if (L.recaps && L.recaps.length) {
+      out += '<div class="bvr-links__grp fade-up"><h3 class="bvr-links__h">赛事回顾</h3>' +
+        '<div class="bvr-links__list">' + L.recaps.map(row).join('') + '</div></div>';
+    }
     if (L.playlists && L.playlists.length) {
       var subs = L.playlists.map(function (p) {
         return '<div class="bvr-links__sub"><h4 class="bvr-links__subh">' + esc(p.platform) + '</h4>' +
@@ -1160,28 +1175,56 @@
     });
     rows.sort(function (a, b) { return a.ov - b.ov; });
 
-    // 各列最大值（Jury/Tele/Voters，GF 与 SF 各自统计）→ 高亮为 --clr-text
-    function maxOf(list, key) {
+    // 每场每首歌的评委/观众投票人数（给正分的人数，按 type 计）→ 计分板「评委数 / 观众数」两列
+    function voterCounts(m) {
+      var map = {};
+      (m.entries || []).forEach(function (e) { map[String(e.eid)] = { j: 0, t: 0 }; });
+      (m.votes.voters || []).forEach(function (v) {
+        Object.keys(v.points || {}).forEach(function (k) {
+          if ((v.points[k] || 0) > 0 && map[k]) { if (v.type === 'tele') map[k].t++; else map[k].j++; }
+        });
+      });
+      return map;
+    }
+    var gfVC = voterCounts(gf), sfVC = { SF1: voterCounts(sf.SF1), SF2: voterCounts(sf.SF2) };
+    function vcOf(r, which) {  // 该行 GF / 半决赛该首的 {j,t}（无则 null）
+      if (which === 'gf') return r.gf ? gfVC[String(r.gf.eid)] : null;
+      return r.sf ? sfVC[r.sf.code][String(r.sf.e.eid)] : null;
+    }
+    // 各列最大值（Jury / Tele / 评委数 / 观众数，GF 与 SF 各自统计）→ 高亮为 --clr-text
+    function maxOf(fn) {
       var m = null;
-      list.forEach(function (e) { if (e && e[key] != null && (m === null || e[key] > m)) m = e[key]; });
+      rows.forEach(function (r) { var v = fn(r); if (v != null && (m === null || v > m)) m = v; });
       return m;
     }
-    var gfEs = rows.map(function (r) { return r.gf; }).filter(Boolean);
-    var sfEs = rows.map(function (r) { return r.sf ? r.sf.e : null; }).filter(Boolean);
-    var gfMax = { jury: maxOf(gfEs, 'jury_vote'), tele: maxOf(gfEs, 'tele_vote'), vot: maxOf(gfEs, 'voters') };
-    var sfMax = { jury: maxOf(sfEs, 'jury_vote'), tele: maxOf(sfEs, 'tele_vote'), vot: maxOf(sfEs, 'voters') };
+    var gfMax = {
+      jury: maxOf(function (r) { return r.gf ? r.gf.jury_vote : null; }),
+      tele: maxOf(function (r) { return r.gf ? r.gf.tele_vote : null; }),
+      jvot: maxOf(function (r) { var c = vcOf(r, 'gf'); return c ? c.j : null; }),
+      tvot: maxOf(function (r) { var c = vcOf(r, 'gf'); return c ? c.t : null; }),
+    };
+    var sfMax = {
+      jury: maxOf(function (r) { return r.sf ? r.sf.e.jury_vote : null; }),
+      tele: maxOf(function (r) { return r.sf ? r.sf.e.tele_vote : null; }),
+      jvot: maxOf(function (r) { var c = vcOf(r, 'sf'); return c ? c.j : null; }),
+      tvot: maxOf(function (r) { var c = vcOf(r, 'sf'); return c ? c.t : null; }),
+    };
 
     function rate(v) { return v == null ? '–' : (Number(v).toFixed(2) + '%'); }
-    // 一组 5 列：Points / Rate / Jury / Tele / Voters（Jury/Tele/Voters 列最大值加 is-max 高亮）
-    function stat5(e, cls, mx) {
-      if (!e) return ['bvr-sb-pts', 'bvr-sb-rate', 'bvr-sb-jury', 'bvr-sb-tele', 'bvr-sb-vot']
+    // 一组 6 列：Points / Rate / Jury / 评委数 / Tele(+观众票) / 观众数（数值列最大值加 is-max 高亮）
+    function stat6(e, cls, mx, vc) {
+      if (!e) return ['bvr-sb-pts', 'bvr-sb-rate', 'bvr-sb-jury', 'bvr-sb-vot', 'bvr-sb-tele', 'bvr-sb-vot']
         .map(function (c) { return '<td class="' + c + ' ' + cls + '">–</td>'; }).join('');
       function mc(val, key) { return (mx && val != null && val === mx[key]) ? ' is-max' : ''; }
+      // 观众分（20 票制届）右侧附「观众票」原始票数（左观众分、右票数）
+      var teleRaw = (e.tele_raw != null) ? '<span class="bvr-sb-raw">' + e.tele_raw + '票</span>' : '';
+      var jv = vc ? vc.j : null, tv = vc ? vc.t : null;
       return '<td class="bvr-sb-pts ' + cls + '">' + fmtScore(e.score) + '</td>' +
         '<td class="bvr-sb-rate ' + cls + '">' + rate(e.support_rate) + '</td>' +
         '<td class="bvr-sb-jury ' + cls + mc(e.jury_vote, 'jury') + '">' + fmtScore(e.jury_vote) + '</td>' +
-        '<td class="bvr-sb-tele ' + cls + mc(e.tele_vote, 'tele') + '">' + fmtScore(e.tele_vote) + '</td>' +
-        '<td class="bvr-sb-vot ' + cls + mc(e.voters, 'vot') + '">' + (e.voters != null ? e.voters : '–') + '</td>';
+        '<td class="bvr-sb-vot ' + cls + mc(jv, 'jvot') + '">' + (jv != null ? jv : '–') + '</td>' +
+        '<td class="bvr-sb-tele ' + cls + mc(e.tele_vote, 'tele') + '">' + fmtScore(e.tele_vote) + teleRaw + '</td>' +
+        '<td class="bvr-sb-vot ' + cls + mc(tv, 'tvot') + '">' + (tv != null ? tv : '–') + '</td>';
     }
     var body = rows.map(function (r) {
       var medal = r.ov <= 3 ? ' bvr-sb-row--' + r.ov : '';
@@ -1195,16 +1238,16 @@
         '<td class="bvr-sb-song">' +
         '<span class="bvr-sb-artist">' + esc(fmtArtist(r.artist)) + '</span>' +
         '<span class="bvr-sb-title">' + esc(r.song) + '</span></td>' +
-        stat5(r.gf, 'is-gf', gfMax) +
+        stat6(r.gf, 'is-gf', gfMax, vcOf(r, 'gf')) +
         '<td class="bvr-sb-sf">' + sfb + '</td>' +
-        stat5(r.sf ? r.sf.e : null, 'is-sf', sfMax) + '</tr>';
+        stat6(r.sf ? r.sf.e : null, 'is-sf', sfMax, vcOf(r, 'sf')) + '</tr>';
     }).join('');
     var head = '<thead>' +
       '<tr><th class="bvr-sb-rank" rowspan="2">#</th><th class="bvr-sb-by" rowspan="2">选送者</th><th class="bvr-sb-song" rowspan="2">参赛作品</th>' +
-      '<th class="bvr-sb-grp bvr-sb-grp--gf" colspan="5">Grand Final</th>' +
-      '<th class="bvr-sb-grp bvr-sb-grp--sf" colspan="6">Semi-Final</th></tr>' +
-      '<tr><th class="bvr-sb-gfh">Points</th><th class="bvr-sb-gfh">Rate</th><th class="bvr-sb-gfh">Jury</th><th class="bvr-sb-gfh">Tele</th><th class="bvr-sb-gfh">Voters</th>' +
-      '<th class="bvr-sb-sfh"></th><th>Points</th><th>Rate</th><th>Jury</th><th>Tele</th><th>Voters</th></tr></thead>';
+      '<th class="bvr-sb-grp bvr-sb-grp--gf" colspan="6">Grand Final</th>' +
+      '<th class="bvr-sb-grp bvr-sb-grp--sf" colspan="7">Semi-Final</th></tr>' +
+      '<tr><th class="bvr-sb-gfh">Points</th><th class="bvr-sb-gfh">Rate</th><th class="bvr-sb-gfh">Jury</th><th class="bvr-sb-gfh">Voters</th><th class="bvr-sb-gfh">Tele</th><th class="bvr-sb-gfh">Voters</th>' +
+      '<th class="bvr-sb-sfh"></th><th>Points</th><th>Rate</th><th>Jury</th><th>Voters</th><th>Tele</th><th>Voters</th></tr></thead>';
     var t = theme(d) || {};
     var vars = '--bvt-c1:' + (t.c1 || '#f0609c') + ';--bvt-c2l:' + (t.c2l || '#fbb1a9') + ';';
     function pollItem(label, n) { return '<span class="bvr-sb-poll__it"><span class="bvr-sb-poll__t">' + esc(label) + '</span><span class="bvr-sb-poll__n">' + n + '</span></span>'; }

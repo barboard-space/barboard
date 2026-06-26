@@ -4,6 +4,32 @@
 
 ---
 
+## [2026-06-25] — 第 14 届(Tonghua 2024)赛果数据 + 20 票观众投票制渲染适配
+
+### Added
+- **第 14 届 Tonghua 2024 赛果数据**：`scripts/parse_bv_edition14.py` → `data/barvision/barvision-2024/regular-14.json`（SF1/SF2/GF 三场）。冠 S妈 Pretender 266（评 123+观 143，破纪录、S妈首冠）/亚 雨妈 Eyes Wide 259/季 A妈 Honeycrash 209；overall 1–28；观众总票 520=26×20。半决赛逐票读 `Barvision Tonghua 2024.xlsx`（CSV SF2 漏「雨」列）、语种取自 CSV、GF 读 `24-GF-JURY/TELE.csv`。
+- **`regular-14.json` 文案**：summary（叙事）/ visual_design（通化轨道交通导视主视觉，威妈设计）/ 结构化 rules.sections（含 QQ 音乐行 + 20 票观众投票说明）/ SF1/SF2/GF 三段场次概况 / links（直播回放 2 + 赛事回顾 3 + 歌单 Spotify 3 / 网易云 3）。
+- **总成绩单 GF VOTERS 拆「评委数 / 观众数」两列**（`bv-results-render.js` `scoreboardBlock`：`stat5→stat6`、`voterCounts(m)` 按 type 计、GF 组 colspan 6 / SF 组 colspan 7 / min-width 1120），对标官方 `Scoreboard 2024.png`（忽略 ODD）。GF TELE 列显示「观众分 + 观众票」（如 `143 55票`）。
+- **`linksBlock` 支持 `recaps` 类**（「赛事回顾」组，介于直播回放与歌单之间）。
+
+### Changed
+- **20 票观众投票制渲染分流**：GF match 加 `tele_mode:"votes"`；观众投票人无 `top`。`votingMatrixSingle('tele')` 无 12 分金标、`twelveBlock` 排除 tele（12 Points 仅评委）、`gen_member_pages` 12 分次数排除 tele。半决赛 tele 仍 1-12、正常金标。
+- **外部投票人**：Watermelonnew → 规范「外部」（`members.external=true`），`memberLink` 外部分支 → `.bvr-ext`（弱化斜体、无 @、无链接、无 tooltip）。
+- **CLAUDE.md #157 投票制度更正**：2024 观众分 20 票**无每首上限、可全投一首**（原写"≤15 票"作废）；2025 起每首≤10 票；20 票制仅决赛 GF 观众侧，半决赛仍 1-12。
+- **个人主页概览卡「双歌只计较好者」**：年度制同一届有 ≥2 首正式单曲（东道主/协办，如 ed14 羊妈/威妈）→ 概览卡统计（best/avg/top1·3·10/参与场数/twelve/jury_avg + member.html「参加场数」）只计 rank 较好那首；参赛表/走势图仍显示两首（`gen_member_pages.aggregate_barvision` 按 `final` 字段判年度制、按届号去重）。
+- **波妈(id101) handle 全局改名** `ww_micro_微波`→`微波子`（=其 B 站名）：members.csv + member/101.html + regular-14.json + editions-index.json + index.html + member.html + hof_data.json 共 7 处；昵称「波妈」不变。
+
+### Style
+- **最终赛果计分板 GF Points 字号**与 SF Points 一致（`.bvr-sb-pts` 15px→14px；颜色 `--clr-text`/字重不变；桌面+手机；2023/2024 共用渲染均生效）。
+
+### Fixed
+- `gen_member_pages._emit_bv` 的 12 分次数对 `tele_mode==='votes'` 的届排除观众，避免观众原始票数恰为 12 被误计。
+
+### Docs
+- CLAUDE.md 新增 #161（第 14 届导入全要点）；更正 #157 投票制度；更新「待建」（1–14 届已导入，下一步第 15 届 Jinzhong 2025）。
+
+---
+
 ## [2026-06-25] — 第 14 届(Tonghua 2024)主视觉/主题/hero + 移动端悬浮 TOC + 文案
 
 ### Added

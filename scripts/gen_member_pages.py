@@ -38,12 +38,16 @@ def _emit_bv(per, ed, m, e, series, rank, final=None):
     if not nick:
         return
     voters = m.get("votes", {}).get("voters", [])
-    # 12 分次数：九届(max 模式)=投票人最高正式曲 v.top；其余=points==12(eid 键/一二届昵称键)
+    # 12 分次数：九届(max 模式)=投票人最高正式曲 v.top；其余=points==12(eid 键/一二届昵称键)。
+    # 2024+ 决赛观众为 20 票制(tele_mode='votes')——观众不设 12 分，仅评委计入。
+    vote_mode = m.get("tele_mode") == "votes"
     if any(v.get("top") is not None for v in voters):
         twelve = sum(1 for v in voters if v.get("top") == e.get("eid"))
     else:
         _pk = str(e["eid"]) if e.get("eid") is not None else nick
-        twelve = sum(1 for v in voters if v.get("points", {}).get(_pk) == 12)
+        twelve = sum(1 for v in voters
+                     if not (vote_mode and v.get("type") == "tele")
+                     and v.get("points", {}).get(_pk) == 12)
     rec = {
         "year": ed["year"], "edition_no": ed["edition_no"],
         "edition_name": ed["edition_name"], "version": ed["version"],
@@ -100,8 +104,19 @@ def aggregate_barvision(eds):
     for nick, entries in per.items():
         entries.sort(key=lambda x: (x["edition_no"], x["series"]))
         stat = [x for x in entries if not x.get("canceled")]  # 取消组不计入任何统计
-        official = [x for x in stat if not x["is_shadow"]]
+        official_all = [x for x in stat if not x["is_shadow"]]
         shadow = [x for x in stat if x["is_shadow"]]
+        # ⭐ 概览卡统计：同一**年度届**有 2 首正式单曲（东道主/协办双歌，如 ed14 羊妈/威妈）→ 只计成绩较好(rank 最小)那首。
+        # 旧分组制(无 final 字段，每组独立一「场」)不去重；参赛表/走势图仍用全部 entries 显示两首。
+        best_ann, official = {}, []
+        for x in official_all:
+            if x.get("final") is not None:  # 年度制记录（按届号去重）
+                ed = x["edition_no"]
+                if ed not in best_ann or (x["rank"] or 1e9) < (best_ann[ed]["rank"] or 1e9):
+                    best_ann[ed] = x
+            else:
+                official.append(x)
+        official += list(best_ann.values())
         ranks = [x["rank"] for x in official if x["rank"]]
         # Jury 均分（广义 12 分，仅正式单曲）：统计所有 1-12 制投票——2024 前观众分(tele)也是 1-12 制故并入；
         # 2024 起观众分改 20 票制不计。每曲 (12分票总和)/(12分票人数) → 再对各曲求均值（理想 0–12）。
