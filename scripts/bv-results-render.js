@@ -603,7 +603,8 @@
     .bvr-rule__tw { overflow-x:auto; border:1px solid var(--clr-border); border-radius:8px; margin:6px 0 4px;
       scrollbar-width:none; }
     .bvr-rule__tw::-webkit-scrollbar { display:none; }
-    .bvr-rule__tbl, .bvr-rule__score { width:100%; border-collapse:collapse; font-size:13px; }
+    .bvr-rule__tbl, .bvr-rule__score { width:100%; border-collapse:collapse; font-size:13px;
+      -webkit-text-size-adjust:100%; text-size-adjust:100%; }  /* 禁移动端真机文字自动膨胀（#139）：赛程表字号锁 13px、与小标题一致 */
     .bvr-rule__tbl th, .bvr-rule__tbl td { padding:9px 14px; text-align:left; border-bottom:1px solid var(--clr-border);
       border-right:1px solid var(--clr-border); white-space:nowrap; }
     .bvr-rule__tbl tr:last-child th, .bvr-rule__tbl tr:last-child td { border-bottom:none; }
@@ -640,6 +641,7 @@
     .bvr-aud-st--prep { color:var(--clr-gold-light); border-color:color-mix(in srgb, var(--clr-gold-light) 45%, transparent); }
 
     /* ===== 进行中（live）：报名名单 ===== */
+    .bvr-su__by { white-space:nowrap; }  /* 选送者昵称不换行（防真机字号膨胀把「X妈」拆成两行，#168） */
     .bvr-su__by .member { font-weight:600; }
     .bvr-su__genre { font-size:11px; color:var(--clr-text-3); white-space:nowrap; }
     /* Candidates / Wildcards 两表固定列宽，使列对齐一致（table-layout:fixed，长歌名自动换行） */

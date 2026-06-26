@@ -4,6 +4,27 @@
 
 ---
 
+## [2026-06-27] — Barvision 数据库化：趣味奖项自动计算 + 重做 hof.html + 新建 stats.html
+
+### Added
+- **趣味奖项自动计算**（`scripts/gen_bv_stats.py` 新增 `build_awards` → `bv-stats.json` 的 `awards`）：11 项自动算（数据截至第 15 届）——出道即巅峰（首秀夺冠：猴妈/A妈/羊妈）、卧薪尝胆（首秀→首冠跨 21 场：锴妈）、实红艺人（连冠 2 届：包妈/雨妈）、小众之星（A 组夺冠 2 次：包妈/雨妈）、雨露均沾（连续参赛 15 届：包妈/雨妈/锴妈）、长盛不衰（连续前十 8 场）、跳水天后（相邻场次跌幅 24 名：萌妈）、极限卡位（同届异场同名次，12 项）、独家冠名（同名次 6 首：城妈）、即刻开吸（混淆落后正式 17 名：雨妈）、全世界都在讲中国话（华语 14 首：院妈）。口径：「相邻场次」遇缺席整届即中断（届号差 ≥2）；混淆不计正式、匿名 id 0 不计；得主多与旧手工版 `bv_hof_data.json` 不同（旧版过时/有误，以全量自动数据为准）。
+- **per-edition `overview`**（`build_overview`）：每届 届号/年份/赛事/城市/赛制(分组制·年度制)/参赛人数/曲目数/冠军，供 stats.html 历届总览。
+- **`pioneer`**（先锋奖，唯一手工项）写入 `bv-stats.json`，hof 读单一数据源。
+- **新建 `barvision/stats.html`**（数据中心）：历届成绩总览（点届号进详情页）+ 大妈选送排行榜（可点表头排序：参与场数/夺冠/前三/前十/12分/平均名次/最佳名次）+ 大数据查询（成员/歌手/歌曲/语种四维切换 + 即时检索全部 661 首）。电蓝/紫数据主题 hero + Notion 右侧目录 + fade-up。合报歌曲向不拆、匿名不入排行。
+
+### Changed
+- **重做 `barvision/hof.html`**：改读 `bv-stats.json`（弃用手工 `bv_hof_data.json`），对齐新 bvr 设计（金/紫 hero + section-label + 卡/表 + Notion 右侧目录 + fade-up）。5 板块：吧视先锋奖 / 历届冠军领奖台（15 届 × 各组前三，金银铜）/ 数据纪录 / 赛季纪录 / 趣味奖项。标注「数据截至第 15 届」，仅常规版。成员链接从 `bv-stats.members` 取 handle（不再硬编码 MEMBER_MAP）。
+- **nav 互链**：barvision.html hero 加「Barvision Stats」按钮；footer（nav.js + partials/footer.html）Barvision 列加 Stats。后改三按钮名为「Barvision 2026 / 名人堂 / 数据中心」，`.bv-hero__actions` 由 `flex-wrap:wrap` → `nowrap` 强制并排（桌面 + 移动端 360px 均同行不溢出，已验证）。
+
+- **stats.html 优化（同日）**：① 历届总览删冗余「城市」列（edition_name 2023+ 已含城市）、「主办」改为「赛事」cell 副行（@host 链接）、整行可点进详情页；② 选送排行榜加 # 序号列（前三金/银/铜）、表头三态排序（默认榜=参与场数降序，与详情页一致）、当前排序计数列加迷你条形图；③ 查询结果按届号→名次排序、命中关键词 `<mark>` 高亮、ed1 单场次标「综合赛」、空查询给「热门」示例 chip（成员/歌手/语种维度）。
+
+### Fixed
+- stats 表 `thead` 原 `position:sticky` 置于 `overflow-x:auto` 容器内 → 滚动时表头与数据行重叠（sticky 相对滚动容器而非视口）；已移除 sticky thead。
+- stats 排行榜 # 序号列金银铜失效：`.st-tbl .st-pos`(0,2,0) 覆盖 `.st-pos--N`(0,1,0) → 改为 `.st-tbl .st-pos--N` 提权（同类 specificity 坑，参 #36）。
+- **barvision/2026.html 手机端（bv-results-render.js）**：① SCHEDULE 等规则表 `.bvr-rule__tbl`/`.bvr-rule__score` 真机字号过大 → 补 `text-size-adjust:100%`（#139 同款，禁 iOS 文字膨胀，锁 13px 与小标题一致）；② 选送名单 `.bvr-su__by` 选送者「X妈」真机被拆两行 → 加 `white-space:nowrap`。两者预览测得正常、仅真机膨胀，已用 cache-bust 重载模块验证 computed（tblTSA=100% / nowrap）。
+
+---
+
 ## [2026-06-26] — Barvision 数据基座 bv-stats.json + 个人页统计规则 + ed16 徽章/筛选自动化
 
 ### Added

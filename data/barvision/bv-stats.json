@@ -1,5 +1,520 @@
 {
  "data_through": 15,
+ "pioneer": {
+  "nickname": "萌妈",
+  "member_id": 125,
+  "handle": "绿荫夏语",
+  "desc": "2019 年，@绿荫夏语在榜吧发起第一届 Barvision 歌曲大赛，为小众音乐爱好者搭建了一个展示舞台，也由此开启了 Barvision 的历史。"
+ },
+ "overview": [
+  {
+   "edition_no": 1,
+   "year": 2019,
+   "edition_name": "The 1st Barvision",
+   "cn_name": "第一届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": null,
+   "host": null,
+   "format": "grouped",
+   "members": 14,
+   "songs": 14,
+   "matches": 1,
+   "champions": [
+    {
+     "group": "",
+     "venue": "",
+     "ids": [
+      "18"
+     ],
+     "nickname": "猴妈",
+     "artist": "Parachute",
+     "song": "Had It All",
+     "score": 128
+    }
+   ]
+  },
+  {
+   "edition_no": 2,
+   "year": 2019,
+   "edition_name": "The 2nd Barvision",
+   "cn_name": "第二届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 19,
+   "songs": 35,
+   "matches": 2,
+   "champions": [
+    {
+     "group": "",
+     "venue": "",
+     "ids": [
+      "295"
+     ],
+     "nickname": "田妈",
+     "artist": "The Brummies & Kacey Musgraves",
+     "song": "Drive Away",
+     "score": 140.44
+    }
+   ]
+  },
+  {
+   "edition_no": 3,
+   "year": 2019,
+   "edition_name": "The 3rd Barvision",
+   "cn_name": "第三届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 22,
+   "songs": 41,
+   "matches": 2,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "20"
+     ],
+     "nickname": "包妈",
+     "artist": "Bob Moses",
+     "song": "Selling Me Sympathy",
+     "score": 119
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "135"
+     ],
+     "nickname": "瑞妈",
+     "artist": "Tame Impala",
+     "song": "Borderline",
+     "score": 115
+    }
+   ]
+  },
+  {
+   "edition_no": 4,
+   "year": 2019,
+   "edition_name": "The 4th Barvision",
+   "cn_name": "第四届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 25,
+   "songs": 45,
+   "matches": 2,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "141"
+     ],
+     "nickname": "草妈",
+     "artist": "Hatchie",
+     "song": "Stay With Me",
+     "score": 149
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "156"
+     ],
+     "nickname": "杰妈",
+     "artist": "Aurora",
+     "song": "The River",
+     "score": 129
+    }
+   ]
+  },
+  {
+   "edition_no": 5,
+   "year": 2019,
+   "edition_name": "The 5th Barvision",
+   "cn_name": "第五届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 24,
+   "songs": 68,
+   "matches": 3,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "20"
+     ],
+     "nickname": "包妈",
+     "artist": "SIRUP",
+     "song": "Evergreen",
+     "score": 96
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "18"
+     ],
+     "nickname": "猴妈",
+     "artist": "Naika",
+     "song": "déjà vu",
+     "score": 84
+    },
+    {
+     "group": "C",
+     "venue": "大众组",
+     "ids": [
+      "17"
+     ],
+     "nickname": "雨妈",
+     "artist": "K. Michelle",
+     "song": "Not A Little Bit",
+     "score": 77
+    }
+   ]
+  },
+  {
+   "edition_no": 6,
+   "year": 2020,
+   "edition_name": "The 6th Barvision",
+   "cn_name": "第六届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 19,
+   "songs": 49,
+   "matches": 3,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "125"
+     ],
+     "nickname": "萌妈",
+     "artist": "Everyone You Know",
+     "song": "She Don't Dance",
+     "score": 101
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "130"
+     ],
+     "nickname": "麦妈",
+     "artist": "Miya Folick",
+     "song": "Thingamajig",
+     "score": 101
+    },
+    {
+     "group": "C",
+     "venue": "大众组",
+     "ids": [
+      "20"
+     ],
+     "nickname": "包妈",
+     "artist": "The Glorious Sons",
+     "song": "Closer to the Sky",
+     "score": 129
+    }
+   ]
+  },
+  {
+   "edition_no": 7,
+   "year": 2020,
+   "edition_name": "The 7th Barvision",
+   "cn_name": "第七届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 25,
+   "songs": 68,
+   "matches": 3,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "17"
+     ],
+     "nickname": "雨妈",
+     "artist": "Indochine",
+     "song": "Station 13",
+     "score": 128
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "120"
+     ],
+     "nickname": "城妈",
+     "artist": "Dardust",
+     "song": "Sublime",
+     "score": 117
+    },
+    {
+     "group": "C",
+     "venue": "大众组",
+     "ids": [
+      "18"
+     ],
+     "nickname": "猴妈",
+     "artist": "Matt Gresham",
+     "song": "Highwire",
+     "score": 83
+    }
+   ]
+  },
+  {
+   "edition_no": 8,
+   "year": 2020,
+   "edition_name": "The 8th Barvision",
+   "cn_name": "第八届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 22,
+   "songs": 40,
+   "matches": 2,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "17"
+     ],
+     "nickname": "雨妈",
+     "artist": "Dorian Electra",
+     "song": "Man to Man",
+     "score": 128
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "153"
+     ],
+     "nickname": "小妈",
+     "artist": "Jessie Ware",
+     "song": "Spotlight",
+     "score": 110
+    }
+   ]
+  },
+  {
+   "edition_no": 9,
+   "year": 2020,
+   "edition_name": "The 9th Barvision",
+   "cn_name": "第九届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 20,
+   "songs": 34,
+   "matches": 2,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "157"
+     ],
+     "nickname": "布妈",
+     "artist": "knxwledge",
+     "song": "minding_my business (Durand Bernarr & Rose Gold)",
+     "score": 116.7
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "19"
+     ],
+     "nickname": "柠妈",
+     "artist": "Isaac Dunbar",
+     "song": "comme des garcons (like the boys)",
+     "score": 91.1
+    }
+   ]
+  },
+  {
+   "edition_no": 10,
+   "year": 2020,
+   "edition_name": "The 10th Barvision",
+   "cn_name": "第十届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 22,
+   "songs": 38,
+   "matches": 2,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "12"
+     ],
+     "nickname": "锴妈",
+     "artist": "Morgan Sulele & Mans Zelmerlow",
+     "song": "Gamle Dager",
+     "score": 88
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "0"
+     ],
+     "nickname": "匿名#5",
+     "artist": "The BossHoss",
+     "song": "Little Help (feat.Mimi＆Josy)",
+     "score": 121
+    }
+   ]
+  },
+  {
+   "edition_no": 11,
+   "year": 2020,
+   "edition_name": "The 11th Barvision",
+   "cn_name": "第十一届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "",
+   "format": "grouped",
+   "members": 26,
+   "songs": 45,
+   "matches": 2,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "0"
+     ],
+     "nickname": "匿名#7",
+     "artist": "Róisín Murphy",
+     "song": "Murphy’s Law",
+     "score": 107
+    },
+    {
+     "group": "B",
+     "venue": "中众组",
+     "ids": [
+      "132"
+     ],
+     "nickname": "A妈",
+     "artist": "Phoebe Bridgers",
+     "song": "Kyoto",
+     "score": 127
+    }
+   ]
+  },
+  {
+   "edition_no": 12,
+   "year": 2020,
+   "edition_name": "The 12th Barvision",
+   "cn_name": "第十二届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "",
+   "host": "雨妈",
+   "format": "grouped",
+   "members": 16,
+   "songs": 17,
+   "matches": 1,
+   "champions": [
+    {
+     "group": "A",
+     "venue": "小众组",
+     "ids": [
+      "120"
+     ],
+     "nickname": "城妈",
+     "artist": "The Magic Gang",
+     "song": "Take Back The Track",
+     "score": 110
+    }
+   ]
+  },
+  {
+   "edition_no": 13,
+   "year": 2023,
+   "edition_name": "Barvision Qiqihar 2023",
+   "cn_name": "第十三届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "黑龙江齐齐哈尔",
+   "host": "雨妈",
+   "format": "annual",
+   "members": 27,
+   "songs": 45,
+   "matches": 3,
+   "champions": [
+    {
+     "group": "",
+     "venue": "",
+     "ids": [
+      "100"
+     ],
+     "nickname": "羊妈",
+     "artist": "Best Frenz & Joywave",
+     "song": "Flatline",
+     "score": 159.0
+    }
+   ]
+  },
+  {
+   "edition_no": 14,
+   "year": 2024,
+   "edition_name": "Barvision Tonghua 2024",
+   "cn_name": "第十四届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "吉林通化",
+   "host": "羊妈",
+   "format": "annual",
+   "members": 27,
+   "songs": 46,
+   "matches": 3,
+   "champions": [
+    {
+     "group": "",
+     "venue": "",
+     "ids": [
+      "27"
+     ],
+     "nickname": "S妈",
+     "artist": "Bennett Coast",
+     "song": "Pretender",
+     "score": 266.0
+    }
+   ]
+  },
+  {
+   "edition_no": 15,
+   "year": 2025,
+   "edition_name": "Barvision Jinzhong 2025",
+   "cn_name": "第十五届欧美流行歌曲个人榜吧歌曲大赛",
+   "city": "晋中",
+   "host": "S妈",
+   "format": "annual",
+   "members": 27,
+   "songs": 42,
+   "matches": 3,
+   "champions": [
+    {
+     "group": "",
+     "venue": "",
+     "ids": [
+      "7"
+     ],
+     "nickname": "威妈",
+     "artist": "Elliot James Reay",
+     "song": "Boy In Love",
+     "score": 357.0
+    }
+   ]
+  }
+ ],
  "members": {
   "18": {
    "id": 18,
@@ -19876,19 +20391,6 @@
      "val": 31
     }
    ]
-  },
-  "most_chinese": {
-   "title": "全世界都在讲中国话",
-   "metric": "最多选送华语单曲",
-   "val": 14,
-   "unit": "首",
-   "entries": [
-    {
-     "id": 326,
-     "nickname": "院妈",
-     "val": 14
-    }
-   ]
   }
  },
  "season": {
@@ -19913,6 +20415,297 @@
    "edition_no": 5,
    "edition_name": "The 5th Barvision",
    "match": "B"
+  }
+ },
+ "awards": {
+  "debut_peak": {
+   "title": "出道即巅峰",
+   "metric": "首次参赛即夺冠",
+   "val": "1st",
+   "unit": "",
+   "type": "list",
+   "winners": [
+    {
+     "id": 18,
+     "nickname": "猴妈",
+     "edition_no": 1,
+     "slot": "1",
+     "artist": "Parachute",
+     "song": "Had It All"
+    },
+    {
+     "id": 132,
+     "nickname": "A妈",
+     "edition_no": 11,
+     "slot": "11B",
+     "artist": "Phoebe Bridgers",
+     "song": "Kyoto"
+    },
+    {
+     "id": 100,
+     "nickname": "羊妈",
+     "edition_no": 13,
+     "slot": "13",
+     "artist": "Best Frenz & Joywave",
+     "song": "Flatline"
+    }
+   ]
+  },
+  "longest_wait": {
+   "title": "卧薪尝胆",
+   "metric": "从首次参赛到首夺冠跨越最多场次",
+   "val": 21,
+   "unit": "场",
+   "type": "max",
+   "winners": [
+    {
+     "id": 12,
+     "nickname": "锴妈",
+     "detail": "1 → 10A"
+    }
+   ]
+  },
+  "consecutive_wins": {
+   "title": "实红艺人",
+   "metric": "连续届夺冠（连冠）",
+   "val": 2,
+   "unit": "届",
+   "type": "max",
+   "winners": [
+    {
+     "id": 20,
+     "nickname": "包妈",
+     "detail": "第 5–6 届"
+    },
+    {
+     "id": 17,
+     "nickname": "雨妈",
+     "detail": "第 7–8 届"
+    }
+   ]
+  },
+  "niche_star": {
+   "title": "小众之星",
+   "metric": "小众组（A 组）夺冠次数最多",
+   "val": 2,
+   "unit": "次",
+   "type": "max",
+   "winners": [
+    {
+     "id": 20,
+     "nickname": "包妈",
+     "detail": "3A · 5A"
+    },
+    {
+     "id": 17,
+     "nickname": "雨妈",
+     "detail": "7A · 8A"
+    }
+   ]
+  },
+  "longest_streak": {
+   "title": "雨露均沾",
+   "metric": "连续届参赛最长",
+   "val": 15,
+   "unit": "届",
+   "type": "max",
+   "winners": [
+    {
+     "id": 20,
+     "nickname": "包妈",
+     "detail": "第 1–15 届"
+    },
+    {
+     "id": 17,
+     "nickname": "雨妈",
+     "detail": "第 1–15 届"
+    },
+    {
+     "id": 12,
+     "nickname": "锴妈",
+     "detail": "第 1–15 届"
+    }
+   ]
+  },
+  "longest_top10": {
+   "title": "长盛不衰",
+   "metric": "连续参赛场次保持前十最长",
+   "val": 8,
+   "unit": "场",
+   "type": "max",
+   "winners": [
+    {
+     "id": 20,
+     "nickname": "包妈",
+     "detail": "5A → 7B"
+    },
+    {
+     "id": 17,
+     "nickname": "雨妈",
+     "detail": "1 → 5A"
+    }
+   ]
+  },
+  "biggest_drop": {
+   "title": "跳水天后",
+   "metric": "相邻参赛场次名次跌幅最大",
+   "val": 24,
+   "unit": "名",
+   "type": "max",
+   "winners": [
+    {
+     "id": 125,
+     "nickname": "萌妈",
+     "detail": "12A（3rd）→ 13（27th）"
+    }
+   ]
+  },
+  "clutch": {
+   "title": "极限卡位",
+   "metric": "同一届不同场次斩获相同名次",
+   "val": "",
+   "unit": "",
+   "type": "list",
+   "winners": [
+    {
+     "id": 17,
+     "nickname": "雨妈",
+     "rank": 2,
+     "rank_en": "2nd",
+     "edition_no": 2,
+     "detail": "第 2 届 2SF · 2GF 同获 2nd"
+    },
+    {
+     "id": 120,
+     "nickname": "城妈",
+     "rank": 5,
+     "rank_en": "5th",
+     "edition_no": 2,
+     "detail": "第 2 届 2SF · 2GF 同获 5th"
+    },
+    {
+     "id": 157,
+     "nickname": "布妈",
+     "rank": 6,
+     "rank_en": "6th",
+     "edition_no": 3,
+     "detail": "第 3 届 3A · 3B 同获 6th"
+    },
+    {
+     "id": 120,
+     "nickname": "城妈",
+     "rank": 7,
+     "rank_en": "7th",
+     "edition_no": 6,
+     "detail": "第 6 届 6A · 6C 同获 7th"
+    },
+    {
+     "id": 18,
+     "nickname": "猴妈",
+     "rank": 8,
+     "rank_en": "8th",
+     "edition_no": 6,
+     "detail": "第 6 届 6A · 6C 同获 8th"
+    },
+    {
+     "id": 124,
+     "nickname": "洛妈",
+     "rank": 9,
+     "rank_en": "9th",
+     "edition_no": 9,
+     "detail": "第 9 届 9A · 9B 同获 9th"
+    },
+    {
+     "id": 770,
+     "nickname": "音妈",
+     "rank": 12,
+     "rank_en": "12th",
+     "edition_no": 6,
+     "detail": "第 6 届 6B · 6C 同获 12th"
+    },
+    {
+     "id": 141,
+     "nickname": "草妈",
+     "rank": 14,
+     "rank_en": "14th",
+     "edition_no": 5,
+     "detail": "第 5 届 5A · 5B 同获 14th"
+    },
+    {
+     "id": 189,
+     "nickname": "雀妈",
+     "rank": 14,
+     "rank_en": "14th",
+     "edition_no": 6,
+     "detail": "第 6 届 6B · 6C 同获 14th"
+    },
+    {
+     "id": 19,
+     "nickname": "柠妈",
+     "rank": 16,
+     "rank_en": "16th",
+     "edition_no": 7,
+     "detail": "第 7 届 7B · 7C 同获 16th"
+    },
+    {
+     "id": 295,
+     "nickname": "田妈",
+     "rank": 17,
+     "rank_en": "17th",
+     "edition_no": 7,
+     "detail": "第 7 届 7A · 7C 同获 17th"
+    },
+    {
+     "id": 18,
+     "nickname": "猴妈",
+     "rank": 21,
+     "rank_en": "21st",
+     "edition_no": 7,
+     "detail": "第 7 届 7A · 7B 同获 21st"
+    }
+   ]
+  },
+  "most_same_rank": {
+   "title": "独家冠名",
+   "metric": "同一名次选送次数最多",
+   "val": 6,
+   "unit": "首",
+   "type": "max",
+   "winners": [
+    {
+     "id": 120,
+     "nickname": "城妈",
+     "detail": "5th ｜ 2SF · 2GF · 5B · 7C · 8A · 10B"
+    }
+   ]
+  },
+  "shadow_gap": {
+   "title": "即刻开吸",
+   "metric": "同场混淆曲名次落后正式曲最多",
+   "val": 17,
+   "unit": "名",
+   "type": "max",
+   "winners": [
+    {
+     "id": 17,
+     "nickname": "雨妈",
+     "detail": "选送 2nd → 混淆 19th（10B）"
+    }
+   ]
+  },
+  "most_chinese": {
+   "title": "全世界都在讲中国话",
+   "metric": "最多选送华语单曲",
+   "val": 14,
+   "unit": "首",
+   "type": "max",
+   "winners": [
+    {
+     "id": 326,
+     "nickname": "院妈",
+     "detail": ""
+    }
+   ]
   }
  }
 }
