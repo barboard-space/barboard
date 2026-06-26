@@ -47,8 +47,8 @@
             'radial-gradient(ellipse 46% 52% at 100% 96%, rgba(60,122,107,0.15) 0%, transparent 55%)'
     },
     2024: {
-      poster: '../../assets/images/barvision/2024/poster.png',  // 蓝版 + logo（hero 背景）
-      posterMobile: '../../assets/images/barvision/2024/bg-blue.png',  // 手机端 hero 底（蓝色无 logo）
+      poster: '../../assets/images/barvision/2024/poster-pink.png',  // 粉版 + logo（桌面 hero 背景，用户试粉版）
+      posterMobile: '../../assets/images/barvision/2024/bg-pink.png',  // 手机端 hero 底（粉色无 logo，用户指定）
       c1: '#f13b8d',   // 深粉（主：eyebrow / 年份 / meta）
       c2: '#09184e',   // 深 navy（辅助次选 / hero 辉光底）
       c2l: '#fc91c1',  // 浅粉（徽章 / 次要）

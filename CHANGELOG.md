@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-06-25] — 第 14 届 hero 改用粉版主视觉
+
+### Changed
+- **2024 hero 主视觉统一为粉版**：桌面 `BV_THEME[2024].poster` → `poster-pink.png`（粉版 + logo，3840×2160）；手机 `posterMobile` → `bg-pink.png`（原 bg-blue）。桌面右锚定保 logo、手机居中铺满，深色 scrim 保证文字可读。
+- 新增资产 `assets/images/barvision/2024/poster-pink.png`。
+
+---
+
 ## [2026-06-25] — 第 14 届(Tonghua 2024)赛果数据 + 20 票观众投票制渲染适配
 
 ### Added
