@@ -171,7 +171,7 @@
    },
    {
     "name": "XVision 2025",
-    "member": "X妈",
+    "member": "XX妈",
     "period": "2025.5.31 – 6.30",
     "artist": "Harvey Causon",
     "song": "Nostalgia"
@@ -259,9 +259,9 @@
    "id": 115,
    "handle": "iTAP_II"
   },
-  "X妈": {
-   "id": 195,
-   "handle": "没有XX不科学"
+  "XX妈": {
+   "id": 88,
+   "handle": "xjebs"
   },
   "包妈": {
    "id": 20,
@@ -883,7 +883,7 @@
       }
      },
      {
-      "voter": "X妈",
+      "voter": "XX妈",
       "type": "jury",
       "points": {
        "0": 6,
@@ -1143,7 +1143,7 @@
       }
      },
      {
-      "voter": "X妈",
+      "voter": "XX妈",
       "type": "tele",
       "points": {
        "0": 2,
@@ -1376,7 +1376,7 @@
     {
      "eid": 0,
      "ro": 1,
-     "member": "X妈",
+     "member": "XX妈",
      "member_id": 195,
      "artist": "Harvey Causon",
      "song": "Nostalgia",
@@ -1593,7 +1593,7 @@
     ],
     "voters": [
      {
-      "voter": "X妈",
+      "voter": "XX妈",
       "type": "jury",
       "points": {
        "1": 2,
@@ -2154,7 +2154,7 @@
       }
      },
      {
-      "voter": "X妈",
+      "voter": "XX妈",
       "type": "tele",
       "points": {
        "3": 3,
@@ -2422,7 +2422,7 @@
     {
      "eid": 12,
      "ro": 13,
-     "member": "X妈",
+     "member": "XX妈",
      "member_id": 195,
      "artist": "Harvey Causon",
      "song": "Nostalgia",
@@ -2755,7 +2755,7 @@
       }
      },
      {
-      "voter": "X妈",
+      "voter": "XX妈",
       "type": "jury",
       "points": {
        "1": 1,
@@ -3376,7 +3376,7 @@
       }
      },
      {
-      "voter": "X妈",
+      "voter": "XX妈",
       "type": "tele",
       "points": {
        "14": 5,

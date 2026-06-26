@@ -28,7 +28,8 @@
 - `style.css` — 全站样式（含完整设计系统）
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
-- `barvision/2026/events.html` — Barvision 2026 赛事页（已完成；**歌曲报名通道已上线**：自定义表单 + EmailJS 发邮件，非问卷星，详见 #127；已接入 nav.js；已按 Rulebook Ver. 260530 全面更新：附加赛资格赛双阶段结构、在线表单提交方式、ELIGIBILITY 新增 Eurovision 排除条款 + 个人榜助攻规则、全站"复活赛"→"附加赛"）
+- `barvision/2026/events.html` — **Barvision 2026 歌曲提交通道（专用页，已重构为只管提交，见 #164）**：hero（中文标题「歌曲 / 提交通道」`.ev-title--cjk` + 倒计时；已去 meta 三标签 / CTA 按钮 / 更新日期）+ 两栏布局（左：报名须知 + 参赛要求，统一信息卡 `.ev-info-card`；右：EmailJS 报名表单面板，**JS 驱动悬浮** initStickyPanel）；EmailJS 详见 #127；eyebrow ← 回 `16.html`（events 为 16 的子页）。原 赛程/投票/规则/关于 已迁入 16.html
+- `barvision/2026/16.html` — **第 16 届 Chongqing 2026「本届实时更新页」（已完成，见 #164）**：薄壳复用 `bv-results-render.js` 的 **live 分支**（`regular-16.json` 顶层 `live:true`）；events 风格静态 hero（渲染器对 live 跳过自带 hero）+ 选送名单（Candidates/Wildcards 两表）+ 海选进展（11 场含 status，未公布获胜曲显「等待宣布/—」）+ info_sections（赛程/投票/规则/关于，数据驱动结构化 rules）；barvision XVI 当届卡 + 首页 XVI 卡/「本届总览」CTA 均指向此页；feed→首页同步机制已建但 hold（脚本 `sync_bv2026_live.py`）
 - `member.html` — Members 总览页（119位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
 - `member/N.html``member/N.html`（119个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
@@ -51,7 +52,7 @@
 
 ### 待建页面（按优先级）
 - **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**下一步：第 16 届（Chongqing 2026，进行中）赛后导入**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
-- **⭐ 第 16 届（Chongqing 2026，进行中）「本届实时更新页」（新需求，下一会话）**：与现有 `barvision/2026/events.html`（赛事详情：规则/赛程/EmailJS 报名表，见 #108–#112/#127）**分开**，新建一个**实时更新/动态页**，记录：① 截至目前的**报名情况**（已报名成员/曲目，随报名滚动更新）；② 各**办海选大妈的海选进展**（哪些成员在办海选、各海选状态/时间线——参考 ed15 `regular-15.json` 的 `auditions` 结构 + #163 「海选阶段」section 渲染）。③ 这些动态条目**同步到首页 updates**（`data/main-page/updates.json` → index.html `renderUpdates()`，见「BBL 动态更新架构」+ #31/#42 `show_after` 字段）。建议数据驱动（如 `data/barvision/barvision-2026/live.json`）；页面/数据 schema 待与用户敲定。
+- ~~第 16 届「本届实时更新页」~~ **已完成**（见 #164，页面 = `barvision/2026/16.html`）。**剩余**：报名/海选实时数据随进展更新（编辑 `regular-16.json` 的 `signups`/`auditions`）；首页 feed 同步功能**用户已 hold**（脚本就绪、`feed:[]`）；待确认数据项（邓妈 European Fever 获胜曲、海选时间）见 #164。
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -748,6 +749,16 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **手机端 hero scrim 调浅**（2023+ 主题届通用，超越 #159 旧值）：移动端 `.bvr-hero__scrim` 由 `0.86/0.76/0.90` → **`0.7/0.52/0.8`**——原值太重把 bg 主视觉压成近黑（尤其 2025 `bg-orange`「像没有背景图」）；调浅后三届（2023 红 / 2024 粉 / 2025 橙）手机端主视觉都透出、文字仍可读。⚠️ bg-orange.png 配置/文件本就正确，问题纯在 scrim。
     - **barvision.html 近届年度大卡遮罩调浅**：`.bv-arch-card--recent .bv-arch-card__logo--img::before` 由 `0.40/0.58` → **`0.4/0.3`**（顶 0.4 保白 logo 对比 / 底 0.3），XV/XIV/XIII 年度卡主视觉更鲜亮；满宽 XVI 当届大卡 `.bv-current-card::before`(0.85→0.40 左深右浅渐变) **不动**（左侧文字需深底）。
     - **下一步：第 16 届（Chongqing 2026，进行中）赛果待赛后导**；HOF 历届前三改版 + 全量数据核对仍待办。
+164. **第 16 届「本届实时更新页」(`barvision/2026/16.html`) + events 重构为提交专用页（本次，进行中届的两页拆分）**：
+    - **架构**：16.html = **薄壳**（`EDITION_SRC=regular-16.json`），复用 `bv-results-render.js`，新增 **live 分支**（顶层 `live:true`）；events.html = **歌曲提交专用子页**。两页 nav：barvision XVI 当届卡（整卡点击）+ index XVI 卡 + index 季卡「本届总览」按钮 → 均指向 `16.html`；index/各处「歌曲报名」→ `events.html#submit`；events eyebrow ← 回 16.html。
+    - **`regular-16.json`（进行中契约，手工维护）**：`live:true` + `submit_url` + hero meta（year/edition_no/edition_name/cn_name/city/host/motto/summary）+ `signups[]`（每条 `role:candidate|wildcard`、`mode:内部选送|公开海选`、member/song/artist/genre(Title-Case)/language）+ `auditions{note,list[{name,member,period,status:进行中|已结束|筹备中,artist,song}]}` + `info_sections[]`（赛程/投票/规则/关于，每项 `{id,cn,en,subtitle,sections:[...rulesSection契约...]}`）+ `feed:[]`（首页同步源，**用户已 hold**）+ `members{}` + `matches:[]`。**必含 `version:"regular"`**（gen_bv_editions_index 要求）。
+    - **渲染器 live 分支（bv-results-render.js，全通用）**：① `BV_THEME[2026]` 主色 = 紫 `#c084fc`（=violet-light，与 events.html hero 一致；poster/posterMobile 用 `assets/images/barvision/2026/{poster,bg}.png`）；`BV_STRIPE[2026]=['#3d9bff','#a855f7']`（蓝紫徽章，赛后用）。② `render()` 对 `d.live` **跳过自带 hero**（`var html = d.live ? '' : buildHero(d)`）——16.html 自带 events 风格静态 hero + 倒计时 JS；③ 顺序：(静态hero) → 选送名单(signupListBlock：Candidates·Semi-Final / Wildcards·海选突围赛 两表) → 海选进展(auditionsBlock 加 `status` 列 + 时间列按需；未公布获胜曲：已结束显「等待宣布」colspan、进行中显「—」) → info_sections（在海选后、nav 前；`infoSectionsBlocks`+`rulesSection`，**rulesSection 新增 `items[]` 纯 bullet 列表**、空 `title` 不渲染 h3）→ navBlock（prev=ed15）；`d.live` 跳过 memberChangesBlock（否则上届全员误判退出）。④ 赛程三表日期列统一宽：`#schedule .bvr-rule__tbl th{width:120px}`（日期含「晚间」CJK，**勿用 DM Mono** #13）。
+    - **events.html 重构**：删 schedule/voting/rules/about（迁入 16.html）；**参赛要求(eligibility)留在 events**；正文统一信息卡 `.ev-info-card`/`.ev-info-item`（圆点列表，取代旧 ev-req/ev-crit/ev-elig 密集边框块，已全迁移）；hero 中文标题「歌曲 / 提交通道」`.ev-title--cjk`（Bebas 无中文→`var(--font-body)` 800）、去 3 个 meta 标签/2 个 CTA 按钮/更新日期、intro 去重为报名提示；正文两栏（左 报名须知+参赛要求 / 右 报名表单），手机端表单优先 `order:-1`。
+    - **⭐ 右侧表单悬浮 = JS 驱动（非 CSS sticky）**：CSS `position:sticky` 在此 grid 布局下失效——根因①祖先 `.fade-up.visible` 残留 `transform:translateY(0)`（**transform 祖先破坏后代 sticky**，已移除右栏 fade-up）；②即便如此 grid 子项 sticky 仍不稳（#67 老 bug）。**改用 `initStickyPanel()`**（events.html）：面板 `position:relative;will-change:transform`，scroll/resize 用 rAF 计算 `ty=clamp(0, GAP - sideRect.top, side.offsetH - panel.offsetH)` 平移；GAP=92(nav-h+20)；手机端(≤960)清空 transform 走正常流。**通则：要悬浮的元素其任何祖先都不能有 transform（含 fade-up 的 translateY(0)）。**
+    - **目录（所有详情页通用，bv-results-render.js）**：网页端改 **Notion 风格右侧缩略目录**——固定右侧垂直居中（`right:32→14px`?实为 `right:14px;top:50%`），默认仅一列短横线（dash 14px，active 22px+紫，scrollspy），**hover 整组 → 文字标签 10.5px 带过渡从右滑出**（毛玻璃浮层）；**顶部(hero)隐藏、下滚 >300px 才显示**（`updateTocVisible`）。手机端(≤768)仍是悬浮按钮+展开面板（dash 隐藏、label 常显）。buildTOC item 改 `<span class=dash>+<span class=label>` 结构。
+    - **ed15 更正（顺带）**：`regular-15.json` 中误录的「X妈」(id195) 全部 → 「XX妈」(id88, xjebs)，重跑 gen_member_pages + gen_bv_editions_index（记录从 member/195 迁至 member/88）。
+    - **多艺人修正**（#15）：ed16 Day One→`Adam Doleac`—`Day One (feat. Madeline Merlo)`、Shimmer→`RabbitJ`—`Shimmer (feat. Kinoko)`、Giđa ávašta 艺人→`Emil Kárlsen & Elina Iijäs`。
+    - **待确认数据**：邓妈 European Fever 获胜曲（暂「等待宣布」）；海选时间（不统计、period 留空、时间列隐藏）。
 
 ## 对话交接工作流
 

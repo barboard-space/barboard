@@ -65,6 +65,16 @@
       c3: '#f4a259',   // 暖橙（hero 简介正文，橙黄渐变）
       glow: 'radial-gradient(ellipse 78% 58% at 50% 0%, rgba(223,90,44,0.18) 0%, transparent 60%),' +
             'radial-gradient(ellipse 46% 52% at 100% 96%, rgba(244,162,89,0.16) 0%, transparent 55%)'
+    },
+    2026: {
+      poster: '../../assets/images/barvision/2026/poster.png',  // 蓝/青/紫流光 + logo（桌面 hero 背景）
+      posterMobile: '../../assets/images/barvision/2026/bg.png',  // 手机端 hero 底（无 logo）
+      c1: '#c084fc',   // 软紫（=--clr-violet-light）：eyebrow / 年份 / meta，与 events.html hero 一致（紫色）
+      c2: '#1a0f3a',   // 深紫（hero 辉光底）
+      c2l: '#c9b3f0',  // 浅紫（次要）
+      c3: '#cdbbf3',   // 浅紫（hero 简介正文）
+      glow: 'radial-gradient(ellipse 78% 58% at 50% 0%, rgba(168,85,247,0.20) 0%, transparent 60%),' +
+            'radial-gradient(ellipse 46% 52% at 100% 96%, rgba(192,132,252,0.14) 0%, transparent 55%)'
     }
   };
   function theme(d) { return (d && BV_THEME[d.year]) || null; }
@@ -408,21 +418,28 @@
       background:var(--clr-surface); padding:1px 6px; border-radius:3px; }
     .bvr-src { margin-top:12px; font-size:11px; color:var(--clr-text-3); }
 
-    /* ----- TOC (沿用 hof) ----- */
-    .bvr-toc { position:fixed; right:19px; bottom:90px; z-index:90; display:flex; flex-direction:column;
-      align-items:flex-end; gap:10px; opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
+    /* ----- TOC：网页端 Notion 风格右侧缩略目录（默认短横线指示，hover 从右侧推出文字标签 + 过渡；移动端见 @media 改悬浮按钮面板） ----- */
+    .bvr-toc { position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:90;
+      display:flex; flex-direction:column; align-items:flex-end; gap:0;
+      opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
     .bvr-toc--visible { opacity:1; visibility:visible; }
-    .bvr-toc__list { display:flex; flex-direction:column; gap:1px; }
-    .bvr-toc__toggle { display:none; }  /* 桌面不显示悬浮按钮；手机端 @media 内启用 */
-    .bvr-toc__item { font-family:var(--font-body); font-size:11px; color:var(--clr-text-3); cursor:pointer;
-      padding:3px 13px 3px 0; position:relative; transition:color 0.15s; line-height:1.5; white-space:nowrap;
-      user-select:none; text-align:right; }
-    .bvr-toc__item::after { content:''; position:absolute; right:3px; top:50%; transform:translateY(-50%);
-      width:5px; height:5px; border-radius:50%; background:var(--clr-violet-light); opacity:0; transition:opacity 0.2s; }
-    .bvr-toc__item:not(.bvr-toc__item--active):hover { color:var(--clr-text); }
-    .bvr-toc__item--active { color:var(--clr-violet-light); }
-    .bvr-toc__item--active::after { opacity:1; animation:bvr-breathe 3s ease-in-out infinite; }
-    @keyframes bvr-breathe { 0%,100%{opacity:1;transform:translateY(-50%) scale(1);} 50%{opacity:0.35;transform:translateY(-50%) scale(0.65);} }
+    .bvr-toc__toggle { display:none; }  /* 网页端不用悬浮按钮（移动端 @media 启用） */
+    .bvr-toc__list { display:flex; flex-direction:column; align-items:flex-end; gap:2px;
+      padding:8px 10px; border-radius:8px; background:transparent;
+      transition:background 0.25s, -webkit-backdrop-filter 0.25s, backdrop-filter 0.25s; }
+    .bvr-toc:hover .bvr-toc__list { background:rgba(20,20,34,0.55); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+    .bvr-toc__item { display:flex; align-items:center; justify-content:flex-end; gap:9px;
+      cursor:pointer; user-select:none; padding:2px 0; }
+    .bvr-toc__dash { flex:none; width:14px; height:2px; border-radius:2px; background:var(--clr-text-3);
+      opacity:0.4; transition:width 0.25s, background 0.25s, opacity 0.25s; }
+    .bvr-toc__label { order:-1; font-family:var(--font-body); font-size:10.5px; letter-spacing:0.01em;
+      color:var(--clr-text-3); white-space:nowrap; max-width:0; opacity:0; transform:translateX(6px); overflow:hidden;
+      transition:max-width 0.3s ease, opacity 0.25s, transform 0.3s ease, color 0.15s; }
+    .bvr-toc:hover .bvr-toc__label { max-width:220px; opacity:1; transform:translateX(0); }
+    .bvr-toc__item:hover .bvr-toc__dash { opacity:0.85; background:var(--clr-text-2); }
+    .bvr-toc__item:hover .bvr-toc__label { color:var(--clr-text); }
+    .bvr-toc__item--active .bvr-toc__dash { width:22px; background:var(--clr-violet-light); opacity:1; }
+    .bvr-toc__item--active .bvr-toc__label { color:var(--clr-violet-light); }
 
     /* 宽表横向滚动提示（手机常显 / 桌面溢出时由 JS 显示）——格式与「注」(.bvr-mtx-note) 一致 */
     .bvr-scroll-hint { display:none; font-size:11px; color:var(--clr-text-3); margin-bottom:7px; }
@@ -431,22 +448,24 @@
     .bvr-sec .section__inner > .fade-up { transition-delay: 0s; }
 
     @media (max-width:768px) {
-      /* 移动端：TOC 改为悬浮按钮（对齐 back-to-top 风格），点开弹出目录面板，置于 back-to-top 上方 */
-      .bvr-toc { right:20px; bottom:66px; z-index:210; gap:10px; }
+      /* 移动端：缩略目录不适合触屏 → 改为悬浮按钮 + 展开面板（对齐 back-to-top 风格，置于其上方） */
+      .bvr-toc { right:20px; bottom:66px; top:auto; transform:none; z-index:210; gap:10px; }
       .bvr-toc__toggle { display:flex; align-items:center; justify-content:center; width:42px; height:42px;
         background:rgba(20,20,34,0.5); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
         border:1px solid var(--clr-border-2); border-radius:4px; color:rgba(192,132,252,0.65); cursor:pointer;
-        padding:0; transition:color 0.25s,border-color 0.25s,box-shadow 0.25s; }
+        padding:0; transition:color 0.25s,border-color 0.25s; }
       .bvr-toc__toggle svg { width:18px; height:18px; }
       .bvr-toc--open .bvr-toc__toggle { color:var(--clr-violet-light); border-color:var(--clr-violet-light); }
-      .bvr-toc__list { display:none; min-width:148px; max-height:62vh; overflow-y:auto;
+      .bvr-toc__list { display:none; gap:1px; min-width:152px; max-height:62vh; overflow-y:auto;
         background:rgba(20,20,34,0.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
-        border:1px solid var(--clr-border-2); border-radius:6px; padding:6px;
-        box-shadow:0 8px 28px rgba(0,0,0,0.4); }
+        border:1px solid var(--clr-border-2); border-radius:6px; padding:6px; box-shadow:0 8px 28px rgba(0,0,0,0.4); }
+      .bvr-toc:hover .bvr-toc__list { background:rgba(20,20,34,0.72); }  /* 取消桌面 hover 推出行为 */
       .bvr-toc--open .bvr-toc__list { display:flex; }
-      .bvr-toc__item { text-align:left; font-size:13px; padding:9px 13px; border-radius:4px; }
-      .bvr-toc__item::after { display:none; }  /* 面板内不用呼吸点 */
-      .bvr-toc__item--active { color:var(--clr-violet-light); background:rgba(168,85,247,0.12); }
+      .bvr-toc__item { justify-content:flex-start; gap:0; padding:9px 13px; border-radius:4px; }
+      .bvr-toc__item:hover { background:rgba(255,255,255,0.04); }
+      .bvr-toc__dash { display:none; }
+      .bvr-toc__label { order:0; max-width:none; opacity:1; transform:none; overflow:visible; font-size:13px; }
+      .bvr-toc__item--active { background:rgba(168,85,247,0.12); }
       .bvr-scroll-hint { display:block; }
       /* Scoreboard / 12 Points 子标题：手机端略收字号 + 上间距（桌面 18px / 48px） */
       .bvr-dvr-sub { font-size:16px; margin-top:36px; }
@@ -482,9 +501,10 @@
       .bvr-tbl tbody .bvr-row--2 td:nth-child(-n+3) { background:linear-gradient(rgba(110,150,178,0.11),rgba(110,150,178,0.11)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--3 td:nth-child(-n+3) { background:linear-gradient(rgba(196,120,68,0.12),rgba(196,120,68,0.12)),var(--clr-bg); }
       .bvr-tbl tbody .bvr-row--shadow td:nth-child(-n+3) { background:var(--clr-shadow-bg); }
-      /* 参赛名单（.bvr-el）/ 海选表（.bvr-aud）：不冻结，完全左右滑动（覆盖上面 .bvr-tbl 前三列 sticky） */
+      /* 参赛名单（.bvr-el）/ 海选表（.bvr-aud）/ 报名名单（.bvr-su）：不冻结，完全左右滑动（覆盖上面 .bvr-tbl 前三列 sticky） */
       .bvr-el thead th:nth-child(-n+3), .bvr-el tbody td:nth-child(-n+3),
-      .bvr-aud thead th:nth-child(-n+3), .bvr-aud tbody td:nth-child(-n+3) { position:static; }
+      .bvr-aud thead th:nth-child(-n+3), .bvr-aud tbody td:nth-child(-n+3),
+      .bvr-su thead th:nth-child(-n+3), .bvr-su tbody td:nth-child(-n+3) { position:static; }
       /* 注释里的 @名在手机端也显示昵称 */
       .bvr-mtx-note .member { font-size:0; }
       .bvr-mtx-note .member::before { content:attr(data-nickname); font-size:11px; }
@@ -589,6 +609,8 @@
     .bvr-rule__tbl th { font-family:var(--font-body); font-weight:700; color:var(--clr-text-2);
       background:var(--clr-surface); }
     .bvr-rule__tbl td { color:var(--clr-text-2); }
+    /* 赛程三表：日期列统一固定宽，使三表左列对齐（日期含「晚间」CJK，不可用 DM Mono，#13） */
+    #schedule .bvr-rule__tbl th { width:120px; }
     /* 赋分表：两行（排名 / 分数），居中 */
     .bvr-rule__score th, .bvr-rule__score td { padding:8px 0; text-align:center; border:1px solid var(--clr-border);
       font-family:var(--font-mono); font-size:13px; min-width:38px; }
@@ -607,6 +629,25 @@
     /* ===== 海选阶段表 ===== */
     .bvr-aud__name { color:var(--clr-text); font-weight:600; }
     .bvr-aud__time { font-family:var(--font-mono); font-size:11px; color:var(--clr-text-3); white-space:nowrap; }
+    .bvr-aud__tbd { color:var(--clr-text-4); }
+    .bvr-aud-st { display:inline-block; white-space:nowrap; font-size:10px; font-weight:600; letter-spacing:0.02em;
+      padding:2px 8px; border-radius:3px; border:1px solid var(--clr-border-2); }
+    .bvr-aud-st--live { color:var(--clr-up); border-color:color-mix(in srgb, var(--clr-up) 50%, transparent);
+      background:color-mix(in srgb, var(--clr-up) 12%, transparent); }
+    .bvr-aud-st--done { color:var(--clr-text-3); }
+    .bvr-aud-st--prep { color:var(--clr-gold-light); border-color:color-mix(in srgb, var(--clr-gold-light) 45%, transparent); }
+
+    /* ===== 进行中（live）：报名名单 ===== */
+    .bvr-su__by .member { font-weight:600; }
+    .bvr-su__genre { font-size:11px; color:var(--clr-text-3); white-space:nowrap; }
+    /* 结构化规则：纯项目符号列表（资格/投票条目） */
+    .bvr-rule__items { margin:10px 0 0; padding-left:20px; list-style:disc; }
+    .bvr-rule__items li { font-size:13.5px; line-height:1.7; color:var(--clr-text-2); margin:5px 0; }
+    .bvr-rule__items li::marker { color:var(--clr-violet); }
+    .bvr-mode { display:inline-block; white-space:nowrap; font-size:10px; font-weight:600; padding:2px 8px;
+      border-radius:3px; border:1px solid var(--clr-border-2); }
+    .bvr-mode--internal { color:var(--clr-accent-light); border-color:color-mix(in srgb, var(--clr-accent-light) 45%, transparent); }
+    .bvr-mode--open { color:var(--clr-pink-light); border-color:color-mix(in srgb, var(--clr-pink-light) 45%, transparent); }
 
     /* ===== 总成绩单（年度制） ===== */
     .bvr-sb { width:100%; border-collapse:separate; border-spacing:0; font-size:13px; min-width:1120px; }
@@ -1095,7 +1136,7 @@
     return '<div class="bvr-rules fade-up"><dl>' + dl + '</dl></div>';  // 不写来源
   }
   function rulesSection(s) {
-    var h = '<h3 class="bvr-rule__h">' + esc(s.title) + '</h3>';
+    var h = s.title ? '<h3 class="bvr-rule__h">' + esc(s.title) + '</h3>' : '';
     var body = (s.body || []).map(function (p) { return '<p class="bvr-rule__p">' + linkMentions(esc(p)) + '</p>'; }).join('');
     var list = '';
     if (s.list && s.list.length) {
@@ -1104,6 +1145,12 @@
           ? '<ol class="bvr-rule__sub">' + it.sublist.map(function (x) { return '<li>' + linkMentions(esc(x)) + '</li>'; }).join('') + '</ol>' : '';
         return '<li><span class="bvr-rule__k">' + esc(it.k) + '</span>' +
           (it.v ? '<span class="bvr-rule__v">' + linkMentions(esc(it.v)) + '</span>' : '') + sub + '</li>';
+      }).join('') + '</ul>';
+    }
+    var items = '';
+    if (s.items && s.items.length) {  // 纯项目符号列表（无 k/v 结构，如资格/投票条目）
+      items = '<ul class="bvr-rule__items">' + s.items.map(function (x) {
+        return '<li>' + linkMentions(esc(x)) + '</li>';
       }).join('') + '</ul>';
     }
     var tbl = '';
@@ -1124,7 +1171,16 @@
     }
     var foot = (s.foot ? (Array.isArray(s.foot) ? s.foot : [s.foot]) : [])
       .map(function (p) { return '<p class="bvr-rule__foot">' + esc(p) + '</p>'; }).join('');
-    return '<div class="bvr-rule">' + h + body + list + tbl + scoring + foot + '</div>';
+    return '<div class="bvr-rule">' + h + body + items + list + tbl + scoring + foot + '</div>';
+  }
+  // info_sections（本届实时更新页：把 events 的 资格/赛程/投票/规则/关于 等静态内容做成数据驱动板块，
+  // 复用结构化 rulesSection 渲染；每项 = 一个独立 section，排在「海选进展」之后）
+  function infoSectionsBlocks(d) {
+    return (d.info_sections || []).map(function (sec) {
+      var inner = '<div class="bvr-rules bvr-rules--rich fade-up">' +
+        (sec.sections || []).map(rulesSection).join('') + '</div>';
+      return { id: sec.id, cn: sec.cn, en: sec.en, subtitle: sec.subtitle || '', html: inner };
+    });
   }
   // 参赛名单（年度制）：合并各场参赛曲，按选送者拼音排序；列 选送者/歌手/歌曲名/语言/流派
   function entryListBlock(d) {
@@ -1158,22 +1214,67 @@
       '<th>选送者</th><th>歌手</th><th>歌曲名</th><th>语言</th><th>流派</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>';
   }
-  // 海选阶段（2025+：部分成员举办海选选出参赛曲）。表：海选名称/成员/时间/获胜歌手/获胜歌曲 + note
+  // 海选阶段（2025+：部分成员举办海选选出参赛曲）。表：海选名称/成员/[时间]/[状态]/获胜歌手/获胜歌曲 + note
+  // 时间列仅当有 period 时出现；状态列仅当有 status 时出现（进行中海选用，赛果届 ed15 无 status→不显示，向后兼容）。
   function auditionsBlock(d) {
     var a = d.auditions;
     if (!a || !a.list || !a.list.length) return '';
+    var hasPeriod = a.list.some(function (it) { return it.period; });
+    var hasStatus = a.list.some(function (it) { return it.status; });
+    var ST = { '进行中': 'live', '已结束': 'done', '筹备中': 'prep' };
+    function tbd(v, cls) {  // 空值（进行中海选尚无获胜曲）→「—」弱化
+      return v ? '<td class="' + cls + '">' + v + '</td>' : '<td class="' + cls + '"><span class="bvr-aud__tbd">—</span></td>';
+    }
     var rows = a.list.map(function (it) {
+      var st = it.status ? '<span class="bvr-aud-st bvr-aud-st--' + (ST[it.status] || 'done') + '">' + esc(it.status) + '</span>' : '';
+      // 获胜曲：已公布→歌手/歌名两列；未公布→单元格合并占两列（已结束「等待宣布」/ 进行中「—」）
+      var winCells = (it.artist || it.song)
+        ? tbd(it.artist ? esc(fmtArtist(it.artist)) : '', 'artist') + tbd(it.song ? esc(it.song) : '', 'song')
+        : '<td colspan="2" class="bvr-aud__tbd">' + (it.status === '已结束' ? '等待宣布' : '—') + '</td>';
       return '<tr><td class="bvr-aud__name">' + esc(it.name) + '</td>' +
         '<td>' + memberLink(it.member) + '</td>' +
-        '<td class="bvr-aud__time">' + esc(it.period || '') + '</td>' +
-        '<td class="artist">' + esc(fmtArtist(it.artist)) + '</td>' +
-        '<td class="song">' + esc(it.song) + '</td></tr>';
+        (hasPeriod ? '<td class="bvr-aud__time">' + esc(it.period || '') + '</td>' : '') +
+        (hasStatus ? '<td>' + st + '</td>' : '') +
+        winCells + '</tr>';
     }).join('');
     var note = a.note ? '<p class="bvr-tbl-note fade-up">注：' + linkMentions(esc(a.note)) + '</p>' : '';
     return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整海选</div>' +
       '<div class="bvr-tw fade-up"><table class="bvr-tbl bvr-aud"><thead><tr>' +
-      '<th>海选名称</th><th>成员</th><th>时间</th><th>获胜歌手</th><th>获胜歌曲</th>' +
+      '<th>海选名称</th><th>成员</th>' + (hasPeriod ? '<th>时间</th>' : '') + (hasStatus ? '<th>状态</th>' : '') +
+      '<th>获胜歌手</th><th>获胜歌曲</th>' +
       '</tr></thead><tbody>' + rows + '</tbody></table></div>' + note;
+  }
+
+  // ── 进行中（live）报名 ─────────────────────────────────────────
+  // 报名名单：Candidates（直通半决赛）+ Wildcards（海选突围赛）两组表；按 JSON 顺序呈现（= 报名顺序）
+  function signupRow(s) {
+    var joint = s.member.indexOf('/') > -1;
+    var by = joint
+      ? '<span class="bvr-joint">' + s.member.split('/').map(function (n) { return memberLink(n.trim()); }).join('') + '</span>'
+      : memberLink(s.member);
+    var modeCls = s.mode === '内部选送' ? 'bvr-mode--internal' : 'bvr-mode--open';
+    return '<tr><td class="bvr-su__by">' + by + '</td>' +
+      '<td class="artist">' + esc(fmtArtist(s.artist)) + '</td>' +
+      '<td class="song">' + esc(s.song) + (joint ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
+      '<td class="lang">' + esc(s.language || '') + '</td>' +
+      '<td class="bvr-su__genre">' + esc(s.genre || '') + '</td>' +
+      '<td>' + (s.mode ? '<span class="bvr-mode ' + modeCls + '">' + esc(s.mode) + '</span>' : '') + '</td></tr>';
+  }
+  function signupTable(list) {
+    return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整名单</div>' +
+      '<div class="bvr-tw fade-up"><table class="bvr-tbl bvr-su"><thead><tr>' +
+      '<th>选送者</th><th>歌手</th><th>歌曲名</th><th>语言</th><th>流派</th><th>报名方式</th>' +
+      '</tr></thead><tbody>' + list.map(signupRow).join('') + '</tbody></table></div>';
+  }
+  function signupListBlock(d) {
+    var su = d.signups || [];
+    if (!su.length) return '';
+    var cand = su.filter(function (s) { return s.role === 'candidate'; });
+    var wild = su.filter(function (s) { return s.role === 'wildcard'; });
+    var out = '';
+    if (cand.length) out += '<div class="bvr-dvr-sub fade-up">Candidates · Semi-Final</div>' + signupTable(cand);
+    if (wild.length) out += '<div class="bvr-dvr-sub fade-up">Wildcards · 海选突围赛</div>' + signupTable(wild);
+    return out;
   }
   // 相关链接（直播回放 + 歌单链接，分平台）；任意届 d.links 存在即渲染
   function linksBlock(d) {
@@ -1316,11 +1417,12 @@
     nav.setAttribute('aria-label', '页内目录');
     var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
     nav.innerHTML = '<div class="bvr-toc__list">' + items.map(function (it) {
-      return '<div class="bvr-toc__item" data-target="' + it.id + '">' + esc(it.label) + '</div>';
+      return '<div class="bvr-toc__item" data-target="' + it.id + '">' +
+        '<span class="bvr-toc__dash"></span><span class="bvr-toc__label">' + esc(it.label) + '</span></div>';
     }).join('') + '</div>' +
       '<button class="bvr-toc__toggle" type="button" aria-label="页内目录">' + ICON + '</button>';
     document.body.appendChild(nav);
-    nav.classList.add('bvr-toc--visible');  // hero 较短，目录加载即显示（不绑定滚动阈值）
+    // 顶部（hero）时隐藏目录，下滚一定距离后再显示
 
     // 移动端悬浮按钮：点击展开/收起目录面板；点条目或点面板外部自动收起（桌面端 toggle 隐藏、list 常显，--open 无副作用）
     var toggle = nav.querySelector('.bvr-toc__toggle');
@@ -1329,7 +1431,10 @@
 
     var els = Array.prototype.slice.call(nav.querySelectorAll('.bvr-toc__item'));
     var navH = 72, suppress = false, timer = null;
+    function updateTocVisible() { nav.classList.toggle('bvr-toc--visible', window.scrollY > 300); }
+    updateTocVisible();
     window.addEventListener('scroll', function () {
+      updateTocVisible();
       if (suppress) { clearTimeout(timer); timer = setTimeout(function () { suppress = false; }, 200); }
     }, { passive: true });
     var obs = new IntersectionObserver(function (entries) {
@@ -1447,7 +1552,8 @@
     buildMentions(d);  // 正文「X妈」自动链接映射（全届花名册 + 本届 members）
     document.title = d.edition_name + ' | Barvision';
     var root = document.getElementById('bvr-root');
-    var html = buildHero(d);
+    // live（本届实时更新页）的 hero 由页面自身静态提供（复用 events 风格 + 倒计时），渲染器不再生成
+    var html = d.live ? '' : buildHero(d);
     var toc = [];
     var th = theme(d);
     var annual = isAnnual(d);
@@ -1466,13 +1572,30 @@
     var el = entryListBlock(d);
     if (el) { html += section('entries', '参赛名单', 'Entries', '', el); toc.push({ id: 'entries', label: '参赛名单' }); }
 
-    // 1.4) 海选阶段（仅 d.auditions 存在时；本届起不匿名、部分成员办海选选曲）
-    var ab = auditionsBlock(d);
-    if (ab) { html += section('auditions', '海选阶段', 'Auditions', '', ab); toc.push({ id: 'auditions', label: '海选阶段' }); }
+    // 1.35) 进行中（live，本届实时更新页）：报名名单（Candidates / Wildcards）
+    if (d.live) {
+      var sl = signupListBlock(d);
+      if (sl) { html += section('signups', '选送名单', 'Submissions', '', sl); toc.push({ id: 'signups', label: '选送名单' }); }
+    }
 
-    // 1.5) 成员变动
-    var mc = memberChangesBlock(d);
-    if (mc) { html += section('changes', '成员变动', 'Roster Changes', '', mc); toc.push({ id: 'changes', label: '成员变动' }); }
+    // 1.4) 海选阶段（仅 d.auditions 存在时；本届起不匿名、部分成员办海选选曲；进行中则标题用「海选进展」）
+    var ab = auditionsBlock(d);
+    if (ab) {
+      var audLabel = d.live ? '海选进展' : '海选阶段';
+      html += section('auditions', audLabel, 'Auditions', '', ab); toc.push({ id: 'auditions', label: audLabel });
+    }
+
+    // 1.45) 信息板块（本届实时更新页：赛程 / 投票 / 资格 / 规则 / 关于，数据驱动，排在海选之后）
+    infoSectionsBlocks(d).forEach(function (s) {
+      html += section(s.id, s.cn, s.en, s.subtitle, s.html);
+      toc.push({ id: s.id, label: s.cn });
+    });
+
+    // 1.5) 成员变动（live 进行中报名阶段名单未定，跳过——否则上届全员会被误判为「退出」）
+    if (!d.live) {
+      var mc = memberChangesBlock(d);
+      if (mc) { html += section('changes', '成员变动', 'Roster Changes', '', mc); toc.push({ id: 'changes', label: '成员变动' }); }
+    }
 
     // 2) 每个 match：结果概览 + Detailed voting results（计分板 / 12 分）
     var multi = d.matches.length > 1;

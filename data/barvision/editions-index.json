@@ -1764,9 +1764,9 @@
      "handle": "Stephen"
     },
     {
-     "name": "X妈",
-     "id": 195,
-     "handle": "没有XX不科学"
+     "name": "XX妈",
+     "id": 88,
+     "handle": "xjebs"
     },
     {
      "name": "杰妈",
@@ -1824,6 +1824,14 @@
      "handle": "哈哈哈时光机"
     }
    ]
+  },
+  {
+   "no": 16,
+   "year": 2026,
+   "version": "regular",
+   "name": "Barvision Chongqing 2026",
+   "href": "/barvision/2026/16.html",
+   "roster": []
   }
  ]
 }

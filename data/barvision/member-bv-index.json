@@ -179,6 +179,15 @@
   "best": 6,
   "active_in": 14
  },
+ "88": {
+  "editions": [
+   15
+  ],
+  "active": true,
+  "count": 1,
+  "best": 11,
+  "active_in": 15
+ },
  "100": {
   "editions": [
    13,
@@ -747,13 +756,12 @@
    3,
    4,
    5,
-   8,
-   15
+   8
   ],
   "active": true,
-  "count": 14,
+  "count": 13,
   "best": 2,
-  "active_in": 15
+  "active_in": 8
  },
  "295": {
   "editions": [
@@ -831,13 +839,6 @@
   "unclaimed": true
  },
  "77": {
-  "editions": [],
-  "active": true,
-  "count": 0,
-  "best": null,
-  "active_in": 2026
- },
- "88": {
   "editions": [],
   "active": true,
   "count": 0,

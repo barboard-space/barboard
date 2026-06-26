@@ -235,7 +235,8 @@
   var BV_STRIPE = {
     2023: ['#f84d39', '#fbb1a9'],  // 珊瑚红 / 浅珊瑚（海报浅红色）
     2024: ['#fc91c1', '#f961a6'],  // 浅粉 / 中粉
-    2025: ['#f4a259', '#e0612e']   // 暖橙 / 深橙（橙黄渐变）
+    2025: ['#f4a259', '#e0612e'],  // 暖橙 / 深橙（橙黄渐变）
+    2026: ['#3d9bff', '#a855f7']   // 电光蓝 / 紫（蓝紫条纹）
   };
   function bvStripeDefs(id, c1, c2) {
     return '<defs><pattern id="' + id + '" width="240" height="240" patternUnits="userSpaceOnUse" patternTransform="translate(0,26) rotate(60)">' +

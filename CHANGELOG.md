@@ -4,6 +4,30 @@
 
 ---
 
+## [2026-06-26] — 第 16 届「本届实时更新页」16.html + events.html 重构为歌曲提交通道
+
+### Added
+- **`barvision/2026/16.html`「本届实时更新页」**：薄壳复用 `bv-results-render.js` 的新 **live 分支**（`regular-16.json` 顶层 `live:true`）。含 events 风格静态 hero + **选送名单**（Candidates·Semi-Final / Wildcards·海选突围赛 两表）+ **海选进展**（11 场含 status，未公布获胜曲显「等待宣布」/「—」）+ **info_sections**（赛程/投票/规则/关于，数据驱动结构化 rules）。
+- **`data/barvision/barvision-2026/regular-16.json`**：进行中契约数据（signups 11 Candidates + 5 Wildcards / 11 场海选 / info_sections / `live`/`submit_url`/`version`）。
+- **`scripts/sync_bv2026_live.py`**：`regular-16.json` 的 `feed[]` → 首页 `updates.json` 同步脚本（`src:"bv2026live"` 标记、只管自己条目）。**功能暂 hold**（feed 留空）。
+- 渲染器 `rulesSection` 新增 `items[]`（纯项目符号列表）；`BV_THEME[2026]`（紫 `#c084fc`）/ `BV_STRIPE[2026]`（蓝紫）。
+
+### Changed
+- **`barvision/2026/events.html` 重构为「歌曲提交通道」专用子页**：移除 赛程/投票/规则/关于（迁入 16.html），保留 提交 + 参赛要求；正文统一为信息卡 `.ev-info-card`（圆点列表，取代旧密集边框块）；hero 中文标题「歌曲 / 提交通道」、去 meta 三标签 / CTA 按钮 / 更新日期、intro 改报名提示去重；两栏布局（左 须知+资格 / 右 表单），手机端表单优先。
+- **导航通达**：barvision XVI 当届卡 + 首页 XVI 卡 / 季卡「本届总览」→ 指向 `16.html`；「歌曲报名」仍 → `events.html#submit`；events eyebrow ← 回 16.html。
+- **详情页目录改 Notion 风格**（全详情页通用）：网页端右侧缩略横线、hover 推出文字标签 + 过渡、字号缩小；顶部隐藏、下滚 >300px 显示；横线整体缩短（14/22px）。手机端仍悬浮按钮面板。
+- ed16 多艺人按 #15 规范：`Adam Doleac` — `Day One (feat. Madeline Merlo)`、`RabbitJ` — `Shimmer (feat. Kinoko)`、`Emil Kárlsen & Elina Iijäs`。
+
+### Fixed
+- **ed15 数据更正**：`regular-15.json` 误录的「X妈」(id195) 全部改为「XX妈」(id88, xjebs)，重跑 gen 脚本（记录迁至 member/88）。
+- **右侧报名表单悬浮失效**：根因 = 祖先 `.fade-up.visible` 的 `transform:translateY(0)` 破坏后代 `position:sticky`，且 grid 子项 CSS sticky 不稳（#67）→ 改用 **JS 驱动悬浮** `initStickyPanel()`（transform 实时计算）。
+- 赛程三表日期列宽不一 → `#schedule .bvr-rule__tbl th{width:120px}` 统一（保留正文字体避开 DM Mono 无中文 #13）。
+
+### Docs
+- CLAUDE.md 新增 #164（16.html / events 重构 / JS 悬浮 / Notion 目录），更新已完成 + 待建。
+
+---
+
 ## [2026-06-26] — 移动端 hero 主视觉透出 + 近届年度卡遮罩调浅
 
 ### Fixed
