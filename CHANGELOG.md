@@ -4,6 +4,29 @@
 
 ---
 
+## [2026-06-26] — 第 15 届(Jinzhong 2025)赛果数据 + 半决赛 20 票制 / 海选 / 三态排序
+
+### Added
+- **第 15 届 Jinzhong 2025 赛果数据**：`scripts/parse_bv_edition15.py` → `regular-15.json`（SF1/SF2/GF）。冠 威妈 Boy In Love 357（评151+观206）/亚 S妈 Virus 310 / 季 雨妈 Glitter & Honey 308；overall 1–26 与官方 25-Scoreboard.csv 完全一致。本届半决赛即引入观众分（20 票制，三场均 `tele_mode='votes'`）、东道主 S妈/威妈直通决赛、首届不匿名、狼/芬合报。
+- **「海选阶段」section**（`auditionsBlock`，JSON `auditions`）：10 场海选表（海选名称/成员/时间/获胜歌手/获胜歌曲）+ MOLODI 换曲 my sea 注释。
+- **Tele Scoreboard 观众分/票数拆两列**（新增冻结列 `.raw`「票数」，不可排序）。
+- `regular-15.json` 文案：summary（威妈夺冠）/ visual_design / 结构化 rules（含海选机制）/ per-match summary / links（Recap + Spotify/网易云/QQ 歌单）。
+
+### Changed
+- **计分板拆分条件**改为 `isGF || tele_mode==='votes'`：2025 SF1/SF2 也拆 Jury/Tele 两表。`bvRunningOrder` 优先用数据自带 `ro`。总成绩单 host/co-host 显「直通」。
+- **排序箭头三态**（结果表 + 计分板）：默认(都不亮) → 降序(下亮) → 升序(上亮) → 默认（恢复初始顺序）。
+- **member.html 实心 logo = 2026 参赛名单**（`BV2026_ACTIVE` space_id 集，覆盖原年份判定）；4 位无往届数据的新参赛者补 bv_index 仅点亮 logo。
+- **城市加省名**：第 14 届 通化→吉林通化、第 13 届 齐齐哈尔→黑龙江齐齐哈尔。萌艺人沿用现名 MYTCH。
+
+### Fixed
+- **冻结窗格横滑轻微抖动**：`stickyMatrixCols`/`stickyResultCols` left 偏移改用分数精度 `getBoundingClientRect().width`（替代整数 `offsetWidth`），消除舍入缝隙（桌面 + 手机）。
+- **手机端结果表 R/O 表头排序箭头被截断**：去掉箭头负右边距（原溢出到相邻冻结列下被遮）。
+
+### Docs
+- CLAUDE.md #163（第 15 届导入全要点）；更新「待建」（1–15 届已导入，下一步第 16 届 2026）。
+
+---
+
 ## [2026-06-25] — 第 15 届(Jinzhong 2025)主题/hero 接入
 
 ### Added

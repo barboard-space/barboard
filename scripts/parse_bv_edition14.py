@@ -273,7 +273,7 @@ def title_genre(g):
     return g[:1].upper() + g[1:] if g and g[0].isascii() else g
 
 # ───────────────────────── 文案（导入后转手工维护）─────────────────────────
-SUMMARY = ('第十四届吧视于 2024 年在通化举办，由羊妈主办、威妈协办。26 位成员选送 28 首歌曲，'
+SUMMARY = ('第十四届吧视于 2024 年在吉林通化举办，由羊妈主办、威妈协办。26 位成员选送 28 首歌曲，'
            '经两场半决赛后共有 18 首进入决赛，并由评审团与观众投票共决冠军。\n\n'
            '最终，S妈选送、Bennett Coast 演唱的 “Pretender” 以 266 分首夺吧视冠军，并刷新吧视历史最高总分纪录；'
            '雨妈的 “Eyes Wide”（259 分）与 A妈的 “Honeycrash”（209 分）分列亚、季军。')
@@ -383,7 +383,7 @@ def main():
     data = {
         'year': 2024, 'edition_no': 14, 'edition_name': 'Barvision Tonghua 2024',
         'cn_name': '第十四届欧美流行歌曲个人榜吧歌曲大赛', 'version': 'regular',
-        'city': '通化', 'host': '羊妈', 'motto': '',
+        'city': '吉林通化', 'host': '羊妈', 'motto': '',
         'summary': SUMMARY, 'visual_design': VISUAL, 'rules': RULES, 'links': LINKS,
         'source': '第十四届吧视报名总则 + 24-SF1/SF2.csv（半决赛逐票）+ 24-GF-JURY/TELE.csv（决赛评委/观众逐票）',
         'members': {k: MEMBERS[k] for k in sorted(MEMBERS)},

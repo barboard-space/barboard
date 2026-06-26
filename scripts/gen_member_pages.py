@@ -10,10 +10,13 @@ import glob
 import json
 import os
 
-# 活跃判定：最近参赛年份 ≥ 此值 → active（member.html 用实心 logo，否则空心）
+# 活跃判定：最近参赛年份 ≥ 此值 → active（旧的年份判定；现已被 BV2026_ACTIVE 名单覆盖，见下）
 BV_ACTIVE_SINCE_YEAR = 2024
 # 观众分(tele)自此年起改为 20 票制（非 1-12 分），不计入「广义 12 分」均分；此前 jury/tele 均为 1-12 制
 BV_TELE_SINCE_YEAR = 2024
+# ⭐ member.html 实心 logo「点亮」= 参加本届（2026）吧视者。2026 尚无赛果数据，故用手动名单（space_id）。
+# 名单内成员实心、其余空心；无往届数据的新参赛者也补进 bv_index（仅点亮 grid logo）。下届有数据后按需更新。
+BV2026_ACTIVE = {7, 17, 18, 19, 20, 31, 33, 45, 67, 77, 88, 100, 101, 105, 119, 132, 195}
 
 
 def load_bv_editions(base):
@@ -246,7 +249,7 @@ def main():
                 bv_index[str(space_id)] = {
                     # 仅报名取消组（如 12B）不算参加该届——与届徽章规则一致，排除 canceled
                     "editions": sorted(set(e["edition_no"] for e in bv["entries"] if not e.get("canceled"))),
-                    "active": ov["active"], "count": ov["entries"] + ov["shadow"],
+                    "active": space_id in BV2026_ACTIVE, "count": ov["entries"] + ov["shadow"],
                     "best": ov["best"], "active_in": ov["active_in"],
                 }
 
@@ -274,6 +277,12 @@ def main():
             "active_in": ov["active_in"], "unclaimed": True,
         }
         print(f"  0.html — 匿名（伪成员，{ov['shadow']} 首混淆曲）")
+
+    # 2026 参赛但无往届赛果数据的成员 → 补 bv_index 条目（仅点亮 grid 实心 logo；个人页暂无吧视板块）
+    for sid in BV2026_ACTIVE:
+        if str(sid) not in bv_index:
+            bv_index[str(sid)] = {"editions": [], "active": True, "count": 0, "best": None, "active_in": 2026}
+            print(f"  + bv_index[{sid}] — 2026 新参赛者（无往届数据，点亮 logo）")
 
     idx_path = os.path.join(base, "data", "barvision", "member-bv-index.json")
     with open(idx_path, "w", encoding="utf-8") as f:

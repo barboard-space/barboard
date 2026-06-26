@@ -50,7 +50,7 @@
 - `barvision/2019/regular-01.html` — **Barvision 历届详情页（第一届，已完成，模板基准）**；薄壳 + 共享 `scripts/bv-results-render.js` + `data/barvision/barvision-2019/regular-01.json`；板块 赛制/结果概览/Scoreboard 矩阵/12 Points + 页内 TOC；可点表头排序、桌面+手机两端已打磨；解析脚本 `scripts/parse_bv_edition.py`；详见开发注意事项 **#130**。barvision.html 届次卡 Ⅰ 已接入链接（`BUILT_EDITIONS`）
 
 ### 待建页面（按优先级）
-- **Barvision 历史成绩数据体系（进行中，见 #129–#162）**：**第 1–14 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三届 + 2024 第十四届「年度制」全部完成，见 #157–#161）。**第 15 届（Jinzhong 2025）主题/hero 已接入**（#162：BV_THEME/BV_STRIPE/RECENT_BG/薄壳 15.html/stub regular-15.json + 橙调 hero + 橘红 c1），**赛果数据待导**。**下一步：导第 15 届赛果数据（SF1/SF2/GF）**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
+- **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**下一步：第 16 届（Chongqing 2026，进行中）赛后导入**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -729,7 +729,22 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **主视觉**（设计=威妈：深红格栅抽象"晋中"笔画 + 橙黄马赛克取自平遥古城剪影/丘陵地貌）：`assets/images/barvision/2025/{poster,bg,bg-orange}.png`（均 16:9，用户放）——`poster.png`=橙黄渐变+logo右（桌面 hero）、`bg-orange.png`=橙黄渐变无 logo（手机 hero）、`bg.png`=深红块状无 logo（近届卡 RECENT_BG；红=主基调）。
     - **主题配色（用户试色定稿：桌面/手机均橙调 + 橘红字）**：`BV_THEME[2025]`={poster:`poster.png`(桌面), posterMobile:`bg-orange.png`(手机), c1:`#df5a2c`(橘红——由初版纯红 `#d4232a` H358° 往橘调降饱和至 H15°), c2:`#5e0f14`(深酒红 glow), c2l/c3:`#f4a259`(暖橙，hero 简介/徽章浅), glow(橘红+暖橙 radial)}；`BV_STRIPE[2025]`=`['#f4a259','#e0612e']`(暖橙/深橙 徽章)；`RECENT_BG[2025]`=`bg.png`(近届卡)。
     - 薄壳 `barvision/2025/15.html` + `BUILT_EDITIONS` 加 `/barvision/2025/15.html`；stub `data/barvision/barvision-2025/regular-15.json`（hero 元数据 + 视觉设计文案 + 设置型 summary[赛果待补]、`matches:[]`、`_stub`）。城市晋中、主办 S妈(上届冠军代表)、协办威妈、`cn_name` 第十五届。
-    - **下一步：导 2025 赛果数据**（SF1/SF2/GF）——源 `D:\Genius\Barvision\Barvision 2025`（`Barvision 2025 Semi-Final 1/2.xlsx` + `Barvision 2025.xlsx` + `data/`，另有 `BarVision2025报名总则…docx` 出规则、`GF-Running Order-Jury.png` 等）；GF 18 首名单已知（图3：丁/威/芬狼/邓/S/吃/鸽/奶/杰/汞/萌/羊/X/包/雨/泰/韩/松）；**2025 观众分每首≤10 票**（GF `tele_mode='votes'` 无 top，同 #161）；按 BARVISION_MEMBER.md §二 SOP + #161 走（parser 设 qualified、recompute/gen 管线、东道主双歌概览自动去重）。
+    - **下一步：导 2025 赛果数据**——见 #163（已完成）。
+163. **第 15 届（Jinzhong 2025）赛果数据 + 半决赛 20 票制 / 海选 / 直通 / 三态排序（已完成，全数据驱动 + 桌面手机预览验证）**：
+    - **数据层** `scripts/parse_bv_edition15.py` → `regular-15.json`（SF1/SF2/GF，源 `Barvision 2025\data\25-{SF1,SF2,GF,Scoreboard}.csv`）。冠 **威妈 Boy In Love 357**（评151+观206）/亚 S妈 Virus 310 / 季 雨妈 Glitter & Honey 308；**overall 1–26 与官方 25-Scoreboard.csv 完全一致**（得票率/评委·观众人数逐项核对）。
+    - **⭐ 2025 关键差异（与 2024）**：① **半决赛就引入观众分（20 票制）**——SF1/SF2/GF **三场都是** 评委(Top10 1-12)+观众(20 票→观众分) 双轨、均 `tele_mode='votes'`；CSV 双轨格式：`...语种,[评委票],得分(=评委分),[观众票],票数(=原始票),得分(=观众分),总分`。② **东道主直通**：S妈(主办)/威妈(协办) 直接进 GF、不参加半决赛（GF 有、SF 无；总成绩单 SF 列显「直通」）。③ **首届不匿名 + 10 人海选**（见下 auditions）。④ 狼/芬合报、每人 1 首、无折算无混淆。⑤ CSV 自带 `R/O`(SF col0)/`序号`(GF)=出场顺序 → entry `ro` 字段。⑥ 萌艺人 = **MYTCH**（已改名，沿用 CSV）。
+    - **⭐ 渲染新增/改动（bv-results-render.js，全通用）**：
+      · **计分板拆分条件** `isGF` → `isGF || m.tele_mode==='votes'`：使 2025 SF1/SF2 也拆「Jury Scoreboard / Tele Scoreboard」两表（20 票制不能与 1-12 合并、观众无金标）。
+      · **`bvRunningOrder` 优先用 `e.ro`**（数据自带出场顺序）；无则回退（SF 艺人字母 / GF eid+1）。
+      · **Tele Scoreboard 观众分/票数拆两列**：新增冻结列 `.raw`(票数)，在 Tele(观众分) 之后；`stickyMatrixCols` 加 `--mtx-l-raw`。票数列**不可排序**。
+      · **新增「海选阶段」section** `auditionsBlock`（JSON 顶层 `auditions{note,list[{name,member,period,artist,song}]}`）：表 海选名称/成员/时间/获胜歌手/获胜歌曲 + note（邓视海选 MOLODI「я не я」获胜、正式曲改「my sea」）；置于参赛名单后；手机端取消冻结（同 .bvr-el）。
+      · **总成绩单 host/co-host 显「直通」**（`.bvr-sb-direct`，无 SF 徽章时）。
+    - **⭐ 冻结窗格横滑轻微抖动修复**：`stickyMatrixCols`/`stickyResultCols` 的 left 偏移由整数 `offsetWidth` 累加改为分数精度 `getBoundingClientRect().width`（`colW()`）——整数舍入误差使冻结列 left 与静止位差零点几 px，横滑时抖动/缝隙。双端生效。
+    - **⭐ 排序箭头三态**（`wireSortable` 结果表 + `wireMatrixSort` 计分板）：**默认(都不亮,初始序) → 降序(下亮) → 升序(上亮) → 默认**。两函数都捕获初始行序作默认态，循环到默认时清 `data-sort` + 还原行序。
+    - **⭐ member.html 实心 logo = 2026 参赛名单**（`gen_member_pages.py` 常量 `BV2026_ACTIVE` space_id 集；覆盖原年份判定，2026 无赛果数据故手动名单）：名单内实心、其余空心；**4 位无往届数据的新参赛者**（XX妈88/白妈77/笃妈33/海妈119）补进 `bv_index`（`editions:[],active:true`）仅点亮 grid logo。下届有数据后更新名单。
+    - **手机端 R/O 表头箭头修复**：`.th-ro` 排序箭头去负右边距（原 `-10px` 使箭头右半溢到相邻冻结「选送者」列下被遮）。
+    - **城市改名**（hand-edit JSON + ed14 parser 同步）：ed14 通化→**吉林通化**、ed13 齐齐哈尔→**黑龙江齐齐哈尔**（summary 正文 + city 字段；hero meta 用英文城市不变）。
+    - **下一步：第 16 届（Chongqing 2026，进行中）赛果待赛后导**；HOF 历届前三改版 + 全量数据核对仍待办。
 
 ## 对话交接工作流
 
