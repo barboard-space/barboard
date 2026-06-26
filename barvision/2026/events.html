@@ -448,6 +448,7 @@
     }
     @media (max-width: 768px) {
       .ev-hero            { padding: calc(var(--nav-h) + 40px) 0 56px; }
+      .ev-hero__poster    { background-image: url('../../assets/images/barvision/2026/bg.png'); }  /* 手机端用无 logo 底图 */
       .ev-section         { padding: 60px 0; }
       .ev-section__hd     { margin-bottom: 36px; }
       .ev-section__hd .section__title { margin-top: 16px; }
@@ -792,7 +793,9 @@
     var im = new Image();
     function done() { el.classList.add('loaded'); }
     im.onload = done; im.onerror = done;
-    im.src = '../../assets/images/barvision/2026/poster.png';
+    // 按视口预解码实际显示的底图：手机端 bg.png（无 logo）/ 桌面端 poster.png
+    im.src = window.matchMedia('(max-width:768px)').matches
+      ? '../../assets/images/barvision/2026/bg.png' : '../../assets/images/barvision/2026/poster.png';
     if (im.decode) { im.decode().then(done).catch(function () {}); }
   })();
 

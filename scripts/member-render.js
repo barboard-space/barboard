@@ -243,34 +243,28 @@
       '<rect width="120" height="240" fill="' + c1 + '"/>' +
       '<rect x="120" width="120" height="240" fill="' + c2 + '"/></pattern></defs>';
   }
+  // 单枚届徽章（空心五边形 logo + 届号；创始届金 + 光晕，2023+ 双色斜条纹）
+  function oneBadge(no, year) {
+    var first = no === 1;
+    var stripe = !first && BV_STRIPE[year];
+    var logoColor = first ? 'var(--clr-gold)' : (BV_YEAR_COLOR[year] || 'var(--clr-board)');
+    var pid = 'bvstr-' + no;
+    var pathTag = stripe
+      ? bvStripeDefs(pid, stripe[0], stripe[1]) + '<path d="' + LOGO_HOLLOW_PATH + '" style="fill:url(#' + pid + ')"/>'
+      : '<path d="' + LOGO_HOLLOW_PATH + '"/>';
+    return '<span class="mp-bv-badge' + (first ? ' mp-bv-badge--first' : '') + '" title="第' + no + '届 Barvision' + (first ? ' · 创始届' : '') + '" style="color:' + logoColor + '">' +
+      '<svg class="mp-bv-badge__mark" viewBox="0 0 770 746" aria-hidden="true">' + pathTag +
+        '<text class="mp-bv-badge__num" x="382" y="497" text-anchor="middle" style="fill:var(--clr-text);font-size:300px">' + no + '</text>' +
+      '</svg></span>';
+  }
   function bvBadges(bv) {
     var seen = {}, list = [];
     (bv.entries || []).forEach(function (e) {
       if (e.canceled) return;  // 仅报名取消组（如 12B）不计入届徽章——须参加正式比赛才获该届徽章
       if (e.edition_no != null && !seen[e.edition_no]) { seen[e.edition_no] = 1; list.push({ no: e.edition_no, year: e.year }); }
     });
-    if (!list.length) return '';
     list.sort(function (a, b) { return a.no - b.no; });
-    return list.map(function (ed) {
-      var first = ed.no === 1;  // 创始届：金色 + 光晕
-      var stripe = !first && BV_STRIPE[ed.year];  // 2023+ 双色斜条纹
-      var logoColor = first ? 'var(--clr-gold)' : (BV_YEAR_COLOR[ed.year] || 'var(--clr-board)');
-      var numColor = 'var(--clr-text)';  // 徽章数字全站统一为 --clr-text
-      var fs = 300;  // 一位/两位数字号统一（1-9 与 10-13 一致）
-      var x = 382;
-      var y = 497;
-      var pid = 'bvstr-' + ed.no;
-      // 条纹款：path 用 pattern fill（inline style 覆盖 CSS 的 fill:currentColor）
-      var pathTag = stripe
-        ? bvStripeDefs(pid, stripe[0], stripe[1]) + '<path d="' + LOGO_HOLLOW_PATH + '" style="fill:url(#' + pid + ')"/>'
-        : '<path d="' + LOGO_HOLLOW_PATH + '"/>';
-      return '<span class="mp-bv-badge' + (first ? ' mp-bv-badge--first' : '') + '" title="第' + ed.no + '届 Barvision' + (first ? ' · 创始届' : '') + '" style="color:' + logoColor + '">' +
-        '<svg class="mp-bv-badge__mark" viewBox="0 0 770 746" aria-hidden="true">' +
-          pathTag +
-          '<text class="mp-bv-badge__num" x="' + x + '" y="' + y + '" text-anchor="middle" style="fill:' + numColor + ';font-size:' + fs + 'px">' + ed.no + '</text>' +
-        '</svg>' +
-      '</span>';
-    }).join('');
+    return list.map(function (ed) { return oneBadge(ed.no, ed.year); }).join('');
   }
   function renderBvRows(list) {
     return list.map(function (e) {
@@ -904,7 +898,8 @@
   if (!root) return;
 
   // 未认领伪成员：大名弱化、无头像/标签/外链；否则正常 hero
-  var bvBadgeHtml = d.barvision ? bvBadges(d.barvision) : '';
+  // 届徽章 = 往届赛果徽章 + 第 16 届徽章（已报名/办海选第 16 届者，即便暂无赛果）
+  var bvBadgeHtml = (d.barvision ? bvBadges(d.barvision) : '') + (d.bv2026 ? oneBadge(16, 2026) : '');
   var heroHtml = d.unclaimed
     ? '<section class="mp-hero mp-hero--unclaimed">' +
         '<div class="mp-hero__inner section__inner">' +

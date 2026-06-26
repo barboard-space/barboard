@@ -272,9 +272,9 @@
       .bv-current-card       { grid-template-columns: 1fr; gap: 32px; }  /* 文字与 logo 拉开距离（手机端 --gap-md 会缩到 20px，故用显式值） */
       .bv-recent-archive-grid { grid-template-columns: repeat(3, 1fr); }
       .bv-unplugged-grid      { grid-template-columns: repeat(4, 1fr); }
-      /* 近届卡（2023–2025）logo 在手机端放大：收窄容器内边距 */
+      /* 近届卡（2023–2025）logo 在手机端放大：收窄容器内边距 + 上限 70px */
       .bv-arch-card--recent .bv-arch-card__logo { padding: 16px 11px; }
-      .bv-arch-card--recent .bv-arch-card__logo img { max-width: 100%; }
+      .bv-arch-card--recent .bv-arch-card__logo img { max-width: 70px; }
     }
     @media (max-width: 465px) {
       .bv-archive-grid   { grid-template-columns: repeat(4, 1fr); }

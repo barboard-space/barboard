@@ -51,6 +51,7 @@
 - `barvision/2019/regular-01.html` — **Barvision 历届详情页（第一届，已完成，模板基准）**；薄壳 + 共享 `scripts/bv-results-render.js` + `data/barvision/barvision-2019/regular-01.json`；板块 赛制/结果概览/Scoreboard 矩阵/12 Points + 页内 TOC；可点表头排序、桌面+手机两端已打磨；解析脚本 `scripts/parse_bv_edition.py`；详见开发注意事项 **#130**。barvision.html 届次卡 Ⅰ 已接入链接（`BUILT_EDITIONS`）
 
 ### 待建页面（按优先级）
+- **⭐ Barvision 数据库化（进行中，见 #167）**：数据基座 `bv-stats.json` 已建（`gen_bv_stats.py`）。**下一步**：#17 补全趣味奖项自动计算 → #18 重做 `barvision/hof.html`（荣誉/领奖台/自动纪录，对齐新 bvr 设计、标注数据截至第 15 届）→ #19 新建 `barvision/stats.html`（历届总览/选送排行/查询[成员·歌手·歌曲·语种]）。纪录口径/合报歌曲向不拆/未晋级减半等见 #167。
 - **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**下一步：第 16 届（Chongqing 2026，进行中）赛后导入**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
 - ~~第 16 届「本届实时更新页」~~ **已完成**（见 #164，页面 = `barvision/2026.html`，路径方案 #165）。**剩余**：报名/海选实时数据随进展更新（编辑 `regular-16.json` 的 `signups`/`auditions`）；首页 feed 同步功能**用户已 hold**（脚本就绪、`feed:[]`）；待确认数据项（邓妈 European Fever 获胜曲、海选时间）见 #164。
 - `about.html` — 关于榜吧完整历史
@@ -771,6 +772,14 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **barvision.html 近届/当届卡微调**：① 个别届主视觉在 `cover` 之上再放大——`buildRecentArchiveGrid` 加 `RECENT_BG_SIZE` map（如 `{2024:'128%'}`），inline `background-size` 覆盖 cover（桌面+手机通用；要调别的届加一条）。② 手机端 XVI 当届卡（`.bv-current-card`）文字↔logo 行间距用**显式 `32px`**（`--gap-md` 手机端会缩到 20px，故不用 token）。③ 手机端近届卡（2023–2025）logo 放大：`.bv-arch-card--recent .bv-arch-card__logo` padding `22/28→16/11px`、img `max-width:100%`。
     - **选送名单两表列宽统一**：Candidates / Wildcards 两张 `.bvr-su` 表原各自 auto-layout 取列宽 → 不对齐。加 `.bvr-su{table-layout:fixed}` + 六列固定百分比（选送者15/歌手21/歌曲名26/语言9/流派14/报名方式15），两表完全对齐（长歌名自动换行；`.bvr-tbl` 本就 `width:100%`、song/artist 不 nowrap）。
     - **ed16 邓妈 European Fever 已出冠亚军**（`regular-16.json`）：海选获胜曲 `Chris De Sarandy — Body & Soul`；Candidates 加冠军（→12 首）、Wildcards 加亚军 `Douwe Bob & SERA — Could Have Been Us`（→6 首），均 Pop/英语。**报名/海选实时数据随进展直接编辑 `regular-16.json` 的 `signups`/`auditions` 即可**（无需跑脚本，前端 fetch 渲染）。
+167. **⭐ Barvision 数据库化：HOF 重做 + 新建 stats.html（规划已定、数据基座已建，页面待做）**：现有全量历史数据（1–15 届完整 + 16 进行中），决定把 barvision 数据分**两页**（用户确认）：
+    - **`barvision/hof.html`（保留，荣誉/纪录页）**：策展向——历届冠军领奖台 + 自动纪录 + 趣味奖项 + 先锋奖。仅常规版（**暂不做娱乐版**）。
+    - **`barvision/stats.html`（新建，数据中心 / Stats）**：历届成绩总览 + 大妈选送排行榜（可排序）+ 大数据查询（成员/歌手/歌曲/**语种**）。**合报曲：成员向视图拆计双方、歌曲向视图不拆（一条）**；混淆不计正式、匿名归 id 0。
+    - **✅ 数据基座已建：`scripts/gen_bv_stats.py` → `data/barvision/bv-stats.json`**（复用 `gen_member_pages.aggregate_barvision`）。结构：`data_through`(=15) + `members`{id→{nickname,handle,overview}} + `entries`[扁平歌曲向，合报不拆、ids 含双方] + `podium`[历届领奖台：有 GF 取 GF 前三、否则各组前三] + `records`{自动纪录} + `season`{赛季纪录}。**改任意届 JSON 后重跑 `python scripts/gen_bv_stats.py`**。
+    - **纪录口径（用户拍板）**：① 尽量自动计算、减手工（仅先锋奖手工）；② 「最多夺冠场数」（按夺冠场次计，绕开混淆冠军曲歧义）= 3（猴/包/雨）；③ 「最高单届总分」限**分组制 LEGACY**（281 包妈；年度制单届单曲与单组总分重复故排除，标 `legacy:true`）；④ 旧「100% 支持率」无法复现 → 改「最高单场得票占比」(得分÷全场)；⑤ 「最多参与场数」年度制 SF+GF 各计 1 场（31 雨妈）；⑥ **匿名(id 0) 不参与成员类纪录**。领奖台列＝排名/选送妈/歌手/歌名/分数（top-3×15 届、紧凑）。
+    - **个人页统计规则（已入聚合，member 页 + stats 同步）**：2023+ **未晋级决赛**(annual SF 淘汰, `final==False`)的歌曲 → **不计其半决赛 12 分**（twelve=0）+ **Jury 均分时半决赛得分减半**（`gen_member_pages._emit_bv` / `aggregate_barvision`）。
+    - **ed16 徽章/筛选自动化**：`BV2026_ACTIVE` 硬编码 → 改 `gen_member_pages.load_bv2026_ids()` **从 regular-16.json 自动推导**（signups 选送者 + auditions 海选 host，含进行中）。这些成员：member.html 实心 logo + 「第十六届」下拉筛选 + 个人页 hero 第 16 届徽章（`MEMBER_DATA.bv2026=true` → `member-render.oneBadge(16,2026)`，蓝紫条纹；无往届赛果者仅徽章、无成绩板）。`member-render.bvBadges` 已抽出 `oneBadge(no,year)`。
+    - **剩余阶段（下一会话）**：#17 补全趣味奖项自动计算（连冠/最长连续参赛/最长连续前十/卧薪尝胆/跳水天后/极限卡位/独家冠名/出道即巅峰等，脚本算 + 编辑文案配置）→ #18 重做 hof.html（对齐新 bvr 设计 + 领奖台 + 自动纪录区，读 bv-stats.json，标注「数据截至第 15 届」）→ #19 建 stats.html（总览/排行/查询，读 bv-stats.json）。
 
 ## 对话交接工作流
 

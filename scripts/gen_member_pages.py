@@ -14,9 +14,29 @@ import os
 BV_ACTIVE_SINCE_YEAR = 2024
 # 观众分(tele)自此年起改为 20 票制（非 1-12 分），不计入「广义 12 分」均分；此前 jury/tele 均为 1-12 制
 BV_TELE_SINCE_YEAR = 2024
-# ⭐ member.html 实心 logo「点亮」= 参加本届（2026）吧视者。2026 尚无赛果数据，故用手动名单（space_id）。
-# 名单内成员实心、其余空心；无往届数据的新参赛者也补进 bv_index（仅点亮 grid logo）。下届有数据后按需更新。
-BV2026_ACTIVE = {7, 17, 18, 19, 20, 31, 33, 45, 67, 77, 88, 100, 101, 105, 119, 132, 195}
+# ⭐ 第 16 届（2026）参赛者 = regular-16.json 的 signups 选送者 + auditions 海选举办者（自动推导，含进行中海选）。
+# 他们获得：member.html 实心 logo + 第十六届筛选 + 个人页第 16 届徽章（即便暂无赛果）。
+def load_bv2026_ids(base):
+    ids = set()
+    p = os.path.join(base, "data", "barvision", "barvision-2026", "regular-16.json")
+    try:
+        d = json.load(open(p, encoding="utf-8"))
+    except Exception:
+        return ids
+    mm = d.get("members", {}) or {}
+
+    def add(nick):
+        for part in ([n.strip() for n in nick.split("/")] if "/" in nick else [nick]):
+            info = mm.get(part, {}) or {}
+            if info.get("id"):
+                ids.add(int(info["id"]))
+    for s in d.get("signups", []):
+        if s.get("member"):
+            add(s["member"])
+    for a in (d.get("auditions", {}) or {}).get("list", []):
+        if a.get("member"):
+            add(a["member"])
+    return ids
 
 
 def load_bv_editions(base):
@@ -51,6 +71,8 @@ def _emit_bv(per, ed, m, e, series, rank, final=None):
         twelve = sum(1 for v in voters
                      if not (vote_mode and v.get("type") == "tele")
                      and v.get("points", {}).get(_pk) == 12)
+    if final is False:  # 2023+ 未晋级决赛的歌曲：不计其半决赛 12 分记录
+        twelve = 0
     rec = {
         "year": ed["year"], "edition_no": ed["edition_no"],
         "edition_name": ed["edition_name"], "version": ed["version"],
@@ -132,7 +154,10 @@ def aggregate_barvision(eds):
             if x["year"] < BV_TELE_SINCE_YEAR and x.get("tele") is not None:  # 2024 前 tele 也是 1-12 制
                 s += x["tele"]; n += (x.get("teleN") or 0)
             if n:
-                jpers.append(s / n)
+                v = s / n
+                if x.get("final") is False:  # 2023+ 未晋级决赛：半决赛得分减半计入 Jury 均分
+                    v *= 0.5
+                jpers.append(v)
         eds_stat = stat or entries  # 仅有取消条目的成员，debut/active 兜底用全部
         out[nick] = {
             "overview": {
@@ -206,6 +231,7 @@ def main():
     os.makedirs(member_dir, exist_ok=True)
 
     bv_by_id = aggregate_barvision(load_bv_editions(base))  # 现按 space_id(字符串) 聚合
+    bv2026 = load_bv2026_ids(base)  # 第 16 届参赛者（signups + 海选 host）
     bv_index = {}  # space_id -> {editions, active, count, best}
 
     space_ids = []
@@ -242,14 +268,20 @@ def main():
             if chart_id:
                 data["chart_id"] = chart_id
 
+            in26 = space_id in bv2026
+            if in26:
+                data["bv2026"] = True  # 第 16 届徽章（个人页 hero）
             bv = bv_by_id.get(str(space_id))
             if bv:
                 data["barvision"] = bv
                 ov = bv["overview"]
+                # 届号集合：往届赛果（排除取消组 12B）+ 第 16 届（若已报名/办海选）——驱动 member.html 第十六届筛选
+                eds = set(e["edition_no"] for e in bv["entries"] if not e.get("canceled"))
+                if in26:
+                    eds.add(16)
                 bv_index[str(space_id)] = {
-                    # 仅报名取消组（如 12B）不算参加该届——与届徽章规则一致，排除 canceled
-                    "editions": sorted(set(e["edition_no"] for e in bv["entries"] if not e.get("canceled"))),
-                    "active": space_id in BV2026_ACTIVE, "count": ov["entries"] + ov["shadow"],
+                    "editions": sorted(eds),
+                    "active": in26, "count": ov["entries"] + ov["shadow"],
                     "best": ov["best"], "active_in": ov["active_in"],
                 }
 
@@ -278,11 +310,11 @@ def main():
         }
         print(f"  0.html — 匿名（伪成员，{ov['shadow']} 首混淆曲）")
 
-    # 2026 参赛但无往届赛果数据的成员 → 补 bv_index 条目（仅点亮 grid 实心 logo；个人页暂无吧视板块）
-    for sid in BV2026_ACTIVE:
+    # 第 16 届参赛但无往届赛果数据的成员 → 补 bv_index（editions=[16] 点亮 logo + 进第十六届筛选；个人页暂无吧视板块、仅 hero 第 16 届徽章）
+    for sid in bv2026:
         if str(sid) not in bv_index:
-            bv_index[str(sid)] = {"editions": [], "active": True, "count": 0, "best": None, "active_in": 2026}
-            print(f"  + bv_index[{sid}] — 2026 新参赛者（无往届数据，点亮 logo）")
+            bv_index[str(sid)] = {"editions": [16], "active": True, "count": 0, "best": None, "active_in": 2026}
+            print(f"  + bv_index[{sid}] — 第 16 届新参赛者（无往届数据，editions=[16]）")
 
     idx_path = os.path.join(base, "data", "barvision", "member-bv-index.json")
     with open(idx_path, "w", encoding="utf-8") as f:

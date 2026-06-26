@@ -4,7 +4,8 @@
    7,
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 5,
@@ -50,7 +51,8 @@
    12,
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 33,
@@ -72,7 +74,8 @@
    11,
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 30,
@@ -92,7 +95,8 @@
    9,
    10,
    11,
-   13
+   13,
+   16
   ],
   "active": true,
   "count": 22,
@@ -115,7 +119,8 @@
    12,
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 31,
@@ -135,7 +140,8 @@
  },
  "31": {
   "editions": [
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 1,
@@ -146,7 +152,8 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 3,
@@ -157,7 +164,8 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 3,
@@ -181,7 +189,8 @@
  },
  "88": {
   "editions": [
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 1,
@@ -192,7 +201,8 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 3,
@@ -202,7 +212,8 @@
  "101": {
   "editions": [
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 2,
@@ -249,7 +260,8 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 3,
@@ -483,7 +495,8 @@
    11,
    12,
    14,
-   15
+   15,
+   16
   ],
   "active": true,
   "count": 4,
@@ -756,7 +769,8 @@
    3,
    4,
    5,
-   8
+   8,
+   16
   ],
   "active": true,
   "count": 13,
@@ -838,22 +852,28 @@
   "active_in": 12,
   "unclaimed": true
  },
- "77": {
-  "editions": [],
+ "33": {
+  "editions": [
+   16
+  ],
   "active": true,
   "count": 0,
   "best": null,
   "active_in": 2026
  },
- "33": {
-  "editions": [],
+ "77": {
+  "editions": [
+   16
+  ],
   "active": true,
   "count": 0,
   "best": null,
   "active_in": 2026
  },
  "119": {
-  "editions": [],
+  "editions": [
+   16
+  ],
   "active": true,
   "count": 0,
   "best": null,

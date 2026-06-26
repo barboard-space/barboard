@@ -4,6 +4,24 @@
 
 ---
 
+## [2026-06-26] — Barvision 数据基座 bv-stats.json + 个人页统计规则 + ed16 徽章/筛选自动化
+
+### Added
+- **数据基座 `scripts/gen_bv_stats.py` → `data/barvision/bv-stats.json`**：聚合全部历史赛果，供即将重做的 hof.html + 新建的 stats.html。含 `data_through`(15) + 成员 overview + 扁平歌曲向条目（合报不拆、ids 含双方）+ 历届领奖台 + 自动纪录 + 赛季纪录。修正「最多夺冠场数 = 3」（按夺冠场次计，绕开混淆冠军曲歧义）；「最高单届总分」限分组制 LEGACY（281 包妈）；「最高得票占比」替代旧 100% 支持率；匿名(id 0) 不计成员纪录。
+
+### Changed
+- **个人页吧视统计规则**：2023+ 未晋级决赛的歌曲 → 不计其半决赛 12 分；计算 Jury 均分时半决赛得分减半（`gen_member_pages` 聚合，member 页 + stats 同步）。
+- **第 16 届徽章/筛选自动化**：`BV2026_ACTIVE` 硬编码 → `load_bv2026_ids()` 从 regular-16.json 自动推导（signups + 海选 host）。这些成员获得：个人页第 16 届徽章（`bv2026` → `oneBadge`）、member.html 实心 logo + 「第十六届」下拉筛选。`member-render.bvBadges` 抽出 `oneBadge(no,year)`。
+- ed16 邓妈两首补流派/语种（Pop / 英语）。
+
+### Style
+- barvision.html 手机端近届卡 logo 上限 70px；手机端 `barvision/2026.html` 与 `events.html` 的 hero 背景改用 `bg.png`（无 logo），预解码也按视口选图。
+
+### Docs
+- CLAUDE.md 新增 #167（数据库化规划 + 数据基座 + 纪录口径 + 统计规则 + ed16 自动化），更新待建。
+
+---
+
 ## [2026-06-26] — Hero/卡片大图加载优化 + barvision 卡片微调 + 选送表列宽 + ed16 海选进展
 
 ### Performance
