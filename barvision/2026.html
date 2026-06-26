@@ -23,7 +23,9 @@
       position: absolute; inset: 0; pointer-events: none;
       background-image: url('/assets/images/barvision/2026/poster.png');
       background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 0.55s ease;   /* 预解码完成后淡入，消除大图弹出/卡顿 */
     }
+    .ev-hero__poster.loaded { opacity: 1; }
     .ev-hero__scrim {
       position: absolute; inset: 0; pointer-events: none;
       background:
@@ -124,6 +126,17 @@
   <script src="/scripts/bv-results-render.js"></script>
   <script src="/scripts/nav.js"></script>
   <script>
+    /* Hero 海报背景：预解码完成后淡入（消除大图弹出 / 主线程解码卡顿） */
+    (function () {
+      var el = document.querySelector('.ev-hero__poster');
+      if (!el) return;
+      var im = new Image();
+      function done() { el.classList.add('loaded'); }
+      im.onload = done; im.onerror = done;
+      im.src = '/assets/images/barvision/2026/poster.png';
+      if (im.decode) { im.decode().then(done).catch(function () {}); }
+    })();
+
     /* Hero 倒计时（与 events.html 同步：开启前→倒数开启 / 开启中→倒数关闭 / 关闭后→倒数半决赛+海选突围赛投票） */
     (function () {
       var OPEN_DATE  = new Date('2026-06-01T18:00:00+08:00');

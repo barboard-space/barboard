@@ -4,6 +4,23 @@
 
 ---
 
+## [2026-06-26] — Hero/卡片大图加载优化 + barvision 卡片微调 + 选送表列宽 + ed16 海选进展
+
+### Performance
+- **大图加载卡顿优化**：详情页 hero 海报 + barvision.html 卡片主视觉（大 PNG）改为 **`Image.decode()` 预解码后淡入**——海报 `opacity:0→1`（`.bvr-hero__poster`/`.ev-hero__poster` + `revealPoster()`；2026/events 薄壳同款）；barvision.html 建卡前预解码 4 张主视觉。消除「弹出感」+ 主线程同步解码顶掉入场动画的掉帧。
+
+### Changed / Style
+- **barvision.html 卡片微调**：2024 近届卡主视觉 `background-size: cover→128%`（`RECENT_BG_SIZE` map，桌面+手机）；手机端 XVI 当届卡文字↔logo 间距 `16→32px`；手机端近届卡（2023–2025）logo 放大（容器 padding `22/28→16/11px`）。
+- **选送名单两表列宽统一**：Candidates / Wildcards 加 `table-layout:fixed` + 六列固定百分比宽，两表完全对齐（长歌名自动换行）。
+
+### Content
+- **ed16 邓妈 European Fever 冠/亚军**：海选获胜曲 `Chris De Sarandy — Body & Soul`；Candidates +冠军（12 首）、Wildcards +亚军 `Douwe Bob & SERA — Could Have Been Us`（6 首），均 Pop/英语。
+
+### Docs
+- CLAUDE.md 新增 #166（大图预解码范式 + barvision 卡片微调 + 选送表列宽 + ed16 实时数据维护）。
+
+---
+
 ## [2026-06-26] — Barvision 详情页 URL 路由改版（年份制 / 二位届数）
 
 ### Changed

@@ -554,7 +554,9 @@
     .bvr-hero--bg { position:relative; overflow:hidden; padding:var(--nav-h) 0 48px;
       min-height:72vh; display:flex; align-items:center; }  /* 海报 16:9，给足视口高度并垂直居中内容 */
     .bvr-hero__poster { position:absolute; inset:0; background-image:var(--bvt-poster);
-      background-size:cover; background-position:right center; pointer-events:none; }  /* 右锚定：缩放裁切时优先保右侧 logo 完整 */
+      background-size:cover; background-position:right center; pointer-events:none;
+      opacity:0; transition:opacity 0.55s ease; }  /* 右锚定：缩放裁切时优先保右侧 logo；初始透明，海报预解码完成后淡入（消除弹出/卡顿） */
+    .bvr-hero__poster.loaded { opacity:1; }
     /* 左侧深、右侧透出海报；底部加深，保证文字可读 */
     .bvr-hero__scrim { position:absolute; inset:0; pointer-events:none; background:
       linear-gradient(90deg, rgba(8,8,18,0.88) 0%, rgba(8,8,18,0.72) 26%, rgba(8,8,18,0.18) 66%, rgba(8,8,18,0.05) 100%),
@@ -640,6 +642,14 @@
     /* ===== 进行中（live）：报名名单 ===== */
     .bvr-su__by .member { font-weight:600; }
     .bvr-su__genre { font-size:11px; color:var(--clr-text-3); white-space:nowrap; }
+    /* Candidates / Wildcards 两表固定列宽，使列对齐一致（table-layout:fixed，长歌名自动换行） */
+    .bvr-su { table-layout:fixed; }
+    .bvr-su th:nth-child(1) { width:15%; }  /* 选送者 */
+    .bvr-su th:nth-child(2) { width:21%; }  /* 歌手 */
+    .bvr-su th:nth-child(3) { width:26%; }  /* 歌曲名 */
+    .bvr-su th:nth-child(4) { width:9%; }   /* 语言 */
+    .bvr-su th:nth-child(5) { width:14%; }  /* 流派 */
+    .bvr-su th:nth-child(6) { width:15%; }  /* 报名方式 */
     /* 结构化规则：纯项目符号列表（资格/投票条目） */
     .bvr-rule__items { margin:10px 0 0; padding-left:20px; list-style:disc; }
     .bvr-rule__items li { font-size:13.5px; line-height:1.7; color:var(--clr-text-2); margin:5px 0; }
@@ -1545,6 +1555,20 @@
     });
   }
 
+  // 海报背景预解码 → 淡入（消除大图弹出 + 主线程解码卡顿）；仅主题届（2023+ bvr hero），live 页 2026 由薄壳自处理
+  function revealPoster(d) {
+    var th = theme(d);
+    if (!th) return;
+    var el = document.querySelector('.bvr-hero--bg .bvr-hero__poster');
+    if (!el) return;
+    var url = window.matchMedia('(max-width:768px)').matches ? (th.posterMobile || th.poster) : th.poster;
+    var im = new Image();
+    function done() { el.classList.add('loaded'); }
+    im.onload = done; im.onerror = done;
+    im.src = url;
+    if (im.decode) { im.decode().then(done).catch(function () {}); }
+  }
+
   /* ---------- render ---------- */
   function render(d, idx) {
     DATA = d;
@@ -1657,6 +1681,7 @@
     html += navBlock(d);
 
     root.innerHTML = html;  // 主题色仅作用于 hero（hero 自带内联 --bvt-* 变量），其余板块保持默认
+    revealPoster(d);  // 海报背景预解码完成后淡入（消除弹出/解码卡顿）
     buildTOC(toc);
     observeFades();
     wireSortable();

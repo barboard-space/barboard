@@ -269,9 +269,12 @@
     @media (max-width: 768px) {
       .bv-hero__layout       { grid-template-columns: 1fr; gap: var(--gap-md); }
       .bv-recent-card        { display: none; }
-      .bv-current-card       { grid-template-columns: 1fr; gap: var(--gap-sm); }
+      .bv-current-card       { grid-template-columns: 1fr; gap: 32px; }  /* 文字与 logo 拉开距离（手机端 --gap-md 会缩到 20px，故用显式值） */
       .bv-recent-archive-grid { grid-template-columns: repeat(3, 1fr); }
       .bv-unplugged-grid      { grid-template-columns: repeat(4, 1fr); }
+      /* 近届卡（2023–2025）logo 在手机端放大：收窄容器内边距 */
+      .bv-arch-card--recent .bv-arch-card__logo { padding: 16px 11px; }
+      .bv-arch-card--recent .bv-arch-card__logo img { max-width: 100%; }
     }
     @media (max-width: 465px) {
       .bv-archive-grid   { grid-template-columns: repeat(4, 1fr); }
@@ -482,6 +485,7 @@
     if (!el) return;
     var recent = EDITIONS.filter(function(ed) { return ed.year >= 2023; });
     var RECENT_BG = { 2023: 'assets/images/barvision/2023/bg.png', 2024: 'assets/images/barvision/2024/bg-pink.png', 2025: 'assets/images/barvision/2025/bg.png' };  // 卡片上半部分主视觉背景（按届补充）
+    var RECENT_BG_SIZE = { 2024: '128%' };  // 个别届主视觉在 cover 之上再放大（桌面+手机通用，inline 覆盖 background-size:cover）
     el.innerHTML = recent.map(function(ed, i) {
       var logoSrc = 'assets/images/barvision_logo_' + ed.year + '.svg';
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';
@@ -492,7 +496,7 @@
         (link ? ' onclick="location.href=\'' + href + '\'"' : '') +
         ' style="transition-delay:' + (i * 0.10).toFixed(2) + 's;">' +
         '<div class="bv-arch-card__logo' + (bg ? ' bv-arch-card__logo--img' : '') + '"' +
-          (bg ? ' style="background-image:url(\'' + bg + '\')"' : '') + '>' +
+          (bg ? ' style="background-image:url(\'' + bg + '\')' + (RECENT_BG_SIZE[ed.year] ? ';background-size:' + RECENT_BG_SIZE[ed.year] : '') + '"' : '') + '>' +
           '<img src="' + logoSrc + '" alt="Barvision ' + ed.year + '">' +
         '</div>' +
         '<div style="text-align:center;padding:14px 16px;">' +
@@ -536,6 +540,15 @@
       '</div>';
     }).join('');
   }
+
+  // 预解码卡片主视觉大图（off-main-thread），避免入场动画期间在主线程同步解码导致掉帧/卡顿
+  ['assets/images/barvision/2026/bg.png',
+   'assets/images/barvision/2023/bg.png',
+   'assets/images/barvision/2024/bg-pink.png',
+   'assets/images/barvision/2025/bg.png'].forEach(function (u) {
+    var im = new Image(); im.src = u;
+    if (im.decode) { im.decode().catch(function () {}); }
+  });
 
   // Run builds before observer setup so querySelectorAll catches dynamic elements
   buildRecentArchiveGrid();
