@@ -744,6 +744,8 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **⭐ member.html 实心 logo = 2026 参赛名单**（`gen_member_pages.py` 常量 `BV2026_ACTIVE` space_id 集；覆盖原年份判定，2026 无赛果数据故手动名单）：名单内实心、其余空心；**4 位无往届数据的新参赛者**（XX妈88/白妈77/笃妈33/海妈119）补进 `bv_index`（`editions:[],active:true`）仅点亮 grid logo。下届有数据后更新名单。
     - **手机端 R/O 表头箭头修复**：`.th-ro` 排序箭头去负右边距（原 `-10px` 使箭头右半溢到相邻冻结「选送者」列下被遮）。
     - **城市改名**（hand-edit JSON + ed14 parser 同步）：ed14 通化→**吉林通化**、ed13 齐齐哈尔→**黑龙江齐齐哈尔**（summary 正文 + city 字段；hero meta 用英文城市不变）。
+    - **手机端 hero scrim 调浅**（2023+ 主题届通用，超越 #159 旧值）：移动端 `.bvr-hero__scrim` 由 `0.86/0.76/0.90` → **`0.7/0.52/0.8`**——原值太重把 bg 主视觉压成近黑（尤其 2025 `bg-orange`「像没有背景图」）；调浅后三届（2023 红 / 2024 粉 / 2025 橙）手机端主视觉都透出、文字仍可读。⚠️ bg-orange.png 配置/文件本就正确，问题纯在 scrim。
+    - **barvision.html 近届年度大卡遮罩调浅**：`.bv-arch-card--recent .bv-arch-card__logo--img::before` 由 `0.40/0.58` → **`0.2/0.3`**，XV/XIV/XIII 年度卡主视觉更鲜亮（白 logo 仍清晰）；满宽 XVI 当届大卡 `.bv-current-card::before`(0.85→0.40 左深右浅渐变) **不动**（左侧文字需深底）。
     - **下一步：第 16 届（Chongqing 2026，进行中）赛果待赛后导**；HOF 历届前三改版 + 全量数据核对仍待办。
 
 ## 对话交接工作流

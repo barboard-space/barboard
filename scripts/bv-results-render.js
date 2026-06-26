@@ -702,7 +702,7 @@
       .bvr-hero--bg { min-height:auto; padding:calc(var(--nav-h) + 30px) 0 40px; }
       .bvr-hero--bg .bvr-title { font-size:clamp(34px,10.5vw,52px); line-height:1.02; }
       .bvr-hero__scrim { background:
-        linear-gradient(180deg, rgba(8,8,18,0.86) 0%, rgba(8,8,18,0.76) 48%, rgba(8,8,18,0.90) 100%); }
+        linear-gradient(180deg, rgba(8,8,18,0.7) 0%, rgba(8,8,18,0.52) 48%, rgba(8,8,18,0.8) 100%); }
       .bvr-hero__meta { margin-top:16px; }
       .bvr-hero__desc { margin-top:14px; }
       .bvr-hero__p { font-size:14px; line-height:1.7; }
