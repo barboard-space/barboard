@@ -242,11 +242,14 @@
 
   /* 成员链接（从 bv-stats.members 取 handle；id 0 / 无 handle → 纯文本） */
   function memLink(id, fallback) {
-    var info = (STATS && STATS.members[String(id)]) || null;
-    var nick = (info && info.nickname) || fallback || String(id);
-    if (!info || String(id) === '0' || !info.handle || info.handle === nick)
+    var sid = String(id);
+    var info = (STATS && STATS.members[sid]) || null;
+    var nick = (info && info.nickname) || fallback || sid;
+    // 匿名(id 0) 或无效 id → 纯文本不导航；其余真实成员（即便无 @handle）都链接到成员页
+    if (!info || !(parseInt(sid, 10) > 0))
       return '<span style="color:var(--clr-text-2);">' + esc(nick) + '</span>';
-    return '<a class="member" href="/member/' + id + '.html" data-nickname="' + esc(nick) + '">@' + esc(info.handle) + '</a>';
+    var label = (info.handle && info.handle !== nick) ? '@' + esc(info.handle) : esc(nick);
+    return '<a class="member" href="/member/' + sid + '.html" data-nickname="' + esc(nick) + '">' + label + '</a>';
   }
   /* 一条记录/奖项的得主链接（支持单 id 或 ids 数组合报） */
   function whoLinks(e) {
