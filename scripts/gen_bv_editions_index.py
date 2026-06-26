@@ -37,10 +37,16 @@ for p in sorted(glob.glob(os.path.join(BASE, 'data', 'barvision', 'barvision-*',
                     seen[part] = {'name': part, 'id': info.get('id'),
                                   'handle': info.get('handle', part)}
     no = d['edition_no']
+    yr = d['year']
+    # 路径方案：2019–2020 一年多届 → /barvision/<年>/<两位届数>.html（娱乐版加 e）；2023 起一年一届 → /barvision/<年>.html
+    if yr >= 2023:
+        href = '/barvision/%d.html' % yr
+    else:
+        href = '/barvision/%d/%02d%s.html' % (yr, no, 'e' if d['version'] == 'unplugged' else '')
     eds.append({
-        'no': no, 'year': d['year'], 'version': d['version'],
+        'no': no, 'year': yr, 'version': d['version'],
         'name': d.get('edition_name', ''),
-        'href': '/barvision/%d/%d%s.html' % (d['year'], no, 'e' if d['version'] == 'unplugged' else ''),
+        'href': href,
         'roster': list(seen.values()),
     })
 eds.sort(key=lambda x: x['no'])

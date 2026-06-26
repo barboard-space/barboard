@@ -334,7 +334,7 @@
     <p class="section-label fade-up">历届大赛</p>
 
     <!-- XVI 当届卡片 -->
-    <div class="bv-current-card" style="cursor:pointer;" onclick="location.href='/barvision/2026/16.html'">
+    <div class="bv-current-card" style="cursor:pointer;" onclick="location.href='/barvision/2026.html'">
       <div class="bv-current-card__left fade-up" style="transition-delay:0.06s;">
         <div class="bv-live-badge"><div class="bv-live-dot"></div>进行中</div>
         <div class="season-card__edition">BARVISION CHONGQING 2026</div>
@@ -444,21 +444,21 @@
   // ── 详情页链接 ───────────────────────────────────────────────
   // 已建好详情页的届次（href 形式）；建好新一届就把 href 加进来，对应卡片自动可点
   var BUILT_EDITIONS = new Set([
-    '/barvision/2019/1.html',
-    '/barvision/2019/2.html',
-    '/barvision/2019/3.html',
-    '/barvision/2019/4.html',
-    '/barvision/2019/5.html',
-    '/barvision/2020/6.html',
-    '/barvision/2020/7.html',
-    '/barvision/2020/8.html',
-    '/barvision/2020/9.html',
+    '/barvision/2019/01.html',
+    '/barvision/2019/02.html',
+    '/barvision/2019/03.html',
+    '/barvision/2019/04.html',
+    '/barvision/2019/05.html',
+    '/barvision/2020/06.html',
+    '/barvision/2020/07.html',
+    '/barvision/2020/08.html',
+    '/barvision/2020/09.html',
     '/barvision/2020/10.html',
     '/barvision/2020/11.html',
     '/barvision/2020/12.html',
-    '/barvision/2023/13.html',
-    '/barvision/2024/14.html',
-    '/barvision/2025/15.html',
+    '/barvision/2023.html',
+    '/barvision/2024.html',
+    '/barvision/2025.html',
   ]);
   function romanToInt(r) {
     var map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 }, n = 0;
@@ -470,8 +470,10 @@
   }
   function editionHref(year, version, roman) {
     var n = romanToInt(roman);
-    // 路径：去届号前导零 + 娱乐版加 e 后缀（如 /barvision/2023/13.html、/barvision/2020/1e.html）
-    return '/barvision/' + year + '/' + n + (version === 'unplugged' ? 'e' : '') + '.html';
+    // 路径方案：2023 起一年一届 → /barvision/<年>.html；2019–2020 一年多届 → /barvision/<年>/<两位届数>(e).html
+    if (year >= 2023) return '/barvision/' + year + '.html';
+    var nn = n < 10 ? '0' + n : '' + n;
+    return '/barvision/' + year + '/' + nn + (version === 'unplugged' ? 'e' : '') + '.html';
   }
 
   // ── Build functions ──────────────────────────────────────────

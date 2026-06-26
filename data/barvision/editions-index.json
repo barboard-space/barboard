@@ -5,7 +5,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 1st Barvision",
-   "href": "/barvision/2019/1.html",
+   "href": "/barvision/2019/01.html",
    "roster": [
     {
      "name": "猴妈",
@@ -84,7 +84,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 2nd Barvision",
-   "href": "/barvision/2019/2.html",
+   "href": "/barvision/2019/02.html",
    "roster": [
     {
      "name": "嘟妈",
@@ -188,7 +188,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 3rd Barvision",
-   "href": "/barvision/2019/3.html",
+   "href": "/barvision/2019/03.html",
    "roster": [
     {
      "name": "包妈",
@@ -307,7 +307,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 4th Barvision",
-   "href": "/barvision/2019/4.html",
+   "href": "/barvision/2019/04.html",
    "roster": [
     {
      "name": "草妈",
@@ -441,7 +441,7 @@
    "year": 2019,
    "version": "regular",
    "name": "The 5th Barvision",
-   "href": "/barvision/2019/5.html",
+   "href": "/barvision/2019/05.html",
    "roster": [
     {
      "name": "包妈",
@@ -570,7 +570,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 6th Barvision",
-   "href": "/barvision/2020/6.html",
+   "href": "/barvision/2020/06.html",
    "roster": [
     {
      "name": "萌妈",
@@ -674,7 +674,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 7th Barvision",
-   "href": "/barvision/2020/7.html",
+   "href": "/barvision/2020/07.html",
    "roster": [
     {
      "name": "雨妈",
@@ -808,7 +808,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 8th Barvision",
-   "href": "/barvision/2020/8.html",
+   "href": "/barvision/2020/08.html",
    "roster": [
     {
      "name": "雨妈",
@@ -927,7 +927,7 @@
    "year": 2020,
    "version": "regular",
    "name": "The 9th Barvision",
-   "href": "/barvision/2020/9.html",
+   "href": "/barvision/2020/09.html",
    "roster": [
     {
      "name": "布妈",
@@ -1398,7 +1398,7 @@
    "year": 2023,
    "version": "regular",
    "name": "Barvision Qiqihar 2023",
-   "href": "/barvision/2023/13.html",
+   "href": "/barvision/2023.html",
    "roster": [
     {
      "name": "雨妈",
@@ -1542,7 +1542,7 @@
    "year": 2024,
    "version": "regular",
    "name": "Barvision Tonghua 2024",
-   "href": "/barvision/2024/14.html",
+   "href": "/barvision/2024.html",
    "roster": [
     {
      "name": "S妈",
@@ -1686,7 +1686,7 @@
    "year": 2025,
    "version": "regular",
    "name": "Barvision Jinzhong 2025",
-   "href": "/barvision/2025/15.html",
+   "href": "/barvision/2025.html",
    "roster": [
     {
      "name": "奶妈",
@@ -1830,7 +1830,7 @@
    "year": 2026,
    "version": "regular",
    "name": "Barvision Chongqing 2026",
-   "href": "/barvision/2026/16.html",
+   "href": "/barvision/2026.html",
    "roster": []
   }
  ]

@@ -275,8 +275,10 @@
   function renderBvRows(list) {
     return list.map(function (e) {
       var cls = (e.is_shadow || e.canceled) ? 'mp-bv-row--shadow' : (e.rank && e.rank <= 3 ? 'mp-bv-row--' + e.rank : '');
-      // 详情页路径：去届号前导零 + 娱乐版加 e 后缀（如 13.html / 1e.html）
-      var href = '../barvision/' + e.year + '/' + e.edition_no + (e.version === 'unplugged' ? 'e' : '') + '.html';
+      // 详情页路径：2019–2020 一年多届 → ../barvision/<年>/<两位届数>(e).html；2023 起一年一届 → ../barvision/<年>.html
+      var href = (e.year >= 2023)
+        ? '../barvision/' + e.year + '.html'
+        : '../barvision/' + e.year + '/' + ('0' + e.edition_no).slice(-2) + (e.version === 'unplugged' ? 'e' : '') + '.html';
       var seriesLabel = /^[0-9]+$/.test(String(e.series)) ? '-' : esc(e.series);
       return '<tr class="' + cls + '">' +
         '<td class="rk">' + (e.rank == null ? '—' : (e.is_shadow ? '<span class="rk-sh">' + e.rank + '*</span>' : e.rank)) + '</td>' +

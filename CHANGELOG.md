@@ -4,6 +4,19 @@
 
 ---
 
+## [2026-06-26] — Barvision 详情页 URL 路由改版（年份制 / 二位届数）
+
+### Changed
+- **详情页路径方案改版**（见 CLAUDE.md #165）：2019–2020 一年多届 → `barvision/<年>/<两位届数>.html`（如 `2019/01.html`、`2020/06.html`）；2023 起一年一届 → `barvision/<年>.html`（`2023.html`…`2026.html`）；`2026/events.html` 报名子页不变。所有详情页薄壳 `git mv` 重命名（保留历史）。
+- **`bv-results-render.js` 内部路径全部改绝对 `/`**（`/member`、`/data`、`/assets`、editions-index fetch）：详情页深度不一且本就依赖 fetch（file:// CORS 打不开、必经服务器），绝对路径深度无关。2023–2026 薄壳自身引用同步改 `/`；2019/2020 薄壳保留 `../../`。
+- 同步更新 `editionHref`/`BUILT_EDITIONS`（barvision.html + XVI 卡）、`gen_bv_editions_index.py`、`member-render.js` 详情链接、`index.html` 届次卡 + 季卡按钮、`events.html` eyebrow；重跑 `gen_bv_editions_index.py` 刷新 editions-index.json（含跨深度 nav 上下届）。
+- **首页历届卡全部 enable**：index 的 XVI/XV/XIV/XIII → 各自详情页，VI–XII / I–V（合并范围卡）→ barvision.html 总览。
+
+### Docs
+- CLAUDE.md 新增 #165（URL 路由权威方案 + 绝对路径原因 + 导入新届须改处），并在 #157 旧命名约定加「已被 #165 取代」指针。
+
+---
+
 ## [2026-06-26] — 第 16 届「本届实时更新页」16.html + events.html 重构为歌曲提交通道
 
 ### Added

@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 本届实时更新 | Barvision</title>
   <meta name="description" content="Barvision Chongqing 2026（第十六届，重庆）本届实时更新：报名情况（Candidates / Wildcards 名单）、各成员海选进展，以及赛程、投票方式、参赛要求与规则摘要。" />
-  <link rel="icon" type="image/png" href="../../assets/images/logo_center.png" />
-  <link rel="stylesheet" href="../../fonts.css" />
-  <link rel="stylesheet" href="../../style.css" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css" />
   <style>
     /* ═══ Hero（复用 events.html 风格：主视觉海报 + 倒计时 + CTA） ═══ */
     .ev-hero { position: relative; padding: calc(var(--nav-h) + 64px) 0 80px; overflow: hidden; }
@@ -21,7 +21,7 @@
     }
     .ev-hero__poster {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: url('../../assets/images/barvision/2026/poster.png');
+      background-image: url('/assets/images/barvision/2026/poster.png');
       background-size: cover; background-position: center;
     }
     .ev-hero__scrim {
@@ -98,7 +98,7 @@
         <h1 class="ev-title">Chongqing<br><span class="ev-accent">2026</span></h1>
         <div class="ev-meta">
           <span class="ev-meta-item">Barvision Chongqing 2026</span>
-          <span class="ev-meta-item">主办：<a class="member" href="../../member/7.html" data-nickname="威妈">@williw_</a></span>
+          <span class="ev-meta-item">主办：<a class="member" href="/member/7.html" data-nickname="威妈">@williw_</a></span>
           <span class="ev-meta-item">重声交响 Echoing Confluence</span>
         </div>
         <p class="ev-hero__desc">
@@ -120,9 +120,9 @@
   <div id="bvr-root"></div>
   <div id="site-footer"></div>
 
-  <script>var EDITION_SRC = '../../data/barvision/barvision-2026/regular-16.json';</script>
-  <script src="../../scripts/bv-results-render.js"></script>
-  <script src="../../scripts/nav.js"></script>
+  <script>var EDITION_SRC = '/data/barvision/barvision-2026/regular-16.json';</script>
+  <script src="/scripts/bv-results-render.js"></script>
+  <script src="/scripts/nav.js"></script>
   <script>
     /* Hero 倒计时（与 events.html 同步：开启前→倒数开启 / 开启中→倒数关闭 / 关闭后→倒数半决赛+海选突围赛投票） */
     (function () {

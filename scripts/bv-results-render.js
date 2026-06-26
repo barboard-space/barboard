@@ -34,11 +34,11 @@
   var EDIDX = { editions: [] }; // 届次索引（成员变动 / 上下届导航）
 
   // 按届主题（2023+ 年度制）：海报 + 双色。无主题年份回退通用紫色 hero。
-  // 通用：导入新年份补一条即可（poster 路径相对薄壳页 ../../；c1/c2 主色用于 hero 辉光 / 徽章 / 大计分板场次徽章）。
+  // 通用：导入新年份补一条即可（poster 等路径用绝对路径 /，详情页深度不一、依赖服务器访问；c1/c2 主色用于 hero 辉光 / 徽章 / 大计分板场次徽章）。
   var BV_THEME = {
     2023: {
-      poster: '../../assets/images/barvision/2023/poster.png',
-      posterMobile: '../../assets/images/barvision/2023/bg.png',  // 手机端 hero 底（无 logo；cover 裁切下完整 logo 显示不全）
+      poster: '/assets/images/barvision/2023/poster.png',
+      posterMobile: '/assets/images/barvision/2023/bg.png',  // 手机端 hero 底（无 logo；cover 裁切下完整 logo 显示不全）
       c1: '#f84d39',   // 珊瑚红（主）
       c2: '#1b2f31',   // 墨绿（深，结构 / hero 辉光）
       c2l: '#fbb1a9',  // 浅珊瑚（徽章 / SF2 标识——海报浅红色，取代原墨绿）
@@ -47,8 +47,8 @@
             'radial-gradient(ellipse 46% 52% at 100% 96%, rgba(60,122,107,0.15) 0%, transparent 55%)'
     },
     2024: {
-      poster: '../../assets/images/barvision/2024/poster-pink.png',  // 粉版 + logo（桌面 hero 背景，用户试粉版）
-      posterMobile: '../../assets/images/barvision/2024/bg-pink.png',  // 手机端 hero 底（粉色无 logo，用户指定）
+      poster: '/assets/images/barvision/2024/poster-pink.png',  // 粉版 + logo（桌面 hero 背景，用户试粉版）
+      posterMobile: '/assets/images/barvision/2024/bg-pink.png',  // 手机端 hero 底（粉色无 logo，用户指定）
       c1: '#f13b8d',   // 深粉（主：eyebrow / 年份 / meta）
       c2: '#09184e',   // 深 navy（辅助次选 / hero 辉光底）
       c2l: '#fc91c1',  // 浅粉（徽章 / 次要）
@@ -57,8 +57,8 @@
             'radial-gradient(ellipse 46% 52% at 0% 100%, rgba(36,53,115,0.22) 0%, transparent 55%)'
     },
     2025: {
-      poster: '../../assets/images/barvision/2025/poster.png',  // 橙黄渐变 + logo 右（桌面 hero 背景）
-      posterMobile: '../../assets/images/barvision/2025/bg-orange.png',  // 手机端 hero 底（橙黄渐变无 logo）
+      poster: '/assets/images/barvision/2025/poster.png',  // 橙黄渐变 + logo 右（桌面 hero 背景）
+      posterMobile: '/assets/images/barvision/2025/bg-orange.png',  // 手机端 hero 底（橙黄渐变无 logo）
       c1: '#df5a2c',   // 橘红（主：eyebrow / 年份 / meta，由纯红往橘调、降饱和）
       c2: '#5e0f14',   // 深酒红（hero 辉光底）
       c2l: '#f4a259',  // 暖橙（徽章 / 次要）
@@ -67,8 +67,8 @@
             'radial-gradient(ellipse 46% 52% at 100% 96%, rgba(244,162,89,0.16) 0%, transparent 55%)'
     },
     2026: {
-      poster: '../../assets/images/barvision/2026/poster.png',  // 蓝/青/紫流光 + logo（桌面 hero 背景）
-      posterMobile: '../../assets/images/barvision/2026/bg.png',  // 手机端 hero 底（无 logo）
+      poster: '/assets/images/barvision/2026/poster.png',  // 蓝/青/紫流光 + logo（桌面 hero 背景）
+      posterMobile: '/assets/images/barvision/2026/bg.png',  // 手机端 hero 底（无 logo）
       c1: '#c084fc',   // 软紫（=--clr-violet-light）：eyebrow / 年份 / meta，与 events.html hero 一致（紫色）
       c2: '#1a0f3a',   // 深紫（hero 辉光底）
       c2l: '#c9b3f0',  // 浅紫（次要）
@@ -97,19 +97,19 @@
     }
     // 未认领（混淆曲赛后无人认领）：弱化、无 @、链接到伪成员页 member/0.html
     if (m && m.unclaimed) {
-      return '<a class="member member--unclaimed" href="../../member/' + m.id + '.html" data-nickname="'
+      return '<a class="member member--unclaimed" href="/member/' + m.id + '.html" data-nickname="'
         + esc(nick) + '">' + esc(nick) + '</a>';
     }
     var label = opts.nick ? esc(nick) : ('@' + esc(m ? m.handle : nick));
     if (!m) return '<span class="member">' + label + '</span>';
-    return '<a class="member" href="../../member/' + m.id + '.html" data-nickname="'
+    return '<a class="member" href="/member/' + m.id + '.html" data-nickname="'
       + esc(nick) + '">' + label + '</a>';
   }
   // 用届次索引 roster 项（{name,id,handle}）渲染链接（不依赖当前届 members）
   function memberLinkR(r) {
     var label = '@' + esc(r.handle || r.name);
     if (!r.id) return '<span class="member">' + label + '</span>';
-    return '<a class="member" href="../../member/' + r.id + '.html" data-nickname="' + esc(r.name) + '">' + label + '</a>';
+    return '<a class="member" href="/member/' + r.id + '.html" data-nickname="' + esc(r.name) + '">' + label + '</a>';
   }
   // ── 正文「X妈」提及自动链接 ───────────────────────────────────
   // 用全届花名册(EDIDX) + 本届 members 建全局 昵称→{id,handle} 映射，
@@ -136,7 +136,7 @@
     if (!m) return esc(nick);
     var label = useNick ? esc(nick) : ('@' + esc(m.handle));
     var cls = m.unclaimed ? 'member member--unclaimed' : 'member';
-    return '<a class="' + cls + '" href="../../member/' + m.id + '.html" data-nickname="' + esc(nick) + '">' + (m.unclaimed ? esc(nick) : label) + '</a>';
+    return '<a class="' + cls + '" href="/member/' + m.id + '.html" data-nickname="' + esc(nick) + '">' + (m.unclaimed ? esc(nick) : label) + '</a>';
   }
   // 在已转义文本上把已知「X妈」昵称替换成成员链接（单次 replace、回调内不再被扫描）
   function linkMentions(escd, useNick) {
@@ -1734,7 +1734,7 @@
   if (!src) { console.error('bv-results-render: EDITION_SRC 未定义'); return; }
   Promise.all([
     fetch(src).then(function (r) { return r.json(); }),
-    fetch('../../data/barvision/editions-index.json').then(function (r) { return r.json(); }).catch(function () { return { editions: [] }; })
+    fetch('/data/barvision/editions-index.json').then(function (r) { return r.json(); }).catch(function () { return { editions: [] }; })
   ]).then(function (res) { render(res[0], res[1]); })
     .catch(function (e) { console.error('bv-results-render: 加载失败', e);
       var root = document.getElementById('bvr-root');
