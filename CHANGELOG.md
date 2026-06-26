@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-06-25] — 第 15 届(Jinzhong 2025)主题/hero 接入
+
+### Added
+- **第 15 届 Jinzhong 2025 主题/hero**（数据未导，仅 hero + 视觉设计 stub）：主视觉素材 `assets/images/barvision/2025/{poster(橙黄+logo右),bg-orange(橙黄无字),bg(深红块状)}.png`；`BV_THEME[2025]`（桌面 poster / 手机 bg-orange，均橙调；c1 橘红 `#df5a2c`、c2 `#5e0f14`、c2l·c3 暖橙 `#f4a259`、橘红+橙 glow）、`BV_STRIPE[2025]`=`['#f4a259','#e0612e']`、`RECENT_BG[2025]`=`bg.png`、`BUILT_EDITIONS`+15.html。
+- 薄壳 `barvision/2025/15.html` + stub `data/barvision/barvision-2025/regular-15.json`（hero 元数据 + 威妈视觉设计文案 + 设置型 summary，matches 待 parser 填）。
+
+---
+
 ## [2026-06-25] — 第 14 届 hero 改用粉版主视觉
 
 ### Changed

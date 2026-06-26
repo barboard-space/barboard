@@ -55,6 +55,16 @@
       c3: '#fc91c1',   // 浅粉（hero 简介正文）
       glow: 'radial-gradient(ellipse 78% 58% at 50% 0%, rgba(241,59,141,0.16) 0%, transparent 60%),' +
             'radial-gradient(ellipse 46% 52% at 0% 100%, rgba(36,53,115,0.22) 0%, transparent 55%)'
+    },
+    2025: {
+      poster: '../../assets/images/barvision/2025/poster.png',  // 橙黄渐变 + logo 右（桌面 hero 背景）
+      posterMobile: '../../assets/images/barvision/2025/bg-orange.png',  // 手机端 hero 底（橙黄渐变无 logo）
+      c1: '#df5a2c',   // 橘红（主：eyebrow / 年份 / meta，由纯红往橘调、降饱和）
+      c2: '#5e0f14',   // 深酒红（hero 辉光底）
+      c2l: '#f4a259',  // 暖橙（徽章 / 次要）
+      c3: '#f4a259',   // 暖橙（hero 简介正文，橙黄渐变）
+      glow: 'radial-gradient(ellipse 78% 58% at 50% 0%, rgba(223,90,44,0.18) 0%, transparent 60%),' +
+            'radial-gradient(ellipse 46% 52% at 100% 96%, rgba(244,162,89,0.16) 0%, transparent 55%)'
     }
   };
   function theme(d) { return (d && BV_THEME[d.year]) || null; }

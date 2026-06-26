@@ -50,7 +50,7 @@
 - `barvision/2019/regular-01.html` — **Barvision 历届详情页（第一届，已完成，模板基准）**；薄壳 + 共享 `scripts/bv-results-render.js` + `data/barvision/barvision-2019/regular-01.json`；板块 赛制/结果概览/Scoreboard 矩阵/12 Points + 页内 TOC；可点表头排序、桌面+手机两端已打磨；解析脚本 `scripts/parse_bv_edition.py`；详见开发注意事项 **#130**。barvision.html 届次卡 Ⅰ 已接入链接（`BUILT_EDITIONS`）
 
 ### 待建页面（按优先级）
-- **Barvision 历史成绩数据体系（进行中，见 #129–#161）**：**第 1–14 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三届 + 2024 第十四届「年度制」全部完成，见 #157–#161）。第 14 届（Tonghua 2024）赛果数据/详情页/成员页/总成绩单已完成并预览验证（#161，含 20 票观众投票制渲染适配 + 总成绩单 VOTERS 拆评委/观众两列）。**下一步：导第 15 届（Jinzhong 2025）**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
+- **Barvision 历史成绩数据体系（进行中，见 #129–#162）**：**第 1–14 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三届 + 2024 第十四届「年度制」全部完成，见 #157–#161）。**第 15 届（Jinzhong 2025）主题/hero 已接入**（#162：BV_THEME/BV_STRIPE/RECENT_BG/薄壳 15.html/stub regular-15.json + 橙调 hero + 橘红 c1），**赛果数据待导**。**下一步：导第 15 届赛果数据（SF1/SF2/GF）**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -724,7 +724,12 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **⭐ 概览卡「双歌只计较好者」（gen_member_pages，本批后续；东道主双歌通用规则，ed15 复用）**：年度制同一届有 ≥2 首正式单曲（东道主/协办，如 ed14 羊妈/威妈）时，**个人主页概览卡统计只计成绩较好(rank 最小)那首**（best/avg/top1/top3/top10/参与场数/twelve/jury_avg + member.html 卡片「参加场数」count 均按去重计）；**参赛表与走势图仍显示全部两首**（用全量 `entries`）。实现：`aggregate_barvision` 用 `x.get("final") is not None` 选年度制记录、按 `edition_no` 保留 rank 最小者；旧分组制（无 `final`、每组独立一「场」）不去重。
     - **总成绩单 GF points 字号**：`.bvr-sb-pts` 15px→**14px**（与 SF `.bvr-sb-pts.is-sf` 一致；颜色 `--clr-text`/字重 700 不变；无 mobile override 故桌面+手机同步）。2023/2024 共用渲染、均生效。
     - **波妈(id101) handle 全局改名**：`ww_micro_微波`→`微波子`（=其 B 站名 `bilibili_name`）；改了 7 文件：members.csv(`space_name`) + member/101.html + regular-14.json + editions-index.json + index.html(MEMBER_MAP) + member.html + hof_data.json(owner_map)。**唯一字符串、全局字面替换**；昵称「波妈」不变。
-    - **下一步：第 15 届（Jinzhong 2025）**——同年度制 SF1/SF2/GF；源在 `D:\Genius\Barvision\Barvision 2025`；**2025 观众分每首≤10 票**；按 §二 SOP + 本条（注意补 BV_THEME[2025]/BV_STRIPE[2025] 配色、parser 设 qualified、GF tele_mode='votes' 无 top；东道主若双歌→概览卡自动去重）。
+    - **下一步：第 15 届（Jinzhong 2025）**——见 #162（主题/hero 已接，数据待导）。
+162. **第 15 届（Jinzhong 2025）主题/hero 接入（本次；数据未导，详情页仅 hero + 视觉设计 stub）**：
+    - **主视觉**（设计=威妈：深红格栅抽象"晋中"笔画 + 橙黄马赛克取自平遥古城剪影/丘陵地貌）：`assets/images/barvision/2025/{poster,bg,bg-orange}.png`（均 16:9，用户放）——`poster.png`=橙黄渐变+logo右（桌面 hero）、`bg-orange.png`=橙黄渐变无 logo（手机 hero）、`bg.png`=深红块状无 logo（近届卡 RECENT_BG；红=主基调）。
+    - **主题配色（用户试色定稿：桌面/手机均橙调 + 橘红字）**：`BV_THEME[2025]`={poster:`poster.png`(桌面), posterMobile:`bg-orange.png`(手机), c1:`#df5a2c`(橘红——由初版纯红 `#d4232a` H358° 往橘调降饱和至 H15°), c2:`#5e0f14`(深酒红 glow), c2l/c3:`#f4a259`(暖橙，hero 简介/徽章浅), glow(橘红+暖橙 radial)}；`BV_STRIPE[2025]`=`['#f4a259','#e0612e']`(暖橙/深橙 徽章)；`RECENT_BG[2025]`=`bg.png`(近届卡)。
+    - 薄壳 `barvision/2025/15.html` + `BUILT_EDITIONS` 加 `/barvision/2025/15.html`；stub `data/barvision/barvision-2025/regular-15.json`（hero 元数据 + 视觉设计文案 + 设置型 summary[赛果待补]、`matches:[]`、`_stub`）。城市晋中、主办 S妈(上届冠军代表)、协办威妈、`cn_name` 第十五届。
+    - **下一步：导 2025 赛果数据**（SF1/SF2/GF）——源 `D:\Genius\Barvision\Barvision 2025`（`Barvision 2025 Semi-Final 1/2.xlsx` + `Barvision 2025.xlsx` + `data/`，另有 `BarVision2025报名总则…docx` 出规则、`GF-Running Order-Jury.png` 等）；GF 18 首名单已知（图3：丁/威/芬狼/邓/S/吃/鸽/奶/杰/汞/萌/羊/X/包/雨/泰/韩/松）；**2025 观众分每首≤10 票**（GF `tele_mode='votes'` 无 top，同 #161）；按 BARVISION_MEMBER.md §二 SOP + #161 走（parser 设 qualified、recompute/gen 管线、东道主双歌概览自动去重）。
 
 ## 对话交接工作流
 
