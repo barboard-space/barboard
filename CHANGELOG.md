@@ -4,6 +4,27 @@
 
 ---
 
+## [2026-06-27] — Barvision hof.html 手机端领奖台卡片标题重做 + 2023-2026 hero meta 调整
+
+### Changed — `barvision/hof.html`（手机端领奖台卡片）
+- 卡片标题重做：保留左侧 Bebas 金色届数数字，删除中文「第 N 届」行 + MONO 字体的 `The Nth barvision` 行，改为 DM Sans 单行 `edition_name`（1–12 届 `The Nth Barvision` / 13+ `Barvision <城市> 202X`，直接用 `edition_name` 字段）；数字↔标题间距 11→12px、去 `.hof-ed__no` 的 `min-width`（单/双位数间距一致）。
+- 手机端页内目录（≤768px）配色金色→紫色（toggle/open 态/active，与其他详情页一致；桌面端仍金色）。
+
+### Changed — `scripts/gen_bv_stats.py`（重跑 `bv-stats.json`）
+- `build_podium`：ed1 单场综合赛组别 `小众` → `小众组`（与其他届「X众组」一致）。
+
+### Changed — `scripts/bv-results-render.js`（2023-2025 详情页 hero）
+- hero meta 删除「Barvision \<城市\> \<年份\>」行 → 现为 `cn_name`（第N届…大赛）+ 主办。
+- 手机端 meta 标签竖排（一行一个、去竖分隔符 border-right）；桌面端仍带分隔符。
+
+### Changed — `barvision/2026.html` hero
+- meta 首标签「Barvision Chongqing 2026」→「第十六届欧美流行歌曲个人榜吧歌曲大赛」；顺序调为 中文全称 → 重声交响 Echoing Confluence → 主办：@williw_。
+- 简介文案 →「Barvision Chongqing 2026 报名正在进行中。本页实时汇总本届报名情况与海选进展，并附赛程、投票方式与参赛规则。」
+- 手机端 meta 标签竖排、去分隔符。
+
+### Changed — `index.html` / `barvision.html`
+- Barvision Chongqing 2026 卡片「第十六届 · 欧美流行歌曲个人榜吧歌曲大赛」→ 去 ` · ` 分隔符「第十六届欧美流行歌曲个人榜吧歌曲大赛」。
+
 ## [2026-06-27] — Barvision HOF (barvision/hof.html) 全面重做 + 「场」口径重定义
 
 ### Changed — 数据层 `scripts/gen_bv_stats.py`（重跑 `bv-stats.json`）

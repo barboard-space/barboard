@@ -103,11 +103,9 @@
       transition: border-color 0.2s, opacity 0.5s ease, transform 0.5s ease;
     }
     .hof-ed:hover { border-color: var(--clr-border-2); }
-    .hof-ed__hd { display: flex; align-items: baseline; gap: 11px; padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--clr-border-2); }
-    .hof-ed__no { font-family: var(--font-display); font-size: 24px; line-height: 1; color: var(--clr-gold-light); min-width: 1.4em; }
-    .hof-ed__meta { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
-    .hof-ed__cn { font-size: 13px; font-weight: 700; color: var(--clr-text); }
-    .hof-ed__en { font-family: var(--font-mono); font-size: 10.5px; color: var(--clr-text-3); letter-spacing: 0.02em; }
+    .hof-ed__hd { display: flex; align-items: baseline; gap: 12px; padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--clr-border-2); }
+    .hof-ed__no { font-family: var(--font-display); font-size: 24px; line-height: 1; color: var(--clr-gold-light); }
+    .hof-ed__name { font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--clr-text); min-width: 0; }
     .hof-ed__grp {
       font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
       color: var(--clr-text-3); margin: 11px 0 4px;
@@ -187,9 +185,9 @@
     .bvr-toc__item--active .bvr-toc__label { color:var(--clr-gold-light); }
     @media (max-width:768px) {
       .bvr-toc { right:20px; bottom:66px; top:auto; transform:none; z-index:210; gap:10px; }
-      .bvr-toc__toggle { display:flex; align-items:center; justify-content:center; width:42px; height:42px; background:rgba(20,20,34,0.5); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border:1px solid var(--clr-border-2); border-radius:4px; color:rgba(245,200,64,0.7); cursor:pointer; padding:0; transition:color 0.25s,border-color 0.25s; }
+      .bvr-toc__toggle { display:flex; align-items:center; justify-content:center; width:42px; height:42px; background:rgba(20,20,34,0.5); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border:1px solid var(--clr-border-2); border-radius:4px; color:rgba(192,132,252,0.65); cursor:pointer; padding:0; transition:color 0.25s,border-color 0.25s; }
       .bvr-toc__toggle svg { width:18px; height:18px; }
-      .bvr-toc--open .bvr-toc__toggle { color:var(--clr-gold-light); border-color:var(--clr-gold-light); }
+      .bvr-toc--open .bvr-toc__toggle { color:var(--clr-violet-light); border-color:var(--clr-violet-light); }
       .bvr-toc__list { display:none; gap:1px; min-width:152px; max-height:62vh; overflow-y:auto; background:rgba(20,20,34,0.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border:1px solid var(--clr-border-2); border-radius:6px; padding:6px; box-shadow:0 8px 28px rgba(0,0,0,0.4); }
       .bvr-toc:hover .bvr-toc__list { background:rgba(20,20,34,0.72); }
       .bvr-toc--open .bvr-toc__list { display:flex; }
@@ -197,7 +195,7 @@
       .bvr-toc__item:hover { background:rgba(255,255,255,0.04); }
       .bvr-toc__dash { display:none; }
       .bvr-toc__label { order:0; max-width:none; opacity:1; transform:none; overflow:visible; font-size:13px; }
-      .bvr-toc__item--active { background:rgba(212,168,50,0.14); }
+      .bvr-toc__item--active { background:rgba(168,85,247,0.12); }
     }
   </style>
 </head>
@@ -334,8 +332,7 @@
     });
     return '<div class="hof-ed fade-up" style="transition-delay:' + ((i % 6) * 0.04).toFixed(2) + 's;">' +
       '<div class="hof-ed__hd"><span class="hof-ed__no">' + ed.edition_no + '</span>' +
-      '<span class="hof-ed__meta"><span class="hof-ed__cn">第 ' + ed.edition_no + ' 届</span>' +
-      '<span class="hof-ed__en">' + esc(ed.edition_name) + '</span></span></div>' + rows + '</div>';
+      '<span class="hof-ed__name">' + esc(ed.edition_name || '') + '</span></div>' + rows + '</div>';  // 1–12 届 "The Nth Barvision"，13+ "Barvision <城市> 202X"
   }
   /* 桌面端：表格（参考 Editions Overview）。一行一组，届次 rowspan 合并；倒序 15→1 */
   function podiumTableHTML(ordered) {

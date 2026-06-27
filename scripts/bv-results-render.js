@@ -761,7 +761,9 @@
       .bvr-hero--bg .bvr-title { font-size:clamp(34px,10.5vw,52px); line-height:1.02; }
       .bvr-hero__scrim { background:
         linear-gradient(180deg, rgba(8,8,18,0.7) 0%, rgba(8,8,18,0.52) 48%, rgba(8,8,18,0.8) 100%); }
-      .bvr-hero__meta { margin-top:16px; }
+      /* 手机端：meta 标签一行一个、去竖分隔符 */
+      .bvr-hero__meta { margin-top:16px; flex-direction:column; align-items:flex-start; gap:5px; }
+      .bvr-hero__mi { padding-right:0; margin-right:0; border-right:none; white-space:normal; }
       .bvr-hero__desc { margin-top:14px; }
       .bvr-hero__p { font-size:14px; line-height:1.7; }
     }
@@ -795,7 +797,6 @@
       var cityEn = (d.edition_name || '').replace(/^Barvision\s+/i, '').replace(/\s*\d{4}\s*$/, '').trim() || esc(d.city || '');
       var mi = [];
       if (d.cn_name) mi.push('<span class="bvr-hero__mi">' + esc(d.cn_name) + '</span>');
-      mi.push('<span class="bvr-hero__mi">Barvision ' + esc(cityEn) + ' ' + esc(d.year) + '</span>');
       if (d.host) mi.push('<span class="bvr-hero__mi">主办：' + linkMentions(esc(d.host)) + '</span>');
       if (d.motto) mi.push('<span class="bvr-hero__mi">' + esc(d.motto) + '</span>');
       return '<section class="bvr-hero bvr-hero--bg" style="' + vars + '">' +

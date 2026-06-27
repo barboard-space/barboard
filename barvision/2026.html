@@ -77,6 +77,9 @@
     @media (max-width: 768px) {
       .ev-hero { padding: calc(var(--nav-h) + 40px) 0 56px; }
       .ev-hero__desc { max-width: 100%; }
+      /* 手机端：meta 标签一行一个、去竖分隔符 */
+      .ev-meta { flex-direction: column; align-items: flex-start; gap: 5px; }
+      .ev-meta-item { padding-right: 0; margin-right: 0; border-right: none; white-space: normal; }
       .ev-hero__cta .btn { flex: 1; min-width: calc(50% - 5px); justify-content: center; }
       .ev-hero__poster { background-image: url('/assets/images/barvision/2026/bg.png'); }  /* 手机端用无 logo 底图 */
     }
@@ -100,12 +103,12 @@
         <a href="/barvision.html" class="ev-eyebrow"><span>←</span><span>Barvision</span></a>
         <h1 class="ev-title">Chongqing<br><span class="ev-accent">2026</span></h1>
         <div class="ev-meta">
-          <span class="ev-meta-item">Barvision Chongqing 2026</span>
-          <span class="ev-meta-item">主办：<a class="member" href="/member/7.html" data-nickname="威妈">@williw_</a></span>
+          <span class="ev-meta-item">第十六届欧美流行歌曲个人榜吧歌曲大赛</span>
           <span class="ev-meta-item">重声交响 Echoing Confluence</span>
+          <span class="ev-meta-item">主办：<a class="member" href="/member/7.html" data-nickname="威妈">@williw_</a></span>
         </div>
         <p class="ev-hero__desc">
-          第十六届欧美流行歌曲个人榜吧歌曲大赛，正在进行中。本页实时汇总本届报名情况与海选进展，并附赛程、投票方式与参赛规则。
+          Barvision Chongqing 2026 报名正在进行中。本页实时汇总本届报名情况与海选进展，并附赛程、投票方式与参赛规则。
         </p>
         <div class="ev-hero__cta">
           <a href="/barvision/2026/events.html#submit" class="btn btn--primary">歌曲报名</a>

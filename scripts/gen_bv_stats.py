@@ -150,7 +150,7 @@ def build_podium(eds, meta):
             ms = [m for m in matches if not m.get("canceled")]
             single = len(ms) == 1 and not ms[0].get("venue")
             sel = [(m, (m.get("match") or ("S" if single else "")),
-                       (m.get("venue") or ("小众" if single else ""))) for m in ms]
+                       (m.get("venue") or ("小众组" if single else ""))) for m in ms]
         rows = []
         for m, grp, ven in sel:
             if not m:

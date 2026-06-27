@@ -813,6 +813,13 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **吧视先锋奖**：金色系底+边、奖章🎖️更明显(opacity .32/92px,手机隐藏)、描述金色调 `rgba(245,200,64,.65)`+14px、大名去 @。
     - **手机端**：卡片大数字 `.hof-card__val`/`.bv-pioneer__name` 34→**28px**（与成员页统计卡 26→21 缩放习惯一致）；各区单列、无溢出。
     - **关键文件**：渲染全在 `barvision/hof.html`（内联 JS：buildPodium/recordCard/awardCard/seasonCard/buildPioneer + RECORD_ORDER/AWARD_ORDER/SEASON_ORDER）；数据全在 `scripts/gen_bv_stats.py`（build_podium/records/season/awards + helper `slot_label`/`rank_cn`/`gf_val`/`VENUE_OF`）。⚠️ 页面 `fetch bv-stats.json` 无 cache-bust，预览需 `?cb=` 强制；线上 Pages 发缓存头部署即 fresh。
+171. **hof.html 手机端领奖台卡片标题 + 2023-2026 hero meta 调整（本次）**：
+    - **hof.html 手机端领奖台卡片标题重做**（`podiumCardHTML`）：保留左侧 Bebas 金色届数数字（`.hof-ed__no`，去掉 `min-width` 使单/双位数间距一致），删除中文「第 N 届」(`.hof-ed__cn`) + MONO 字体的 `edition_name`(`.hof-ed__en`) 两行，改为 DM Sans **单行** `.hof-ed__name`（直接 `esc(ed.edition_name)`：1–12 届 `The Nth Barvision` / 13+ `Barvision <城市> 202X`）；`.hof-ed__hd` gap 12px。**手机端页内目录配色金→紫**（`@media≤768` 的 toggle/open/active 三处，桌面仍金）。
+    - **ed1 领奖台组别 `小众` → `小众组`**（`gen_bv_stats.build_podium` 第 153 行 `single` 分支；与其他届「X众组」统一）。改后重跑 `gen_bv_stats.py`。
+    - **2023-2025 详情页 hero meta**（`bv-results-render.js` `buildHero` 主题届分支）：**删除「Barvision \<城市\> \<年份\>」行** → 现为 `cn_name`（第N届…大赛）+ 主办。
+    - **2026.html 静态 hero**（`barvision/2026.html`）：meta 首标签「Barvision Chongqing 2026」→「第十六届欧美流行歌曲个人榜吧歌曲大赛」（注：2026=**第十六届**，edition_no=16，勿写第十四届）；meta 顺序 = 中文全称 → 重声交响 Echoing Confluence(motto) → 主办：@williw_；简介 →「Barvision Chongqing 2026 报名正在进行中。本页实时汇总本届报名情况与海选进展，并附赛程、投票方式与参赛规则。」
+    - **手机端 hero meta 竖排**（两处）：`.bvr-hero__meta`（bv-results-render.js）+ `.ev-meta`（2026.html）`@media≤768` 改 `flex-direction:column; align-items:flex-start; gap:5px` + meta item 去 `border-right`/`padding-right`/`margin-right`、`white-space:normal`（一行一个、无竖分隔符；桌面端仍横排带分隔符）。
+    - **index.html / barvision.html**：XVI 卡「第十六届 · 欧美流行歌曲个人榜吧歌曲大赛」去 ` · ` 分隔符 →「第十六届欧美流行歌曲个人榜吧歌曲大赛」。
 
 ## 对话交接工作流
 
