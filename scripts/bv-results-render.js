@@ -505,6 +505,11 @@
       .bvr-el thead th:nth-child(-n+3), .bvr-el tbody td:nth-child(-n+3),
       .bvr-aud thead th:nth-child(-n+3), .bvr-aud tbody td:nth-child(-n+3),
       .bvr-su thead th:nth-child(-n+3), .bvr-su tbody td:nth-child(-n+3) { position:static; }
+      /* 报名名单手机端：取消桌面 table-layout:fixed 的固定列宽 → 改 auto，列宽随内容 + 横滑（与 2025 参赛名单 .bvr-el 一致）；
+         否则固定 % 把选送者/歌手列挤窄、长歌手名强制换行致表头与内容叠挤。table.bvr-su 提权盖过文件下方基础 nth-child 列宽规则 */
+      table.bvr-su { table-layout:auto; }
+      table.bvr-su th:nth-child(1), table.bvr-su th:nth-child(2), table.bvr-su th:nth-child(3),
+      table.bvr-su th:nth-child(4), table.bvr-su th:nth-child(5), table.bvr-su th:nth-child(6) { width:auto; }
       /* 注释里的 @名在手机端也显示昵称 */
       .bvr-mtx-note .member { font-size:0; }
       .bvr-mtx-note .member::before { content:attr(data-nickname); font-size:11px; }
