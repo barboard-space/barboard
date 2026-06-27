@@ -122,6 +122,7 @@
 - **`bv-results-render.js` 的 `BV_THEME[year]`**：海报路径 + 主题双色（c1/c2/c2l/c3/glow）。主题届 hero 渲染海报 banner、总成绩单 SF 徽章用 c1/c2l。缺则回退通用紫色 hero。
 - **`member-render.js` 的 `BV_STRIPE[year]`**：`[c1, c2]` → 该年徽章 logo 改 45° 双色斜条纹（同步导出 PNG canvas）。缺则回退 `BV_YEAR_COLOR` 纯色。
 - 年度制（matches=SF1/SF2/GF）的成员页**收敛**、计分板**拆块**、`overall_rank`/`support_rate`/`voters` **派生**全自动（`recompute_bv_ranks.py` + `gen_member_pages.py` 的 `is_annual_ed`），导入时无需改这些逻辑——只要 JSON 符合契约（含 `qualified`、折算曲 score 折后/jury_vote·tele_vote 折前）。
+- ⭐ **「场」口径（HOF/stats 计数基准）权威定义见 CLAUDE.md #169**：成功举办共 **28 场**；**年度制(13+) 单届=单场**（SF1/SF2/GF 折叠）、**ed2 例外算 2 场**（2SF/2GF）、分组制每组 1 场、ed1 单场；且**年度制在 HOF 各单曲/单场纪录只取决赛(GF)依据、半决赛不计**。涉及术语「参与场数/冠军场数/前三场数」时按此理解。
 
 ---
 

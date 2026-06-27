@@ -19201,8 +19201,8 @@
    "edition_name": "The 1st Barvision",
    "rows": [
     {
-     "group": "",
-     "venue": "",
+     "group": "S",
+     "venue": "小众",
      "rank": 1,
      "member": "猴妈",
      "ids": [
@@ -19214,8 +19214,8 @@
      "score": 128
     },
     {
-     "group": "",
-     "venue": "",
+     "group": "S",
+     "venue": "小众",
      "rank": 2,
      "member": "X妈",
      "ids": [
@@ -19227,8 +19227,8 @@
      "score": 121
     },
     {
-     "group": "",
-     "venue": "",
+     "group": "S",
+     "venue": "小众",
      "rank": 3,
      "member": "包妈",
      "ids": [
@@ -19247,8 +19247,8 @@
    "edition_name": "The 2nd Barvision",
    "rows": [
     {
-     "group": "",
-     "venue": "",
+     "group": "GF",
+     "venue": "决赛",
      "rank": 1,
      "member": "田妈",
      "ids": [
@@ -19260,8 +19260,8 @@
      "score": 140.44
     },
     {
-     "group": "",
-     "venue": "",
+     "group": "GF",
+     "venue": "决赛",
      "rank": 2,
      "member": "雨妈",
      "ids": [
@@ -19273,8 +19273,8 @@
      "score": 117.36
     },
     {
-     "group": "",
-     "venue": "",
+     "group": "GF",
+     "venue": "决赛",
      "rank": 3,
      "member": "麦妈",
      "ids": [
@@ -19284,6 +19284,45 @@
      "artist": "Röyksopp & Man Without Country",
      "song": "In the End (Lost Tapes) (feat. Susanne Sundfør)",
      "score": 108
+    },
+    {
+     "group": "SF",
+     "venue": "半决赛",
+     "rank": 1,
+     "member": "嘟妈",
+     "ids": [
+      "190"
+     ],
+     "nickname": "嘟妈",
+     "artist": "Deva Mahal",
+     "song": "Snakes",
+     "score": 141
+    },
+    {
+     "group": "SF",
+     "venue": "半决赛",
+     "rank": 2,
+     "member": "雨妈",
+     "ids": [
+      "17"
+     ],
+     "nickname": "雨妈",
+     "artist": "Kim Petras",
+     "song": "Icy",
+     "score": 123
+    },
+    {
+     "group": "SF",
+     "venue": "半决赛",
+     "rank": 3,
+     "member": "萌妈",
+     "ids": [
+      "125"
+     ],
+     "nickname": "萌妈",
+     "artist": "PLGRMS",
+     "song": "Daylight",
+     "score": 89
     }
    ]
   },
@@ -20420,8 +20459,8 @@
    ]
   },
   "highest_match_score": {
-   "title": "最高单组总分",
-   "metric": "单场最高总分",
+   "title": "最高单届总分 · 年度制",
+   "metric": "年度制单届(=决赛)总分",
    "val": 357.0,
    "unit": "分",
    "entries": [
@@ -20441,92 +20480,133 @@
   "highest_share": {
    "title": "最高单场得票占比",
    "metric": "单曲得分占全场总分比（score ÷ Σ全场）",
-   "val": 13.04,
+   "val": 12.04,
    "unit": "%",
    "entries": [
     {
      "ids": [
-      "17"
+      "120"
      ],
-     "nickname": "雨妈",
-     "artist": "Del Water Gap",
-     "song": "Glitter & Honey",
-     "edition_no": 15,
-     "match": "SF2",
-     "val": 13.04
+     "nickname": "城妈",
+     "artist": "The Magic Gang",
+     "song": "Take Back The Track",
+     "edition_no": 12,
+     "match": "A",
+     "val": 12.04
     }
    ]
   },
   "highest_jury_avg": {
    "title": "最高单曲评委均分",
    "metric": "单曲评委（Jury）均分",
-   "val": 7.5,
+   "val": 6.69,
    "unit": "",
    "entries": [
     {
      "ids": [
-      "100"
+      "190"
      ],
-     "nickname": "羊妈",
-     "artist": "Best Frenz & Joywave",
-     "song": "Flatline",
-     "edition_no": 13,
-     "match": "SF2",
-     "val": 7.5
+     "nickname": "嘟妈",
+     "artist": "Deva Mahal",
+     "song": "Snakes",
+     "edition_no": 2,
+     "match": "SF",
+     "val": 6.69
     }
    ]
   },
   "highest_edition_score": {
-   "title": "最高单届总分",
-   "metric": "单届各曲得分之和（分组制）",
+   "title": "最高单届总分 · 分组制",
+   "metric": "单届各组得分之和（分组制）",
    "val": 281,
    "unit": "分",
-   "legacy": true,
    "entries": [
     {
      "id": 20,
      "nickname": "包妈",
      "edition_no": 6,
-     "val": 281
+     "val": 281,
+     "detail": "小众 66 · 中众 86 · 大众 129"
     }
    ]
   },
   "most_participations": {
    "title": "最多参与场数",
    "metric": "累计参赛场次",
-   "val": 31,
+   "val": 28,
    "unit": "场",
    "entries": [
     {
+     "id": 20,
+     "nickname": "包妈",
+     "val": 28
+    },
+    {
      "id": 17,
      "nickname": "雨妈",
-     "val": 31
+     "val": 28
+    },
+    {
+     "id": 12,
+     "nickname": "锴妈",
+     "val": 28
     }
    ]
   }
  },
  "season": {
   "most_members_edition": {
+   "title": "单届最多参赛成员",
+   "unit": "人",
    "val": 27,
-   "edition_no": 11,
-   "edition_name": "The 11th Barvision"
+   "badges": [
+    "第 13 届",
+    "第 14 届",
+    "第 15 届"
+   ]
   },
-  "most_songs_edition": {
+  "songs_edition_annual": {
+   "title": "单届最多参赛曲目 · 年度制",
+   "unit": "首",
+   "val": 28,
+   "badges": [
+    "第 14 届"
+   ]
+  },
+  "songs_edition_grouped": {
+   "title": "单届最多参赛曲目 · 分组制",
+   "unit": "首",
    "val": 68,
-   "edition_no": 5,
-   "edition_name": "The 5th Barvision"
+   "badges": [
+    "第 5 届",
+    "第 7 届"
+   ]
   },
   "most_members_match": {
+   "title": "单场最多参赛成员 · 分组制",
+   "unit": "人",
    "val": 24,
-   "edition_no": 5,
-   "edition_name": "The 5th Barvision",
-   "match": "B"
+   "badges": [
+    "第 5 届中众组"
+   ]
   },
-  "most_songs_match": {
-   "val": 24,
-   "edition_no": 5,
-   "edition_name": "The 5th Barvision",
-   "match": "B"
+  "most_lang_match": {
+   "title": "单场最多语种",
+   "unit": "种",
+   "val": 7,
+   "badges": [
+    "第 10 届小众组"
+   ]
+  },
+  "noneng_champ": {
+   "title": "非英语歌曲夺冠",
+   "unit": "场",
+   "val": 4,
+   "badges": [
+    "第 5 届小众组",
+    "第 7 届小众组 中众组",
+    "第 10 届小众组"
+   ]
   }
  },
  "awards": {
@@ -20565,7 +20645,7 @@
   },
   "longest_wait": {
    "title": "卧薪尝胆",
-   "metric": "从首次参赛到首夺冠跨越最多场次",
+   "metric": "最大首赛至首冠间隔场次",
    "val": 21,
    "unit": "场",
    "type": "max",
@@ -20573,13 +20653,23 @@
     {
      "id": 12,
      "nickname": "锴妈",
-     "detail": "1 → 10A"
+     "segs": [
+      {
+       "b": "第 1 届"
+      },
+      {
+       "t": "→"
+      },
+      {
+       "b": "第 10 届小众组"
+      }
+     ]
     }
    ]
   },
   "consecutive_wins": {
    "title": "实红艺人",
-   "metric": "连续届夺冠（连冠）",
+   "metric": "连续届数夺冠",
    "val": 2,
    "unit": "届",
    "type": "max",
@@ -20587,18 +20677,32 @@
     {
      "id": 20,
      "nickname": "包妈",
-     "detail": "第 5–6 届"
+     "segs": [
+      {
+       "b": "第 5 届"
+      },
+      {
+       "b": "第 6 届"
+      }
+     ]
     },
     {
      "id": 17,
      "nickname": "雨妈",
-     "detail": "第 7–8 届"
+     "segs": [
+      {
+       "b": "第 7 届"
+      },
+      {
+       "b": "第 8 届"
+      }
+     ]
     }
    ]
   },
   "niche_star": {
    "title": "小众之星",
-   "metric": "小众组（A 组）夺冠次数最多",
+   "metric": "小众组夺冠次数最多",
    "val": 2,
    "unit": "次",
    "type": "max",
@@ -20606,18 +20710,32 @@
     {
      "id": 20,
      "nickname": "包妈",
-     "detail": "3A · 5A"
+     "segs": [
+      {
+       "b": "第 3 届"
+      },
+      {
+       "b": "第 5 届"
+      }
+     ]
     },
     {
      "id": 17,
      "nickname": "雨妈",
-     "detail": "7A · 8A"
+     "segs": [
+      {
+       "b": "第 7 届"
+      },
+      {
+       "b": "第 8 届"
+      }
+     ]
     }
    ]
   },
   "longest_streak": {
    "title": "雨露均沾",
-   "metric": "连续届参赛最长",
+   "metric": "最长连续参赛届数",
    "val": 15,
    "unit": "届",
    "type": "max",
@@ -20625,23 +20743,53 @@
     {
      "id": 20,
      "nickname": "包妈",
-     "detail": "第 1–15 届"
+     "segs": [
+      {
+       "b": "第 1 届"
+      },
+      {
+       "t": "→"
+      },
+      {
+       "b": "第 15 届"
+      }
+     ]
     },
     {
      "id": 17,
      "nickname": "雨妈",
-     "detail": "第 1–15 届"
+     "segs": [
+      {
+       "b": "第 1 届"
+      },
+      {
+       "t": "→"
+      },
+      {
+       "b": "第 15 届"
+      }
+     ]
     },
     {
      "id": 12,
      "nickname": "锴妈",
-     "detail": "第 1–15 届"
+     "segs": [
+      {
+       "b": "第 1 届"
+      },
+      {
+       "t": "→"
+      },
+      {
+       "b": "第 15 届"
+      }
+     ]
     }
    ]
   },
   "longest_top10": {
    "title": "长盛不衰",
-   "metric": "连续参赛场次保持前十最长",
+   "metric": "最长连续前十场次",
    "val": 8,
    "unit": "场",
    "type": "max",
@@ -20649,18 +20797,38 @@
     {
      "id": 20,
      "nickname": "包妈",
-     "detail": "5A → 7B"
+     "segs": [
+      {
+       "b": "第 5 届小众组"
+      },
+      {
+       "t": "→"
+      },
+      {
+       "b": "第 7 届中众组"
+      }
+     ]
     },
     {
      "id": 17,
      "nickname": "雨妈",
-     "detail": "1 → 5A"
+     "segs": [
+      {
+       "b": "第 1 届"
+      },
+      {
+       "t": "→"
+      },
+      {
+       "b": "第 5 届小众组"
+      }
+     ]
     }
    ]
   },
   "biggest_drop": {
    "title": "跳水天后",
-   "metric": "相邻参赛场次名次跌幅最大",
+   "metric": "最大相邻两场名次跌幅",
    "val": 24,
    "unit": "名",
    "type": "max",
@@ -20668,13 +20836,26 @@
     {
      "id": 125,
      "nickname": "萌妈",
-     "detail": "12A（3rd）→ 13（27th）"
+     "segs": [
+      {
+       "b": "第 12 届小众组"
+      },
+      {
+       "t": "第 3 名 →"
+      },
+      {
+       "b": "第 13 届"
+      },
+      {
+       "t": "第 27 名"
+      }
+     ]
     }
    ]
   },
   "clutch": {
    "title": "极限卡位",
-   "metric": "同一届不同场次斩获相同名次",
+   "metric": "同届不同场次收获相同名次",
    "val": "",
    "unit": "",
    "type": "list",
@@ -20683,103 +20864,211 @@
      "id": 17,
      "nickname": "雨妈",
      "rank": 2,
-     "rank_en": "2nd",
      "edition_no": 2,
-     "detail": "第 2 届 2SF · 2GF 同获 2nd"
+     "segs": [
+      {
+       "t": "第 2 名"
+      },
+      {
+       "b": "2SF"
+      },
+      {
+       "b": "2GF"
+      }
+     ]
     },
     {
      "id": 120,
      "nickname": "城妈",
      "rank": 5,
-     "rank_en": "5th",
      "edition_no": 2,
-     "detail": "第 2 届 2SF · 2GF 同获 5th"
+     "segs": [
+      {
+       "t": "第 5 名"
+      },
+      {
+       "b": "2SF"
+      },
+      {
+       "b": "2GF"
+      }
+     ]
     },
     {
      "id": 157,
      "nickname": "布妈",
      "rank": 6,
-     "rank_en": "6th",
      "edition_no": 3,
-     "detail": "第 3 届 3A · 3B 同获 6th"
+     "segs": [
+      {
+       "t": "第 6 名"
+      },
+      {
+       "b": "3A"
+      },
+      {
+       "b": "3B"
+      }
+     ]
     },
     {
      "id": 120,
      "nickname": "城妈",
      "rank": 7,
-     "rank_en": "7th",
      "edition_no": 6,
-     "detail": "第 6 届 6A · 6C 同获 7th"
+     "segs": [
+      {
+       "t": "第 7 名"
+      },
+      {
+       "b": "6A"
+      },
+      {
+       "b": "6C"
+      }
+     ]
     },
     {
      "id": 18,
      "nickname": "猴妈",
      "rank": 8,
-     "rank_en": "8th",
      "edition_no": 6,
-     "detail": "第 6 届 6A · 6C 同获 8th"
+     "segs": [
+      {
+       "t": "第 8 名"
+      },
+      {
+       "b": "6A"
+      },
+      {
+       "b": "6C"
+      }
+     ]
     },
     {
      "id": 124,
      "nickname": "洛妈",
      "rank": 9,
-     "rank_en": "9th",
      "edition_no": 9,
-     "detail": "第 9 届 9A · 9B 同获 9th"
+     "segs": [
+      {
+       "t": "第 9 名"
+      },
+      {
+       "b": "9A"
+      },
+      {
+       "b": "9B"
+      }
+     ]
     },
     {
      "id": 770,
      "nickname": "音妈",
      "rank": 12,
-     "rank_en": "12th",
      "edition_no": 6,
-     "detail": "第 6 届 6B · 6C 同获 12th"
+     "segs": [
+      {
+       "t": "第 12 名"
+      },
+      {
+       "b": "6B"
+      },
+      {
+       "b": "6C"
+      }
+     ]
     },
     {
      "id": 141,
      "nickname": "草妈",
      "rank": 14,
-     "rank_en": "14th",
      "edition_no": 5,
-     "detail": "第 5 届 5A · 5B 同获 14th"
+     "segs": [
+      {
+       "t": "第 14 名"
+      },
+      {
+       "b": "5A"
+      },
+      {
+       "b": "5B"
+      }
+     ]
     },
     {
      "id": 189,
      "nickname": "雀妈",
      "rank": 14,
-     "rank_en": "14th",
      "edition_no": 6,
-     "detail": "第 6 届 6B · 6C 同获 14th"
+     "segs": [
+      {
+       "t": "第 14 名"
+      },
+      {
+       "b": "6B"
+      },
+      {
+       "b": "6C"
+      }
+     ]
     },
     {
      "id": 19,
      "nickname": "柠妈",
      "rank": 16,
-     "rank_en": "16th",
      "edition_no": 7,
-     "detail": "第 7 届 7B · 7C 同获 16th"
+     "segs": [
+      {
+       "t": "第 16 名"
+      },
+      {
+       "b": "7B"
+      },
+      {
+       "b": "7C"
+      }
+     ]
     },
     {
      "id": 295,
      "nickname": "田妈",
      "rank": 17,
-     "rank_en": "17th",
      "edition_no": 7,
-     "detail": "第 7 届 7A · 7C 同获 17th"
+     "segs": [
+      {
+       "t": "第 17 名"
+      },
+      {
+       "b": "7A"
+      },
+      {
+       "b": "7C"
+      }
+     ]
     },
     {
      "id": 18,
      "nickname": "猴妈",
      "rank": 21,
-     "rank_en": "21st",
      "edition_no": 7,
-     "detail": "第 7 届 7A · 7B 同获 21st"
+     "segs": [
+      {
+       "t": "第 21 名"
+      },
+      {
+       "b": "7A"
+      },
+      {
+       "b": "7B"
+      }
+     ]
     }
    ]
   },
   "most_same_rank": {
    "title": "独家冠名",
-   "metric": "同一名次选送次数最多",
+   "metric": "最多同名次选送数",
    "val": 6,
    "unit": "首",
    "type": "max",
@@ -20787,13 +21076,35 @@
     {
      "id": 120,
      "nickname": "城妈",
-     "detail": "5th ｜ 2SF · 2GF · 5B · 7C · 8A · 10B"
+     "segs": [
+      {
+       "t": "第 5 名"
+      },
+      {
+       "b": "2SF"
+      },
+      {
+       "b": "2GF"
+      },
+      {
+       "b": "5B"
+      },
+      {
+       "b": "7C"
+      },
+      {
+       "b": "8A"
+      },
+      {
+       "b": "10B"
+      }
+     ]
     }
    ]
   },
   "shadow_gap": {
    "title": "即刻开吸",
-   "metric": "同场混淆曲名次落后正式曲最多",
+   "metric": "最大同场混淆曲落后正式曲名次",
    "val": 17,
    "unit": "名",
    "type": "max",
@@ -20801,13 +21112,20 @@
     {
      "id": 17,
      "nickname": "雨妈",
-     "detail": "选送 2nd → 混淆 19th（10B）"
+     "segs": [
+      {
+       "t": "选送 第 2 名 → 混淆 第 19 名"
+      },
+      {
+       "b": "第 10 届中众组"
+      }
+     ]
     }
    ]
   },
   "most_chinese": {
    "title": "全世界都在讲中国话",
-   "metric": "最多选送华语单曲",
+   "metric": "最多选送华语单曲数",
    "val": 14,
    "unit": "首",
    "type": "max",
@@ -20816,6 +21134,55 @@
      "id": 326,
      "nickname": "院妈",
      "detail": ""
+    }
+   ]
+  },
+  "most_artist": {
+   "title": "大众之选",
+   "metric": "被选送次数最多艺人",
+   "val": 4,
+   "unit": "次",
+   "type": "max",
+   "winners": [
+    {
+     "nickname": "Rina Sawayama"
+    }
+   ]
+  },
+  "group_slam": {
+   "title": "大满贯",
+   "metric": "小众 / 中众 / 大众组均夺冠",
+   "val": "",
+   "unit": "",
+   "type": "max",
+   "winners": [
+    {
+     "id": 18,
+     "nickname": "猴妈",
+     "segs": [
+      {
+       "b": "第 1 届"
+      },
+      {
+       "b": "第 5 届中众组"
+      },
+      {
+       "b": "第 7 届大众组"
+      }
+     ]
+    }
+   ]
+  },
+  "rank_slam": {
+   "title": "全满贯",
+   "metric": "历届成绩收获第一至十名",
+   "val": "",
+   "unit": "",
+   "type": "max",
+   "winners": [
+    {
+     "id": 20,
+     "nickname": "包妈"
     }
    ]
   }

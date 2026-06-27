@@ -4,6 +4,27 @@
 
 ---
 
+## [2026-06-27] — Barvision HOF (barvision/hof.html) 全面重做 + 「场」口径重定义
+
+### Changed — 数据层 `scripts/gen_bv_stats.py`（重跑 `bv-stats.json`）
+- **⭐「场」口径重定义（28 场模型，CLAUDE.md #169）**：年度制(13+) 单届=单场（SF1/SF2/GF 折叠）、ed2 例外算 2 场、分组制每组、ed1 单场；HOF 单曲/单场纪录**年度制只取决赛(GF)**（helper `gf_val`）。重算 `most_participations`(28 上限，包/雨/锴并列 28)、`highest_jury_avg`(修 13 SF2 违规→嘟妈 ed2 SF)、`highest_share`(城妈 ed12)。
+- **build_podium**：ed2 取 决赛+半决赛、ed1 记小众、年度制组别留空。
+- **build_records**：`最高单组总分→最高单届总分·年度制`、`·LEGACY→·分组制`(+各组得分 detail)；`most_artist` 移出至 awards。
+- **build_season(eds,meta,overview)**：改基于 overview 去重 members/songs；6 项=单届成员/单场成员·分组制/单届曲目·年度制/·分组制/单场语种/非英语夺冠(列 4 场)；每项带 `badges`。
+- **build_awards**：新增 大众之选/大满贯(猴妈)/全满贯(包妈)；13 处 metric 精简改写；详情改结构化 `segs`（场次码→徽章 `slot_label`、英文名次→中文 `rank_cn`、区间→首尾徽章；独家冠名/极限卡位用缩略码）。新增 helper `slot_label`/`rank_cn`/`VENUE_OF`。
+
+### Changed — `barvision/hof.html`
+- 段序：吧视先锋奖 → 领奖台 → 赛季纪录 → 数据纪录 → 成就纪录。
+- **领奖台**（原「历届冠军领奖台/Podium Roll」→「领奖台/Winner's Podium」）：桌面**表格**（倒序 15→1、届次 rowspan 合并+hover 整届高亮、届次榜吧蓝居中、🥇🥈🥉 列）、手机**卡片**；删副标题。
+- **数据纪录**(Category→Data Records)：瀑布流、删说明文字、标签填充式 chip(同 st-ov-grp)、歌手/歌名配色、徽章「第 N 届」。
+- **赛季纪录**(Season Records)：6 卡 3 列×2 行、徽章式（「第 N 届组」）、非英语列各场（同届合并）。
+- **成就纪录**（原「趣味奖项/Fun Awards」→「成就纪录/Achievement Records」）：14 项重排、metric 精简、去「·共 N 项」、详情徽章化+中文名次、debut 改「@名 歌手—歌名 届数徽章」。
+- **先锋奖**：金色系底/边、奖章更明显、描述金色调。
+- **手机端**：卡片大数字 34→28px、各区单列无溢出（与成员页缩放习惯一致）。
+
+### Docs
+- CLAUDE.md #169（「场」口径权威定义）+ #170（hof.html 重做总览）；BARVISION_MEMBER.md 加「场」口径指针。
+
 ## [2026-06-27] — Barvision stats.html 手机端精修 + 曲目数去重 + barvision.html 按钮
 
 ### Changed — 数据层（`gen_bv_stats.py` → `bv-stats.json`，已重跑）

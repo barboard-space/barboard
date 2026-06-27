@@ -12,7 +12,7 @@
 数据规则：混淆曲(is_shadow)不计正式；合报成员向拆计双方、歌曲向不拆；匿名归 id 0。
 改任意届 JSON 后重跑：python scripts/gen_bv_stats.py
 """
-import csv, glob, json, os, sys
+import csv, glob, json, os, re, sys
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from gen_member_pages import load_bv_editions, aggregate_barvision, is_annual_ed  # 复用聚合
@@ -57,6 +57,19 @@ def ord_en(n):
     n = int(n)
     suf = "th" if 10 <= n % 100 <= 20 else {1: "st", 2: "nd", 3: "rd"}.get(n % 10, "th")
     return f"{n}{suf}"
+
+
+VENUE_OF = {"A": "小众组", "B": "中众组", "C": "大众组", "SF": "半决赛", "GF": "决赛"}
+
+
+def slot_label(code):
+    """场次代码 → 中文标签：'5B'→'第 5 届中众组'、'1'→'第 1 届'、'2GF'→'第 2 届决赛'。"""
+    m = re.match(r"(\d+)([A-Za-z]*)", str(code))
+    return f"第 {m.group(1)} 届" + VENUE_OF.get(m.group(2), "") if m else str(code)
+
+
+def rank_cn(n):
+    return f"第 {int(n)} 名" if n is not None else "—"
 
 
 def load_member_meta():
@@ -118,17 +131,28 @@ def build_entries(eds):
 
 
 def build_podium(eds, meta):
-    """历届领奖台：有 GF（决赛/ed2）取 GF 前三；否则（分组制 A/B/C）各组前三。仅正式曲。"""
+    """历届领奖台（仅正式曲，各组/场前三）：
+       年度制(2023+) 取决赛前三、组别留空；ed2 取 决赛(GF)+半决赛(SF)；分组制取各组(小众/中众/大众)；ed1 单场综合赛记「小众」。"""
     out = []
     for ed in eds:
         if ed.get("version") != "regular":
             continue
         mm = ed.get("members", {}) or {}
         matches = ed.get("matches", [])
+        annual = is_annual_ed(matches)
         gf = next((m for m in matches if (m.get("match") or "") == "GF"), None)
-        groups = [gf] if gf else [m for m in matches if not m.get("canceled")]
+        if annual and gf:                              # 年度制：仅决赛，组别留空
+            sel = [(gf, "", "")]
+        elif gf:                                       # ed2：决赛 + 半决赛
+            others = [m for m in matches if not m.get("canceled") and m is not gf]
+            sel = [(gf, "GF", "决赛")] + [(m, (m.get("match") or "SF"), "半决赛") for m in others]
+        else:                                          # 分组制 / ed1 单场综合赛
+            ms = [m for m in matches if not m.get("canceled")]
+            single = len(ms) == 1 and not ms[0].get("venue")
+            sel = [(m, (m.get("match") or ("S" if single else "")),
+                       (m.get("venue") or ("小众" if single else ""))) for m in ms]
         rows = []
-        for m in groups:
+        for m, grp, ven in sel:
             if not m:
                 continue
             offi = [e for e in m.get("entries", []) if not e.get("is_shadow") and e.get("rank")]
@@ -136,8 +160,7 @@ def build_podium(eds, meta):
             for e in top3:
                 ids = resolve_ids(e["member"], mm)
                 rows.append({
-                    "group": "" if gf else (m.get("match") or ""),
-                    "venue": "" if gf else (m.get("venue") or ""),
+                    "group": grp, "venue": ven,
                     "rank": e["rank"], "member": e["member"], "ids": [i for i, _ in ids],
                     "nickname": " / ".join(n for _, n in ids),
                     "artist": e.get("artist"), "song": e.get("song"), "score": e.get("score"),
@@ -175,6 +198,10 @@ def build_records(eds, by_id, entries, meta):
 
     off = [e for e in entries if not e["is_shadow"]]
 
+    def gf_val(e, v):
+        # 年度制(13+ SF1/SF2/GF)：单届=单场，HOF 只取决赛依据 → 半决赛条目不计入
+        return None if (e.get("annual") and (e.get("match") or "") in ("SF", "SF1", "SF2")) else v
+
     def entry_max(key, title, metric, valfn, unit=""):
         cand = [(e, valfn(e)) for e in off]
         cand = [(e, v) for e, v in cand if v is not None]
@@ -189,41 +216,47 @@ def build_records(eds, by_id, entries, meta):
         rec[key] = {"title": title, "metric": metric, "val": round(mx, 2) if isinstance(mx, float) else mx,
                     "unit": unit, "entries": ents}
 
-    entry_max("highest_match_score", "最高单组总分", "单场最高总分", lambda e: e["score"], "分")
+    entry_max("highest_match_score", "最高单届总分 · 年度制", "年度制单届(=决赛)总分", lambda e: gf_val(e, e["score"]), "分")
     entry_max("highest_share", "最高单场得票占比", "单曲得分占全场总分比（score ÷ Σ全场）",
-              lambda e: e.get("support_rate"), "%")
+              lambda e: gf_val(e, e.get("support_rate")), "%")
     entry_max("highest_jury_avg", "最高单曲评委均分", "单曲评委（Jury）均分",
-              lambda e: (e["jury"] / e["juryN"]) if (e.get("jury") is not None and e.get("juryN")) else None)
+              lambda e: gf_val(e, (e["jury"] / e["juryN"]) if (e.get("jury") is not None and e.get("juryN")) else None))
 
-    # —— 最高单届总分（分组制 LEGACY）：仅 2019–2020 分组制（每人单届多曲）——年度制每人单届仅 1 曲、与「最高单组总分」重复，故排除 ——
+    # —— 最高单届总分 · 分组制：仅 2019–2020 分组制（每人单届多曲，各组得分之和）——年度制单届仅 1 曲、归「· 年度制」(highest_match_score) ——
+    GTYPE_R = {"A": "小众", "B": "中众", "C": "大众"}
+    TYPES_R = ["小众", "中众", "大众"]
     annual_eds = {ed["edition_no"] for ed in eds if is_annual_ed(ed.get("matches", []))}
-    edsum = {}  # (id, edition_no) -> {sum, edition_no}
+    edsum = {}  # (id, edition_no) -> {sum, edition_no, parts{组:得分}}
     for sid, ov in by_id.items():
         if sid == "0":  # 排除「匿名」伪成员
             continue
         for x in ov["entries"]:
             if x.get("is_shadow") or x.get("canceled") or x.get("total") is None:
                 continue
-            if x["edition_no"] in annual_eds:  # 年度制不计（单届单曲，重复于单组总分）
+            if x["edition_no"] in annual_eds:  # 年度制不计
                 continue
             k = (sid, x["edition_no"])
-            d = edsum.setdefault(k, {"sum": 0.0, "edition_no": x["edition_no"]})
+            d = edsum.setdefault(k, {"sum": 0.0, "edition_no": x["edition_no"], "parts": {}})
             d["sum"] += x["total"]
+            t = GTYPE_R.get((x.get("series") or "").strip(), "小众")
+            d["parts"][t] = d["parts"].get(t, 0) + x["total"]
     if edsum:
         mx = max(d["sum"] for d in edsum.values())
         ents = [{"id": int(i) if i.isdigit() else 0, "nickname": meta.get(i, {}).get("nickname", i),
-                 "edition_no": d["edition_no"], "val": round(d["sum"])}
+                 "edition_no": d["edition_no"], "val": round(d["sum"]),
+                 "detail": " · ".join(t + " " + str(round(d["parts"][t])) for t in TYPES_R if t in d["parts"])}
                 for (i, _), d in edsum.items() if abs(d["sum"] - mx) < 0.5]
-        rec["highest_edition_score"] = {"title": "最高单届总分", "metric": "单届各曲得分之和（分组制）",
-                                        "val": round(mx), "unit": "分", "legacy": True, "entries": ents}
+        rec["highest_edition_score"] = {"title": "最高单届总分 · 分组制", "metric": "单届各组得分之和（分组制）",
+                                        "val": round(mx), "unit": "分", "entries": ents}
 
     # —— 最多参与场数（distinct 场次，合报计双方，含正式+混淆，排除取消）——
-    appear = {}  # id -> set((edition_no, match))
+    appear = {}  # id -> set(场key)；28 场模型：年度制(13+)单届=单场(折叠 SF1/SF2/GF)，ed2/分组制/ed1 按 (届,场)
     for e in entries:
+        skey = (e["edition_no"],) if e.get("annual") else (e["edition_no"], e["match"])
         for i in e["ids"]:
             if i == "0":
                 continue
-            appear.setdefault(i, set()).add((e["edition_no"], e["match"]))
+            appear.setdefault(i, set()).add(skey)
     if appear:
         mx = max(len(s) for s in appear.values())
         ents = [{"id": int(i) if i.isdigit() else 0, "nickname": meta.get(i, {}).get("nickname", i), "val": len(s)}
@@ -234,42 +267,100 @@ def build_records(eds, by_id, entries, meta):
     return rec
 
 
-def build_season(eds, meta):
-    """赛季纪录：最多参赛成员数（届/场）、最多参赛曲目数（届/场）。"""
-    per_ed_members, per_ed_songs = {}, {}
-    per_match = []  # (edition_no, match, members, songs)
+def build_season(eds, meta, overview):
+    """赛季纪录（基于 overview 的去重 members/songs，与历届赛果总览一致）。
+       每项：title/unit/val + 其一：editions(并列届号列表) / edition_no+match / list(条目)。"""
+    ov = [o for o in overview if not o.get("in_progress")]
+    season = {}
+
+    def maxeds(items, key):
+        mx = max(o[key] for o in items)
+        return mx, [o["edition_no"] for o in items if o[key] == mx]
+
+    def edbadge(ed, venue=""):  # 标签：第 N 届 + 完整组名（数字两侧空格、其余无空格）
+        return f"第 {ed} 届" + (venue or "")
+
+    # 单届最多参赛成员（overview members 已排除匿名；并列全列 → 13/14/15 = 27）
+    mx, e = maxeds(ov, "members")
+    season["most_members_edition"] = {"title": "单届最多参赛成员", "unit": "人", "val": mx,
+                                      "badges": [edbadge(x) for x in e]}
+    # 单届最多参赛曲目 · 年度制（去重）/ · 分组制（各组之和）
+    ann = [o for o in ov if o["format"] == "annual"]
+    grp = [o for o in ov if o["format"] != "annual"]
+    if ann:
+        mx, e = maxeds(ann, "songs")
+        season["songs_edition_annual"] = {"title": "单届最多参赛曲目 · 年度制", "unit": "首", "val": mx,
+                                          "badges": [edbadge(x) for x in e]}
+    if grp:
+        mx, e = maxeds(grp, "songs")
+        season["songs_edition_grouped"] = {"title": "单届最多参赛曲目 · 分组制", "unit": "首", "val": mx,
+                                           "badges": [edbadge(x) for x in e]}
+
+    # 单场最多参赛成员 · 分组制（仅 1–12 届=非年度制；各场/组 distinct 成员，排除匿名 id 0）
+    best = None  # (count, edition_no, venue_short)
     for ed in eds:
-        if ed.get("version") != "regular":
+        if ed.get("version") != "regular" or is_annual_ed(ed.get("matches", [])):
             continue
         mm = ed.get("members", {}) or {}
-        ed_members, ed_songs = set(), 0
         for m in ed.get("matches", []):
             if m.get("canceled"):
                 continue
-            mset, scount = set(), 0
-            for e in m.get("entries", []):
-                if e.get("is_shadow"):
+            mset = set()
+            for e2 in m.get("entries", []):
+                if e2.get("is_shadow"):
                     continue
-                scount += 1
-                for i, _ in resolve_ids(e.get("member", ""), mm):
-                    mset.add(i)
-            ed_members |= mset
-            ed_songs += scount
-            per_match.append((ed["edition_no"], ed.get("edition_name", ""), m.get("match") or "", len(mset), scount))
-        per_ed_members[ed["edition_no"]] = (ed.get("edition_name", ""), len(ed_members))
-        per_ed_songs[ed["edition_no"]] = (ed.get("edition_name", ""), ed_songs)
+                for i, _ in resolve_ids(e2.get("member", ""), mm):
+                    if i != "0":
+                        mset.add(i)
+            lbl = m.get("venue") or m.get("match") or ""   # 完整组名（含「组」）
+            if best is None or len(mset) > best[0]:
+                best = (len(mset), ed["edition_no"], lbl)
+    if best:
+        season["most_members_match"] = {"title": "单场最多参赛成员 · 分组制", "unit": "人", "val": best[0],
+                                        "badges": [edbadge(best[1], best[2])]}
 
-    def mx_ed(d, label):
-        no = max(d, key=lambda k: d[k][1])
-        return {"val": d[no][1], "edition_no": no, "edition_name": d[no][0]}
-
-    bm = max(per_match, key=lambda x: x[3]); bs = max(per_match, key=lambda x: x[4])
-    return {
-        "most_members_edition": mx_ed(per_ed_members, "成员"),
-        "most_songs_edition": mx_ed(per_ed_songs, "曲目"),
-        "most_members_match": {"val": bm[3], "edition_no": bm[0], "edition_name": bm[1], "match": bm[2]},
-        "most_songs_match": {"val": bs[4], "edition_no": bs[0], "edition_name": bs[1], "match": bs[2]},
-    }
+    # 单场最多语种 + 非英语歌曲夺冠（「场」：分组制按各组、否则整届一场）
+    def langs_of(mlist):
+        s = set()
+        for m in mlist:
+            for e2 in m.get("entries", []):
+                if e2.get("is_shadow"):
+                    continue
+                for lg in re.split(r"[ /、,，]+", (e2.get("language") or "").strip()):
+                    if lg:
+                        s.add(lg)
+        return s
+    lang_units, noneng_by_ed = [], {}   # noneng_by_ed: 届号 -> [组名…]（同届多场合并一个标签）
+    for ed in eds:
+        if ed.get("version") != "regular":
+            continue
+        ms = [m for m in ed.get("matches", []) if not m.get("canceled")]
+        if not ms:
+            continue
+        has_venue = any(m.get("venue") for m in ms)
+        if has_venue:
+            for m in ms:
+                lang_units.append((len(langs_of([m])), ed["edition_no"], m.get("venue") or ""))
+        else:
+            lang_units.append((len(langs_of(ms)), ed["edition_no"], ""))
+        # 非英语夺冠场：分组制各组冠军、否则决赛(GF)/单场冠军；冠军曲语种非「英语」
+        champ_ms = ms if has_venue else [next((m for m in ms if (m.get("match") or "") == "GF"), None)]
+        champ_ms = [m for m in champ_ms if m] or ms
+        for m in champ_ms:
+            offi = [e2 for e2 in m.get("entries", []) if not e2.get("is_shadow") and e2.get("rank")]
+            if not offi:
+                continue
+            lang = (min(offi, key=lambda x: x["rank"]).get("language") or "").strip()
+            if lang and lang != "英语":
+                noneng_by_ed.setdefault(ed["edition_no"], []).append(m.get("venue") or "")
+    if lang_units:
+        bl = max(lang_units, key=lambda x: x[0])
+        season["most_lang_match"] = {"title": "单场最多语种", "unit": "种", "val": bl[0],
+                                     "badges": [edbadge(bl[1], bl[2])]}
+    noneng_total = sum(len(v) for v in noneng_by_ed.values())  # 场数（同届多场各计）
+    noneng_badges = [edbadge(e, " ".join(vs)) for e, vs in sorted(noneng_by_ed.items())]  # 同届多组合并：第 7 届小众组 中众组
+    season["noneng_champ"] = {"title": "非英语歌曲夺冠", "unit": "场", "val": noneng_total, "badges": noneng_badges}
+    return season
 
 
 def build_overview(eds, meta, podium):
@@ -434,10 +525,11 @@ def build_awards(by_id, entries, meta):
         wait.append((sid, span, p["debut_slot"], first_win))
     if wait:
         mx = max(s for _, s, _, _ in wait)
-        aw["longest_wait"] = {"title": "卧薪尝胆", "metric": "从首次参赛到首夺冠跨越最多场次", "val": mx,
+        aw["longest_wait"] = {"title": "卧薪尝胆", "metric": "最大首赛至首冠间隔场次", "val": mx,
                               "unit": "场", "type": "max",
                               "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                           "detail": f"{ds} → {fw}"} for s, sp, ds, fw in wait if sp == mx]}
+                                           "segs": [{"b": slot_label(ds)}, {"t": "→"}, {"b": slot_label(fw)}]}
+                                          for s, sp, ds, fw in wait if sp == mx]}
 
     # ③ 实红艺人（max）：连续届夺冠（连冠）
     cw = []
@@ -447,10 +539,11 @@ def build_awards(by_id, entries, meta):
             cw.append((sid, ln, s, e))
     if cw:
         mx = max(x[1] for x in cw)
-        aw["consecutive_wins"] = {"title": "实红艺人", "metric": "连续届夺冠（连冠）", "val": mx, "unit": "届",
+        aw["consecutive_wins"] = {"title": "实红艺人", "metric": "连续届数夺冠", "val": mx, "unit": "届",
                                   "type": "max",
                                   "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                               "detail": ed_range(a, b)} for s, ln, a, b in cw if ln == mx]}
+                                               "segs": [{"b": f"第 {x} 届"} for x in range(a, b + 1)]}
+                                              for s, ln, a, b in cw if ln == mx]}
 
     # ④ 小众之星（max）：小众组（A 组）夺冠次数最多
     niche = {}
@@ -461,10 +554,11 @@ def build_awards(by_id, entries, meta):
             niche[sid] = slots_a
     if niche:
         mx = max(len(v) for v in niche.values())
-        aw["niche_star"] = {"title": "小众之星", "metric": "小众组（A 组）夺冠次数最多", "val": mx, "unit": "次",
+        aw["niche_star"] = {"title": "小众之星", "metric": "小众组夺冠次数最多", "val": mx, "unit": "次",
                             "type": "max",
                             "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                         "detail": " · ".join(v)} for s, v in niche.items() if len(v) == mx]}
+                                         "segs": [{"b": "第 " + re.match(r"\d+", c).group() + " 届"} for c in v]}
+                                        for s, v in niche.items() if len(v) == mx]}
 
     # ⑤ 雨露均沾（max）：连续届参赛最长
     streak = []
@@ -473,10 +567,12 @@ def build_awards(by_id, entries, meta):
         streak.append((sid, ln, s, e))
     if streak:
         mx = max(x[1] for x in streak)
-        aw["longest_streak"] = {"title": "雨露均沾", "metric": "连续届参赛最长", "val": mx, "unit": "届",
+        aw["longest_streak"] = {"title": "雨露均沾", "metric": "最长连续参赛届数", "val": mx, "unit": "届",
                                 "type": "max",
                                 "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                             "detail": ed_range(a, b)} for s, ln, a, b in streak if ln == mx]}
+                                             "segs": ([{"b": f"第 {a} 届"}] if a == b else
+                                                      [{"b": f"第 {a} 届"}, {"t": "→"}, {"b": f"第 {b} 届"}])}
+                                            for s, ln, a, b in streak if ln == mx]}
 
     # 缺席整届即中断：相邻两场次属于同届或相邻届才算连续（届号差 ≤ 1）
     def adjacent(e1, e2):
@@ -501,10 +597,11 @@ def build_awards(by_id, entries, meta):
             top10run.append((sid, best, brange))
     if top10run:
         mx = max(x[1] for x in top10run)
-        aw["longest_top10"] = {"title": "长盛不衰", "metric": "连续参赛场次保持前十最长", "val": mx, "unit": "场",
+        aw["longest_top10"] = {"title": "长盛不衰", "metric": "最长连续前十场次", "val": mx, "unit": "场",
                                "type": "max",
                                "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                            "detail": f"{r[0]} → {r[-1]}"} for s, ln, r in top10run if ln == mx]}
+                                            "segs": [{"b": slot_label(r[0])}, {"t": "→"}, {"b": slot_label(r[-1])}]}
+                                           for s, ln, r in top10run if ln == mx]}
 
     # ⑦ 跳水天后（max）：相邻参赛场次名次跌幅最大
     drop = []
@@ -516,10 +613,11 @@ def build_awards(by_id, entries, meta):
                 drop.append((sid, d, c1, e1["rank"], c2, e2["rank"]))
     if drop:
         mx = max(x[1] for x in drop)
-        aw["biggest_drop"] = {"title": "跳水天后", "metric": "相邻参赛场次名次跌幅最大", "val": mx, "unit": "名",
+        aw["biggest_drop"] = {"title": "跳水天后", "metric": "最大相邻两场名次跌幅", "val": mx, "unit": "名",
                               "type": "max",
                               "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                           "detail": f"{c1}（{ord_en(r1)}）→ {c2}（{ord_en(r2)}）"}
+                                           "segs": [{"b": slot_label(c1)}, {"t": rank_cn(r1) + " →"},
+                                                    {"b": slot_label(c2)}, {"t": rank_cn(r2)}]}
                                           for s, d, c1, r1, c2, r2 in drop if d == mx]}
 
     # ⑧ 极限卡位（list）：同一届不同场次斩获相同名次
@@ -532,10 +630,10 @@ def build_awards(by_id, entries, meta):
             codes = sorted(set(codes), key=slot_idx)
             if len(codes) >= 2:
                 clutch.append({"id": int(sid) if sid.isdigit() else 0, "nickname": nick(sid),
-                               "rank": rk, "rank_en": ord_en(rk), "edition_no": ed,
-                               "detail": f"{ed_range(ed, ed)} {' · '.join(codes)} 同获 {ord_en(rk)}"})
+                               "rank": rk, "edition_no": ed,
+                               "segs": [{"t": rank_cn(rk)}] + [{"b": c} for c in codes]})
     clutch.sort(key=lambda x: (x["rank"], x["edition_no"]))
-    aw["clutch"] = {"title": "极限卡位", "metric": "同一届不同场次斩获相同名次", "val": "", "unit": "",
+    aw["clutch"] = {"title": "极限卡位", "metric": "同届不同场次收获相同名次", "val": "", "unit": "",
                     "type": "list", "winners": clutch}
 
     # ⑨ 独家冠名（max）：同一名次的选送次数最多
@@ -550,10 +648,10 @@ def build_awards(by_id, entries, meta):
         same_rank.append((sid, cnt[rk], rk, sorted(set(codes[rk]), key=slot_idx)))
     if same_rank:
         mx = max(x[1] for x in same_rank)
-        aw["most_same_rank"] = {"title": "独家冠名", "metric": "同一名次选送次数最多", "val": mx, "unit": "首",
+        aw["most_same_rank"] = {"title": "独家冠名", "metric": "最多同名次选送数", "val": mx, "unit": "首",
                                 "type": "max",
                                 "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                             "detail": f"{ord_en(rk)} ｜ {' · '.join(cs)}"}
+                                             "segs": [{"t": rank_cn(rk)}] + [{"b": cc} for cc in cs]}
                                             for s, c, rk, cs in same_rank if c == mx]}
 
     # ⑩ 即刻开吸（max）：同场混淆曲名次落后正式曲最大（混淆比正式差最多）
@@ -568,10 +666,10 @@ def build_awards(by_id, entries, meta):
                     sgap.append((sid, d, c, off["rank"], sh["rank"]))
     if sgap:
         mx = max(x[1] for x in sgap)
-        aw["shadow_gap"] = {"title": "即刻开吸", "metric": "同场混淆曲名次落后正式曲最多", "val": mx, "unit": "名",
+        aw["shadow_gap"] = {"title": "即刻开吸", "metric": "最大同场混淆曲落后正式曲名次", "val": mx, "unit": "名",
                             "type": "max",
                             "winners": [{"id": int(s) if s.isdigit() else 0, "nickname": nick(s),
-                                         "detail": f"选送 {ord_en(r1)} → 混淆 {ord_en(r2)}（{c}）"}
+                                         "segs": [{"t": "选送 " + rank_cn(r1) + " → 混淆 " + rank_cn(r2)}, {"b": slot_label(c)}]}
                                         for s, d, c, r1, r2 in sgap if d == mx]}
 
     # ⑪ 全世界都在讲中国话（max）：最多选送华语单曲（合报计双方）
@@ -585,10 +683,52 @@ def build_awards(by_id, entries, meta):
                     cn[i] = cn.get(i, 0) + 1
     if cn:
         mx = max(cn.values())
-        aw["most_chinese"] = {"title": "全世界都在讲中国话", "metric": "最多选送华语单曲", "val": mx, "unit": "首",
+        aw["most_chinese"] = {"title": "全世界都在讲中国话", "metric": "最多选送华语单曲数", "val": mx, "unit": "首",
                               "type": "max",
                               "winners": [{"id": int(i) if i.isdigit() else 0, "nickname": nick(i), "detail": ""}
                                           for i, c in cn.items() if c == mx]}
+
+    # ⑫ 大众之选（max）：被选送最多的艺人（(届,选送者,歌名) 去重、不含混淆曲；得主为艺人、纯文本）
+    artist_sub = {}
+    for e in entries:
+        if e["is_shadow"] or not e.get("artist"):
+            continue
+        artist_sub.setdefault(e["artist"], set()).add((e["edition_no"], e["member"], e["song"]))
+    if artist_sub:
+        mx = max(len(s) for s in artist_sub.values())
+        aw["most_artist"] = {"title": "大众之选", "metric": "被选送次数最多艺人",
+                             "val": mx, "unit": "次", "type": "max",
+                             "winners": sorted([{"nickname": a} for a, s in artist_sub.items() if len(s) == mx],
+                                               key=lambda x: x["nickname"])}
+
+    # ⑬ 大满贯（max）：小众/中众/大众三组均夺冠（A→小众 B→中众 C→大众，无分组的届默认归小众）
+    GTYPE = {"A": "小众", "B": "中众", "C": "大众"}
+    TYPES = ["小众", "中众", "大众"]
+    slam = []
+    for sid, p in prof.items():
+        won = {}  # type -> 最早夺冠场代码
+        for e in p["offs"]:
+            if e["rank"] != 1:
+                continue
+            t = GTYPE.get((e.get("series") or "").strip(), "小众")
+            c = slot_code(e)
+            if t not in won or slot_idx(c) < slot_idx(won[t]):
+                won[t] = c
+        if all(t in won for t in TYPES):
+            slam.append({"id": int(sid) if sid.isdigit() else 0, "nickname": nick(sid),
+                         "segs": [{"b": slot_label(won[t])} for t in TYPES]})
+    if slam:
+        aw["group_slam"] = {"title": "大满贯", "metric": "小众 / 中众 / 大众组均夺冠", "val": "", "unit": "",
+                            "type": "max", "winners": slam}
+
+    # ⑭ 全满贯（max）：历届正式成绩囊括第 1–10 名各至少一次
+    full = []
+    for sid, p in prof.items():
+        if set(range(1, 11)) <= {e["rank"] for e in p["offs"]}:
+            full.append({"id": int(sid) if sid.isdigit() else 0, "nickname": nick(sid)})
+    if full:
+        aw["rank_slam"] = {"title": "全满贯", "metric": "历届成绩收获第一至十名", "val": "", "unit": "",
+                           "type": "max", "winners": full}
 
     return aw
 
@@ -608,9 +748,9 @@ def main():
     entries = build_entries(eds)
     podium = build_podium(eds, meta)
     records = build_records(eds, by_id, entries, meta)
-    season = build_season(eds, meta)
     awards = build_awards(by_id, entries, meta)
     overview = build_overview(eds, meta, podium)
+    season = build_season(eds, meta, overview)
 
     data_through = max((p["edition_no"] for p in podium), default=0)  # 有赛果的最大届号（第 15 届）
     out = {"data_through": data_through, "pioneer": PIONEER, "overview": overview, "members": members,
@@ -626,19 +766,22 @@ def main():
         print(f"  {r['title']}: {r['val']}{r['unit']}  ← {who}")
     print("  —— 赛季纪录 ——")
     for k, r in season.items():
-        print(f"  {k}: {r['val']} (第{r['edition_no']}届{(' ' + r.get('match','')) if r.get('match') else ''})")
-    print("  —— 趣味奖项 ——")
+        print(f"  {k}: {r['val']} ({' / '.join(r.get('badges', []))})")
+    print("  —— 成就纪录 ——")
+
+    def wdetail(w):
+        if w.get("segs"):
+            return " ".join(s.get("b") or s.get("t", "") for s in w["segs"])
+        if w.get("song"):
+            return f"第{w.get('edition_no')}届 {w.get('artist','')} — {w.get('song','')}"
+        return w.get("detail", "")
+
     for k, r in awards.items():
-        head = f"  {r['title']}（{r['metric']}）"
-        if r.get("type") == "list":
-            print(head + f"  共 {len(r['winners'])} 项")
-            for w in r["winners"]:
-                d = w.get("detail") or f"第{w.get('edition_no')}届 {w.get('artist','')} — {w.get('song','')}"
-                print(f"      · {w['nickname']}：{d}")
-        else:
-            print(head + f"  {r['val']}{r['unit']}")
-            for w in r["winners"]:
-                print(f"      · {w['nickname']}" + (f"：{w['detail']}" if w.get('detail') else ""))
+        head = f"  {r['title']}（{r['metric']}）" + (f"  共 {len(r['winners'])} 项" if r.get("type") == "list" else f"  {r['val']}{r['unit']}")
+        print(head)
+        for w in r["winners"]:
+            d = wdetail(w)
+            print(f"      · {w['nickname']}" + (f"：{d}" if d else ""))
 
 
 if __name__ == "__main__":
