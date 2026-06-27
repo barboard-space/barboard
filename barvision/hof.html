@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Hall of Fame | Barboard</title>
-  <meta name="description" content="Barvision 荣誉殿堂——历届冠军领奖台、数据纪录、趣味奖项与吧视先锋奖，记录 Barvision 年度歌曲大赛的高光时刻（数据截至第 15 届）。" />
+  <meta name="description" content="Barvision 荣誉殿堂——历届领奖台、数据纪录、趣味奖项与吧视先锋奖，记录 Barvision 年度歌曲大赛的高光时刻（数据截至第 15 届）。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
   <link rel="stylesheet" href="/style.css" />
@@ -45,12 +45,6 @@
     .hof-title .gold { color: var(--clr-gold-light); }
     .hof-title .dim { opacity: 0.65; }
     .hof-desc { font-size: 15px; color: rgba(245,200,64,0.85); line-height: 1.7; margin-top: 24px; max-width: 560px; }
-    .hof-through {
-      display: inline-block; margin-top: 20px; font-family: var(--font-body); font-size: 11px; font-weight: 600;
-      letter-spacing: 0.12em; color: var(--clr-gold-light);
-      border: 1px solid rgba(212,168,50,0.35); border-radius: 999px; padding: 5px 14px;
-      background: rgba(212,168,50,0.06);
-    }
 
     /* ── Section header 间距（与其他页一致） ── */
     .section--bordered .section-label { margin-bottom: 16px; }
@@ -70,8 +64,11 @@
     .bv-pioneer__name { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--clr-text); }
     .bv-pioneer__desc { font-size: 13px; color: var(--clr-text-2); line-height: 1.65; margin-top: 16px; max-width: 620px; }
 
-    /* ── 历届冠军领奖台 ── */
-    .hof-pod-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(330px, 1fr)); gap: 12px; align-items: start; margin-top: var(--gap-md); }
+    /* ── 领奖台 ── */
+    /* 领奖台 / 趣味奖项卡片高度参差大 → CSS columns 瀑布流紧凑排布，消除 grid 同行参差留白 */
+    .hof-pod-grid { columns: 330px; column-gap: 12px; margin-top: var(--gap-md); }
+    .hof-awards-grid { columns: 300px; column-gap: 12px; margin-top: var(--gap-md); }
+    .hof-pod-grid > .hof-ed, .hof-awards-grid > .hof-card { break-inside: avoid; margin-bottom: 12px; }
     .hof-ed {
       background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 8px; padding: 16px 18px 14px;
       transition: border-color 0.2s, opacity 0.5s ease, transform 0.5s ease;
@@ -90,7 +87,7 @@
     .hof-pod__rk { font-family: var(--font-display); font-size: 18px; line-height: 1; color: var(--clr-text-3); text-align: center; }
     .hof-pod__main { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
     .hof-pod__by { font-size: 12.5px; font-weight: 600; color: var(--clr-text); line-height: 1.3; }
-    .hof-pod__song { font-size: 11px; color: var(--clr-text-2); line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .hof-pod__song { font-size: 11px; color: var(--clr-text-2); line-height: 1.35; }   /* 瀑布流允许高度自由 → 歌名完整换行、不截断 */
     .hof-pod__song .art { color: var(--clr-text-3); }
     .hof-pod__sc { font-family: var(--font-display); font-size: 16px; line-height: 1; color: var(--clr-text-2); }
     .hof-pod--1 .hof-pod__rk { color: var(--clr-gold-light); }
@@ -131,7 +128,8 @@
     .bv-legend code { font-family: var(--font-mono); color: var(--clr-text-2); background: var(--clr-surface); padding: 0 5px; border-radius: 3px; margin: 0 1px; }
 
     @media (max-width: 768px) {
-      .hof-pod-grid, .hof-grid { grid-template-columns: 1fr; }
+      .hof-grid { grid-template-columns: 1fr; }
+      .hof-pod-grid, .hof-awards-grid { columns: 1; }
       .bv-pioneer { flex-direction: column; align-items: flex-start; }
       .bv-pioneer::after { display: none; }
       .bv-legend__ex { display: none; }
@@ -181,8 +179,7 @@
   <div class="hof-hero__inner section__inner">
     <a class="hof-eyebrow fade-up" href="/barvision.html"><span>←</span><span>Barvision</span></a>
     <h1 class="hof-title fade-up" style="transition-delay:0.1s;">Hall <span class="dim">of</span> <span class="gold">Fame</span></h1>
-    <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届的高光时刻——冠军领奖台、数据纪录与趣味奖项。</p>
-    <div class="fade-up" style="transition-delay:0.28s;"><span class="hof-through" id="hofThrough">数据截至第 15 届</span></div>
+    <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届高光时刻。数据统计截至第 <span id="hofThrough">15</span> 届。</p>
   </div>
 </section>
 
@@ -198,9 +195,8 @@
 <!-- ═══ 历届冠军领奖台 ═══ -->
 <section class="section section--bordered" id="podium" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
-    <p class="section-label fade-up">历届冠军领奖台</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Podium <span style="color:var(--clr-gold-light);">Roll</span></h2>
-    <p class="hof-sec__sub fade-up" style="transition-delay:0.15s;">第 1–15 届各场（决赛 / 分组）前三名。分组制（2019–2020）取各组前三，年度制（2023 起）取决赛前三。</p>
+    <p class="section-label fade-up">领奖台</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Winner's <span style="color:var(--clr-gold-light);">Podium</span></h2>
     <div id="bvPodium"></div>
   </div>
 </section>
@@ -263,7 +259,7 @@
     var el = document.getElementById('bvPioneer');
     if (!el || !p) return;
     var href = '/member/' + p.member_id + '.html';
-    var nameLink = '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '" style="color:var(--clr-text);">@' + esc(p.handle) + '</a>';
+    var nameLink = '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '" style="color:var(--clr-text);">' + esc(p.handle) + '</a>';
     var descHtml = esc(p.desc).replace('@' + esc(p.handle),
       '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '">@' + esc(p.handle) + '</a>');
     el.innerHTML = '<div class="bv-pioneer">' +
@@ -369,7 +365,7 @@
     } catch (e) { console.error('BV HOF: data load failed', e); return; }
 
     var through = document.getElementById('hofThrough');
-    if (through && STATS.data_through) through.textContent = '数据截至第 ' + STATS.data_through + ' 届';
+    if (through && STATS.data_through) through.textContent = STATS.data_through;
 
     buildPioneer(STATS.pioneer);
     buildPodium(STATS.podium);
@@ -378,7 +374,7 @@
     document.getElementById('bvRecords').innerHTML = '<div class="hof-grid">' + recs.map(recordCard).join('') + '</div>';
 
     var aws = AWARD_ORDER.filter(function (k) { return STATS.awards[k]; }).map(function (k) { var a = STATS.awards[k]; a.key = k; return a; });
-    document.getElementById('bvAwards').innerHTML = '<div class="hof-grid">' + aws.map(awardCard).join('') + '</div>';
+    document.getElementById('bvAwards').innerHTML = '<div class="hof-awards-grid">' + aws.map(awardCard).join('') + '</div>';
 
     var seas = SEASON_DEFS.filter(function (d) { return STATS.season[d[0]]; }).map(function (d) {
       var s = STATS.season[d[0]]; return { label: d[1], val: s.val, unit: d[2], edition_no: s.edition_no, match: s.match };
@@ -399,7 +395,7 @@
 
   /* ── Notion 风格右侧目录 ── */
   (function () {
-    var ITEMS = [['pioneer', '吧视先锋奖'], ['podium', '历届冠军领奖台'], ['records', '数据纪录'], ['season', '赛季纪录'], ['awards', '趣味奖项']];
+    var ITEMS = [['pioneer', '吧视先锋奖'], ['podium', '领奖台'], ['records', '数据纪录'], ['season', '赛季纪录'], ['awards', '趣味奖项']];
     var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
     var nav = document.createElement('nav');
     nav.className = 'bvr-toc'; nav.setAttribute('aria-label', '页内目录');
