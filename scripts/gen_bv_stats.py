@@ -286,11 +286,9 @@ def build_overview(eds, meta, podium):
             continue
         mm = ed.get("members", {}) or {}
         annual = is_annual_ed(ed.get("matches", []))
-        members, songs, nmatch = set(), 0, 0
-        for m in ed.get("matches", []):
-            if m.get("canceled"):
-                continue
-            nmatch += 1
+        mlist = [m for m in ed.get("matches", []) if not m.get("canceled")]
+        members, songs = set(), 0
+        for m in mlist:
             for e in m.get("entries", []):
                 if e.get("is_shadow"):
                     continue
@@ -298,15 +296,62 @@ def build_overview(eds, meta, podium):
                 for i, _ in resolve_ids(e.get("member", ""), mm):
                     if i != "0":
                         members.add(i)
-        if not nmatch:
-            continue  # 跳过进行中/无赛果的届（如 ed16）
+        nmatch = len(mlist)
+
+        def _champ(m):  # 某场冠军（正式曲 rank 最小）
+            offi = [e for e in m.get("entries", []) if not e.get("is_shadow") and e.get("rank")]
+            if not offi:
+                return None
+            top = min(offi, key=lambda e: e["rank"])
+            ids = resolve_ids(top.get("member", ""), mm)
+            return {"ids": [i for i, _ in ids], "nickname": " / ".join(n for _, n in ids),
+                    "artist": top.get("artist"), "song": top.get("song")}
+
+        # 当届冠军（按场/组拆分）：年度制→决赛单冠军(拉通,含夺冠曲)；ed2 等多场非年度制→按场(SF/GF)；
+        # 分组制→各组(小众/中众/大众)；ed1 单场综合赛→标「小众」
+        champ_rows = []
+        if annual:
+            gf = next((m for m in mlist if (m.get("match") or "") == "GF"), None)
+            c = _champ(gf) if gf else None
+            if c:
+                c["label"] = ""
+                champ_rows.append(c)
+        else:
+            for m in mlist:
+                c = _champ(m)
+                if not c:
+                    continue
+                code = (m.get("match") or "").strip()
+                if code in ("SF", "GF", "SF1", "SF2"):
+                    c["label"] = code
+                elif m.get("venue"):
+                    c["label"] = m["venue"].replace("组", "")
+                else:
+                    c["label"] = "小众"  # 第一届单场综合赛
+                champ_rows.append(c)
+
+        # 各场曲目数（按场/组）：与 champ_rows 同样的场次序与标签
+        song_rows = []
+        for m in mlist:
+            cnt = sum(1 for e in m.get("entries", []) if not e.get("is_shadow"))
+            code = (m.get("match") or "").strip()
+            if code in ("SF", "GF", "SF1", "SF2"):
+                lbl = code
+            elif m.get("venue"):
+                lbl = m["venue"].replace("组", "")
+            else:
+                lbl = "小众"
+            song_rows.append({"label": lbl, "songs": cnt})
+
+        # nmatch==0 → 进行中/尚无赛果的届（如 ed16）：仍纳入总览，仅元信息，标 in_progress
         out.append({
             "edition_no": ed["edition_no"], "year": ed["year"],
             "edition_name": ed.get("edition_name", ""), "cn_name": ed.get("cn_name", ""),
             "city": ed.get("city", ""), "host": ed.get("host", ""),
             "format": "annual" if annual else "grouped",
             "members": len(members), "songs": songs, "matches": nmatch,
-            "champions": champ_by_ed.get(ed["edition_no"], []),
+            "champ_rows": champ_rows, "song_rows": song_rows,
+            "in_progress": nmatch == 0,
         })
     out.sort(key=lambda x: x["edition_no"])
     return out

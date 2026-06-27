@@ -793,6 +793,12 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **barvision/2026.html 手机端修复（bv-results-render.js，真机膨胀类，预览复现不出，参 #139）**：① SCHEDULE 等规则表 `.bvr-rule__tbl`/`.bvr-rule__score` 补 `text-size-adjust:100%`（真机字号锁 13px、与小标题一致）；② 选送名单 `.bvr-su__by` 加 `white-space:nowrap`（防「X妈」真机被拆两行）。**通则重申：详情页/规则表凡宽内容真机字号异常优先怀疑 text-size-adjust 缺失**。
     - **stats.html 二轮精修（同日，已预览验证）**：① **finder 置顶**（查询区进 hero、大标题下直接 tab+搜索框，删独立 Big Query section，左对齐使搜索框/标题/表格左缘齐）；② **可读性**（表格 DM Sans 400→500、14→15px，暗灰 text-3→text-2，数字去 MONO 改 `tabular-nums`）；③ **查询逻辑**：`matchEng` 场次显代码（SF/SF1/SF2/GF，分组保留中文，ed1→「—」）+ **同届同曲跨场合并一条**（`stageOf` 取决赛/最终，名次用 `overall`）+ 从新到旧（届号降序）+ 标题「**606** 首」(按 届+选送者+歌手+歌名 去重、动态)；④ 控件：示例「热门」→「猜你想搜」(≤5/维度,固定高度居中)、输入框**清除 X**(`has-value` 切换放大镜↔X)、tab 圆角 8px、首个 tab「歌曲」→「单曲」、表头「届」→「届次」、结果「第 N 届」；⑤ 列宽：名次+总分居中、参赛作品内层 `.st-song__in{inline-block;max-width:400px}`、语种 `width:5em`、结果表 `width:auto` 内容自适应不横滑；⑥ 背景网格→**噪点**(`.st-hero__noise` SVG feTurbulence 去饱和,opacity .09/freq .8)、水印 STATS→BARVISION；⑦ **⭐ 手机端结果改卡片**（≤600px：`.st-card` 名次+歌手—歌名+标签/meta 行，无横滑；桌面仍表格；resize 重渲）。
     - **memLink 无 handle 成员不导航修复（stats.html + hof.html）**：原「无 handle / handle==昵称」返回纯文本 → 改为只要正整数 id（真实成员、有 `member/<id>.html`）即链接，有 handle 显 @handle、否则显昵称，仅匿名 id 0 不导航。命中薯妈/雀妈/蛋妈/饼妈/插妈（members.csv 无 handle）。
+    - **stats.html 历届总览/排行榜深度精修（同日，桌面已验证；⚠️ 手机端待优化）**：
+      · **数据层 `gen_bv_stats.build_overview`**：纳入进行中届（`in_progress`，ed16 仅元信息）；新增 `champ_rows`（按场/组各场冠军：年度制取 GF 单冠、ed2 取 SF+GF、分组取各组、ed1 标「小众」）+ `song_rows`（各场曲目数，同标签）。改届 JSON 后重跑 `gen_bv_stats.py`。
+      · **总览**：历届成绩总览→**历届赛果总览**、删副标题/赛制列、倒序、`The` 前缀去除；**当届冠军等分三列**（年度制 @冠军 + 夺冠曲合并 2-3 列拉通；ed2=SF/GF；分组=小众/中众/大众；ed1=小众）；**曲目数等分三列**（chip+各场数）；对齐 届次中/年份左/赛事左/成员中；主办仅 2023+；`table-layout:fixed`+`<colgroup>` 保证不横滑；字号 赛事名/年份/成员/曲目数/冠军 14、夺冠曲/匿名 13、chip 10(min-width32)、主办 12。
+      · **排行榜**：大妈选送排行榜→**选送排行榜**、删副标题；夺冠/前三/前十→**Top 1/3/10**；全列居中（修 `th.ctr.sortable` 旧右对齐 bug）、去迷你条、成员名 14、**成员列不排序**、**最佳名次↔平均名次对调**；排序用 member 同款上下三角 `.st-tri`；**三态排序**（计数列首降、名次列首升、第三态 `rankSort=null` 回**默认多级排序** `DEFAULT_ORDER` 优先级 参与>Top1>Top3>Top10>最佳>平均>12分）；配色 `vcls`：参与场数 前十名 text/其余 text-3（无金）、Top1/Top3/Top10/12分 最高金/前十名 text/其余 text-3、最佳名次 =1 金/2-9 text/≥10 text-3、平均名次 最佳金/≤10 text/>10 text-3。
+      · **查询**：`matchEng` 场次去「组」(小众组→小众) + ed1→小众；数值统一 14px。
+      · ⚠️ **手机端（≤600px）三表卡片化/可读性尚未做** —— 总览/排行新结构（fixed colgroup 多列）在手机端会横滑或拥挤，**下一会话专门优化**（查询结果已有 `.st-card` 卡片，可参照扩展到总览/排行）。
 
 ## 对话交接工作流
 

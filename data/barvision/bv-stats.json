@@ -18,19 +18,24 @@
    "members": 14,
    "songs": 14,
    "matches": 1,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "",
-     "venue": "",
      "ids": [
       "18"
      ],
      "nickname": "猴妈",
      "artist": "Parachute",
      "song": "Had It All",
-     "score": 128
+     "label": "小众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 14
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 2,
@@ -43,19 +48,37 @@
    "members": 19,
    "songs": 35,
    "matches": 2,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "",
-     "venue": "",
+     "ids": [
+      "190"
+     ],
+     "nickname": "嘟妈",
+     "artist": "Deva Mahal",
+     "song": "Snakes",
+     "label": "SF"
+    },
+    {
      "ids": [
       "295"
      ],
      "nickname": "田妈",
      "artist": "The Brummies & Kacey Musgraves",
      "song": "Drive Away",
-     "score": 140.44
+     "label": "GF"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "SF",
+     "songs": 16
+    },
+    {
+     "label": "GF",
+     "songs": 19
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 3,
@@ -68,30 +91,37 @@
    "members": 22,
    "songs": 41,
    "matches": 2,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "20"
      ],
      "nickname": "包妈",
      "artist": "Bob Moses",
      "song": "Selling Me Sympathy",
-     "score": 119
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "135"
      ],
      "nickname": "瑞妈",
      "artist": "Tame Impala",
      "song": "Borderline",
-     "score": 115
+     "label": "中众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 22
+    },
+    {
+     "label": "中众",
+     "songs": 19
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 4,
@@ -104,30 +134,37 @@
    "members": 25,
    "songs": 45,
    "matches": 2,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "141"
      ],
      "nickname": "草妈",
      "artist": "Hatchie",
      "song": "Stay With Me",
-     "score": 149
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "156"
      ],
      "nickname": "杰妈",
      "artist": "Aurora",
      "song": "The River",
-     "score": 129
+     "label": "中众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 23
+    },
+    {
+     "label": "中众",
+     "songs": 22
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 5,
@@ -140,41 +177,50 @@
    "members": 24,
    "songs": 68,
    "matches": 3,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "20"
      ],
      "nickname": "包妈",
      "artist": "SIRUP",
      "song": "Evergreen",
-     "score": 96
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "18"
      ],
      "nickname": "猴妈",
      "artist": "Naika",
      "song": "déjà vu",
-     "score": 84
+     "label": "中众"
     },
     {
-     "group": "C",
-     "venue": "大众组",
      "ids": [
       "17"
      ],
      "nickname": "雨妈",
      "artist": "K. Michelle",
      "song": "Not A Little Bit",
-     "score": 77
+     "label": "大众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 21
+    },
+    {
+     "label": "中众",
+     "songs": 24
+    },
+    {
+     "label": "大众",
+     "songs": 23
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 6,
@@ -187,41 +233,50 @@
    "members": 19,
    "songs": 49,
    "matches": 3,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "125"
      ],
      "nickname": "萌妈",
      "artist": "Everyone You Know",
      "song": "She Don't Dance",
-     "score": 101
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "130"
      ],
      "nickname": "麦妈",
      "artist": "Miya Folick",
      "song": "Thingamajig",
-     "score": 101
+     "label": "中众"
     },
     {
-     "group": "C",
-     "venue": "大众组",
      "ids": [
       "20"
      ],
      "nickname": "包妈",
      "artist": "The Glorious Sons",
      "song": "Closer to the Sky",
-     "score": 129
+     "label": "大众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 16
+    },
+    {
+     "label": "中众",
+     "songs": 16
+    },
+    {
+     "label": "大众",
+     "songs": 17
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 7,
@@ -234,41 +289,50 @@
    "members": 25,
    "songs": 68,
    "matches": 3,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "17"
      ],
      "nickname": "雨妈",
      "artist": "Indochine",
      "song": "Station 13",
-     "score": 128
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "120"
      ],
      "nickname": "城妈",
      "artist": "Dardust",
      "song": "Sublime",
-     "score": 117
+     "label": "中众"
     },
     {
-     "group": "C",
-     "venue": "大众组",
      "ids": [
       "18"
      ],
      "nickname": "猴妈",
      "artist": "Matt Gresham",
      "song": "Highwire",
-     "score": 83
+     "label": "大众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 23
+    },
+    {
+     "label": "中众",
+     "songs": 24
+    },
+    {
+     "label": "大众",
+     "songs": 21
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 8,
@@ -281,30 +345,37 @@
    "members": 22,
    "songs": 40,
    "matches": 2,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "17"
      ],
      "nickname": "雨妈",
      "artist": "Dorian Electra",
      "song": "Man to Man",
-     "score": 128
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "153"
      ],
      "nickname": "小妈",
      "artist": "Jessie Ware",
      "song": "Spotlight",
-     "score": 110
+     "label": "中众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 19
+    },
+    {
+     "label": "中众",
+     "songs": 21
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 9,
@@ -317,30 +388,37 @@
    "members": 20,
    "songs": 34,
    "matches": 2,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "157"
      ],
      "nickname": "布妈",
      "artist": "knxwledge",
      "song": "minding_my business (Durand Bernarr & Rose Gold)",
-     "score": 116.7
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "19"
      ],
      "nickname": "柠妈",
      "artist": "Isaac Dunbar",
      "song": "comme des garcons (like the boys)",
-     "score": 91.1
+     "label": "中众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 15
+    },
+    {
+     "label": "中众",
+     "songs": 19
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 10,
@@ -353,30 +431,37 @@
    "members": 22,
    "songs": 38,
    "matches": 2,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "12"
      ],
      "nickname": "锴妈",
      "artist": "Morgan Sulele & Mans Zelmerlow",
      "song": "Gamle Dager",
-     "score": 88
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "0"
      ],
      "nickname": "匿名#5",
      "artist": "The BossHoss",
      "song": "Little Help (feat.Mimi＆Josy)",
-     "score": 121
+     "label": "中众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 19
+    },
+    {
+     "label": "中众",
+     "songs": 19
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 11,
@@ -389,30 +474,37 @@
    "members": 26,
    "songs": 45,
    "matches": 2,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "0"
      ],
      "nickname": "匿名#7",
      "artist": "Róisín Murphy",
      "song": "Murphy’s Law",
-     "score": 107
+     "label": "小众"
     },
     {
-     "group": "B",
-     "venue": "中众组",
      "ids": [
       "132"
      ],
      "nickname": "A妈",
      "artist": "Phoebe Bridgers",
      "song": "Kyoto",
-     "score": 127
+     "label": "中众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 23
+    },
+    {
+     "label": "中众",
+     "songs": 22
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 12,
@@ -425,19 +517,24 @@
    "members": 16,
    "songs": 17,
    "matches": 1,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "A",
-     "venue": "小众组",
      "ids": [
       "120"
      ],
      "nickname": "城妈",
      "artist": "The Magic Gang",
      "song": "Take Back The Track",
-     "score": 110
+     "label": "小众"
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "小众",
+     "songs": 17
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 13,
@@ -450,19 +547,32 @@
    "members": 27,
    "songs": 45,
    "matches": 3,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "",
-     "venue": "",
      "ids": [
       "100"
      ],
      "nickname": "羊妈",
      "artist": "Best Frenz & Joywave",
      "song": "Flatline",
-     "score": 159.0
+     "label": ""
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "SF1",
+     "songs": 13
+    },
+    {
+     "label": "SF2",
+     "songs": 14
+    },
+    {
+     "label": "GF",
+     "songs": 18
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 14,
@@ -475,19 +585,32 @@
    "members": 27,
    "songs": 46,
    "matches": 3,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "",
-     "venue": "",
      "ids": [
       "27"
      ],
      "nickname": "S妈",
      "artist": "Bennett Coast",
      "song": "Pretender",
-     "score": 266.0
+     "label": ""
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "SF1",
+     "songs": 14
+    },
+    {
+     "label": "SF2",
+     "songs": 14
+    },
+    {
+     "label": "GF",
+     "songs": 18
+    }
+   ],
+   "in_progress": false
   },
   {
    "edition_no": 15,
@@ -500,19 +623,47 @@
    "members": 27,
    "songs": 42,
    "matches": 3,
-   "champions": [
+   "champ_rows": [
     {
-     "group": "",
-     "venue": "",
      "ids": [
       "7"
      ],
      "nickname": "威妈",
      "artist": "Elliot James Reay",
      "song": "Boy In Love",
-     "score": 357.0
+     "label": ""
     }
-   ]
+   ],
+   "song_rows": [
+    {
+     "label": "SF1",
+     "songs": 12
+    },
+    {
+     "label": "SF2",
+     "songs": 12
+    },
+    {
+     "label": "GF",
+     "songs": 18
+    }
+   ],
+   "in_progress": false
+  },
+  {
+   "edition_no": 16,
+   "year": 2026,
+   "edition_name": "Barvision Chongqing 2026",
+   "cn_name": "第十六届",
+   "city": "Chongqing",
+   "host": "威妈",
+   "format": "grouped",
+   "members": 0,
+   "songs": 0,
+   "matches": 0,
+   "champ_rows": [],
+   "song_rows": [],
+   "in_progress": true
   }
  ],
  "members": {
