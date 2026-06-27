@@ -227,6 +227,17 @@
     .st-q__bar.has-value .st-q__clear { display: flex; }
     .st-q__count { font-size: 13px; color: var(--clr-text-2); min-height: 16px; }
     .st-q__empty { font-size: 14px; color: var(--clr-text-2); padding: 28px 4px; }
+    /* 查询区入场动画：每次 runQuery 重渲都生成全新直接子元素（空状态提示+示例 chip / 结果表 / 卡片），
+       CSS animation 随之重新播放一次 → 首次加载、切 tab、出结果均淡入；140ms 去抖保证停止输入才触发、不逐键闪烁 */
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes st-result-in { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+      #stResults > * { animation: st-result-in 0.28s ease both; }
+      #stResults > .st-ex { animation-delay: 0.06s; }   /* 示例 chip 略晚于提示语 */
+      /* 首次加载：接续上方 hero 入场 stagger（eyebrow 0→title 0.1→desc 0.2→查询框 0.32→结果 0.42），
+         作为整段序列收尾，避免比上方元素先冒出而割裂；首次渲染后由 JS 移除 .st-first，后续搜索/切 tab 即时淡入 */
+      #stResults.st-first > * { animation-delay: 0.42s; }
+      #stResults.st-first > .st-ex { animation-delay: 0.48s; }
+    }
 
     /* ── Notion 风格右侧目录 ── */
     .bvr-toc { position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; align-items:flex-end; gap:0; opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
@@ -286,7 +297,7 @@
         <div class="st-q__count" id="stCount"></div>
       </div>
     </div>
-    <div id="stResults"></div>
+    <div id="stResults" class="st-first"></div>
   </div>
 </section>
 
@@ -569,6 +580,8 @@
     curQ = q.toLowerCase();
     var bar = inEl.closest('.st-q__bar'); if (bar) bar.classList.toggle('has-value', inEl.value.length > 0);  // 有输入显清除 X
     var resEl = document.getElementById('stResults'), cntEl = document.getElementById('stCount');
+    if (runQuery._ran) resEl.classList.remove('st-first');  // 仅首次渲染随 hero stagger 延迟收尾，之后搜索/切 tab 即时淡入
+    runQuery._ran = true;
     if (!q) {
       resEl.innerHTML = '<div class="st-q__empty">输入关键词，按「' + DIM[curDim] + '」检索历届参赛歌曲。</div>' + exampleChips();
       cntEl.textContent = '';
