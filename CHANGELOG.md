@@ -4,6 +4,28 @@
 
 ---
 
+## [2026-06-27] — Barvision stats.html 手机端精修 + 曲目数去重 + barvision.html 按钮
+
+### Changed — 数据层（`gen_bv_stats.py` → `bv-stats.json`，已重跑）
+- **曲目数去重（年度制 2023+）**：`overview[].songs` 对年度制（`is_annual_ed`）按 `(选送者,歌手,歌名)` 去重——同曲跨 SF/GF 多场只计一次（ed13 45→27、ed14 46→28、ed15 42→26）；`song_rows` 年度制留空。**分组制（1–12）保持各组分开**（各组曲目互不重叠，按场累计，song_rows 仍 小众/中众/大众）。
+
+### Changed — barvision.html
+- hero 按钮 **数据中心 ↔ 名人堂 位置互换**（现序：Barvision 2026 / 数据中心 / 名人堂）。
+
+### Changed — barvision/stats.html
+- **历届赛果总览 曲目数列**：年度制改为**单一去重总数**（`colspan=3` 一格，如 27）；分组制仍三栏 chip + 数（小众17…）。
+- **手机端「等待更新」**：进行中届（ed16）总览卡冠军位 “尚未开赛” → **“等待更新”**。
+- **手机端总览卡片字号 -1px**（首行 届号22px/赛事名14px 及 chip 标签不变）：meta 13→12、champ 13→12、champ 夺冠曲 13→12、匿名 11→10。
+- **⭐ 手机端成员一律显昵称「X妈」省空间（网页端仍 @handle）**：用 `.member{font-size:0}` + `::before{content:attr(data-nickname)}` 切换，覆盖①总览卡 主办(meta 12px)+冠军(champ 11px)②选送排行榜成员(13px，且较桌面 14px **-1px**，规则置 `@media(max-width:600px)` 因排行表桌面也在)③查询结果卡 选送者(12.5px)。桌面零影响。
+
+### Changed — section header 标题字号
+- 把全站「`section-label` 眉标 + `section__title` 标题（+ 可选描述）」这套头部的**标题字号统一为 events 标准 `clamp(24px,3.5vw,48px)`**（桌面 48px / 手机 24px）。涉及：`barvision/stats.html`(2) / `archive.html`(2) / `barvision/hof.html`(5) / `bbl/hof.html`(9) / `barvision/2026/events.html`(2 内联 + 1 CSS 规则) / **`scripts/bv-results-render.js`**（`section()` 函数，覆盖所有 Barvision 历届详情页板块标题）。
+- 原各页字号不一（stats/archive/bv-hof = `clamp(18px,2.4vw,36px)`、bbl-hof = `clamp(18px,2.4vw,28px)`）现统一到 events 值；events / 详情页本就是该值（基准）。
+- **⭐ `index.html` 首页主板块（Barvision / BarboardLab）不在此列**——保持其默认 `clamp(36px,5vw,64px)`（首页主板块属更大层级，单独保留）。
+- **描述（subtitle）对齐 events 标准 14px / `margin-top:24px`**：`barvision/hof.html` `.hof-sec__sub`（13px/mt14→14px/mt24）、`bbl/hof.html` `.hof-section-desc`（13px/mt16→14px/mt24）。events 描述本就 14px。
+- 眉标 `.section-label`（11px / 字距 0.32em / 下间距 16px）全站本就一致，未动。`.bbl-chart-title`（图表卡片标题，非 section 头部）保持原样。未改 `style.css`，无需升 `?v=`。
+- ⚠️ 使 CLAUDE.md #88（bbl/hof 标题 28px）相关字号说明过时（现为 `clamp(24px,3.5vw,48px)`）。
+
 ## [2026-06-27] — Barvision stats.html 历届总览 / 选送排行榜 深度精修
 
 ### Changed — 历届赛果总览（overview）

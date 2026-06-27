@@ -545,7 +545,7 @@
    "host": "雨妈",
    "format": "annual",
    "members": 27,
-   "songs": 45,
+   "songs": 27,
    "matches": 3,
    "champ_rows": [
     {
@@ -558,20 +558,7 @@
      "label": ""
     }
    ],
-   "song_rows": [
-    {
-     "label": "SF1",
-     "songs": 13
-    },
-    {
-     "label": "SF2",
-     "songs": 14
-    },
-    {
-     "label": "GF",
-     "songs": 18
-    }
-   ],
+   "song_rows": [],
    "in_progress": false
   },
   {
@@ -583,7 +570,7 @@
    "host": "羊妈",
    "format": "annual",
    "members": 27,
-   "songs": 46,
+   "songs": 28,
    "matches": 3,
    "champ_rows": [
     {
@@ -596,20 +583,7 @@
      "label": ""
     }
    ],
-   "song_rows": [
-    {
-     "label": "SF1",
-     "songs": 14
-    },
-    {
-     "label": "SF2",
-     "songs": 14
-    },
-    {
-     "label": "GF",
-     "songs": 18
-    }
-   ],
+   "song_rows": [],
    "in_progress": false
   },
   {
@@ -621,7 +595,7 @@
    "host": "S妈",
    "format": "annual",
    "members": 27,
-   "songs": 42,
+   "songs": 26,
    "matches": 3,
    "champ_rows": [
     {
@@ -634,20 +608,7 @@
      "label": ""
     }
    ],
-   "song_rows": [
-    {
-     "label": "SF1",
-     "songs": 12
-    },
-    {
-     "label": "SF2",
-     "songs": 12
-    },
-    {
-     "label": "GF",
-     "songs": 18
-    }
-   ],
+   "song_rows": [],
    "in_progress": false
   },
   {

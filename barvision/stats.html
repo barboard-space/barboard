@@ -90,7 +90,8 @@
     .st-card__work .ttl { color: var(--clr-text); }
     .st-card__meta { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 5px 7px; font-size: 12.5px; color: var(--clr-text-3); }
     .st-card__meta .sep { opacity: 0.4; }
-    .st-card__meta .member { font-weight: 500; }
+    .st-card__meta .member { font-weight: 500; font-size: 0; }   /* 手机卡片：隐 @handle，::before 显昵称(X妈)省空间 */
+    .st-card__meta .member::before { content: attr(data-nickname); font-size: 12.5px; }
 
     /* 排行榜可排序表头 */
     .st-tbl th.sortable { cursor: pointer; user-select: none; }
@@ -126,13 +127,21 @@
     .st-anon { color: var(--clr-text-2); }   /* 匿名/无 id 选送者纯文本 */
     #stOverview .st-ov-champ { font-size: 13px; }   /* 冠军列正文 13px（@名/夺冠曲；组别 chip 10 / 匿名 13 各自保留） */
     #stOverview .st-ov-champ .st-anon { font-size: 13px; }   /* 匿名（桌面）13px */
-    #stOverview .st-ovc__champ .member { font-size: 12px; }   /* 手机卡片冠军 @名 12px */
-    #stOverview .st-ovc__champ .st-anon { font-size: 11px; }  /* 匿名（手机）11px */
+    #stOverview .st-ovc__meta .member { font-size: 0; }   /* 手机卡片主办：隐 @handle，::before 显昵称(X妈) */
+    #stOverview .st-ovc__meta .member::before { content: attr(data-nickname); font-size: 12px; font-weight: 500; }
+    #stOverview .st-ovc__champ .member { font-size: 0; }   /* 手机卡片冠军：隐 @handle，::before 显昵称(X妈)省空间 */
+    #stOverview .st-ovc__champ .member::before { content: attr(data-nickname); font-size: 11px; font-weight: 500; }  /* X妈 11px（-1px） */
+    #stOverview .st-ovc__champ .st-anon { font-size: 10px; }  /* 匿名（手机）-1px → 10px */
+    #stOverview .st-ovc__champ .st-ov-song { font-size: 12px; }  /* 夺冠曲（手机）-1px → 12px */
     #stOverview .st-tbl td:nth-child(2) { font-size: 14px; }   /* 年份字号 -1px */
     /* 数值字号统一 14px（年份/成员/曲目数/名次/总分/排行各计数列）+ 排行成员名 -1px */
     #stRanking td.ctr, #stOverview td.ctr, #stOverview .st-ov-numslot,
     #stResults td.num, #stResults td.ctr { font-size: 14px; }
     #stRanking tbody td:nth-child(2), #stRanking tbody td:nth-child(2) .member { font-size: 14px; }
+    @media (max-width: 600px) {  /* 排行榜手机端：成员显昵称(X妈) + -1px(14→13) 省空间；网页端仍 @handle 14px */
+      #stRanking tbody td:nth-child(2) .member { font-size: 0; }
+      #stRanking tbody td:nth-child(2) .member::before { content: attr(data-nickname); font-size: 13px; }
+    }
     /* 排行榜：上下三角排序指示（同 member 页）+ 每列最佳金色配色 */
     #stRanking .st-tri { display: inline-block; width: 7px; height: 10px; margin-left: 5px; vertical-align: middle; }
     #stRanking .st-tri path { fill: currentColor; opacity: 0.28; }
@@ -162,8 +171,8 @@
     .st-ovc__hd .st-no { flex: none; font-size: 22px; }
     .st-ovc__name { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--clr-text); line-height: 1.35; }
     .st-ovc__hd .st-fmt { flex: none; }
-    .st-ovc__meta { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; font-size: 13px; color: var(--clr-text-2); }
-    .st-ovc__champ { margin-top: 6px; font-size: 13px; color: var(--clr-text-2); line-height: 1.5; }
+    .st-ovc__meta { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; font-size: 12px; color: var(--clr-text-2); }
+    .st-ovc__champ { margin-top: 6px; font-size: 12px; color: var(--clr-text-2); line-height: 1.5; }
     .st-ovc__lb { color: var(--clr-text-3); margin-right: 7px; }
     .st-ovc .sep { opacity: 0.4; }
     /* 查询关键词高亮 */
@@ -283,7 +292,7 @@
 <section class="section section--bordered" id="overview" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
     <p class="section-label fade-up">历届赛果总览</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Editions <span class="ac">Overview</span></h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Editions <span class="ac">Overview</span></h2>
     <div id="stOverview" class="fade-up" style="transition-delay:0.15s;"></div>
   </div>
 </section>
@@ -292,7 +301,7 @@
 <section class="section section--bordered" id="ranking" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
     <p class="section-label fade-up">选送排行榜</p>
-    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(18px,2.4vw,36px);">Member <span class="ac">Leaderboard</span></h2>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Member <span class="ac">Leaderboard</span></h2>
     <div id="stRanking" class="fade-up" style="transition-delay:0.15s;"></div>
   </div>
 </section>
@@ -353,7 +362,7 @@
         var meta = '<span class="st-muted">' + o.year + '</span>';
         if (!o.in_progress) meta += sep + '成员 ' + o.members + sep + '曲目数 ' + o.songs;
         if (o.host && o.year >= 2023) meta += sep + '主办 ' + hostLink(o);
-        var champ = o.in_progress ? '<span class="st-muted">尚未开赛</span>'
+        var champ = o.in_progress ? '<span class="st-muted">等待更新</span>'
           : '<span class="st-ovc__lb">当届冠军</span>' + (o.champ_rows || []).map(function (c) { return '<span class="st-ovc__cl">' + champLine(c, annual) + '</span>'; }).join('');
         return '<div class="st-ovc" data-href="' + edHref(o.year, o.edition_no) + '">' +
           '<div class="st-ovc__hd"><span class="st-no">' + o.edition_no + '</span>' +
@@ -367,9 +376,10 @@
         var cr = o.champ_rows || [];
         var href = edHref(o.year, o.edition_no);
         var hostHtml = (o.host && o.year >= 2023) ? '<div class="st-ev__host">主办 ' + hostLink(o) + '</div>' : '';
-        // 曲目数：分三栏，各场 chip + 数目（与 champ 同样的场次序）
+        // 曲目数：年度制(2023+)同曲跨 SF/GF 去重 → 单一总数(colspan)；分组制(1–12)各组分开，chip + 数目
         var songCells;
         if (o.in_progress) songCells = '<td colspan="3">' + dash + '</td>';
+        else if (annual) songCells = '<td class="st-ov-numslot" colspan="3">' + o.songs + '</td>';
         else {
           var sr = o.song_rows || [];
           songCells = '';

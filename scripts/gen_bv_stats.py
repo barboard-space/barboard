@@ -287,16 +287,20 @@ def build_overview(eds, meta, podium):
         mm = ed.get("members", {}) or {}
         annual = is_annual_ed(ed.get("matches", []))
         mlist = [m for m in ed.get("matches", []) if not m.get("canceled")]
-        members, songs = set(), 0
+        members, songs, song_keys = set(), 0, set()
         for m in mlist:
             for e in m.get("entries", []):
                 if e.get("is_shadow"):
                     continue
                 songs += 1
+                song_keys.add((e.get("member", ""), e.get("artist", ""), e.get("song", "")))
                 for i, _ in resolve_ids(e.get("member", ""), mm):
                     if i != "0":
                         members.add(i)
         nmatch = len(mlist)
+        # 曲目数：年度制(2023+)同曲在 SF/GF 多场重复出现 → 按(选送者,歌手,歌名)去重为唯一曲目数；
+        #         分组制(1–12)各组曲目互不重叠 → 按场累计（保持分开）
+        songs_total = len(song_keys) if annual else songs
 
         def _champ(m):  # 某场冠军（正式曲 rank 最小）
             offi = [e for e in m.get("entries", []) if not e.get("is_shadow") and e.get("rank")]
@@ -330,18 +334,20 @@ def build_overview(eds, meta, podium):
                     c["label"] = "小众"  # 第一届单场综合赛
                 champ_rows.append(c)
 
-        # 各场曲目数（按场/组）：与 champ_rows 同样的场次序与标签
+        # 曲目数明细：分组制(1–12)各组分开（小众/中众/大众，与 champ_rows 同序同标签）；
+        #            年度制(2023+)已去重为单一总数(songs)，不按场拆分（song_rows 留空）
         song_rows = []
-        for m in mlist:
-            cnt = sum(1 for e in m.get("entries", []) if not e.get("is_shadow"))
-            code = (m.get("match") or "").strip()
-            if code in ("SF", "GF", "SF1", "SF2"):
-                lbl = code
-            elif m.get("venue"):
-                lbl = m["venue"].replace("组", "")
-            else:
-                lbl = "小众"
-            song_rows.append({"label": lbl, "songs": cnt})
+        if not annual:
+            for m in mlist:
+                cnt = sum(1 for e in m.get("entries", []) if not e.get("is_shadow"))
+                code = (m.get("match") or "").strip()
+                if code in ("SF", "GF", "SF1", "SF2"):
+                    lbl = code
+                elif m.get("venue"):
+                    lbl = m["venue"].replace("组", "")
+                else:
+                    lbl = "小众"
+                song_rows.append({"label": lbl, "songs": cnt})
 
         # nmatch==0 → 进行中/尚无赛果的届（如 ed16）：仍纳入总览，仅元信息，标 in_progress
         out.append({
@@ -349,7 +355,7 @@ def build_overview(eds, meta, podium):
             "edition_name": ed.get("edition_name", ""), "cn_name": ed.get("cn_name", ""),
             "city": ed.get("city", ""), "host": ed.get("host", ""),
             "format": "annual" if annual else "grouped",
-            "members": len(members), "songs": songs, "matches": nmatch,
+            "members": len(members), "songs": songs_total, "matches": nmatch,
             "champ_rows": champ_rows, "song_rows": song_rows,
             "in_progress": nmatch == 0,
         })
