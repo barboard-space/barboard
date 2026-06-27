@@ -23,6 +23,8 @@
 
 ## 当前网站状态
 
+> **⚠️ 路径方案（2026-06-27 起，全局，见 #173）**：全站已 **clean-URL 目录化**——下文「已完成/待建」及各历史注记里写的页面 `X.html` 现一律为：**文件 `X/index.html`、线上 URL `/X/`**（首页 `index.html` 例外，留根、URL `/`）。例：`bbl.html`→文件 `bbl/index.html`／URL `/bbl/`；`barvision/hof.html`→`barvision/hof/index.html`／`/barvision/hof/`；`member/7.html`→`member/7/index.html`／`/member/7/`；`barvision/2026.html`→`barvision/2026/index.html`／`/barvision/2026/`；`barvision/2019/01.html`→`barvision/2019/01/index.html`。**新增页面/链接一律绝对 `/` + 尾斜杠目录形式，禁用相对 `../` 与 `X.html`。** 阅读旧注记时按此换算，不再逐条标注。
+
 ### 已完成
 - `index.html` — 首页（完成，经过多轮 session 深度打磨，详见开发注意事项）
 - `style.css` — 全站样式（含完整设计系统）
@@ -41,7 +43,7 @@
 - `data/members/members.csv` — 全体成员信息（昵称、ID名、小组、B站ID、Musictrack）
 - `scripts/fetch_bbl.py` — BBL 抓取脚本（label 映射已修正；使用 `curl_cffi` 伪装 Chrome TLS 指纹绕过 Cloudflare）
 - `.github/workflows/update-bbl.yml` — 每周六自动更新 BBL 数据（已修复：`permissions: contents: write`；`git add` 包含 ticker/updates；curl_cffi 已验证可正常 fetch + push）
-- **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）
+- **Dev Gate** — `scripts/nav.js` 顶部 `DEV_GATE`/`DEV_PASS` 控制，各页面 `<head>` 含防闪内联脚本（详见开发注意事项 #48–50）。**当前 `DEV_GATE=false`＝已关闭、站点公开上线，无密码门**
 - `bbl.html` — BBL 专题页（已完成，含 hero + Bilibili 视频自适应尺寸 + 亮点 JS-sticky 侧栏 + 完整榜单 + 搜索，详见开发注意事项 #64–69, #76–80）
 - `bbl/hof.html` — BBL 荣誉殿堂（已完成，**9大板块**（顺序）：冠单名录 → 在榜周数纪录 → 点数纪录 → 无冕高分 → 助攻纪录 → 最强N榜 → 个人榜冠军纪录 → 单周专辑进榜纪录 → 艺人进榜纪录，数据截至第125期；**数据已迁移至 `data/bbl/bbl-record/hof_data.json` 动态加载**，HTML 内只有空 `let` 声明；async IIFE `Promise.all` fetch `bbl-vol-index.json` + `hof_data.json` 后渲染；页内 TOC（右侧固定，呼吸点指示器，IO suppression）；各板块卡片/条目均有 `fade-up` 错落入场动画；详见开发注意事项 #80–97, #114）
 - `barvision.html` — Barvision 总览（已完成，大幅重设计，详见开发注意事项 #100–102）
@@ -53,8 +55,8 @@
 
 ### 待建页面（按优先级）
 - **✅ Barvision 数据库化（已完成，见 #167/#168）**：数据基座 `bv-stats.json`（`gen_bv_stats.py`，含 pioneer/overview/members/entries/podium/records/season/**awards** 11 项趣味奖项）+ **重做 `barvision/hof.html`**（读 bv-stats，先锋奖/领奖台/数据纪录/赛季纪录/趣味奖项，金/紫 hero + Notion 目录）+ **新建 `barvision/stats.html`**（历届总览/可排序选送排行/四维查询）+ nav 互链。剩余：娱乐版 HOF（暂缓）、全量数据核对。改任意届 JSON 后重跑 `gen_bv_stats.py`。
-- **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**下一步：第 16 届（Chongqing 2026，进行中）赛后导入**——同年度制（SF1/SF2/GF），渲染已通用，按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 补 `BV_THEME[2025]`/`BV_STRIPE[2025]`/`RECENT_BG[2025]` 年度配色 + 跑 recompute/gen 管线）；**2025 观众分每首≤10 票**（见 #161）；源数据在 `D:\Genius\Barvision\Barvision 2025`，intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
-- ~~第 16 届「本届实时更新页」~~ **已完成**（见 #164，页面 = `barvision/2026.html`，路径方案 #165）。**剩余**：报名/海选实时数据随进展更新（编辑 `regular-16.json` 的 `signups`/`auditions`）；首页 feed 同步功能**用户已 hold**（脚本就绪、`feed:[]`）；待确认数据项（邓妈 European Fever 获胜曲、海选时间）见 #164。
+- **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**下一步：第 16 届（Chongqing 2026，进行中）赛后导入**——同年度制（SF1/SF2/GF），渲染已通用，`BV_THEME[2026]`/`BV_STRIPE[2026]` 已随 live 页建好（#164），按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 跑 recompute/number_anon/gen 管线）；**2025 起观众分每首≤10 票**（见 #161）；intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
+- ~~第 16 届「本届实时更新页」~~ **已完成**（见 #164，页面 URL `/barvision/2026/`）。**剩余**：报名/海选实时数据随进展更新（直接编辑 `regular-16.json` 的 `signups`/`auditions`，无需跑脚本）；首页 feed 同步功能**用户已 hold**（脚本就绪、`feed:[]`）。海选已陆续出结果（邓妈 European Fever、猴妈 Voiizion 等已录入）。
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -76,10 +78,7 @@ barboard-space/
 ├── styleguide-data.js      ← styleguide Foundation 渲染数据（audit 脚本生成）
 ├── DESIGN_AUDIT.md         ← 设计值审计详表（audit 脚本生成）
 ├── CNAME                   ← barboard.space（GitHub Pages 自定义域名，勿删）
-├── about.html
-├── bbl.html
-├── barvision.html
-├── archive.html
+│   ＊clean-URL 目录化（#173）：除 index.html 外每个页面 = `<路径>/index.html`
 │
 ├── .github/
 │   └── workflows/
@@ -89,9 +88,13 @@ barboard-space/
 │   ├── fetch_bbl.py        ← BBL 抓取脚本（同时更新 ticker.json / updates.json）
 │   ├── nav.js              ← 全站共享 nav/footer 组件 + 所有 nav JS
 │   ├── member-render.js    ← 成员页共享模板（CSS注入 + HTML渲染 + 动画）
-│   ├── gen_member_pages.py ← 批量生成 member/N.html（读CSV，运行一次）
+│   ├── gen_member_pages.py ← 批量生成 member/<id>/index.html（读CSV，数据变动后重跑）
 │   ├── bv-results-render.js ← Barvision 历届详情页共享渲染（见 #130）
-│   └── parse_bv_edition.py  ← 解析每届 Excel → 详情页 JSON（见 #130）
+│   ├── gen_bv_stats.py      ← 生成 data/barvision/bv-stats.json（HOF/Stats 数据源，见 #167/#168）
+│   ├── gen_bv_editions_index.py ← 生成 editions-index.json（详情页上下届导航，见 #132）
+│   ├── recompute_bv_ranks.py ← 重算名次/派生 rate·voters·overall（导入届管线，见 #144/#157）
+│   ├── number_anon.py       ← 匿名成员全局编号「匿名#N」（见 #150）
+│   └── parse_bv_edition*.py ← 解析每届源数据 → 详情页 JSON（每届一个，见 #130 起）
 │
 ├── partials/
 │   ├── nav.html            ← nav HTML 可读备份（与 nav.js 内容同步）
@@ -101,39 +104,40 @@ barboard-space/
 │   ├── bbl/
 │   │   ├── bbl-latest.json     ← BBL 最新榜单（自动更新，含真实数据）
 │   │   ├── bbl-vol-index.json  ← Vol.1–125 期号→日期索引
-│   │   └── bbl-record/
-│   │       └── hof_data.json   ← BBL HOF 全部数据（13板块，动态加载）
-│   │   └── bbl-record/         ← BBL 原始数据文件（CSV 等）
+│   │   └── bbl-record/         ← BBL HOF 数据 hof_data.json（13板块，动态加载）+ 原始 CSV（bbl_01…11）
 │   ├── main-page/
 │   │   ├── ticker.json         ← 字幕条目（字符串数组，BBL条目由fetch_bbl.py维护）
 │   │   └── updates.json        ← 动态条目（对象数组，BBL条目由fetch_bbl.py维护）
 │   ├── members/
 │   │   └── members.csv         ← 全体成员信息
 │   └── barvision/
-│       ├── barvision-archive/  ← Barvision 历届存档（领奖台 only CSV，见 #129）
-│       ├── barvision-2019/     ← 详情页每届 JSON（regular-01.json…，见 #130）
-│       └── bv_hof_data.json    ← Barvision HOF 数据（富嵌套，手工维护，见 #119）
+│       ├── barvision-2019/ … barvision-2026/ ← 各届详情页 JSON（regular-NN.json，见 #130 起）
+│       ├── bv-stats.json       ← HOF/Stats 数据源（gen_bv_stats.py 生成，见 #167/#168）
+│       ├── editions-index.json ← 届次索引（gen_bv_editions_index.py 生成，详情页上下届导航）
+│       ├── member-bv-index.json← 成员吧视索引（gen_member_pages.py 生成，member 概览筛选/徽章）
+│       └── barvision-archive/  ← 早期领奖台 only CSV 存档（见 #129）
+│   ＊bv_hof_data.json 已弃用（#168 改用 bv-stats.json）
 │
 ├── bbl/
-│   └── hof.html            ← BBL 荣誉殿堂（已完成）
+│   ├── index.html          ← BBL 专题页（原 bbl.html）
+│   └── hof/index.html      ← BBL 荣誉殿堂
 │
 ├── member/
-│   ├── 7.html              ← @williw_（威妈）成员主页（已完成）
-│   ├── 12.html … 770.html  ← 全部119位成员主页（gen_member_pages.py 生成）
-│   └── …
+│   ├── index.html          ← Members 总览页（原 member.html）
+│   └── <id>/index.html     ← 119 位成员主页（gen_member_pages.py 生成）+ 0/（匿名伪成员）
 │
 ├── barvision/
-│   ├── 2026/
-│   │   ├── events.html     ← 已完成，已接入 nav.js，待填表单 URL
-│   │   ├── results.html
-│   │   └── news.html
-│   ├── 2019/
-│   │   └── regular-01.html ← 第一届详情页薄壳（已完成，模板基准，见 #130）
-│   └── 2025/
+│   ├── index.html          ← Barvision 总览（原 barvision.html）
+│   ├── hof/index.html      ← Hall of Fame（见 #168/#170）
+│   ├── stats/index.html    ← 数据中心 Stats（见 #168）
+│   ├── 2026/index.html     ← 第16届本届实时更新页（live，见 #164）
+│   │   └── events/index.html ← 2026 歌曲提交通道（见 #127/#164）
+│   ├── 2023/index.html … 2025/index.html ← 13–15 届年度详情页
+│   ├── 2019/<NN>/index.html ← 1–5 届详情页薄壳（NN=01..05）
+│   └── 2020/<NN>/index.html ← 6–12 届详情页薄壳（NN=06..12）
 │
 ├── archive/
-│   ├── barammy.html
-│   └── esc-voting-party.html
+│   └── index.html          ← 活动存档总览（原 archive.html；barammy/esc-voting 子页待建）
 │
 └── assets/
     ├── fonts/
@@ -761,7 +765,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **ed15 更正（顺带）**：`regular-15.json` 中误录的「X妈」(id195) 全部 → 「XX妈」(id88, xjebs)，重跑 gen_member_pages + gen_bv_editions_index（记录从 member/195 迁至 member/88）。
     - **多艺人修正**（#15）：ed16 Day One→`Adam Doleac`—`Day One (feat. Madeline Merlo)`、Shimmer→`RabbitJ`—`Shimmer (feat. Kinoko)`、Giđa ávašta 艺人→`Emil Kárlsen & Elina Iijäs`。
     - **待确认数据**：邓妈 European Fever 获胜曲（暂「等待宣布」）；海选时间（不统计、period 留空、时间列隐藏）。
-165. **⭐ Barvision 详情页 URL 路由方案改版（取代 #130/#135/#157/#158 旧命名，全局权威）**：因 2019–2020 一年多届、2023 起一年一届，详情页薄壳路径改为：
+165. **⚠️ 已被 #173 取代（clean-URL 目录化）——本条 `.html` 路径方案作废，仅存沿革。** Barvision 详情页 URL 路由方案（旧版）：因 2019–2020 一年多届、2023 起一年一届，详情页薄壳路径曾为：
     - **2019–2020**：`barvision/<年>/<两位届数>.html`（前导零，如 `barvision/2019/01.html`、`barvision/2020/06.html`；10–12 已两位）；**娱乐版** `<两位届数>e.html`。
     - **2023 起**：`barvision/<年>.html`（如 `barvision/2023.html` … `barvision/2026.html`）。
     - **2026 报名子页不变**：`barvision/2026/events.html`（与 `barvision/2026.html` 文件 + `barvision/2026/` 目录并存）。

@@ -4,6 +4,15 @@
 
 ---
 
+## [2026-06-27] — 破图修复 + 鸽妈改名 + CLAUDE.md 审查
+
+### Fixed
+- **破图修复（clean-URL 迁移遗漏）**：JS 字符串拼接的图片 `src`（normalize 只处理了 `href=`/`src=` 属性、漏了 JS 串）在目录页下相对解析 404——`barvision/index.html` 卡片背景 `bg.png`(9 处) + `member/index.html` 成员卡 bv-logo `logo_center/hollow.svg`(2 处) 全改绝对 `/assets/`。
+
+### Changed
+- **鸽妈（id 160）handle 全局改名** `Phoerienies` → `EUGONDINE_`（与 B 站/音乐名一致，同 #161 做法）：members.csv + regular-13/15.json + 重跑 bv-stats/member/160/editions-index + index.html/member.html 硬编码，共 8 文件。
+- **CLAUDE.md 审查**：加全局 clean-URL 路径横幅（一处覆盖全文旧 `.html` 引用）、文件结构树改目录形式 + 补缺漏脚本/数据文件、#165 标作废（→#173）、待建段去过时项、Dev Gate 标 false。
+
 ## [2026-06-27] — ⭐ Clean URL 全站目录化（隐藏 .html）
 
 ### Changed — 全站结构（方案 B：目录化 index.html）

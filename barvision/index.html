@@ -89,7 +89,7 @@
       display: grid; grid-template-columns: 1fr auto;
       gap: 36px;
       /* 2026 主视觉 bg（无文字）作底图，铺满无边界；padding-box 防半透明 border 透出亮边 */
-      background: url('assets/images/barvision/2026/bg.png') center / cover no-repeat;
+      background: url('/assets/images/barvision/2026/bg.png') center / cover no-repeat;
       background-clip: padding-box;
       border: 1px solid rgba(100,140,230,0.55);
       border-radius: 8px;
@@ -485,10 +485,10 @@
     var el = document.getElementById('bvRecentArchiveGrid');
     if (!el) return;
     var recent = EDITIONS.filter(function(ed) { return ed.year >= 2023; });
-    var RECENT_BG = { 2023: 'assets/images/barvision/2023/bg.png', 2024: 'assets/images/barvision/2024/bg-pink.png', 2025: 'assets/images/barvision/2025/bg.png' };  // 卡片上半部分主视觉背景（按届补充）
+    var RECENT_BG = { 2023: '/assets/images/barvision/2023/bg.png', 2024: '/assets/images/barvision/2024/bg-pink.png', 2025: '/assets/images/barvision/2025/bg.png' };  // 卡片上半部分主视觉背景（按届补充）
     var RECENT_BG_SIZE = { 2024: '128%' };  // 个别届主视觉在 cover 之上再放大（桌面+手机通用，inline 覆盖 background-size:cover）
     el.innerHTML = recent.map(function(ed, i) {
-      var logoSrc = 'assets/images/barvision_logo_' + ed.year + '.svg';
+      var logoSrc = '/assets/images/barvision_logo_' + ed.year + '.svg';
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';
       var href = editionHref(ed.year, 'regular', ed.roman);
       var link = BUILT_EDITIONS.has(href);
@@ -543,10 +543,10 @@
   }
 
   // 预解码卡片主视觉大图（off-main-thread），避免入场动画期间在主线程同步解码导致掉帧/卡顿
-  ['assets/images/barvision/2026/bg.png',
-   'assets/images/barvision/2023/bg.png',
-   'assets/images/barvision/2024/bg-pink.png',
-   'assets/images/barvision/2025/bg.png'].forEach(function (u) {
+  ['/assets/images/barvision/2026/bg.png',
+   '/assets/images/barvision/2023/bg.png',
+   '/assets/images/barvision/2024/bg-pink.png',
+   '/assets/images/barvision/2025/bg.png'].forEach(function (u) {
     var im = new Image(); im.src = u;
     if (im.decode) { im.decode().catch(function () {}); }
   });
