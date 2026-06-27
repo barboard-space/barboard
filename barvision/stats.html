@@ -194,9 +194,11 @@
     #stChampShare tbody td.st-pos { font-size: 17px; }
     /* 届次(第2列) / 场次(第3列) 再 -1px → 13px */
     #stChampShare tbody td:nth-child(2), #stChampShare tbody td:nth-child(3) { font-size: 13px; }
-    /* 手机端字号对齐 Member Leaderboard：# 16px、选送者显昵称(X妈)13px（须置于以上非 media 规则之后才生效） */
+    /* 手机端两表字号对齐个人主页吧视记录：单元格 13px / #(名次) 15px / 表头 11px（须置于以上非 media 规则之后才生效） */
     @media (max-width: 600px) {
-      #stChampShare tbody td.st-pos { font-size: 16px; }
+      #stRanking tbody td.ctr, #stRanking tbody td:nth-child(2),
+      #stChampShare tbody td:not(.st-pos) { font-size: 13px; }
+      #stRanking .st-pos, #stChampShare tbody td.st-pos { font-size: 15px; }
       #stChampShare tbody td:nth-child(4) .member { font-size: 0; }
       #stChampShare tbody td:nth-child(4) .member::before { content: attr(data-nickname); font-size: 13px; }
     }
@@ -206,7 +208,7 @@
     .st-ovc { border: 1px solid var(--clr-border); border-radius: 8px; padding: 11px 13px 12px; margin-bottom: 9px; cursor: pointer; }
     .st-ovc--latest { border-color: var(--clr-violet-dim); background: rgba(168,85,247,0.06); }
     .st-ovc__hd { display: flex; align-items: center; gap: 10px; }
-    .st-ovc__hd .st-no { flex: none; font-size: 22px; }
+    .st-ovc__hd .st-no { flex: none; min-width: 1.5em; text-align: center; font-size: 22px; }  /* 固定宽：一/两位数不影响 title 起点 */
     .st-ovc__name { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--clr-text); line-height: 1.35; }
     .st-ovc__hd .st-fmt { flex: none; }
     .st-ovc__meta { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; font-size: 12px; color: var(--clr-text-2); }

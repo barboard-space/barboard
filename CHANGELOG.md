@@ -4,6 +4,12 @@
 
 ---
 
+## [2026-06-27] — Barvision stats 手机端字号收敛 + Editions Overview 卡片届数固定宽
+
+### Changed — `barvision/stats.html`（手机端 `@media≤600`）
+- Editions Overview 卡片届数 `.st-ovc__hd .st-no` 加固定宽（`min-width:1.5em`+居中）——一/两位数届号不再影响 title 起点。
+- 选送排行榜 + 冠军得票率两表字号对齐个人主页吧视记录：单元格 14→**13px**、#（名次）16→**15px**（表头仍 11px）。
+
 ## [2026-06-27] — Barvision 冠军得票率手机端字号 + 颁奖台分数配色 + footer 数据中心
 
 ### Changed
