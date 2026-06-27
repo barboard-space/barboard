@@ -174,6 +174,7 @@
     .st-ovc__name { flex: 1; min-width: 0; font-size: 14px; font-weight: 600; color: var(--clr-text); line-height: 1.35; }
     .st-ovc__hd .st-fmt { flex: none; }
     .st-ovc__meta { margin-top: 8px; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 7px; font-size: 12px; color: var(--clr-text-2); }
+    .st-ovc__sg { white-space: nowrap; margin-right: 8px; }   /* 手机卡片：分组制各组曲目数（chip+数）之间留隔 */
     .st-ovc__champ { margin-top: 6px; font-size: 12px; color: var(--clr-text-2); line-height: 1.5; }
     .st-ovc__lb { color: var(--clr-text-3); margin-right: 7px; }
     .st-ovc .sep { opacity: 0.4; }
@@ -373,7 +374,13 @@
       el.innerHTML = '<div class="st-ovcards">' + list.map(function (o) {
         var annual = o.format === 'annual';
         var meta = '<span class="st-muted">' + o.year + '</span>';
-        if (!o.in_progress) meta += sep + '成员 ' + o.members + sep + '曲目数 ' + o.songs;
+        if (!o.in_progress) {
+          var sr = o.song_rows || [];  // 分组制(1–12)按组 chip+数分开显示；年度制(2023+) song_rows 空 → 用去重总数
+          var songTxt = sr.length
+            ? sr.map(function (s) { return '<span class="st-ovc__sg"><span class="st-ov-grp">' + esc(s.label) + '</span>' + s.songs + '</span>'; }).join('')
+            : o.songs;
+          meta += sep + '成员 ' + o.members + sep + '曲目数 ' + songTxt;
+        }
         if (o.host && o.year >= 2023) meta += sep + '主办 ' + hostLink(o);
         var champ = o.in_progress ? '<span class="st-muted">等待更新</span>'
           : '<span class="st-ovc__lb">当届冠军</span>' + (o.champ_rows || []).map(function (c) { return '<span class="st-ovc__cl">' + champLine(c, annual) + '</span>'; }).join('');
