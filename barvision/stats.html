@@ -159,6 +159,8 @@
     #stOverview .st-ov-tbl td, #stOverview .st-ov-tbl th { white-space: normal; overflow-wrap: normal; word-break: keep-all; }
     /* 曲目：分三栏（各场数目）——缩小内边距使 chip+数字一行容下 */
     #stOverview .st-ov-numslot { padding-left: 6px; padding-right: 6px; }
+    /* 「曲目数」表头对齐到数据列的 6px 内边距（默认 th 为 12px，会比数字右移 6px 造成错位） */
+    #stOverview .st-ov-tbl thead th:nth-child(5) { padding-left: 6px; }
     .st-ov-song { font-size: 13px; color: var(--clr-text-3); }   /* 13–16 届夺冠曲 +1px */
     .st-ov-latest { display: inline-block; margin-left: 7px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: var(--clr-violet-light); border: 1px solid var(--clr-violet-dim); border-radius: 3px; padding: 1px 5px; vertical-align: middle; }
     .st-tbl tbody tr.st-ov-row--latest td { background: rgba(168,85,247,0.07); }
@@ -378,7 +380,7 @@
         var hostHtml = (o.host && o.year >= 2023) ? '<div class="st-ev__host">主办 ' + hostLink(o) + '</div>' : '';
         // 曲目数：年度制(2023+)同曲跨 SF/GF 去重 → 单一总数(colspan)；分组制(1–12)各组分开，chip + 数目
         var songCells;
-        if (o.in_progress) songCells = '<td colspan="3">' + dash + '</td>';
+        if (o.in_progress) songCells = '<td class="st-ov-numslot" colspan="3">' + dash + '</td>';
         else if (annual) songCells = '<td class="st-ov-numslot" colspan="3">' + o.songs + '</td>';
         else {
           var sr = o.song_rows || [];
