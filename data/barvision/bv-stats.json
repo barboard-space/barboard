@@ -19248,7 +19248,7 @@
    "rows": [
     {
      "group": "GF",
-     "venue": "决赛",
+     "venue": "下半场",
      "rank": 1,
      "member": "田妈",
      "ids": [
@@ -19261,7 +19261,7 @@
     },
     {
      "group": "GF",
-     "venue": "决赛",
+     "venue": "下半场",
      "rank": 2,
      "member": "雨妈",
      "ids": [
@@ -19274,7 +19274,7 @@
     },
     {
      "group": "GF",
-     "venue": "决赛",
+     "venue": "下半场",
      "rank": 3,
      "member": "麦妈",
      "ids": [
@@ -19287,7 +19287,7 @@
     },
     {
      "group": "SF",
-     "venue": "半决赛",
+     "venue": "上半场",
      "rank": 1,
      "member": "嘟妈",
      "ids": [
@@ -19300,7 +19300,7 @@
     },
     {
      "group": "SF",
-     "venue": "半决赛",
+     "venue": "上半场",
      "rank": 2,
      "member": "雨妈",
      "ids": [
@@ -19313,7 +19313,7 @@
     },
     {
      "group": "SF",
-     "venue": "半决赛",
+     "venue": "上半场",
      "rank": 3,
      "member": "萌妈",
      "ids": [
@@ -20477,41 +20477,16 @@
     }
    ]
   },
-  "highest_share": {
-   "title": "最高单场得票占比",
-   "metric": "单曲得分占全场总分比（score ÷ Σ全场）",
-   "val": 12.04,
-   "unit": "%",
-   "entries": [
-    {
-     "ids": [
-      "120"
-     ],
-     "nickname": "城妈",
-     "artist": "The Magic Gang",
-     "song": "Take Back The Track",
-     "edition_no": 12,
-     "match": "A",
-     "val": 12.04
-    }
-   ]
-  },
   "highest_jury_avg": {
-   "title": "最高单曲评委均分",
-   "metric": "单曲评委（Jury）均分",
-   "val": 6.69,
+   "title": "最高 Jury 均分",
+   "metric": "参赛曲目 12 分制平均分（2024 前广义 / 2024 起仅评委）",
+   "val": 4.74,
    "unit": "",
    "entries": [
     {
-     "ids": [
-      "190"
-     ],
-     "nickname": "嘟妈",
-     "artist": "Deva Mahal",
-     "song": "Snakes",
-     "edition_no": 2,
-     "match": "SF",
-     "val": 6.69
+     "id": 31,
+     "nickname": "邓妈",
+     "val": 4.74
     }
    ]
   },
@@ -20524,9 +20499,28 @@
     {
      "id": 20,
      "nickname": "包妈",
-     "edition_no": 6,
+     "edition_no": null,
      "val": 281,
-     "detail": "小众 66 · 中众 86 · 大众 129"
+     "segs": [
+      {
+       "b": "6A"
+      },
+      {
+       "t": "66"
+      },
+      {
+       "b": "6B"
+      },
+      {
+       "t": "86"
+      },
+      {
+       "b": "6C"
+      },
+      {
+       "t": "129"
+      }
+     ]
     }
    ]
   },
@@ -20550,6 +20544,25 @@
      "id": 12,
      "nickname": "锴妈",
      "val": 28
+    }
+   ]
+  },
+  "highest_share": {
+   "title": "最高单场得票占比",
+   "metric": "冠军单曲得分 ÷ 该场正式曲总分",
+   "val": 12.23,
+   "unit": "%",
+   "entries": [
+    {
+     "ids": [
+      "120"
+     ],
+     "nickname": "城妈",
+     "artist": "The Magic Gang",
+     "song": "Take Back The Track",
+     "edition_no": 12,
+     "match": "A",
+     "val": 12.23
     }
    ]
   }
@@ -21186,5 +21199,455 @@
     }
    ]
   }
- }
+ },
+ "champ_share": [
+  {
+   "edition_no": 12,
+   "year": 2020,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "120"
+   ],
+   "nickname": "城妈",
+   "artist": "The Magic Gang",
+   "song": "Take Back The Track",
+   "share": 12.23,
+   "score": 110,
+   "pool": 899,
+   "rank": 1
+  },
+  {
+   "edition_no": 1,
+   "year": 2019,
+   "match": "",
+   "stage": "小众组",
+   "ids": [
+    "18"
+   ],
+   "nickname": "猴妈",
+   "artist": "Parachute",
+   "song": "Had It All",
+   "share": 11.62,
+   "score": 128,
+   "pool": 1102,
+   "rank": 2
+  },
+  {
+   "edition_no": 2,
+   "year": 2019,
+   "match": "SF",
+   "stage": "上半场",
+   "ids": [
+    "190"
+   ],
+   "nickname": "嘟妈",
+   "artist": "Deva Mahal",
+   "song": "Snakes",
+   "share": 11.59,
+   "score": 141,
+   "pool": 1217,
+   "rank": 3
+  },
+  {
+   "edition_no": 2,
+   "year": 2019,
+   "match": "GF",
+   "stage": "下半场",
+   "ids": [
+    "295"
+   ],
+   "nickname": "田妈",
+   "artist": "The Brummies & Kacey Musgraves",
+   "song": "Drive Away",
+   "share": 11.16,
+   "score": 140,
+   "pool": 1258,
+   "rank": 4
+  },
+  {
+   "edition_no": 13,
+   "year": 2023,
+   "match": "GF",
+   "stage": "决赛",
+   "ids": [
+    "100"
+   ],
+   "nickname": "羊妈",
+   "artist": "Best Frenz & Joywave",
+   "song": "Flatline",
+   "share": 11.15,
+   "score": 159,
+   "pool": 1426,
+   "rank": 5
+  },
+  {
+   "edition_no": 6,
+   "year": 2020,
+   "match": "C",
+   "stage": "大众组",
+   "ids": [
+    "20"
+   ],
+   "nickname": "包妈",
+   "artist": "The Glorious Sons",
+   "song": "Closer to the Sky",
+   "share": 11.12,
+   "score": 129,
+   "pool": 1160,
+   "rank": 6
+  },
+  {
+   "edition_no": 6,
+   "year": 2020,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "125"
+   ],
+   "nickname": "萌妈",
+   "artist": "Everyone You Know",
+   "song": "She Don't Dance",
+   "share": 10.88,
+   "score": 101,
+   "pool": 928,
+   "rank": 7
+  },
+  {
+   "edition_no": 4,
+   "year": 2019,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "141"
+   ],
+   "nickname": "草妈",
+   "artist": "Hatchie",
+   "song": "Stay With Me",
+   "share": 10.53,
+   "score": 149,
+   "pool": 1414,
+   "rank": 8
+  },
+  {
+   "edition_no": 10,
+   "year": 2020,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "0"
+   ],
+   "nickname": "匿名",
+   "artist": "The BossHoss",
+   "song": "Little Help (feat.Mimi＆Josy)",
+   "share": 10.38,
+   "score": 121,
+   "pool": 1166,
+   "rank": 9
+  },
+  {
+   "edition_no": 9,
+   "year": 2020,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "157"
+   ],
+   "nickname": "布妈",
+   "artist": "knxwledge",
+   "song": "minding_my business (Durand Bernarr & Rose Gold)",
+   "share": 10.26,
+   "score": 117,
+   "pool": 1137,
+   "rank": 10
+  },
+  {
+   "edition_no": 6,
+   "year": 2020,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "130"
+   ],
+   "nickname": "麦妈",
+   "artist": "Miya Folick",
+   "song": "Thingamajig",
+   "share": 10.24,
+   "score": 101,
+   "pool": 986,
+   "rank": 11
+  },
+  {
+   "edition_no": 14,
+   "year": 2024,
+   "match": "GF",
+   "stage": "决赛",
+   "ids": [
+    "27"
+   ],
+   "nickname": "S妈",
+   "artist": "Bennett Coast",
+   "song": "Pretender",
+   "share": 9.97,
+   "score": 266,
+   "pool": 2668,
+   "rank": 12
+  },
+  {
+   "edition_no": 4,
+   "year": 2019,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "156"
+   ],
+   "nickname": "杰妈",
+   "artist": "Aurora",
+   "song": "The River",
+   "share": 9.95,
+   "score": 129,
+   "pool": 1296,
+   "rank": 13
+  },
+  {
+   "edition_no": 15,
+   "year": 2025,
+   "match": "GF",
+   "stage": "决赛",
+   "ids": [
+    "7"
+   ],
+   "nickname": "威妈",
+   "artist": "Elliot James Reay",
+   "song": "Boy In Love",
+   "share": 9.93,
+   "score": 357,
+   "pool": 3596,
+   "rank": 14
+  },
+  {
+   "edition_no": 10,
+   "year": 2020,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "12"
+   ],
+   "nickname": "锴妈",
+   "artist": "Morgan Sulele & Mans Zelmerlow",
+   "song": "Gamle Dager",
+   "share": 9.13,
+   "score": 88,
+   "pool": 964,
+   "rank": 15
+  },
+  {
+   "edition_no": 3,
+   "year": 2019,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "135"
+   ],
+   "nickname": "瑞妈",
+   "artist": "Tame Impala",
+   "song": "Borderline",
+   "share": 9.08,
+   "score": 115,
+   "pool": 1267,
+   "rank": 16
+  },
+  {
+   "edition_no": 7,
+   "year": 2020,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "17"
+   ],
+   "nickname": "雨妈",
+   "artist": "Indochine",
+   "song": "Station 13",
+   "share": 8.93,
+   "score": 128,
+   "pool": 1434,
+   "rank": 17
+  },
+  {
+   "edition_no": 3,
+   "year": 2019,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "20"
+   ],
+   "nickname": "包妈",
+   "artist": "Bob Moses",
+   "song": "Selling Me Sympathy",
+   "share": 8.89,
+   "score": 119,
+   "pool": 1338,
+   "rank": 18
+  },
+  {
+   "edition_no": 8,
+   "year": 2020,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "17"
+   ],
+   "nickname": "雨妈",
+   "artist": "Dorian Electra",
+   "song": "Man to Man",
+   "share": 8.83,
+   "score": 128,
+   "pool": 1450,
+   "rank": 19
+  },
+  {
+   "edition_no": 7,
+   "year": 2020,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "120"
+   ],
+   "nickname": "城妈",
+   "artist": "Dardust",
+   "song": "Sublime",
+   "share": 8.64,
+   "score": 117,
+   "pool": 1354,
+   "rank": 20
+  },
+  {
+   "edition_no": 9,
+   "year": 2020,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "19"
+   ],
+   "nickname": "柠妈",
+   "artist": "Isaac Dunbar",
+   "song": "comme des garcons (like the boys)",
+   "share": 8.47,
+   "score": 91,
+   "pool": 1075,
+   "rank": 21
+  },
+  {
+   "edition_no": 11,
+   "year": 2020,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "132"
+   ],
+   "nickname": "A妈",
+   "artist": "Phoebe Bridgers",
+   "song": "Kyoto",
+   "share": 8.45,
+   "score": 127,
+   "pool": 1503,
+   "rank": 22
+  },
+  {
+   "edition_no": 8,
+   "year": 2020,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "153"
+   ],
+   "nickname": "小妈",
+   "artist": "Jessie Ware",
+   "song": "Spotlight",
+   "share": 8.25,
+   "score": 110,
+   "pool": 1334,
+   "rank": 23
+  },
+  {
+   "edition_no": 11,
+   "year": 2020,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "0"
+   ],
+   "nickname": "匿名",
+   "artist": "Róisín Murphy",
+   "song": "Murphy’s Law",
+   "share": 7.69,
+   "score": 107,
+   "pool": 1392,
+   "rank": 24
+  },
+  {
+   "edition_no": 5,
+   "year": 2019,
+   "match": "A",
+   "stage": "小众组",
+   "ids": [
+    "20"
+   ],
+   "nickname": "包妈",
+   "artist": "SIRUP",
+   "song": "Evergreen",
+   "share": 7.55,
+   "score": 96,
+   "pool": 1272,
+   "rank": 25
+  },
+  {
+   "edition_no": 5,
+   "year": 2019,
+   "match": "C",
+   "stage": "大众组",
+   "ids": [
+    "17"
+   ],
+   "nickname": "雨妈",
+   "artist": "K. Michelle",
+   "song": "Not A Little Bit",
+   "share": 6.92,
+   "score": 77,
+   "pool": 1113,
+   "rank": 26
+  },
+  {
+   "edition_no": 7,
+   "year": 2020,
+   "match": "C",
+   "stage": "大众组",
+   "ids": [
+    "18"
+   ],
+   "nickname": "猴妈",
+   "artist": "Matt Gresham",
+   "song": "Highwire",
+   "share": 6.91,
+   "score": 83,
+   "pool": 1202,
+   "rank": 27
+  },
+  {
+   "edition_no": 5,
+   "year": 2019,
+   "match": "B",
+   "stage": "中众组",
+   "ids": [
+    "18"
+   ],
+   "nickname": "猴妈",
+   "artist": "Naika",
+   "song": "déjà vu",
+   "share": 6.61,
+   "score": 84,
+   "pool": 1270,
+   "rank": 28
+  }
+ ]
 }

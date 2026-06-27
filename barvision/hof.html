@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Hall of Fame | Barboard</title>
-  <meta name="description" content="Barvision 荣誉殿堂——历届领奖台、数据纪录、成就纪录与吧视先锋奖，记录 Barvision 年度歌曲大赛的高光时刻（数据截至第 15 届）。" />
+  <meta name="description" content="Barvision 荣誉殿堂——历届颁奖台、数据纪录、成就纪录与吧视先锋奖，记录 Barvision 年度歌曲大赛的高光时刻（数据截至第 15 届）。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
   <link rel="stylesheet" href="/style.css" />
@@ -114,8 +114,8 @@
     .hof-pod__rk { font-family: var(--font-display); font-size: 16px; line-height: 1; color: var(--clr-text-3); text-align: center; }
     .hof-pod__main { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
     .hof-pod__by { font-size: 12.5px; font-weight: 600; color: var(--clr-text); line-height: 1.3; }
-    .hof-pod__song { font-size: 11px; color: var(--clr-text-2); line-height: 1.35; }   /* 瀑布流允许高度自由 → 歌名完整换行、不截断 */
-    .hof-pod__song .art { color: var(--clr-text-3); }
+    .hof-pod__song { font-size: 12px; color: var(--clr-text-2); line-height: 1.35; }   /* 「— 歌名」part；瀑布流允许高度自由 → 歌名完整换行、不截断 */
+    .hof-pod__song .art { color: var(--clr-text); }   /* 歌手：白（比「— 歌名」更亮）*/
     .hof-pod__sc { font-family: var(--font-display); font-size: 14px; line-height: 1; color: var(--clr-text-2); }
     .hof-pod--1 .hof-pod__rk { color: var(--clr-gold-light); }
     .hof-pod--1 .hof-pod__by { color: var(--clr-gold-tint); }
@@ -142,8 +142,11 @@
     .hof-holders { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--clr-border-2); display: flex; flex-direction: column; gap: 7px; }
     .hof-card--solo .hof-holders { border-top: none; padding-top: 0; margin-top: 9px; }
     .hof-holders.hof-season-tags { flex-direction: row; flex-wrap: wrap; gap: 6px; }   /* 非英语夺冠：场次徽章横向换行 */
+    .hof-holders--inline { flex-direction: row; flex-wrap: wrap; gap: 6px 16px; }   /* 多个纯 @名得主：横排省空间（双端） */
     .hof-holder { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: 12px; line-height: 1.45; }
     .hof-holder__who { font-weight: 600; color: var(--clr-text); white-space: nowrap; }
+    .hof-card--artist .hof-holder__who { font-size: 13px; }   /* 大众之选：得主为艺人名（纯文本），双端 +1px */
+    .hof-holder__rank { font-weight: 600; color: var(--clr-text-2); white-space: nowrap; }   /* 极限卡位：前置「第 X 名」 */
     .hof-holder__song { color: var(--clr-text-2); min-width: 0; }
     .hof-holder__detail { color: var(--clr-text-2); display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 3px 5px; }
     #bvRecords .hof-holder__detail { font-size: 11px; }   /* 分组制各组得分注释 -1px */
@@ -161,9 +164,11 @@
       .bv-pioneer__name { font-size: 28px; }
       .bv-pioneer { flex-direction: column; align-items: flex-start; }
       .bv-pioneer::after { display: none; }
-      /* 领奖台卡片：手机端成员显昵称(X妈)省空间，链接/tooltip 仍有效；桌面表格保留 @handle */
+      /* 颁奖台卡片 + 成就/纪录得主：手机端 @名 显昵称(X妈)省空间，链接/tooltip 仍有效；桌面保留 @handle（先锋奖大名 .bv-pioneer__name 例外，不在此列） */
       .hof-ed .member { font-size: 0; }
       .hof-ed .member::before { content: attr(data-nickname); font-size: 12.5px; font-weight: 600; }
+      .hof-holder .member { font-size: 0; }
+      .hof-holder .member::before { content: attr(data-nickname); font-size: 12px; font-weight: 600; }
     }
     @media (hover: none), (pointer: coarse) {
       .hof-ed:hover, .hof-card:hover { border-color: var(--clr-border); }
@@ -226,7 +231,7 @@
 <!-- ═══ 历届冠军领奖台 ═══ -->
 <section class="section section--bordered" id="podium" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
   <div class="section__inner">
-    <p class="section-label fade-up">领奖台</p>
+    <p class="section-label fade-up">颁奖台</p>
     <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Winner's <span style="color:var(--clr-gold-light);">Podium</span></h2>
     <div id="bvPodium"></div>
   </div>
@@ -383,20 +388,35 @@
       var parts = '<span class="hof-holder__who">' + whoLinks(e) + '</span>';
       if (e.song) parts += '<span class="hof-holder__song"><span style="color:var(--clr-text)">' + esc(e.artist) + '</span> — ' + esc(e.song) + '</span>' + slotBadge(e);
       else if (e.edition_no != null) parts += '<span class="hof-badge">第 ' + e.edition_no + ' 届</span>';
-      if (e.detail) parts += '<span class="hof-holder__detail">' + esc(e.detail) + '</span>';
+      if (e.segs)  // 场次码徽章 + 得分文本交替（如 6A 徽章 66）
+        parts += '<span class="hof-holder__detail">' + e.segs.map(function (s) {
+          return s.b != null ? '<span class="hof-badge">' + esc(s.b) + '</span>' : '<span>' + esc(s.t) + '</span>';
+        }).join('') + '</span>';
+      else if (e.detail) parts += '<span class="hof-holder__detail">' + esc(e.detail) + '</span>';
       return '<div class="hof-holder">' + parts + '</div>';
     }).join('');
     var val = (r.val != null) ? '<span class="hof-card__val">' + esc(r.val) + (r.unit ? '<span class="hof-card__unit">' + esc(r.unit) + '</span>' : '') + '</span>' : '';
+    // 多个得主且全是纯 @名（无歌名/届数/detail）→ 横排省空间；带额外信息的保持竖排
+    var bare = ents.length > 1 && ents.every(function (e) { return !e.song && e.edition_no == null && !e.detail; });
     return '<div class="hof-card fade-up" style="transition-delay:' + ((i % 6) * 0.04).toFixed(2) + 's;">' +
       '<div class="hof-card__label">' + esc(r.title) + (r.legacy ? ' · LEGACY' : '') + '</div>' +
       '<div class="hof-card__head">' + val + '</div>' +
-      (holders ? '<div class="hof-holders">' + holders + '</div>' : '') + '</div>';
+      (holders ? '<div class="hof-holders' + (bare ? ' hof-holders--inline' : '') + '">' + holders + '</div>' : '') + '</div>';
   }
 
   /* ── 趣味奖项卡 ── */
   function awardCard(a, i) {
     var ws = a.winners || [];
     var holders = ws.map(function (w) {
+      if (a.key === 'clutch') {  // 极限卡位：第 X 名 + @名 + 场次标签
+        var rankTxt = (w.rank != null) ? '第 ' + w.rank + ' 名' : ((w.segs && w.segs[0] && w.segs[0].t) || '');
+        var badges = (w.segs || []).filter(function (s) { return s.b != null; })
+          .map(function (s) { return '<span class="hof-badge">' + esc(s.b) + '</span>'; }).join('');
+        return '<div class="hof-holder">' +
+          '<span class="hof-holder__rank">' + esc(rankTxt) + '</span>' +
+          '<span class="hof-holder__who">' + whoLinks(w) + '</span>' +
+          '<span class="hof-holder__detail">' + badges + '</span></div>';
+      }
       var parts = '<span class="hof-holder__who">' + whoLinks(w) + '</span>';
       if (a.key === 'debut_peak')  // @名 + 歌手—歌名 + 届数徽章
         parts += '<span class="hof-holder__song"><span style="color:var(--clr-text)">' + esc(w.artist) + '</span> — ' + esc(w.song) + '</span><span class="hof-badge">第 ' + w.edition_no + ' 届</span>';
@@ -411,7 +431,7 @@
     var val = (a.type !== 'list' && a.val !== '' && a.val != null)
       ? '<span class="hof-card__val">' + esc(a.val) + (a.unit ? '<span class="hof-card__unit">' + esc(a.unit) + '</span>' : '') + '</span>' : '';
     var metric = esc(a.metric);
-    return '<div class="hof-card hof-card--award fade-up" style="transition-delay:' + ((i % 6) * 0.04).toFixed(2) + 's;">' +
+    return '<div class="hof-card hof-card--award' + (a.key === 'most_artist' ? ' hof-card--artist' : '') + ' fade-up" style="transition-delay:' + ((i % 6) * 0.04).toFixed(2) + 's;">' +
       '<div class="hof-card__title">' + esc(a.title) + '</div>' +
       '<div class="hof-card__metric">' + metric + '</div>' +
       (val ? '<div class="hof-card__head">' + val + '</div>' : '') +
@@ -494,7 +514,7 @@
 
   /* ── Notion 风格右侧目录 ── */
   (function () {
-    var ITEMS = [['pioneer', '吧视先锋奖'], ['podium', '领奖台'], ['season', '赛季纪录'], ['records', '数据纪录'], ['awards', '成就纪录']];
+    var ITEMS = [['pioneer', '吧视先锋奖'], ['podium', '颁奖台'], ['season', '赛季纪录'], ['records', '数据纪录'], ['awards', '成就纪录']];
     var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
     var nav = document.createElement('nav');
     nav.className = 'bvr-toc'; nav.setAttribute('aria-label', '页内目录');

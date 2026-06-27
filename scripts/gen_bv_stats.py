@@ -143,9 +143,9 @@ def build_podium(eds, meta):
         gf = next((m for m in matches if (m.get("match") or "") == "GF"), None)
         if annual and gf:                              # 年度制：仅决赛，组别留空
             sel = [(gf, "", "")]
-        elif gf:                                       # ed2：决赛 + 半决赛
+        elif gf:                                       # ed2 特例：中文「上半场/下半场」（英文仍 SF/GF）
             others = [m for m in matches if not m.get("canceled") and m is not gf]
-            sel = [(gf, "GF", "决赛")] + [(m, (m.get("match") or "SF"), "半决赛") for m in others]
+            sel = [(gf, "GF", "下半场")] + [(m, (m.get("match") or "SF"), "上半场") for m in others]
         else:                                          # 分组制 / ed1 单场综合赛
             ms = [m for m in matches if not m.get("canceled")]
             single = len(ms) == 1 and not ms[0].get("venue")
@@ -217,14 +217,15 @@ def build_records(eds, by_id, entries, meta):
                     "unit": unit, "entries": ents}
 
     entry_max("highest_match_score", "最高单届总分 · 年度制", "年度制单届(=决赛)总分", lambda e: gf_val(e, e["score"]), "分")
-    entry_max("highest_share", "最高单场得票占比", "单曲得分占全场总分比（score ÷ Σ全场）",
-              lambda e: gf_val(e, e.get("support_rate")), "%")
-    entry_max("highest_jury_avg", "最高单曲评委均分", "单曲评委（Jury）均分",
-              lambda e: gf_val(e, (e["jury"] / e["juryN"]) if (e.get("jury") is not None and e.get("juryN")) else None))
+    # highest_share（最高单场得票占比）改由 build_champ_share 在 main 中按「冠军 score ÷ 该场正式曲 score 之和」设置
+    # 最高 Jury 均分（与个人主页卡片一致）：某大妈全部参赛曲在 12 分制下的平均分
+    # ——2024 前「广义 12 分均分」(评委+观众)/(全部投票人)，2024 起「狭义 12 分制均分」仅评委、不计 20 票制观众。复用 overview.jury_avg。
+    member_record("highest_jury_avg", "最高 Jury 均分", "参赛曲目 12 分制平均分（2024 前广义 / 2024 起仅评委）", "jury_avg")
 
     # —— 最高单届总分 · 分组制：仅 2019–2020 分组制（每人单届多曲，各组得分之和）——年度制单届仅 1 曲、归「· 年度制」(highest_match_score) ——
     GTYPE_R = {"A": "小众", "B": "中众", "C": "大众"}
     TYPES_R = ["小众", "中众", "大众"]
+    TYPE_LETTER = {"小众": "A", "中众": "B", "大众": "C"}
     annual_eds = {ed["edition_no"] for ed in eds if is_annual_ed(ed.get("matches", []))}
     edsum = {}  # (id, edition_no) -> {sum, edition_no, parts{组:得分}}
     for sid, ov in by_id.items():
@@ -242,9 +243,16 @@ def build_records(eds, by_id, entries, meta):
             d["parts"][t] = d["parts"].get(t, 0) + x["total"]
     if edsum:
         mx = max(d["sum"] for d in edsum.values())
+        # 各组得分：场次码作徽章 + 得分文本交替（6A 徽章 66 / 6B 徽章 86 …）。已含届号 → 不再单出「第 N 届」徽章，edition_no 置 None
+        def _grp_segs(d):
+            segs = []
+            for t in TYPES_R:
+                if t in d["parts"]:
+                    segs.append({"b": str(d["edition_no"]) + TYPE_LETTER[t]})
+                    segs.append({"t": str(round(d["parts"][t]))})
+            return segs
         ents = [{"id": int(i) if i.isdigit() else 0, "nickname": meta.get(i, {}).get("nickname", i),
-                 "edition_no": d["edition_no"], "val": round(d["sum"]),
-                 "detail": " · ".join(t + " " + str(round(d["parts"][t])) for t in TYPES_R if t in d["parts"])}
+                 "edition_no": None, "val": round(d["sum"]), "segs": _grp_segs(d)}
                 for (i, _), d in edsum.items() if abs(d["sum"] - mx) < 0.5]
         rec["highest_edition_score"] = {"title": "最高单届总分 · 分组制", "metric": "单届各组得分之和（分组制）",
                                         "val": round(mx), "unit": "分", "entries": ents}
@@ -265,6 +273,42 @@ def build_records(eds, by_id, entries, meta):
                                       "val": mx, "unit": "场", "entries": ents}
 
     return rec
+
+
+def build_champ_share(entries, meta):
+    """28 场冠军单曲得票率：冠军 score ÷ 该场所有正式曲 score 之和（年度制 13+ 只取决赛 GF）。
+       返回按得票率降序、带 rank 的列表（供 stats.html「冠军得票率」表 + HOF highest_share 共用）。"""
+    groups = {}  # (edition_no, match) -> [entries]
+    for e in entries:
+        if e.get("annual") and (e.get("match") or "") in ("SF", "SF1", "SF2"):
+            continue  # 年度制单届=单场，只取决赛 GF（ed2 非年度制，SF/GF 各算一场）
+        groups.setdefault((e["edition_no"], e.get("match") or ""), []).append(e)
+    rows = []
+    for (en, mt), es in groups.items():
+        offi = [e for e in es if not e["is_shadow"] and e.get("score") is not None]
+        if not offi:
+            continue
+        pool = sum(e["score"] for e in offi)
+        if pool <= 0:
+            continue
+        champ = next((e for e in offi if e.get("rank") == 1), None) or min(offi, key=lambda e: (e.get("rank") or 999))
+        # 场次中文：小众组/中众组/大众组/决赛；ed1 单场→小众组；ed2 特例→上半场/下半场（英文仍 SF/GF）
+        if en == 2:
+            stage = "上半场" if mt == "SF" else "下半场"
+        else:
+            stage = VENUE_OF.get(mt) or (champ.get("venue") or "小众组")
+        rows.append({
+            "edition_no": en, "year": champ.get("year"), "match": mt, "stage": stage,
+            "ids": champ["ids"],
+            "nickname": " / ".join(meta.get(i, {}).get("nickname", i) for i in champ["ids"]) or champ.get("member"),
+            "artist": champ.get("artist"), "song": champ.get("song"),
+            "share": round(champ["score"] / pool * 100, 2),
+            "score": round(champ["score"]), "pool": round(pool),
+        })
+    rows.sort(key=lambda r: (-r["share"], r["edition_no"]))
+    for i, r in enumerate(rows):
+        r["rank"] = i + 1
+    return rows
 
 
 def build_season(eds, meta, overview):
@@ -748,13 +792,23 @@ def main():
     entries = build_entries(eds)
     podium = build_podium(eds, meta)
     records = build_records(eds, by_id, entries, meta)
+    champ_share = build_champ_share(entries, meta)  # 28 场冠军得票率（降序）
+    # highest_share（HOF）：取得票率最高者（含并列），口径 = 冠军 score ÷ 该场正式曲 score 之和
+    if champ_share:
+        top = champ_share[0]["share"]
+        hs_ents = [{"ids": r["ids"], "nickname": r["nickname"], "artist": r["artist"], "song": r["song"],
+                    "edition_no": r["edition_no"], "match": r["match"], "val": r["share"]}
+                   for r in champ_share if r["share"] == top]
+        records["highest_share"] = {"title": "最高单场得票占比", "metric": "冠军单曲得分 ÷ 该场正式曲总分",
+                                    "val": top, "unit": "%", "entries": hs_ents}
     awards = build_awards(by_id, entries, meta)
     overview = build_overview(eds, meta, podium)
     season = build_season(eds, meta, overview)
 
     data_through = max((p["edition_no"] for p in podium), default=0)  # 有赛果的最大届号（第 15 届）
     out = {"data_through": data_through, "pioneer": PIONEER, "overview": overview, "members": members,
-           "entries": entries, "podium": podium, "records": records, "season": season, "awards": awards}
+           "entries": entries, "podium": podium, "records": records, "season": season, "awards": awards,
+           "champ_share": champ_share}
     os.makedirs(os.path.dirname(OUT), exist_ok=True)
     with open(OUT, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)

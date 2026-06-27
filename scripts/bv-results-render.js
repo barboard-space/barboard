@@ -648,7 +648,8 @@
     /* ===== 进行中（live）：报名名单 ===== */
     .bvr-su__by { white-space:nowrap; }  /* 选送者昵称不换行（防真机字号膨胀把「X妈」拆成两行，#168） */
     .bvr-su__by .member { font-weight:600; }
-    .bvr-su__genre { font-size:11px; color:var(--clr-text-3); white-space:nowrap; }
+    .bvr-su__genre { font-size:12px; color:var(--clr-text-3); white-space:nowrap; }
+    .bvr-su .lang { font-size:12px; }  /* 选送名单语言列 +1px（覆盖 .bvr-tbl .lang 的 11px） */
     /* Candidates / Wildcards 两表固定列宽，使列对齐一致（table-layout:fixed，长歌名自动换行） */
     .bvr-su { table-layout:fixed; }
     .bvr-su th:nth-child(1) { width:15%; }  /* 选送者 */

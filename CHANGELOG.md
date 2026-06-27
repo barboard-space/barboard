@@ -4,6 +4,36 @@
 
 ---
 
+## [2026-06-27] — Barvision HOF/Stats 精修 + 冠军得票率新表 + 纪录口径修订 + ed2 上下半场 + .gitignore
+
+### Changed — `barvision/hof.html`
+- 「领奖台」→「**颁奖台**」（section-label + 页内目录 TOC + meta description，桌面/手机双端；英文 Winner's Podium 不变）。
+- 手机端颁奖台卡片 `.hof-pod__song` 字号 11→12px；歌手 `.art` → `--clr-text`（白）、「— 歌名」→ `--clr-text-2`。
+- **极限卡位**（clutch）格式改为 **第 X 名 → @名 → 场次标签**（新增 `.hof-holder__rank`）。
+- **大众之选**得主（艺人名 Rina Sawayama）字号 +1px（`.hof-card--artist .hof-holder__who` 13px，双端）。
+- 手机端**成就/纪录得主** @名 → X妈 昵称（`.hof-holder .member`，先锋奖大名 `.bv-pioneer__name` 例外不动）。
+- 多个**纯 @名**的纪录卡（最多夺冠/参与场数等）得主**横排**省空间（`.hof-holders--inline`，自动判定；带歌名/届数/detail 的卡仍竖排）。
+- `recordCard` 支持 `segs`（场次徽章+文本交替）——用于「最高单届总分·分组制」各组得分 `(6A)66 (6B)86 (6C)129`（slot 码作徽章，去「第6届」徽章）。
+
+### Changed — `scripts/gen_bv_stats.py`（重跑 `bv-stats.json`）
+- **「场」口径**：ed1 颁奖台组别 `小众` → `小众组`；**ed2 特例**中文名 `半决赛/决赛` → **`上半场/下半场`**（颁奖台 + 冠军得票率；英文仍 SF/GF）。
+- **`highest_jury_avg`** → **「最高 Jury 均分」**：改为按成员取最大 `overview.jury_avg`（与个人主页卡片同口径：2024 前广义12分 / 2024 起仅评委、不计 20 票制观众；晋级曲只取决赛 GF、淘汰曲 SF×0.5）。得主邓妈 4.74。
+- **`highest_share`**（最高单场得票占比）口径改为「冠军单曲 score ÷ 该场正式曲 score 之和」（12.04%→**12.23%** 城妈 12A）；新增 `build_champ_share`（28 场冠军得票率降序，输出顶层 `champ_share`）。
+- **`highest_edition_score`** detail 改 `segs` 形式（slot 码徽章）。
+
+### Added — `barvision/stats.html`
+- **选送排行榜**新增「**Jury 均分**」列（列序：…平均名次→12分→Jury 均分；首点降序、最大值金/前十 text/其余 text-3）。
+- 末尾新增「**冠军得票率 / Winner Voting Rate**」表（28 场，TOC 加项）：列 #(Bebas·前三金银铜)/届次/场次/选送者/歌手/歌名/得分率/分数/分数池，对齐与字体按规范；前三名整行金/银/铜样式（tint 文字 + 渐变底 + 左 3px 光条，参考 `.bvr-row--N`）。
+
+### Changed — `scripts/bv-results-render.js`
+- `barvision/2026.html` 选送名单语言/流派列值字号 +1px（`.bvr-su` 内 11→12px）。
+
+### Content — `data/barvision/barvision-2026/regular-16.json`
+- 猴妈「Voiizion Contest」海选结果：海选条目→已结束（Elle Coves — I Got A Thing For Love）；Candidates 加冠军、Wildcards 加亚军（MAKSIM & Babet — Hoe Dan Ook）。
+
+### Chore
+- `.gitignore` 加入 `.claude/`（本机设置 / 跨会话记忆 / launch.json，不纳入仓库）。
+
 ## [2026-06-27] — Barvision hof.html 手机端领奖台卡片标题重做 + 2023-2026 hero meta 调整
 
 ### Changed — `barvision/hof.html`（手机端领奖台卡片）

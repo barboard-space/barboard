@@ -165,6 +165,36 @@
     .st-ov-latest { display: inline-block; margin-left: 7px; font-size: 10px; font-weight: 700; letter-spacing: 0.04em; color: var(--clr-violet-light); border: 1px solid var(--clr-violet-dim); border-radius: 3px; padding: 1px 5px; vertical-align: middle; }
     .st-tbl tbody tr.st-ov-row--latest td { background: rgba(168,85,247,0.07); }
     .st-tbl tbody tr.st-ov-row--latest td:first-child { box-shadow: inset 3px 0 0 var(--clr-violet); }
+    /* ── 冠军得票率表（除 # 列外均 DM Sans；# 用 Bebas，沿用 .st-pos） ── */
+    #stChampShare .st-cs__ed { color: var(--clr-text); text-decoration: none; }
+    #stChampShare .st-cs__ed:hover { color: var(--clr-violet-light); }
+    #stChampShare .st-cs__art { color: var(--clr-text); }
+    #stChampShare .st-cs__ttl { color: var(--clr-text-2); }
+    #stChampShare .st-cs__rate { font-weight: 600; }
+    #stChampShare .st-cs__pool { color: var(--clr-text-3); }
+    /* 前三名整行金/银/铜 tint（# 列保留更亮奖牌色 .st-pos--N） */
+    #stChampShare tbody tr.st-cs-row--1 td:not(.st-pos),
+    #stChampShare tbody tr.st-cs-row--1 .member,
+    #stChampShare tbody tr.st-cs-row--1 .st-cs__ed { color: var(--clr-gold-tint); }
+    #stChampShare tbody tr.st-cs-row--2 td:not(.st-pos),
+    #stChampShare tbody tr.st-cs-row--2 .member,
+    #stChampShare tbody tr.st-cs-row--2 .st-cs__ed { color: var(--clr-silver-tint); }
+    #stChampShare tbody tr.st-cs-row--3 td:not(.st-pos),
+    #stChampShare tbody tr.st-cs-row--3 .member,
+    #stChampShare tbody tr.st-cs-row--3 .st-cs__ed { color: var(--clr-bronze-tint); }
+    /* 前三名渐变底 + 首格左 3px 光条（参考详情页结果概览 .bvr-row--N） */
+    #stChampShare tbody tr.st-cs-row--1 { background: linear-gradient(90deg, rgba(212,168,50,0.20) 0%, rgba(212,168,50,0.06) 50%, transparent 85%); }
+    #stChampShare tbody tr.st-cs-row--2 { background: linear-gradient(90deg, rgba(110,150,178,0.15) 0%, rgba(110,150,178,0.05) 50%, transparent 85%); }
+    #stChampShare tbody tr.st-cs-row--3 { background: linear-gradient(90deg, rgba(196,120,68,0.16) 0%, rgba(196,120,68,0.05) 50%, transparent 85%); }
+    #stChampShare tbody tr.st-cs-row--1 td:first-child { box-shadow: inset 3px 0 0 var(--clr-gold-light); }
+    #stChampShare tbody tr.st-cs-row--2 td:first-child { box-shadow: inset 3px 0 0 #7ea4bc; }
+    #stChampShare tbody tr.st-cs-row--3 td:first-child { box-shadow: inset 3px 0 0 #d09068; }
+    /* 值字号：除 # 外整体 -1px（15→14）；# 列 +1px（16→17） */
+    #stChampShare tbody td:not(.st-pos) { font-size: 14px; }
+    #stChampShare tbody td.st-pos { font-size: 17px; }
+    /* 届次(第2列) / 场次(第3列) 再 -1px → 13px */
+    #stChampShare tbody td:nth-child(2), #stChampShare tbody td:nth-child(3) { font-size: 13px; }
+
     /* 历届总览手机端卡片 */
     .st-ovcards { margin-top: var(--gap-md); }
     .st-ovc { border: 1px solid var(--clr-border); border-radius: 8px; padding: 11px 13px 12px; margin-bottom: 9px; cursor: pointer; }
@@ -320,6 +350,15 @@
   </div>
 </section>
 
+<!-- ═══ 冠军得票率 ═══ -->
+<section class="section section--bordered" id="champshare" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">冠军得票率</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Winner <span class="ac">Voting Rate</span></h2>
+    <div id="stChampShare" class="fade-up" style="transition-delay:0.15s;"></div>
+  </div>
+</section>
+
 <div id="site-footer"></div>
 <script src="/scripts/nav.js"></script>
 <script>
@@ -452,9 +491,10 @@
     { key: 'top1', label: 'Top 1', type: 'num', desc: true },
     { key: 'top3', label: 'Top 3', type: 'num', desc: true },
     { key: 'top10', label: 'Top 10', type: 'num', desc: true },
-    { key: 'twelve', label: '12 分', type: 'num', desc: true },
     { key: 'best', label: '最佳名次', type: 'num', desc: false },
     { key: 'avg', label: '平均名次', type: 'num', desc: false },
+    { key: 'twelve', label: '12 分', type: 'num', desc: true },
+    { key: 'jury_avg', label: 'Jury 均分', type: 'num', desc: true },
   ];
   var rankData = [], rankSort = null;  // null = 默认多级排序（无箭头）
   // 默认排序优先级（-1 降序 / 1 升序）：参与场数>Top1>Top3>Top10>最佳名次>平均名次>12分
@@ -475,7 +515,7 @@
     }).map(function (sid) {
       var m = STATS.members[sid], o = m.overview;
       return { id: m.id, name: m.nickname, entries: o.entries || 0, top1: o.top1 || 0, top3: o.top3 || 0,
-        top10: o.top10 || 0, twelve: o.twelve || 0, avg: o.avg, best: o.best };
+        top10: o.top10 || 0, twelve: o.twelve || 0, avg: o.avg, best: o.best, jury_avg: o.jury_avg };
     });
     renderRanking();
   }
@@ -494,7 +534,7 @@
     }
     // 配色：参与场数 前十名→text/其余→text-2（无金）；Top1/Top3/Top10/12分 最高→金/前十名→text/其余→text-2；
     //       最佳名次 =1→金/2-9→text/≥10→text-2；平均名次 最佳→金/≤10→text/>10→text-2
-    var THRCOLS = ['entries', 'top3', 'top10', 'twelve'], thr = {}, mx = {};
+    var THRCOLS = ['entries', 'top3', 'top10', 'twelve', 'jury_avg'], thr = {}, mx = {};
     THRCOLS.forEach(function (k) {
       var vs = rankData.map(function (r) { return r[k] || 0; }).filter(function (v) { return v > 0; }).sort(function (a, b) { return b - a; });
       thr[k] = vs.length ? vs[Math.min(9, vs.length - 1)] : 1;
@@ -505,7 +545,7 @@
     function vcls(key, v) {
       if (v == null) return 'st-rk--zero';
       if (key === 'entries') return (v > 0 && v >= thr.entries) ? 'st-rk--on' : 'st-rk--zero';  // 参与场数无金
-      if (key === 'top3' || key === 'top10' || key === 'twelve')
+      if (key === 'top3' || key === 'top10' || key === 'twelve' || key === 'jury_avg')
         return v === mx[key] ? 'st-rk--best' : ((v > 0 && v >= thr[key]) ? 'st-rk--on' : 'st-rk--zero');
       if (key === 'top1') return v <= 0 ? 'st-rk--zero' : (v === top1max ? 'st-rk--best' : 'st-rk--on');
       if (key === 'best') return v === 1 ? 'st-rk--best' : (v <= 9 ? 'st-rk--on' : 'st-rk--zero');
@@ -526,9 +566,11 @@
         '<td class="st-pos' + posCls + '">' + pos + '</td>' +
         '<td>' + memLink(r.id, r.name) + '</td>' +
         cell('entries', r.entries) + cell('top1', r.top1) + cell('top3', r.top3) +
-        cell('top10', r.top10) + cell('twelve', r.twelve) +
+        cell('top10', r.top10) +
         cell('best', r.best != null ? r.best : '—') +
-        cell('avg', r.avg != null ? r.avg.toFixed(2) : '—') + '</tr>';
+        cell('avg', r.avg != null ? r.avg.toFixed(2) : '—') +
+        cell('twelve', r.twelve) +
+        cell('jury_avg', r.jury_avg != null ? r.jury_avg.toFixed(2) : '—') + '</tr>';
     }).join('');
     document.getElementById('stRanking').innerHTML =
       '<div class="st-wrap"><table class="st-tbl"><thead>' + head + '</thead><tbody>' + body + '</tbody></table></div>';
@@ -543,6 +585,32 @@
         renderRanking();
       });
     });
+  }
+
+  /* ── 冠军得票率（28 场冠军单曲得分率，降序） ── */
+  function buildChampShare(list) {
+    var el = document.getElementById('stChampShare');
+    if (!el || !list) return;
+    var body = list.map(function (r) {
+      var posCls = (r.rank <= 3) ? ' st-pos--' + r.rank : '';
+      var rowCls = (r.rank <= 3) ? ' class="st-cs-row--' + r.rank + '"' : '';
+      return '<tr' + rowCls + '>' +
+        '<td class="st-pos' + posCls + '">' + r.rank + '</td>' +
+        '<td class="ctr"><a class="st-cs__ed" href="' + edHref(r.year, r.edition_no) + '">第 ' + r.edition_no + ' 届</a></td>' +
+        '<td class="ctr st-muted">' + esc(r.stage) + '</td>' +
+        '<td>' + whoLinks(r.ids, r.nickname) + '</td>' +
+        '<td class="st-cs__art">' + esc(r.artist) + '</td>' +
+        '<td class="st-cs__ttl">' + esc(r.song) + '</td>' +
+        '<td class="ctr st-cs__rate">' + r.share.toFixed(2) + '%</td>' +
+        '<td class="ctr">' + r.score + '</td>' +
+        '<td class="ctr st-cs__pool">' + r.pool + '</td>' +
+        '</tr>';
+    }).join('');
+    el.innerHTML = '<div class="st-wrap"><table class="st-tbl st-cs-tbl"><thead><tr>' +
+      '<th class="ctr">#</th><th class="ctr">届次</th><th class="ctr">场次</th>' +
+      '<th>选送者</th><th>歌手</th><th>歌名</th>' +
+      '<th class="ctr">得分率</th><th class="ctr">分数</th><th class="ctr">分数池</th>' +
+      '</tr></thead><tbody>' + body + '</tbody></table></div>';
   }
 
   /* ── 大数据查询 ── */
@@ -670,6 +738,7 @@
 
     buildOverview(STATS.overview);
     buildRanking();
+    buildChampShare(STATS.champ_share);
     runQuery();
 
     document.querySelectorAll('#stTabs .st-q__tab').forEach(function (t) {
@@ -706,7 +775,7 @@
 
   /* ── Notion 风格右侧目录 ── */
   (function () {
-    var ITEMS = [['finder', '数据查询'], ['overview', '历届赛果总览'], ['ranking', '选送排行榜']];
+    var ITEMS = [['finder', '数据查询'], ['overview', '历届赛果总览'], ['ranking', '选送排行榜'], ['champshare', '冠军得票率']];
     var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
     var nav = document.createElement('nav');
     nav.className = 'bvr-toc'; nav.setAttribute('aria-label', '页内目录');

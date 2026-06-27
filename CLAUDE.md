@@ -820,6 +820,15 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **2026.html 静态 hero**（`barvision/2026.html`）：meta 首标签「Barvision Chongqing 2026」→「第十六届欧美流行歌曲个人榜吧歌曲大赛」（注：2026=**第十六届**，edition_no=16，勿写第十四届）；meta 顺序 = 中文全称 → 重声交响 Echoing Confluence(motto) → 主办：@williw_；简介 →「Barvision Chongqing 2026 报名正在进行中。本页实时汇总本届报名情况与海选进展，并附赛程、投票方式与参赛规则。」
     - **手机端 hero meta 竖排**（两处）：`.bvr-hero__meta`（bv-results-render.js）+ `.ev-meta`（2026.html）`@media≤768` 改 `flex-direction:column; align-items:flex-start; gap:5px` + meta item 去 `border-right`/`padding-right`/`margin-right`、`white-space:normal`（一行一个、无竖分隔符；桌面端仍横排带分隔符）。
     - **index.html / barvision.html**：XVI 卡「第十六届 · 欧美流行歌曲个人榜吧歌曲大赛」去 ` · ` 分隔符 →「第十六届欧美流行歌曲个人榜吧歌曲大赛」。
+172. **Barvision HOF/Stats 精修 + 冠军得票率新表 + 纪录口径修订 + ed2 上下半场（本次，全数据驱动 `bv-stats.json`，改任意届 JSON 后重跑 `gen_bv_stats.py`）**：
+    - **hof.html**：① 「领奖台」→「**颁奖台**」（label/TOC/meta，英文 Winner's Podium 不变）。② 颁奖台卡片歌名 11→12px、歌手 `--clr-text`/歌名 `--clr-text-2`。③ **极限卡位**(clutch) 格式 = **第 X 名 → @名 → 场次标签**（`.hof-holder__rank`；awardCard 内 `a.key==='clutch'` 专支）。④ **大众之选**艺人名 +1px（`.hof-card--artist .hof-holder__who`）。⑤ 手机端**成就/纪录得主** @名→X妈（`.hof-holder .member`，**先锋奖大名 `.bv-pioneer__name` 例外不动**）。⑥ 多个纯 @名纪录卡（最多夺冠/参与场数等）**横排**（`recordCard` 自动判定 `bare`→`.hof-holders--inline`；带歌名/届数/detail 仍竖排）。⑦ `recordCard` 支持 `segs`（场次徽章+文本交替）。
+    - **「场」口径细化**：ed1 颁奖台组别 `小众`→`小众组`；**ed2 特例**——两场中文名 `半决赛/决赛`→**`上半场/下半场`**（英文仍 SF/GF），改在 `gen_bv_stats` 的 `build_podium`(line 148) + `build_champ_share`，影响 颁奖台 + 冠军得票率两处。
+    - **`highest_jury_avg` → 「最高 Jury 均分」**（`build_records`）：由「单曲」改为**按成员取最大 `overview.jury_avg`**（= 个人主页卡片同口径）。⭐ **jury_avg 算法**（`gen_member_pages.aggregate_barvision` line 146-160）：成员**每首正式曲**的「每评委人均分」`v=jury/juryN`（**2024 前** `BV_TELE_SINCE_YEAR` 并入观众分 `(jury+tele)/(juryN+teleN)`＝广义12分；2024 起仅评委、不计 20 票制观众），**年度制晋级曲只取决赛 GF 数据**（收敛时 SF 已晋级条目不发出）、**淘汰曲取 SF 且 `v*=0.5`**；再对各曲求平均。**注意此指标偏向「只参赛一次且发挥好」者**（样本量小、无弱曲拉低）——邓妈仅 ed15 一首 GF 4 名 147/31=4.74 即登顶，威妈夺冠(357)因 5 首含早期弱曲反而 2.88。属定义使然、非 bug（如需可加最低参赛门槛）。
+    - **`highest_share`（最高单场得票占比）口径**：改为「冠军单曲 `score` ÷ 该场正式曲 `score` 之和」（旧用 `support_rate`=score÷Σ(jury+tele折前)；12.04%→**12.23%** 城妈 12A）。新增 **`build_champ_share(entries, meta)`**：28 场冠军得票率降序（年度制只取决赛 GF），输出顶层 `champ_share`，与 highest_share 共用。
+    - **`highest_edition_score`** detail 改 `segs`（slot 码徽章 `(6A)66 …`）。
+    - **stats.html**：① **选送排行榜**加「Jury 均分」列（列序 …平均名次→12分→Jury 均分；首点降序、max 金/前十 text/其余 text-3，`THRCOLS`+`vcls` 已纳入）。② 末尾新增「**冠军得票率 / Winner Voting Rate**」section（`buildChampShare` 读 `STATS.champ_share`，TOC 加 `champshare`）：列 #(Bebas·`.st-pos`·前三金银铜)/届次(链接详情页)/场次/选送者/歌手/歌名/得分率(2dp)/分数/分数池(text-3)，除 # 外 DM Sans；值字号 14px（届次/场次 13px、# 17px）；**前三名整行**金/银/铜（`.st-cs-row--N`：文字 `-tint`、渐变底、首格 `inset 3px` 光条，#id 特异度高于 `:hover` 故持久）。
+    - **bv-results-render.js**：`barvision/2026.html` 选送名单(`.bvr-su`) 语言/流派列值 +1px（11→12px）。
+    - **regular-16.json**：直接编辑 signups/auditions 更新海选结果（#166，无需跑脚本）；本次录入猴妈「Voiizion Contest」冠/亚军。
 
 ## 对话交接工作流
 

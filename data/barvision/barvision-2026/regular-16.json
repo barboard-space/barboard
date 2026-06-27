@@ -23,13 +23,15 @@
   { "role": "candidate", "mode": "内部选送", "member": "A妈",  "song": "Running To Pain", "artist": "Kelsey Lu", "genre": "Alternative Pop", "language": "英语" },
   { "role": "candidate", "mode": "内部选送", "member": "海妈", "song": "cherry cola", "artist": "Devon Again", "genre": "Indie Rock", "language": "英语" },
   { "role": "candidate", "mode": "公开海选", "member": "邓妈", "song": "Body & Soul", "artist": "Chris De Sarandy", "genre": "Pop", "language": "英语" },
+  { "role": "candidate", "mode": "公开海选", "member": "猴妈", "song": "I Got A Thing For Love", "artist": "Elle Coves", "genre": "Pop", "language": "英语" },
 
   { "role": "wildcard", "mode": "公开海选", "member": "松妈", "song": "Starcrossed", "artist": "Kings Elliot", "genre": "Pop", "language": "英语" },
   { "role": "wildcard", "mode": "公开海选", "member": "XX妈", "song": "Giđa ávašta (春意渐浓)", "artist": "Emil Kárlsen & Elina Iijäs", "genre": "Folk", "language": "北萨米语" },
   { "role": "wildcard", "mode": "公开海选", "member": "韩妈", "song": "Цілую малинові (树梅之吻)", "artist": "YAKTAK", "genre": "Pop", "language": "乌克兰语" },
   { "role": "wildcard", "mode": "公开海选", "member": "白妈", "song": "Polje ruža (玫瑰花田)", "artist": "Jakov Jozinović", "genre": "Pop", "language": "克罗地亚语" },
   { "role": "wildcard", "mode": "公开海选", "member": "雨妈", "song": "THE MØURNING AFTER", "artist": "MØNØDREAM", "genre": "Rock", "language": "英语" },
-  { "role": "wildcard", "mode": "公开海选", "member": "邓妈", "song": "Could Have Been Us", "artist": "Douwe Bob & SERA", "genre": "Pop", "language": "英语" }
+  { "role": "wildcard", "mode": "公开海选", "member": "邓妈", "song": "Could Have Been Us", "artist": "Douwe Bob & SERA", "genre": "Pop", "language": "英语" },
+  { "role": "wildcard", "mode": "公开海选", "member": "猴妈", "song": "Hoe Dan Ook", "artist": "MAKSIM & Babet", "genre": "Pop", "language": "荷兰语" }
  ],
  "auditions": {
   "note": "",
@@ -40,7 +42,7 @@
    { "name": "Whitevision 2026", "member": "白妈", "period": "", "status": "已结束", "artist": "Robin Packalen", "song": "1001 tapaa (1001种方式)" },
    { "name": "Rainfall Melody Festival 2026", "member": "雨妈", "period": "", "status": "已结束", "artist": "Brian Dunne", "song": "Clams Casino" },
    { "name": "European Fever", "member": "邓妈", "period": "", "status": "已结束", "artist": "Chris De Sarandy", "song": "Body & Soul" },
-   { "name": "Voiizion Contest", "member": "猴妈", "period": "", "status": "进行中", "artist": "", "song": "" },
+   { "name": "Voiizion Contest", "member": "猴妈", "period": "", "status": "已结束", "artist": "Elle Coves", "song": "I Got A Thing For Love" },
    { "name": "RollingGOAT 2026", "member": "羊妈", "period": "", "status": "进行中", "artist": "", "song": "" },
    { "name": "Starvision 2026", "member": "星妈", "period": "", "status": "进行中", "artist": "", "song": "" },
    { "name": "2026 BacUp", "member": "包妈", "period": "", "status": "进行中", "artist": "", "song": "" },
