@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-06-27] — 新成员柴妈 + 非吧视成员页模板文案
+
+### Added
+- 新成员**柴妈**（space_id 51，@是柴柴呀，无标签，B站 29153282 / Musictrack 962）：members.csv + 重跑 gen_member_pages → member/51/index.html + member.html BUILT_PAGES 加 51。
+
+### Changed
+- 非吧视成员个人页默认板块（`member-render.js`）：「Works」→「UPDATES」（字体改 DM Sans/700，与吧视页「Barvision」标签同款）、「代表成绩」→「最近动态」、「即将上线」→「暂无动态」。
+
 ## [2026-06-27] — 破图修复 + 鸽妈改名 + CLAUDE.md 审查
 
 ### Fixed

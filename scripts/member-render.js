@@ -934,10 +934,10 @@
     (d.barvision ? bvSection(d.barvision, d.unclaimed) :
       '<section class="mp-section">' +
         '<div class="section__inner">' +
-          '<div class="mp-section-label fade-up" style="transition-delay:.05s">Works</div>' +
-          '<div class="mp-section-title fade-up" style="transition-delay:.15s">代表成绩</div>' +
+          '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">UPDATES</div>' +
+          '<div class="mp-section-title fade-up" style="transition-delay:.15s">最近动态</div>' +
           '<div class="mp-works-grid fade-up" style="transition-delay:.25s">' +
-            '<div class="mp-todo">即将上线</div>' +
+            '<div class="mp-todo">暂无动态</div>' +
           '</div>' +
         '</div>' +
       '</section>');
