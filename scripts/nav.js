@@ -74,7 +74,7 @@
     '          <li><a href="/barvision/2026/events.html">Barvision 2026</a></li>',
     '          <li style="display:none"><a href="/barvision/2025/events.html">Barvision 2025</a></li>',
     '          <li><a href="/barvision/hof.html">Hall of Fame</a></li>',
-    '          <li><a href="/barvision/stats.html">Stats</a></li>',
+    '          <li><a href="/barvision/stats.html">数据中心</a></li>',
     '          <li><a href="/barvision.html">历届回顾</a></li>',
     '        </ul>',
     '      </div>',

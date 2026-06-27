@@ -4,6 +4,13 @@
 
 ---
 
+## [2026-06-27] — Barvision 冠军得票率手机端字号 + 颁奖台分数配色 + footer 数据中心
+
+### Changed
+- `barvision/stats.html`：冠军得票率表**手机端**字号对齐 Member Leaderboard——#（`.st-pos`）17→16px、选送者 @handle→昵称(X妈)13px（`@media≤600`，须置于非 media 规则之后才生效）。
+- `barvision/hof.html`：颁奖台（手机卡片）分数 `.hof-pod__sc` 配色——第一名 → `--clr-text`、第二/三名 → `--clr-text-3`（名次数字仍金/银/铜，拆分原 `rk+sc` 合并规则）。
+- footer（`scripts/nav.js` + `partials/footer.html`）Barvision 列「Stats」→「数据中心」。
+
 ## [2026-06-27] — Barvision HOF/Stats 精修 + 冠军得票率新表 + 纪录口径修订 + ed2 上下半场 + .gitignore
 
 ### Changed — `barvision/hof.html`

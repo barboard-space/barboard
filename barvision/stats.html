@@ -194,6 +194,12 @@
     #stChampShare tbody td.st-pos { font-size: 17px; }
     /* 届次(第2列) / 场次(第3列) 再 -1px → 13px */
     #stChampShare tbody td:nth-child(2), #stChampShare tbody td:nth-child(3) { font-size: 13px; }
+    /* 手机端字号对齐 Member Leaderboard：# 16px、选送者显昵称(X妈)13px（须置于以上非 media 规则之后才生效） */
+    @media (max-width: 600px) {
+      #stChampShare tbody td.st-pos { font-size: 16px; }
+      #stChampShare tbody td:nth-child(4) .member { font-size: 0; }
+      #stChampShare tbody td:nth-child(4) .member::before { content: attr(data-nickname); font-size: 13px; }
+    }
 
     /* 历届总览手机端卡片 */
     .st-ovcards { margin-top: var(--gap-md); }
