@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>Barvision Hall of Fame | Barboard</title>
+  <meta name="description" content="Barvision 荣誉殿堂——历届颁奖台、数据纪录、成就纪录与吧视先锋奖，记录 Barvision 年度歌曲大赛的高光时刻（数据截至第 15 届）。" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    /* ── Hero（金色主题） ── */
+    .hof-hero { position: relative; padding: var(--nav-h) 0 64px; overflow: hidden; }
+    .hof-hero__glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%,  rgba(212,168,50,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 45% 45% at 0% 95%,  rgba(168,85,247,0.08) 0%, transparent 55%),
+        radial-gradient(ellipse 30% 30% at 100% 40%,rgba(0,180,255,0.05)  0%, transparent 50%);
+    }
+    .hof-hero__grid {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+      background-size: 48px 48px;
+    }
+    .hof-hero__watermark {
+      position: absolute; right: -10px; bottom: -10px;
+      font-family: var(--font-display); font-size: 200px; line-height: 1; letter-spacing: -0.02em;
+      color: rgba(212,168,50,0.035); pointer-events: none; user-select: none;
+    }
+    .hof-hero__inner { position: relative; z-index: 2; margin-top: 40px; }
+    .hof-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--clr-gold-light); text-shadow: 0 0 10px rgba(245,200,64,0.7), 0 0 32px rgba(245,200,64,0.28);
+      margin-bottom: 24px; display: inline-flex; align-items: center; gap: 8px; transition: color 0.2s;
+    }
+    .hof-eyebrow:hover { color: var(--clr-white); text-decoration: none; }
+    .hof-title {
+      font-family: var(--font-display); font-size: clamp(56px, 8vw, 108px);
+      line-height: 1; letter-spacing: 0.02em; text-transform: uppercase;
+    }
+    .hof-title .gold { color: var(--clr-gold-light); }
+    .hof-title .dim { opacity: 0.65; }
+    .hof-desc { font-size: 15px; color: rgba(245,200,64,0.85); line-height: 1.7; margin-top: 24px; max-width: 560px; }
+
+    /* ── Section header 间距（与其他页一致） ── */
+    .section--bordered .section-label { margin-bottom: 16px; }
+    .section--bordered .section__title { margin-top: 24px; }
+    .hof-sec__sub { font-size: 14px; color: var(--clr-text-2); margin-top: 24px; max-width: 640px; line-height: 1.7; }
+
+    /* ── 先锋奖 ── */
+    .bv-pioneer {
+      background: linear-gradient(135deg, rgba(212,168,50,0.14) 0%, rgba(245,200,64,0.04) 100%);
+      border: 1px solid rgba(212,168,50,0.34); border-radius: 8px; padding: 28px 32px;
+      display: flex; align-items: center; gap: 24px; position: relative; overflow: hidden; margin-top: var(--gap-md);
+    }
+    .bv-pioneer::after {
+      content: '🎖️'; position: absolute; right: 26px; top: 50%; transform: translateY(-50%);
+      font-size: 92px; opacity: 0.32; pointer-events: none; user-select: none;
+    }
+    .bv-pioneer__name { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--clr-text); }
+    .bv-pioneer__desc { font-size: 14px; color: rgba(245,200,64,0.65); line-height: 1.65; margin-top: 16px; max-width: 620px; }
+    .bv-pioneer__desc .member { color: var(--clr-gold-light); }   /* @绿荫夏语 链接也用金色调，去紫 */
+
+    /* ── 领奖台 ── */
+    /* 桌面端：表格（参考 Editions Overview）；倒序 15→1，一行一组、届次 rowspan 合并 */
+    .hof-pt-wrap { margin-top: var(--gap-md); overflow-x: auto; scrollbar-width: thin; border: 1px solid var(--clr-border); border-radius: 8px; }
+    .hof-pt { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .hof-pt th, .hof-pt td { text-align: left; padding: 11px 14px; border-bottom: 1px solid var(--clr-border); vertical-align: middle; }
+    .hof-pt thead th { font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--clr-text-2); border-bottom: 1px solid var(--clr-border-2); white-space: nowrap; }
+    .hof-pt thead th.pod-1 { color: var(--clr-gold-light); }
+    .hof-pt thead th.pod-2 { color: var(--clr-silver); }
+    .hof-pt thead th.pod-3 { color: var(--clr-bronze); }
+    .hof-pt tbody tr.hof-pt-hl { background: rgba(255,255,255,0.022); }   /* 悬停整届高亮（JS 按 data-ed 给该届全部行加类，含 rowspan 届次格） */
+    .hof-pt td.hof-pt__ed { text-align: center; width: 1px; white-space: nowrap; border-right: 1px solid var(--clr-border-2); vertical-align: middle; }  /* td.hof-pt__ed 提权盖过通用 .hof-pt td 的 text-align:left */
+    .hof-pt__ed a { text-decoration: none; display: inline-block; }   /* inline-block + 单元格 text-align:center / vertical-align:middle → rowspan 高格内水平+垂直居中 */
+    .hof-pt__ed .no { font-family: var(--font-display); font-size: 24px; line-height: 1; color: var(--clr-board); }
+    .hof-pt tbody tr.hof-pt__edstart td { border-top: 1px solid var(--clr-border-2); }
+    .hof-pt tbody tr.hof-pt__edstart:first-child td { border-top: none; }
+    .hof-pt__grp { font-size: 12px; color: var(--clr-text-2); white-space: nowrap; }
+    .hof-pt__cell { min-width: 196px; }
+    .hof-pt__cell .who { display: block; font-size: 13px; font-weight: 600; color: var(--clr-text); }
+    .hof-pt__cell .who .sc { font-family: var(--font-display); font-weight: 400; font-size: 13px; color: var(--clr-text-2); margin-left: 5px; }  /* 二三名分数 text-2；冠军另由 pod-1 覆盖为金 */
+    .hof-pt__cell .song { display: block; font-size: 12.5px; color: var(--clr-text-2); line-height: 1.4; margin-top: 2px; }  /* 破折号(本元素文本)→ text-2 */
+    .hof-pt__cell .song .art { color: var(--clr-text); }     /* 歌手 → text */
+    .hof-pt__cell .song .ttl { color: var(--clr-text-2); }   /* 歌名 → text-2 */
+    .hof-pt td.pod-1 .who { color: var(--clr-gold-tint); }
+    .hof-pt td.pod-2 .who { color: var(--clr-silver-tint); }
+    .hof-pt td.pod-3 .who { color: var(--clr-bronze-tint); }
+    .hof-pt td.pod-1 .who .sc { color: var(--clr-gold-light); }
+    .hof-pt__muted { color: var(--clr-text-3); }
+    /* 手机端：每届一张卡（.hof-ed），单列 */
+    .hof-pod-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: var(--gap-md); }
+    /* 趣味奖项卡片高度参差大、无固定顺序 → CSS columns 瀑布流紧凑排布 */
+    /* 瀑布流（数据纪录 + 趣味奖项：卡片高度参差，columns 紧凑排布） */
+    .hof-roll { columns: 300px; column-gap: 12px; margin-top: var(--gap-md); }
+    .hof-roll > .hof-card { break-inside: avoid; margin-bottom: 12px; }
+    .hof-ed {
+      background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 8px; padding: 16px 18px 14px;
+      transition: border-color 0.2s, opacity 0.5s ease, transform 0.5s ease;
+    }
+    .hof-ed:hover { border-color: var(--clr-border-2); }
+    .hof-ed__hd { display: flex; align-items: baseline; gap: 12px; padding-bottom: 12px; margin-bottom: 4px; border-bottom: 1px solid var(--clr-border-2); }
+    .hof-ed__no { font-family: var(--font-display); font-size: 24px; line-height: 1; color: var(--clr-gold-light); }
+    .hof-ed__name { font-family: var(--font-body); font-size: 14px; font-weight: 700; color: var(--clr-text); min-width: 0; }
+    .hof-ed__grp {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--clr-text-3); margin: 11px 0 4px;
+    }
+    .hof-pod { display: grid; grid-template-columns: 20px 1fr auto; gap: 0 10px; align-items: center; padding: 5px 0; }
+    .hof-pod__rk { font-family: var(--font-display); font-size: 16px; line-height: 1; color: var(--clr-text-3); text-align: center; }
+    .hof-pod__main { min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+    .hof-pod__by { font-size: 12.5px; font-weight: 600; color: var(--clr-text); line-height: 1.3; }
+    .hof-pod__song { font-size: 12px; color: var(--clr-text-2); line-height: 1.35; }   /* 「— 歌名」part；瀑布流允许高度自由 → 歌名完整换行、不截断 */
+    .hof-pod__song .art { color: var(--clr-text); }   /* 歌手：白（比「— 歌名」更亮）*/
+    .hof-pod__sc { font-family: var(--font-display); font-size: 14px; line-height: 1; color: var(--clr-text-2); }
+    .hof-pod--1 .hof-pod__rk { color: var(--clr-gold-light); }
+    .hof-pod--1 .hof-pod__by { color: var(--clr-gold-tint); }
+    .hof-pod--1 .hof-pod__sc { color: var(--clr-text); }
+    .hof-pod--2 .hof-pod__rk { color: var(--clr-silver); }
+    .hof-pod--2 .hof-pod__by { color: var(--clr-silver-tint); }
+    .hof-pod--3 .hof-pod__rk { color: var(--clr-bronze); }
+    .hof-pod--2 .hof-pod__sc, .hof-pod--3 .hof-pod__sc { color: var(--clr-text-3); }
+    .hof-pod--3 .hof-pod__by { color: var(--clr-bronze-tint); }
+
+    /* ── 卡片（数据纪录 / 趣味奖项 / 赛季纪录） ── */
+    /* .hof-grid 仅赛季纪录用：固定 3 列（6 卡 = 3 列 × 2 行，按列分组） */
+    .hof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; align-items: start; margin-top: var(--gap-md); }
+    .hof-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 8px; padding: 16px 18px;
+      transition: border-color 0.2s, opacity 0.5s ease, transform 0.5s ease;
+    }
+    .hof-card:hover { border-color: var(--clr-border-2); }
+    .hof-card__label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clr-text-2); }
+    .hof-card__title { font-size: 15px; font-weight: 700; color: var(--clr-gold-light); }
+    .hof-card__metric { font-size: 12.5px; color: var(--clr-text-3); margin-top: 4px; line-height: 1.5; }
+    .hof-card__head { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin-top: 9px; }
+    .hof-card__val { font-family: var(--font-display); font-size: 34px; line-height: 1; color: var(--clr-gold-light); text-shadow: 0 0 18px rgba(212,168,50,0.25); }
+    .hof-card__unit { font-family: var(--font-body); font-size: 14px; font-weight: 600; margin-left: 2px; }
+    .hof-holders { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--clr-border-2); display: flex; flex-direction: column; gap: 7px; }
+    .hof-card--solo .hof-holders { border-top: none; padding-top: 0; margin-top: 9px; }
+    .hof-holders.hof-season-tags { flex-direction: row; flex-wrap: wrap; gap: 6px; }   /* 非英语夺冠：场次徽章横向换行 */
+    .hof-holders--inline { flex-direction: row; flex-wrap: wrap; gap: 6px 16px; }   /* 多个纯 @名得主：横排省空间（双端） */
+    .hof-holder { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; font-size: 12px; line-height: 1.45; }
+    .hof-holder__who { font-weight: 600; color: var(--clr-text); white-space: nowrap; }
+    .hof-card--artist .hof-holder__who { font-size: 13px; }   /* 大众之选：得主为艺人名（纯文本），双端 +1px */
+    .hof-holder__rank { font-weight: 600; color: var(--clr-text-2); white-space: nowrap; }   /* 极限卡位：前置「第 X 名」 */
+    .hof-holder__song { color: var(--clr-text-2); min-width: 0; }
+    .hof-holder__detail { color: var(--clr-text-2); display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 3px 5px; }
+    #bvRecords .hof-holder__detail { font-size: 11px; }   /* 分组制各组得分注释 -1px */
+    /* 标签 chip：与 Editions Overview 的 .st-ov-grp 一致（body 字体、无边框、浅底填充） */
+    .hof-badge {
+      display: inline-block; box-sizing: border-box; font-size: 11px; color: var(--clr-text-3);
+      background: rgba(255,255,255,0.05); border-radius: 3px; padding: 1px 6px; white-space: nowrap; flex-shrink: 0;
+    }
+
+    @media (max-width: 768px) {
+      .hof-grid { grid-template-columns: 1fr; }
+      .hof-roll { columns: 1; }
+      /* 手机端收小卡片大数字（与成员页统计卡 26→21 的缩放习惯一致，不再比其他页突兀） */
+      .hof-card__val { font-size: 28px; }
+      .bv-pioneer__name { font-size: 28px; }
+      .bv-pioneer { flex-direction: column; align-items: flex-start; }
+      .bv-pioneer::after { display: none; }
+      /* 颁奖台卡片 + 成就/纪录得主：手机端 @名 显昵称(X妈)省空间，链接/tooltip 仍有效；桌面保留 @handle（先锋奖大名 .bv-pioneer__name 例外，不在此列） */
+      .hof-ed .member { font-size: 0; }
+      .hof-ed .member::before { content: attr(data-nickname); font-size: 12.5px; font-weight: 600; }
+      .hof-holder .member { font-size: 0; }
+      .hof-holder .member::before { content: attr(data-nickname); font-size: 12px; font-weight: 600; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .hof-ed:hover, .hof-card:hover { border-color: var(--clr-border); }
+    }
+
+    /* ── Notion 风格右侧目录（复用 bv-results-render.js 规范） ── */
+    .bvr-toc { position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:90; display:flex; flex-direction:column; align-items:flex-end; gap:0; opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
+    .bvr-toc--visible { opacity:1; visibility:visible; }
+    .bvr-toc__toggle { display:none; }
+    .bvr-toc__list { display:flex; flex-direction:column; align-items:flex-end; gap:2px; padding:8px 10px; border-radius:8px; background:transparent; transition:background 0.25s, -webkit-backdrop-filter 0.25s, backdrop-filter 0.25s; }
+    .bvr-toc:hover .bvr-toc__list { background:rgba(20,20,34,0.55); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+    .bvr-toc__item { display:flex; align-items:center; justify-content:flex-end; gap:9px; cursor:pointer; user-select:none; padding:2px 0; }
+    .bvr-toc__dash { flex:none; width:14px; height:2px; border-radius:2px; background:var(--clr-text-3); opacity:0.4; transition:width 0.25s, background 0.25s, opacity 0.25s; }
+    .bvr-toc__label { order:-1; font-family:var(--font-body); font-size:10.5px; letter-spacing:0.01em; color:var(--clr-text-3); white-space:nowrap; max-width:0; opacity:0; transform:translateX(6px); overflow:hidden; transition:max-width 0.3s ease, opacity 0.25s, transform 0.3s ease, color 0.15s; }
+    .bvr-toc:hover .bvr-toc__label { max-width:220px; opacity:1; transform:translateX(0); }
+    .bvr-toc__item:hover .bvr-toc__dash { opacity:0.85; background:var(--clr-text-2); }
+    .bvr-toc__item:hover .bvr-toc__label { color:var(--clr-text); }
+    .bvr-toc__item--active .bvr-toc__dash { width:22px; background:var(--clr-gold-light); opacity:1; }
+    .bvr-toc__item--active .bvr-toc__label { color:var(--clr-gold-light); }
+    @media (max-width:768px) {
+      .bvr-toc { right:20px; bottom:66px; top:auto; transform:none; z-index:210; gap:10px; }
+      .bvr-toc__toggle { display:flex; align-items:center; justify-content:center; width:42px; height:42px; background:rgba(20,20,34,0.5); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px); border:1px solid var(--clr-border-2); border-radius:4px; color:rgba(192,132,252,0.65); cursor:pointer; padding:0; transition:color 0.25s,border-color 0.25s; }
+      .bvr-toc__toggle svg { width:18px; height:18px; }
+      .bvr-toc--open .bvr-toc__toggle { color:var(--clr-violet-light); border-color:var(--clr-violet-light); }
+      .bvr-toc__list { display:none; gap:1px; min-width:152px; max-height:62vh; overflow-y:auto; background:rgba(20,20,34,0.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px); border:1px solid var(--clr-border-2); border-radius:6px; padding:6px; box-shadow:0 8px 28px rgba(0,0,0,0.4); }
+      .bvr-toc:hover .bvr-toc__list { background:rgba(20,20,34,0.72); }
+      .bvr-toc--open .bvr-toc__list { display:flex; }
+      .bvr-toc__item { justify-content:flex-start; gap:0; padding:9px 13px; border-radius:4px; }
+      .bvr-toc__item:hover { background:rgba(255,255,255,0.04); }
+      .bvr-toc__dash { display:none; }
+      .bvr-toc__label { order:0; max-width:none; opacity:1; transform:none; overflow:visible; font-size:13px; }
+      .bvr-toc__item--active { background:rgba(168,85,247,0.12); }
+    }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hof-hero">
+  <div class="hof-hero__glow" aria-hidden="true"></div>
+  <div class="hof-hero__grid" aria-hidden="true"></div>
+  <div class="hof-hero__watermark" aria-hidden="true">BARVISION</div>
+  <div class="hof-hero__inner section__inner">
+    <a class="hof-eyebrow fade-up" href="/barvision/"><span>←</span><span>Barvision</span></a>
+    <h1 class="hof-title fade-up" style="transition-delay:0.1s;">Hall <span class="dim">of</span> <span class="gold">Fame</span></h1>
+    <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届高光时刻。数据统计截至第 <span id="hofThrough">15</span> 届。</p>
+  </div>
+</section>
+
+<!-- ═══ 吧视先锋奖 ═══ -->
+<section class="section section--bordered" id="pioneer" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">吧视先锋奖</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Pioneer <span style="color:var(--clr-gold-light);">Award</span></h2>
+    <div id="bvPioneer" class="fade-up" style="transition-delay:0.2s;"></div>
+  </div>
+</section>
+
+<!-- ═══ 历届冠军领奖台 ═══ -->
+<section class="section section--bordered" id="podium" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">颁奖台</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Winner's <span style="color:var(--clr-gold-light);">Podium</span></h2>
+    <div id="bvPodium"></div>
+  </div>
+</section>
+
+<!-- ═══ 赛季纪录 ═══ -->
+<section class="section section--bordered" id="season" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">赛季纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Season <span style="color:var(--clr-gold-light);">Records</span></h2>
+    <div id="bvSeason"></div>
+  </div>
+</section>
+
+<!-- ═══ 数据纪录 ═══ -->
+<section class="section section--bordered" id="records" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">数据纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Data <span style="color:var(--clr-gold-light);">Records</span></h2>
+    <div id="bvRecords"></div>
+  </div>
+</section>
+
+<!-- ═══ 趣味奖项 ═══ -->
+<section class="section section--bordered" id="awards" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+  <div class="section__inner">
+    <p class="section-label fade-up">成就纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);">Achievement <span style="color:var(--clr-gold-light);">Records</span></h2>
+    <div id="bvAwards"></div>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+<script src="/scripts/nav.js"></script>
+<script>
+  function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+  var STATS = null;
+
+  /* 成员链接（从 bv-stats.members 取 handle；id 0 / 无 handle → 纯文本） */
+  function memLink(id, fallback) {
+    var sid = String(id);
+    var info = (STATS && STATS.members[sid]) || null;
+    var nick = (info && info.nickname) || fallback || sid;
+    // 匿名(id 0) 或无效 id → 纯文本不导航；其余真实成员（即便无 @handle）都链接到成员页
+    if (!info || !(parseInt(sid, 10) > 0))
+      return '<span style="color:var(--clr-text-2);">' + esc(nick) + '</span>';
+    var label = (info.handle && info.handle !== nick) ? '@' + esc(info.handle) : esc(nick);
+    return '<a class="member" href="/member/' + sid + '/" data-nickname="' + esc(nick) + '">' + label + '</a>';
+  }
+  /* 一条记录/奖项的得主链接（支持单 id 或 ids 数组合报） */
+  function whoLinks(e) {
+    var ids = e.ids || (e.id != null ? [e.id] : []);
+    if (!ids.length) return esc(e.nickname || '');
+    return ids.map(function (i) { return memLink(i, e.nickname); }).join('<span style="opacity:0.35"> / </span>');
+  }
+  /* 详情页路径（#165）：2023+ → /barvision/<年>.html；2019–2020 → /barvision/<年>/<两位届号>.html */
+  function edHref(year, no) {
+    return year >= 2023 ? '/barvision/' + year + '/'
+      : '/barvision/' + year + '/' + String(no).padStart(2, '0') + '/';
+  }
+
+  /* ── 先锋奖 ── */
+  function buildPioneer(p) {
+    var el = document.getElementById('bvPioneer');
+    if (!el || !p) return;
+    var href = '/member/' + p.member_id + '/';
+    var nameLink = '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '" style="color:var(--clr-text);">' + esc(p.handle) + '</a>';
+    var descHtml = esc(p.desc).replace('@' + esc(p.handle),
+      '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '">@' + esc(p.handle) + '</a>');
+    el.innerHTML = '<div class="bv-pioneer">' +
+      '<div><div class="bv-pioneer__name">' + nameLink + '</div>' +
+      '<p class="bv-pioneer__desc">' + descHtml + '</p></div></div>';
+  }
+
+  /* ── 历届领奖台 ── */
+  var GRP_SHORT = { '小众组': '小众', '中众组': '中众', '大众组': '大众' };
+  /* 把一届的 rows 按组聚合 → [{label, byRank:{1,2,3}}]（年度制/有 GF 的 → 单组、label 空） */
+  function podiumGroups(ed) {
+    var groups = [], map = {};
+    ed.rows.forEach(function (r) {
+      var key = (r.venue || r.group || '');
+      if (!map[key]) { map[key] = { label: key, byRank: {} }; groups.push(map[key]); }
+      map[key].byRank[r.rank] = r;
+    });
+    return groups;
+  }
+  /* 手机端：每届一张卡（沿用 .hof-ed 领奖台卡） */
+  function podiumCardHTML(ed, i) {
+    var rows = '', lastGroup = null;
+    ed.rows.forEach(function (r) {
+      if (r.group && r.group !== lastGroup) {
+        rows += '<div class="hof-ed__grp">' + esc(r.venue || r.group) + '</div>';
+        lastGroup = r.group;
+      }
+      rows += '<div class="hof-pod hof-pod--' + r.rank + '">' +
+        '<span class="hof-pod__rk">' + r.rank + '</span>' +
+        '<span class="hof-pod__main">' +
+          '<span class="hof-pod__by">' + whoLinks(r) + '</span>' +
+          '<span class="hof-pod__song"><span class="art">' + esc(r.artist) + '</span> — ' + esc(r.song) + '</span>' +
+        '</span>' +
+        '<span class="hof-pod__sc">' + Math.round(r.score) + '</span></div>';
+    });
+    return '<div class="hof-ed fade-up" style="transition-delay:' + ((i % 6) * 0.04).toFixed(2) + 's;">' +
+      '<div class="hof-ed__hd"><span class="hof-ed__no">' + ed.edition_no + '</span>' +
+      '<span class="hof-ed__name">' + esc(ed.edition_name || '') + '</span></div>' + rows + '</div>';  // 1–12 届 "The Nth Barvision"，13+ "Barvision <城市> 202X"
+  }
+  /* 桌面端：表格（参考 Editions Overview）。一行一组，届次 rowspan 合并；倒序 15→1 */
+  function podiumTableHTML(ordered) {
+    function cell(r, rk) {
+      if (!r) return '<td class="hof-pt__cell pod-' + rk + '"><span class="hof-pt__muted">—</span></td>';
+      return '<td class="hof-pt__cell pod-' + rk + '">' +
+        '<span class="who">' + whoLinks(r) + '<span class="sc">' + Math.round(r.score) + '</span></span>' +
+        '<span class="song"><span class="art">' + esc(r.artist) + '</span> — <span class="ttl">' + esc(r.song) + '</span></span></td>';
+    }
+    var body = ordered.map(function (ed) {
+      var groups = podiumGroups(ed), href = edHref(ed.year, ed.edition_no);
+      return groups.map(function (g, gi) {
+        var grpLabel = g.label ? (GRP_SHORT[g.label] || g.label.replace('组', '')) : '';  // 年度制(13+)组别留空
+        var edCell = gi === 0
+          ? '<td class="hof-pt__ed" rowspan="' + groups.length + '"><a href="' + href + '"><span class="no">' + ed.edition_no + '</span></a></td>'
+          : '';
+        return '<tr data-ed="' + ed.edition_no + '"' + (gi === 0 ? ' class="hof-pt__edstart"' : '') + '>' + edCell +
+          '<td class="hof-pt__grp">' + esc(grpLabel) + '</td>' +
+          cell(g.byRank[1], 1) + cell(g.byRank[2], 2) + cell(g.byRank[3], 3) + '</tr>';
+      }).join('');
+    }).join('');
+    return '<div class="hof-pt-wrap fade-up"><table class="hof-pt"><thead><tr>' +
+      '<th>届次</th><th>组别</th>' +
+      '<th class="pod-1">🥇 冠军</th><th class="pod-2">🥈 亚军</th><th class="pod-3">🥉 季军</th>' +
+      '</tr></thead><tbody>' + body + '</tbody></table></div>';
+  }
+  function buildPodium(podium) {
+    var el = document.getElementById('bvPodium');
+    if (!el || !podium) return;
+    var ordered = podium.slice().sort(function (a, b) { return b.edition_no - a.edition_no; });  // 倒序 15→1
+    if (window.matchMedia('(max-width:768px)').matches)
+      el.innerHTML = '<div class="hof-pod-grid">' + ordered.map(podiumCardHTML).join('') + '</div>';
+    else
+      el.innerHTML = podiumTableHTML(ordered);
+  }
+
+  /* 单首歌的届次徽章：13 届起单组（半决赛/决赛两阶段）不带场次代码；1–12 届保留 A/B/C·SF/GF */
+  function slotBadge(e) {
+    if (e.edition_no == null) return '';
+    var m = (e.edition_no >= 13) ? '' : (e.match || '');
+    return '<span class="hof-badge">第 ' + e.edition_no + ' 届' + (m ? ' ' + esc(m) : '') + '</span>';
+  }
+
+  /* ── 数据纪录卡 ── */
+  function recordCard(r, i) {
+    var ents = r.entries || [];
+    var holders = ents.map(function (e) {
+      var parts = '<span class="hof-holder__who">' + whoLinks(e) + '</span>';
+      if (e.song) parts += '<span class="hof-holder__song"><span style="color:var(--clr-text)">' + esc(e.artist) + '</span> — ' + esc(e.song) + '</span>' + slotBadge(e);
+      else if (e.edition_no != null) parts += '<span class="hof-badge">第 ' + e.edition_no + ' 届</span>';
+      if (e.segs)  // 场次码徽章 + 得分文本交替（如 6A 徽章 66）
+        parts += '<span class="hof-holder__detail">' + e.segs.map(function (s) {
+          return s.b != null ? '<span class="hof-badge">' + esc(s.b) + '</span>' : '<span>' + esc(s.t) + '</span>';
+        }).join('') + '</span>';
+      else if (e.detail) parts += '<span class="hof-holder__detail">' + esc(e.detail) + '</span>';
+      return '<div class="hof-holder">' + parts + '</div>';
+    }).join('');
+    var val = (r.val != null) ? '<span class="hof-card__val">' + esc(r.val) + (r.unit ? '<span class="hof-card__unit">' + esc(r.unit) + '</span>' : '') + '</span>' : '';
+    // 多个得主且全是纯 @名（无歌名/届数/detail）→ 横排省空间；带额外信息的保持竖排
+    var bare = ents.length > 1 && ents.every(function (e) { return !e.song && e.edition_no == null && !e.detail; });
+    return '<div class="hof-card fade-up" style="transition-delay:' + ((i % 6) * 0.04).toFixed(2) + 's;">' +
+      '<div class="hof-card__label">' + esc(r.title) + (r.legacy ? ' · LEGACY' : '') + '</div>' +
+      '<div class="hof-card__head">' + val + '</div>' +
+      (holders ? '<div class="hof-holders' + (bare ? ' hof-holders--inline' : '') + '">' + holders + '</div>' : '') + '</div>';
+  }
+
+  /* ── 趣味奖项卡 ── */
+  function awardCard(a, i) {
+    var ws = a.winners || [];
+    var holders = ws.map(function (w) {
+      if (a.key === 'clutch') {  // 极限卡位：第 X 名 + @名 + 场次标签
+        var rankTxt = (w.rank != null) ? '第 ' + w.rank + ' 名' : ((w.segs && w.segs[0] && w.segs[0].t) || '');
+        var badges = (w.segs || []).filter(function (s) { return s.b != null; })
+          .map(function (s) { return '<span class="hof-badge">' + esc(s.b) + '</span>'; }).join('');
+        return '<div class="hof-holder">' +
+          '<span class="hof-holder__rank">' + esc(rankTxt) + '</span>' +
+          '<span class="hof-holder__who">' + whoLinks(w) + '</span>' +
+          '<span class="hof-holder__detail">' + badges + '</span></div>';
+      }
+      var parts = '<span class="hof-holder__who">' + whoLinks(w) + '</span>';
+      if (a.key === 'debut_peak')  // @名 + 歌手—歌名 + 届数徽章
+        parts += '<span class="hof-holder__song"><span style="color:var(--clr-text)">' + esc(w.artist) + '</span> — ' + esc(w.song) + '</span><span class="hof-badge">第 ' + w.edition_no + ' 届</span>';
+      else if (w.segs)  // 场次→徽章、名次→第 N 名（文本片段穿插）
+        parts += '<span class="hof-holder__detail">' + w.segs.map(function (s) {
+          return s.b != null ? '<span class="hof-badge">' + esc(s.b) + '</span>' : '<span>' + esc(s.t) + '</span>';
+        }).join('') + '</span>';
+      else if (w.detail)
+        parts += '<span class="hof-holder__detail">' + esc(w.detail) + '</span>';
+      return '<div class="hof-holder">' + parts + '</div>';
+    }).join('');
+    var val = (a.type !== 'list' && a.val !== '' && a.val != null)
+      ? '<span class="hof-card__val">' + esc(a.val) + (a.unit ? '<span class="hof-card__unit">' + esc(a.unit) + '</span>' : '') + '</span>' : '';
+    var metric = esc(a.metric);
+    return '<div class="hof-card hof-card--award' + (a.key === 'most_artist' ? ' hof-card--artist' : '') + ' fade-up" style="transition-delay:' + ((i % 6) * 0.04).toFixed(2) + 's;">' +
+      '<div class="hof-card__title">' + esc(a.title) + '</div>' +
+      '<div class="hof-card__metric">' + metric + '</div>' +
+      (val ? '<div class="hof-card__head">' + val + '</div>' : '') +
+      (holders ? '<div class="hof-holders">' + holders + '</div>' : '') + '</div>';
+  }
+
+  /* ── 赛季纪录卡（统一：标题 + 大数字 + 分割线 + 场次徽章行） ── */
+  function seasonCard(s, i) {
+    var badges = (s.badges || []).map(function (b) { return '<span class="hof-badge">' + esc(b) + '</span>'; }).join('');
+    return '<div class="hof-card fade-up" style="transition-delay:' + ((i % 3) * 0.04).toFixed(2) + 's;">' +
+      '<div class="hof-card__label">' + esc(s.title) + '</div>' +
+      '<div class="hof-card__head"><span class="hof-card__val">' + esc(s.val) +
+      '<span class="hof-card__unit">' + esc(s.unit) + '</span></span></div>' +
+      '<div class="hof-holders hof-season-tags">' + badges + '</div></div>';
+  }
+
+  var RECORD_ORDER = ['most_wins', 'most_top3', 'most_top10', 'highest_match_score', 'highest_edition_score',
+    'most_participations', 'most_twelve', 'highest_jury_avg', 'highest_share'];
+  var AWARD_ORDER = ['group_slam', 'rank_slam', 'debut_peak', 'niche_star', 'consecutive_wins', 'longest_streak',
+    'longest_top10', 'longest_wait', 'most_same_rank', 'biggest_drop', 'shadow_gap', 'most_artist', 'most_chinese', 'clutch'];
+  /* 3 列 × 2 行（行优先）：列1 成员单届/单场分组制 · 列2 曲目年度制/分组制 · 列3 语种/非英语 */
+  var SEASON_ORDER = ['most_members_edition', 'songs_edition_annual', 'most_lang_match',
+    'most_members_match', 'songs_edition_grouped', 'noneng_champ'];
+
+  /* ── load + render ── */
+  (async function () {
+    try {
+      STATS = await fetch('/data/barvision/bv-stats.json').then(function (r) { return r.json(); });
+    } catch (e) { console.error('BV HOF: data load failed', e); return; }
+
+    var through = document.getElementById('hofThrough');
+    if (through && STATS.data_through) through.textContent = STATS.data_through;
+
+    buildPioneer(STATS.pioneer);
+    buildPodium(STATS.podium);
+
+    var recs = RECORD_ORDER.filter(function (k) { return STATS.records[k]; }).map(function (k) { return STATS.records[k]; });
+    document.getElementById('bvRecords').innerHTML = '<div class="hof-roll">' + recs.map(recordCard).join('') + '</div>';
+
+    var aws = AWARD_ORDER.filter(function (k) { return STATS.awards[k]; }).map(function (k) { var a = STATS.awards[k]; a.key = k; return a; });
+    document.getElementById('bvAwards').innerHTML = '<div class="hof-roll">' + aws.map(awardCard).join('') + '</div>';
+
+    var seas = SEASON_ORDER.filter(function (k) { return STATS.season[k]; }).map(function (k) { return STATS.season[k]; });
+    document.getElementById('bvSeason').innerHTML = '<div class="hof-grid">' + seas.map(seasonCard).join('') + '</div>';
+
+    /* fade-up observer */
+    function clearDelayAfterAnim(el) { var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250; setTimeout(function () { el.style.transitionDelay = '0s'; }, ms); }
+    if ('IntersectionObserver' in window) {
+      var fo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('visible'); fo.unobserve(e.target); clearDelayAfterAnim(e.target); } });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up').forEach(function (el) { fo.observe(el); });
+    } else {
+      document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('visible'); });
+    }
+
+    /* 领奖台 桌面表格 ↔ 手机卡片：跨 768px 断点重渲（重渲内容直接置 visible，不再播入场动画） */
+    var podMobile = window.matchMedia('(max-width:768px)').matches, rzT = null;
+    window.addEventListener('resize', function () {
+      var m = window.matchMedia('(max-width:768px)').matches;
+      if (m === podMobile) return;
+      podMobile = m;
+      clearTimeout(rzT);
+      rzT = setTimeout(function () {
+        buildPodium(STATS.podium);
+        document.querySelectorAll('#bvPodium .fade-up').forEach(function (el) { el.style.transitionDelay = '0s'; el.classList.add('visible'); });
+      }, 150);
+    });
+
+    /* 领奖台表格：悬停该届任意行 → 整届高亮（含 rowspan 届次格）。事件委托在 #bvPodium，跨重渲持久 */
+    var podEl = document.getElementById('bvPodium');
+    function clearHl() { podEl.querySelectorAll('tr.hof-pt-hl').forEach(function (r) { r.classList.remove('hof-pt-hl'); }); }
+    podEl.addEventListener('mouseover', function (e) {
+      var tr = e.target.closest('tr[data-ed]'); clearHl();
+      if (!tr) return;
+      podEl.querySelectorAll('tr[data-ed="' + tr.getAttribute('data-ed') + '"]').forEach(function (r) { r.classList.add('hof-pt-hl'); });
+    });
+    podEl.addEventListener('mouseleave', clearHl);
+  })();
+
+  /* ── Notion 风格右侧目录 ── */
+  (function () {
+    var ITEMS = [['pioneer', '吧视先锋奖'], ['podium', '颁奖台'], ['season', '赛季纪录'], ['records', '数据纪录'], ['awards', '成就纪录']];
+    var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
+    var nav = document.createElement('nav');
+    nav.className = 'bvr-toc'; nav.setAttribute('aria-label', '页内目录');
+    nav.innerHTML = '<div class="bvr-toc__list">' + ITEMS.map(function (it) {
+      return '<div class="bvr-toc__item" data-target="' + it[0] + '"><span class="bvr-toc__dash"></span><span class="bvr-toc__label">' + it[1] + '</span></div>';
+    }).join('') + '</div><button class="bvr-toc__toggle" type="button" aria-label="页内目录">' + ICON + '</button>';
+    document.body.appendChild(nav);
+    var toggle = nav.querySelector('.bvr-toc__toggle');
+    toggle.addEventListener('click', function (e) { e.stopPropagation(); nav.classList.toggle('bvr-toc--open'); });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) nav.classList.remove('bvr-toc--open'); });
+    var els = Array.prototype.slice.call(nav.querySelectorAll('.bvr-toc__item'));
+    var navH = 72, suppress = false, timer = null;
+    function updateVisible() { nav.classList.toggle('bvr-toc--visible', window.scrollY > 300); }
+    updateVisible();
+    window.addEventListener('scroll', function () { updateVisible(); if (suppress) { clearTimeout(timer); timer = setTimeout(function () { suppress = false; }, 200); } }, { passive: true });
+    var obs = new IntersectionObserver(function (entries) {
+      if (suppress) return;
+      entries.forEach(function (e) { if (e.isIntersecting) els.forEach(function (it) { it.classList.toggle('bvr-toc__item--active', it.dataset.target === e.target.id); }); });
+    }, { rootMargin: '-' + navH + 'px 0px -55% 0px' });
+    els.forEach(function (it) {
+      var t = document.getElementById(it.dataset.target);
+      if (t) obs.observe(t);
+      it.addEventListener('click', function () {
+        var t = document.getElementById(it.dataset.target); if (!t) return;
+        nav.classList.remove('bvr-toc--open'); suppress = true; clearTimeout(timer);
+        els.forEach(function (x) { x.classList.toggle('bvr-toc__item--active', x === it); });
+        window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
+</body>
+</html>

@@ -97,19 +97,19 @@
     }
     // 未认领（混淆曲赛后无人认领）：弱化、无 @、链接到伪成员页 member/0.html
     if (m && m.unclaimed) {
-      return '<a class="member member--unclaimed" href="/member/' + m.id + '.html" data-nickname="'
+      return '<a class="member member--unclaimed" href="/member/' + m.id + '/" data-nickname="'
         + esc(nick) + '">' + esc(nick) + '</a>';
     }
     var label = opts.nick ? esc(nick) : ('@' + esc(m ? m.handle : nick));
     if (!m) return '<span class="member">' + label + '</span>';
-    return '<a class="member" href="/member/' + m.id + '.html" data-nickname="'
+    return '<a class="member" href="/member/' + m.id + '/" data-nickname="'
       + esc(nick) + '">' + label + '</a>';
   }
   // 用届次索引 roster 项（{name,id,handle}）渲染链接（不依赖当前届 members）
   function memberLinkR(r) {
     var label = '@' + esc(r.handle || r.name);
     if (!r.id) return '<span class="member">' + label + '</span>';
-    return '<a class="member" href="/member/' + r.id + '.html" data-nickname="' + esc(r.name) + '">' + label + '</a>';
+    return '<a class="member" href="/member/' + r.id + '/" data-nickname="' + esc(r.name) + '">' + label + '</a>';
   }
   // ── 正文「X妈」提及自动链接 ───────────────────────────────────
   // 用全届花名册(EDIDX) + 本届 members 建全局 昵称→{id,handle} 映射，
@@ -136,7 +136,7 @@
     if (!m) return esc(nick);
     var label = useNick ? esc(nick) : ('@' + esc(m.handle));
     var cls = m.unclaimed ? 'member member--unclaimed' : 'member';
-    return '<a class="' + cls + '" href="/member/' + m.id + '.html" data-nickname="' + esc(nick) + '">' + (m.unclaimed ? esc(nick) : label) + '</a>';
+    return '<a class="' + cls + '" href="/member/' + m.id + '/" data-nickname="' + esc(nick) + '">' + (m.unclaimed ? esc(nick) : label) + '</a>';
   }
   // 在已转义文本上把已知「X妈」昵称替换成成员链接（单次 replace、回调内不再被扫描）
   function linkMentions(escd, useNick) {
@@ -788,7 +788,7 @@
   }
   function buildHero(d) {
     var th = theme(d);
-    var eyebrow = '<a class="bvr-eyebrow fade-up" href="/barvision.html"><span>←</span><span>Barvision</span></a>';
+    var eyebrow = '<a class="bvr-eyebrow fade-up" href="/barvision/"><span>←</span><span>Barvision</span></a>';
     var name = esc(d.edition_name).replace(/(\d+(?:st|nd|rd|th))/i, '<span class="bvr-ord">$1</span>');
     // 主题届（2023+）：内容布局参考 2026/events.html hero（eyebrow + 城市/年份标题 + 竖分隔 meta + 简介），海报作背景铺底
     if (th) {

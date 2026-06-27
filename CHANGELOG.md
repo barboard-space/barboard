@@ -4,6 +4,15 @@
 
 ---
 
+## [2026-06-27] — ⭐ Clean URL 全站目录化（隐藏 .html）
+
+### Changed — 全站结构（方案 B：目录化 index.html）
+- 每个页面改为 `路径/index.html` 目录形式，地址栏隐藏 `.html`（线上 GitHub Pages + 本地 Live Server/python http.server 均原生支持目录→index.html）。URL 形如 `/bbl/`、`/barvision/hof/`、`/member/7/`、`/barvision/2019/01/`。首页 `index.html` 留根。
+- 移动 28 个手写/详情页 + 119 个成员页（生成器输出 `member/<id>/index.html`）；旧扁平 `*.html` 已删除。
+- **所有路径引用与互链改绝对 `/`**（资源/fetch/EDITION_SRC/页面链接），使页面深度变化不破坏引用。
+- 链接生成处全部改干净 URL：`nav.js`/partials、`member-render.js`、`bv-results-render.js`、`index.html`(MEMBER_MAP)、`member/index.html`；生成器 `gen_member_pages.py`(输出目录形式)、`gen_bv_editions_index.py`(href)，并重跑 `editions-index.json`。
+- 详情：CLAUDE.md #173（取代 #165 路径方案）。各页面类型已在本地预览逐一验证（首页/bbl/barvision/hof/stats/member 概览+个人/2023 年度详情/2019 分组详情/2026 live+events）。
+
 ## [2026-06-27] — Barvision stats 手机端字号收敛 + Editions Overview 卡片届数固定宽
 
 ### Changed — `barvision/stats.html`（手机端 `@media≤600`）

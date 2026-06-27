@@ -269,10 +269,10 @@
   function renderBvRows(list) {
     return list.map(function (e) {
       var cls = (e.is_shadow || e.canceled) ? 'mp-bv-row--shadow' : (e.rank && e.rank <= 3 ? 'mp-bv-row--' + e.rank : '');
-      // 详情页路径：2019–2020 一年多届 → ../barvision/<年>/<两位届数>(e).html；2023 起一年一届 → ../barvision/<年>.html
+      // 详情页路径（clean URL 目录化）：2023 起一年一届 → /barvision/<年>/；2019–2020 一年多届 → /barvision/<年>/<两位届数>(e)/
       var href = (e.year >= 2023)
-        ? '../barvision/' + e.year + '.html'
-        : '../barvision/' + e.year + '/' + ('0' + e.edition_no).slice(-2) + (e.version === 'unplugged' ? 'e' : '') + '.html';
+        ? '/barvision/' + e.year + '/'
+        : '/barvision/' + e.year + '/' + ('0' + e.edition_no).slice(-2) + (e.version === 'unplugged' ? 'e' : '') + '/';
       var seriesLabel = /^[0-9]+$/.test(String(e.series)) ? '-' : esc(e.series);
       return '<tr class="' + cls + '">' +
         '<td class="rk">' + (e.rank == null ? '—' : (e.is_shadow ? '<span class="rk-sh">' + e.rank + '*</span>' : e.rank)) + '</td>' +
@@ -477,9 +477,9 @@
   function bvEmbedFontCss() {  // 把走势图用到的本地字体 base64 内嵌，导出时文字才保真；失败则优雅降级为系统字体
     if (_bvFontCssP) return _bvFontCssP;
     var fonts = [
-      ['DM Mono', '400', '../assets/fonts/DM_Mono/DMMono-Regular.ttf'],
-      ['DM Sans', '400', '../assets/fonts/DM_Sans/static/DMSans-Regular.ttf'],
-      ['DM Sans', '600', '../assets/fonts/DM_Sans/static/DMSans-SemiBold.ttf']
+      ['DM Mono', '400', '/assets/fonts/DM_Mono/DMMono-Regular.ttf'],
+      ['DM Sans', '400', '/assets/fonts/DM_Sans/static/DMSans-Regular.ttf'],
+      ['DM Sans', '600', '/assets/fonts/DM_Sans/static/DMSans-SemiBold.ttf']
     ];
     _bvFontCssP = Promise.all(fonts.map(function (f) {
       return fetch(f[2]).then(function (r) { return r.arrayBuffer(); }).then(function (buf) {
@@ -497,7 +497,7 @@
       var im = new Image();
       im.onload = function () { res(im); };
       im.onerror = function () { res(null); };
-      im.src = '../assets/images/logo_center.png';
+      im.src = '/assets/images/logo_center.png';
     });
     return _bvLogoP;
   }
@@ -903,7 +903,7 @@
   var heroHtml = d.unclaimed
     ? '<section class="mp-hero mp-hero--unclaimed">' +
         '<div class="mp-hero__inner section__inner">' +
-          '<a class="mp-eyebrow fade-up" href="/member.html"><span>←</span><span>Members</span></a>' +
+          '<a class="mp-eyebrow fade-up" href="/member/"><span>←</span><span>Members</span></a>' +
           '<div class="mp-card fade-up"><div class="mp-info">' +
             '<div class="mp-nickname mp-nickname--unclaimed">匿名</div>' +
             '<div class="mp-handle">参赛歌曲匿名选送者</div>' +
@@ -913,7 +913,7 @@
     : '<section class="mp-hero">' +
         '<div class="mp-hero__glow" aria-hidden="true"></div>' +
         '<div class="mp-hero__inner section__inner">' +
-          '<a class="mp-eyebrow fade-up" href="/member.html"><span>←</span><span>Members</span></a>' +
+          '<a class="mp-eyebrow fade-up" href="/member/"><span>←</span><span>Members</span></a>' +
           '<div class="mp-card fade-up">' +
             '<div style="position:relative;display:inline-block;margin-top:8px">' +
               '<div class="mp-avatar__ring" style="position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--clr-violet),var(--clr-accent));opacity:.5;z-index:0"></div>' +

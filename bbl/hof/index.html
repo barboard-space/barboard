@@ -1,0 +1,1209 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>BBL Hall of Fame · BarboardLab | Barboard</title>
+  <meta name="description" content="BarboardLab 荣誉殿堂 — 历届冠军单曲、在榜纪录、艺人成就与专辑上榜记录，数据截至第 124 期。" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css?v=3.0.13" />
+  <style>
+    /* ── Hero ── */
+    .hof-hero {
+      position: relative;
+      padding: var(--nav-h) 0 72px;
+      overflow: hidden;
+    }
+    .hof-hero__glow {
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 55% at 55% 0%,   rgba(212,168,50,0.20) 0%, transparent 55%),
+        radial-gradient(ellipse 45% 50% at 0%  95%,  rgba(168,85,247,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 35% at 100% 40%, rgba(0,180,255,0.06)  0%, transparent 50%);
+      pointer-events: none;
+    }
+    .hof-hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+    .hof-hero__watermark {
+      position: absolute;
+      right: -10px;
+      bottom: -10px;
+      font-family: var(--font-display);
+      font-size: 200px;
+      line-height: 1;
+      letter-spacing: -0.02em;
+      color: rgba(212,168,50,0.035);
+      pointer-events: none;
+      user-select: none;
+    }
+    .hof-hero__inner {
+      position: relative;
+      z-index: 2;
+      margin-top: 40px;
+    }
+    .hof-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--clr-gold-light);
+      text-shadow: 0 0 10px rgba(245,200,64,0.7), 0 0 32px rgba(245,200,64,0.28);
+      margin-bottom: 24px;
+      display: inline-flex; align-items: center; gap: 8px;
+      transition: color 0.2s;
+    }
+    .hof-eyebrow:hover { color: var(--clr-white); text-decoration: none; }
+    .hof-hero__title {
+      font-family: var(--font-display);
+      font-size: clamp(56px, 8vw, 108px);
+      line-height: 1;
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+    .hof-accent { color: var(--clr-gold-light); }
+    .hof-hero__desc {
+      margin-top: 24px;
+      font-size: 15px;
+      color: rgba(245,200,64,0.85);
+      line-height: 1.75;
+      max-width: 560px;
+    }
+    .hof-hero__stats {
+      display: flex;
+      gap: var(--gap-lg);
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+    .hof-stat { display: flex; flex-direction: column; gap: 4px; }
+    .hof-stat__val {
+      font-family: var(--font-display);
+      font-size: 44px;
+      line-height: 1;
+      color: var(--clr-gold-light);
+    }
+    .hof-stat__label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--clr-text-2);
+    }
+
+    /* ── Section header spacing — matches bbl chart header ── */
+    .section--bordered .section-label { margin-bottom: 16px; }
+    .section--bordered .section__title { margin-top: 24px; }
+
+    /* ── Champion Roll ── */
+    .hof-section-desc {
+      margin-top: 24px;
+      font-size: 14px;
+      color: var(--clr-text-2);
+      line-height: 1.75;
+      max-width: 600px;
+    }
+    /* ── Champion Roll (Grouped) ── */
+    .hof-roll { margin-top: var(--gap-md); columns: 3; column-gap: 6px; }
+    .hof-group { border: 1px solid var(--clr-border); border-radius: 8px; overflow: hidden; break-inside: avoid; margin-bottom: 6px; }
+    .hof-group--gold   { border-color: rgba(212,168,50,0.28); }
+    .hof-group--silver { border-color: rgba(144,184,208,0.20); }
+    .hof-group--bronze { border-color: rgba(224,168,112,0.18); }
+
+    .hof-group__head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 20px;
+      background: var(--clr-surface);
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .hof-group--gold   .hof-group__head { background: rgba(212,168,50,0.08);  border-color: rgba(212,168,50,0.22); }
+    .hof-group--silver .hof-group__head { background: rgba(144,184,208,0.05); border-color: rgba(144,184,208,0.16); }
+    .hof-group--bronze .hof-group__head { background: rgba(224,168,112,0.05); border-color: rgba(224,168,112,0.14); }
+
+    .hof-group__num {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: 0.02em;
+      color: var(--clr-text-2);
+      position: relative;
+      top: 1px;
+    }
+    .hof-group--gold   .hof-group__num   { color: var(--clr-gold-light); }
+    .hof-group--silver .hof-group__num   { color: var(--clr-silver); }
+    .hof-group--bronze .hof-group__num   { color: var(--clr-bronze); }
+    .hof-group--gold   .hof-group__count { color: var(--clr-gold-light); }
+    .hof-group--silver .hof-group__count { color: var(--clr-silver); }
+    .hof-group--bronze .hof-group__count { color: var(--clr-bronze); }
+    .hof-group--gold   .hof-group__label { color: var(--clr-gold-light); opacity: 0.75; }
+    .hof-group--silver .hof-group__label { color: var(--clr-silver); opacity: 0.75; }
+    .hof-group--bronze .hof-group__label { color: var(--clr-bronze); opacity: 0.75; }
+
+    .hof-group__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clr-text-3);
+    }
+    .hof-group__count {
+      margin-left: auto;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--clr-text-3);
+      opacity: 0.65;
+    }
+
+    .hof-group-song {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      padding: 10px 20px;
+      border-bottom: 1px solid rgba(180,160,255,0.07);
+      align-items: center;
+      transition: background 0.15s;
+    }
+    .hof-group-song:last-child { border-bottom: none; }
+    .hof-group-song:hover { background: rgba(180,160,255,0.04); }
+    .hof-group--gold   .hof-group-song { border-color: rgba(212,168,50,0.10); }
+    .hof-group--gold   .hof-group-song:hover { background: rgba(212,168,50,0.06); }
+    .hof-group--silver .hof-group-song:hover { background: rgba(144,184,208,0.06); }
+    .hof-group--bronze .hof-group-song:hover { background: rgba(224,168,112,0.06); }
+
+    .hof-group-song__title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-text);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .hof-group-song__artist {
+      font-size: 12px;
+      color: var(--clr-text-2);
+      margin-top: 2px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .hof-group--gold   .hof-group-song__title  { color: var(--clr-gold-tint); }
+    .hof-group--gold   .hof-group-song__artist { color: rgba(245,200,64,0.75); }
+    .hof-group--gold   .hof-group-song__date   { color: rgba(245,200,64,0.70); }
+    .hof-group--gold   .hof-group-song__vol    { color: rgba(245,200,64,0.42); }
+    .hof-group--silver .hof-group-song__title  { color: var(--clr-silver-tint); }
+    .hof-group--silver .hof-group-song__artist { color: rgba(144,184,208,0.80); }
+    .hof-group--silver .hof-group-song__date   { color: rgba(144,184,208,0.70); }
+    .hof-group--silver .hof-group-song__vol    { color: rgba(144,184,208,0.42); }
+    .hof-group--bronze .hof-group-song__title  { color: var(--clr-bronze-tint); }
+    .hof-group--bronze .hof-group-song__artist { color: rgba(224,168,112,0.80); }
+    .hof-group--bronze .hof-group-song__date   { color: rgba(224,168,112,0.70); }
+    .hof-group--bronze .hof-group-song__vol    { color: rgba(224,168,112,0.42); }
+
+    .hof-group-song__debut { text-align: right; flex-shrink: 0; }
+    .hof-group-song__date {
+      font-family: var(--font-body);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--clr-text-2);
+      white-space: nowrap;
+    }
+    .hof-group-song__vol {
+      font-family: var(--font-body);
+      font-size: 10px;
+      color: var(--clr-text-3);
+      margin-top: 2px;
+    }
+
+    /* ── Records Grid ── */
+    .hof-records-grid {
+      display: grid;
+      grid-template-columns: 1.65fr 2fr;
+      gap: 14px;
+      margin-top: var(--gap-md);
+      align-items: start;
+    }
+    .hof-records-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .hof-record-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      padding: 18px 20px;
+    }
+    .hof-record-card__title {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clr-violet-light);
+      margin-bottom: 14px;
+    }
+    .hof-record-entry {
+      display: grid;
+      grid-template-columns: 22px 1fr auto;
+      gap: 0 10px;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .hof-record-entry:last-child { border-bottom: none; }
+    .hof-record-entry__rank {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--clr-text-3);
+    }
+    .hof-record-entry__song { min-width: 0; }
+    .hof-record-entry__artist {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--clr-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-record-entry__name {
+      font-size: 11px;
+      color: var(--clr-text-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+    .hof-record-entry__val {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1;
+      color: var(--clr-text);
+      white-space: nowrap;
+      text-align: left;
+    }
+    .hof-record-ast { font-size: 11px; vertical-align: super; margin-left: 1px; position: relative; top: 2px; left: 1px; }
+    .hof-record-entry--top .hof-record-entry__artist { color: var(--clr-violet-light); }
+    .hof-record-entry--top .hof-record-entry__val    { color: var(--clr-violet-light); }
+
+    /* ── Full chart medal rows ── */
+    .hof-record-card--full {
+      border-color: rgba(168,85,247,0.38);
+      overflow: hidden;
+      background: linear-gradient(150deg, rgba(168,85,247,0.06) 0%, transparent 55%);
+      box-shadow: 0 0 0 1px rgba(168,85,247,0.08), 0 6px 28px rgba(168,85,247,0.07);
+    }
+    .hof-record-card--full .hof-record-card__title { font-size: 11px; letter-spacing: 0.22em; }
+    .hof-record-card--full .hof-record-entry { margin: 0 -20px; padding: 9px 20px; }
+    .hof-record-card--full .hof-record-entry__rank { font-family: var(--font-display); font-size: 18px; line-height: 1; color: var(--clr-text-2); }
+    .hof-record-card--full .hof-record-entry__val { font-size: 28px; }
+    .hof-record-entry--gold   { background: rgba(212,168,50,0.07);  border-bottom-color: rgba(212,168,50,0.13); }
+    .hof-record-entry--silver { background: rgba(144,184,208,0.05); border-bottom-color: rgba(144,184,208,0.11); }
+    .hof-record-entry--bronze { background: rgba(224,168,112,0.05); border-bottom-color: rgba(224,168,112,0.11); }
+    .hof-record-entry--gold   .hof-record-entry__rank  { color: var(--clr-gold-light); }
+    .hof-record-entry--silver .hof-record-entry__rank  { color: var(--clr-silver); }
+    .hof-record-entry--bronze .hof-record-entry__rank  { color: var(--clr-bronze); }
+    .hof-record-entry--gold   .hof-record-entry__artist { color: var(--clr-gold-tint); }
+    .hof-record-entry--silver .hof-record-entry__artist { color: var(--clr-silver-tint); }
+    .hof-record-entry--bronze .hof-record-entry__artist { color: var(--clr-bronze-tint); }
+    .hof-record-entry--gold   .hof-record-entry__name  { color: rgba(245,200,64,0.62); }
+    .hof-record-entry--silver .hof-record-entry__name  { color: rgba(144,184,208,0.72); }
+    .hof-record-entry--bronze .hof-record-entry__name  { color: rgba(224,168,112,0.72); }
+    .hof-record-entry--gold   .hof-record-entry__val   { color: var(--clr-gold-light); text-shadow: 0 0 18px rgba(245,200,64,0.32); }
+    .hof-record-entry--silver .hof-record-entry__val   { color: var(--clr-silver); }
+    .hof-record-entry--bronze .hof-record-entry__val   { color: var(--clr-bronze); }
+
+    /* ── Artist + Album Tables ── */
+    .hof-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap-md);
+      margin-top: var(--gap-md);
+    }
+    .hof-three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: var(--gap-md);
+      margin-top: var(--gap-md);
+      align-items: start;
+    }
+    .hof-table-card {
+      background: var(--clr-surface);
+      border: 1px solid var(--clr-border);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .hof-table-card__head {
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--clr-border);
+      background: var(--clr-surface-2);
+    }
+    .hof-table-card__label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--clr-violet-light);
+    }
+    .hof-table-card__sub {
+      font-size: 11px;
+      color: var(--clr-text-3);
+      margin-top: 3px;
+    }
+    .hof-table-row {
+      display: grid;
+      align-items: center;
+      padding: 11px 20px;
+      border-bottom: 1px solid var(--clr-border);
+      gap: 0 12px;
+    }
+    .hof-table-row:last-child { border-bottom: none; }
+    .hof-table-row--2col { grid-template-columns: 22px 1fr auto; }
+    .hof-table-row--3col { grid-template-columns: 22px 1fr auto auto; }
+    .hof-table__idx {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--clr-text-3);
+    }
+    .hof-table__info { min-width: 0; }
+    .hof-table__name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--clr-text);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .hof-table__sub {
+      font-size: 11px;
+      color: var(--clr-text-2);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-top: 1px;
+    }
+    .hof-table__val {
+      font-family: var(--font-display);
+      font-size: 24px;
+      line-height: 1;
+      color: var(--clr-text);
+      text-align: right;
+    }
+    .hof-table__rate {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--clr-text-3);
+      text-align: right;
+      white-space: nowrap;
+    }
+    .hof-table-card .hof-table-row:nth-child(2) { background: rgba(212,168,50,0.07);  border-bottom-color: rgba(212,168,50,0.13); }
+    .hof-table-card .hof-table-row:nth-child(3) { background: rgba(144,184,208,0.05); border-bottom-color: rgba(144,184,208,0.11); }
+    .hof-table-card .hof-table-row:nth-child(4) { background: rgba(224,168,112,0.05); border-bottom-color: rgba(224,168,112,0.11); }
+    .hof-table-card .hof-table-row:nth-child(2) .hof-table__idx,
+    .hof-table-card .hof-table-row:nth-child(2) .hof-table__name,
+    .hof-table-card .hof-table-row:nth-child(2) .hof-table__val { color: var(--clr-gold-light); }
+    .hof-table-card .hof-table-row:nth-child(3) .hof-table__idx,
+    .hof-table-card .hof-table-row:nth-child(3) .hof-table__name,
+    .hof-table-card .hof-table-row:nth-child(3) .hof-table__val { color: var(--clr-silver); }
+    .hof-table-card .hof-table-row:nth-child(4) .hof-table__idx,
+    .hof-table-card .hof-table-row:nth-child(4) .hof-table__name,
+    .hof-table-card .hof-table-row:nth-child(4) .hof-table__val { color: var(--clr-bronze); }
+
+    /* ── Albums (full-width) ── */
+    .hof-album-wrap { margin-top: var(--gap-md); }
+    .hof-group-song__rate {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--clr-text-3);
+      white-space: nowrap;
+    }
+    .hof-group--gold   .hof-group-song__rate { color: rgba(245,200,64,0.65); }
+    .hof-group--silver .hof-group-song__rate { color: rgba(144,184,208,0.65); }
+    .hof-group--bronze .hof-group-song__rate { color: rgba(224,168,112,0.65); }
+
+    /* ── Uncrowned ── */
+    .hof-uncrowned-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: var(--gap-md);
+      align-items: start;
+    }
+    .hof-uncrowned {
+      border: 1px solid rgba(168,85,247,0.22);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .hof-uncrowned-header,
+    .hof-uncrowned-row {
+      display: grid;
+      grid-template-columns: 22px auto 1fr auto auto;
+      gap: 0 14px;
+      align-items: center;
+      padding: 10px 20px;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .hof-uncrowned-header {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--clr-text-3);
+      background: rgba(180,160,255,0.03);
+    }
+    .hof-uncrowned-row { transition: background 0.15s; }
+    .hof-uncrowned-row:last-child { border-bottom: none; }
+    .hof-uncrowned-row:hover { background: rgba(180,160,255,0.04); }
+    .hof-uncrowned__idx { font-family: var(--font-mono); font-size: 11px; color: var(--clr-text-2); }
+    .hof-uncrowned__pts { font-family: var(--font-display); font-size: 24px; line-height: 1; color: var(--clr-text); white-space: nowrap; }
+    .hof-uncrowned__pts-dec { font-size: 13px; opacity: 0.6; }
+    .hof-uncrowned__info { min-width: 0; padding-left: 16px; }
+    .hof-uncrowned__song { font-size: 13px; font-weight: 600; color: var(--clr-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hof-uncrowned__artist { font-size: 11px; color: var(--clr-text-2); margin-top: 1px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .hof-uncrowned__vol { font-family: var(--font-mono); font-size: 10px; color: var(--clr-text-3); white-space: nowrap; text-align: right; line-height: 1.6; position: relative; left: -1px; }
+    .hof-uncrowned__badge { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--clr-text-2); background: var(--clr-surface); border: 1px solid var(--clr-border-2); border-radius: 3px; padding: 3px 7px; white-space: nowrap; }
+    .hof-uncrowned__badge--gold   { color: rgba(212,168,50,0.75); border-color: rgba(212,168,50,0.32); }
+    .hof-uncrowned__badge--silver { color: var(--clr-silver); border-color: rgba(144,184,208,0.45); }
+    .hof-uncrowned__badge--bronze { color: var(--clr-bronze); border-color: rgba(224,168,112,0.40); }
+    /* medal rows */
+    .hof-uncrowned-row--gold   { background: rgba(212,168,50,0.07);  border-bottom-color: rgba(212,168,50,0.13); }
+    .hof-uncrowned-row--silver { background: rgba(144,184,208,0.05); border-bottom-color: rgba(144,184,208,0.11); }
+    .hof-uncrowned-row--bronze { background: rgba(224,168,112,0.05); border-bottom-color: rgba(224,168,112,0.11); }
+    .hof-uncrowned-row--gold   .hof-uncrowned__idx  { color: var(--clr-gold-light); }
+    .hof-uncrowned-row--silver .hof-uncrowned__idx  { color: var(--clr-silver); }
+    .hof-uncrowned-row--bronze .hof-uncrowned__idx  { color: var(--clr-bronze); }
+    .hof-uncrowned-row--gold   .hof-uncrowned__pts  { color: var(--clr-gold-light); text-shadow: 0 0 18px rgba(245,200,64,0.32); }
+    .hof-uncrowned-row--silver .hof-uncrowned__pts  { color: var(--clr-silver); }
+    .hof-uncrowned-row--bronze .hof-uncrowned__pts  { color: var(--clr-bronze); }
+    .hof-uncrowned-row--gold   .hof-uncrowned__song { color: var(--clr-gold-tint); }
+    .hof-uncrowned-row--silver .hof-uncrowned__song { color: var(--clr-silver-tint); }
+    .hof-uncrowned-row--bronze .hof-uncrowned__song { color: var(--clr-bronze-tint); }
+    .hof-uncrowned-row--gold   .hof-uncrowned__artist { color: rgba(245,200,64,0.62); }
+    .hof-uncrowned-row--silver .hof-uncrowned__artist { color: rgba(144,184,208,0.72); }
+    .hof-uncrowned-row--bronze .hof-uncrowned__artist { color: rgba(224,168,112,0.72); }
+
+    /* ── Weekly No.1 ── */
+    .hof-no1-wrap { margin-top: var(--gap-md); columns: 2; column-gap: 6px; }
+    .hof-no1-group { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 8px; overflow: hidden; break-inside: avoid; margin-bottom: 6px; }
+    .hof-no1-group__head { display: flex; align-items: baseline; gap: 8px; padding: 12px 20px; background: var(--clr-surface-2); border-bottom: 1px solid var(--clr-border); }
+    .hof-no1-group__cnt { font-family: var(--font-display); font-size: 26px; line-height: 1; }
+    .hof-no1-group__label { font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--clr-text-3); }
+    .hof-no1-entry { border-bottom: 1px solid var(--clr-border); padding: 10px 0 8px; }
+    .hof-no1-entry:last-child { border-bottom: none; }
+    .hof-no1-entry__head { padding: 0 20px 5px; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+    .hof-no1__song { font-size: 13px; font-weight: 600; color: var(--clr-text); }
+    .hof-no1__artist { font-size: 12px; color: var(--clr-text-2); }
+    .hof-no1-entry__occ {
+      display: grid; grid-template-columns: 172px 1fr;
+      gap: 2px 10px; padding: 1px 20px; align-items: start;
+    }
+    .hof-no1-entry__occ + .hof-no1-entry__occ { padding-top: 2px; }
+    .hof-no1__when { position: relative; top: -4px; }
+    .hof-no1__date { font-family: var(--font-body); font-size: 11px; font-weight: 500; color: var(--clr-text-2); white-space: nowrap; }
+    .hof-no1__vol { font-family: var(--font-body); font-size: 11px; color: var(--clr-text-3); }
+    .hof-no1__owners { font-size: 11px; color: var(--clr-text-2); white-space: normal; line-height: 1.75; margin-left: -30px; word-spacing: 1px; }
+
+    /* ── Single-chart: badge-first, no index column ── */
+    #hofSingleChart .hof-uncrowned-row { grid-template-columns: auto auto 1fr auto; }
+    /* ── Artist peak: hide date on mobile ── */
+    @media (max-width: 768px) {
+      .hof-peak-card .hof-table-row { grid-template-columns: 22px 1fr auto; }
+      .hof-peak-card .hof-table__rate { display: none; }
+    }
+
+    /* ── Charts occurrences (flex-wrap, fixed-width items) ── */
+    .hof-group .hof-no1-entry__head { padding-bottom: 0; }
+    .hof-charts-occs { display: flex; flex-wrap: nowrap; padding: 1px 20px 6px; gap: 2px 12px; }
+    .hof-charts-occ  { flex: 0 0 170px; white-space: nowrap; overflow: hidden; line-height: 1.7; }
+    .hof-charts-rank { font-family: var(--font-mono); font-size: 11px; font-weight: 600; margin-left: 5px; color: var(--clr-text-3); }
+    .hof-charts-rank--gold   { color: rgba(212,168,50,0.75); }
+    .hof-charts-rank--silver { color: var(--clr-silver); }
+    .hof-charts-rank--bronze { color: var(--clr-bronze); }
+
+    /* ── Page TOC ── */
+    .hof-toc {
+      position: fixed; right: 19px; bottom: 90px; z-index: 90;
+      display: flex; flex-direction: column; gap: 1px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .hof-toc--visible { opacity: 1; visibility: visible; }
+    .hof-toc__item {
+      font-family: var(--font-body); font-size: 11px;
+      color: var(--clr-text-3); cursor: pointer;
+      padding: 3px 13px 3px 0;
+      position: relative;
+      transition: color 0.15s;
+      line-height: 1.5; white-space: nowrap; user-select: none;
+      text-align: right;
+    }
+    .hof-toc__item::after {
+      content: ''; position: absolute; right: 3px; top: 50%;
+      transform: translateY(-50%); width: 5px; height: 5px;
+      border-radius: 50%; background: var(--clr-violet-light);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .hof-toc__item:not(.hof-toc__item--active):hover { color: var(--clr-text); }
+    .hof-toc__item--active { color: var(--clr-violet-light); }
+    .hof-toc__item--active::after { opacity: 1; animation: toc-breathe 3s ease-in-out infinite; }
+    @keyframes toc-breathe {
+      0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+      50%       { opacity: 0.35; transform: translateY(-50%) scale(0.65); }
+    }
+
+    /* ── Mobile ── */
+    @media (max-width: 768px) {
+      .hof-hero__stats { gap: var(--gap-md); }
+      .hof-stat__val { font-size: 36px; }
+      .hof-records-grid { grid-template-columns: 1fr; }
+      .hof-records-right { grid-template-columns: 1fr 1fr; }
+      .hof-two-col { grid-template-columns: 1fr; }
+      .hof-three-col { grid-template-columns: 1fr; }
+      .hof-roll { columns: 1; }
+      .hof-no1-wrap { columns: 1; }
+      .hof-group-song__debut { display: none; }
+      .hof-no1-entry__occ { grid-template-columns: 1fr; gap: 1px; }
+      .hof-uncrowned-grid { grid-template-columns: 1fr; }
+      .hof-uncrowned-header,
+      .hof-uncrowned-row { grid-template-columns: 22px 1fr auto; }
+      .hof-uncrowned__pts, .hof-uncrowned__vol { display: none; }
+      #hofSingleChart .hof-uncrowned-row { grid-template-columns: auto 1fr; }
+      .hof-toc { display: none; }
+    }
+    @media (max-width: 540px) {
+      .hof-records-right { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hof-hero">
+  <div class="hof-hero__glow"></div>
+  <div class="hof-hero__grid"></div>
+  <div class="hof-hero__watermark" aria-hidden="true">BARBOARDLAB</div>
+  <div class="section__inner hof-hero__inner">
+    <a class="hof-eyebrow fade-up" href="/bbl/"><span>←</span><span>BarboardLab</span></a>
+    <h1 class="hof-hero__title fade-up" style="transition-delay:0.1s;">
+      Hall <span style="opacity:0.65;">of</span> <span class="hof-accent">Fame</span>
+    </h1>
+    <p class="hof-hero__desc fade-up" style="transition-delay:0.2s;">
+      BarboardLab 自第 1 期起的周榜冠军，在榜纪录与艺人成就全览。<br>数据截至第 124 期，持续更新。
+    </p>
+    <div class="hof-hero__stats fade-up" style="transition-delay:0.3s;">
+      <div class="hof-stat">
+        <span class="hof-stat__val">124</span>
+        <span class="hof-stat__label">期单曲合榜</span>
+      </div>
+      <div class="hof-stat">
+        <span class="hof-stat__val">31</span>
+        <span class="hof-stat__label">首冠军单曲</span>
+      </div>
+      <div class="hof-stat">
+        <span class="hof-stat__val">15</span>
+        <span class="hof-stat__label">最长冠军周数</span>
+      </div>
+      <div class="hof-stat">
+        <span class="hof-stat__val">57</span>
+        <span class="hof-stat__label">最长在榜周数</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHAMPION ROLL ═══ -->
+<section class="section section--bordered" id="champions" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">冠单纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">冠单名录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;"><strong>124</strong> 期冠军单曲按夺冠周数排列，共 <strong>31</strong> 首。首次夺冠日期 / 期数已标注。</p>
+    <div class="fade-up" style="transition-delay:0.3s;">
+      <div class="hof-roll" id="hofChampionRoll"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CHARTING RECORDS ═══ -->
+<section class="section section--bordered" id="records" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">在榜纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">在榜周数纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">左栏为总在榜周数完整排行，右栏为各榜位前五纪录。</p>
+    <div class="hof-records-grid" id="hofRecordsGrid"></div>
+  </div>
+</section>
+
+<!-- ═══ MOST POINTS ═══ -->
+<section class="section section--bordered" id="most-points" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">点数纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">单周最高点数纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">单曲单周积分最高纪录（前 20），括注为该单曲当时的在榜周数。</p>
+    <div class="hof-uncrowned-grid" id="hofMostPoints"></div>
+  </div>
+</section>
+
+<!-- ═══ UNCROWNED ═══ -->
+<section class="section section--bordered" id="uncrowned" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">无冕高分</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">未夺冠单曲单周点数纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">从未登顶但当周积分最高的单曲记录，括注为该周最终排名。</p>
+    <div class="hof-uncrowned-grid" id="hofUncrowned"></div>
+  </div>
+</section>
+
+<!-- ═══ MOST CHARTS ═══ -->
+<section class="section section--bordered" id="most-charts" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">助攻纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">单周助攻数纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">单曲单周被最多成员收录于个人榜的纪录，括注为该周最终排名。</p>
+    <div class="hof-no1-wrap" id="hofMostCharts"></div>
+  </div>
+</section>
+
+<!-- ═══ SINGLE CHART ═══ -->
+<section class="section section--bordered" id="single-chart" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">最强N榜</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">单周N榜助攻纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">各参榜人数规模下单周合榜积分最高纪录，括注为当期参榜成员数。</p>
+    <div class="hof-uncrowned-grid" id="hofSingleChart"></div>
+  </div>
+</section>
+
+<!-- ═══ WEEKLY NO.1 ═══ -->
+<section class="section section--bordered" id="weekly-no1" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">个人榜冠军纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">单周个人榜冠军数</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">同一周内，被最多成员同时列为个人榜冠军的单曲纪录。</p>
+    <div class="hof-no1-wrap" id="hofNo1Groups"></div>
+  </div>
+</section>
+
+<!-- ═══ ALBUMS ═══ -->
+<section class="section section--bordered" id="albums" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">专辑纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">单周专辑进榜纪录</h2>
+    <p class="hof-section-desc fade-up" style="transition-delay:0.2s;">同一期榜单中进榜单曲最多的专辑（至少 7 首），条目末尾为进榜率（进榜曲数 / 专辑总曲数）。</p>
+    <div class="hof-roll hof-album-wrap" id="hofAlbums"></div>
+  </div>
+</section>
+
+<!-- ═══ ARTIST RECORDS ═══ -->
+<section class="section section--bordered" id="artists" style="scroll-margin-top:calc(var(--nav-h) - 2px);">
+  <div class="section__inner">
+    <p class="section-label fade-up">艺人纪录</p>
+    <h2 class="section__title fade-up" style="transition-delay:0.1s; font-size:clamp(24px, 3.5vw, 48px);">艺人进榜纪录</h2>
+    <div class="hof-three-col" id="hofArtistCols"></div>
+  </div>
+</section>
+
+<nav id="hofToc" class="hof-toc" aria-label="页内目录">
+  <div class="hof-toc__item" data-target="champions">冠单纪录</div>
+  <div class="hof-toc__item" data-target="records">在榜纪录</div>
+  <div class="hof-toc__item" data-target="most-points">点数纪录</div>
+  <div class="hof-toc__item" data-target="uncrowned">无冕高分</div>
+  <div class="hof-toc__item" data-target="most-charts">助攻纪录</div>
+  <div class="hof-toc__item" data-target="single-chart">最强N榜</div>
+  <div class="hof-toc__item" data-target="weekly-no1">个人榜冠军纪录</div>
+  <div class="hof-toc__item" data-target="albums">专辑纪录</div>
+  <div class="hof-toc__item" data-target="artists">艺人纪录</div>
+</nav>
+
+<div id="site-footer"></div>
+<script src="/scripts/nav.js"></script>
+<script>
+  /* ─────────────────────────── DATA ──────────────────────────────────── */
+
+  /* Vol.1–124 日期索引（index = Vol. 期号） */
+  let VOL_DATES = [], CHAMPIONS = [], CHARTED_FULL = [], RECORDS = [];
+  let ARTISTS_PEAK = [], ARTISTS_SONGS = [], ARTISTS_WEEKS = [];
+  let ALBUMS = [], MOST_POINTS = [], SINGLE_CHART = [], MOST_CHARTS = [], UNCROWNED = [];
+
+  /* ─────────────────────────── RENDER ────────────────────────────────── */
+
+  function fmtDebutDate(d) {
+    const [y, m, day] = d.split('-');
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[parseInt(m) - 1] + ' ' + parseInt(day) + ', ' + y;
+  }
+
+  function buildChampionRoll() {
+    const groups = {};
+    CHAMPIONS.forEach(c => { if (!groups[c.weeks]) groups[c.weeks] = []; groups[c.weeks].push(c); });
+    const weeksList = Object.keys(groups).map(Number).sort((a, b) => b - a);
+    weeksList.forEach(w => groups[w].sort((a, b) => new Date(a.date) - new Date(b.date)));
+
+    const el = document.getElementById('hofChampionRoll');
+    el.innerHTML = weeksList.map((weeks, gi) => {
+      const tier = gi === 0 ? 'gold' : gi === 1 ? 'silver' : gi === 2 ? 'bronze' : '';
+      const cls  = tier ? ` hof-group--${tier}` : '';
+      const songs = groups[weeks];
+      const countLabel = songs.length > 1
+        ? `<span class="hof-group__count">${songs.length} 首</span>` : '';
+      const rows = songs.map(c => `
+        <div class="hof-group-song">
+          <div>
+            <div class="hof-group-song__title">${c.song}</div>
+            <div class="hof-group-song__artist">${c.artist}</div>
+          </div>
+          <div class="hof-group-song__debut">
+            <div class="hof-group-song__date">${fmtDebutDate(c.date)}</div>
+            <div class="hof-group-song__vol">第 ${c.vol} 期</div>
+          </div>
+        </div>`).join('');
+      return `
+        <div class="hof-group${cls} fade-up" style="transition-delay:${(gi * 0.06).toFixed(2)}s;">
+          <div class="hof-group__head">
+            <div style="display:flex;align-items:baseline;gap:7px;margin-left:-2px;">
+              <div class="hof-group__num">${weeks}</div>
+              <div class="hof-group__label">冠军周数</div>
+            </div>
+            ${countLabel}
+          </div>
+          <div>${rows}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function buildRecordsGrid() {
+    const MEDAL = ['gold','silver','bronze'];
+    function computeRanks(items) {
+      const ranks = [];
+      let rank = 1;
+      for (let i = 0; i < items.length; i++) {
+        if (i > 0 && parseFloat(String(items[i].val)) < parseFloat(String(items[i-1].val))) rank = i + 1;
+        ranks.push(rank);
+      }
+      return ranks;
+    }
+    function renderCard(title, items, delay, medals) {
+      const ranks = medals ? computeRanks(items) : null;
+      return `
+        <div class="hof-record-card${medals ? ' hof-record-card--full' : ''} fade-up" style="transition-delay:${delay}s;">
+          <div class="hof-record-card__title">${title}</div>
+          ${items.map((it, j) => {
+            const tier = medals ? (MEDAL[j] || '') : (j === 0 ? 'top' : '');
+            const rankNum = medals ? ranks[j] : j + 1;
+            const valStr = String(it.val);
+            const hasAst = valStr.endsWith('*');
+            const valDisplay = hasAst ? valStr.slice(0, -1) : valStr;
+            const songDisplay = hasAst ? `${it.song}<span class="hof-record-ast">*</span>` : it.song;
+            return `
+            <div class="hof-record-entry${tier ? ` hof-record-entry--${tier}` : ''}"${it.note ? ` data-tooltip="${it.note}"` : ''}>
+              <span class="hof-record-entry__rank">${rankNum}</span>
+              <div class="hof-record-entry__song">
+                <div class="hof-record-entry__artist">${songDisplay}</div>
+                <div class="hof-record-entry__name">${it.artist}</div>
+              </div>
+              <span class="hof-record-entry__val">${valDisplay}</span>
+            </div>`;
+          }).join('')}
+        </div>`;
+    }
+    const fullCard = renderCard('总在榜周数', CHARTED_FULL, '0', true);
+    let di = 0;
+    const rightCards = RECORDS.filter(r => r.show).map(r => renderCard(r.title, r.items, ((++di) * 0.07).toFixed(2))).join('');
+    document.getElementById('hofRecordsGrid').innerHTML =
+      fullCard + `<div class="hof-records-right">${rightCards}</div>`;
+  }
+
+  function buildArtistCols() {
+    function simpleCard(title, sub, data, delay) {
+      return `
+        <div class="hof-table-card fade-up" style="transition-delay:${delay}s;">
+          <div class="hof-table-card__head">
+            <div class="hof-table-card__label">${title}</div>
+            <div class="hof-table-card__sub">${sub}</div>
+          </div>
+          ${data.map((a, i) => `
+            <div class="hof-table-row hof-table-row--2col">
+              <span class="hof-table__idx">${i + 1}</span>
+              <div class="hof-table__info"><div class="hof-table__name">${a.artist}</div></div>
+              <span class="hof-table__val">${a.val}</span>
+            </div>`).join('')}
+        </div>`;
+    }
+    function peakCard() {
+      const rows = ARTISTS_PEAK.map((a, i) => {
+        const vol = VOL_DATES.indexOf(a.date);
+        return `
+          <div class="hof-table-row hof-table-row--3col">
+            <span class="hof-table__idx">${i + 1}</span>
+            <div class="hof-table__info"><div class="hof-table__name">${a.artist}</div></div>
+            <span class="hof-table__rate">${fmtDebutDate(a.date)}<span style="font-family:var(--font-body);"> · 第 ${vol} 期</span></span>
+            <span class="hof-table__val">${a.val}</span>
+          </div>`;
+      }).join('');
+      return `
+        <div class="hof-table-card hof-peak-card fade-up" style="transition-delay:0s;">
+          <div class="hof-table-card__head">
+            <div class="hof-table-card__label">单周进榜单曲数</div>
+            <div class="hof-table-card__sub">艺人单周进榜单曲数纪录（10首以上）</div>
+          </div>
+          ${rows}
+        </div>`;
+    }
+    document.getElementById('hofArtistCols').innerHTML =
+      peakCard() +
+      simpleCard('累计进榜单曲数', '不重复上榜单曲总数', ARTISTS_SONGS, '0.12') +
+      simpleCard('累计在榜周数', '所有上榜歌曲累计在榜周数', ARTISTS_WEEKS, '0.24');
+  }
+
+  function buildAlbums() {
+    const groups = {};
+    ALBUMS.forEach(a => { if (!groups[a.songs]) groups[a.songs] = []; groups[a.songs].push(a); });
+    const songsList = Object.keys(groups).map(Number).sort((a, b) => b - a);
+
+    document.getElementById('hofAlbums').innerHTML = songsList.map((songs, gi) => {
+      const tier = gi === 0 ? 'gold' : gi === 1 ? 'silver' : gi === 2 ? 'bronze' : '';
+      const cls  = tier ? ` hof-group--${tier}` : '';
+      const albums = groups[songs];
+      const countLabel = albums.length > 1 ? `<span class="hof-group__count">${albums.length} 张</span>` : '';
+      const rows = albums.map(a => `
+        <div class="hof-group-song">
+          <div>
+            <div class="hof-group-song__title">${a.album}</div>
+            <div class="hof-group-song__artist">${a.artist}</div>
+          </div>
+          <div class="hof-group-song__debut">
+            <div class="hof-group-song__rate">${a.rate}</div>
+          </div>
+        </div>`).join('');
+      return `
+        <div class="hof-group${cls} fade-up" style="transition-delay:${(gi * 0.06).toFixed(2)}s;">
+          <div class="hof-group__head">
+            <div style="display:flex;align-items:baseline;gap:7px;margin-left:-2px;">
+              <div class="hof-group__num">${songs}</div>
+              <div class="hof-group__label">首</div>
+            </div>
+            ${countLabel}
+          </div>
+          <div>${rows}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function buildSingleChart() {
+    function renderRow(p, i) {
+      const int = Math.floor(p.pts);
+      const dec = (p.pts - int).toFixed(2).slice(1);
+      const vol = VOL_DATES.indexOf(p.date);
+      return `
+        <div class="hof-uncrowned-row">
+          <span class="hof-uncrowned__badge">${p.n}榜</span>
+          <span class="hof-uncrowned__pts">${int}<span class="hof-uncrowned__pts-dec">${dec}</span></span>
+          <div class="hof-uncrowned__info">
+            <div class="hof-uncrowned__song">${p.song}</div>
+            <div class="hof-uncrowned__artist">${p.artist}</div>
+          </div>
+          <div class="hof-uncrowned__vol">
+            <div>${fmtDebutDate(p.date)}</div>
+            <div style="font-family:var(--font-body);">第 ${vol} 期</div>
+          </div>
+        </div>`;
+    }
+    const mid = 10;
+    const left  = SINGLE_CHART.slice(0, mid).map((p, i) => renderRow(p, i)).join('');
+    const right = SINGLE_CHART.slice(mid).map((p, i) => renderRow(p, i + mid)).join('');
+    document.getElementById('hofSingleChart').innerHTML =
+      `<div class="hof-uncrowned fade-up">${left}</div>` +
+      `<div class="hof-uncrowned fade-up" style="transition-delay:0.07s;">${right}</div>`;
+  }
+
+  function buildMostCharts() {
+    const MEDAL = ['gold','silver','bronze'];
+    const groups = {};
+    MOST_CHARTS.forEach(p => {
+      if (!groups[p.n]) groups[p.n] = [];
+      groups[p.n].push(p);
+    });
+    const ns = Object.keys(groups).map(Number).sort((a, b) => b - a);
+
+    document.getElementById('hofMostCharts').innerHTML = ns.map((n, gi) => {
+      const tier = gi === 0 ? 'gold' : gi === 1 ? 'silver' : gi === 2 ? 'bronze' : '';
+      const cls  = tier ? ` hof-group--${tier}` : '';
+
+      const songMap = new Map();
+      groups[n].forEach(p => {
+        const key = p.artist + '|||' + p.song;
+        if (!songMap.has(key)) songMap.set(key, { artist: p.artist, song: p.song, occs: [] });
+        songMap.get(key).occs.push({ date: p.date, rank: p.rank });
+      });
+      const songs = [...songMap.values()];
+      const countLabel = songs.length > 1 ? `<span class="hof-group__count">${songs.length} 首</span>` : '';
+
+      const rows = songs.map(s => {
+        const occs = s.occs.map(o => {
+          const vol = VOL_DATES.indexOf(o.date);
+          const volStr = vol > 0 ? ` · 第 ${vol} 期` : '';
+          const rankCls = o.rank===1 ? ' hof-charts-rank--gold' : o.rank===2 ? ' hof-charts-rank--silver' : o.rank===3 ? ' hof-charts-rank--bronze' : '';
+          return `<span class="hof-charts-occ"><span class="hof-no1__date">${fmtDebutDate(o.date)}</span><span class="hof-no1__vol">${volStr}</span><span class="hof-charts-rank${rankCls}">　#${o.rank}</span></span>`;
+        }).join('');
+        return `
+          <div class="hof-no1-entry">
+            <div class="hof-no1-entry__head">
+              <span class="hof-no1__song">${s.song}</span><span class="hof-no1__artist">　${s.artist}</span>
+            </div>
+            <div class="hof-charts-occs">${occs}</div>
+          </div>`;
+      }).join('');
+
+      return `
+        <div class="hof-group${cls} fade-up" style="transition-delay:${(gi * 0.06).toFixed(2)}s;">
+          <div class="hof-group__head">
+            <div style="display:flex;align-items:baseline;gap:7px;margin-left:-2px;">
+              <div class="hof-group__num">${n}</div>
+              <div class="hof-group__label">进榜数</div>
+            </div>
+            ${countLabel}
+          </div>
+          ${rows}
+        </div>`;
+    }).join('');
+  }
+
+  function buildMostPoints() {
+    const MEDAL = ['gold','silver','bronze'];
+    function renderRow(p, i) {
+      const tier = MEDAL[i] || '';
+      const cls  = tier ? ` hof-uncrowned-row--${tier}` : '';
+      const int  = Math.floor(p.pts);
+      const dec  = (p.pts - int).toFixed(2).slice(1);
+      const vol  = VOL_DATES.indexOf(p.date);
+      return `
+        <div class="hof-uncrowned-row${cls}">
+          <span class="hof-uncrowned__idx">${i + 1}</span>
+          <span class="hof-uncrowned__pts">${int}<span class="hof-uncrowned__pts-dec">${dec}</span></span>
+          <div class="hof-uncrowned__info">
+            <div class="hof-uncrowned__song">${p.song}</div>
+            <div class="hof-uncrowned__artist">${p.artist}</div>
+          </div>
+          <div class="hof-uncrowned__vol">
+            <div>${fmtDebutDate(p.date)}</div>
+            <div style="font-family:var(--font-body);">第 ${vol} 期</div>
+          </div>
+          <span class="hof-uncrowned__badge${p.rank===1?' hof-uncrowned__badge--gold':p.rank===2?' hof-uncrowned__badge--silver':p.rank===3?' hof-uncrowned__badge--bronze':''}">#${p.rank}</span>
+        </div>`;
+    }
+    const mid = 10;
+    const left  = MOST_POINTS.slice(0, mid).map((p, i) => renderRow(p, i)).join('');
+    const right = MOST_POINTS.slice(mid).map((p, i) => renderRow(p, i + mid)).join('');
+    document.getElementById('hofMostPoints').innerHTML =
+      `<div class="hof-uncrowned fade-up">${left}</div>` +
+      `<div class="hof-uncrowned fade-up" style="transition-delay:0.07s;">${right}</div>`;
+  }
+
+  function buildUncrowned() {
+    const MEDAL = ['gold','silver','bronze'];
+    const header = '';
+    function renderRow(u, i) {
+      const tier = MEDAL[i] || '';
+      const cls  = tier ? ` hof-uncrowned-row--${tier}` : '';
+      const int  = Math.floor(u.pts);
+      const dec  = (u.pts - int).toFixed(2).slice(1);
+      return `
+        <div class="hof-uncrowned-row${cls}">
+          <span class="hof-uncrowned__idx">${i + 1}</span>
+          <span class="hof-uncrowned__pts">${int}<span class="hof-uncrowned__pts-dec">${dec}</span></span>
+          <div class="hof-uncrowned__info">
+            <div class="hof-uncrowned__song">${u.song}</div>
+            <div class="hof-uncrowned__artist">${u.artist}</div>
+          </div>
+          <div class="hof-uncrowned__vol">
+            <div>${fmtDebutDate(VOL_DATES[u.vol])}</div>
+            <div style="font-family:var(--font-body);">第 ${u.vol} 期</div>
+          </div>
+          <span class="hof-uncrowned__badge${u.rank===2?' hof-uncrowned__badge--silver':u.rank===3?' hof-uncrowned__badge--bronze':''}">#${u.rank}</span>
+        </div>`;
+    }
+    const mid = 8;
+    const left  = header + UNCROWNED.slice(0, mid).map((u, i) => renderRow(u, i)).join('');
+    const right = header + UNCROWNED.slice(mid).map((u, i) => renderRow(u, i + mid)).join('');
+    document.getElementById('hofUncrowned').innerHTML =
+      `<div class="hof-uncrowned fade-up">${left}</div>` +
+      `<div class="hof-uncrowned fade-up" style="transition-delay:0.07s;">${right}</div>`;
+  }
+
+  let OWNER_MAP = {};
+
+  function fmtOwners(str) {
+    return str.split(' ').map(k => {
+      const m = OWNER_MAP[k];
+      if (!m) return '@' + k;
+      return `<a class="member" href="/member/${m.id}/" data-nickname="${m.nickname}">@${m.handle}</a>`;
+    }).join(' ');
+  }
+
+  let NO1_RECORDS = [];
+
+  function buildNo1Groups() {
+    const groups = {};
+    NO1_RECORDS.forEach(r => { if (!groups[r.n]) groups[r.n] = []; groups[r.n].push(r); });
+    const ns = Object.keys(groups).map(Number).sort((a, b) => b - a);
+    const maxN = ns[0];
+    const cntColors = { 5: 'var(--clr-gold-light)' };
+    document.getElementById('hofNo1Groups').innerHTML = ns.map((n, gi) => {
+      const color = cntColors[n] || 'var(--clr-text-2)';
+
+      const songMap = new Map();
+      groups[n].forEach(r => {
+        const key = r.artist + '|||' + r.song;
+        if (!songMap.has(key)) songMap.set(key, { artist: r.artist, song: r.song, occs: [] });
+        songMap.get(key).occs.push({ date: r.date, owners: r.owners });
+      });
+
+      const entries = [...songMap.values()].map((s, ei) => {
+        const occs = s.occs.map(o => {
+          const vol = VOL_DATES.indexOf(o.date);
+          const volStr = vol > 0 ? ` · 第 ${vol} 期` : '';
+          return `
+            <div class="hof-no1-entry__occ">
+              <div class="hof-no1__when"><span class="hof-no1__date">${fmtDebutDate(o.date)}</span><span class="hof-no1__vol">${volStr}</span></div>
+              <div class="hof-no1__owners">${fmtOwners(o.owners)}</div>
+            </div>`;
+        }).join('');
+        return `
+          <div class="hof-no1-entry">
+            <div class="hof-no1-entry__head">
+              <span class="hof-no1__song">${s.song}</span><span class="hof-no1__artist">　${s.artist}</span>
+            </div>
+            ${occs}
+          </div>`;
+      }).join('');
+
+      return `
+        <div class="hof-no1-group fade-up" style="transition-delay:${(gi * 0.12).toFixed(2)}s;">
+          <div class="hof-no1-group__head">
+            <span class="hof-no1-group__cnt" style="color:${color}">${n}</span>
+            <span class="hof-no1-group__label">位成员同冠</span>
+          </div>
+          ${entries}
+        </div>`;
+    }).join('');
+  }
+
+  /* ─── async data load + render ─────────────────────────────────────── */
+  (async function() {
+    let volIndex, d;
+    try {
+      [volIndex, d] = await Promise.all([
+        fetch('/data/bbl/bbl-vol-index.json').then(r => r.json()),
+        fetch('/data/bbl/bbl-record/hof_data.json').then(r => r.json()),
+      ]);
+    } catch (e) {
+      console.error('HOF: data load failed', e);
+      return;
+    }
+    VOL_DATES.push('');
+    const maxVol = Math.max(...Object.keys(volIndex).map(Number));
+    for (let i = 1; i <= maxVol; i++) VOL_DATES.push(volIndex[String(i)] || '');
+    CHAMPIONS = d.champions;      CHARTED_FULL = d.charted_full;    RECORDS       = d.charted_records;
+    ARTISTS_PEAK = d.artists_peak; ARTISTS_SONGS = d.artists_songs; ARTISTS_WEEKS = d.artists_weeks;
+    ALBUMS = d.albums;            MOST_POINTS  = d.most_points;     SINGLE_CHART  = d.single_chart;
+    MOST_CHARTS = d.most_charts;  UNCROWNED    = d.uncrowned;
+    OWNER_MAP = d.owner_map;      NO1_RECORDS  = d.no1_records;
+
+    buildChampionRoll(); buildNo1Groups();  buildRecordsGrid();
+    buildMostPoints();   buildMostCharts(); buildSingleChart();
+    buildArtistCols();   buildAlbums();     buildUncrowned();
+
+    function clearDelayAfterAnim(el) {
+      const ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+      setTimeout(() => { el.style.transitionDelay = '0s'; }, ms);
+    }
+    if ('IntersectionObserver' in window) {
+      const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            obs.unobserve(e.target);
+            clearDelayAfterAnim(e.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+    } else {
+      document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+    }
+  })();
+
+  /* ─────────────────────────── TOC ───────────────────────────────────── */
+  (function initHofToc() {
+    const toc = document.getElementById('hofToc');
+    const items = Array.from(toc.querySelectorAll('.hof-toc__item'));
+    const navH = 72;
+    let suppressIO = false;
+    let suppressTimer = null;
+
+    window.addEventListener('scroll', () => {
+      toc.classList.toggle('hof-toc--visible', window.scrollY > 400);
+      if (suppressIO) {
+        clearTimeout(suppressTimer);
+        suppressTimer = setTimeout(() => { suppressIO = false; }, 200);
+      }
+    }, { passive: true });
+
+    const obs = new IntersectionObserver(entries => {
+      if (suppressIO) return;
+      entries.forEach(e => {
+        if (e.isIntersecting)
+          items.forEach(it => it.classList.toggle('hof-toc__item--active', it.dataset.target === e.target.id));
+      });
+    }, { rootMargin: `-${navH}px 0px -55% 0px` });
+
+    items.forEach(item => {
+      const el = document.getElementById(item.dataset.target);
+      if (el) obs.observe(el);
+      item.addEventListener('click', () => {
+        const el = document.getElementById(item.dataset.target);
+        if (!el) return;
+        suppressIO = true;
+        clearTimeout(suppressTimer);
+        items.forEach(it => it.classList.toggle('hof-toc__item--active', it === item));
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+      });
+    });
+  })();
+
+    /* ── Data tooltip (same style as member tooltip) ── */
+  (function() {
+    var tip = document.createElement('div');
+    tip.className = 'member-tooltip';
+    tip.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(tip);
+    function pos(e) { tip.style.left = (e.clientX + 16) + 'px'; tip.style.top = e.clientY + 'px'; }
+    function nearest(t) { return t.closest ? t.closest('[data-tooltip]') : null; }
+    document.addEventListener('mouseover', function(e) {
+      var el = nearest(e.target);
+      if (!el) return;
+      tip.textContent = el.getAttribute('data-tooltip');
+      pos(e);
+      tip.classList.add('member-tooltip--visible');
+    });
+    document.addEventListener('mousemove', function(e) {
+      if (tip.classList.contains('member-tooltip--visible')) pos(e);
+    });
+    document.addEventListener('mouseout', function(e) {
+      if (!nearest(e.target)) return;
+      var rel = e.relatedTarget;
+      if (rel && nearest(rel)) return;
+      tip.classList.remove('member-tooltip--visible');
+    });
+  })();
+</script>
+</body>
+</html>

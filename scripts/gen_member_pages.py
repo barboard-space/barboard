@@ -190,17 +190,17 @@ TEMPLATE = """\
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barboard 成员</title>
   <meta name="description" content="Barboard 成员主页" />
-  <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
-  <link rel="stylesheet" href="../fonts.css" />
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <div id="site-nav"></div>
   <div id="mp-root"></div>
   <div id="site-footer"></div>
   <script>var MEMBER_DATA = PLACEHOLDER;</script>
-  <script src="../scripts/member-render.js"></script>
-  <script src="../scripts/nav.js"></script>
+  <script src="/scripts/member-render.js"></script>
+  <script src="/scripts/nav.js"></script>
 </body>
 </html>
 """
@@ -288,7 +288,8 @@ def main():
             data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
             html = TEMPLATE.replace("PLACEHOLDER", data_json)
 
-            out_path = os.path.join(member_dir, f"{space_id}.html")
+            out_path = os.path.join(member_dir, str(space_id), "index.html")
+            os.makedirs(os.path.dirname(out_path), exist_ok=True)
             with open(out_path, "w", encoding="utf-8") as out:
                 out.write(html)
 
@@ -300,7 +301,8 @@ def main():
     if unclaimed:
         u_data = {"nickname": "匿名", "unclaimed": True, "barvision": unclaimed}
         u_json = json.dumps(u_data, ensure_ascii=False, separators=(",", ":"))
-        with open(os.path.join(member_dir, "0.html"), "w", encoding="utf-8") as out:
+        os.makedirs(os.path.join(member_dir, "0"), exist_ok=True)
+        with open(os.path.join(member_dir, "0", "index.html"), "w", encoding="utf-8") as out:
             out.write(TEMPLATE.replace("PLACEHOLDER", u_json))
         ov = unclaimed["overview"]
         bv_index["0"] = {
