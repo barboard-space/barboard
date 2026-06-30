@@ -21,6 +21,7 @@
   --clr-shadow-bg:  #0c0a18;   /* 混淆（影子）单曲行背景：比 bg-2 略深偏紫，融入底色不凸显 */
   --clr-border:     rgba(180,160,255,0.14);
   --clr-border-2:   rgba(180,160,255,0.26);
+  --clr-border-3:   rgba(180,160,255,0.48);
 
   /* ── Primary — Electric Blue（片头蓝色线条）── */
   --clr-accent:       #00b4ff;
