@@ -4,6 +4,13 @@
 
 ---
 
+## [2026-06-30] — 榜吧年终榜导入（2022 样板）
+
+### Added
+- **年终榜数据管线** `scripts/parse_annual_chart.py`：读 `年终榜/<年>吧年榜.xlsx` 的「总榜」sheet → `data/annual/<年>.json`（Top 100：名次/歌手/歌曲/点数/助攻数）；封面用 **iTunes Search API** 构建期抓取（600×600，查不到留 null、前端 onerror 兜底）。2022 命中 62/100。
+- **年榜页** `archive/annual/2022/index.html`（URL `/archive/annual/2022/`，clean-URL/绝对路径）：BBL 风格榜单（复用全局 `.chart-item`，前三金银铜，右列「累计点数/助攻数」字号同 BBL）+ **右侧悬浮侧栏完整移植 BBL**（搜索过滤+计数+清除、年度看点卡[点数冠军/助攻王，点击定位+持久高亮]、JS-sticky 跟随；手机端单列堆叠+看点 2 列+sticky 关）。
+- `archive/index.html`：「榜吧年榜」卡入口接入 → 2022 年终榜。
+
 ## [2026-06-27] — 新成员柴妈 + 非吧视成员页模板文案
 
 ### Added
