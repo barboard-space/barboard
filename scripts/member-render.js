@@ -191,13 +191,15 @@
     '.mp-an-tbl .mp-an-row--1 td{background:rgba(212,168,50,.12)}',
     '.mp-an-tbl .mp-an-row--2 td{background:rgba(148,196,220,.11)}',
     '.mp-an-tbl .mp-an-row--3 td{background:rgba(224,160,100,.10)}',
-    '.mp-an-tbl .an-name{color:var(--clr-text);white-space:normal;display:flex;align-items:center;gap:18px}',  /* 歌名（前，prominent）+ 封面 */
-    '.an-cover{width:36px;height:36px;margin:-2px 0;border-radius:3px;object-fit:cover;flex-shrink:0;background:var(--clr-surface-2);display:block}',  /* margin 负 2px：封面距行上下各收 2px */
+    '.mp-an-tbl .an-name{color:var(--clr-text);white-space:normal}',  /* 歌名列（保持 table-cell，避免 td 设 flex 导致边框亚像素偏移）*/
+    '.mp-an-tbl .an-name-in{display:flex;align-items:center;gap:18px}',  /* 内层 flex：封面 + 标题 */
+    '.an-cover{width:36px;height:36px;border-radius:3px;object-fit:cover;flex-shrink:0;background:var(--clr-surface-2);display:block}',
     '.an-cover--ph{display:inline-block}',
     '.mp-an-tbl .an-title{min-width:0}',
     /* 前十表：固定列宽（避免展开后歌手列因内容变化而横向移动）+ 歌名表头缩进到标题位置（td14 + 封面36 + 间距18 = 68）*/
     '.mp-an-block .mp-an-tbl{table-layout:fixed;min-width:600px}',
     '.mp-an-block .mp-an-tbl th:nth-child(1),.mp-an-block .mp-an-tbl td:nth-child(1){width:64px}',  /* 名次；歌手列宽由 JS(alignAnCols) 设为 表宽/2+27 → 左缘对齐居中下拉按钮，歌名列取余 */
+    '.mp-an-block .mp-an-tbl td{padding-top:7px;padding-bottom:7px}',  /* 前十行更紧凑（等效原封面 -2px，改用 padding 避免负边距的边框亚像素偏移）*/
     '.mp-an-block .mp-an-tbl .an-artist{white-space:normal}',
     '.mp-an-block .mp-an-tbl thead th:nth-child(2){padding-left:68px}',
     /* 手机端：前十表改 BBL 榜单式（名次 | 封面 | 歌名/歌手上下堆叠），不横滚、不显示右侧列 */
@@ -206,17 +208,19 @@
     '  .mp-an-block .mp-an-tbl{display:block;min-width:0;width:100%;table-layout:auto}',
     '  .mp-an-block .mp-an-tbl thead{display:none}',
     '  .mp-an-block .mp-an-tbl tbody{display:block}',
-    '  .mp-an-block .mp-an-tbl tr{display:grid;grid-template-columns:30px 1fr;column-gap:12px;row-gap:2px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--clr-border)}',
+    '  .mp-an-block .mp-an-tbl tr{display:grid;grid-template-columns:44px 42px 1fr;column-gap:12px;row-gap:4px;align-items:center;padding:6px 14px;border-bottom:1px solid var(--clr-border)}',
     '  .mp-an-block .mp-an-tbl tr:last-child{border-bottom:none}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--1{background:rgba(212,168,50,.12)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--2{background:rgba(148,196,220,.11)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--3{background:rgba(224,160,100,.10)}',
     '  .mp-an-block .mp-an-tbl td{display:block;padding:0;border:none;width:auto!important;background:none!important}',
-    '  .mp-an-block .mp-an-tbl .rk{grid-column:1;grid-row:1/3;text-align:center;font-size:16px}',
-    '  .mp-an-block .mp-an-tbl .an-name{grid-column:2;grid-row:1;gap:10px;display:flex;align-items:center}',
-    '  .mp-an-block .mp-an-tbl .an-title{font-size:14px}',
-    '  .mp-an-block .mp-an-tbl .an-artist{grid-column:2;grid-row:2;padding-left:46px;white-space:normal;font-size:12px;color:var(--clr-text-2)}',
-    '  .mp-an-assist{min-width:460px}',  /* 助攻表：手机端舒展横滚（同吧视表，滚动条已隐藏）*/
+    '  .mp-an-block .mp-an-tbl .rk{grid-column:1;grid-row:1/3;align-self:center;text-align:center;font-family:var(--font-display);font-size:22px;font-weight:400}',  /* 名次同 BBL .chart-rank */
+    '  .mp-an-block .mp-an-tbl .an-name,.mp-an-block .mp-an-tbl .an-name-in{display:contents}',  /* 拆出封面/标题为网格项：封面独立列居中、标题占行1 */
+    '  .mp-an-block .mp-an-tbl .an-cover{grid-column:2;grid-row:1/3;align-self:center;width:42px;height:42px;margin:0}',
+    '  .mp-an-block .mp-an-tbl .an-title{grid-column:3;grid-row:1;font-size:14px;font-weight:600;line-height:1.2}',
+    '  .mp-an-block .mp-an-tbl .an-artist{grid-column:3;grid-row:2;font-size:12px;line-height:1.2;color:var(--clr-text-2);white-space:normal}',
+    '  .mp-an-assist{min-width:0;width:100%;table-layout:fixed}',  /* 助攻表：手机端 6 列等分、一屏内显示不横滚 */
+    '  .mp-an-assist th,.mp-an-assist td{padding-left:6px;padding-right:6px}',
     '}',
     '.mp-an-tbl .an-artist{color:var(--clr-text-2);white-space:nowrap}',  /* 歌手（后，secondary） */
     '.mp-an-h{font-size:13px;font-weight:600;color:var(--clr-text-2);margin:0 0 12px}',  /* 「助攻详情」同「历届排名走势」 */
@@ -228,7 +232,6 @@
        重叠部分藏在表格下面（wrap z:0 < table z:1，表格不透明底遮住按钮上半）；箭头默认＝描边色，hover 变紫 */
     '.mp-an-more-wrap{display:flex;justify-content:center;margin-top:-6px;position:relative;z-index:0}',
     '.mp-an-more{display:flex;align-items:center;justify-content:center;width:54px;height:24px;padding:0;background:var(--clr-surface);border:1px solid var(--clr-border-2);border-radius:6px;color:var(--clr-text-4);cursor:pointer;transition:border-color .2s,color .2s,background .2s}',  /* 箭头(currentColor)=混淆标签色 text-4；描边仍 border-2 */
-    '.mp-an-more:hover{border-color:var(--clr-violet-light);color:var(--clr-violet-light);background:var(--clr-surface-2)}',
     '.mp-an-more svg{width:16px;height:16px;display:block;position:relative;top:2px;transition:transform .25s}',  /* 箭头内部下移 2px */
     '.mp-an-more.is-open svg{transform:rotate(180deg)}',
     /* ── 页内目录（Notion 风格，同吧视详情页 bvr-toc）── */
@@ -1050,7 +1053,7 @@
           ? '<img class="an-cover" src="' + esc(e.cover) + '" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">'
           : '<span class="an-cover an-cover--ph"></span>';
         return '<tr class="' + (medal + extra).trim() + '"><td class="rk">' + e.rank + '</td>' +
-          '<td class="an-name">' + cov + '<span class="an-title">' + esc(e.song) + '</span></td>' +
+          '<td class="an-name"><span class="an-name-in">' + cov + '<span class="an-title">' + esc(e.song) + '</span></span></td>' +
           '<td class="an-artist">' + esc(e.artist) + '</td></tr>';
       }).join('');
       var more = list.length > TOP_INIT
