@@ -219,6 +219,7 @@
     '  .mp-an-block .mp-an-tbl .an-cover{grid-column:2;grid-row:1/3;align-self:center;width:42px;height:42px;margin:0}',
     '  .mp-an-block .mp-an-tbl .an-title{grid-column:3;grid-row:1;font-size:14px;font-weight:600;line-height:1.2}',
     '  .mp-an-block .mp-an-tbl .an-artist{grid-column:3;grid-row:2;font-size:12px;line-height:1.2;color:var(--clr-text-2);white-space:normal}',
+    '  .mp-an-more:hover{border-color:var(--clr-border-2);color:var(--clr-text-4);background:var(--clr-surface)}',  /* 手机端去 hover（点击后不残留高亮），桌面保留 */
     '  .mp-an-assist{min-width:0;width:100%;table-layout:fixed}',  /* 助攻表：手机端 6 列等分、一屏内显示不横滚 */
     '  .mp-an-assist th,.mp-an-assist td{padding-left:6px;padding-right:6px}',
     '}',
@@ -232,6 +233,7 @@
        重叠部分藏在表格下面（wrap z:0 < table z:1，表格不透明底遮住按钮上半）；箭头默认＝描边色，hover 变紫 */
     '.mp-an-more-wrap{display:flex;justify-content:center;margin-top:-6px;position:relative;z-index:0}',
     '.mp-an-more{display:flex;align-items:center;justify-content:center;width:54px;height:24px;padding:0;background:var(--clr-surface);border:1px solid var(--clr-border-2);border-radius:6px;color:var(--clr-text-4);cursor:pointer;transition:border-color .2s,color .2s,background .2s}',  /* 箭头(currentColor)=混淆标签色 text-4；描边仍 border-2 */
+    '.mp-an-more:hover{border-color:var(--clr-violet-light);color:var(--clr-violet-light);background:var(--clr-surface-2)}',
     '.mp-an-more svg{width:16px;height:16px;display:block;position:relative;top:2px;transition:transform .25s}',  /* 箭头内部下移 2px */
     '.mp-an-more.is-open svg{transform:rotate(180deg)}',
     /* ── 页内目录（Notion 风格，同吧视详情页 bvr-toc）── */
