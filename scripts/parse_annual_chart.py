@@ -200,10 +200,23 @@ def main():
                     cache[ckey(oe["artist"], oe["song"])] = oe["cover"]
         except Exception:
             pass
+    # 也复用成员年榜索引里已抓到的 top10 封面（含 Top200 之外的私榜曲），避免重复请求
+    midx_path = os.path.join(OUT_DIR, "member-annual-index.json")
+    if os.path.exists(midx_path):
+        try:
+            mold = json.load(open(midx_path, encoding="utf-8"))
+            for ydata in mold.values():
+                for mv in ydata.values():
+                    for te in mv.get("top10", []):
+                        if te.get("cover"):
+                            cache[ckey(te["artist"], te["song"])] = te["cover"]
+        except Exception:
+            pass
     # 名次：整数=欧美占位曲；字符串带星（如 34* / 145**）=亚洲单曲（华语/K-POP），不占位、只插入展示
     STAR_RE = re.compile(r"^\s*(\d+)\s*(\**)")
+    all_rows = list(rows)
     entries = []
-    for row in rows:
+    for row in all_rows:
         rk_raw = row[ci["rank"]]
         star = 0
         if isinstance(rk_raw, (int, float)):
@@ -245,6 +258,67 @@ def main():
         json.dump(out, f, ensure_ascii=False, indent=1)
     covered = sum(1 for e in entries if e["cover"])
     print("写出 %s | %d 条 | 封面命中 %d/%d" % (fp, len(entries), covered, len(entries)))
+
+    # ── 成员年榜聚合 → data/annual/member-annual-index.json（个人主页「个人年榜」板块）──
+    TIERS = [10, 20, 50, 100, 200]
+    sids = sorted(set(rank_cols.values()))
+    top10 = {s: [] for s in sids}                         # 个人榜前十：其个人名次 1..10 的歌
+    assist = {s: {t: 0 for t in TIERS} for s in sids}     # 助攻分档（占位/欧美曲）：按年榜名次累计（前 N）
+    assist_sh = {s: {t: 0 for t in TIERS} for s in sids}  # 助攻分档（亚洲不占位曲）：单独统计、括号标注
+    for row in all_rows:
+        rk_raw = row[ci["rank"]]
+        star = 0
+        if isinstance(rk_raw, (int, float)):
+            rk = int(rk_raw)
+        elif isinstance(rk_raw, str):
+            mm = STAR_RE.match(rk_raw)
+            if not mm:
+                continue
+            rk = int(mm.group(1))
+            star = len(mm.group(2))
+        else:
+            continue
+        if rk < 1:
+            continue
+        artist = norm_artist(str(row[ci["artist"]] or "").strip())
+        song = norm_song(str(row[ci["song"]] or "").strip())
+        if not artist or not song:
+            continue
+        for col, sid in rank_cols.items():
+            v = row[col]
+            if not isinstance(v, (int, float)):
+                continue
+            pr = int(v)
+            if 1 <= pr <= 10:                             # 个人榜前十
+                top10[sid].append((pr, artist, song))
+            tgt = assist if star == 0 else assist_sh      # 占位曲计主数 / 亚洲不占位曲计括号
+            for t in TIERS:
+                if rk <= t:
+                    tgt[sid][t] += 1
+    magg = {}
+    for sid in sids:
+        lst = sorted(top10[sid], key=lambda x: x[0])[:10]
+        if not lst and not any(assist[sid].values()) and not any(assist_sh[sid].values()):
+            continue
+        t10 = []
+        for r, a, s in lst:
+            t10.append({"rank": r, "artist": a, "song": s,
+                        "cover": (None if nocover else itunes_cover(a, s, cache))})
+        m = {"assists": {"t%d" % t: assist[sid][t] for t in TIERS}, "top10": t10}
+        if any(assist_sh[sid].values()):
+            m["assists_shadow"] = {"t%d" % t: assist_sh[sid][t] for t in TIERS}
+        magg[str(sid)] = m
+    idx_path = os.path.join(OUT_DIR, "member-annual-index.json")
+    idx = {}
+    if os.path.exists(idx_path):
+        try:
+            idx = json.load(open(idx_path, encoding="utf-8"))
+        except Exception:
+            idx = {}
+    idx[year] = magg
+    with open(idx_path, "w", encoding="utf-8") as f:
+        json.dump(idx, f, ensure_ascii=False, indent=1)
+    print("成员年榜聚合 → %s | %d 位大妈" % (idx_path, len(magg)))
 
 
 if __name__ == "__main__":

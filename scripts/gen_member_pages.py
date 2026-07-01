@@ -39,6 +39,20 @@ def load_bv2026_ids(base):
     return ids
 
 
+def load_annual(base):
+    """data/annual/member-annual-index.json → {space_id_str: {year: {assists, top10}}}（个人主页「个人年榜」板块）"""
+    p = os.path.join(base, "data", "annual", "member-annual-index.json")
+    out = {}
+    if not os.path.exists(p):
+        return out
+    with open(p, encoding="utf-8") as f:
+        idx = json.load(f)
+    for year, mems in idx.items():
+        for sid, v in mems.items():
+            out.setdefault(sid, {})[year] = v
+    return out
+
+
 def load_bv_editions(base):
     eds = []
     pat = os.path.join(base, "data", "barvision", "barvision-*", "*.json")
@@ -232,6 +246,7 @@ def main():
 
     bv_by_id = aggregate_barvision(load_bv_editions(base))  # 现按 space_id(字符串) 聚合
     bv2026 = load_bv2026_ids(base)  # 第 16 届参赛者（signups + 海选 host）
+    annual_by_id = load_annual(base)  # 年榜聚合（个人榜前十 + 助攻分档）
     bv_index = {}  # space_id -> {editions, active, count, best}
 
     space_ids = []
@@ -284,6 +299,10 @@ def main():
                     "active": in26, "count": ov["entries"] + ov["shadow"],
                     "best": ov["best"], "active_in": ov["active_in"],
                 }
+
+            an = annual_by_id.get(str(space_id))
+            if an:
+                data["annual"] = an
 
             data_json = json.dumps(data, ensure_ascii=False, separators=(",", ":"))
             html = TEMPLATE.replace("PLACEHOLDER", data_json)

@@ -103,10 +103,10 @@
     '.mp-bv-tip{position:fixed;z-index:200;pointer-events:none;background:var(--clr-surface-2);border:1px solid var(--clr-border-2);border-radius:6px;padding:7px 10px;font-size:12px;line-height:1.55;color:var(--clr-text);box-shadow:0 6px 20px rgba(0,0,0,.4);opacity:0;transition:opacity .15s;white-space:nowrap}',
     '.mp-bv-tip.is-on{opacity:1}',
     '.mp-bv-tip__row--sh{color:var(--clr-text-3)}',
-    '.mp-bv-tw{overflow-x:auto;border:1px solid var(--clr-border);border-radius:8px;scrollbar-width:none}',
+    '.mp-bv-tw{overflow-x:auto;border:1px solid var(--clr-border);border-radius:8px;scrollbar-width:none;position:relative;z-index:1;background:var(--clr-bg)}',
     '.mp-bv-tw::-webkit-scrollbar{display:none}',
     'table.mp-bv-tbl{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}',
-    '.mp-bv-tbl th{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--clr-text-2);text-align:left;padding:10px 12px;background:var(--clr-surface);border-bottom:1px solid var(--clr-border-2);white-space:nowrap}',
+    '.mp-bv-tbl th{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--clr-text-2);text-align:left;padding:10px 12px;background:var(--clr-surface);border-bottom:1px solid #353050;white-space:nowrap}',
     '.mp-bv-tbl th.ta-c{text-align:center}',
     '.mp-bv-tbl th.sortable{cursor:pointer;user-select:none;transition:color .15s}',
     '.mp-bv-tbl th.sortable:hover{color:var(--clr-text)}',
@@ -124,7 +124,7 @@
     '.mp-bv-tbl td:nth-child(2){text-align:center}',
     '.mp-bv-tbl td:nth-child(3),.mp-bv-tbl td:nth-child(7){color:var(--clr-text-3)}',
     '.mp-bv-tbl th:nth-child(3),.mp-bv-tbl td:nth-child(3){padding-left:11px}',
-    '.mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4){padding-left:14px;width:400px}',
+    '.mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4){padding-left:14px;width:373px}',
     '.mp-bv-tbl th:nth-child(5),.mp-bv-tbl td:nth-child(5){padding-left:8px}',
     '.mp-bv-legend{font-size:11px;color:var(--clr-text-3);line-height:1.8;margin-top:8px}',
     '.mp-bv-legend code{font-family:var(--font-mono);color:var(--clr-text-2);background:var(--clr-surface);padding:0 5px;border-radius:3px;margin:0 1px}',
@@ -168,6 +168,96 @@
     '  .mp-bv-tbl th:nth-child(4),.mp-bv-tbl td:nth-child(4),.mp-bv-tbl th:nth-child(5),.mp-bv-tbl td:nth-child(5){width:150px}',
     '  .mp-bv-tbl td:nth-child(4){white-space:normal}',
     '  .mp-bv-legend__ex{display:none}',
+    '}',
+    /* ── 个人年榜 板块 ── */
+    '.mp-an-caption{font-size:12px;color:var(--clr-text-3);line-height:1.7;margin-bottom:18px;max-width:640px}',
+    '.mp-an-block{margin-top:8px}',
+    '.mp-an-subtitle{font-size:13px;font-weight:600;color:var(--clr-text-2);margin:30px 0 12px}',
+    '.mp-an-tw{overflow-x:auto;border:1px solid var(--clr-border);border-radius:8px;scrollbar-width:none;position:relative;z-index:1;background:var(--clr-bg)}',
+    '.mp-an-tw::-webkit-scrollbar{display:none}',
+    'table.mp-an-tbl{width:100%;border-collapse:collapse;font-size:13px}',
+    '.mp-an-tbl th{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--clr-text-2);text-align:left;padding:10px 14px;background:var(--clr-surface);border-bottom:1px solid #353050;white-space:nowrap}',
+    '.mp-an-tbl th.ta-c{text-align:center}',
+    '.mp-an-tbl td{padding:9px 14px;border-bottom:1px solid var(--clr-border);white-space:nowrap;vertical-align:middle}',
+    '.mp-an-tbl tr:last-child td{border-bottom:none}',
+    '.mp-an-tbl .yr{font-family:var(--font-body);color:var(--clr-text);font-size:14px}',
+    '.mp-an-tbl .num{font-family:var(--font-body);text-align:center;color:var(--clr-text)}',
+    '.mp-an-tbl .num .mp-an-sh{font-size:12px;color:var(--clr-text-3);margin-left:2px}',  /* 亚洲不占位曲计数（括号）*/
+    '.mp-an-tbl .rk{font-family:var(--font-body);font-size:15px;font-weight:600;color:var(--clr-text-3);text-align:center;width:48px}',
+    '.mp-an-tbl .mp-an-row--1 .rk{color:var(--clr-gold-light)}',
+    '.mp-an-tbl .mp-an-row--2 .rk{color:var(--clr-silver)}',
+    '.mp-an-tbl .mp-an-row--3 .rk{color:var(--clr-bronze)}',
+    /* 前三名金银铜行背景（半透明深色底，同 bbl 奖牌行思路） */
+    '.mp-an-tbl .mp-an-row--1 td{background:rgba(212,168,50,.12)}',
+    '.mp-an-tbl .mp-an-row--2 td{background:rgba(148,196,220,.11)}',
+    '.mp-an-tbl .mp-an-row--3 td{background:rgba(224,160,100,.10)}',
+    '.mp-an-tbl .an-name{color:var(--clr-text);white-space:normal;display:flex;align-items:center;gap:18px}',  /* 歌名（前，prominent）+ 封面 */
+    '.an-cover{width:36px;height:36px;margin:-2px 0;border-radius:3px;object-fit:cover;flex-shrink:0;background:var(--clr-surface-2);display:block}',  /* margin 负 2px：封面距行上下各收 2px */
+    '.an-cover--ph{display:inline-block}',
+    '.mp-an-tbl .an-title{min-width:0}',
+    /* 前十表：固定列宽（避免展开后歌手列因内容变化而横向移动）+ 歌名表头缩进到标题位置（td14 + 封面36 + 间距18 = 68）*/
+    '.mp-an-block .mp-an-tbl{table-layout:fixed;min-width:600px}',
+    '.mp-an-block .mp-an-tbl th:nth-child(1),.mp-an-block .mp-an-tbl td:nth-child(1){width:64px}',  /* 名次；歌手列宽由 JS(alignAnCols) 设为 表宽/2+27 → 左缘对齐居中下拉按钮，歌名列取余 */
+    '.mp-an-block .mp-an-tbl .an-artist{white-space:normal}',
+    '.mp-an-block .mp-an-tbl thead th:nth-child(2){padding-left:68px}',
+    /* 手机端：前十表改 BBL 榜单式（名次 | 封面 | 歌名/歌手上下堆叠），不横滚、不显示右侧列 */
+    '@media (max-width:768px){',
+    '  .mp-an-block .mp-an-tw{overflow:visible}',
+    '  .mp-an-block .mp-an-tbl{display:block;min-width:0;width:100%;table-layout:auto}',
+    '  .mp-an-block .mp-an-tbl thead{display:none}',
+    '  .mp-an-block .mp-an-tbl tbody{display:block}',
+    '  .mp-an-block .mp-an-tbl tr{display:grid;grid-template-columns:30px 1fr;column-gap:12px;row-gap:2px;align-items:center;padding:8px 12px;border-bottom:1px solid var(--clr-border)}',
+    '  .mp-an-block .mp-an-tbl tr:last-child{border-bottom:none}',
+    '  .mp-an-block .mp-an-tbl .mp-an-row--1{background:rgba(212,168,50,.12)}',
+    '  .mp-an-block .mp-an-tbl .mp-an-row--2{background:rgba(148,196,220,.11)}',
+    '  .mp-an-block .mp-an-tbl .mp-an-row--3{background:rgba(224,160,100,.10)}',
+    '  .mp-an-block .mp-an-tbl td{display:block;padding:0;border:none;width:auto!important;background:none!important}',
+    '  .mp-an-block .mp-an-tbl .rk{grid-column:1;grid-row:1/3;text-align:center;font-size:16px}',
+    '  .mp-an-block .mp-an-tbl .an-name{grid-column:2;grid-row:1;gap:10px;display:flex;align-items:center}',
+    '  .mp-an-block .mp-an-tbl .an-title{font-size:14px}',
+    '  .mp-an-block .mp-an-tbl .an-artist{grid-column:2;grid-row:2;padding-left:46px;white-space:normal;font-size:12px;color:var(--clr-text-2)}',
+    '  .mp-an-assist{min-width:460px}',  /* 助攻表：手机端舒展横滚（同吧视表，滚动条已隐藏）*/
+    '}',
+    '.mp-an-tbl .an-artist{color:var(--clr-text-2);white-space:nowrap}',  /* 歌手（后，secondary） */
+    '.mp-an-h{font-size:13px;font-weight:600;color:var(--clr-text-2);margin:0 0 12px}',  /* 「助攻详情」同「历届排名走势」 */
+    '.mp-an-subtitle .an-yr{font-family:var(--font-display);font-size:19px;letter-spacing:.04em;color:var(--clr-text);margin-right:3px}',
+    '.mp-an-block.is-collapsed .mp-an-extra{display:none}',
+    '.mp-more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:transparent;border:1px solid var(--clr-border-2);color:var(--clr-text-2);font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.04em;padding:6px 16px;border-radius:6px;cursor:pointer;transition:border-color .2s,color .2s}',
+    '.mp-more:hover{border-color:var(--clr-text);color:var(--clr-text)}',
+    /* 展开按钮（个人榜前十 + 吧视表通用）：表格底边居中的小圆角矩形 + 双箭头（展开后翻转朝上）
+       重叠部分藏在表格下面（wrap z:0 < table z:1，表格不透明底遮住按钮上半）；箭头默认＝描边色，hover 变紫 */
+    '.mp-an-more-wrap{display:flex;justify-content:center;margin-top:-6px;position:relative;z-index:0}',
+    '.mp-an-more{display:flex;align-items:center;justify-content:center;width:54px;height:24px;padding:0;background:var(--clr-surface);border:1px solid var(--clr-border-2);border-radius:6px;color:var(--clr-text-4);cursor:pointer;transition:border-color .2s,color .2s,background .2s}',  /* 箭头(currentColor)=混淆标签色 text-4；描边仍 border-2 */
+    '.mp-an-more:hover{border-color:var(--clr-violet-light);color:var(--clr-violet-light);background:var(--clr-surface-2)}',
+    '.mp-an-more svg{width:16px;height:16px;display:block;position:relative;top:2px;transition:transform .25s}',  /* 箭头内部下移 2px */
+    '.mp-an-more.is-open svg{transform:rotate(180deg)}',
+    /* ── 页内目录（Notion 风格，同吧视详情页 bvr-toc）── */
+    '.mp-toc{position:fixed;right:14px;top:50%;transform:translateY(-50%);z-index:90;display:flex;flex-direction:column;align-items:flex-end;gap:0;opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}',
+    '.mp-toc--visible{opacity:1;visibility:visible}',
+    '.mp-toc__toggle{display:none}',
+    '.mp-toc__list{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding:8px 10px;border-radius:8px;background:transparent;transition:background .25s,-webkit-backdrop-filter .25s,backdrop-filter .25s}',
+    '.mp-toc:hover .mp-toc__list{background:rgba(20,20,34,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}',
+    '.mp-toc__item{display:flex;align-items:center;justify-content:flex-end;gap:9px;cursor:pointer;user-select:none;padding:2px 0}',
+    '.mp-toc__dash{flex:none;width:14px;height:2px;border-radius:2px;background:var(--clr-text-3);opacity:.4;transition:width .25s,background .25s,opacity .25s}',
+    '.mp-toc__label{order:-1;font-family:var(--font-body);font-size:10.5px;letter-spacing:.01em;color:var(--clr-text-3);white-space:nowrap;max-width:0;opacity:0;transform:translateX(6px);overflow:hidden;transition:max-width .3s ease,opacity .25s,transform .3s ease,color .15s}',
+    '.mp-toc:hover .mp-toc__label{max-width:220px;opacity:1;transform:translateX(0)}',
+    '.mp-toc__item:hover .mp-toc__dash{opacity:.85;background:var(--clr-text-2)}',
+    '.mp-toc__item:hover .mp-toc__label{color:var(--clr-text)}',
+    '.mp-toc__item--active .mp-toc__dash{width:22px;background:var(--clr-violet-light);opacity:1}',
+    '.mp-toc__item--active .mp-toc__label{color:var(--clr-violet-light)}',
+    '@media (max-width:768px){',
+    '  .mp-toc{right:20px;bottom:66px;top:auto;transform:none;z-index:210;gap:10px}',
+    '  .mp-toc__toggle{display:flex;align-items:center;justify-content:center;width:42px;height:42px;background:rgba(20,20,34,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border:1px solid var(--clr-border-2);border-radius:4px;color:rgba(192,132,252,.65);cursor:pointer;padding:0;transition:color .25s,border-color .25s}',
+    '  .mp-toc__toggle svg{width:18px;height:18px}',
+    '  .mp-toc--open .mp-toc__toggle{color:var(--clr-violet-light);border-color:var(--clr-violet-light)}',
+    '  .mp-toc__list{display:none;gap:1px;min-width:152px;max-height:62vh;overflow-y:auto;background:rgba(20,20,34,.72);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border:1px solid var(--clr-border-2);border-radius:6px;padding:6px;box-shadow:0 8px 28px rgba(0,0,0,.4)}',
+    '  .mp-toc:hover .mp-toc__list{background:rgba(20,20,34,.72)}',
+    '  .mp-toc--open .mp-toc__list{display:flex}',
+    '  .mp-toc__item{justify-content:flex-start;gap:0;padding:9px 13px;border-radius:4px}',
+    '  .mp-toc__item:hover{background:rgba(255,255,255,.04)}',
+    '  .mp-toc__dash{display:none}',
+    '  .mp-toc__label{order:0;max-width:none;opacity:1;transform:none;overflow:visible;font-size:13px}',
+    '  .mp-toc__item--active{background:rgba(168,85,247,.12)}',
     '}'
   ].join('\n');
 
@@ -864,7 +954,7 @@
         '<div class="mp-bv-stat__v' + vCls + '"' + vStyle + '>' + s.v + (s.sh ? shadow(s.sh) : '') + rep + '</div>' +
         '<div class="mp-bv-stat__k">' + s.k + '</div></div>';
     }).join('');
-    var rows = renderBvRows(sortBvEntries(bv.entries, 'edition', 'asc'));
+    var rows = renderBvRows(sortBvEntries(bv.entries, 'edition', 'desc').slice(0, 10));  // 默认年份从新到旧、先展示前十
     var TRI = '<svg class="mp-bv-tri" viewBox="0 0 10 14" aria-hidden="true"><path class="up" d="M5 0L9 5H1Z"/><path class="dn" d="M5 14L1 9H9Z"/></svg>';
     var unclaimed = arguments[1];
     var label = 'Barvision';
@@ -879,7 +969,7 @@
     var topBlock = unclaimed
       ? '<p class="mp-bv-note fade-up" style="transition-delay:.2s">以下参赛歌曲在比赛结束后始终无人认领选送者，统一归档于此。</p>'
       : '<div class="mp-bv-stats fade-up" style="transition-delay:.2s">' + statsHtml + '</div>';
-    return '<section class="mp-section">' +
+    return '<section class="mp-section" id="mp-sec-bv">' +
       '<div class="section__inner">' +
         '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">' + label + '</div>' +
         '<div class="mp-bv-titlebar fade-up" style="transition-delay:.15s"><span class="mp-section-title">' + title + '</span>' + exportBar + '</div>' +
@@ -887,10 +977,142 @@
         '<div class="mp-bv-tw fade-up" style="transition-delay:.25s"><table class="mp-bv-tbl"><thead><tr>' +
           '<th class="sortable ta-c" data-sort="rank">名次' + TRI + '</th><th class="sortable ta-c" data-sort="edition">届次' + TRI + '</th><th class="ta-c">场次</th><th>歌手</th><th>歌名</th><th class="sortable ta-c" data-sort="total">总分' + TRI + '</th><th class="sortable ta-c" data-sort="twelve">12分' + TRI + '</th>' +
         '</tr></thead><tbody>' + rows + '</tbody></table></div>' +
+        ((bv.entries || []).length > 10 ? '<div class="mp-an-more-wrap fade-up" style="transition-delay:.27s"><button type="button" class="mp-an-more" id="mpBvMore" aria-label="展开全部"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l5 5 5-5"/><path d="M7 13l5 5 5-5"/></svg></button></div>' : '') +
         '<p class="mp-bv-legend fade-up" style="transition-delay:.28s">注：<code>A</code> 小众 · <code>B</code> 中众 · <code>C</code> 大众 · <code>SF</code> 半决赛 · <code>GF</code> 决赛 · <code>E</code> 娱乐版<span class="mp-bv-legend__ex">（如 <code>7A</code> = 第 7 届小众组）</span></p>' +
         (unclaimed ? '' : bvTrend(bv)) +
       '</div>' +
     '</section>';
+  }
+
+  /* 表格高度平滑动画：调用前先记录 startH，改变内容（行数）后调用，从 startH 过渡到新高度 */
+  function animateTwHeight(tw, startH) {
+    if (!tw || tw._animating) return;
+    var endH = tw.offsetHeight;
+    tw._animating = true;
+    tw.style.overflow = 'hidden';
+    tw.style.height = startH + 'px';
+    void tw.offsetHeight;  // 强制回流锁定起始高度
+    tw.style.transition = 'height .3s ease';
+    tw.style.height = endH + 'px';
+    var timer;
+    var done = function () {
+      if (done._d) return; done._d = true;
+      clearTimeout(timer);
+      tw.removeEventListener('transitionend', done);
+      tw.style.transition = ''; tw.style.height = ''; tw.style.overflow = '';
+      tw._animating = false;
+    };
+    tw.addEventListener('transitionend', done);
+    timer = setTimeout(done, 380);  // 兜底
+  }
+
+  /* 个人榜前十：歌手列左缘对齐「吧视表歌名列」左缘（无吧视表时回退＝对齐居中下拉按钮 表宽/2−27）。
+     fixed 布局下 calc% 不可靠，故 JS 直接设 px 列宽；随 resize 更新 */
+  function alignAnCols() {
+    var bvSong = document.querySelector('.mp-bv-tbl thead th:nth-child(5)');  // 吧视歌名列（名次/届次/场次/歌手/歌名…）
+    var songLeft = bvSong ? bvSong.getBoundingClientRect().left : null;
+    Array.prototype.forEach.call(document.querySelectorAll('#mp-sec-annual .mp-an-block .mp-an-tbl'), function (tbl) {
+      var w = tbl.offsetWidth;
+      if (!w) return;
+      var th3 = tbl.querySelector('thead th:nth-child(3)');
+      if (!th3) return;
+      var col3 = (songLeft != null)
+        ? Math.round(w - (songLeft - tbl.getBoundingClientRect().left))  // 歌手列左缘 = 吧视歌名列左缘
+        : Math.round(w / 2 + 27);                                         // 回退：对齐居中下拉按钮
+      th3.style.width = col3 + 'px';
+    });
+  }
+
+  /* ── 个人年榜 板块（BARCHARTS）── */
+  function annualSection(annual) {
+    var years = Object.keys(annual).sort(function (a, b) { return b - a; });  // 年份降序
+    if (!years.length) return '';
+    var TIERS = [['t10', '前10'], ['t20', '前20'], ['t50', '前50'], ['t100', '前100'], ['t200', '前200']];
+    // ① 个人助攻数表格（行=年份，列=前10/20/50/100/200，累计）
+    var assistHead = '<th>年份</th>' + TIERS.map(function (t) { return '<th class="ta-c">' + t[1] + '</th>'; }).join('');
+    var assistRows = years.map(function (y) {
+      var a = annual[y].assists || {}, sh = annual[y].assists_shadow || {};  // 主数=占位曲；括号=亚洲不占位曲
+      return '<tr><td class="yr">' + y + '</td>' + TIERS.map(function (t) {
+        return '<td class="num">' + (a[t[0]] || 0) + (sh[t[0]] ? '<span class="mp-an-sh">(' + sh[t[0]] + ')</span>' : '') + '</td>';
+      }).join('') + '</tr>';
+    }).join('');
+    var assistTable = '<div class="mp-an-tw fade-up" style="transition-delay:.28s"><table class="mp-an-tbl mp-an-assist">' +
+      '<thead><tr>' + assistHead + '</tr></thead><tbody>' + assistRows + '</tbody></table></div>';
+    // ② 各年个人榜前十表格（歌名在前 prominent、歌手在后 secondary；默认只展示前三，点击展开前十）
+    var TOP_INIT = 3;
+    var topBlocks = years.map(function (y, yi) {
+      var list = (annual[y].top10 || []).slice(0, 10);
+      if (!list.length) return '';
+      var rows = list.map(function (e, i) {
+        var medal = e.rank <= 3 ? ' mp-an-row--' + e.rank : '';
+        var extra = i >= TOP_INIT ? ' mp-an-extra' : '';
+        var cov = e.cover
+          ? '<img class="an-cover" src="' + esc(e.cover) + '" alt="" loading="lazy" onerror="this.style.visibility=\'hidden\'">'
+          : '<span class="an-cover an-cover--ph"></span>';
+        return '<tr class="' + (medal + extra).trim() + '"><td class="rk">' + e.rank + '</td>' +
+          '<td class="an-name">' + cov + '<span class="an-title">' + esc(e.song) + '</span></td>' +
+          '<td class="an-artist">' + esc(e.artist) + '</td></tr>';
+      }).join('');
+      var more = list.length > TOP_INIT
+        ? '<div class="mp-an-more-wrap"><button type="button" class="mp-an-more" data-collapse aria-label="展开前十">' +
+          '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 7l5 5 5-5"/><path d="M7 13l5 5 5-5"/></svg></button></div>' : '';
+      return '<div class="mp-an-block is-collapsed fade-up" style="transition-delay:' + (0.34 + yi * 0.06).toFixed(2) + 's">' +
+        '<div class="mp-an-subtitle"><span class="an-yr">' + y + '</span>年 个人榜 Top 10</div>' +
+        '<div class="mp-an-tw"><table class="mp-an-tbl"><thead><tr><th class="ta-c">名次</th><th>歌名</th><th>歌手</th></tr></thead><tbody>' + rows + '</tbody></table></div>' +
+        more +
+      '</div>';
+    }).join('');
+    return '<section class="mp-section" id="mp-sec-annual">' +
+      '<div class="section__inner">' +
+        '<div class="mp-section-label fade-up" style="transition-delay:.05s">BARCHARTS</div>' +
+        '<div class="mp-section-title fade-up" style="transition-delay:.15s">个人年榜</div>' +
+        '<div class="mp-an-h fade-up" style="transition-delay:.2s">助攻详情</div>' +
+        assistTable +
+        '<p class="mp-bv-legend fade-up" style="transition-delay:.3s">注：括号内数字为助攻的非占位亚洲单曲数</p>' +
+        topBlocks +
+      '</div>' +
+    '</section>';
+  }
+
+  /* ── 页内目录（Notion 风格，同吧视详情页）── */
+  function buildMemberTOC(items) {
+    var nav = document.createElement('nav');
+    nav.className = 'mp-toc';
+    nav.setAttribute('aria-label', '页内目录');
+    var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
+    nav.innerHTML = '<div class="mp-toc__list">' + items.map(function (it) {
+      return '<div class="mp-toc__item" data-target="' + it.id + '"><span class="mp-toc__dash"></span><span class="mp-toc__label">' + esc(it.label) + '</span></div>';
+    }).join('') + '</div><button class="mp-toc__toggle" type="button" aria-label="页内目录">' + ICON + '</button>';
+    document.body.appendChild(nav);
+    var toggle = nav.querySelector('.mp-toc__toggle');
+    toggle.addEventListener('click', function (e) { e.stopPropagation(); nav.classList.toggle('mp-toc--open'); });
+    document.addEventListener('click', function (e) { if (!nav.contains(e.target)) nav.classList.remove('mp-toc--open'); });
+    var els = Array.prototype.slice.call(nav.querySelectorAll('.mp-toc__item'));
+    var navH = 72, suppress = false, timer = null;
+    function updateVisible() { nav.classList.toggle('mp-toc--visible', window.scrollY > 300); }
+    updateVisible();
+    window.addEventListener('scroll', function () {
+      updateVisible();
+      if (suppress) { clearTimeout(timer); timer = setTimeout(function () { suppress = false; }, 200); }
+    }, { passive: true });
+    var obs = new IntersectionObserver(function (entries) {
+      if (suppress) return;
+      entries.forEach(function (e) {
+        if (e.isIntersecting) els.forEach(function (it) { it.classList.toggle('mp-toc__item--active', it.dataset.target === e.target.id); });
+      });
+    }, { rootMargin: '-' + navH + 'px 0px -55% 0px' });
+    els.forEach(function (it) {
+      var t = document.getElementById(it.dataset.target);
+      if (t) obs.observe(t);
+      it.addEventListener('click', function () {
+        var tt = document.getElementById(it.dataset.target);
+        if (!tt) return;
+        nav.classList.remove('mp-toc--open');
+        suppress = true; clearTimeout(timer);
+        els.forEach(function (x) { x.classList.toggle('mp-toc__item--active', x === it); });
+        window.scrollTo({ top: tt.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+      });
+    });
   }
 
   /* ── Render ── */
@@ -930,8 +1152,10 @@
         '</div>' +
       '</section>';
 
+  var annualHtml = (d.annual && !d.unclaimed) ? annualSection(d.annual) : '';
   root.innerHTML = heroHtml +
     (d.barvision ? bvSection(d.barvision, d.unclaimed) :
+      (annualHtml ? '' :
       '<section class="mp-section">' +
         '<div class="section__inner">' +
           '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">UPDATES</div>' +
@@ -940,7 +1164,57 @@
             '<div class="mp-todo">暂无动态</div>' +
           '</div>' +
         '</div>' +
-      '</section>');
+      '</section>')) +
+    annualHtml;
+
+  // 个人榜前十：折叠（前三 ↔ 前十）——平滑高度动画，就地展开、不移动视口
+  Array.prototype.forEach.call(document.querySelectorAll('.mp-an-block [data-collapse]'), function (btn) {
+    btn.addEventListener('click', function () {
+      var block = btn.closest('.mp-an-block');
+      var tw = block.querySelector('.mp-an-tw');
+      if (tw._animating) return;
+      var willExpand = block.classList.contains('is-collapsed');
+      var startH = tw.offsetHeight;
+      // 量目标高度（切到目标态测量）
+      if (willExpand) block.classList.remove('is-collapsed'); else block.classList.add('is-collapsed');
+      var endH = tw.offsetHeight;
+      if (!willExpand) block.classList.remove('is-collapsed');  // 收起：先恢复显示以便动画，结束再隐藏
+      tw._animating = true;
+      tw.style.overflow = 'hidden';
+      tw.style.height = startH + 'px';
+      void tw.offsetHeight;  // 强制回流，锁定起始高度
+      tw.style.transition = 'height .3s ease';
+      tw.style.height = endH + 'px';
+      btn.classList.toggle('is-open', willExpand);
+      btn.setAttribute('aria-label', willExpand ? '收起' : '展开前十');
+      var timer;
+      var done = function () {
+        if (done._d) return; done._d = true;              // 去重（transitionend + 超时兜底）
+        clearTimeout(timer);
+        tw.removeEventListener('transitionend', done);
+        tw.style.transition = ''; tw.style.height = ''; tw.style.overflow = '';
+        if (!willExpand) block.classList.add('is-collapsed');  // 收起动画结束后真正隐藏额外行
+        tw._animating = false;
+      };
+      tw.addEventListener('transitionend', done);
+      timer = setTimeout(done, 380);  // 兜底：transitionend 未触发（如动画被禁用）也能收尾
+    });
+  });
+
+  // 个人榜前十歌手列对齐居中下拉按钮（初始 + resize）
+  if (d.annual && !d.unclaimed) {
+    alignAnCols();
+    var _anrt;
+    window.addEventListener('resize', function () { clearTimeout(_anrt); _anrt = setTimeout(alignAnCols, 120); });
+  }
+
+  // 页内目录（存在多个板块时才建；样式同吧视详情页）
+  if (!d.unclaimed) {
+    var tocItems = [];
+    if (d.barvision) tocItems.push({ id: 'mp-sec-bv', label: '吧视参赛记录' });
+    if (d.annual) tocItems.push({ id: 'mp-sec-annual', label: '个人年榜' });
+    if (tocItems.length >= 2) buildMemberTOC(tocItems);
+  }
 
   /* ── Fade-up animations ── */
   if ('IntersectionObserver' in window) {
@@ -960,15 +1234,27 @@
     if (bvTable) {
       var bvBody = bvTable.querySelector('tbody');
       var bvData = d.barvision.entries || [];
-      var bvDefDir = { rank: 'asc', edition: 'asc', total: 'desc', twelve: 'desc' };
-      var bvCur = { key: 'edition', dir: 'asc' };
+      var bvDefDir = { rank: 'asc', edition: 'desc', total: 'desc', twelve: 'desc' };
+      var bvCur = { key: 'edition', dir: 'desc' };  // 默认年份从新到旧
+      var BV_INIT = 10, bvCollapsed = true;
+      var bvMore = document.getElementById('mpBvMore');
       var bvApply = function () {
-        bvBody.innerHTML = renderBvRows(sortBvEntries(bvData, bvCur.key, bvCur.dir));
+        var arr = sortBvEntries(bvData, bvCur.key, bvCur.dir);
+        var show = (bvCollapsed && arr.length > BV_INIT) ? arr.slice(0, BV_INIT) : arr;
+        bvBody.innerHTML = renderBvRows(show);
         bvTable.querySelectorAll('th.sortable').forEach(function (th) {
           th.classList.remove('is-asc', 'is-desc');
           if (th.dataset.sort === bvCur.key) th.classList.add(bvCur.dir === 'asc' ? 'is-asc' : 'is-desc');
         });
+        if (bvMore) { bvMore.classList.toggle('is-open', !bvCollapsed); bvMore.setAttribute('aria-label', bvCollapsed ? ('展开全部 ' + arr.length + ' 项') : '收起'); }
       };
+      if (bvMore) bvMore.addEventListener('click', function () {
+        var tw = bvTable.closest('.mp-bv-tw');
+        if (tw && tw._animating) return;
+        var startH = tw ? tw.offsetHeight : 0;
+        bvCollapsed = !bvCollapsed; bvApply();
+        animateTwHeight(tw, startH);
+      });
       bvTable.querySelectorAll('th.sortable').forEach(function (th) {
         th.addEventListener('click', function () {
           var k = th.dataset.sort;
