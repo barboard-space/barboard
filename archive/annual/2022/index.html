@@ -61,6 +61,15 @@
     .chart-item--top .ac-gap { color: var(--clr-gold-light); opacity: 0.85; }
     .chart-item--silver .ac-gap { color: var(--clr-silver); opacity: 0.85; }
     .chart-item--bronze .ac-gap { color: var(--clr-bronze); opacity: 0.85; }
+    /* 亚洲单曲（华语/K-POP）不占位——按卡位插入、名次带星（当年规则只把欧美音乐计入名次）
+       配色对齐成员页混淆单曲：深底 --clr-shadow-bg + 弱化文字 --clr-text-4，不透明度 1 */
+    .ac-chart .chart-item--asian { background: var(--clr-shadow-bg); }
+    .ac-chart .chart-item--asian .chart-rank,
+    .ac-chart .chart-item--asian .chart-song__title,
+    .ac-chart .chart-item--asian .chart-song__artist,
+    .ac-chart .chart-item--asian .ac-stat__label,
+    .ac-chart .chart-item--asian .ac-stat__val { color: var(--clr-text-4); }
+    .ac-rank-star { font-family: var(--font-display); font-size: 0.5em; font-weight: 400; color: var(--clr-text-4); vertical-align: 0.85em; margin-left: 1px; letter-spacing: -1px; }
     .ac-empty { font-size: 14px; color: var(--clr-text-3); padding: 40px 0; }
     /* 查看完整 Top 200 按钮（对标 bbl 显示全部） */
     .ac-showmore { text-align: center; padding: 32px 0 8px; }
@@ -105,10 +114,12 @@
     .ac-hl-card__type { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 7px; display: flex; align-items: center; gap: 6px; justify-content: space-between; }
     .ac-hl-card__rank { font-size: 10px; margin-left: auto; color: var(--clr-text-3); }
     .ac-hl-card__type--pts    { color: var(--clr-gold-light); }
+    .ac-hl-card__type--no1    { color: var(--clr-pink-light); }
     .ac-hl-card__type--assist { color: var(--clr-accent); }
     .ac-hl-card__type--artist { color: var(--clr-violet-light); }
     .ac-hl-card__val { font-family: var(--font-display); font-size: 26px; line-height: 1; letter-spacing: 0.02em; margin-bottom: 5px; }
     .ac-hl-card__val--pts    { color: var(--clr-gold-light); text-shadow: 0 0 20px rgba(212,168,50,0.3); }
+    .ac-hl-card__val--no1    { color: var(--clr-pink-light); text-shadow: 0 0 20px rgba(240,96,184,0.3); }
     .ac-hl-card__val--assist { color: var(--clr-accent); text-shadow: 0 0 20px rgba(0,180,255,0.3); }
     .ac-hl-card__val--artist { color: var(--clr-violet-light); text-shadow: 0 0 20px rgba(168,85,247,0.3); }
     .ac-hl-card__unit { font-family: var(--font-body); font-size: 12px; font-weight: 600; margin-left: 3px; }
@@ -135,13 +146,17 @@
       .ac-search__input { font-size: 16px; padding: 6px 30px 8px 12px; }
       .ac-search__input::placeholder { font-size: 12px; }
       #acHighlights { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-      .ac-meta-item { white-space: normal; }
+      /* 手机：meta 双行——第 1 行机构+榜名，第 2 行 TOP 200 · 76 榜合榜（"·" 分隔，无竖线） */
+      .ac-meta { row-gap: 4px; }
+      .ac-meta-item { white-space: normal; border-right: none; padding-right: 0; margin-right: 0; }
+      .ac-meta-item:first-child { flex-basis: 100%; }
+      .ac-meta-item:nth-child(3)::before { content: '·'; margin: 0 8px; color: var(--clr-text-3); }
       /* 手机：右列两行 label|值网格 */
       .ac-stats { display: grid; grid-template-columns: auto auto; row-gap: 2px; column-gap: 8px; align-items: baseline; }
       .ac-stat { display: contents; }
       .ac-stat + .ac-stat { border-left: none; }
       .ac-stat__label { font-size: 10px; color: var(--clr-text-3); text-align: left; }
-      .ac-stat__val { font-size: 10px; font-weight: 600; color: var(--clr-text-2); text-align: right; }
+      .ac-stat__val { font-size: 10px; font-weight: 600; color: var(--clr-text-2); text-align: left; }
     }
   </style>
 </head>
@@ -199,8 +214,10 @@
   <script src="/scripts/nav.js"></script>
   <script>
     function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
-    var _byRank = {}, _activeRankEl = null, _rankListenerAdded = false, _all = [], _io = null;
-    var INITIAL = 100;   // 默认展示 Top 100，按钮展开至全部
+    var _byKey = {}, _activeRankEl = null, _rankListenerAdded = false, _all = [], _io = null;
+    var INITIAL = 100;   // 默认展示到名次 100（含其下不占位的亚洲曲），按钮展开至全部
+    // 唯一键：欧美占位曲=名次数字；亚洲不占位曲=名次+星（34* / 145**）
+    function itemKey(t){ return t.rank + (t.star ? new Array(t.star + 1).join('*') : ''); }
     function observeFades(root){
       (root||document).querySelectorAll('.fade-up').forEach(function(n){
         if (n.classList.contains('visible')) return;
@@ -213,9 +230,10 @@
       var cover = t.cover
         ? '<img class="chart-cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
         : '<div class="chart-cover"></div>';
-      var medal = t.rank===1?'chart-item--top':t.rank===2?'chart-item--silver':t.rank===3?'chart-item--bronze':'';
-      return '<div class="chart-item ' + (medal?medal+' ':'') + 'fade-up" data-rank="' + t.rank + '">' +
-        '<div class="chart-rank-col"><div class="chart-rank">' + t.rank + '</div>' +
+      var medal = (!t.star && t.rank===1)?'chart-item--top':(!t.star && t.rank===2)?'chart-item--silver':(!t.star && t.rank===3)?'chart-item--bronze':'';
+      var star = t.star ? '<span class="ac-rank-star">' + new Array(t.star + 1).join('*') + '</span>' : '';
+      return '<div class="chart-item ' + (medal?medal+' ':'') + (t.star?'chart-item--asian ':'') + 'fade-up" data-rank="' + itemKey(t) + '">' +
+        '<div class="chart-rank-col"><div class="chart-rank">' + t.rank + star + '</div>' +
           (t.gap!=null ? '<span class="ac-gap">+' + t.gap + '</span>' : '') + '</div>' + cover +
         '<div class="chart-song">' +
           '<div class="chart-song__title">' + esc(t.song) + '</div>' +
@@ -223,7 +241,7 @@
         '</div>' +
         '<div class="ac-stats">' +
           '<div class="ac-stat"><span class="ac-stat__label">累计点数</span><span class="ac-stat__val">' + Math.round(t.points) + '</span></div>' +
-          (t.assists!=null ? '<div class="ac-stat"><span class="ac-stat__label">助攻数</span><span class="ac-stat__val">' + t.assists + '</span></div>' : '') +
+          (t.assists!=null ? '<div class="ac-stat"><span class="ac-stat__label">助攻榜数</span><span class="ac-stat__val">' + t.assists + '</span></div>' : '') +
         '</div>' +
       '</div>';
     }
@@ -235,7 +253,7 @@
         : '<div class="ac-hl-card__cover"></div>';
       var title = opts.titleText != null ? opts.titleText : t.song;
       var sub   = opts.subText   != null ? opts.subText   : t.artist;
-      return '<div class="ac-hl-card ac-hl-card--clickable" data-rank="' + t.rank + '">' +
+      return '<div class="ac-hl-card ac-hl-card--clickable" data-rank="' + itemKey(t) + '">' +
         '<div class="ac-hl-card__type ac-hl-card__type--' + opts.kind + '"><span>' + opts.label + '</span><span class="ac-hl-card__rank">' + (opts.rankPrefix||'') + '#' + t.rank + '</span></div>' +
         '<div class="ac-hl-card__val ac-hl-card__val--' + opts.kind + '">' + opts.val + (opts.unit ? '<span class="ac-hl-card__unit">' + opts.unit + '</span>' : '') + '</div>' +
         '<div class="ac-hl-card__cover-row">' + cover +
@@ -246,14 +264,19 @@
     function buildHighlights(entries){
       var el = document.getElementById('acHighlights');
       var cards = [];
+      // 看点只统计欧美占位曲（不带星）——亚洲单曲当年不计入名次
+      var counted = entries.filter(function(e){ return !e.star; });
       // 点数冠军（年度第一）
-      var champ = entries.slice().sort(function(a,b){ return b.points-a.points; })[0];
+      var champ = counted.slice().sort(function(a,b){ return b.points-a.points; })[0];
       if (champ) cards.push(hlCard({ track: champ, kind: 'pts', label: '点数冠军', val: Math.round(champ.points), unit: '' }));
+      // 最多年冠（登顶个人榜最多的单曲——被最多大妈排在其个人榜第 1；含亚洲曲）
+      var no1Top = entries.filter(function(e){ return e.no1; }).sort(function(a,b){ return b.no1-a.no1; })[0];
+      if (no1Top) cards.push(hlCard({ track: no1Top, kind: 'no1', label: '最多年冠', val: no1Top.no1, unit: ' 冠' }));
       // 助攻王（助攻数最多）
-      var assistTop = entries.filter(function(e){ return e.assists!=null; }).sort(function(a,b){ return b.assists-a.assists; })[0];
+      var assistTop = counted.filter(function(e){ return e.assists!=null; }).sort(function(a,b){ return b.assists-a.assists; })[0];
       if (assistTop) cards.push(hlCard({ track: assistTop, kind: 'assist', label: '助攻王', val: assistTop.assists, unit: ' 榜' }));
-      // 进百最多（Top 100 内单曲数最多的艺人；多人合作串拆开分别计入；封面取其最高名次单曲，显示艺人名）
-      var top100 = entries.filter(function(e){ return e.rank <= 100; }), byArtist = {};
+      // 最多前百（Top 100 内单曲数最多的艺人；多人合作串拆开分别计入；封面取其最高名次单曲，显示艺人名）
+      var top100 = counted.filter(function(e){ return e.rank <= 100; }), byArtist = {};
       var KEEP = ['Tyler, The Creator', 'Black Country, New Road'];  // 名字本身含逗号、勿拆
       function splitArtists(s){
         var tmp = s; KEEP.forEach(function(k,i){ tmp = tmp.split(k).join('§'+i+'§'); });
@@ -265,10 +288,10 @@
         var list = byArtist[a];
         if (list.length > bestCount) { bestCount=list.length; bestArtist=a; bestTrack=list.slice().sort(function(x,y){ return x.rank-y.rank; })[0]; }
       });
-      if (bestArtist && bestTrack) cards.push(hlCard({ track: bestTrack, kind: 'artist', label: '前百最多', val: bestCount, unit: ' 首', titleText: bestArtist, subText: '', rankPrefix: '最高' }));
+      if (bestArtist && bestTrack) cards.push(hlCard({ track: bestTrack, kind: 'artist', label: '最多前百', val: bestCount, unit: ' 首', titleText: bestArtist, subText: '', rankPrefix: '最高' }));
       el.innerHTML = cards.join('');
       el.querySelectorAll('.ac-hl-card--clickable').forEach(function(c){
-        c.addEventListener('click', function(){ scrollToRank(parseInt(c.dataset.rank)); });
+        c.addEventListener('click', function(){ scrollToRank(c.dataset.rank); });
       });
     }
 
@@ -279,12 +302,13 @@
       if (!_activeRankEl) return;
       var el = _activeRankEl; _activeRankEl = null; el.classList.remove('ac-rank-active');
     }
-    function scrollToRank(rank){
+    function scrollToRank(key){
+      var t = _byKey[key]; if (!t) return;
       var wrap = document.getElementById('acShowMore');
-      var needExpand = rank > INITIAL && wrap && !wrap.classList.contains('ac-showmore--hidden');
+      var needExpand = t.rank > INITIAL && wrap && !wrap.classList.contains('ac-showmore--hidden');
       function doScroll(){
         var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
-        var el = document.querySelector('#acChart [data-rank="' + rank + '"]'); if (!el) return;
+        var el = document.querySelector('#acChart [data-rank="' + key.replace(/"/g,'') + '"]'); if (!el) return;
         if (!el.classList.contains('visible')) { el.style.transition='none'; el.style.transitionDelay=''; el.classList.add('visible'); void el.offsetWidth; el.style.transition=''; }
         var visibleH = window.innerHeight - navH;
         var top = el.getBoundingClientRect().top + window.scrollY - navH - (visibleH - el.offsetHeight)/2;
@@ -307,7 +331,7 @@
       if (!q) { items.forEach(function(el){ el.style.display=''; }); countEl.textContent=''; return; }
       var matched = 0;
       items.forEach(function(el){
-        var t = _byRank[parseInt(el.dataset.rank)];
+        var t = _byKey[el.dataset.rank];
         var hit = t && (t.song.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
         el.style.display = hit ? '' : 'none'; if (hit) matched++;
       });
@@ -326,7 +350,7 @@
     function initShowMore(){
       var btn=document.getElementById('acShowMoreBtn'), wrap=document.getElementById('acShowMore');
       if (!btn||!wrap) return;
-      if (_all.length <= INITIAL) { wrap.classList.add('ac-showmore--hidden'); return; }
+      if (!_all.some(function(e){ return e.rank > INITIAL; })) { wrap.classList.add('ac-showmore--hidden'); return; }
       btn.addEventListener('click', function(){ renderChart(_all); wrap.classList.add('ac-showmore--hidden'); });
     }
 
@@ -372,14 +396,15 @@
       try { d = await fetch('/data/annual/2022.json').then(function(r){ return r.json(); }); }
       catch(e){ el.innerHTML = '<div class="ac-empty">榜单加载失败</div>'; return; }
       _all = d.entries || [];
-      _all.sort(function(a,b){ return a.rank-b.rank; });
-      // 与下一名的分差（四舍五入整数相减）；末名无
-      for (var gi=0; gi<_all.length; gi++) _all[gi].gap = (gi+1<_all.length) ? Math.round(_all[gi].points)-Math.round(_all[gi+1].points) : null;
-      _all.forEach(function(t){ _byRank[t.rank] = t; });
+      _all.sort(function(a,b){ return (a.rank-b.rank) || ((a.star||0)-(b.star||0)); });
+      // 分差只在欧美占位曲（不带星）之间算——亚洲不占位曲不显示分差；末名无
+      var slotted = _all.filter(function(e){ return !e.star; });
+      for (var gi=0; gi<slotted.length; gi++) slotted[gi].gap = (gi+1<slotted.length) ? Math.round(slotted[gi].points)-Math.round(slotted[gi+1].points) : null;
+      _all.forEach(function(t){ _byKey[itemKey(t)] = t; });
       if ('IntersectionObserver' in window) {
         _io = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('visible'); _io.unobserve(x.target); } }); }, { threshold: 0.06 });
       }
-      renderChart(_all.slice(0, INITIAL));   // 默认 Top 100
+      renderChart(_all.filter(function(e){ return e.rank <= INITIAL; }));   // 默认名次 ≤ 100（含其下不占位亚洲曲）
       buildHighlights(_all);
       initSearch();
       initShowMore();
