@@ -7,11 +7,19 @@ import sys, os, json, time, re, urllib.parse, urllib.request
 
 SRC = {
     "2022": r"D:\Genius\BarChart\吧榜文件\年终榜\2022吧年榜.xlsx",
+    "2021": r"D:\Genius\BarChart\吧榜文件\年终榜\2021年终榜\吧榜整理文件.xlsx",
 }
+# 各年源 sheet（默认「总榜」）；列名也各年不同，用 _col() 兼容
+SHEET = {"2021": "吧榜豪华榜"}
+# 个人榜 top10 用的「全量」sheet（含所有排过的曲 → 保证满 10 条）；未定义则用主 sheet 本身。
+# 2021：显示榜=豪华榜(亚洲不占位)，但 top10 从完全榜(2760 首全量)取，避免私榜曲缺失。
+FULL_SHEET = {"2021": "吧榜完全榜"}
+# 无单张全量合表、但有各大妈独立个人 sheet（sheet 名=简称，列 排名/作品/艺术家）的年份 → top10 从个人 sheet 取（最权威、满 10）
+MEMBER_SHEETS = {"2022"}
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "annual")
 MEMBERS_CSV = os.path.join(os.path.dirname(__file__), "..", "data", "members", "members.csv")
 # 修正表（歌手/歌名规范化的唯一维护源，见该文件顶部说明）
-from annual_corrections import KEEP, ABBR_OVERRIDE, ARTIST_FIX, SONG_FIX_EXACT, SONG_FIX_SUB
+from annual_corrections import KEEP, ABBR_OVERRIDE, ARTIST_FIX, ARTIST_RAW_FIX, SONG_FIX_EXACT, SONG_FIX_SUB
 
 
 # Title-Case 修复：撇号后的英文缩写/所有格被误大写（'S 'T 'M 'D 'Re 'Ve 'Ll）→ 小写
@@ -41,6 +49,9 @@ def _keep_split(s):
 
 
 def norm_artist(s):
+    for a, b in ARTIST_RAW_FIX.items():          # 整串预修正（名字内含逗号者，拆分前先规范）
+        s = s.replace(a, b)
+    s = s.replace("，", ",")                      # 多艺人全角逗号分隔 → 半角（后续统一「, 」重组）
     s = _FEAT_RE.sub(", ", fix_text(s))          # feat/ft → 逗号
     parts = [ARTIST_FIX.get(p, p) for p in _keep_split(s)]  # 逐艺人官方写法
     return ", ".join(parts)                       # 统一「逗号 + 空格」
@@ -60,8 +71,40 @@ def ckey(artist, song):
     return n(artist) + "|" + n(song)
 
 
-def build_abbr2id(abbrs):
-    """把总榜里的个人榜简称（松/威/N/时…）映射到 space_id。"""
+# 各大妈独立个人 sheet 表头名多变，尽力识别（识别不出则返回 []，跳过、不覆盖）
+_MS_RANK = ("排名", "名次", "排位", "Rank", "RANK", "POS", "Number", "ranking", "rank")
+_MS_SONG = ("作品", "歌曲", "歌名", "单曲", "曲名", "歌曲名称", "Song", "Songs", "Single", "Single Name",
+            "Title", "Titles", "Track", "SONG", "SONGS", "song")
+_MS_ARTIST = ("艺术家", "艺人", "歌手", "艺人名称", "Artist", "Artists", "Artist(s)", "Artist (s)",
+              "Artist（s）", "Aritist", "Aritist(s)", "ARTIST", "ARITIST", "artist")
+
+
+def read_member_sheet(ws):
+    """从某大妈的独立个人 sheet 读其个人榜前十 [(rank, artist, song)]（表头格式多变，识别不出返回 []）。"""
+    it = ws.iter_rows(values_only=True)
+    try:
+        hdr = next(it)
+    except StopIteration:
+        return []
+    idx = {str(h).strip(): i for i, h in enumerate(hdr) if h is not None}
+    ri = next((idx[n] for n in _MS_RANK if n in idx), None)
+    si = next((idx[n] for n in _MS_SONG if n in idx), None)
+    ai = next((idx[n] for n in _MS_ARTIST if n in idx), None)
+    if ri is None or si is None or ai is None:
+        return []
+    out = []
+    for row in it:
+        v = row[ri]
+        if isinstance(v, (int, float)) and 1 <= int(v) <= 10:
+            a = norm_artist(str(row[ai] or "").strip())
+            s = norm_song(str(row[si] or "").strip())
+            if a and s:
+                out.append((int(v), a, s))
+    return out
+
+
+def build_abbr2id(abbrs, year=None):
+    """把总榜里的个人榜简称（松/威/N/时…）映射到 space_id；ABBR_OVERRIDE 按年消歧。"""
     import csv as _csv
     mem = []
     with open(MEMBERS_CSV, encoding="utf-8-sig") as f:
@@ -70,10 +113,11 @@ def build_abbr2id(abbrs):
         for r in rd:
             if r and r[0]:
                 mem.append((int(r[0]), r[1]))
+    ov = ABBR_OVERRIDE.get(str(year), {})
     out, miss = {}, []
     for a in abbrs:
-        if a in ABBR_OVERRIDE:
-            out[a] = ABBR_OVERRIDE[a]
+        if a in ov:
+            out[a] = ov[a]
             continue
         c = [sid for sid, name in mem if name == a + "妈" or (name and name[0] == a)]
         if len(c) == 1:
@@ -172,17 +216,23 @@ def main():
         top = int(sys.argv[sys.argv.index("--top") + 1])
     import openpyxl
     wb = openpyxl.load_workbook(SRC[year], read_only=True, data_only=True)
-    ws = wb["总榜"]
+    ws = wb[SHEET.get(year, "总榜")]
     rows = ws.iter_rows(values_only=True)
     header = next(rows)
-    # 定位列（排名/艺术家/作品/点数/助攻数）
+    # 定位列（各年列名不同：艺术家/艺人、作品/歌曲、点数/总点数、助攻数/总助攻数）
     idx = {h: i for i, h in enumerate(header) if h}
-    ci = {"rank": idx["排名"], "artist": idx["艺术家"], "song": idx["作品"],
-          "pts": idx["点数"], "assist": idx.get("助攻数")}
+
+    def _col(*names):
+        for n in names:
+            if n in idx:
+                return idx[n]
+        return None
+    ci = {"rank": _col("排名"), "artist": _col("艺术家", "艺人"), "song": _col("作品", "歌曲"),
+          "pts": _col("点数", "总点数"), "assist": _col("助攻数", "总助攻数")}
     # 成员个人榜列（'求和项:<简称>排名' + 末尾 '盲排名'）→ col_index -> space_id
     abbrs = [str(h).replace("求和项:", "").replace("排名", "")
              for h in header[5:] if h and str(h).endswith("排名")]
-    abbr2id = build_abbr2id(abbrs)
+    abbr2id = build_abbr2id(abbrs, year)
     rank_cols = {}
     for i, h in enumerate(header):
         if i >= 5 and h and str(h).endswith("排名"):
@@ -262,10 +312,9 @@ def main():
     # ── 成员年榜聚合 → data/annual/member-annual-index.json（个人主页「个人年榜」板块）──
     TIERS = [10, 20, 50, 100, 200]
     sids = sorted(set(rank_cols.values()))
-    top10 = {s: [] for s in sids}                         # 个人榜前十：其个人名次 1..10 的歌
     assist = {s: {t: 0 for t in TIERS} for s in sids}     # 助攻分档（占位/欧美曲）：按年榜名次累计（前 N）
     assist_sh = {s: {t: 0 for t in TIERS} for s in sids}  # 助攻分档（亚洲不占位曲）：单独统计、括号标注
-    for row in all_rows:
+    for row in all_rows:                                  # 助攻分档 = 主显示榜（豪华榜）
         rk_raw = row[ci["rank"]]
         star = 0
         if isinstance(rk_raw, (int, float)):
@@ -280,21 +329,51 @@ def main():
             continue
         if rk < 1:
             continue
-        artist = norm_artist(str(row[ci["artist"]] or "").strip())
-        song = norm_song(str(row[ci["song"]] or "").strip())
-        if not artist or not song:
-            continue
         for col, sid in rank_cols.items():
-            v = row[col]
-            if not isinstance(v, (int, float)):
+            if not isinstance(row[col], (int, float)):
                 continue
-            pr = int(v)
-            if 1 <= pr <= 10:                             # 个人榜前十
-                top10[sid].append((pr, artist, song))
             tgt = assist if star == 0 else assist_sh      # 占位曲计主数 / 亚洲不占位曲计括号
             for t in TIERS:
                 if rk <= t:
                     tgt[sid][t] += 1
+
+    # 个人榜前十：优先从「完全榜」全量 sheet 取（保证满 10 条）；否则用主 sheet
+    def collect_top10(rows_, ci_, rcols_):
+        t = {s: [] for s in sids}
+        for row in rows_:
+            a = norm_artist(str(row[ci_["artist"]] or "").strip())
+            s = norm_song(str(row[ci_["song"]] or "").strip())
+            if not a or not s:
+                continue
+            for col, sid in rcols_.items():
+                v = row[col]
+                if isinstance(v, (int, float)) and 1 <= int(v) <= 10:
+                    t[sid].append((int(v), a, s))
+        return t
+    if year in FULL_SHEET:
+        fws = wb[FULL_SHEET[year]]
+        fit = fws.iter_rows(values_only=True)
+        fh = next(fit)
+        fidx = {h: i for i, h in enumerate(fh) if h}
+        fci = {"artist": next((fidx[n] for n in ("艺术家", "艺人") if n in fidx), None),
+               "song": next((fidx[n] for n in ("作品", "歌曲") if n in fidx), None)}
+        frcols = {}
+        for i, h in enumerate(fh):
+            if i >= 5 and h and str(h).endswith("排名"):
+                aa = str(h).replace("求和项:", "").replace("排名", "")
+                if aa in abbr2id:
+                    frcols[i] = abbr2id[aa]
+        top10 = collect_top10(list(fit), fci, frcols)
+    else:
+        top10 = collect_top10(all_rows, ci, rank_cols)
+    # 补全：MEMBER_SHEETS 年份里，总榜不足 10 条的成员，从其独立个人 sheet 尽力补齐（个人 sheet 表头多变）
+    if year in MEMBER_SHEETS:
+        for abbr, sid in abbr2id.items():
+            if len(top10.get(sid, [])) >= 10 or abbr not in wb.sheetnames:
+                continue
+            st = read_member_sheet(wb[abbr])
+            if len(st) > len(top10.get(sid, [])):
+                top10[sid] = st
     magg = {}
     for sid in sids:
         lst = sorted(top10[sid], key=lambda x: x[0])[:10]

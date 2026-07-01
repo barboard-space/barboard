@@ -32,7 +32,8 @@ KEEP = [
 # ── 个人榜简称 → space_id 的例外（简称非昵称首字者）──────────────
 # 默认规则：昵称去「妈」/首字唯一匹配 members.csv；下列为例外
 ABBR_OVERRIDE = {
-    "时": 27,   # S妈：简称取自 handle「哈哈哈时光机」
+    "2022": {"时": 27},                 # S妈：简称取自 handle「哈哈哈时光机」
+    "2021": {"蓝": 169, "姐": 171},     # 蓝=霍妈(handle 霍蓝Horan)、姐=蓝姐（该年两列并存，需消歧）
 }
 
 # ── 艺人：Title-Case → 官方写法 / 拼写纠错（逐个独立艺人精确匹配）──
@@ -63,6 +64,12 @@ ARTIST_FIX = {
     "Bring Me To Horizon": "Bring Me the Horizon",  # To → the
     "Micheal Ray": "Michael Ray",                    # Micheal → Michael
     "dui": "Taylor Swift, Lana Del Rey",             # 源数据艺人栏错填（Snow On The Beach）
+}
+
+# ── 艺人整串预修正（在按逗号拆分前替换）：修名字内含逗号的写法 → 统一规范，再靠 KEEP 保护不被拆 ──
+ARTIST_RAW_FIX = {
+    "Tyler, The Creater": "Tyler, The Creator",  # 拼写错 Creater
+    "Tyler,The Creator": "Tyler, The Creator",   # 内部逗号无空格
 }
 
 # ── 歌名：整首替换（键 = 完整错误歌名，值 = 完整正确歌名）──────────

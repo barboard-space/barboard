@@ -225,7 +225,7 @@
     '}',
     '.mp-an-tbl .an-artist{color:var(--clr-text-2);white-space:nowrap}',  /* 歌手（后，secondary） */
     '.mp-an-h{font-size:13px;font-weight:600;color:var(--clr-text-2);margin:0 0 12px}',  /* 「助攻详情」同「历届排名走势」 */
-    '.mp-an-subtitle .an-yr{font-family:var(--font-display);font-size:19px;letter-spacing:.04em;color:var(--clr-text);margin-right:3px}',
+    '.mp-an-subtitle .an-yr{font-family:var(--font-display);font-weight:400;font-size:19px;letter-spacing:.04em;color:var(--clr-text);margin-right:3px}',
     '.mp-an-block.is-collapsed .mp-an-extra{display:none}',
     '.mp-more{display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:transparent;border:1px solid var(--clr-border-2);color:var(--clr-text-2);font-family:var(--font-body);font-size:12px;font-weight:600;letter-spacing:.04em;padding:6px 16px;border-radius:6px;cursor:pointer;transition:border-color .2s,color .2s}',
     '.mp-more:hover{border-color:var(--clr-text);color:var(--clr-text)}',
@@ -1069,7 +1069,7 @@
     }).join('');
     return '<section class="mp-section" id="mp-sec-annual">' +
       '<div class="section__inner">' +
-        '<div class="mp-section-label fade-up" style="transition-delay:.05s">BARCHARTS</div>' +
+        '<div class="mp-section-label fade-up" style="transition-delay:.05s;font-family:var(--font-body);font-weight:700">BARCHARTS</div>' +
         '<div class="mp-section-title fade-up" style="transition-delay:.15s">个人年榜</div>' +
         '<div class="mp-an-h fade-up" style="transition-delay:.2s">助攻详情</div>' +
         assistTable +

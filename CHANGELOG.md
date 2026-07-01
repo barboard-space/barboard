@@ -4,6 +4,23 @@
 
 ---
 
+## [2026-07-01] — 成员个人年榜（BARCHARTS）+ 2021 年榜导入
+
+### Added
+- 成员个人主页新增「个人年榜」板块（BARCHARTS）：助攻详情表（前10/20/50/100/200，占位曲主数 + 亚洲不占位曲括号）+ 各年个人榜 Top 10（名次·封面·歌名·歌手）+ Notion 目录 + 展开/折叠动画。数据 `data/annual/member-annual-index.json`（`gen_member_pages` 注入 `MEMBER_DATA.annual`）。
+- 2021 年榜导入（源 `吧榜豪华榜`，67 榜、31 条亚洲不占位曲、封面 221/221），`/archive/annual/2021/` + 年份导航互链 + archive 入口。
+- 年度看点卡「最多年冠」（被最多大妈排个人榜第 1 的单曲）。
+- `scripts/annual_corrections.py` 为歌手/歌名规范化单一维护源（新增 `ARTIST_RAW_FIX`、`ABBR_OVERRIDE` 按年份、全角逗号→半角）。
+- 解析脚本按年 `SHEET`/`FULL_SHEET`/`MEMBER_SHEETS` 字典：显示榜用主 sheet，个人榜 Top10 另取全量源（2021 完全榜 / 2022 各大妈个人 sheet 补全）保证每人满 10 条。
+
+### Changed
+- 亚洲单曲不占位：名次带星、深底弱化、不计名次/看点/分差；封面 iTunes 多级回退 + 归一缓存键。
+- 「前百最多」→「最多前百」；助攻标签「助攻数」→「助攻榜数」。
+
+### Fixed
+- 个人榜 Top10 完整性：2021（67）+ 2022（76）全员补齐至 10 条（肥妈 #3 由个人 sheet 补入）。
+- 桌面第 2/3 名封面+歌手底边框 1px 偏移（td 不再设 flex + 去封面负边距）。
+
 ## [2026-06-30] — 年榜页精修：Top 200 + 完整侧栏 + 年份导航 + 分差下标
 
 ### Changed — `archive/annual/2022/`
