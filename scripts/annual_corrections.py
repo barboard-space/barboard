@@ -80,6 +80,31 @@ ABBR_OVERRIDE = {
         # 「助攻」「数字」身份不明，用户指示暂略去——不加映射，
         # 自动落入 build_abbr2id 的未匹配名单（不计入该年成员统计，总点数/名次不受影响）。
     },
+    # 2015（21 人合榜）：列头是英文/拼音网名（非"X妈"简称），build_abbr2id 默认按昵称去妈匹配对不上，
+    # 全部 21 人均登记（含本可 name==a 自动解出的"小擦"，此年格式特殊、显式登记更清晰）。
+    "2015": {
+        "DDDDDope": 190,     # 嘟妈（bilibili_name/handle 均为 DDDDDope）
+        "依娜布点": 157,     # 布妈（用户指认）
+        "绿荫夏语": 125,     # 萌妈（handle 绿荫夏语）
+        "靛冰蓝晓": 776,     # 冰妈（用户指认）
+        "lemon心语": 19,     # 柠妈（沿用 2018 已确认的个人榜标题别名）
+        "fire_storm": 129,   # 火妈（handle fire_storm）
+        "Lee翼雨": 17,       # 雨妈（handle Lee翼雨）
+        "城城": 120,         # 城妈（沿用既有别名）
+        "小擦": 781,         # 小擦（本身即成员名，name==a 可自动解出，此处显式登记）
+        "Rihanavy": 133,     # N妈（handle rihanavy，大小写/尾随 nbsp 已由 strip() 处理）
+        "小麻雀": 189,       # 雀妈（用户指认，"麻雀"别名的变体）
+        "环球颖音": 770,     # 音妈（handle 环球颖音）
+        "Raz": 118,          # 兔妈（沿用既有别名，handle Razbit 前缀）
+        "Jh": 156,           # 杰妈（handle jh201013 前缀）
+        "卡卡": 786,         # 卡妈（沿用既有别名）
+        "小耳": 783,         # 耳妈（沿用既有别名）
+        "jdean": 782,        # JD（用户指认）
+        "小小": 153,         # 小妈（沿用既有别名）
+        "淋淋": 785,         # 淋妈（沿用既有别名）
+        "特仑苏": 127,       # 苏妈（用户指认）
+        "死心陈": 167,       # 森妈（用户推测确认，handle 陈先森Qq）
+    },
 }
 
 # ── 艺人：Title-Case → 官方写法 / 拼写纠错（逐个独立艺人精确匹配）──
@@ -240,6 +265,8 @@ ARTIST_RAW_FIX = {
     "Justin Bieber&MO": "Justin Bieber & MØ",           # 补空格 + Ø 缺失
     "Gnash&Olivia O'Brien": "Gnash & Olivia O'Brien",   # 补空格
     "Justin Bieber(feat. Big Sean)": "Justin Bieber (feat. Big Sean)",  # 补空格
+    # 2015 年榜：无逗号的整串组合
+    "Ariana Grande & The Weekend": "Ariana Grande & The Weeknd",  # Weeknd 拼写错（另有正确的 Vampire Weekend 乐队名，不可混淆）
 }
 
 # ── 歌名：整首替换（键 = 完整错误歌名，值 = 完整正确歌名）──────────
@@ -270,6 +297,14 @@ SONG_FIX_EXACT = {
     "John Wayne Gacy. Jr.": "John Wayne Gacy, Jr.",  # Sufjan Stevens；句读符号错
     "True Colours": "True Colors",  # Anna Kendrick & Justin Timberlake；官方美式拼写
     "Me,Myself&I": "Me, Myself & I",  # G-Eazy, Bebe Rexha；补空格
+    # 2015 年榜
+    "Runnin'（Lose it All）": "Runnin' (Lose It All)",  # Naughty Boy；全角括号 + 大小写规范
+    "All Of Me (Live）": "All of Me (Live)",  # John Legend；全角括号 + Of→of
+    "Watch Me (Whip/Nae Nae）": "Watch Me (Whip/Nae Nae)",  # Silento；全角括号
+    "Up ＆ Down(위아래)": "Up & Down (위아래)",  # EXID；全角 & + 补空格
+    "I’m Yours": "I'm Yours",  # 弯引号规范
+    "Should’ve Been Us": "Should've Been Us",  # 弯引号规范
+    "You Should Know Where I’m Coming From": "You Should Know Where I'm Coming From",  # 弯引号规范
 }
 
 # ── 歌名：子串替换（品牌/缩写/加空格；对任意歌名生效）──────────────

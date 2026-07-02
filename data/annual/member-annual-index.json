@@ -29328,5 +29328,1498 @@
    "top10": [],
    "no_detail": true
   }
+ },
+ "2015": {
+  "17": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Prince Royce, Snoop Dogg",
+     "song": "Stuck On a Feeling",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/20/e8/ab/20e8abb9-76ee-637b-4abd-d90eb4d4a44b/886445275926.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Taylor Swift",
+     "song": "Style",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Sage the Gemini",
+     "song": "Good Thing (feat. Nick Jonas)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/cf/af/76/cfaf7686-0bbd-d53a-c0d0-8cec6e2d88ac/15UMGIM69664.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "song": "See You Again",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Taylor Swift",
+     "song": "Blank Space",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Billy Gilman",
+     "song": "Say You Will",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features115/v4/43/03/5f/43035f49-04bd-9e1e-2bd6-242ae7c6e240/dj.qalzngzq.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Owl City",
+     "song": "Back Home",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/11/56/47/11564785-af2f-7938-75c2-9eac4a39ad6c/5064010160890_cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Cro",
+     "song": "Meine Gang",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4f/83/a9/4f83a996-69d8-774c-71ce-dec8721ca63f/4018939265793.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Sam Hunt",
+     "song": "House Party",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/17/00/a2/1700a23b-2441-5133-7cb8-344168f45cd4/14UMGIM42058.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Major Lazer",
+     "song": "Lean On (feat. MØ & DJ Snake)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/29/a7/3f/29a73f03-a1b5-c8f0-0df7-8dfe107bf929/653738300326_Cover.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "19": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 75,
+    "t200": 75
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Ed Sheeran",
+     "song": "Photograph",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2d/36/f9/2d36f9a7-2c3e-ce0f-7fb6-036feecb221f/825646974450.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Rihanna",
+     "song": "Bitch Better Have My Money",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/76/d5/19/76d519f9-e79a-1b78-570a-01b737ad5bdb/00851365006066.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Ed Sheeran",
+     "song": "BloodStream",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2d/36/f9/2d36f9a7-2c3e-ce0f-7fb6-036feecb221f/825646974450.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "song": "See You Again",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "The Weeknd",
+     "song": "The Hills",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Taylor Swift",
+     "song": "Style",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Justin Bieber",
+     "song": "What Do You Mean?",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/75/11/84/751184b0-77df-1eff-bb20-dac03247425d/15UMGIM59808.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Ellie Goulding",
+     "song": "Love Me Like You Do",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/df/09/7e/df097e10-36b1-a35c-bf5e-2ef138bd2ed7/15UMGIM68751.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Tinashe",
+     "song": "All Hands On Deck",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/43/1c/5e/431c5e0f-140b-bf2f-9678-8790c369987a/886444673228.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "The Weeknd",
+     "song": "Can't Feel My Face",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "118": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Major Lazer",
+     "song": "Lean On (feat. MØ & DJ Snake)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/29/a7/3f/29a73f03-a1b5-c8f0-0df7-8dfe107bf929/653738300326_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Sigala",
+     "song": "Easy Love",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/fa/ae/f5/faaef5a7-ea8e-4a2b-83d7-9db8d418ce0f/886445462111.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Justin Bieber",
+     "song": "What Do You Mean?",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/75/11/84/751184b0-77df-1eff-bb20-dac03247425d/15UMGIM59808.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Tiësto, Jane Zhang",
+     "song": "Change Your World",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/88/84/d6/8884d662-302a-56d9-a2b1-29732eb45a1b/6941636777703.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Sigala, Bryn Christopher",
+     "song": "Sweet Lovin'",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e2/9f/16/e29f16c3-84e5-0794-c8f8-2dbfd68b89ee/886445714975.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Coldplay",
+     "song": "Adventure Of A Lifetime",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/c8/0a/6d/c80a6df9-e55a-fb83-0311-f4776984ac67/mzm.lasidxkv.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "song": "See You Again",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Diplo",
+     "song": "Set Me Free",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/f6/8c/5a/f68c5a3f-2408-0369-27b9-d183252c21a1/00094633561755.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Mark Ronson",
+     "song": "Uptown Funk (feat. Bruno Mars)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/7e/30/c5/7e30c572-aa47-5f7b-c6fd-42d50cd2c56d/886444959797.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Naughty Boy, Beyoncé, Arrow Benjamin",
+     "song": "Runnin' (Lose It All)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/57/eb/28/57eb28b9-fe12-720b-3cff-b8140fde6790/00602547584106.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "120": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Carly Rae Jepsen",
+     "song": "Run Away with Me",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8e/b9/9b/8eb99b2a-f730-0df5-3c2c-4175d57cd84d/15UMGIM31527.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Sage the Gemini",
+     "song": "Good Thing (feat. Nick Jonas)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/cf/af/76/cfaf7686-0bbd-d53a-c0d0-8cec6e2d88ac/15UMGIM69664.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Taylor Swift",
+     "song": "Style",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Major Lazer",
+     "song": "Lean On (feat. MØ & DJ Snake)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/29/a7/3f/29a73f03-a1b5-c8f0-0df7-8dfe107bf929/653738300326_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Twenty One Pilots",
+     "song": "Stressed Out",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8e/e2/89/8ee28904-0821-610d-5011-a61845f62756/075679926951.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Natalie La Rose",
+     "song": "Somebody (feat. Jeremih)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/51/cb/ce/51cbce53-ce09-b5ca-007f-6fce5dd068ca/00602547184801.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Rihanna, Kanye West & Paul McCartney",
+     "song": "FourFiveSeconds",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b1/f2/24/b1f224ad-40fb-ae22-b632-de330c70b540/00602547235398.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Carly Rae Jepsen",
+     "song": "Your Type",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fb/b4/7d/fbb47d4f-f187-538a-fc49-a5ccc56748c4/00602547739889.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Justin Bieber",
+     "song": "What Do You Mean?",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/75/11/84/751184b0-77df-1eff-bb20-dac03247425d/15UMGIM59808.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Sufjan Stevens",
+     "song": "Should Have Known Better",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ba/61/bc/ba61bcaf-2034-f13e-6f66-fdb578d618dc/656605609966.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "125": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Mumford & Sons",
+     "song": "Believe",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/f2/eb/6c/f2eb6c10-94ba-7047-eef4-f6041b14ba3d/0602547279422_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Zedd / Jon Bellion",
+     "song": "Beautiful Now",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/2d/b6/57/2db6571e-c770-ee80-7567-f8cb94a6f370/15UMGIM20773.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Alesso / Roy English",
+     "song": "Cool",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/ec/f6/b6/ecf6b67a-c8f0-4f1c-faa4-83667013eb0d/15UMGIM17353.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Calvin Harris",
+     "song": "Outside (feat. Ellie Goulding)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/da/50/cc/da50cc80-3515-a38d-369b-0d700ffd249d/886444820448.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Lilly Wood & The Prick / Robin Schulz",
+     "song": "Prayer In C",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/2b/55/c2/2b55c258-0f75-bdee-dfce-abdee319a134/825646217687.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Ellie Goulding",
+     "song": "Love Me Like You Do",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/df/09/7e/df097e10-36b1-a35c-bf5e-2ef138bd2ed7/15UMGIM68751.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Calvin Harris & Disciples",
+     "song": "How Deep Is Your Love",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0a/14/ec/0a14ecf0-e123-f439-723f-d72f38a6d2f9/886445437676.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Major Lazer/Tarrus Riley/Ellie Goulding",
+     "song": "Powerful",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a6/7c/c5/a67cc5ee-f687-aa59-fc70-b326e88154da/653738312428_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Omi, Felix Jaehn",
+     "song": "Cheerleader",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/92/91/73/92917387-aeb3-f761-e4b6-1536c1a8e8a3/mzm.djjxxpzr.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Mark Ronson",
+     "song": "Uptown Funk (feat. Bruno Mars)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/7e/30/c5/7e30c572-aa47-5f7b-c6fd-42d50cd2c56d/886444959797.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "127": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 30,
+    "t100": 30,
+    "t200": 30
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Madonna",
+     "song": "Wash All Over Me (Avicii Remix)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/38/8b/7a/388b7a8f-10ff-a4e0-7624-65e29ac6a793/828765374828.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Marina and the diamonds",
+     "song": "Forget",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/29/48/b4/2948b4aa-460c-d8d9-4cf3-b0a25e433e87/dj.hnanvgmw.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Years & Years",
+     "song": "Shine",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/63/54/43/635443d4-70fc-ab27-e622-17b63853eebc/21UM1IM07256.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Zella Day",
+     "song": "1965",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/17/b2/8a17b2f7-3d21-97e0-5b42-c6cb9a453261/00050087323950.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Tiësto & Don Diablo, Thomas Troelsen",
+     "song": "Chemicals",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/48/66/82/486682f3-4151-81d1-f841-6140fa887da4/8712944489248.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Zedd / Jon Bellion",
+     "song": "Beautiful Now",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/2d/b6/57/2db6571e-c770-ee80-7567-f8cb94a6f370/15UMGIM20773.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "song": "See You Again",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "X Ambassadors",
+     "song": "Renegades",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ba/85/8e/ba858e00-8c2d-5c8f-c417-e577829c26fa/15UMGIM23181.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Leyk & Lockvogel",
+     "song": "Ne Sekunde Sommer-",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/f3/c0/36/f3c0360b-0d9c-d203-7405-5a1231b84255/00602547416582.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Fall Out Boy",
+     "song": "Uma Thurman",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ea/5f/87/ea5f87ea-4bc3-0e01-456c-37401a4268f2/14UMGIM60337.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "129": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Twenty One Pilots",
+     "song": "Stressed Out",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8e/e2/89/8ee28904-0821-610d-5011-a61845f62756/075679926951.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Major Lazer",
+     "song": "Lean On (feat. MØ & DJ Snake)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/29/a7/3f/29a73f03-a1b5-c8f0-0df7-8dfe107bf929/653738300326_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Rihanna, Kanye West & Paul McCartney",
+     "song": "FourFiveSeconds",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b1/f2/24/b1f224ad-40fb-ae22-b632-de330c70b540/00602547235398.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Twenty One Pilots",
+     "song": "Fairly Local",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8e/e2/89/8ee28904-0821-610d-5011-a61845f62756/075679926951.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Lost Frequencies, Janieck Devy",
+     "song": "Reality",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5c/e2/d8/5ce2d8ba-890d-5266-b97b-77eb73fee1ac/8718522061936.png/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Lana Del Rey",
+     "song": "High By The Beach",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music6/v4/68/30/74/683074e2-9a51-a08b-27c3-728c9c4609a6/WYmPx.png/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Florence + the Machine",
+     "song": "Queen of Peace",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/9f/a6/0c/9fa60c63-a582-9ce9-0401-fefb48648c99/00602547252395.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Twenty One Pilots",
+     "song": "Lane Boy",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8e/e2/89/8ee28904-0821-610d-5011-a61845f62756/075679926951.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Florence + The Machine",
+     "song": "How Big, How Blue, How Beautiful",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/9f/a6/0c/9fa60c63-a582-9ce9-0401-fefb48648c99/00602547252395.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Atlas Genius",
+     "song": "If So",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8a/98/e4/8a98e476-4455-a587-b8b1-8d37d3df677f/093624947400.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "133": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Justin Bieber",
+     "song": "What Do You Mean?",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/75/11/84/751184b0-77df-1eff-bb20-dac03247425d/15UMGIM59808.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Meghan Trainor",
+     "song": "Lips Are Movin'",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a6/a7/58/a6a75888-4eb5-f292-0eda-a0133a54ce34/dj.stzzlhlw.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Omi",
+     "song": "Hula Hoop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/92/91/73/92917387-aeb3-f761-e4b6-1536c1a8e8a3/mzm.djjxxpzr.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Elle Varner/J. Cole",
+     "song": "Only Wanna Give It to You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/f8/f0/10/f8f010ef-4956-b0ab-c1a0-6d22373a5ad5/886443435100.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Jennifer Hudson",
+     "song": "It's Your World",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/1a/d0/d2/1ad0d27d-c664-fefc-7a7d-536fb518b958/886444792080.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Carly Rae Jepsen",
+     "song": "I Really Like You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/3c/d6/b4/3cd6b429-af73-b8a8-7c32-03f8da35bbef/25UM1IM06993.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Calvin Harris",
+     "song": "Outside (feat. Ellie Goulding)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/da/50/cc/da50cc80-3515-a38d-369b-0d700ffd249d/886444820448.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Alessia Cara",
+     "song": "I'm Yours",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/9d/33/0a/9d330a96-f007-72cc-4c37-c6cd876f8939/15UMGIM55240.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Alessia Cara",
+     "song": "Here",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/29/28/2a/29282a49-3ee2-3a4d-3ff5-16c10806aaa6/15UMGIM55240.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Ella Henderson",
+     "song": "Ghost",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a5/c8/9c/a5c89cfb-0c1b-72b0-47c0-c51d25600ca6/886444976381.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "153": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 99,
+    "t200": 99
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Portishead",
+     "song": "Roads",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/c1/71/93/c1719342-df7d-e9c5-c87c-53dae5afb289/00042282855329.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Sufjan Stevens",
+     "song": "Should Have Known Better",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ba/61/bc/ba61bcaf-2034-f13e-6f66-fdb578d618dc/656605609966.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Hooverphonic",
+     "song": "Mad About You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/b0/ae/87/b0ae87ac-f0ee-a05d-53b0-7ed97954192d/06UMGIM21077.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "祁紫檀",
+     "song": "得知平淡珍贵的一天",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/47/df/61/47df6172-6fd5-6c05-9c9c-15915c7a5d19/4894894741868.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Imagine Dragons",
+     "song": "Shots",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/c1/16/59/c116596f-f3fd-3499-6cc2-bcb5b4931e6e/14UMGIM61459.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Lana Del Rey",
+     "song": "Music To Watch Boys To",
+     "cover": null
+    },
+    {
+     "rank": 7,
+     "artist": "Portishead",
+     "song": "Over",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/20/d1/97/20d1978c-e152-61a0-77cf-119397215d51/06UMGIM15814.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "FKA Twigs",
+     "song": "Lights On",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/51/0e/4b/510e4b83-9486-11a0-ddae-dc81e8e2374d/1221.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Zella Day",
+     "song": "1965",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/17/b2/8a17b2f7-3d21-97e0-5b42-c6cb9a453261/00050087323950.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Florence + the Machine",
+     "song": "Queen of Peace",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/9f/a6/0c/9fa60c63-a582-9ce9-0401-fefb48648c99/00602547252395.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "156": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 81,
+    "t200": 81
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Christina Perri",
+     "song": "The Words",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/ea/a7/76/eaa77690-bb3d-5766-4333-5fead6d05109/dj.croicmdg.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Rachel Platten",
+     "song": "Fight Song",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/06/3d/34/063d3412-0487-f0c5-39c2-8013f6669f9a/886445624960.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Leona Lewis",
+     "song": "Fire Under My Feet",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/ea/4b/a7/ea4ba7f2-6cee-90f5-64bf-02def88f40c1/00602547544469.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Rachel Platten",
+     "song": "Stand By You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/06/3d/34/063d3412-0487-f0c5-39c2-8013f6669f9a/886445624960.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Billy Boyd",
+     "song": "The Last Goodbye",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/56/de/1f/56de1f2d-5eea-e362-de94-85b8d81aa5ff/794043180811.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Jess Glynne",
+     "song": "Hold My Hand",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/19/e0/1b/19e01b5f-0fd5-85f1-f347-461d4130309a/825646029594.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "MIKA",
+     "song": "Happy Ending",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/36/97/76/36977630-7bed-b717-ce9b-1dbff75fdeb7/07UMGIM00928.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Sara Bareilles",
+     "song": "She Used To Be Mine",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music62/v4/d9/9d/b1/d99db173-d4f4-d915-23d0-a081933be090/mzm.zyjesuvh.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Charlie Puth",
+     "song": "Marvin Gaye (feat. Meghan Trainor)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/7e/05/fd/7e05fd3e-597b-db52-5d87-3ed146d2e2bb/mzm.omtrmqdi.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Leona Lewis",
+     "song": "I Got You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/9e/64/369e6418-e013-80ad-1e7e-74517cbee65f/artwork.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "157": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "MAX, Hoodie Allen",
+     "song": "Gibberish",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8c/6d/6b/8c6d6b9e-1fad-a9b4-b559-96435cd19169/886445483338.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Tinashé",
+     "song": "Player (feat. Chris Brown)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/4e/c5/d8/4ec5d834-bcde-9db8-99bf-5a59e414c8f5/886445491654.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Disclosure, Sam Smith",
+     "song": "Omen",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b7/88/5a/b7885ad6-a44a-3c41-77dd-7837669012bf/15UMGIM29141.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Robin Thicke, Nicki Minaj",
+     "song": "Back Together",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/64/fe/ed/64feed4c-fac9-965c-96d8-0e8dcec35dcd/00602547479983.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Pia Mia",
+     "song": "Do It Again (feat. Chris Brown & Tyga)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/ff/db/e7/ffdbe772-101e-b00f-a344-fe4d5d25597f/00602547366467.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Prince Royce, Snoop Dogg",
+     "song": "Stuck On a Feeling",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/20/e8/ab/20e8abb9-76ee-637b-4abd-d90eb4d4a44b/886445275926.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Tinashe",
+     "song": "All Hands On Deck",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/43/1c/5e/431c5e0f-140b-bf2f-9678-8790c369987a/886444673228.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Jason Derulo",
+     "song": "Want To Want Me",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/f9/27/0b/f9270b80-9a2f-f7cc-a4e2-2f77372ede3c/093624927594.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "August Alsina",
+     "song": "Why I Do It (feat. Lil Wayne)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/d4/c5/81/d4c58155-b7b6-9d0d-9838-2013704dc209/00602547555472.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Cashmere Cat, Ariana Grande",
+     "song": "Adore",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/2d/a2/28/2da22811-a3f6-2a72-2723-d86a0ba89bd5/00602547447180.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "167": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 82,
+    "t200": 82
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Lady Gaga",
+     "song": "Artpop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0c/33/64/0c336478-aaa9-95dc-d373-f6fb8510b170/13UAAIM69752.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Jessie Ware",
+     "song": "Tough Love",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/83/53/ef/8353ef20-477f-4595-0703-fde8b7bb2a26/14UMGIM31953.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "David Guetta",
+     "song": "The Whisperer (feat. Sia)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/68/7f/d5/687fd582-2387-5044-a881-0bc4f0697338/825646194315.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Jessie Ware",
+     "song": "You & I (Forever)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/83/53/ef/8353ef20-477f-4595-0703-fde8b7bb2a26/14UMGIM31953.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Years & Years",
+     "song": "King",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e9/2c/0a/e92c0a04-7ac6-9563-a9b1-ec93171fcca5/00602547836649.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Virginia To Vegas",
+     "song": "Beautiful",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/d7/28/4e/d7284ebf-64c3-1760-f830-b9e80eb54b3d/00185627001309.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Sufjan Stevens",
+     "song": "Should Have Known Better",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ba/61/bc/ba61bcaf-2034-f13e-6f66-fdb578d618dc/656605609966.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Ellie Goulding",
+     "song": "Love Me Like You Do",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/df/09/7e/df097e10-36b1-a35c-bf5e-2ef138bd2ed7/15UMGIM68751.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Lady Gaga",
+     "song": "Gypsy",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "iamamiwhoami",
+     "song": "Fountain",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/af/95/36/af953640-279d-fa36-f655-357bc6b34575/5060236632098_1.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "189": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 99,
+    "t200": 99
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "The Weeknd",
+     "song": "Earned It (Fifty Shades of Grey)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/62/ca/13/62ca1332-7cee-6c26-d054-6513766ab978/15UMGIM23256.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Ed Sheeran",
+     "song": "BloodStream",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2d/36/f9/2d36f9a7-2c3e-ce0f-7fb6-036feecb221f/825646974450.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Taylor Swift",
+     "song": "Style",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Ed Sheeran",
+     "song": "Photograph",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2d/36/f9/2d36f9a7-2c3e-ce0f-7fb6-036feecb221f/825646974450.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Selena Gomez",
+     "song": "Good For You (feat. A$AP Rocky)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0f/17/eb/0f17eba1-bae8-9a6d-f21e-b727926f5af1/15UMGIM48241.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Sia",
+     "song": "Elastic Heart",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/00/bf/72/00bf72a2-3e50-e5e7-ae78-dc35bbf9bcda/886444578219.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Nicki Minaj",
+     "song": "Grand Piano",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/5a/39/5c/5a395c85-41e7-6cda-779b-9249a1cbee51/24UM1IM31480.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Halsey",
+     "song": "Gasoline",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2a/ce/42/2ace4296-25a5-09c5-7727-b96e64bea074/25UMGIM93932.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Major Lazer",
+     "song": "Lean On (feat. MØ & DJ Snake)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/29/a7/3f/29a73f03-a1b5-c8f0-0df7-8dfe107bf929/653738300326_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Birdy & Rhodes",
+     "song": "Let It All Go",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music7/v4/c1/ca/84/c1ca8481-8576-18e6-3217-0e2453f047f6/825646037483.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "190": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Ariana Grande & The Weeknd",
+     "song": "Love Me Harder",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/1e/04/fa/1e04fa35-29e3-2252-a6a0-b3438d5a1ef0/14UMGIM28137.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Natalie La Rose",
+     "song": "Somebody (feat. Jeremih)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/51/cb/ce/51cbce53-ce09-b5ca-007f-6fce5dd068ca/00602547184801.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "The Weeknd",
+     "song": "Can't Feel My Face",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Mark Ronson",
+     "song": "Uptown Funk (feat. Bruno Mars)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/7e/30/c5/7e30c572-aa47-5f7b-c6fd-42d50cd2c56d/886444959797.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Rihanna",
+     "song": "Bitch Better Have My Money",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/76/d5/19/76d519f9-e79a-1b78-570a-01b737ad5bdb/00851365006066.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Tinashe",
+     "song": "All Hands On Deck",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/43/1c/5e/431c5e0f-140b-bf2f-9678-8790c369987a/886444673228.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Drake",
+     "song": "Hotline Bling",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/f2/0d/8b/f20d8bff-a927-ae98-6784-20a1f51cb23e/16UMGIM27642.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "The Weeknd",
+     "song": "The Hills",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Usher",
+     "song": "I Don't Mind (feat. Juicy J)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/29/2f/e0/292fe074-0e8e-3c16-aa39-fdb8da233698/195497084135.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Rihanna, Kanye West & Paul McCartney",
+     "song": "FourFiveSeconds",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b1/f2/24/b1f224ad-40fb-ae22-b632-de330c70b540/00602547235398.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "770": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Rihanna, Kanye West & Paul McCartney",
+     "song": "FourFiveSeconds",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b1/f2/24/b1f224ad-40fb-ae22-b632-de330c70b540/00602547235398.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Christina Perri",
+     "song": "The Words",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/ea/a7/76/eaa77690-bb3d-5766-4333-5fead6d05109/dj.croicmdg.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Jhené Aiko",
+     "song": "Spotless Mind",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/44/65/fa/4465fac3-eb41-1452-b3fa-9639c8e2211e/14UMGIM33693.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Tor Miller",
+     "song": "Midnight",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b4/db/da/b4dbdade-c429-dad8-d5c5-2cde7e9121b2/0044003179509_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Adele",
+     "song": "Hello",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/08/8c/24/088c2405-2e33-801b-5c38-e967f2c01e69/191404113974.png/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Of Monsters and Men",
+     "song": "I of the Storm",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/88/18/27/8818279f-f09b-d546-b984-bedb4a9c12d2/22UMGIM34573.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Omi, Felix Jaehn",
+     "song": "Cheerleader",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/92/91/73/92917387-aeb3-f761-e4b6-1536c1a8e8a3/mzm.djjxxpzr.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "张靓颖",
+     "song": "All of Me (Live)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/b7/05/6a/b7056ad1-5f7b-c195-8b34-0949eec7d726/0192508005127.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Jess Glynne",
+     "song": "Hold My Hand",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/19/e0/1b/19e01b5f-0fd5-85f1-f347-461d4130309a/825646029594.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Ellie Goulding",
+     "song": "Love Me Like You Do",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/df/09/7e/df097e10-36b1-a35c-bf5e-2ef138bd2ed7/15UMGIM68751.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "776": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 91,
+    "t200": 91
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Rihanna, Kanye West & Paul McCartney",
+     "song": "FourFiveSeconds",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b1/f2/24/b1f224ad-40fb-ae22-b632-de330c70b540/00602547235398.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Ellie Goulding",
+     "song": "Love Me Like You Do",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/df/09/7e/df097e10-36b1-a35c-bf5e-2ef138bd2ed7/15UMGIM68751.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Taylor Swift",
+     "song": "Wildest Dreams",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/89/4a/4a/894a4ab9-b0b0-9ea5-ca41-8da0b9b79453/14UMDIM03405.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Ellie Goulding",
+     "song": "On My Mind",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/c4/5f/26/c45f26ac-1bd4-1481-ce51-8a4c10bcd757/15UMGIM48135.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Selena Gomez",
+     "song": "Good For You (feat. A$AP Rocky)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0f/17/eb/0f17eba1-bae8-9a6d-f21e-b727926f5af1/15UMGIM48241.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Ariana Grande",
+     "song": "Focus",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/19/77/49/19774922-3f97-308c-bb6e-fc899c204187/15UMGIM61975.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Janelle Monáe",
+     "song": "Yoga (feat. Jidenna)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/42/a0/69/42a069f9-93af-bc8c-ddc4-9471d081c0cd/886445354317.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Carly Rae Jepsen",
+     "song": "Run Away with Me",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/8e/b9/9b/8eb99b2a-f730-0df5-3c2c-4175d57cd84d/15UMGIM31527.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Taylor Swift",
+     "song": "Style",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Zella Day",
+     "song": "Hypnotic",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/8a/17/b2/8a17b2f7-3d21-97e0-5b42-c6cb9a453261/00050087323950.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "781": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Mary Lambert",
+     "song": "Secrets",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e2/61/f8/e261f8c1-73db-9a7a-c89e-1068f19970e0/16UMGIM67863.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Jessie J",
+     "song": "Masterpiece",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/c1/1d/ef/c11defee-4f77-60f7-af57-e7a492bb5f7e/14UMGIM36178.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Sam Hunt",
+     "song": "Take Your Time",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/17/00/a2/1700a23b-2441-5133-7cb8-344168f45cd4/14UMGIM42058.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Taylor Swift",
+     "song": "Style",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Jessie J",
+     "song": "Flashlight (From Pitch Perfect 2)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/97/5d/a9/975da9c0-578e-acb8-d98f-ff304e08bfb1/15UMGIM40151.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "The Weeknd",
+     "song": "Can't Feel My Face",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "The Weeknd",
+     "song": "The Hills",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Rihanna, Kanye West & Paul McCartney",
+     "song": "FourFiveSeconds",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b1/f2/24/b1f224ad-40fb-ae22-b632-de330c70b540/00602547235398.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Nicki Minaj",
+     "song": "The Night Is Still Young",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/96/ae/f6/96aef61f-306a-c9f9-e899-98a8b60550b6/14UMGIM59294.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Rachel Platten",
+     "song": "Fight Song",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/06/3d/34/063d3412-0487-f0c5-39c2-8013f6669f9a/886445624960.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "782": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "The Offspring",
+     "song": "Coming for You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/59/72/d2/5972d2c7-54d7-5e27-d65f-d05395805da6/932599.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Cro",
+     "song": "Bye Bye",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/43/e2/51/43e251e1-36ef-c9e9-abc8-225c46f647b8/4018939282684.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Brandon Flowers",
+     "song": "Lonely Town",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/32/b3/d1/32b3d187-8410-3cc1-4c8d-e6433d6feb77/00602547265425.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Imagine Dragons",
+     "song": "Shots",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/c1/16/59/c116596f-f3fd-3499-6cc2-bcb5b4931e6e/14UMGIM61459.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Cro",
+     "song": "Traum",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/4f/83/a9/4f83a996-69d8-774c-71ce-dec8721ca63f/4018939265793.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "The Madden Brothers",
+     "song": "We Are Done",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music5/v4/6f/13/95/6f139567-d226-929e-864b-67ff8e96fe5c/cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Mark Forster",
+     "song": "Flash mich",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music1/v4/d5/6b/cd/d56bcd69-871f-d31c-e286-df1cf2c94568/886444944694.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Imagine Dragons",
+     "song": "I Bet My Life",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/c1/16/59/c116596f-f3fd-3499-6cc2-bcb5b4931e6e/14UMGIM61459.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "JVG",
+     "song": "Tarkenee",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music1/v4/c7/9f/6d/c79f6db9-b4c6-f2ba-9aa6-e4ba1eb8b0c8/825646039135.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Cro",
+     "song": "Bad Chick",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/4b/7f/af/4b7faf9a-119a-0899-d3c6-11058bcc03e6/15UMGIM47981.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "783": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 90,
+    "t200": 90
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Baggi Begovic/Tab",
+     "song": "Compromise",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/a9/05/76/a905764c-dcaf-6294-0dc0-f54638d86e28/8712944441574.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Hedegaard/Lukas Graham",
+     "song": "Happy Home (Sam Feldt Remix)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/69/68/53/696853a3-7042-5df7-b365-9804181f1879/00602547567154.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Major Lazer",
+     "song": "Lean On (feat. MØ & DJ Snake)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/29/a7/3f/29a73f03-a1b5-c8f0-0df7-8dfe107bf929/653738300326_Cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Hardwell",
+     "song": "Colors feat. Andreas Moe (Extetended Mix)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music3/v4/4e/70/f4/4e70f4cf-ad03-dfbc-d950-1414b377dfe6/0617465588655.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Milky Chance",
+     "song": "Stolen Dance",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/dd/bf/33/ddbf3362-6ee4-1e72-2839-41c883d46b5e/14UMGIM36148.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Kylie Minogue",
+     "song": "Get Outta My Way",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/fb/9f/df/fb9fdfc5-9293-9820-fc16-cafe87ce39cb/5099964812755_1500x1500_300dpi.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Ed Sheeran",
+     "song": "Photograph",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2d/36/f9/2d36f9a7-2c3e-ce0f-7fb6-036feecb221f/825646974450.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Tiësto/Zac Barnett",
+     "song": "A Town Called Paradise (Original Mix)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/01/cb/a2/01cba257-884f-bcdf-467d-a20eb429b26e/00602537844227.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Gabriel Ríos",
+     "song": "Gold (Thomas Jack Remix)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music3/v4/f8/1a/72/f81a72a3-d420-e8ed-a890-c08c48085f6c/886444841009.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Sam Hunt",
+     "song": "Take Your Time",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/17/00/a2/1700a23b-2441-5133-7cb8-344168f45cd4/14UMGIM42058.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "785": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 27,
+    "t100": 27,
+    "t200": 27
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "The Weeknd",
+     "song": "Earned It (Fifty Shades of Grey)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/62/ca/13/62ca1332-7cee-6c26-d054-6513766ab978/15UMGIM23256.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "The Weeknd",
+     "song": "Can't Feel My Face",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Rihanna",
+     "song": "Bitch Better Have My Money",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/76/d5/19/76d519f9-e79a-1b78-570a-01b737ad5bdb/00851365006066.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Lana Del Rey",
+     "song": "Terrence Loves You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/a2/e1/35/a2e1350a-c739-dc75-93f5-b3e8b33d7d7e/15UMGIM44419.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Taylor Swift",
+     "song": "Style",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/a7/98/d8/a798d867-344d-2bf2-fbfe-d2d1412dcef8/14UMDIM03793.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Little Big Town",
+     "song": "Girl Crush",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/28/e4/2e/28e42e31-3f41-22db-09fd-c2014fddb2aa/15UMGIM47334.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Mark Ronson",
+     "song": "Uptown Funk (feat. Bruno Mars)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/7e/30/c5/7e30c572-aa47-5f7b-c6fd-42d50cd2c56d/886444959797.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Taylor Swift",
+     "song": "Wildest Dreams",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/89/4a/4a/894a4ab9-b0b0-9ea5-ca41-8da0b9b79453/14UMDIM03405.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "FKA Twigs",
+     "song": "Two Weeks",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/69/ee/d2/69eed23b-62a8-7cd5-a2b2-6942adbcc65b/075679604736.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Selena Gomez",
+     "song": "Same Old Love",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0f/17/eb/0f17eba1-bae8-9a6d-f21e-b727926f5af1/15UMGIM48241.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "786": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "The War on Drugs",
+     "song": "Disappearing",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/3b/e7/98/3be79889-aea5-5139-5330-3cbe1b364ef3/656605031064.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "The Weeknd",
+     "song": "Earned It (Fifty Shades of Grey)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/62/ca/13/62ca1332-7cee-6c26-d054-6513766ab978/15UMGIM23256.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "The War on Drugs",
+     "song": "An Ocean in Between the Waves",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/3b/e7/98/3be79889-aea5-5139-5330-3cbe1b364ef3/656605031064.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Alabama Shakes",
+     "song": "Don't Wanna Fight",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music62/v4/6c/30/aa/6c30aa11-b842-105c-da48-d569c45604fc/mzm.rrxxfbbw.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Janelle Monáe",
+     "song": "Yoga (feat. Jidenna)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/42/a0/69/42a069f9-93af-bc8c-ddc4-9471d081c0cd/886445354317.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "The Weeknd",
+     "song": "Can't Feel My Face",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Miguel",
+     "song": "...GoingtoHell",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/e8/ba/2ee8baac-f1a8-b82d-53be-ab2140d09d14/886445204278.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "The War on Drugs",
+     "song": "Under the Pressure",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/3b/e7/98/3be79889-aea5-5139-5330-3cbe1b364ef3/656605031064.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "The Weeknd",
+     "song": "Often",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/30/05/1e/30051e57-a63a-3acc-4b30-42568293f5f7/15UMGIM36514.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Alabama Shakes",
+     "song": "Future People",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music62/v4/6c/30/aa/6c30aa11-b842-105c-da48-d569c45604fc/mzm.rrxxfbbw.jpg/600x600bb.jpg"
+    }
+   ]
+  }
  }
 }

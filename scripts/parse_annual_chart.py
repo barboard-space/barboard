@@ -14,9 +14,17 @@ SRC = {
     "2018": r"D:\Genius\BarChart\吧榜文件\年终榜\2018年终榜\000 汇总榜.xlsx",
     "2016": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\2016吧单曲年榜汇总.xlsx",
     "2017": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\2017榜吧单曲年榜.xlsx",
+    "2015": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\个人榜吧2015年吧友汇总榜.xlsx",
 }
 # 各年源 sheet（默认「总榜」）；列名也各年不同，用 _col() 兼容
-SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1", "2018": "综合点数整理", "2016": "汇总", "2017": "Sheet1"}
+SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1", "2018": "综合点数整理", "2016": "汇总", "2017": "Sheet1", "2015": "Sheet1"}
+# 2015：唯一 sheet「Sheet1」列 Rank/Artist/-/Title/(无表头,=TOTAL 重复列)/<21 位成员各占 1 列>/TOTAL，
+# 官方总排名(Rank)已算好（该年为 Top 296，非常规 Top 200）、但**每位成员列存的是点数、不是名次**——
+# 与 BARE_COL_YEARS 的列识别方式相同（每人仅占 1 列、表头即网名本身），故把 "2015" 也加进 BARE_COL_YEARS
+# 复用列定位逻辑；但取值语义不同，交由 POINTS_NOT_RANK_YEARS 分支处理（反推各成员个人 Top N，见 main()）。
+# 该年列头是英文/拼音网名（非"X妈"简称），ABBR_OVERRIDE 需为全部 21 人登记（build_abbr2id 默认按
+# 昵称去"妈"匹配，网名匹配不上）。无助攻数列，改用「该行有值的成员列数」通用兜底（见 main()）。
+POINTS_NOT_RANK_YEARS = {"2015"}
 # 2017：唯一 sheet「Sheet1」只有 5 列（排名/艺人/歌曲/入榜数/点数），无任何成员个人列——
 # 源数据本身就没有留存各大妈的详细个人提交榜单，故无法像其它年份一样从表里算出个人 Top10 /
 # 分档助攻明细 / 「最多榜冠」；下方 find_member_cols 对此年份天然返回空（无列名以"排名"结尾），
@@ -42,7 +50,8 @@ PAIR_COL_RANK_SECOND = {"2023", "2016"}
 # 与 PAIR_COL_YEARS（一列有表头一列无表头）不同，靠"_名次"后缀识别、忽略"_点数"列。
 SUFFIX_COL_YEARS = {"2019"}
 # 个人榜列格式为「每人仅占 1 列、表头即简称本身」的年份（如 2018："蛋妈"/"晕妈"…，列值直接是该成员对这首歌的名次）。
-BARE_COL_YEARS = {"2018"}
+# 2015 列结构相同（每人 1 列、表头即网名）但列值是点数而非名次，见 POINTS_NOT_RANK_YEARS。
+BARE_COL_YEARS = {"2018", "2015"}
 # 源 sheet 是「转置」布局的年份（如 2018「综合点数整理」：行=字段(Rank/Artist/Title/...)+各成员，列=名次1..200）——
 # main() 读取后先转置成常规「行=一首歌」布局，再走通用管线，见 main() 内 TRANSPOSED_YEARS 分支。
 TRANSPOSED_YEARS = {"2018"}
@@ -57,7 +66,9 @@ _META_COLS = {"终名次", "名次", "排名", "艺人", "艺术家", "歌曲", 
               # 2016「汇总」表头额外的过程性/损坏列（中间几档部分排名 + 艺人/歌曲/公式残留列，均已被 FIXED_COLS 接管，
               # 这里只是防止 find_member_cols 的 PAIR_COL_YEARS 扫描把它们误当成员列——2016 元信息列跨到第 9 列，
               # 比其它年份的 "i<4" 起扫下标更靠后）
-              "最终34榜排名", "30榜排名", "26榜排名", "22榜排名", "17榜排名", "10榜排名", "0 ARTIST", "0SONG", "#VALUE!"}
+              "最终34榜排名", "30榜排名", "26榜排名", "22榜排名", "17榜排名", "10榜排名", "0 ARTIST", "0SONG", "#VALUE!",
+              # 2015 表头全大写 ARTIST/TITLE/TOTAL（与其它年份的 Title-Case 不同，需单独登记）
+              "ARTIST", "TITLE", "TOTAL"}
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "annual")
 MEMBERS_CSV = os.path.join(os.path.dirname(__file__), "..", "data", "members", "members.csv")
 # 修正表（歌手/歌名规范化的唯一维护源，见该文件顶部说明）
@@ -441,8 +452,8 @@ def main():
             if n in idx:
                 return idx[n]
         return None
-    ci = {"rank": _col("排名", "名次", "终名次", "Rank"), "artist": _col("艺术家", "艺人", "Artists", "Artist"), "song": _col("作品", "歌曲", "Song", "Track", "Title"),
-          "pts": _col("点数", "总点数", "Points", "Total Points"), "assist": _col("助攻数", "总助攻数", "In", "Charts", "Num. in Chart", "入榜数")}
+    ci = {"rank": _col("排名", "名次", "终名次", "Rank"), "artist": _col("艺术家", "艺人", "Artists", "Artist", "ARTIST"), "song": _col("作品", "歌曲", "Song", "Track", "Title", "TITLE"),
+          "pts": _col("点数", "总点数", "Points", "Total Points", "TOTAL"), "assist": _col("助攻数", "总助攻数", "In", "Charts", "Num. in Chart", "入榜数")}
     if ci["rank"] is None:
         ci["rank"] = 0  # 排名列无表头（如 2023，第 1 列即排名，无列名）
     if year in FIXED_COLS:
@@ -477,6 +488,26 @@ def main():
     # 名次：整数=欧美占位曲；字符串带星（如 34* / 145**）=亚洲单曲（华语/K-POP），不占位、只插入展示
     STAR_RE = re.compile(r"^\s*(\d+)\s*(\**)")
     all_rows = list(rows)
+    # 成员列存点数、非名次的年份（如 2015）：反推每位成员的个人排名——
+    # 用该成员在全表（不限于官方 Top N）里的点数降序排位，代替其它年份直接读列值=名次的做法。
+    personal_rank = {}  # sid -> {(artist,song): 反推名次}
+    personal_top1 = {}  # sid -> (artist,song)，反推第 1 名（供 no1_by 判定用）
+    if year in POINTS_NOT_RANK_YEARS:
+        personal_raw = {sid: [] for sid in set(rank_cols.values())}
+        for row in all_rows:
+            a = norm_artist(str(row[ci["artist"]] or "").strip())
+            s = norm_song(str(row[ci["song"]] or "").strip())
+            if not a or not s:
+                continue
+            for col, sid in rank_cols.items():
+                v = row[col]
+                if isinstance(v, (int, float)) and v > 0:
+                    personal_raw[sid].append((v, a, s))
+        for sid, lst in personal_raw.items():
+            lst.sort(key=lambda x: -x[0])
+            personal_rank[sid] = {(a, s): i + 1 for i, (v, a, s) in enumerate(lst)}
+            if lst:
+                personal_top1[sid] = (lst[0][1], lst[0][2])
     entries = []
     for row in all_rows:
         rk_raw = row[ci["rank"]]
@@ -497,15 +528,26 @@ def main():
         song = norm_song(str(row[ci["song"]] or "").strip())
         if not artist or not song:
             continue
+        # 助攻数：优先读显式列；无此列但有成员个人列（rank_cols）时，兜底按「该行有值的成员列数」统计
+        # （某成员是否包含这首歌，与该列存的是名次还是点数无关——只看是否非空）
+        if ci["assist"] is not None and row[ci["assist"]] is not None:
+            assists = int(row[ci["assist"]])
+        elif rank_cols:
+            assists = sum(1 for col in rank_cols if row[col] is not None)
+        else:
+            assists = None
         e = {"rank": rk, "artist": artist, "song": song,
              "points": round(float(row[ci["pts"]] or 0), 1),
-             "assists": int(row[ci["assist"]]) if ci["assist"] is not None and row[ci["assist"]] is not None else None,
+             "assists": assists,
              "cover": None}
         if star:
             e["star"] = star
         # 个人榜冠军数：多少位大妈把这首歌排在其个人榜第 1（no1_by = 这些大妈的 space_id）
-        no1_by = sorted(sid for col, sid in rank_cols.items()
-                        if isinstance(row[col], (int, float)) and int(row[col]) == 1)
+        if year in POINTS_NOT_RANK_YEARS:
+            no1_by = sorted(sid for sid, top1 in personal_top1.items() if top1 == (artist, song))
+        else:
+            no1_by = sorted(sid for col, sid in rank_cols.items()
+                            if isinstance(row[col], (int, float)) and int(row[col]) == 1)
         if no1_by:
             e["no1"] = len(no1_by)
             e["no1_by"] = no1_by
@@ -544,28 +586,36 @@ def main():
     sids = sorted(set(rank_cols.values()))
     assist = {s: {t: 0 for t in TIERS} for s in sids}     # 助攻分档（占位/欧美曲）：按年榜名次累计（前 N）
     assist_sh = {s: {t: 0 for t in TIERS} for s in sids}  # 助攻分档（亚洲不占位曲）：单独统计、括号标注
-    for row in all_rows:                                  # 助攻分档 = 主显示榜（豪华榜）
-        rk_raw = row[ci["rank"]]
-        star = 0
-        if isinstance(rk_raw, (int, float)):
-            rk = int(rk_raw)
-        elif isinstance(rk_raw, str):
-            mm = STAR_RE.match(rk_raw)
-            if not mm:
+    if year in POINTS_NOT_RANK_YEARS:
+        # 用反推名次（personal_rank，见上）分档，而非直接读列值——该年无亚洲不占位曲概念，assist_sh 全 0
+        for sid, rankmap in personal_rank.items():
+            for (a, s), rk in rankmap.items():
+                for t in TIERS:
+                    if rk <= t:
+                        assist[sid][t] += 1
+    else:
+        for row in all_rows:                                  # 助攻分档 = 主显示榜（豪华榜）
+            rk_raw = row[ci["rank"]]
+            star = 0
+            if isinstance(rk_raw, (int, float)):
+                rk = int(rk_raw)
+            elif isinstance(rk_raw, str):
+                mm = STAR_RE.match(rk_raw)
+                if not mm:
+                    continue
+                rk = int(mm.group(1))
+                star = len(mm.group(2))
+            else:
                 continue
-            rk = int(mm.group(1))
-            star = len(mm.group(2))
-        else:
-            continue
-        if rk < 1:
-            continue
-        for col, sid in rank_cols.items():
-            if not isinstance(row[col], (int, float)) or row[col] <= 0:
-                continue  # <=0 排除「未上榜」哨兵值（如 2018 用 0 表示未排入，而非 None）
-            tgt = assist if star == 0 else assist_sh      # 占位曲计主数 / 亚洲不占位曲计括号
-            for t in TIERS:
-                if rk <= t:
-                    tgt[sid][t] += 1
+            if rk < 1:
+                continue
+            for col, sid in rank_cols.items():
+                if not isinstance(row[col], (int, float)) or row[col] <= 0:
+                    continue  # <=0 排除「未上榜」哨兵值（如 2018 用 0 表示未排入，而非 None）
+                tgt = assist if star == 0 else assist_sh      # 占位曲计主数 / 亚洲不占位曲计括号
+                for t in TIERS:
+                    if rk <= t:
+                        tgt[sid][t] += 1
 
     # 个人榜前十：优先从「完全榜」全量 sheet 取（保证满 10 条）；否则用主 sheet
     def collect_top10(rows_, ci_, rcols_):
@@ -580,7 +630,10 @@ def main():
                 if isinstance(v, (int, float)) and 1 <= int(v) <= 10:
                     t[sid].append((int(v), a, s))
         return t
-    if year in FULL_SHEET:
+    if year in POINTS_NOT_RANK_YEARS:
+        # 反推排名（personal_rank）本身已是完整"点数降序"排位，直接取前十即可，无需额外全量表
+        top10 = {sid: [(rk, a, s) for (a, s), rk in personal_rank.get(sid, {}).items() if rk <= 10] for sid in sids}
+    elif year in FULL_SHEET:
         fws = wb[FULL_SHEET[year]]
         fit = fws.iter_rows(values_only=True)
         fh = next(fit)
