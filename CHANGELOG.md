@@ -4,13 +4,16 @@
 
 ---
 
-## [2026-07-01] — 个人年榜手机端间距修复 + 封面缺失 placeholder
+## [2026-07-01] — 个人年榜手机端间距修复 + 封面缺失 placeholder + 前三名金银铜配色
 
 ### Fixed
-- 成员页「个人年榜」Top 10 手机端歌名→歌手间距从实测 7.4px 修正为 4px，与 BBL 榜单一致：根因是原 CSS grid 让名次/封面跨 2 行 spanning 撑大了文字行轨道；改为名次/封面 `position:absolute` 居中覆盖、歌名/歌手回归纯文档流 `margin-top:4px`，与 BBL `.chart-song` 机制一致，且长歌名换行时行高自动适配。
+- 成员页「个人年榜」Top 10 手机端歌名→歌手间距从实测 7.4px 修正为 4px（后按反馈进一步收至 2px），与 BBL 榜单机制一致：根因是原 CSS grid 让名次/封面跨 2 行 spanning 撑大了文字行轨道；改为名次/封面 `position:absolute` 居中覆盖、歌名/歌手回归纯文档流 `margin-top` 控距，长歌名换行时行高自动适配。
+- 手机端排名数字框宽度一直被通用重置规则 `td{width:auto!important}` 悄悄压制（哪怕 `.rk` 自身选择器更具体，没带 `!important` 就会输），导致 `text-align:center` 从未真正生效——补 `!important` 抢回控制权，排名现在在自己的小框内真正居中。
+- 手机端排名/封面位置与字号按用户多轮实测反馈定稿：`.rk{left:20px;width:24px;font-size:21px}`、`.an-cover{left:54px;width/height:38px}`、`.an-title{font-size:13px}`、`.an-artist{font-size:11px}`。
 
 ### Added
 - 封面缺失 placeholder（`.an-cover--ph`）：保留原背景色，叠加 `mask-image` 引入的榜吧 logo 水印（`--clr-text-4` 弱化色调 + 0.5 透明度），桌面/手机两种尺寸按比例适配。真实样例见 `member/127/`（苏妈）2021 年 Top10。
+- 个人年榜 Top 10 前三名歌名/歌手改用金银铜配色，与 BBL 榜单前三名色值完全一致。
 
 ## [2026-07-01] — 年榜总览 Hub 页 + Archive 卡片视觉/文案精修
 

@@ -212,22 +212,30 @@
     /* 注：不用 2 行 grid + rk/cover 跨行 spanning——42px 封面跨行会撑大行高（grid 轨道为容纳
        spanning 项的最小尺寸而增长），导致歌名→歌手间距比声明的 row-gap 明显更大。改用 BBL 同款
        机制：rk/封面脱离文档流用 position:absolute 居中覆盖，歌名/歌手回归纯文档流 margin-top 控距 */
-    '  .mp-an-block .mp-an-tbl tr{position:relative;display:block;padding:6px 14px 6px 124px;border-bottom:1px solid var(--clr-border)}',
+    '  .mp-an-block .mp-an-tbl tr{position:relative;display:block;padding:6px 14px 6px 108px;border-bottom:1px solid var(--clr-border)}',
     '  .mp-an-block .mp-an-tbl tr:last-child{border-bottom:none}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--1{background:rgba(212,168,50,.12)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--2{background:rgba(148,196,220,.11)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--3{background:rgba(224,160,100,.10)}',
     '  .mp-an-block .mp-an-tbl td{display:block;padding:0;border:none;width:auto!important;background:none!important}',
-    '  .mp-an-block .mp-an-tbl .rk{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:44px;text-align:center;font-family:var(--font-display);font-size:22px;font-weight:400}',  /* 名次同 BBL .chart-rank */
+    '  .mp-an-block .mp-an-tbl .rk{position:absolute;left:20px;top:50%;transform:translateY(-50%);width:24px!important;text-align:center;font-family:var(--font-display);font-size:21px;font-weight:400}',  /* 名次同 BBL .chart-rank；上一行 td 重置规则用 !important 强制 width:auto，此前一直悄悄覆盖本行的 width 声明使 text-align:center 从未真正生效（数字始终贴框左边）——补 !important 抢回控制权 */
     '  .mp-an-block .mp-an-tbl .an-name,.mp-an-block .mp-an-tbl .an-name-in{display:contents}',  /* 拆出封面，标题回归纯文档流 */
-    '  .mp-an-block .mp-an-tbl .an-cover{position:absolute;left:70px;top:50%;transform:translateY(-50%);width:42px;height:42px;margin:0}',
-    '  .mp-an-block .mp-an-tbl .an-title{display:block;font-size:14px;font-weight:600;line-height:1.2}',
-    '  .mp-an-block .mp-an-tbl .an-artist{display:block;font-size:12px;line-height:1.2;color:var(--clr-text-2);white-space:normal;margin-top:4px}',  /* 与标题间距同 BBL .chart-song__artist margin-top:4px */
+    '  .mp-an-block .mp-an-tbl .an-cover{position:absolute;left:54px;top:50%;transform:translateY(-50%);width:38px;height:38px;margin:0}',
+    '  .mp-an-block .mp-an-tbl .an-title{display:block;font-size:13px;font-weight:600;line-height:1.2}',
+    '  .mp-an-block .mp-an-tbl .an-artist{display:block;font-size:11px;line-height:1.2;color:var(--clr-text-2);white-space:normal;margin-top:2px}',
     '  .mp-an-more:hover{border-color:var(--clr-border-2);color:var(--clr-text-4);background:var(--clr-surface)}',  /* 手机端去 hover（点击后不残留高亮），桌面保留 */
     '  .mp-an-assist{min-width:0;width:100%;table-layout:fixed}',  /* 助攻表：手机端 6 列等分、一屏内显示不横滚 */
     '  .mp-an-assist th,.mp-an-assist td{padding-left:6px;padding-right:6px}',
     '}',
     '.mp-an-tbl .an-artist{color:var(--clr-text-2);white-space:nowrap}',  /* 歌手（后，secondary） */
+    /* 前三名歌名/歌手金银铜配色，同 BBL .chart-item--top/silver/bronze .chart-song__title/__artist；
+       置于手机端 @media 块之后以特异度打平后靠源序覆盖其内 .an-artist 默认色（同 0,3,0） */
+    '.mp-an-tbl .mp-an-row--1 .an-title{color:var(--clr-gold-tint)}',
+    '.mp-an-tbl .mp-an-row--1 .an-artist{color:rgba(224,176,64,.85)}',
+    '.mp-an-tbl .mp-an-row--2 .an-title{color:var(--clr-silver-tint)}',
+    '.mp-an-tbl .mp-an-row--2 .an-artist{color:rgba(148,196,220,.85)}',
+    '.mp-an-tbl .mp-an-row--3 .an-title{color:var(--clr-bronze-tint)}',
+    '.mp-an-tbl .mp-an-row--3 .an-artist{color:rgba(224,160,100,.8)}',
     '.mp-an-h{font-size:13px;font-weight:600;color:var(--clr-text-2);margin:0 0 12px}',  /* 「助攻详情」同「历届排名走势」 */
     '.mp-an-subtitle .an-yr{font-family:var(--font-display);font-weight:400;font-size:19px;letter-spacing:.04em;color:var(--clr-text);margin-right:3px}',
     '.mp-an-block.is-collapsed .mp-an-extra{display:none}',
