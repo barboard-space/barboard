@@ -10,13 +10,15 @@ SRC = {
     "2022": r"D:\Genius\BarChart\吧榜文件\年终榜\2022吧年榜.xlsx",
     "2021": r"D:\Genius\BarChart\吧榜文件\年终榜\2021年终榜\吧榜整理文件.xlsx",
     "2020": r"D:\Genius\BarChart\吧榜文件\年终榜\2020年终榜\00 汇总榜.xlsx",
+    "2019": r"D:\Genius\BarChart\吧榜文件\年终榜\2019年终榜\2019年贴吧年终榜.xlsx",
 }
 # 各年源 sheet（默认「总榜」）；列名也各年不同，用 _col() 兼容
-SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带"}
+SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1"}
 # 个人榜 top10 用的「全量」sheet（含所有排过的曲 → 保证满 10 条）；未定义则用主 sheet 本身。
 # 2021：显示榜=豪华榜(亚洲不占位)，但 top10 从完全榜(2760 首全量)取，避免私榜曲缺失。
 # 2020：显示榜=吧榜终版(300 首终版排名)，但 top10 从汇总表(2444 首全量)取，避免私榜曲缺失。
 # 2023：显示榜=星号带(300 首、含 "N*" 亚洲不占位星标)，但 top10 从 Sheet1(2781 首全量) 取，避免私榜曲缺失。
+# 2019：唯一 sheet「Sheet1」本身就是完整总榜（1930 首、各成员个人榜均满 top10），无需单独全量表。
 FULL_SHEET = {"2021": "吧榜完全榜", "2020": "汇总表", "2023": "Sheet1"}
 # 无单张全量合表、但有各大妈独立个人 sheet（sheet 名=简称，列 排名/作品/艺术家）的年份 → top10 从个人 sheet 取（最权威、满 10）
 MEMBER_SHEETS = {"2022"}
@@ -25,6 +27,9 @@ MEMBER_SHEETS = {"2022"}
 # 用 PAIR_COL_RANK_SECOND 标记「名次在第二列」的年份；两种列扫描逻辑见 find_member_cols()。
 PAIR_COL_YEARS = {"2020", "2023"}
 PAIR_COL_RANK_SECOND = {"2023"}
+# 个人榜列格式为「每人占 2 列、且两列均带完整表头」的年份（如 2019："X妈_名次"/"X妈_点数"），
+# 与 PAIR_COL_YEARS（一列有表头一列无表头）不同，靠"_名次"后缀识别、忽略"_点数"列。
+SUFFIX_COL_YEARS = {"2019"}
 # 宽表个人榜区之外的元信息列名（用于从 PAIR_COL_YEARS 的表头里排除，不误当成成员列）
 _META_COLS = {"终名次", "名次", "排名", "艺人", "艺术家", "歌曲", "作品", "总点数", "点数", "助攻数", "总助攻数", "前十助攻数",
               "Song", "Artists", "In", "Points"}
@@ -116,15 +121,27 @@ def read_member_sheet(ws):
 
 
 def find_member_cols(header, year):
-    """从表头识别「个人榜简称 → 名次列下标」。两种格式：
+    """从表头识别「个人榜简称 → 名次列下标」。三种格式：
     - 默认（如 2021）：单列，表头「简称+排名」（如 "波排名"，可带 "求和项:" 前缀）。
     - PAIR_COL_YEARS（如 2020/2023）：每人占 2 列，表头列非空、紧跟一列无表头；
       名次在第一列还是第二列由 PAIR_COL_RANK_SECOND 决定（2020＝第一列，2023＝第二列）。
+    - SUFFIX_COL_YEARS（如 2019）：每人占 2 列，两列均带完整表头「X妈_名次」「X妈_点数」，
+      靠 "_名次" 后缀识别、直接取该列为名次列，"_点数" 列忽略。
     返回 (abbrs, col_of_abbr)，abbrs 已去除「妈」后缀（供 build_abbr2id 用统一规则匹配 members.csv；
     本身已是单字简称的年份如 2023 不受影响，末字不是「妈」不会被误切）。
     """
     col_of = {}
-    if year in PAIR_COL_YEARS:
+    if year in SUFFIX_COL_YEARS:
+        for i, h in enumerate(header):
+            if not h:
+                continue
+            hs = str(h).strip()
+            if not hs.endswith("_名次"):
+                continue
+            name = hs[:-3]
+            a = name[:-1] if name.endswith("妈") else name
+            col_of[a] = i
+    elif year in PAIR_COL_YEARS:
         rank_second = year in PAIR_COL_RANK_SECOND
         for i, h in enumerate(header):
             if i < 4 or not h:
@@ -269,8 +286,8 @@ def main():
             if n in idx:
                 return idx[n]
         return None
-    ci = {"rank": _col("排名", "名次", "终名次"), "artist": _col("艺术家", "艺人", "Artists"), "song": _col("作品", "歌曲", "Song"),
-          "pts": _col("点数", "总点数", "Points"), "assist": _col("助攻数", "总助攻数", "In")}
+    ci = {"rank": _col("排名", "名次", "终名次", "Rank"), "artist": _col("艺术家", "艺人", "Artists", "Artist"), "song": _col("作品", "歌曲", "Song", "Track"),
+          "pts": _col("点数", "总点数", "Points"), "assist": _col("助攻数", "总助攻数", "In", "Charts")}
     if ci["rank"] is None:
         ci["rank"] = 0  # 排名列无表头（如 2023，第 1 列即排名，无列名）
     # 成员个人榜列 → col_index -> space_id（两种表头格式，见 find_member_cols）

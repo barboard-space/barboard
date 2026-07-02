@@ -70,6 +70,48 @@ ARTIST_FIX = {
     "Lana del rey": "Lana Del Rey",                   # 大小写：源数据同集内其他处已是正确写法，此处不一致
     "YOUNG NUDY": "Young Nudy",                       # 全大写源行（该行整体大写，逐个纠正）
     "21 SAVAGE": "21 Savage",                         # 同上
+    # 2019 年榜（源数据 Title-Case 较乱，逐个纠正官方写法/拼写错）
+    "Fka Twigs": "FKA twigs",
+    "Lana Del Ray": "Lana Del Rey",              # Ray → Rey 拼写错
+    "Juice Wrld": "Juice WRLD",
+    "Khaild": "Khalid",                          # 拼写错
+    "5Sos": "5SOS",
+    "5 Seconds Of Summer": "5 Seconds of Summer",
+    "Big Hawke": "Big Hawk",                     # Sicko Mode 采样艺人，拼写错
+    "Carly Rae Jepson": "Carly Rae Jepsen",      # 拼写错
+    "Gasafflestein": "Gesaffelstein",            # 拼写错
+    "A Boogie Wit Da Hoodie": "A Boogie Wit da Hoodie",
+    "A Boodie Wit Da Hoodie": "A Boogie Wit da Hoodie",  # Boodie 拼写错 + 大小写
+    "Daddy Yonkee": "Daddy Yankee",              # 拼写错
+    "Sza": "SZA",
+    "Onerepublic": "OneRepublic",
+    "Shaed": "SHAED",
+    "Rosalia": "Rosalía",
+    "Yungblud": "YUNGBLUD",
+    "Ilovemakonnen": "iLoveMakonnen",
+    "Nicky Minaj": "Nicki Minaj",                # 拼写错
+    "Ty Dolla Sign": "Ty Dolla $ign",
+    "Ty Dolla $Isn": "Ty Dolla $ign",            # 拼写错
+    "P!Nk": "P!nk",
+    "Dababy": "DaBaby",
+    "Vanjess": "VanJess",
+    "Goldlink": "GoldLink",
+    "Christine And The Queens": "Christine and the Queens",
+    "One Direcion": "One Direction",             # 拼写错
+    "U.S. Gilrs": "U.S. Girls",                  # 拼写错
+    "Twenty-One Pilots": "Twenty One Pilots",    # 与本站其他处一致，去连字符
+    "Anna Of The North": "Anna of the North",
+    "Foster The People": "Foster the People",
+    "Zayn": "ZAYN",
+    "Nao": "NAO",
+    "Marc E Bassy": "Marc E. Bassy",
+    "Luca Hanni": "Luca Hänni",                  # 缺重音
+    "Serpentwithfeet": "serpentwithfeet",
+    "Toro Y Moi": "Toro y Moi",
+    "How To Dress Well": "How to Dress Well",
+    "Tones And I": "Tones and I",
+    "The Minds Of 99": "The Minds of 99",
+    "The Minds Of 99+102:1": "The Minds of 99",  # 源数据混入类似单元格引用的乱码后缀
 }
 
 # ── 艺人整串预修正（在按逗号拆分前替换）：修名字内含逗号的写法 → 统一规范，再靠 KEEP 保护不被拆 ──
@@ -79,6 +121,29 @@ ARTIST_RAW_FIX = {
     "Earth, Wind, Fire": "Earth, Wind & Fire",   # 乐队名内部应为 &，源数据误写成逗号（改后无逗号，天然不会被拆）
     "Anderson ,Paak": "Anderson .Paak",          # 艺人本名 Anderson .Paak（句点），源数据误写成逗号
     "裘德/魏如萱": "裘德, 魏如萱",                 # 斜杠分隔改为站内统一的逗号分隔格式
+    # 2019 年榜：多艺人用 "/" 或 "&" 拼接（无逗号，_keep_split 不会拆开），
+    # 含拼写错/大小写需修正的整串在此按完整原文替换（不改变分隔符风格，除非源数据本身已损坏）
+    "Grimes Hana": "Grimes, HANA",                       # 缺分隔符 + 官方全大写
+    "Benny Blanco /Halsey&Khaild)": "Benny Blanco, Halsey, Khalid",  # 源数据格式损坏（多余括号+拼写错）
+    "Marshmello The Bastille": "Marshmello, Bastille",   # 缺分隔符 + 乐队名无 "The"
+    "Halsey/Juice Wrld": "Halsey/Juice WRLD",
+    "The Chainsmokers/5Sos": "The Chainsmokers/5SOS",
+    "Travis Scott/Drake/Swae Lee/Big Hawke": "Travis Scott/Drake/Swae Lee/Big Hawk",
+    "Gasafflestein/The Weeknd": "Gesaffelstein/The Weeknd",
+    "Lil Nas X/Dababy": "Lil Nas X/DaBaby",
+    "Shaed/Zayn": "SHAED/ZAYN",
+    "Rosalia/J Balvin/El Guincho": "Rosalía/J Balvin/El Guincho",
+    "Megan Thee Stallion/Nicky Minaj/Ty Dolla Sign": "Megan Thee Stallion/Nicki Minaj/Ty Dolla $ign",
+    "Vanjess / Goldlink": "VanJess / GoldLink",
+    "Lil Peep/Ilovemakonnen/Fall Out Boy": "Lil Peep/iLoveMakonnen/Fall Out Boy",
+    "Bring Me To Horizon/Rahzel": "Bring Me the Horizon/Rahzel",
+    "Bring Me The Horizon & Grimes": "Bring Me the Horizon & Grimes",
+    "Ari Lennox  / J. Cole": "Ari Lennox / J. Cole",     # 多余空格
+    "Dreamvile / J.I.D, Bas, J.Cole, Earthgang & Young Nudy": "Dreamville, JID, Bas, J. Cole, EARTHGANG, Young Nudy",
+    "Calvin Harris/Rag'N'Bone Man": "Calvin Harris/Rag'n'Bone Man",
+    "Juice Wrld/Seezyn": "Juice WRLD/Seezyn",
+    "Yungblud/Halsey/Travis Barker": "YUNGBLUD/Halsey/Travis Barker",
+    "Marc E Bassy / Blackbear": "Marc E. Bassy / Blackbear",
 }
 
 # ── 歌名：整首替换（键 = 完整错误歌名，值 = 完整正确歌名）──────────
@@ -90,6 +155,10 @@ SONG_FIX_EXACT = {
     "My Name Ia Dark": "My Name Is Dark",  # Grimes；Ia → Is 拼写错
     "All Along The Wtachtower": "All Along the Watchtower",  # Lucifer Cast；Wtach → Watch 拼写错 + 大小写规范
     "PEACHES & EGGPLANTS (FEAT. 21 SAVAGE)": "Peaches & Eggplants (feat. 21 Savage)",  # 该行整体全大写源数据
+    "We Appriciate Power": "We Appreciate Power",  # Grimes ft. HANA；拼写错
+    "It's Not Living(If It's Not With You)": "It's Not Living (If It's Not with You)",  # The 1975；补空格 + With → with
+    "Messy (Accoustic)": "Messy (Acoustic)",  # serpentwithfeet；拼写错
+    "Imi": "iMi",  # Bon Iver；官方拼写 iMi
 }
 
 # ── 歌名：子串替换（品牌/缩写/加空格；对任意歌名生效）──────────────

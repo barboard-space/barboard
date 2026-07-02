@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-07-02] — 2019 年榜导入
+
+### Added
+- 2019 年榜（37 榜合榜、Top 200）导入 `/archive/annual/2019/`。冠军 Ariana Grande — 7 rings。数据源是第三种「宽表」变体——每人占 2 列且**两列均带完整表头**（"X妈_名次"/"X妈_点数"），与 2020/2023 的"一列有表头、一列无表头"不同，`scripts/parse_annual_chart.py` 新增 `SUFFIX_COL_YEARS` 分支处理。
+- 新增历史成员离妈(772)/枫妈(773)/绿妈(774)——2019 数据中出现但不在 `members.csv` 名单，按菜妈先例顺延 id 加入。
+- `scripts/annual_corrections.py` 补充约 60 条歌手/歌名修正（源数据 Title-Case 混乱，含官方风格化如 FKA twigs/SZA/DaBaby/YUNGBLUD、拼写错、及 2 处表格数据损坏）。
+- Hub 页与 2020/2021/2022/2023 四个年份页的 `YEARS` 导航数组同步加入 2019。
+
 ## [2026-07-02] — 年榜并排名次排序修复 + 艺人名分隔符统一
 
 ### Changed
