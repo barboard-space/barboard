@@ -80,7 +80,7 @@
       padding: 28px 28px 24px;
       display: flex; flex-direction: column;
       overflow: hidden;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
     .arc-card::before {
       content: '';
@@ -89,7 +89,14 @@
       background: var(--arc-color, var(--clr-violet-light));
       pointer-events: none;
     }
-    .arc-card:hover { border-color: var(--clr-border-2); }
+    .arc-card:hover {
+      border-color: var(--clr-border-2);
+      transform: translateY(-3px);
+      box-shadow: 0 14px 32px color-mix(in srgb, var(--arc-color, var(--clr-violet-light)) 22%, transparent);
+    }
+    /* .arc-card.fade-up.visible（入场动效 3 类选择器）比 .arc-card:hover（2 类）更具体，
+       会覆盖 hover 的 transform——提权恢复（同 #64 原理，见 CLAUDE.md） */
+    .arc-card.fade-up.visible:hover { transform: translateY(-3px); }
 
     .arc-card--bbl  { --arc-color: var(--clr-violet-light); }
     .arc-card--bv   { --arc-color: var(--clr-pink-light); }
@@ -128,9 +135,9 @@
       border-radius: 3px; white-space: nowrap;
     }
     .arc-badge--active {
-      color: var(--clr-board);
-      background: rgba(111,158,195,0.08);
-      border: 1px solid rgba(111,158,195,0.22);
+      color: var(--clr-text-2);
+      background: rgba(136,128,168,0.07);
+      border: 1px solid var(--clr-border);
     }
     .arc-badge--annual {
       color: var(--clr-violet-light);
@@ -138,9 +145,9 @@
       border: 1px solid rgba(168,85,247,0.22);
     }
     .arc-badge--ended {
-      color: var(--clr-text-2);
-      background: rgba(136,128,168,0.07);
-      border: 1px solid var(--clr-border);
+      color: var(--clr-board);
+      background: rgba(111,158,195,0.08);
+      border: 1px solid rgba(111,158,195,0.22);
     }
 
     /* mini stats row (active cards only) */
@@ -194,7 +201,11 @@
 
     /* ended card glow-off */
     .arc-card--ended { opacity: 0.82; }
-    .arc-card--ended:hover { opacity: 1; border-color: var(--clr-border-2); }
+    .arc-card--ended:hover {
+      opacity: 1;
+      border-color: var(--clr-border-2);
+      box-shadow: 0 14px 32px color-mix(in srgb, var(--arc-color, var(--clr-violet-light)) 22%, transparent);
+    }
 
     /* responsive */
     @media (prefers-reduced-motion: no-preference) {
@@ -217,8 +228,9 @@
       .arc-grid--3 { grid-template-columns: 1fr; }
     }
     @media (hover: none), (pointer: coarse) {
-      .arc-card:hover       { border-color: var(--clr-border); }
-      .arc-card--ended:hover { opacity: 0.82; border-color: var(--clr-border); }
+      .arc-card:hover       { border-color: var(--clr-border); transform: none; box-shadow: none; }
+      .arc-card--ended:hover { opacity: 0.82; border-color: var(--clr-border); transform: none; box-shadow: none; }
+      .arc-card.fade-up.visible:hover { transform: none; }
       .arc-card__link:hover  { color: var(--clr-text-2); border-color: var(--clr-border); }
       .arc-card__link--primary:hover { opacity: 0.8; }
       .arc-card__link--disabled:hover { opacity: 0.35; }
@@ -260,7 +272,7 @@
         </div>
         <div class="arc-card__stats">
           <div class="arc-stat">
-            <span class="arc-stat__val">124</span>
+            <span class="arc-stat__val" id="arcBblIssue">124</span>
             <span class="arc-stat__label">当前期数</span>
           </div>
           <div class="arc-stat">
@@ -268,7 +280,7 @@
             <span class="arc-stat__label">榜单容量</span>
           </div>
         </div>
-        <p class="arc-card__desc">每周六更新的个人单曲周榜合并积分活动。成员提交完整的个人周榜，由积分系统汇总生成合榜，完整记录在 Musictrack。自 2024 年 3 月 13 日第一期起，每周稳定运行至今。</p>
+        <p class="arc-card__desc">每周六更新的个人单曲周榜合榜活动，成员提交个人周榜，通过点数规则汇总生成合榜，完整榜单记录在 Musictrack。从 2024 年 3 月 13 日起，每周稳定更新至今。</p>
         <div class="arc-card__links">
           <a href="/bbl/" class="arc-card__link arc-card__link--primary">了解 BBL</a>
           <a href="/bbl/hof/" class="arc-card__link">Hall of Fame</a>
@@ -296,7 +308,7 @@
             <span class="arc-stat__label">创立年份</span>
           </div>
         </div>
-        <p class="arc-card__desc">灵感来自 Eurovision 的年度歌曲大赛，成员选送小众欧美歌曲参赛，设半决赛与决赛。由 <a class="member" href="/member/125/" data-nickname="萌妈">@绿荫夏语</a> 于 2019 年创立，2021–2022 年停办后于 2023 年恢复，改为每年一届。</p>
+        <p class="arc-card__desc">灵感来自 Eurovision 的年度歌曲大赛，成员选送小众歌曲参赛。由 <a class="member" href="/member/125/" data-nickname="萌妈">@绿荫夏语</a> 在 2019 年发起，于 2021–2022 年停办，自 2023 年恢复后改为一年一届。</p>
         <div class="arc-card__links">
           <a href="/barvision/" class="arc-card__link arc-card__link--primary">了解 Barvision</a>
           <a href="/barvision/2026/events/" class="arc-card__link">Barvision 2026</a>
@@ -320,16 +332,15 @@
       <div class="arc-card arc-card--year arc-card--ended fade-up" style="transition-delay:0.07s;">
         <div class="arc-card__header">
           <div>
-            <p class="arc-card__eyebrow">年度 / 半年榜单</p>
+            <p class="arc-card__eyebrow">音乐盘点活动</p>
             <div class="arc-card__name"><span style="font-size:0.94em;">榜吧年榜</span></div>
             <div class="arc-card__years">2013 — 2024</div>
           </div>
           <span class="arc-badge arc-badge--ended">Legacy</span>
         </div>
-        <p class="arc-card__desc">社区年度与半年度音乐盘点活动，成员评选年度最佳单曲与专辑。是榜吧成立初期的核心活动，运行逾十年，见证了社区从百度贴吧走向 Barboard 品牌的完整历程。</p>
+        <p class="arc-card__desc">榜吧最核心的音乐盘点活动之一。成员通过汇总各自榜单共同评选年度最佳单曲、专辑和艺人。</p>
         <div class="arc-card__links">
-          <a href="/archive/annual/2022/" class="arc-card__link arc-card__link--primary">2022 年终榜</a>
-          <a href="/archive/annual/2021/" class="arc-card__link">2021 年终榜</a>
+          <a href="/archive/annual/" class="arc-card__link arc-card__link--primary">查看历届年榜</a>
         </div>
       </div>
 
@@ -343,7 +354,7 @@
           </div>
           <span class="arc-badge arc-badge--ended">Legacy</span>
         </div>
-        <p class="arc-card__desc">社区原创颁奖礼，效仿格莱美设立多个音乐类奖项，由成员投票评选年度最佳，兼顾榜吧内外的音乐人与作品。举办四届，留下了完整的年度颁奖记录。</p>
+        <p class="arc-card__desc">以格莱美奖为灵感自创的榜吧音乐颁奖礼，由成员票选评出年度最佳音乐人及作品。</p>
         <div class="arc-card__links">
           <a href="#" class="arc-card__link arc-card__link--disabled" onclick="return false" data-tooltip="暂不可用">存档页面</a>
         </div>
@@ -359,7 +370,7 @@
           </div>
           <span class="arc-badge arc-badge--ended">Legacy</span>
         </div>
-        <p class="arc-card__desc">Eurovision China Voting Party，社区 Eurovision 歌唱大赛同期观赛活动。成员模拟各国评审进行 Jury Vote，同步追随半决赛与总决赛直播，是榜吧与 Eurovision 文化交汇的独特记录。</p>
+        <p class="arc-card__desc">Eurovision China Voting Party 是榜吧联合欧洲歌唱大赛群在 Eurovision 歌唱大赛期间举办的观赛活动。成员参照 Eurovision 评分规则票选出自己心目中的当届 Eurovision 冠军。</p>
         <div class="arc-card__links">
           <a href="#" class="arc-card__link arc-card__link--disabled" onclick="return false" data-tooltip="暂不可用">存档页面</a>
         </div>
@@ -391,6 +402,12 @@
     var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
     setTimeout(function() { el.style.transitionDelay = '0s'; }, ms);
   }
+
+  // 当前期数与 bbl/index.html 同源，动态 fetch 保持同步，不手动硬编码
+  fetch('/data/bbl/bbl-latest.json').then(function(r){ return r.json(); }).then(function(d){
+    var el = document.getElementById('arcBblIssue');
+    if (el && d.issue) el.textContent = d.issue;
+  }).catch(function(){});
 </script>
 </body>
 </html>

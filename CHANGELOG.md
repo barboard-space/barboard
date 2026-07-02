@@ -4,6 +4,23 @@
 
 ---
 
+## [2026-07-01] — 年榜总览 Hub 页 + Archive 卡片视觉/文案精修
+
+### Added
+- 新建 `archive/annual/index.html`（榜吧年榜总览 Hub 页）：hero 品牌为「榜吧年榜」（历届存档），下设「单曲年榜」section 承载当前分榜类型（后续专辑榜/艺人榜/冠单榜可追加同结构 section）；年份卡片（2022/2021 倒序）动态 fetch 各年 JSON 取年度冠军曲 + `member-annual-index.json` 取合榜数，点击进入对应年份页。
+- `archive/index.html` 全部活动卡统一 hover 光效：上浮 3px + `color-mix()` 按各卡 `--arc-color` 生成发光阴影（BBL 紫/Barvision 粉/年榜蓝/吧莱美金/ECVP 青）。
+- 「当前期数」stat 改为动态 fetch `data/bbl/bbl-latest.json` 的 `issue` 字段，不再手动同步（发现时已与实际期数脱节 5 期）。
+
+### Changed
+- `archive/index.html` 五张活动卡说明文字改写为更口语化的社区语气（去掉"运行/设立"等公司化措辞）；eyebrow「年度 / 半年榜单」→「音乐盘点活动」。
+- 「榜吧年榜」卡片链接简化为单个「查看历届年榜」按钮 → `/archive/annual/`。
+- 年度看点「最多年冠」→「最多榜冠」，单位「冠」→「榜冠」（2021+2022 两页同步）。
+- ACTIVE / LEGACY 徽章样式互换。
+- 年份卡片不再显示点数数据，只保留封面/歌名/歌手；封面 44px → 60px，箭头图标改用紧贴边界的 viewBox 并缩小。
+
+### Fixed
+- `.arc-card` 入场动效 `.fade-up.visible`（3 类选择器）specificity 高于新增的 `:hover`（2 类），导致 hover 的 `transform` 完成入场后失效——补 `.arc-card.fade-up.visible:hover` 提权覆盖；触屏 hover 抑制媒体块同步补 `transform`/`box-shadow` 重置。
+
 ## [2026-07-01] — 成员个人年榜（BARCHARTS）+ 2021 年榜导入
 
 ### Added

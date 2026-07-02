@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>榜吧年榜 | Barboard</title>
+  <meta name="description" content="榜吧年榜历届存档总览——社区年度音乐盘点传统，含年度单曲榜及后续将扩展的专辑榜、艺人榜、冠单榜等分榜类型。" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css?v=3.0.14" />
+  <style>
+    /* ── Hero（沿用年榜系统 ac- 配色：电蓝主色）── */
+    .ac-hero { position: relative; padding: calc(var(--nav-h) + 40px) 0 24px; overflow: hidden; }
+    .ac-hero__glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 25% 0%, rgba(0,180,255,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 85% 40%, rgba(168,85,247,0.08) 0%, transparent 55%);
+    }
+    .ac-hero__inner { position: relative; z-index: 1; }
+    .ac-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--clr-violet-light); text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; transition: color 0.2s;
+    }
+    .ac-eyebrow:hover { color: var(--clr-white); }
+    .ac-title { font-family: var(--font-display); font-size: clamp(48px, 7vw, 88px); line-height: 0.96; letter-spacing: 0.02em; color: var(--clr-text); }
+    .ac-title .ac-board { color: var(--clr-board); }
+    .ac-title .ac-yr { color: var(--clr-accent); display: inline-block; margin-top: 4px; }
+    .ac-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin-top: 18px; }
+    .ac-meta-item { font-size: 12px; color: var(--clr-text-3); padding-right: 14px; margin-right: 14px; border-right: 1px solid var(--clr-border); white-space: nowrap; }
+    .ac-meta-item:last-child { border-right: none; }
+    .ac-desc { font-size: 14px; color: var(--clr-text-2); line-height: 1.7; margin-top: 18px; max-width: 560px; }
+
+    /* ── 单曲年榜 section 标题（沿用 archive.html 惯例：section-label 中文 + section__title 英文）── */
+    .section__title { color: var(--clr-accent); }
+
+    /* ── 年份卡片网格 ── */
+    .ac-hub-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--gap-md); margin-top: var(--gap-md); }
+
+    .ac-hub-card {
+      position: relative; display: block; text-decoration: none;
+      background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 8px;
+      padding: 24px 24px 20px; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    }
+    .ac-hub-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: var(--clr-accent); opacity: 0.85; border-radius: 8px 8px 0 0; pointer-events: none;
+    }
+    .ac-hub-card:hover { border-color: var(--clr-border-2); transform: translateY(-3px); box-shadow: 0 14px 32px rgba(0,180,255,0.10); }
+
+    .ac-hub-card__top { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 18px; }
+    .ac-hub-card__year {
+      font-family: var(--font-display); font-size: 44px; line-height: 1; letter-spacing: 0.02em;
+      color: var(--clr-accent); text-shadow: 0 0 22px rgba(0,180,255,0.28);
+    }
+    .ac-hub-card__badge {
+      font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--clr-text-2); border: 1px solid var(--clr-border); border-radius: 3px; padding: 4px 9px; white-space: nowrap;
+    }
+
+    .ac-hub-card__champ { display: flex; align-items: center; gap: 12px; padding: 12px; background: var(--clr-surface-2); border-radius: 6px; margin-bottom: 14px; }
+    .ac-hub-card__cover { width: 60px; height: 60px; border-radius: 5px; object-fit: cover; flex-shrink: 0; background: var(--clr-border); }
+    .ac-hub-card__song { min-width: 0; flex: 1; }
+    .ac-hub-card__label { font-size: 9px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clr-gold-light); margin-bottom: 3px; }
+    .ac-hub-card__title { font-size: 13px; font-weight: 600; color: var(--clr-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ac-hub-card__artist { font-size: 11px; color: var(--clr-text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-top: 1px; }
+
+    .ac-hub-card__meta { display: flex; gap: 14px; font-size: 11px; color: var(--clr-text-3); margin-bottom: 16px; }
+    .ac-hub-card__cta { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; color: var(--clr-accent); display: flex; align-items: center; gap: 5px; }
+    .ac-hub-card__cta svg { width: 5px; height: 10px; flex-shrink: 0; transition: transform 0.2s; }
+    .ac-hub-card:hover .ac-hub-card__cta svg { transform: translateX(3px); }
+
+    .ac-hub-empty { font-size: 14px; color: var(--clr-text-3); padding: 40px 0; }
+
+    @media (max-width: 768px) {
+      .ac-hub-grid { grid-template-columns: 1fr; }
+      .ac-hub-card__year { font-size: 36px; }
+      .ac-meta { row-gap: 4px; }
+      .ac-meta-item { white-space: normal; }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <section class="ac-hero">
+    <div class="ac-hero__glow" aria-hidden="true"></div>
+    <div class="section__inner ac-hero__inner">
+      <a href="/archive/" class="ac-eyebrow fade-up"><span>←</span><span>Archive</span></a>
+      <h1 class="ac-title fade-up" style="transition-delay:0.1s;"><span class="ac-board">榜吧</span>年榜<br><span class="ac-yr">历届存档</span></h1>
+      <div class="ac-meta fade-up" style="transition-delay:0.16s;">
+        <span class="ac-meta-item">欧美流行音乐个人榜吧 · 年度音乐盘点</span>
+      </div>
+      <p class="ac-desc fade-up" style="transition-delay:0.2s;">榜吧年榜是榜吧自 2013 年开始的年度音乐传统活动，由成员各自提交个人榜单合并产生。目前已收录年度单曲榜，后续将逐步更新专辑榜、艺人榜、冠单榜等更多分榜类型。</p>
+    </div>
+  </section>
+
+  <section class="section section--bordered" id="singles" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+    <div class="section__inner">
+      <p class="section-label fade-up">单曲年榜</p>
+      <h2 class="section__title fade-up" style="transition-delay:0.1s;font-size:clamp(24px,3.5vw,48px);"><span style="color:var(--clr-text);">Annual</span> Singles Chart</h2>
+      <div class="ac-hub-grid" id="acHubGrid">
+        <div class="ac-hub-empty">年份加载中…</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="/scripts/nav.js"></script>
+  <script>
+    function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+    var fadeObserver = ('IntersectionObserver' in window) ? new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); clearDelayAfterAnim(e.target); }
+      });
+    }, { threshold: 0.08 }) : null;
+    function clearDelayAfterAnim(el) {
+      var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+      setTimeout(function() { el.style.transitionDelay = '0s'; }, ms);
+    }
+    function observeFades(root) {
+      (root || document).querySelectorAll('.fade-up').forEach(function(n) {
+        if (n.classList.contains('visible')) return;
+        if (fadeObserver) fadeObserver.observe(n); else n.classList.add('visible');
+      });
+    }
+    observeFades();
+
+    // 已建年份列表，倒序（新→旧）；铺新年份时把新年份加到最前，并同步各年页面 YEARS 数组
+    var YEARS = [2022, 2021];
+
+    function hubCard(y, entries, sheets, i) {
+      var counted = entries.filter(function(e){ return !e.star; });
+      var champ = counted.slice().sort(function(a,b){ return b.points - a.points; })[0];
+      var cover = champ && champ.cover
+        ? '<img class="ac-hub-card__cover" src="' + esc(champ.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
+        : '<div class="ac-hub-card__cover"></div>';
+      var champBlock = champ ? (
+        '<div class="ac-hub-card__champ">' + cover +
+          '<div class="ac-hub-card__song">' +
+            '<div class="ac-hub-card__label">年度冠军单曲</div>' +
+            '<div class="ac-hub-card__title">' + esc(champ.song) + '</div>' +
+            '<div class="ac-hub-card__artist">' + esc(champ.artist) + '</div>' +
+          '</div>' +
+        '</div>'
+      ) : '';
+      var metaParts = ['TOP 200'];
+      if (sheets) metaParts.push(sheets + ' 榜合榜');
+      return '<a class="ac-hub-card fade-up" href="/archive/annual/' + y + '/" style="transition-delay:' + (i * 0.07) + 's;">' +
+        '<div class="ac-hub-card__top"><span class="ac-hub-card__year">' + y + '</span><span class="ac-hub-card__badge">年度单曲榜</span></div>' +
+        champBlock +
+        '<div class="ac-hub-card__meta">' + metaParts.map(function(m){ return '<span>' + esc(m) + '</span>'; }).join('') + '</div>' +
+        '<div class="ac-hub-card__cta">查看完整榜单 <svg viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg></div>' +
+      '</a>';
+    }
+
+    (async function() {
+      var grid = document.getElementById('acHubGrid');
+      var idx = {};
+      try { idx = await fetch('/data/annual/member-annual-index.json').then(function(r){ return r.json(); }); } catch (e) {}
+      var cards = await Promise.all(YEARS.map(async function(y, i) {
+        try {
+          var d = await fetch('/data/annual/' + y + '.json').then(function(r){ return r.json(); });
+          var sheets = idx[String(y)] ? Object.keys(idx[String(y)]).length : null;
+          return hubCard(y, d.entries || [], sheets, i);
+        } catch (e) { return ''; }
+      }));
+      var html = cards.join('');
+      grid.innerHTML = html || '<div class="ac-hub-empty">暂无年份数据</div>';
+      observeFades(grid);
+    })();
+  </script>
+</body>
+</html>

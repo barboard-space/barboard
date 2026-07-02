@@ -271,7 +271,7 @@
       if (champ) cards.push(hlCard({ track: champ, kind: 'pts', label: '点数冠军', val: Math.round(champ.points), unit: '' }));
       // 最多年冠（登顶个人榜最多的单曲——被最多大妈排在其个人榜第 1；含亚洲曲）
       var no1Top = entries.filter(function(e){ return e.no1; }).sort(function(a,b){ return b.no1-a.no1; })[0];
-      if (no1Top) cards.push(hlCard({ track: no1Top, kind: 'no1', label: '最多年冠', val: no1Top.no1, unit: ' 冠' }));
+      if (no1Top) cards.push(hlCard({ track: no1Top, kind: 'no1', label: '最多榜冠', val: no1Top.no1, unit: ' 榜冠' }));
       // 助攻王（助攻数最多）
       var assistTop = counted.filter(function(e){ return e.assists!=null; }).sort(function(a,b){ return b.assists-a.assists; })[0];
       if (assistTop) cards.push(hlCard({ track: assistTop, kind: 'assist', label: '助攻王', val: assistTop.assists, unit: ' 榜' }));

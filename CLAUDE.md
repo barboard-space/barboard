@@ -137,7 +137,10 @@ barboard-space/
 │   └── 2020/<NN>/index.html ← 6–12 届详情页薄壳（NN=06..12）
 │
 ├── archive/
-│   └── index.html          ← 活动存档总览（原 archive.html；barammy/esc-voting 子页待建）
+│   ├── index.html          ← 活动存档总览（原 archive.html；barammy/esc-voting 子页待建）
+│   └── annual/
+│       ├── index.html      ← 榜吧年榜总览 Hub 页（历届入口，见 #175）
+│       └── <年>/index.html ← 各年年度单曲榜详情页（见 #174）
 │
 └── assets/
     ├── fonts/
@@ -845,15 +848,22 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **数据**：源 Excel 在 `D:\Genius\BarChart\吧榜文件\年终榜\<年>吧年榜.xlsx`（含各大妈分表 + **`总榜` sheet = 最终排名**：列 `排名/艺术家/作品/点数/助攻数`；2022 共 76 个成员分表合榜、总榜 3000+ 条）。`scripts/parse_annual_chart.py <年> --top N` 读「总榜」→ `data/annual/<年>.json`（`{year,title,count,entries:[{rank,artist,song,points,assists,cover}]}`，当前 Top 200）。**封面 = iTunes Search API 构建期抓取**（`itunes.apple.com/search` 按「歌手 作品」查、`artworkUrl100`→`600x600bb`，免费无 key 国内可用；查不到留 null、前端 `onerror` 兜底；2022 命中 ~150/200）。`SRC` 字典按年加路径。
     - **页面** `archive/annual/<年>/index.html`（URL `/archive/annual/<年>/`，clean-URL/绝对路径/复用全局 `.chart-item`）：① 两行标题（年度蓝/单曲白/榜蓝 + 年份电蓝）；② meta「欧美流行音乐个人榜吧 · <年>年度单曲榜 · TOP 200 · 76 榜合榜」；③ **年份导航**（`.ac-nav`，3 格 `85px 1fr 85px`、前/后年箭头跳 `/archive/annual/<年±1>/`，`YEARS` 列表硬编码已建年份、不在列则禁用——**铺新年份须更新 YEARS**）；④ 默认 Top 100 + **「查看完整 Top 200」**展开按钮（`INITIAL=100`，搜索/定位>100 自动展开，对标 bbl `renderChartItems`）；⑤ **右侧悬浮侧栏完整移植 bbl**：搜索过滤(`.ac-search`)+ **年度看点卡**(点数冠军/助攻王[单位「榜」]/**前百最多**[Top100 内单曲数最多艺人，封面取其最高名次单曲、显示艺人名、徽章「最高#N」])，卡片点击 `scrollToRank` 定位+持久高亮(`.ac-rank-active` ::after 叠层)，JS-sticky(rAF+lerp)；⑥ 每条排名下方 `.ac-gap`「+N」= 本名次比下一名多的分（`round(pts[N])-round(pts[N+1])`，前三奖牌色+0.85、其余 `--clr-border-3`，样式同 bbl 排名下标）；⑦ 手机端：单列堆叠、看点 2 列、sticky 关、右列「累计点数/助攻数」label|值两行。
     - **合作串拆分（KEEP 例外）**：「前百最多」按**逗号**拆多艺人到各自；**名字本身含逗号者**（`Tyler, The Creator`、`Black Country, New Road`）进页面内 `KEEP` 例外不拆（占位符 `§`、勿用 NUL）。**每导入新年份先扫含逗号艺人串、向用户确认后更新 KEEP**（见 memory `feedback-annual-keep-list`）。
-    - **入口**：`archive/index.html` 的「榜吧年榜」卡（当前列 2022 + 2021 两个年份按钮）。
+    - **入口**：`archive/index.html` 的「榜吧年榜」卡→单个「查看历届年榜」按钮 → `/archive/annual/`（Hub 页，见 #175）。
     - **新增令牌** `--clr-border-3: rgba(180,160,255,0.48)`（style.css :root，border 族 0.14/0.26/0.48）。改 style.css 已升 `?v=3.0.14`（index/bbl/bbl·hof/styleguide/annual 5 文件同步，#122）。
     - **亚洲不占位曲**（华语/K-POP，源名次带 `*`/`**`）：当年规则只把欧美音乐计入名次、亚洲曲不占位——按卡位插入、名次带星、配色对齐成员页混淆单曲（深底 `--clr-shadow-bg` + 文字 `--clr-text-4`，opacity 1）、不计名次/看点/分差；页内 `itemKey`(如 `34*`) 作唯一键；看点卡/`scrollToRank` 用 key 基准。parser 保留字符串名次（`STAR_RE`）、`star` 字段。
-    - **年度看点卡**：点数冠军 / **最多年冠**（被最多大妈排个人榜第 1 的单曲，字段 `no1`/`no1_by`）/ 助攻榜数王 / **最多前百**（原「前百最多」，Top100 内单曲最多艺人）。均只计欧美占位曲（除最多年冠含全部）。
+    - **年度看点卡**：点数冠军 / **最多榜冠**（被最多大妈排个人榜第 1 的单曲，字段 `no1`/`no1_by`，单位「榜冠」）/ 助攻榜数王 / **最多前百**（原「前百最多」，Top100 内单曲最多艺人）。均只计欧美占位曲（除最多榜冠含全部）。
     - **⭐ 歌手/歌名规范化「单一维护源」= `scripts/annual_corrections.py`**（parser import）：系统性规则（撇号缩写小写 / feat·ft→逗号 / 逗号后补空格 / **全角逗号→半角** / 封面归一缓存键 `ckey`）+ 表（`KEEP` 名字含逗号 / `ABBR_OVERRIDE` **按年份**简称→id 例外[2022:时=27；2021:蓝=169霍妈·姐=171蓝姐] / `ARTIST_FIX` 艺人官方写法+拼写纠错 / `ARTIST_RAW_FIX` 整串预修正[Tyler 变体统一] / `SONG_FIX_EXACT`+`SONG_FIX_SUB` 品牌缩写 iPad/TV/BZRP)。铺新年份/发现新错只在表加一行重跑即生效。
-    - **⭐ 成员个人主页「个人年榜」板块（BARCHARTS，见 #175 后续所有 member 精修）**：`parse_annual_chart.py` 聚合成员年榜 → `data/annual/member-annual-index.json`（每位大妈每年 `assists`[前10/20/50/100/200，主数=占位曲/括号=亚洲不占位曲] + `top10`[个人榜前十，含封面]）；`gen_member_pages.py` 注入 `MEMBER_DATA.annual`；`member-render.js` 渲染（BARCHARTS 标签[同 Barvision 样式] + 助攻详情表 + 各年个人榜 Top10[名次·封面·歌名·歌手；桌面歌手列对齐吧视歌名列 630；手机 BBL 榜单式] + 折叠动画 + Notion 目录）。**改任意年 JSON 后重跑 `gen_member_pages.py`**。
+    - **⭐ 成员个人主页「个人年榜」板块（BARCHARTS）**：`parse_annual_chart.py` 聚合成员年榜 → `data/annual/member-annual-index.json`（每位大妈每年 `assists`[前10/20/50/100/200，主数=占位曲/括号=亚洲不占位曲] + `top10`[个人榜前十，含封面]）；`gen_member_pages.py` 注入 `MEMBER_DATA.annual`；`member-render.js` 渲染（BARCHARTS 标签[同 Barvision 样式] + 助攻详情表 + 各年个人榜 Top10[名次·封面·歌名·歌手；桌面歌手列对齐吧视歌名列 630；手机 BBL 榜单式] + 折叠动画 + Notion 目录）。**改任意年 JSON 后重跑 `gen_member_pages.py`**。
     - **⭐ 个人榜 Top10 完整性（每人满 10 条）关键**：① 显示榜/助攻用主 sheet（2022=总榜 / 2021=豪华榜[亚洲不占位]）；② **top10 另取全量源**避免私榜曲缺失——`FULL_SHEET`（2021=完全榜，单张全量合表 2760 首）或 `MEMBER_SHEETS`（2022=各大妈独立个人 sheet，sheet 名=简称，仅对总榜不足 10 的成员用 `read_member_sheet` 尽力补齐[个人 sheet 表头格式极乱，识别不出则跳过不覆盖]）。当前 2021(67)+2022(76) 全员满 10。
     - **2021 导入要点**（`吧榜豪华榜` sheet，非「总榜」；列名 `排名/艺人/歌曲/总点数/总助攻数`，用 `_col()` 兼容多名）：67 简称、31 带星亚洲曲、封面 221/221；`SHEET`/`FULL_SHEET`/`MEMBER_SHEETS` 三个按年字典控制来源。
-    - **下一步（本条交接的新窗口任务）**：**复用现有网页模板制作 `/archive/annual/`（年榜总览/枢纽页）**——统筹历年年榜（2021、2022、…），列出各年入口卡（可带年度冠军/主视觉/榜数等）；**把 `archive/index.html` 的「榜吧年榜」卡改为仅保留一个按钮，指向 `/archive/annual/`**（去掉现有两个年份按钮）。之后：铺 2013–2020 其它年份（各年 Excel 结构可能不同，`SHEET`/`FULL_SHEET`/`MEMBER_SHEETS`/`ABBR_OVERRIDE`/`annual_corrections.py` 按年增补）、年榜页排行榜细化。
+    - ~~下一步：制作 `/archive/annual/` 年榜总览 Hub 页~~ **已完成**（见 #175）。**剩余**：铺 2013–2020 其它年份（各年 Excel 结构可能不同，`SHEET`/`FULL_SHEET`/`MEMBER_SHEETS`/`ABBR_OVERRIDE`/`annual_corrections.py` 按年增补，Hub 页 `YEARS` 常量记得同步加新年份）、年榜页排行榜细化、后续分榜类型（专辑榜/艺人榜/冠单榜等，Hub 页已预留 section 结构）。
+
+175. **⭐ 年榜总览 Hub 页（`archive/annual/index.html`）+ `archive/index.html` 卡片视觉/文案精修（本次）**：
+    - **Hub 页架构**：hero 品牌为「榜吧年榜」（历届存档），**不是**「年度单曲榜」——因为年榜以后还会扩展专辑榜/艺人榜/冠单榜等分榜类型，hub 用「单曲年榜」section（`section-label`+`section__title`）承载当前唯一已建的分榜类型，未来新分榜类型直接追加同结构的 sibling section，hero 不用再改。年份卡片（页内 `YEARS` 常量，倒序排列，同 barvision `BUILT_EDITIONS` 惯例——已建年份列表本身允许硬编码，但列表指向的数据必须动态 fetch）：动态 fetch 各年 `data/annual/<年>.json` 取年度冠军曲（**只显示封面+歌名+歌手，不显示点数**）+ 一次性 fetch `member-annual-index.json`（顶层键为年份字符串）取合榜数，无需手工维护统计数字。
+    - **`archive/index.html` 卡片 hover 光效通用化**：把 Hub 页年份卡片的 `translateY(-3px)+box-shadow` 悬浮效果搬到全站活动卡 `.arc-card`，用 `color-mix(in srgb, var(--arc-color) 22%, transparent)` 让阴影颜色自动跟随各卡已有的 `--arc-color`（BBL 紫/Barvision 粉/年榜蓝/吧莱美金/ECVP 青），不用为每个卡型手写颜色；Legacy 降调卡（`.arc-card--ended`）同款处理。**踩坑（同 #64 原理，务必留意）**：卡片入场动效的 resting-state 规则 `.arc-card.fade-up.visible { transform: translateY(0) }`（3 类选择器，specificity 0,3,0）比新加的 `.arc-card:hover`（2 类，0,2,0）更具体，入场完成后 hover 的 `transform` 完全不生效——必须再加一条 `.arc-card.fade-up.visible:hover { transform: translateY(-3px) }`（4 类，0,4,0）提权覆盖；触屏 hover 抑制媒体块（`@media (hover: none), (pointer: coarse)`）里也要把这条一起重置为 `transform:none`，否则触屏点击后残留悬浮态。**任何「入场 fade-up + hover transform」组合都会撞上此陷阱**，加 hover transform 前先检查该元素的 resting-state 规则 specificity。
+    - **卡片文案基调**：archive.html 五张活动卡说明文字按用户多轮定稿改写为更口语化的社区语气（"成员"取代"大家"混用、去掉"运行/设立"等公司化措辞），非正式品牌口吻，避免"年度盘点活动"式套话堆砌；短句优先，能删的形容词都删。
+    - **数据防漂移**：「当前期数」stat 改为动态 fetch `data/bbl/bbl-latest.json` 的 `issue` 字段（与 bbl/index.html 同源），不再手写数字，避免像本次发现的一样和实际期数脱节（发现时已经差了 5 期）。
+    - **ACTIVE/LEGACY 徽章样式互换**：`.arc-badge--active` ↔ `.arc-badge--ended` 的 color/background/border 值直接对调（class 名与用法不变，只换视觉呈现）。
 
 ## 对话交接工作流
 
