@@ -865,6 +865,12 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **数据防漂移**：「当前期数」stat 改为动态 fetch `data/bbl/bbl-latest.json` 的 `issue` 字段（与 bbl/index.html 同源），不再手写数字，避免像本次发现的一样和实际期数脱节（发现时已经差了 5 期）。
     - **ACTIVE/LEGACY 徽章样式互换**：`.arc-badge--active` ↔ `.arc-badge--ended` 的 color/background/border 值直接对调（class 名与用法不变，只换视觉呈现）。
 
+176. **⭐ 成员页个人年榜 Top10 手机端歌名/歌手间距修复 + 封面缺失 placeholder（本次，`scripts/member-render.js`）**：
+    - **手机端间距根因**：原 CSS 用 grid 让「名次」「封面」跨 2 行（`grid-row:1/3`+`align-self:center`）实现相对歌名+歌手两行整体居中；42px 封面比"歌名(16.8)+row-gap(4)+歌手(14.4)≈35.2px"内容更高，grid 为容纳跨行 spanning 项会把两行轨道整体撑大（+`align-items:center` 使多余空间摊在轨道内容两侧），导致实测歌名→歌手间距变成 7.4px 而非声明的 4px（BBL 用 `.chart-item` 单行 grid + `.chart-song` 内部纯文档流 `margin-top:4px` 实现，天然没有这个问题，因为封面和文字块同处一行、彼此互不影响内部间距）。
+    - **修复**：改用与 BBL 完全相同的机制——名次和封面脱离文档流用 `position:absolute;top:50%;transform:translateY(-50%)`（相对 `position:relative` 的 `tr`）居中覆盖（`left:14px`/`left:70px`，对应原 `44px 名次列+12间距+42px 封面列` 的累加位置），歌名/歌手回归纯文档流、`.an-artist{margin-top:4px}` 控距，`tr{padding-left:124px}` 给文字列留出名次+封面+间距的空间。**实测间距精确等于 4px**，且长歌名换行成两行时行高自动增高、封面仍稳定居中（不再受行数影响）。**通则**：CSS grid 中让一个「跨多行、尺寸固定」的元素与「多行纯文本」共享同一组行轨道时，尺寸较大的跨行元素会撑大轨道、破坏文本行间的声明间距——凡是「侯选图标/头像跨行 + 多行文字」的布局都应避免共享轨道，改用脱离文档流居中覆盖（或让文字块整体作为单一网格/flex 项）。
+    - **封面缺失 placeholder**：`.an-cover--ph`（`<span>`，无 `cover` 字段时渲染）保留现有背景色 `var(--clr-surface-2)`，叠加 `::before` 用 `mask-image: url(/assets/images/logo_hollow.svg)` 引入榜吧 pentagon logo 水印，`background: var(--clr-text-4)`（"最弱化文字"色阶，#158/#39 一脉沿用的调色）+ `opacity:.5`，`inset:20%` 使 logo 占据约 60% 的封面区域、居中，桌面 36px/手机 42px 两种封面尺寸按百分比自动适配。**真实可见样例**（iTunes 查无封面）：`member/127/`（苏妈）2021 年 Top10 第 1/7 名 Arab Strap 两曲；另见 `member/171/`、`member/770/`（2021）、`member/167/`（2022）。
+    - **验证坑（预览缓存）**：`scripts/member-render.js` 无 `?v=` 版本号，预览里改完 `location.reload()` 常仍吃浏览器缓存的旧 JS（同 #139 bv-results-render.js 的教训）——验证时用 `fetch(url,{cache:'no-store'})` 取到新文本后 `eval()` 重跑一遍脚本（可靠但会重复渲染出重复 DOM，测量时要挑 `getBoundingClientRect().height>0` 的那份，忽略因去重逻辑冲突产生的 0 高度重复节点）。
+
 ## 对话交接工作流
 
 **触发时机**：每次对话即将被 compact（上下文压缩）之前，或用户主动要求生成交接 prompt 时。

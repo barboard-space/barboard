@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-07-01] — 个人年榜手机端间距修复 + 封面缺失 placeholder
+
+### Fixed
+- 成员页「个人年榜」Top 10 手机端歌名→歌手间距从实测 7.4px 修正为 4px，与 BBL 榜单一致：根因是原 CSS grid 让名次/封面跨 2 行 spanning 撑大了文字行轨道；改为名次/封面 `position:absolute` 居中覆盖、歌名/歌手回归纯文档流 `margin-top:4px`，与 BBL `.chart-song` 机制一致，且长歌名换行时行高自动适配。
+
+### Added
+- 封面缺失 placeholder（`.an-cover--ph`）：保留原背景色，叠加 `mask-image` 引入的榜吧 logo 水印（`--clr-text-4` 弱化色调 + 0.5 透明度），桌面/手机两种尺寸按比例适配。真实样例见 `member/127/`（苏妈）2021 年 Top10。
+
 ## [2026-07-01] — 年榜总览 Hub 页 + Archive 卡片视觉/文案精修
 
 ### Added

@@ -194,7 +194,8 @@
     '.mp-an-tbl .an-name{color:var(--clr-text);white-space:normal}',  /* 歌名列（保持 table-cell，避免 td 设 flex 导致边框亚像素偏移）*/
     '.mp-an-tbl .an-name-in{display:flex;align-items:center;gap:18px}',  /* 内层 flex：封面 + 标题 */
     '.an-cover{width:36px;height:36px;border-radius:3px;object-fit:cover;flex-shrink:0;background:var(--clr-surface-2);display:block}',
-    '.an-cover--ph{display:inline-block}',
+    '.an-cover--ph{display:inline-block;position:relative;overflow:hidden}',  /* 封面缺失兜底：沿用背景色 + 榜吧 logo 水印（弱化色调，不抢视觉） */
+    '.an-cover--ph::before{content:"";position:absolute;inset:20%;background:var(--clr-text-4);opacity:.5;-webkit-mask-image:url(/assets/images/logo_hollow.svg);mask-image:url(/assets/images/logo_hollow.svg);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
     '.mp-an-tbl .an-title{min-width:0}',
     /* 前十表：固定列宽（避免展开后歌手列因内容变化而横向移动）+ 歌名表头缩进到标题位置（td14 + 封面36 + 间距18 = 68）*/
     '.mp-an-block .mp-an-tbl{table-layout:fixed;min-width:600px}',
@@ -208,17 +209,20 @@
     '  .mp-an-block .mp-an-tbl{display:block;min-width:0;width:100%;table-layout:auto}',
     '  .mp-an-block .mp-an-tbl thead{display:none}',
     '  .mp-an-block .mp-an-tbl tbody{display:block}',
-    '  .mp-an-block .mp-an-tbl tr{display:grid;grid-template-columns:44px 42px 1fr;column-gap:12px;row-gap:4px;align-items:center;padding:6px 14px;border-bottom:1px solid var(--clr-border)}',
+    /* 注：不用 2 行 grid + rk/cover 跨行 spanning——42px 封面跨行会撑大行高（grid 轨道为容纳
+       spanning 项的最小尺寸而增长），导致歌名→歌手间距比声明的 row-gap 明显更大。改用 BBL 同款
+       机制：rk/封面脱离文档流用 position:absolute 居中覆盖，歌名/歌手回归纯文档流 margin-top 控距 */
+    '  .mp-an-block .mp-an-tbl tr{position:relative;display:block;padding:6px 14px 6px 124px;border-bottom:1px solid var(--clr-border)}',
     '  .mp-an-block .mp-an-tbl tr:last-child{border-bottom:none}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--1{background:rgba(212,168,50,.12)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--2{background:rgba(148,196,220,.11)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--3{background:rgba(224,160,100,.10)}',
     '  .mp-an-block .mp-an-tbl td{display:block;padding:0;border:none;width:auto!important;background:none!important}',
-    '  .mp-an-block .mp-an-tbl .rk{grid-column:1;grid-row:1/3;align-self:center;text-align:center;font-family:var(--font-display);font-size:22px;font-weight:400}',  /* 名次同 BBL .chart-rank */
-    '  .mp-an-block .mp-an-tbl .an-name,.mp-an-block .mp-an-tbl .an-name-in{display:contents}',  /* 拆出封面/标题为网格项：封面独立列居中、标题占行1 */
-    '  .mp-an-block .mp-an-tbl .an-cover{grid-column:2;grid-row:1/3;align-self:center;width:42px;height:42px;margin:0}',
-    '  .mp-an-block .mp-an-tbl .an-title{grid-column:3;grid-row:1;font-size:14px;font-weight:600;line-height:1.2}',
-    '  .mp-an-block .mp-an-tbl .an-artist{grid-column:3;grid-row:2;font-size:12px;line-height:1.2;color:var(--clr-text-2);white-space:normal}',
+    '  .mp-an-block .mp-an-tbl .rk{position:absolute;left:14px;top:50%;transform:translateY(-50%);width:44px;text-align:center;font-family:var(--font-display);font-size:22px;font-weight:400}',  /* 名次同 BBL .chart-rank */
+    '  .mp-an-block .mp-an-tbl .an-name,.mp-an-block .mp-an-tbl .an-name-in{display:contents}',  /* 拆出封面，标题回归纯文档流 */
+    '  .mp-an-block .mp-an-tbl .an-cover{position:absolute;left:70px;top:50%;transform:translateY(-50%);width:42px;height:42px;margin:0}',
+    '  .mp-an-block .mp-an-tbl .an-title{display:block;font-size:14px;font-weight:600;line-height:1.2}',
+    '  .mp-an-block .mp-an-tbl .an-artist{display:block;font-size:12px;line-height:1.2;color:var(--clr-text-2);white-space:normal;margin-top:4px}',  /* 与标题间距同 BBL .chart-song__artist margin-top:4px */
     '  .mp-an-more:hover{border-color:var(--clr-border-2);color:var(--clr-text-4);background:var(--clr-surface)}',  /* 手机端去 hover（点击后不残留高亮），桌面保留 */
     '  .mp-an-assist{min-width:0;width:100%;table-layout:fixed}',  /* 助攻表：手机端 6 列等分、一屏内显示不横滚 */
     '  .mp-an-assist th,.mp-an-assist td{padding-left:6px;padding-right:6px}',
