@@ -75,6 +75,19 @@
 
     .ac-hub-empty { font-size: 14px; color: var(--clr-text-3); padding: 40px 0; }
 
+    /* 卡片入场动画对齐 member.html 的 ml-card-enter（12px 轻微位移，不做明显"向上浮动"） */
+    @media (prefers-reduced-motion: no-preference) {
+      .ac-hub-card.fade-up {
+        transform: translateY(12px);
+        transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1),
+                    transform 0.55s cubic-bezier(0.22,1,0.36,1);
+      }
+      .ac-hub-card.fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
     @media (max-width: 768px) {
       .ac-hub-grid { grid-template-columns: 1fr; }
       .ac-hub-card__year { font-size: 36px; }
