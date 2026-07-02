@@ -57,7 +57,7 @@
     '      <div>',
     '        <a href="/" class="nav__logo footer__logo"><img src="/assets/images/logo_center.png" alt="" class="nav__logo-img" aria-hidden="true" /><span>BAR<span class="nav__logo-board">BOARD</span></span></a>',
     '        <p class="footer__name">欧美流行音乐个人榜吧</p>',
-    '        <p class="footer__tagline"><span>始于2013年5月21日</span><span>UNITED BY MUSIC</span></p>',
+    '        <p class="footer__tagline"><span>始于2013年5月20日</span><span>UNITED BY MUSIC</span></p>',
     '      </div>',
     '      <div>',
     '        <div class="footer__col-title">BarboardLab</div>',
