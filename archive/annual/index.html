@@ -131,7 +131,7 @@
     observeFades();
 
     // 已建年份列表，倒序（新→旧）；铺新年份时把新年份加到最前，并同步各年页面 YEARS 数组
-    var YEARS = [2023, 2022, 2021, 2020, 2019, 2018, 2016];
+    var YEARS = [2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016];
 
     function hubCard(y, entries, sheets, i) {
       var counted = entries.filter(function(e){ return !e.star; });
@@ -165,7 +165,8 @@
       var cards = await Promise.all(YEARS.map(async function(y, i) {
         try {
           var d = await fetch('/data/annual/' + y + '.json').then(function(r){ return r.json(); });
-          var sheets = idx[String(y)] ? Object.keys(idx[String(y)]).length : null;
+          // boards = 官方合榜数（人工登记，见 BOARD_COUNT），未登记则退回按已识别成员数动态算
+          var sheets = d.boards != null ? d.boards : (idx[String(y)] ? Object.keys(idx[String(y)]).length : null);
           return hubCard(y, d.entries || [], sheets, i);
         } catch (e) { return ''; }
       }));

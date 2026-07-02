@@ -223,6 +223,7 @@
     '  .mp-an-block .mp-an-tbl .an-cover{position:absolute;left:54px;top:50%;transform:translateY(-50%);width:38px;height:38px;margin:0}',
     '  .mp-an-block .mp-an-tbl .an-title{display:block;font-size:13px;font-weight:600;line-height:1.2}',
     '  .mp-an-block .mp-an-tbl .an-artist{display:block;font-size:11px;line-height:1.2;color:var(--clr-text-2);white-space:normal;margin-top:2px}',
+    '  .mp-an-more:hover{border-color:var(--clr-border-2);color:var(--clr-text-4);background:var(--clr-surface)}',  /* 手机端去 hover（点击后不残留高亮），桌面保留 */
     '  .mp-an-assist{min-width:0;width:100%;table-layout:fixed}',  /* 助攻表：手机端 6 列等分、一屏内显示不横滚 */
     '  .mp-an-assist th,.mp-an-assist td{padding-left:6px;padding-right:6px}',
     '}',
@@ -243,7 +244,8 @@
     /* 展开按钮（个人榜前十 + 吧视表通用）：表格底边居中的小圆角矩形 + 双箭头（展开后翻转朝上）
        重叠部分藏在表格下面（wrap z:0 < table z:1，表格不透明底遮住按钮上半）；箭头默认＝描边色，hover 变紫 */
     '.mp-an-more-wrap{display:flex;justify-content:center;margin-top:-6px;position:relative;z-index:0}',
-    '.mp-an-more{display:flex;align-items:center;justify-content:center;width:54px;height:24px;padding:0;background:var(--clr-surface);border:1px solid var(--clr-border-2);border-radius:6px;color:var(--clr-text-4);cursor:pointer}',  /* 箭头(currentColor)=混淆标签色 text-4；描边仍 border-2；无 hover/click 高亮效果 */
+    '.mp-an-more{display:flex;align-items:center;justify-content:center;width:54px;height:24px;padding:0;background:var(--clr-surface);border:1px solid var(--clr-border-2);border-radius:6px;color:var(--clr-text-4);cursor:pointer;transition:border-color .2s,color .2s,background .2s}',  /* 箭头(currentColor)=混淆标签色 text-4；描边仍 border-2 */
+    '.mp-an-more:hover{border-color:var(--clr-violet-light);color:var(--clr-violet-light);background:var(--clr-surface-2)}',
     '.mp-an-more svg{width:16px;height:16px;display:block;position:relative;top:2px;transition:transform .25s}',  /* 箭头内部下移 2px */
     '.mp-an-more.is-open svg{transform:rotate(180deg)}',
     /* ── 页内目录（Notion 风格，同吧视详情页 bvr-toc）── */
@@ -1048,7 +1050,8 @@
     var assistRows = years.map(function (y) {
       var a = annual[y].assists || {}, sh = annual[y].assists_shadow || {};  // 主数=占位曲；括号=亚洲不占位曲
       return '<tr><td class="yr">' + y + '</td>' + TIERS.map(function (t) {
-        return '<td class="num">' + (a[t[0]] || 0) + (sh[t[0]] ? '<span class="mp-an-sh">(' + sh[t[0]] + ')</span>' : '') + '</td>';
+        var v = a[t[0]];  // null=该档数据源缺失（如 2017，见 no_detail）显示"—"；undefined 沿用旧行为按 0 算
+        return '<td class="num">' + (v === null ? '—' : (v || 0)) + (sh[t[0]] ? '<span class="mp-an-sh">(' + sh[t[0]] + ')</span>' : '') + '</td>';
       }).join('') + '</tr>';
     }).join('');
     var assistTable = '<div class="mp-an-tw fade-up" style="transition-delay:.28s"><table class="mp-an-tbl mp-an-assist">' +
@@ -1057,7 +1060,13 @@
     var TOP_INIT = 3;
     var topBlocks = years.map(function (y, yi) {
       var list = (annual[y].top10 || []).slice(0, 10);
-      if (!list.length) return '';
+      if (!list.length) {
+        if (!annual[y].no_detail) return '';  // 正常年份没有 top10 代表数据尚未覆盖到——沿用旧行为不渲染
+        return '<div class="mp-an-block fade-up" style="transition-delay:' + (0.34 + yi * 0.06).toFixed(2) + 's">' +
+          '<div class="mp-an-subtitle"><span class="an-yr">' + y + '</span>年 个人榜 Top 10</div>' +
+          '<p class="mp-an-caption">该年源数据缺失各成员详细个人榜，暂无法生成 Top 10。</p>' +
+        '</div>';
+      }
       var rows = list.map(function (e, i) {
         var medal = e.rank <= 3 ? ' mp-an-row--' + e.rank : '';
         var extra = i >= TOP_INIT ? ' mp-an-extra' : '';

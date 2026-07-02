@@ -13,9 +13,16 @@ SRC = {
     "2019": r"D:\Genius\BarChart\吧榜文件\年终榜\2019年终榜\2019年贴吧年终榜.xlsx",
     "2018": r"D:\Genius\BarChart\吧榜文件\年终榜\2018年终榜\000 汇总榜.xlsx",
     "2016": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\2016吧单曲年榜汇总.xlsx",
+    "2017": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\2017榜吧单曲年榜.xlsx",
 }
 # 各年源 sheet（默认「总榜」）；列名也各年不同，用 _col() 兼容
-SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1", "2018": "综合点数整理", "2016": "汇总"}
+SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1", "2018": "综合点数整理", "2016": "汇总", "2017": "Sheet1"}
+# 2017：唯一 sheet「Sheet1」只有 5 列（排名/艺人/歌曲/入榜数/点数），无任何成员个人列——
+# 源数据本身就没有留存各大妈的详细个人提交榜单，故无法像其它年份一样从表里算出个人 Top10 /
+# 分档助攻明细 / 「最多榜冠」；下方 find_member_cols 对此年份天然返回空（无列名以"排名"结尾），
+# 主榜（排名/艺人/歌名/点数/入榜数=助攻数）本身完整、可正常生成。
+# 「最多榜冠」改用 CHAMP_OVERRIDE 人工覆盖；各成员助攻贡献值（仅 Top100 档，来自用户提供的
+# 另一份「43 榜合榜助攻贡献」统计图，非本 xlsx）另见 MANUAL_MEMBER_ASSISTS。
 # 个人榜 top10 用的「全量」sheet（含所有排过的曲 → 保证满 10 条）；未定义则用主 sheet 本身。
 # 2021：显示榜=豪华榜(亚洲不占位)，但 top10 从完全榜(2760 首全量)取，避免私榜曲缺失。
 # 2020：显示榜=吧榜终版(300 首终版排名)，但 top10 从汇总表(2444 首全量)取，避免私榜曲缺失。
@@ -54,7 +61,7 @@ _META_COLS = {"终名次", "名次", "排名", "艺人", "艺术家", "歌曲", 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "annual")
 MEMBERS_CSV = os.path.join(os.path.dirname(__file__), "..", "data", "members", "members.csv")
 # 修正表（歌手/歌名规范化的唯一维护源，见该文件顶部说明）
-from annual_corrections import KEEP, ABBR_OVERRIDE, ARTIST_FIX, ARTIST_RAW_FIX, SONG_FIX_EXACT, SONG_FIX_SUB, COVER_OVERRIDE
+from annual_corrections import KEEP, ABBR_OVERRIDE, ARTIST_FIX, ARTIST_RAW_FIX, SONG_FIX_EXACT, SONG_FIX_SUB, COVER_OVERRIDE, CHAMP_OVERRIDE, MANUAL_MEMBER_ASSISTS, BOARD_COUNT
 
 
 # Title-Case 修复：撇号后的英文缩写/所有格被误大写（'S 'T 'M 'D 'Re 'Ve 'Ll）→ 小写
@@ -435,7 +442,7 @@ def main():
                 return idx[n]
         return None
     ci = {"rank": _col("排名", "名次", "终名次", "Rank"), "artist": _col("艺术家", "艺人", "Artists", "Artist"), "song": _col("作品", "歌曲", "Song", "Track", "Title"),
-          "pts": _col("点数", "总点数", "Points", "Total Points"), "assist": _col("助攻数", "总助攻数", "In", "Charts", "Num. in Chart")}
+          "pts": _col("点数", "总点数", "Points", "Total Points"), "assist": _col("助攻数", "总助攻数", "In", "Charts", "Num. in Chart", "入榜数")}
     if ci["rank"] is None:
         ci["rank"] = 0  # 排名列无表头（如 2023，第 1 列即排名，无列名）
     if year in FIXED_COLS:
@@ -502,6 +509,10 @@ def main():
         if no1_by:
             e["no1"] = len(no1_by)
             e["no1_by"] = no1_by
+        # 「最多榜冠」人工覆盖（源数据缺个人榜逐曲名次、无法自动统计的年份，见 CHAMP_OVERRIDE）
+        co = CHAMP_OVERRIDE.get(year)
+        if co and co["artist"] == artist and co["song"] == song:
+            e["no1"] = co["no1"]
         if not nocover:
             e["cover"] = itunes_cover(artist, song, cache)
             sys.stderr.write("  %3d%s. %s — %s  %s\n" % (rk, "*" * star, artist, song, "✓" if e["cover"] else "—"))
@@ -520,6 +531,8 @@ def main():
     # 多首不占位曲并排同一名次时，点数高的排前面（而非按星号数排，星号数只表示"隔了几首不占位曲"，与排序先后无关）
     entries.sort(key=lambda x: (x["rank"], -x["points"]))
     out = {"year": int(year), "title": "%s 榜吧年终榜" % year, "count": len(entries), "entries": entries}
+    if year in BOARD_COUNT:
+        out["boards"] = BOARD_COUNT[year]
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(fp, "w", encoding="utf-8") as f:
         json.dump(out, f, ensure_ascii=False, indent=1)
@@ -612,6 +625,13 @@ def main():
         if any(assist_sh[sid].values()):
             m["assists_shadow"] = {"t%d" % t: assist_sh[sid][t] for t in TIERS}
         magg[str(sid)] = m
+    # 人工覆盖：源数据缺各成员详细个人榜的年份（如 2017），无法从主榜算出分档助攻/Top10，
+    # 改用用户提供的另一份统计人工登记（仅 t100 有值，其余档位/Top10 留空，前端显示"—"）
+    for sid, t100 in MANUAL_MEMBER_ASSISTS.get(year, {}).items():
+        magg[str(sid)] = {
+            "assists": {"t%d" % t: (t100 if t == 100 else None) for t in TIERS},
+            "top10": [], "no_detail": True,
+        }
     idx_path = os.path.join(OUT_DIR, "member-annual-index.json")
     idx = {}
     if os.path.exists(idx_path):

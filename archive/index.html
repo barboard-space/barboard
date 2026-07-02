@@ -199,6 +199,15 @@
     .arc-card__link--disabled:hover { color: var(--clr-text-2); border-color: var(--clr-border); opacity: 0.35; }
     .arc-card__link:hover .ext-icon { opacity: 1; }
 
+    /* 整卡可点击的卡片用此 CTA（非按钮，纯文字+箭头，样式对齐 archive/annual/ Hub 页 .ac-hub-card__cta） */
+    .arc-card__cta {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em;
+      color: var(--arc-color, var(--clr-accent)); display: flex; align-items: center; gap: 5px;
+      margin-top: auto;
+    }
+    .arc-card__cta svg { width: 5px; height: 10px; flex-shrink: 0; transition: transform 0.2s; }
+    .arc-card:hover .arc-card__cta svg { transform: translateX(3px); }
+
     /* ended card glow-off */
     .arc-card--ended { opacity: 0.82; }
     .arc-card--ended:hover {
@@ -328,8 +337,8 @@
 
     <div class="arc-grid arc-grid--3">
 
-      <!-- 榜吧年榜/半年榜 -->
-      <div class="arc-card arc-card--year arc-card--ended fade-up" style="transition-delay:0.07s;">
+      <!-- 榜吧年榜/半年榜（整卡可点击跳转） -->
+      <div class="arc-card arc-card--year arc-card--ended fade-up" style="transition-delay:0.07s;cursor:pointer;" onclick="location.href='/archive/annual/'">
         <div class="arc-card__header">
           <div>
             <p class="arc-card__eyebrow">音乐盘点活动</p>
@@ -339,9 +348,7 @@
           <span class="arc-badge arc-badge--ended">Legacy</span>
         </div>
         <p class="arc-card__desc">榜吧最核心的音乐盘点活动之一。成员通过汇总各自榜单共同评选年度最佳单曲、专辑和艺人。</p>
-        <div class="arc-card__links">
-          <a href="/archive/annual/" class="arc-card__link arc-card__link--primary">查看历届年榜</a>
-        </div>
+        <div class="arc-card__cta">查看历届年榜 <svg viewBox="0 0 8 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 1l6 6-6 6"/></svg></div>
       </div>
 
       <!-- 吧莱美 -->

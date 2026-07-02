@@ -26763,7 +26763,7 @@
    "top10": [
     {
      "rank": 1,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -27006,7 +27006,7 @@
     },
     {
      "rank": 6,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -27118,7 +27118,7 @@
    "top10": [
     {
      "rank": 1,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -27361,7 +27361,7 @@
     },
     {
      "rank": 9,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -27954,7 +27954,7 @@
      "rank": 1,
      "artist": "Kanye West",
      "song": "Father Stretches My Hand, Pts. 1 & 2 (feat. Kid Cudi & Desiigner)",
-     "cover": null
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music113/v4/21/fd/d3/21fdd3d4-0c00-53ef-3903-d0569c49a812/19UMGIM89397.rgb.jpg/600x600bb.jpg"
     },
     {
      "rank": 2,
@@ -28189,7 +28189,7 @@
     },
     {
      "rank": 5,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -28284,7 +28284,7 @@
     },
     {
      "rank": 9,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -28313,7 +28313,7 @@
     },
     {
      "rank": 2,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -28627,7 +28627,7 @@
     },
     {
      "rank": 7,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -28664,7 +28664,7 @@
      "rank": 1,
      "artist": "Maxwell",
      "song": "All the Ways Love Can Feel",
-     "cover": null
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/6e/43/ed/6e43ed66-264b-c38c-c20e-db456490b5f8/886446285252.jpg/600x600bb.jpg"
     },
     {
      "rank": 2,
@@ -28816,7 +28816,7 @@
     },
     {
      "rank": 3,
-     "artist": "Beyonce",
+     "artist": "Beyoncé",
      "song": "Formation",
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
     },
@@ -28863,6 +28863,470 @@
      "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/9c/da/90/9cda90c9-df1a-078b-319c-bdf2801e8d1f/16UMGIM03373.rgb.jpg/600x600bb.jpg"
     }
    ]
+  }
+ },
+ "2017": {
+  "17": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 64,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "168": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 63,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "781": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 57,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "132": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 57,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "138": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 56,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "12": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 55,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "19": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 53,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "776": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 52,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "784": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 48,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "191": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 47,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "173": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 44,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "154": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 44,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "158": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 43,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "172": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 43,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "174": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 43,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "782": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 42,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "7": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 40,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "775": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 39,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "779": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 37,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "167": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 37,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "129": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 36,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "164": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 35,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "141": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 35,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "123": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 34,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "120": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 34,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "125": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 32,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "156": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 30,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "131": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 30,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "18": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 30,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "189": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 27,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "124": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 26,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "783": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 25,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "770": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 23,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "118": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 23,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "20": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 20,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "157": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 20,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "119": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 18,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "153": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 17,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "190": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 15,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "133": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 14,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "185": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 13,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "127": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": 11,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
   }
  }
 }

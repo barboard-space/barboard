@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-07-02] — 2017 年榜导入 + 全站细节收尾
+
+### Added
+- 2017 年榜（43 榜合榜、Top 200）导入 `/archive/annual/2017/`。冠军 Taylor Swift — Look What You Made Me Do。数据源是本系列里最干净的一份（唯一 sheet 仅 5 列，无任何成员个人列），主榜构建走通用管线零特殊分支。
+- 新增三个通用「人工覆盖」机制（`scripts/annual_corrections.py`），用于源数据没有成员个人列、无法自动统计某项数据的年份：`CHAMP_OVERRIDE`（人工登记"最多榜冠"真实值）、`MANUAL_MEMBER_ASSISTS`（人工登记各成员 Top100 助攻贡献数，其余档位/Top10 显示"—"及"该年源数据缺失…"提示）、`BOARD_COUNT`（人工登记官方合榜总数，写入各年 JSON 的 `boards` 字段，Hub 页优先读取，不再用"已识别成员数"顶替）。
+- 42 位成员（本届简称身份全部对照 `members.csv` 已存在的成员解出，零新增历史成员）的 2017 助攻数据接入个人主页「个人年榜」板块。
+
+### Fixed
+- 2016 年份页 hero meta 此前误写"31 榜合榜"（按误识别成员数），改为官方数"34 榜合榜"。
+- `scripts/member-render.js` 的个人主页展开按钮（`.mp-an-more`，Top10/吧视参赛记录共用）恢复桌面端 hover 高亮，手机端仍中和避免残留高亮。
+
+### Changed
+- `archive/index.html`「榜吧年榜」卡片改为整卡可点击跳转 `/archive/annual/`；内部原按钮式 CTA 同步改为与 Hub 页年份卡片一致的纯文字+箭头样式（新增 `.arc-card__cta`）。
+
 ## [2026-07-02] — 2016 年榜导入
 
 ### Added

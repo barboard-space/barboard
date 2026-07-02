@@ -124,7 +124,7 @@
   },
   {
    "rank": 12,
-   "artist": "Beyonce",
+   "artist": "Beyoncé",
    "song": "Formation",
    "points": 2664.4,
    "assists": 17,
@@ -803,7 +803,7 @@
   },
   {
    "rank": 91,
-   "artist": "Beyonce, Kendrick Lamar",
+   "artist": "Beyoncé, Kendrick Lamar",
    "song": "Freedom",
    "points": 653.7,
    "assists": 8,
@@ -1687,11 +1687,12 @@
   },
   {
    "rank": 200,
-   "artist": "Beyonce",
+   "artist": "Beyoncé",
    "song": "All Night",
    "points": 324.2,
    "assists": 3,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/53/65/d2536587-c7f3-9153-4677-f5a2f3e9e5ad/886447691120.jpg/600x600bb.jpg"
   }
- ]
+ ],
+ "boards": 34
 }
