@@ -11,28 +11,46 @@ SRC = {
     "2021": r"D:\Genius\BarChart\吧榜文件\年终榜\2021年终榜\吧榜整理文件.xlsx",
     "2020": r"D:\Genius\BarChart\吧榜文件\年终榜\2020年终榜\00 汇总榜.xlsx",
     "2019": r"D:\Genius\BarChart\吧榜文件\年终榜\2019年终榜\2019年贴吧年终榜.xlsx",
+    "2018": r"D:\Genius\BarChart\吧榜文件\年终榜\2018年终榜\000 汇总榜.xlsx",
+    "2016": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\2016吧单曲年榜汇总.xlsx",
 }
 # 各年源 sheet（默认「总榜」）；列名也各年不同，用 _col() 兼容
-SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1"}
+SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1", "2018": "综合点数整理", "2016": "汇总"}
 # 个人榜 top10 用的「全量」sheet（含所有排过的曲 → 保证满 10 条）；未定义则用主 sheet 本身。
 # 2021：显示榜=豪华榜(亚洲不占位)，但 top10 从完全榜(2760 首全量)取，避免私榜曲缺失。
 # 2020：显示榜=吧榜终版(300 首终版排名)，但 top10 从汇总表(2444 首全量)取，避免私榜曲缺失。
 # 2023：显示榜=星号带(300 首、含 "N*" 亚洲不占位星标)，但 top10 从 Sheet1(2781 首全量) 取，避免私榜曲缺失。
 # 2019：唯一 sheet「Sheet1」本身就是完整总榜（1930 首、各成员个人榜均满 top10），无需单独全量表。
+# 2018：「综合点数整理」只有 Top 200（转置表，见 TRANSPOSED_YEARS），无法覆盖各成员完整 top10——
+#       top10 改从 54 位成员各自的个人榜原始 Excel 读取，见 MEMBER_2018_FILES + read_2018_top10()。
 FULL_SHEET = {"2021": "吧榜完全榜", "2020": "汇总表", "2023": "Sheet1"}
 # 无单张全量合表、但有各大妈独立个人 sheet（sheet 名=简称，列 排名/作品/艺术家）的年份 → top10 从个人 sheet 取（最权威、满 10）
 MEMBER_SHEETS = {"2022"}
 # 个人榜列格式为「每人占 2 列」的年份（如 2020/2023），与默认（2021 式）单列「简称+排名」表头（如 "波排名"）不同。
 # 两列顺序各年不同：2020＝(昵称整列=名次, 下一列无表头=点数)；2023＝(简称整列=点数, 下一列无表头=名次)，
 # 用 PAIR_COL_RANK_SECOND 标记「名次在第二列」的年份；两种列扫描逻辑见 find_member_cols()。
-PAIR_COL_YEARS = {"2020", "2023"}
-PAIR_COL_RANK_SECOND = {"2023"}
+PAIR_COL_YEARS = {"2020", "2023", "2016"}
+PAIR_COL_RANK_SECOND = {"2023", "2016"}
 # 个人榜列格式为「每人占 2 列、且两列均带完整表头」的年份（如 2019："X妈_名次"/"X妈_点数"），
 # 与 PAIR_COL_YEARS（一列有表头一列无表头）不同，靠"_名次"后缀识别、忽略"_点数"列。
 SUFFIX_COL_YEARS = {"2019"}
-# 宽表个人榜区之外的元信息列名（用于从 PAIR_COL_YEARS 的表头里排除，不误当成成员列）
+# 个人榜列格式为「每人仅占 1 列、表头即简称本身」的年份（如 2018："蛋妈"/"晕妈"…，列值直接是该成员对这首歌的名次）。
+BARE_COL_YEARS = {"2018"}
+# 源 sheet 是「转置」布局的年份（如 2018「综合点数整理」：行=字段(Rank/Artist/Title/...)+各成员，列=名次1..200）——
+# main() 读取后先转置成常规「行=一首歌」布局，再走通用管线，见 main() 内 TRANSPOSED_YEARS 分支。
+TRANSPOSED_YEARS = {"2018"}
+# 表头过于杂乱/损坏（空字符串、纯数字 0、"#VALUE!" 公式残留等 _col() 按名字怎么也配不上）的年份，
+# 直接按列下标覆盖 rank/artist/song/pts/assist（优先于 _col() 结果）。
+# 2016「汇总」：col0=最终排名(已是 1..200 排好序)、col6="0 ARTIST"、col7="0SONG"、col8=纯数字 0（助攻数，
+# 因是 Python 假值被 `idx={h:i for...if h}` 过滤掉，必须用下标兜底）、col9="#VALUE!"（点数，表头是残留公式错误）。
+FIXED_COLS = {"2016": {"rank": 0, "artist": 6, "song": 7, "assist": 8, "pts": 9}}
+# 宽表个人榜区之外的元信息列名（用于从 PAIR_COL_YEARS/BARE_COL_YEARS 的表头里排除，不误当成成员列）
 _META_COLS = {"终名次", "名次", "排名", "艺人", "艺术家", "歌曲", "作品", "总点数", "点数", "助攻数", "总助攻数", "前十助攻数",
-              "Song", "Artists", "In", "Points"}
+              "Song", "Artist", "Artists", "In", "Points", "Rank", "Title", "Album", "Num. in Chart", "Total Points",
+              # 2016「汇总」表头额外的过程性/损坏列（中间几档部分排名 + 艺人/歌曲/公式残留列，均已被 FIXED_COLS 接管，
+              # 这里只是防止 find_member_cols 的 PAIR_COL_YEARS 扫描把它们误当成员列——2016 元信息列跨到第 9 列，
+              # 比其它年份的 "i<4" 起扫下标更靠后）
+              "最终34榜排名", "30榜排名", "26榜排名", "22榜排名", "17榜排名", "10榜排名", "0 ARTIST", "0SONG", "#VALUE!"}
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "annual")
 MEMBERS_CSV = os.path.join(os.path.dirname(__file__), "..", "data", "members", "members.csv")
 # 修正表（歌手/歌名规范化的唯一维护源，见该文件顶部说明）
@@ -120,13 +138,125 @@ def read_member_sheet(ws):
     return out
 
 
+# ── 2018：无全量/成员子表可用，个人榜 top10 改从 54 位成员各自的原始提交文件读取 ──
+# 「综合点数整理」是转置后的 Top 200，无法覆盖各成员完整前十（很多人的第 1–3 名根本进不了聚合 Top 200）。
+# 54 份原始文件格式各不相同（人工逐个核对列位置），故用显式 spec 表而非通用表头嗅探。
+# 每条：fn=文件名（相对 2018 年终榜目录）、sheet=可选指定 sheet（默认第一个）、
+# skip=跳过的表头/标题行数、a/s=艺人·歌曲列下标（0-based）；combined=单列"歌名-艺人"合并格式的列下标（如蛋妈）；
+# 所有文件均已核实按名次升序排列，故不依赖显式名次列，直接用「跳过表头后的行序」当名次（第 N 个有效条目=名次 N）。
+# 键 = space_id（不用简称，避免跟 ABBR_OVERRIDE 重复解析）。
+MEMBER_2018_FILES = {
+    17: dict(fn="01 Lee翼雨（雨妈）年终榜.xlsx", skip=0, a=1, s=2),
+    133: dict(fn="02 NAVY YEAR END 100 （N妈）.xlsx", skip=1, a=2, s=1),
+    191: dict(fn="03 土豆2018年榜（薯妈）.xls", skip=1, a=1, s=2),
+    167: dict(fn="04 陈先森Qq 年榜TOP100（森妈）.xls", skip=0, a=0, s=1),
+    157: dict(fn="05 VE Charts  2018 年榜（布妈）.xlsx", skip=0, a=0, s=1),
+    195: dict(fn="06 【X妈】【Auditory】2018年个人年榜.xlsx", skip=1, a=1, s=2),
+    778: dict(fn="07 农妈18单曲年榜.xlsx", skip=0, a=1, s=2, decamel=True),  # 艺人列单词间无空格，需反 camelCase
+    19: dict(fn="08 lemon心语 年榜TOP100 （淋檬）.xlsx", skip=0, a=1, s=2),
+    141: dict(fn="09 草妈 2018年榜.xls", skip=1, a=1, s=2),  # 文件名写「草妈」，内容实为「香草」= 草妈本人
+    128: dict(fn="10 克妈-年榜.xlsx", skip=0, a=1, s=2),
+    174: dict(fn="11 AzarathTrainor 2019 Year-End Chart （肥屎）.xls", skip=1, a=1, s=2),
+    779: dict(fn="12 然然君.xlsx", skip=0, a=0, s=1),
+    18: dict(fn="13 voiiz chart 2018年榜 (猴妈).xlsx", sheet="2018", skip=1, a=1, s=2),
+    165: dict(fn="14 LORRY 年榜 （鹿妈）.xlsx", skip=1, a=2, s=1),  # 歌曲列在前、艺人列在后
+    777: dict(fn="15 hc （线妈）.xlsx", skip=2, a=1, s=2),
+    184: dict(fn="16 2018 Bed for you 年榜 （床妈）.xlsx", skip=1, a=2, s=3),
+    138: dict(fn="17 lovezedd （Z妈）.xlsx", skip=0, a=0, s=1),
+    12: dict(fn="18 WillKris Chart 2018 Year End （锴妈）.xlsx", skip=0, a=0, s=1),
+    40: dict(fn="19 猹妈.xlsx", skip=0, a=1, s=2),
+    176: dict(fn="20 Music Track年榜.Coke （可乐）.xlsx", sheet="Sheet2", skip=0, a=0, s=1),
+    131: dict(fn="21 泰坦2018年单曲年榜 （泰妈）.xlsx", skip=2, a=1, s=2),
+    119: dict(fn="22 Ocean 2018单曲年榜 （海妈）.xlsx", skip=1, a=1, s=2),
+    125: dict(fn="23 converted.xlsx", skip=2, a=2, s=3),  # 原 .xls 命名表损坏 xlrd 读不出，已用 Excel 转存为 xlsx
+    780: dict(fn="24 Year-end 2018 TomCYF.xlsx", sheet="TomCYF 2018", skip=1, a=0, s=1),
+    781: dict(fn="25 小擦18年年榜+冠单榜.xlsx", sheet="年榜", skip=1, a=2, s=3),
+    770: dict(fn="26 环球颖音2018单曲年榜 （音妈）.xlsx", skip=1, a=1, s=2),
+    168: dict(fn="27 风宇凌胖2018年榜 （胖妈）.xlsx", skip=1, a=1, s=2),
+    295: dict(fn="28 Song Of Freeman 2018 Year-End Charts HOT 100 （田妈）.xlsx", skip=1, a=1, s=2),
+    173: dict(fn="29 YS榜2018年年榜 （俗妈）.xlsx", skip=0, a=1, s=2),
+    154: dict(fn="30 小风2018年榜 （风妈）.xlsx", sheet="Feuil1", skip=1, a=2, s=3),
+    123: dict(fn="31 KE - 2018 Year-End Chart (可妈).xlsx", skip=1, a=1, s=2),
+    135: dict(fn="32 Jeffery's Yearly Picks 2018 Singles （瑞妈）.xlsx", skip=2, a=1, s=2),
+    326: dict(fn="33 2018单曲榜年榜 （院长）.xlsx", skip=2, a=1, s=2),
+    132: dict(fn="34 AA Charts 2018Year （A妈）.xlsx", skip=1, a=1, s=2),
+    127: dict(fn="35 【NEOCHART】2018 Single Top 120 （苏妈）.xlsx", skip=1, a=1, s=2),
+    775: dict(fn="36 SUNNYSTEWART2018单曲全年榜 （加妈）.xls", skip=1, a=2, s=3),
+    20: dict(fn="37 BAg 2018年榜（榜吧版;附奖项名单）（包妈）.xlsx", skip=1, a=2, s=3),
+    124: dict(fn="38 Lolo 2018年榜.xlsx", skip=1, a=1, s=2),
+    156: dict(fn="39 小杰2018吧榜特供英文年榜.xls", skip=1, a=1, s=2),
+    782: dict(fn="40 2018 JD HOT 100年榜.xlsx", skip=0, a=0, s=1),
+    776: dict(fn="41 冰妈年榜.xls", skip=0, a=0, s=1),
+    164: dict(fn="42 liangliang年榜.xlsx", skip=0, a=1, s=2),
+    158: dict(fn="43 漫画小鸣2018年榜.xlsx", skip=1, a=1, s=2),
+    172: dict(fn="44 2018清妈年榜-1.xlsx", sheet="工作表 1 - 2018 Oliver Year-End Ch", skip=2, a=1, s=2),
+    130: dict(fn="45 麦妈Book1.xlsx", skip=0, a=1, s=2),
+    7: dict(fn="46 GENIUS TOP 50 2018年榜.xlsx", skip=1, a=1, s=2),
+    117: dict(fn="47 晕妈的2018单曲年榜.xlsx", skip=1, a=1, s=2),
+    118: dict(fn="48 RAZ Chart 2018年榜（参与吧榜版本）.xlsx", sheet="正式榜单", skip=0, a=2, s=3),
+    153: dict(fn="49 DJL 2018单曲榜（筛选后）.xlsx", skip=1, a=2, s=3),
+    129: dict(fn="50 火火2018-年榜.xlsx", skip=1, a=1, s=2),
+    120: dict(fn="51 城妈2018年榜.xlsx", skip=1, a=2, s=3),
+    189: dict(fn="52 麻雀2018年榜.xlsx", skip=1, a=1, s=2),
+    185: dict(fn="53 2018年年榜_Clean.xlsx", sheet="年榜榜单", skip=1, combined=3),  # 单列"歌名-艺人"合并格式
+    190: dict(fn="54 5D Single Chart 2018年榜top100 - 副本.xlsx", skip=2, a=1, s=2),
+}
+_DECAMEL_RE = re.compile(r"(?<=[a-z])(?=[A-Z])")
+
+
+def _fmt_cell(v):
+    """单元格转文本：整数值的 float（如 2002.0，Excel 把纯数字歌名存成数值）去掉多余 .0。"""
+    if isinstance(v, float) and v.is_integer():
+        return str(int(v))
+    return str(v or "")
+
+
+def _read_2018_personal_chart(spec, base_dir):
+    """按 spec 读一位成员的原始个人榜文件，返回 [(rank, artist, song)]（最多前十，行序即名次）。"""
+    path = os.path.join(base_dir, spec["fn"])
+    if path.lower().endswith(".xls"):
+        import xlrd
+        wb = xlrd.open_workbook(path)
+        ws = wb.sheet_by_name(spec["sheet"]) if spec.get("sheet") else wb.sheet_by_index(0)
+        all_rows = [ws.row_values(r) for r in range(ws.nrows)]
+    else:
+        import openpyxl
+        wb = openpyxl.load_workbook(path, data_only=True, read_only=True)
+        ws = wb[spec["sheet"]] if spec.get("sheet") else wb[wb.sheetnames[0]]
+        all_rows = list(ws.iter_rows(values_only=True))
+    data_rows = all_rows[spec.get("skip", 0):]
+    out = []
+    for row in data_rows:
+        if len(out) >= 10:
+            break
+        if "combined" in spec:
+            raw = row[spec["combined"]] if spec["combined"] < len(row) else None
+            if not raw or "-" not in str(raw):
+                continue
+            song, artist = str(raw).split("-", 1)
+        else:
+            ai, si = spec["a"], spec["s"]
+            if ai >= len(row) or si >= len(row):
+                continue
+            artist, song = row[ai], row[si]
+        artist = _fmt_cell(artist).replace("\xa0", " ").strip()
+        song = _fmt_cell(song).replace("\xa0", " ").strip()
+        if spec.get("decamel"):
+            artist = _DECAMEL_RE.sub(" ", artist)
+        if not artist or not song:
+            continue
+        out.append((len(out) + 1, norm_artist(artist), norm_song(song)))
+    return out
+
+
 def find_member_cols(header, year):
-    """从表头识别「个人榜简称 → 名次列下标」。三种格式：
+    """从表头识别「个人榜简称 → 名次列下标」。四种格式：
     - 默认（如 2021）：单列，表头「简称+排名」（如 "波排名"，可带 "求和项:" 前缀）。
     - PAIR_COL_YEARS（如 2020/2023）：每人占 2 列，表头列非空、紧跟一列无表头；
       名次在第一列还是第二列由 PAIR_COL_RANK_SECOND 决定（2020＝第一列，2023＝第二列）。
     - SUFFIX_COL_YEARS（如 2019）：每人占 2 列，两列均带完整表头「X妈_名次」「X妈_点数」，
       靠 "_名次" 后缀识别、直接取该列为名次列，"_点数" 列忽略。
+    - BARE_COL_YEARS（如 2018，转置后）：每人仅占 1 列，表头即简称本身（如 "蛋妈"），列值直接是名次。
     返回 (abbrs, col_of_abbr)，abbrs 已去除「妈」后缀（供 build_abbr2id 用统一规则匹配 members.csv；
     本身已是单字简称的年份如 2023 不受影响，末字不是「妈」不会被误切）。
     """
@@ -151,6 +281,15 @@ def find_member_cols(header, year):
                 continue
             a = hs[:-1] if hs.endswith("妈") else hs
             col_of[a] = i + 1 if rank_second else i
+    elif year in BARE_COL_YEARS:
+        for i, h in enumerate(header):
+            if not h:
+                continue
+            hs = str(h).strip()
+            if hs in _META_COLS:
+                continue
+            a = hs[:-1] if hs.endswith("妈") else hs
+            col_of[a] = i
     else:
         for i, h in enumerate(header):
             if i >= 5 and h and str(h).endswith("排名"):
@@ -175,7 +314,7 @@ def build_abbr2id(abbrs, year=None):
         if a in ov:
             out[a] = ov[a]
             continue
-        c = [sid for sid, name in mem if name == a + "妈" or (name and name[0] == a)]
+        c = [sid for sid, name in mem if name == a + "妈" or name == a or (name and len(a) == 1 and name[0] == a)]
         if len(c) == 1:
             out[a] = c[0]
         else:
@@ -276,8 +415,17 @@ def main():
     import openpyxl
     wb = openpyxl.load_workbook(SRC[year], read_only=True, data_only=True)
     ws = wb[SHEET.get(year, "总榜")]
-    rows = ws.iter_rows(values_only=True)
-    header = next(rows)
+    if year in TRANSPOSED_YEARS:
+        # 源 sheet 是转置布局（行=字段名/成员，列=名次1..N）——先转置成常规「行=一首歌」布局
+        # 再走通用管线：转置后第 0 行 = 原第 0 列 = ['Rank','Artist','Title',...,'蛋妈',...,'X妈']（新表头），
+        # 之后每行 = 一首歌（各字段 + 每位成员对这首歌的名次）
+        matrix = list(ws.iter_rows(values_only=True))
+        transposed = list(zip(*matrix))
+        rows = iter(transposed[1:])
+        header = transposed[0]
+    else:
+        rows = ws.iter_rows(values_only=True)
+        header = next(rows)
     # 定位列（各年列名不同：艺术家/艺人、作品/歌曲、点数/总点数、助攻数/总助攻数）
     idx = {h: i for i, h in enumerate(header) if h}
 
@@ -286,10 +434,12 @@ def main():
             if n in idx:
                 return idx[n]
         return None
-    ci = {"rank": _col("排名", "名次", "终名次", "Rank"), "artist": _col("艺术家", "艺人", "Artists", "Artist"), "song": _col("作品", "歌曲", "Song", "Track"),
-          "pts": _col("点数", "总点数", "Points"), "assist": _col("助攻数", "总助攻数", "In", "Charts")}
+    ci = {"rank": _col("排名", "名次", "终名次", "Rank"), "artist": _col("艺术家", "艺人", "Artists", "Artist"), "song": _col("作品", "歌曲", "Song", "Track", "Title"),
+          "pts": _col("点数", "总点数", "Points", "Total Points"), "assist": _col("助攻数", "总助攻数", "In", "Charts", "Num. in Chart")}
     if ci["rank"] is None:
         ci["rank"] = 0  # 排名列无表头（如 2023，第 1 列即排名，无列名）
+    if year in FIXED_COLS:
+        ci.update(FIXED_COLS[year])  # 表头过烂，直接按列下标覆盖（见 FIXED_COLS 注释）
     # 成员个人榜列 → col_index -> space_id（两种表头格式，见 find_member_cols）
     abbrs, col_of_abbr = find_member_cols(header, year)
     abbr2id = build_abbr2id(abbrs, year)
@@ -397,8 +547,8 @@ def main():
         if rk < 1:
             continue
         for col, sid in rank_cols.items():
-            if not isinstance(row[col], (int, float)):
-                continue
+            if not isinstance(row[col], (int, float)) or row[col] <= 0:
+                continue  # <=0 排除「未上榜」哨兵值（如 2018 用 0 表示未排入，而非 None）
             tgt = assist if star == 0 else assist_sh      # 占位曲计主数 / 亚洲不占位曲计括号
             for t in TIERS:
                 if rk <= t:
@@ -427,6 +577,18 @@ def main():
         _, fcol_of_abbr = find_member_cols(fh, year)
         frcols = {col: abbr2id[a] for a, col in fcol_of_abbr.items() if a in abbr2id}
         top10 = collect_top10(list(fit), fci, frcols)
+    elif year == "2018":
+        # 「综合点数整理」只有 Top 200、覆盖不了各成员完整前十，改从各自原始提交文件读取（见 MEMBER_2018_FILES）
+        base_dir = os.path.dirname(SRC[year])
+        top10 = {sid: [] for sid in sids}
+        for sid in sids:
+            spec = MEMBER_2018_FILES.get(sid)
+            if not spec:
+                continue
+            try:
+                top10[sid] = _read_2018_personal_chart(spec, base_dir)
+            except Exception as e:
+                sys.stderr.write("  ! 2018 个人榜读取失败 sid=%s (%s): %s\n" % (sid, spec.get("fn"), e))
     else:
         top10 = collect_top10(all_rows, ci, rank_cols)
     # 补全：MEMBER_SHEETS 年份里，总榜不足 10 条的成员，从其独立个人 sheet 尽力补齐（个人 sheet 表头多变）

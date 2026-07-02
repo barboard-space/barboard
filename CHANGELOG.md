@@ -4,6 +4,31 @@
 
 ---
 
+## [2026-07-02] — 2016 年榜导入
+
+### Added
+- 2016 年榜（32 榜合并、Top 200）导入 `/archive/annual/2016/`。冠军 The Weeknd, Daft Punk — Starboy。数据源表头相当混乱（含纯数字 `0`、公式残留 `#VALUE!` 等无法用名字匹配的表头），`scripts/parse_annual_chart.py` 新增 `FIXED_COLS` 机制按列下标直接覆盖 rank/artist/song/pts/assist。
+- 34 个人榜简称中 13 个无法自动匹配身份，逐一征询用户确认（其中「淋脑(风雨淋胖)」经用户后续补充确认为胖妈）；新增历史成员耳妈/滔妈/淋妈/卡妈/Koleies/2cm（783–788）。
+- `annual_corrections.py` 补充约 26 条歌手/歌名修正。
+
+### Known issues
+- 2017 年数据暂缺，用户正在另行修复，后续补齐。
+
+### Fixed
+- iTunes 封面接口曾遇持续性限流，后自行解除，重跑补齐至主榜 200/200、个人榜 315/317（剩 2 条为源数据把多首歌合并成一条自定义歌名，iTunes 上无对应单曲，属正常缺失）。
+
+## [2026-07-02] — 2018 年榜导入
+
+### Added
+- 2018 年榜（54 榜合榜、Top 200）导入 `/archive/annual/2018/`。冠军 Ariana Grande — No Tears Left To Cry。数据源是「转置表」结构（行=字段/成员，列=名次 1–200），`scripts/parse_annual_chart.py` 新增 `TRANSPOSED_YEARS`（读入后转置一次接入通用管线）和 `BARE_COL_YEARS`（每人仅占 1 列、表头即简称本身）两种新机制。
+- 个人榜 Top10 首次改为从 54 位成员各自的原始提交 Excel 直接读取（聚合表覆盖不到很多人的前三名），新增 `MEMBER_2018_FILES` 显式 spec 表 + `_read_2018_personal_chart()` 读取函数。
+- 新增历史成员加妈/冰妈/线妈/农妈/然然君/CYF/小擦/JD（775–782）。
+- `annual_corrections.py` 补充约 30 条歌手/歌名修正。
+
+### Fixed
+- 助攻分档统计的"未上榜"判定改为 `isinstance(v,(int,float)) and v>0`（原先只判类型，2018 数据用 `0` 而非 `None` 表示未上榜，曾导致误统计）。
+- `build_abbr2id` 支持简称与成员昵称完全相同（无"妈"后缀）的匹配方式，兼容 CYF/然然君这类命名。
+
 ## [2026-07-02] — 年榜详情页 eyebrow 修正
 
 ### Fixed

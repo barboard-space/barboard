@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>2018 榜吧年度单曲榜 | Barboard</title>
+  <meta name="description" content="榜吧 2018 年度单曲榜 Top 200——成员个人榜合并积分产生的年度歌曲榜单。" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css?v=3.0.15" />
+  <style>
+    /* ── Hero ── */
+    .ac-hero { position: relative; padding: calc(var(--nav-h) + 40px) 0 24px; overflow: hidden; }
+    .ac-hero__glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 60% at 25% 0%, rgba(0,180,255,0.14) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 85% 40%, rgba(168,85,247,0.08) 0%, transparent 55%);
+    }
+    .ac-hero__inner { position: relative; z-index: 1; }
+    .ac-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--clr-violet-light); text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      display: inline-flex; align-items: center; gap: 8px; margin-bottom: 24px; transition: color 0.2s;
+    }
+    .ac-eyebrow:hover { color: var(--clr-white); }
+    .ac-title { font-family: var(--font-display); font-size: clamp(48px, 7vw, 88px); line-height: 0.96; letter-spacing: 0.02em; color: var(--clr-text); }
+    .ac-title .ac-board { color: var(--clr-board); }   /* 年终榜：榜吧蓝 */
+    .ac-title .ac-yr { color: var(--clr-accent); display: inline-block; margin-top: 4px; }   /* 2018：电蓝；两行间距 +4px */
+    .ac-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin-top: 18px; }
+    .ac-meta-item { font-size: 12px; color: var(--clr-text-3); padding-right: 14px; margin-right: 14px; border-right: 1px solid var(--clr-border); white-space: nowrap; }
+    .ac-meta-item:last-child { border-right: none; }
+    .ac-desc { font-size: 14px; color: var(--clr-text-2); line-height: 1.7; margin-top: 18px; max-width: 560px; }
+
+    /* ── 两栏布局（榜单 + 右侧悬浮侧栏，对标 bbl） ── */
+    .ac-section { padding: 24px 0 80px; min-height: 60vh; }
+    .ac-layout { display: grid; grid-template-columns: 1fr 236px; gap: var(--gap-md); align-items: stretch; }
+    .ac-chart { display: flex; flex-direction: column; gap: 10px; }
+
+    /* 年份导航（前一年 / 后一年） */
+    .ac-nav { display: grid; grid-template-columns: 85px 1fr 85px; align-items: stretch; border: 1px solid var(--clr-border); border-radius: 8px; background: var(--clr-surface); overflow: hidden; margin-bottom: 16px; }
+    .ac-nav__btn { display: flex; align-items: center; justify-content: center; padding: 5px 26px; background: none; border: none; color: var(--clr-text-2); cursor: pointer; transition: background 0.15s, color 0.15s; }
+    .ac-nav__btn:hover:not(:disabled) { background: var(--clr-surface-2); color: var(--clr-text); }
+    .ac-nav__btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .ac-nav__btn svg { width: 15px; height: 15px; }
+    .ac-nav__label { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 5px 24px; border-left: 1px solid var(--clr-border); border-right: 1px solid var(--clr-border); font-family: var(--font-body); font-weight: 600; font-size: 14px; color: var(--clr-text); white-space: nowrap; }
+    .ac-nav__label svg { width: 14px; height: 14px; color: var(--clr-text-2); }
+
+    /* 第 4 列：累计点数 + 助攻数（BBL 风格——桌面：上 label 下值、居中列、左边框分隔） */
+    .ac-stats { display: flex; align-self: center; }
+    .ac-stat { width: 72px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; text-align: center; padding: 0 8px; }
+    .ac-stat + .ac-stat { border-left: 1px solid var(--clr-border); }
+    .ac-stat__label { font-family: var(--font-body); font-size: 10px; color: var(--clr-text-2); white-space: nowrap; }
+    .ac-stat__val { font-family: var(--font-mono); font-size: 12px; color: rgba(240,238,255,0.85); }
+    .chart-item--top .ac-stat__label, .chart-item--top .ac-stat__val { color: rgba(224,176,64,0.85); }
+    .chart-item--silver .ac-stat__label, .chart-item--silver .ac-stat__val { color: rgba(148,196,220,0.85); }
+    .chart-item--bronze .ac-stat__label, .chart-item--bronze .ac-stat__val { color: rgba(224,160,100,0.8); }
+    /* 排名下方：本名次比下一名多多少分（样式同 bbl 排名下标） */
+    .ac-gap { font-family: var(--font-mono); font-size: 9px; font-weight: 600; line-height: 1; color: var(--clr-border-3); white-space: nowrap; }
+    .chart-item--top .ac-gap { color: var(--clr-gold-light); opacity: 0.85; }
+    .chart-item--silver .ac-gap { color: var(--clr-silver); opacity: 0.85; }
+    .chart-item--bronze .ac-gap { color: var(--clr-bronze); opacity: 0.85; }
+    /* 亚洲单曲（华语/K-POP）不占位——按卡位插入、名次带星（当年规则只把欧美音乐计入名次）
+       配色对齐成员页混淆单曲：深底 --clr-shadow-bg + 弱化文字 --clr-text-4，不透明度 1 */
+    .ac-chart .chart-item--asian { background: var(--clr-shadow-bg); }
+    .ac-chart .chart-item--asian .chart-rank,
+    .ac-chart .chart-item--asian .chart-song__title,
+    .ac-chart .chart-item--asian .chart-song__artist,
+    .ac-chart .chart-item--asian .ac-stat__label,
+    .ac-chart .chart-item--asian .ac-stat__val { color: var(--clr-text-4); }
+    .ac-rank-star { font-family: var(--font-display); font-size: 0.5em; font-weight: 400; color: var(--clr-text-4); vertical-align: 0.85em; margin-left: 1px; letter-spacing: -1px; }
+    .ac-empty { font-size: 14px; color: var(--clr-text-3); padding: 40px 0; }
+    /* 查看完整 Top 200 按钮（对标 bbl 显示全部） */
+    .ac-showmore { text-align: center; padding: 32px 0 8px; }
+    .ac-showmore__btn { display: inline-flex; align-items: center; gap: 8px; background: transparent; border: 1px solid var(--clr-border-2); color: var(--clr-text-2); font-family: var(--font-body); font-size: 13px; font-weight: 600; letter-spacing: 0.06em; padding: 8px 23px 12px 25px; border-radius: 4px; cursor: pointer; transition: all 0.2s; }
+    .ac-showmore__btn:hover { color: var(--clr-text); border-color: var(--clr-text); }
+    .ac-showmore--hidden { display: none; }
+
+    /* ── 侧栏（sticky + 搜索 + 年度看点） ── */
+    .ac-sidebar { align-self: start; display: flex; flex-direction: column; gap: 8px; will-change: transform; }
+    .ac-search { margin-bottom: 16px; }
+    .ac-search__field { position: relative; }
+    .ac-search__input {
+      width: 100%; box-sizing: border-box; background: var(--clr-surface);
+      border: 1px solid var(--clr-border); border-radius: 4px; padding: 7px 30px 7px 14px;
+      font-family: var(--font-body); font-size: 12px; font-weight: 500; letter-spacing: 0.03em;
+      color: var(--clr-text); outline: none; transition: border-color 0.18s;
+    }
+    .ac-search__input::placeholder { color: var(--clr-text-3); font-weight: 400; transition: opacity 0.18s; }
+    .ac-search__input:focus::placeholder { opacity: 0; }
+    .ac-search__input:focus { border-color: var(--clr-violet); caret-color: var(--clr-violet); }
+    .ac-search__icon, .ac-search__clear {
+      position: absolute; right: 8px; top: 50%; transform: translateY(-50%);
+      color: var(--clr-text-2); line-height: 1; display: flex; align-items: center;
+    }
+    .ac-search__clear { background: none; border: none; cursor: pointer; padding: 2px; font-size: 14px; display: none; transition: color 0.15s; }
+    .ac-search__clear:hover { color: var(--clr-text); }
+    .ac-search--active .ac-search__icon { display: none; }
+    .ac-search--active .ac-search__clear { display: flex; }
+    .ac-search__count { font-size: 10px; font-family: var(--font-body); color: var(--clr-text-2); margin-top: 4px; height: 14px; line-height: 14px; overflow: hidden; }
+
+    .ac-sidebar__label {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--clr-violet-light); text-shadow: 0 0 10px rgba(192,132,252,0.45); margin-bottom: 4px;
+    }
+    #acHighlights { display: flex; flex-direction: column; gap: 8px; }
+
+    /* 年度看点卡 */
+    .ac-hl-card { background: var(--clr-surface); border: 1px solid var(--clr-border); border-radius: 6px; padding: 10px 14px; transition: border-color 0.2s, box-shadow 0.2s; }
+    .ac-hl-card--clickable { cursor: pointer; }
+    .ac-hl-card--clickable:active { transform: scale(0.98); }
+    .ac-hl-card:hover { border-color: var(--clr-border-2); box-shadow: 0 0 20px rgba(168,85,247,0.08); }
+    .ac-hl-card__type { font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 7px; display: flex; align-items: center; gap: 6px; justify-content: space-between; }
+    .ac-hl-card__rank { font-size: 10px; margin-left: auto; color: var(--clr-text-3); }
+    .ac-hl-card__type--pts    { color: var(--clr-gold-light); }
+    .ac-hl-card__type--no1    { color: var(--clr-pink-light); }
+    .ac-hl-card__type--assist { color: var(--clr-accent); }
+    .ac-hl-card__type--artist { color: var(--clr-violet-light); }
+    .ac-hl-card__val { font-family: var(--font-display); font-size: 26px; line-height: 1; letter-spacing: 0.02em; margin-bottom: 5px; }
+    .ac-hl-card__val--pts    { color: var(--clr-gold-light); text-shadow: 0 0 20px rgba(212,168,50,0.3); }
+    .ac-hl-card__val--no1    { color: var(--clr-pink-light); text-shadow: 0 0 20px rgba(240,96,184,0.3); }
+    .ac-hl-card__val--assist { color: var(--clr-accent); text-shadow: 0 0 20px rgba(0,180,255,0.3); }
+    .ac-hl-card__val--artist { color: var(--clr-violet-light); text-shadow: 0 0 20px rgba(168,85,247,0.3); }
+    .ac-hl-card__unit { font-family: var(--font-body); font-size: 12px; font-weight: 600; margin-left: 3px; }
+    .ac-hl-card__cover-row { display: flex; align-items: center; gap: 10px; margin-top: 2px; }
+    .ac-hl-card__cover { width: 36px; height: 36px; border-radius: 3px; object-fit: cover; flex-shrink: 0; background: var(--clr-surface-2); }
+    .ac-hl-card__song { min-width: 0; }
+    .ac-hl-card__title { font-size: 13px; font-weight: 600; color: var(--clr-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .ac-hl-card__artist { font-size: 11px; color: var(--clr-text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* 点击定位的持久高亮叠层（只动 opacity，平滑、不触碰条目自身背景） */
+    .ac-chart .chart-item { position: relative; }
+    .ac-chart .chart-item::after {
+      content: ''; position: absolute; inset: 0; border-radius: inherit;
+      background: rgba(168,85,247,0.13);
+      box-shadow: inset 0 0 0 1px rgba(168,85,247,0.35), 0 0 18px rgba(168,85,247,0.22), 0 0 40px rgba(168,85,247,0.10);
+      opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .ac-chart .chart-item.ac-rank-active::after { opacity: 1; }
+
+    @media (max-width: 1024px) { .ac-layout { grid-template-columns: 1fr 210px; } }
+    @media (max-width: 768px) {
+      .ac-layout { grid-template-columns: 1fr; }
+      .ac-sidebar { transform: none !important; }
+      .ac-search__input { font-size: 16px; padding: 6px 30px 8px 12px; }
+      .ac-search__input::placeholder { font-size: 12px; }
+      #acHighlights { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+      /* 手机：meta 双行——第 1 行机构+榜名，第 2 行 TOP 200 · 54 榜合榜（"·" 分隔，无竖线） */
+      .ac-meta { row-gap: 4px; }
+      .ac-meta-item { white-space: normal; border-right: none; padding-right: 0; margin-right: 0; }
+      .ac-meta-item:first-child { flex-basis: 100%; }
+      .ac-meta-item:nth-child(3)::before { content: '·'; margin: 0 8px; color: var(--clr-text-3); }
+      /* 手机：右列两行 label|值网格 */
+      .ac-stats { display: grid; grid-template-columns: auto auto; row-gap: 2px; column-gap: 8px; align-items: baseline; }
+      .ac-stat { display: contents; }
+      .ac-stat + .ac-stat { border-left: none; }
+      .ac-stat__label { font-size: 10px; color: var(--clr-text-3); text-align: left; }
+      .ac-stat__val { font-size: 10px; font-weight: 600; color: var(--clr-text-2); text-align: left; }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <section class="ac-hero">
+    <div class="ac-hero__glow" aria-hidden="true"></div>
+    <div class="section__inner ac-hero__inner">
+      <a href="/archive/annual/" class="ac-eyebrow"><span>←</span><span>BARCHARTS</span></a>
+      <h1 class="ac-title"><span class="ac-board">年度</span>单曲<span class="ac-board">榜</span><br><span class="ac-yr">2018</span></h1>
+      <div class="ac-meta">
+        <span class="ac-meta-item">欧美流行音乐个人榜吧 · 2018年度单曲榜</span>
+        <span class="ac-meta-item">TOP 200</span>
+        <span class="ac-meta-item">54 榜合榜</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="ac-section">
+    <div class="section__inner">
+      <div class="ac-layout">
+        <div class="ac-chart-col">
+          <div class="ac-nav">
+            <button class="ac-nav__btn" id="acNavPrev" aria-label="上一年"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg></button>
+            <div class="ac-nav__label">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" stroke-linecap="round"/></svg>
+              <span id="acNavYear">2018</span>
+            </div>
+            <button class="ac-nav__btn" id="acNavNext" aria-label="下一年"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button>
+          </div>
+          <div id="acChart" class="ac-chart"><div class="ac-empty">榜单加载中…</div></div>
+          <div class="ac-showmore" id="acShowMore">
+            <button class="ac-showmore__btn" id="acShowMoreBtn">查看完整 Top 200</button>
+          </div>
+        </div>
+
+        <aside class="ac-sidebar">
+          <div class="ac-search">
+            <div class="ac-search__field">
+              <input class="ac-search__input" type="text" id="acSearch" placeholder="搜索歌曲 / 歌手" autocomplete="off" />
+              <svg class="ac-search__icon" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><path d="M11 11l3.5 3.5"/></svg>
+              <button class="ac-search__clear" id="acSearchClear" aria-label="清除搜索">×</button>
+            </div>
+            <div class="ac-search__count" id="acSearchCount"></div>
+          </div>
+          <p class="ac-sidebar__label">年度看点</p>
+          <div id="acHighlights"></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="/scripts/nav.js"></script>
+  <script>
+    function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+    var _byKey = {}, _activeRankEl = null, _rankListenerAdded = false, _all = [], _io = null;
+    var INITIAL = 100;   // 默认展示到名次 100（含其下不占位的亚洲曲），按钮展开至全部
+    // 唯一键：欧美占位曲=名次数字；亚洲不占位曲=名次+星（34* / 145**）
+    function itemKey(t){ return t.rank + (t.star ? new Array(t.star + 1).join('*') : ''); }
+    function observeFades(root){
+      (root||document).querySelectorAll('.fade-up').forEach(function(n){
+        if (n.classList.contains('visible')) return;
+        if (_io) _io.observe(n); else n.classList.add('visible');
+      });
+    }
+    function renderChart(list){ var el=document.getElementById('acChart'); el.innerHTML=list.map(chartItem).join(''); observeFades(el); }
+
+    function chartItem(t){
+      var cover = t.cover
+        ? '<img class="chart-cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
+        : '<div class="chart-cover cover-ph"></div>';
+      var medal = (!t.star && t.rank===1)?'chart-item--top':(!t.star && t.rank===2)?'chart-item--silver':(!t.star && t.rank===3)?'chart-item--bronze':'';
+      var star = t.star ? '<span class="ac-rank-star">' + new Array(t.star + 1).join('*') + '</span>' : '';
+      return '<div class="chart-item ' + (medal?medal+' ':'') + (t.star?'chart-item--asian ':'') + 'fade-up" data-rank="' + itemKey(t) + '">' +
+        '<div class="chart-rank-col"><div class="chart-rank">' + t.rank + star + '</div>' +
+          (t.gap!=null ? '<span class="ac-gap">+' + t.gap + '</span>' : '') + '</div>' + cover +
+        '<div class="chart-song">' +
+          '<div class="chart-song__title">' + esc(t.song) + '</div>' +
+          '<div class="chart-song__artist">' + esc(t.artist) + '</div>' +
+        '</div>' +
+        '<div class="ac-stats">' +
+          '<div class="ac-stat"><span class="ac-stat__label">累计点数</span><span class="ac-stat__val">' + Math.round(t.points) + '</span></div>' +
+          (t.assists!=null ? '<div class="ac-stat"><span class="ac-stat__label">助攻榜数</span><span class="ac-stat__val">' + t.assists + '</span></div>' : '') +
+        '</div>' +
+      '</div>';
+    }
+
+    function hlCard(opts){
+      var t = opts.track;
+      var cover = t.cover
+        ? '<img class="ac-hl-card__cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
+        : '<div class="ac-hl-card__cover cover-ph"></div>';
+      var title = opts.titleText != null ? opts.titleText : t.song;
+      var sub   = opts.subText   != null ? opts.subText   : t.artist;
+      return '<div class="ac-hl-card ac-hl-card--clickable" data-rank="' + itemKey(t) + '">' +
+        '<div class="ac-hl-card__type ac-hl-card__type--' + opts.kind + '"><span>' + opts.label + '</span><span class="ac-hl-card__rank">' + (opts.rankPrefix||'') + '#' + t.rank + '</span></div>' +
+        '<div class="ac-hl-card__val ac-hl-card__val--' + opts.kind + '">' + opts.val + (opts.unit ? '<span class="ac-hl-card__unit">' + opts.unit + '</span>' : '') + '</div>' +
+        '<div class="ac-hl-card__cover-row">' + cover +
+          '<div class="ac-hl-card__song"><div class="ac-hl-card__title">' + esc(title) + '</div>' + (sub ? '<div class="ac-hl-card__artist">' + esc(sub) + '</div>' : '') + '</div>' +
+        '</div></div>';
+    }
+
+    function buildHighlights(entries){
+      var el = document.getElementById('acHighlights');
+      var cards = [];
+      // 看点只统计欧美占位曲（不带星）——亚洲单曲当年不计入名次
+      var counted = entries.filter(function(e){ return !e.star; });
+      // 点数冠军（年度第一）
+      var champ = counted.slice().sort(function(a,b){ return b.points-a.points; })[0];
+      if (champ) cards.push(hlCard({ track: champ, kind: 'pts', label: '点数冠军', val: Math.round(champ.points), unit: '' }));
+      // 最多榜冠（登顶个人榜最多的单曲——被最多大妈排在其个人榜第 1；含亚洲曲）
+      var no1Top = entries.filter(function(e){ return e.no1; }).sort(function(a,b){ return b.no1-a.no1; })[0];
+      if (no1Top) cards.push(hlCard({ track: no1Top, kind: 'no1', label: '最多榜冠', val: no1Top.no1, unit: ' 榜冠' }));
+      // 助攻王（助攻数最多）
+      var assistTop = counted.filter(function(e){ return e.assists!=null; }).sort(function(a,b){ return b.assists-a.assists; })[0];
+      if (assistTop) cards.push(hlCard({ track: assistTop, kind: 'assist', label: '助攻王', val: assistTop.assists, unit: ' 榜' }));
+      // 最多前百（Top 100 内单曲数最多的艺人；多人合作串拆开分别计入；封面取其最高名次单曲，显示艺人名）
+      var top100 = counted.filter(function(e){ return e.rank <= 100; }), byArtist = {};
+      var KEEP = ['Tyler, The Creator', 'Black Country, New Road', 'Earth, Wind & Fire'];  // 名字本身含逗号、勿拆
+      function splitArtists(s){
+        var tmp = s; KEEP.forEach(function(k,i){ tmp = tmp.split(k).join('§'+i+'§'); });
+        return tmp.split(',').map(function(p){ p=p.trim(); KEEP.forEach(function(k,i){ p=p.split('§'+i+'§').join(k); }); return p; }).filter(Boolean);
+      }
+      top100.forEach(function(e){ splitArtists(e.artist).forEach(function(a){ (byArtist[a] = byArtist[a] || []).push(e); }); });
+      var bestArtist=null, bestCount=0, bestTrack=null;
+      Object.keys(byArtist).forEach(function(a){
+        var list = byArtist[a];
+        if (list.length > bestCount) { bestCount=list.length; bestArtist=a; bestTrack=list.slice().sort(function(x,y){ return x.rank-y.rank; })[0]; }
+      });
+      if (bestArtist && bestTrack) cards.push(hlCard({ track: bestTrack, kind: 'artist', label: '最多前百', val: bestCount, unit: ' 首', titleText: bestArtist, subText: '', rankPrefix: '最高' }));
+      el.innerHTML = cards.join('');
+      el.querySelectorAll('.ac-hl-card--clickable').forEach(function(c){
+        c.addEventListener('click', function(){ scrollToRank(c.dataset.rank); });
+      });
+    }
+
+    // ── 点击定位 + 持久高亮 ──
+    function onDocClickClear(e){
+      if (e.target.closest && e.target.closest('.ac-hl-card--clickable')) return;
+      document.removeEventListener('click', onDocClickClear); _rankListenerAdded = false;
+      if (!_activeRankEl) return;
+      var el = _activeRankEl; _activeRankEl = null; el.classList.remove('ac-rank-active');
+    }
+    function scrollToRank(key){
+      var t = _byKey[key]; if (!t) return;
+      var wrap = document.getElementById('acShowMore');
+      var needExpand = t.rank > INITIAL && wrap && !wrap.classList.contains('ac-showmore--hidden');
+      function doScroll(){
+        var navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 72;
+        var el = document.querySelector('#acChart [data-rank="' + key.replace(/"/g,'') + '"]'); if (!el) return;
+        if (!el.classList.contains('visible')) { el.style.transition='none'; el.style.transitionDelay=''; el.classList.add('visible'); void el.offsetWidth; el.style.transition=''; }
+        var visibleH = window.innerHeight - navH;
+        var top = el.getBoundingClientRect().top + window.scrollY - navH - (visibleH - el.offsetHeight)/2;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+        if (_activeRankEl && _activeRankEl !== el) _activeRankEl.classList.remove('ac-rank-active');
+        _activeRankEl = el; el.classList.add('ac-rank-active');
+        if (!_rankListenerAdded) { _rankListenerAdded = true; document.addEventListener('click', onDocClickClear); }
+      }
+      if (needExpand) { renderChart(_all); wrap.classList.add('ac-showmore--hidden'); requestAnimationFrame(function(){ requestAnimationFrame(doScroll); }); }
+      else doScroll();
+    }
+
+    // ── 搜索过滤 ──
+    function filterChart(query){
+      var q = query.trim().toLowerCase();
+      var listEl = document.getElementById('acChart'), countEl = document.getElementById('acSearchCount');
+      var wrap = document.getElementById('acShowMore');
+      if (q && wrap && !wrap.classList.contains('ac-showmore--hidden')) { renderChart(_all); wrap.classList.add('ac-showmore--hidden'); }
+      var items = listEl.querySelectorAll('.chart-item');
+      if (!q) { items.forEach(function(el){ el.style.display=''; }); countEl.textContent=''; return; }
+      var matched = 0;
+      items.forEach(function(el){
+        var t = _byKey[el.dataset.rank];
+        var hit = t && (t.song.toLowerCase().includes(q) || t.artist.toLowerCase().includes(q));
+        el.style.display = hit ? '' : 'none'; if (hit) matched++;
+      });
+      countEl.textContent = matched ? matched + ' 个结果' : '无匹配结果';
+    }
+    function initSearch(){
+      var input = document.getElementById('acSearch'), clearBtn = document.getElementById('acSearchClear');
+      input.addEventListener('input', function(){
+        input.closest('.ac-search').classList.toggle('ac-search--active', input.value.length>0);
+        filterChart(input.value);
+      });
+      clearBtn.addEventListener('click', function(){
+        input.value=''; input.closest('.ac-search').classList.remove('ac-search--active'); filterChart(''); input.focus();
+      });
+    }
+    function initShowMore(){
+      var btn=document.getElementById('acShowMoreBtn'), wrap=document.getElementById('acShowMore');
+      if (!btn||!wrap) return;
+      if (!_all.some(function(e){ return e.rank > INITIAL; })) { wrap.classList.add('ac-showmore--hidden'); return; }
+      btn.addEventListener('click', function(){ renderChart(_all); wrap.classList.add('ac-showmore--hidden'); });
+    }
+
+    // ── Sticky 侧栏（rAF + lerp 丝滑跟随，对标 bbl） ──
+    function initSticky(){
+      var sidebar = document.querySelector('.ac-sidebar'), grid = document.querySelector('.ac-layout');
+      if (!sidebar || !grid) return;
+      var cur=0, tgt=0, raf=null;
+      function computeTarget(){
+        if (window.innerWidth <= 768) return 0;
+        var gr = grid.getBoundingClientRect(), sh = sidebar.offsetHeight;
+        var listEl = document.getElementById('acChart');
+        var maxTY = listEl ? listEl.getBoundingClientRect().bottom - gr.top - sh + 1 : grid.offsetHeight - sh + 1;
+        if (maxTY <= 0) return 0;
+        var past = (window.innerHeight - 24) - (gr.top + sh);
+        return past <= 0 ? 0 : Math.min(past, maxTY);
+      }
+      function tick(){
+        var diff = tgt - cur;
+        if (Math.abs(diff) < 0.5) { cur = tgt; raf = null; } else { cur += diff*0.22; raf = requestAnimationFrame(tick); }
+        sidebar.style.transform = cur > 0.05 ? 'translateY(' + cur.toFixed(2) + 'px)' : '';
+      }
+      function update(){ tgt = computeTarget(); if (raf===null) raf = requestAnimationFrame(tick); }
+      window.addEventListener('scroll', update, { passive:true });
+      window.addEventListener('resize', update, { passive:true });
+      if (window.ResizeObserver) new ResizeObserver(update).observe(grid);
+      update();
+    }
+
+    // 年份导航：已建年份列表（铺新年份时更新此处，或改 data 驱动）
+    (function initYearNav(){
+      var YEAR = 2018, YEARS = [2016, 2018, 2019, 2020, 2021, 2022, 2023];
+      var prevY = YEARS.filter(function(y){ return y<YEAR; }).sort(function(a,b){ return b-a; })[0];
+      var nextY = YEARS.filter(function(y){ return y>YEAR; }).sort(function(a,b){ return a-b; })[0];
+      var pb=document.getElementById('acNavPrev'), nb=document.getElementById('acNavNext');
+      if (prevY) pb.onclick=function(){ location.href='/archive/annual/'+prevY+'/'; }; else pb.disabled=true;
+      if (nextY) nb.onclick=function(){ location.href='/archive/annual/'+nextY+'/'; }; else nb.disabled=true;
+    })();
+
+    (async function(){
+      var el = document.getElementById('acChart');
+      var d;
+      try { d = await fetch('/data/annual/2018.json').then(function(r){ return r.json(); }); }
+      catch(e){ el.innerHTML = '<div class="ac-empty">榜单加载失败</div>'; return; }
+      _all = d.entries || [];
+      _all.sort(function(a,b){ return (a.rank-b.rank) || (b.points-a.points); });
+      // 分差只在欧美占位曲（不带星）之间算——亚洲不占位曲不显示分差；末名无
+      var slotted = _all.filter(function(e){ return !e.star; });
+      for (var gi=0; gi<slotted.length; gi++) slotted[gi].gap = (gi+1<slotted.length) ? Math.round(slotted[gi].points)-Math.round(slotted[gi+1].points) : null;
+      _all.forEach(function(t){ _byKey[itemKey(t)] = t; });
+      if ('IntersectionObserver' in window) {
+        _io = new IntersectionObserver(function(es){ es.forEach(function(x){ if(x.isIntersecting){ x.target.classList.add('visible'); _io.unobserve(x.target); } }); }, { threshold: 0.06 });
+      }
+      renderChart(_all.filter(function(e){ return e.rank <= INITIAL; }));   // 默认名次 ≤ 100（含其下不占位亚洲曲）
+      buildHighlights(_all);
+      initSearch();
+      initShowMore();
+      initSticky();
+    })();
+  </script>
+</body>
+</html>

@@ -35,6 +35,51 @@ ABBR_OVERRIDE = {
     "2022": {"时": 27},                 # S妈：简称取自 handle「哈哈哈时光机」
     "2021": {"蓝": 169, "姐": 171},     # 蓝=霍妈(handle 霍蓝Horan)、姐=蓝姐（该年两列并存，需消歧）
     "2020": {"淋檬": 19, "绿萌": 125, "菜": 771},  # 淋檬=柠妈、绿萌=萌妈（同 barvision 昵称别名）；菜=菜妈（不在活跃名单，id 顺延自当时最大 770）
+    # 注：键必须是 find_member_cols 去掉末字「妈」之后的形态（如 "X妈"→"X"、"京东大妈"→"京东大"），
+    # 不去妈的简称（如「香草」「院长」）原样即可。
+    "2018": {
+        "淋檬": 19,       # 柠妈
+        "绿萌": 125,      # 萌妈
+        "香草": 141,      # 草妈本人当年用的昵称变体（个人榜文件名写「草妈」，与之相符）
+        "肥屎": 174,      # 肥妈（文件 handle AzarathTrainor 与其 members.csv 记录一致）
+        "可乐": 176,      # 乐妈（文件 handle "Coke" = 乐妈 members.csv 里的 handle）
+        "院长": 326,      # 院妈（handle 天神院院长）
+        "X": 195,         # 「X妈」去妈后 = X，与「XX妈」(id88) 消歧，沿用 2019/2020 Barvision 已确认的 X妈=id195
+        "小": 153,        # 「小妈」去妈后 = 小，与新增「小擦」(id781) 消歧（其名首字也是"小"）
+        "京东大": 782,    # 「京东大妈」去妈后 = 京东大；不在活跃名单，按用户指示记为「JD」，id 顺延自当时最大 781
+    },
+    # 2016（34 榜合并，"Koleies"/"2cm" 已是新成员 members.csv 里的原名，靠 name==a 精确匹配自动解析，无需在此列出）
+    "2016": {
+        "Lovezedd": 138,  # Z妈（handle lovezedd）
+        "冰": 776,        # 「冰妈」去妈后 = 冰
+        "Tandiny": 130,   # 麦妈（handle Tandiny）
+        "城城": 120,      # 城妈（沿用 Barvision ALIASES 已确认的别名，见 #135）
+        "雅俗": 173,      # 俗妈（handle 雅俗的老巢）
+        "麻雀": 189,      # 雀妈（沿用 2018 年榜已确认的别名）
+        "嘟嘟": 190,      # 嘟妈
+        "火火": 129,      # 火妈（沿用 2018 年榜已确认的别名）
+        "陈先森": 167,    # 森妈（handle 陈先森Qq）
+        "泰坦": 131,      # 泰妈（handle 泰坦crazy）
+        "雨雨": 17,       # 雨妈
+        "azarath": 174,   # 肥妈（handle AzarathTrainor）
+        "BAG": 20,        # 包妈（handle 09BAg / Jeremy_BAg）
+        "LEMON": 19,      # 柠妈（handle LemonSheeran）
+        "环球": 770,      # 音妈（handle 环球颖音）
+        "莫扎特伦苏": 127,  # 苏妈（handle 莫扎特_伦苏）
+        "RAZ": 118,       # 兔妈（沿用 2018 年榜已确认的别名）
+        "布布": 157,      # 布妈
+        "小杰": 156,      # 杰妈（沿用 2018 年榜已确认的别名）
+        "小耳": 783,      # 耳妈（用户指认，新成员）
+        "滔滔": 784,      # 滔妈（用户指认，新成员）
+        "淋淋": 785,      # 淋妈（用户指认，新成员）
+        "卡卡": 786,      # 卡妈（用户指认，新成员）
+        "小小": 153,      # 小妈（用户指认，即已有成员）
+        "恒河猴": 18,     # 猴妈（用户指认，即已有成员）
+        "C榜": 780,       # CYF（用户指认）
+        "淋脑(风雨淋胖)": 168,  # 胖妈（handle 风宇凌胖，用户后续指认）
+        # 「助攻」「数字」身份不明，用户指示暂略去——不加映射，
+        # 自动落入 build_abbr2id 的未匹配名单（不计入该年成员统计，总点数/名次不受影响）。
+    },
 }
 
 # ── 艺人：Title-Case → 官方写法 / 拼写纠错（逐个独立艺人精确匹配）──
@@ -112,6 +157,42 @@ ARTIST_FIX = {
     "Tones And I": "Tones and I",
     "The Minds Of 99": "The Minds of 99",
     "The Minds Of 99+102:1": "The Minds of 99",  # 源数据混入类似单元格引用的乱码后缀
+    # 2018 年榜（54 位成员各自个人榜原始文件，Title-Case/拼写混乱，逐个纠正）
+    "George Erza": "George Ezra",                # 拼写错
+    "Ed Sheeeran": "Ed Sheeran",                  # 拼写错
+    "Kacey Mursgraves": "Kacey Musgraves",        # 拼写错
+    "Rachel Platte": "Rachel Platten",            # 拼写错
+    "Janelle Monae": "Janelle Monáe",             # 缺重音
+    "Janelle Monàe": "Janelle Monáe",             # 重音方向错
+    "Sebastian Yatra": "Sebastián Yatra",         # 缺重音
+    "Camila Cebello": "Camila Cabello",           # 拼写错
+    "One Republic": "OneRepublic",                # 官方无空格
+    "Nick iMinaj": "Nicki Minaj",                 # 源数据断字错误
+    "Hailee Steinfiled": "Hailee Steinfeld",      # 拼写错
+    "Blocboy JB": "BlocBoy JB",                   # 官方风格化
+    "Rosalia（Rosalía）": "Rosalía",               # 源数据两种拼法并列
+    "Twenty-one Pilots": "Twenty One Pilots",     # 与本站其他处一致
+    "twenty one pilots": "Twenty One Pilots",     # 同上（全小写源数据）
+    "benny blanco": "Benny Blanco",               # 大小写
+    "lil peep": "Lil Peep",                       # 大小写
+    "Xxxtentacion": "XXXTENTACION",               # 官方全大写风格化
+    "Craig David &Stefflon Don": "Craig David & Stefflon Don",  # 补空格
+    # 2016 年榜（34 榜合并，源表格多处拼写/断句错误）
+    "Calvin Harries": "Calvin Harris",            # 拼写错
+    "Mike Ponser": "Mike Posner",                 # 拼写错
+    "G-eazy": "G-Eazy",                           # 大小写
+    "Hailee Stainfield": "Hailee Steinfeld",      # 拼写错
+    "Zedd&Grey": "Zedd & Grey",                   # 补空格
+    "Gwen Stefeni": "Gwen Stefani",               # 拼写错
+    "James Authur": "James Arthur",               # 拼写错
+    "Kogo": "Kygo",                                # 拼写错
+    "Jason Derülo": "Jason Derulo",               # 误加重音，官方无重音
+    "Tory Lanez&Chris Brown": "Tory Lanez & Chris Brown",  # 补空格
+    "Marc.E.Bassy": "Marc E. Bassy",              # 句点误代空格
+    "ENRIQUE IGLESIAS": "Enrique Iglesias",       # 全大写源数据
+    "DESCEMER BUENO&GENTE DE ZONA": "Descemer Bueno & Gente De Zona",  # 全大写 + 补空格
+    "M∅": "MØ",                                    # 数学空集符号误代 Ø
+    "Philipp Poisel 542": "Philipp Poisel",       # 艺人名混入疑似时长/编号残留
 }
 
 # ── 艺人整串预修正（在按逗号拆分前替换）：修名字内含逗号的写法 → 统一规范，再靠 KEEP 保护不被拆 ──
@@ -144,6 +225,14 @@ ARTIST_RAW_FIX = {
     "Juice Wrld/Seezyn": "Juice WRLD/Seezyn",
     "Yungblud/Halsey/Travis Barker": "YUNGBLUD/Halsey/Travis Barker",
     "Marc E Bassy / Blackbear": "Marc E. Bassy / Blackbear",
+    # 2018 年榜：无逗号的整串组合，含拼写/缺分隔符问题
+    "Lady Gaga Brandley Cooper": "Lady Gaga, Bradley Cooper",  # 缺逗号 + Brandley 拼写错
+    "Maroon 5 Cardi B": "Maroon 5, Cardi B",                    # 缺逗号
+    "Hailee Steinfeld/Alesso/Florida Georgia Li...": "Hailee Steinfeld/Alesso/Florida Georgia Line",  # 源数据截断
+    # 2016 年榜：无逗号的整串组合
+    "Justin Bieber&MO": "Justin Bieber & MØ",           # 补空格 + Ø 缺失
+    "Gnash&Olivia O'Brien": "Gnash & Olivia O'Brien",   # 补空格
+    "Justin Bieber(feat. Big Sean)": "Justin Bieber (feat. Big Sean)",  # 补空格
 }
 
 # ── 歌名：整首替换（键 = 完整错误歌名，值 = 完整正确歌名）──────────
@@ -159,6 +248,21 @@ SONG_FIX_EXACT = {
     "It's Not Living(If It's Not With You)": "It's Not Living (If It's Not with You)",  # The 1975；补空格 + With → with
     "Messy (Accoustic)": "Messy (Acoustic)",  # serpentwithfeet；拼写错
     "Imi": "iMi",  # Bon Iver；官方拼写 iMi
+    "Dancing With Our Hards Tied": "Dancing With Our Hands Tied",  # Taylor Swift；Hards → Hands 拼写错
+    # 2016 年榜
+    "Make me…": "Make Me...",  # Britney Spears
+    "CAN't STOP THE FELLING!": "Can't Stop the Feeling!",  # Justin Timberlake；全大写 + Felling 拼写错
+    "Send My Love(To Your New Lover)": "Send My Love (To Your New Lover)",  # 补空格
+    "Up&Up": "Up & Up",  # Coldplay；补空格
+    "All In My Head(Flex)(Feat.Fetty Wap)": "All In My Head (Flex) (feat. Fetty Wap)",  # 补空格
+    "Chantaje (feat.Maluma)": "Chantaje (feat. Maluma)",  # 补空格
+    "Ghostbusters(I’m Not Afraid)": "Ghostbusters (I'm Not Afraid)",  # 补空格 + 弯引号规范
+    "Mom(Feat.Kelli Trainor)": "Mom (feat. Kelli Trainor)",  # 补空格
+    "Better(Feat.Yo Gotti)": "Better (feat. Yo Gotti)",  # 补空格
+    "Father Streches My Hand, Pts 1 & 2 (feat. KiD CuDi & Desiigner)": "Father Stretches My Hand, Pts. 1 & 2 (feat. Kid Cudi & Desiigner)",  # Streches 拼写错 + KiD CuDi 大小写
+    "John Wayne Gacy. Jr.": "John Wayne Gacy, Jr.",  # Sufjan Stevens；句读符号错
+    "True Colours": "True Colors",  # Anna Kendrick & Justin Timberlake；官方美式拼写
+    "Me,Myself&I": "Me, Myself & I",  # G-Eazy, Bebe Rexha；补空格
 }
 
 # ── 歌名：子串替换（品牌/缩写/加空格；对任意歌名生效）──────────────
@@ -166,6 +270,8 @@ SONG_FIX_SUB = {
     "Bzrp": "BZRP",         # Quevedo: BZRP Music Sessions
     "T'Aime": "T'aime",     # Bruxelles Je T'aime（法语，A 也该小写）
     "F.N.F.(": "F.N.F. (",  # 补空格
+    "`": "'",               # 反引号误代撇号（2016 年榜多处，如 Ain`t My Fault）
+    "THat Part": "That Part",  # ScHoolboy Q；随手误按大写键，歌名后面还带 "(feat. ...)" 用 SUB 而非 EXACT
 }
 
 # ── 封面：(艺人, 歌名) → 手动指定的 iTunes 封面 URL（600x600bb）─────
