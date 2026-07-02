@@ -10,7 +10,10 @@
    "points": 1822.4,
    "assists": 10,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    120
+   ]
   },
   {
    "rank": 2,
@@ -19,7 +22,11 @@
    "points": 1324.1,
    "assists": 8,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg",
-   "no1": 2
+   "no1": 2,
+   "no1_by": [
+    789,
+    793
+   ]
   },
   {
    "rank": 3,
@@ -124,7 +131,10 @@
    "points": 736.5,
    "assists": 4,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b8/50/04/b850045b-bfab-77de-040b-94b13c6f79ef/825646557646.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    129
+   ]
   },
   {
    "rank": 16,
@@ -173,7 +183,10 @@
    "points": 566.1,
    "assists": 4,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/24/4f/99/244f99bf-4417-421e-0ee6-934b02ff4b1b/16UMGIM59235.rgb.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    156
+   ]
   },
   {
    "rank": 22,
@@ -190,7 +203,10 @@
    "points": 559.3,
    "assists": 3,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/da/52/41/da52415b-d0ac-d61f-422c-e84bf5ef8162/20UMGIM66000.rgb.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    190
+   ]
   },
   {
    "rank": 24,
@@ -239,7 +255,10 @@
    "points": 465.0,
    "assists": 2,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/a8/69/14a86912-841d-3cb8-cf55-0439b15c6cab/dj.mjduepez.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    792
+   ]
   },
   {
    "rank": 30,
@@ -288,7 +307,10 @@
    "points": 418.0,
    "assists": 2,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b6/3a/15/b63a15ba-dd50-62b0-4054-03a81241774a/00602567743217.rgb.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    154
+   ]
   },
   {
    "rank": 36,
@@ -321,7 +343,10 @@
    "points": 403.1,
    "assists": 2,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ab/af/22/abaf2296-ed4d-6da2-c24d-503cfdfa4c1f/0617465356858.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    791
+   ]
   },
   {
    "rank": 40,
@@ -481,7 +506,7 @@
    "song": "Give It 2 U (feat. Kendrick Lamar)",
    "points": 339.7,
    "assists": 3,
-   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/6b/34/3b/6b343b0b-2aaa-fa98-4c8b-a8b9287b8efd/07UMGIM00995.rgb.jpg/600x600bb.jpg"
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/18/0d/0b/180d0b53-fa4c-c564-26fe-6d6c161f6a1e/13UAAIM09922.rgb.jpg/600x600bb.jpg"
   },
   {
    "rank": 60,
@@ -514,7 +539,10 @@
    "points": 328.4,
    "assists": 2,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3e/3c/e7/3e3ce786-bbce-133d-c72a-8bff584fd729/21UMGIM90453.rgb.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    783
+   ]
   },
   {
    "rank": 64,
@@ -691,7 +719,10 @@
    "points": 254.5,
    "assists": 1,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a7/10/e0/a710e05f-e7f5-2ead-46c1-8b073b955bbc/886443702547.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    17
+   ]
   },
   {
    "rank": 86,
@@ -716,7 +747,10 @@
    "points": 250.0,
    "assists": 1,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music69/v4/44/7f/9e/447f9eed-6ea0-244a-8531-de054b01a958/616892079545.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    782
+   ]
   },
   {
    "rank": 89,
@@ -797,7 +831,10 @@
    "points": 230.0,
    "assists": 1,
    "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/b0/ce/b1/b0ceb156-625e-e02c-5217-4256f45904b1/4050538314113.jpg/600x600bb.jpg",
-   "no1": 1
+   "no1": 1,
+   "no1_by": [
+    790
+   ]
   },
   {
    "rank": 99,

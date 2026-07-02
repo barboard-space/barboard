@@ -30822,6 +30822,1074 @@
    ]
   }
  },
- "2014": {},
- "2013": {}
+ "2014": {
+  "17": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "120": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "129": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "154": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "156": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "190": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "782": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "783": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "789": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "790": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "791": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "792": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  },
+  "793": {
+   "assists": {
+    "t10": null,
+    "t20": null,
+    "t50": null,
+    "t100": null,
+    "t200": null
+   },
+   "top10": [],
+   "no_detail": true
+  }
+ },
+ "2013": {
+  "17": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Kelly Clarkson",
+     "song": "People Like Us",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a7/10/e0/a710e05f-e7f5-2ead-46c1-8b073b955bbc/886443702547.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Taylor Swift",
+     "song": "I Knew You Were Trouble",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/25/0d/7e/250d7e42-3a2f-19ac-f865-f1e04a4a1f97/12UMDIM01007.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Ke$ha",
+     "song": "Crazy Kids",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/b0/b8/b0/b0b8b015-2a06-2533-536e-50d8d8b96a8a/886447561225.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Owl City",
+     "song": "Gold",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/37/dd/e6/37dde667-4cd5-e31a-5dff-30c84a0dd8cc/12UMGIM33874.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Lawson",
+     "song": "Learn To Love Again",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/cd/85/32/cd853233-efeb-a82a-e8e9-c7a6f1bd2284/00602537289844.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Rihanna",
+     "song": "Diamonds",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a0/1a/10/a01a1080-7b1d-e475-a03c-394e5cbba66c/12UMGIM53876.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Florida Georgia Line",
+     "song": "Cruise",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/18/37/69/18376949-c4f9-18bd-0adf-7a473df55a7b/12UMGIM58533.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Serena Ryder",
+     "song": "Stompa",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/d6/40/12/d640129e-a20f-ef29-1ef3-bf636c670fb8/cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "P!nk",
+     "song": "Just Give Me a Reason",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/4a/c9/7f/4ac97f30-465f-c85b-4dfd-d911a8750fa1/886443581159.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "The Script (feat. will.i.am)",
+     "song": "Hall of Fame",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bb/89/cd/bb89cdb5-4456-2b75-d1f9-e61009a4c8cc/886443609532.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "120": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 50,
+    "t200": 50
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Lady Gaga",
+     "song": "Applause",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Patrick Swayze",
+     "song": "She's Like The Wind",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/8c/f2/1f/8cf21f62-eed1-64c0-e710-df52dc3556c3/078635640823.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "TLC",
+     "song": "Creep",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/a8/69/14a86912-841d-3cb8-cf55-0439b15c6cab/dj.mjduepez.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Pet Shop Boys & Dusty Springfield",
+     "song": "What Have I Done To Deserve This?",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/37/95/1a/37951a3d-6f9b-b5fc-fdac-e4818029ba00/5054197358579.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Samantha Jade",
+     "song": "What You've Done to Me",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/aa/3b/44/aa3b44e2-503b-4af5-218f-0c7ae5b8d919/886443770836.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Pet Shop Boys",
+     "song": "Suburbia",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/3a/00/04/3a0004fb-5532-fa36-f7cd-01a2b3da8efd/190295758547.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Pet Shop Boys",
+     "song": "Opportunities(Let's Make Lots Of Money)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/3a/00/04/3a0004fb-5532-fa36-f7cd-01a2b3da8efd/190295758547.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Guns n' Roses",
+     "song": "November Rain",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/6a/e2/1f/6ae21fa9-c897-3be1-2967-50eefae22b93/06UMGIM05041.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Kate Bush",
+     "song": "Wuthering Heights",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/4f/a8/69/4fa8697c-baf0-8dc2-8609-190a50432952/cover.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Ariana Grande",
+     "song": "Tattooed Heart/Honeymoon Avenue",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/19/23/0a19235d-8bcc-76d4-58ca-61a65d928587/13UAAIM68293.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "129": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 50,
+    "t200": 50
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Muse",
+     "song": "Madness",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b8/50/04/b850045b-bfab-77de-040b-94b13c6f79ef/825646557646.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Lorde",
+     "song": "Royals",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/b9/e2/d0/b9e2d0af-8ce2-e078-d4e2-eccf24d7e206/12UMGIM55707.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Imagine Dragons",
+     "song": "Demons",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/1f/fa/09/1ffa092f-f52f-4a66-7d10-4cc5982dc747/12UMGIM46901.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Justin Timberlake, Jay-Z",
+     "song": "Suit & Tie",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/54/d7/0f/54d70f0c-4c80-f66a-003e-980595d6a0d8/886443834668.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Macklemore & Ryan Lewis, Wanz",
+     "song": "Thrift Shop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/44/40/83/44408300-636f-8cae-d508-9dd96db48cea/707541528191.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Lana Del Rey",
+     "song": "Young and Beautiful",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/e3/e3/13/e3e31393-abf5-e9b1-edc4-20ede35d0c75/13UMGIM43701.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Gotye, Kimbra",
+     "song": "Somebody that I Used to Know",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/5d/4b/b0/5d4bb010-fbb5-3d6d-b355-d8074392e958/12UMGIM32418.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Jay-Z",
+     "song": "Holy Grail (feat. Justin Timberlake)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/86/69/05/8669059c-ed98-2bd1-e6e8-9e6332556b28/00857018004113.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Macklemore & Ryan Lewis, Mary Lambert",
+     "song": "Same Love",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5e/5f/81/5e5f81c7-849e-63f6-6ffd-8801145bfd97/707541525398.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Avicii",
+     "song": "Wake Me Up",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/18/5b/1e/185b1ef5-5d97-19d8-aebf-8e29e41874ef/13UAAIM59255.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "154": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 99,
+    "t200": 99
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Janet Jackson",
+     "song": "That's the Way Love Goes",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b6/3a/15/b63a15ba-dd50-62b0-4054-03a81241774a/00602567743217.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Miley Cyrus",
+     "song": "We Can't Stop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Fleetwood Mac",
+     "song": "Dreams",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/48/f4/d248f4ae-a7e4-a48e-1588-6617de3e8d76/mzi.izeorbmm.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Pet Shop Boys & Dusty Springfield",
+     "song": "What Have I Done To Deserve This?",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/37/95/1a/37951a3d-6f9b-b5fc-fdac-e4818029ba00/5054197358579.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Blondie",
+     "song": "Call Me",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/72/73/8f/72738f62-d8a1-f1f9-e84d-244ff697d1db/13UABIM56926.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Donna Summer",
+     "song": "Hot Stuff",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/66/a7/b0/66a7b03a-c02c-73c2-c7f2-f2afdf05a8dc/06UMGIM04498.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Toni Braxton",
+     "song": "Un-Break My Heart",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/87/8d/72/mzi.baogxofm.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "PJ Harvey",
+     "song": "Good Fortune",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/4d/70/53/4d70536e-f463-3bfe-45e9-4274ce8bb33a/00731454814423.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "TLC",
+     "song": "Waterfalls",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/a8/69/14a86912-841d-3cb8-cf55-0439b15c6cab/dj.mjduepez.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Lorde",
+     "song": "Royals",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/b9/e2/d0/b9e2d0af-8ce2-e078-d4e2-eccf24d7e206/12UMGIM55707.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "156": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 80,
+    "t200": 80
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Rihanna, Mikky Ekko",
+     "song": "Stay",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/24/4f/99/244f99bf-4417-421e-0ee6-934b02ff4b1b/16UMGIM59235.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Leona Lewis",
+     "song": "Lovebird",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/70/8b/c3/708bc389-bc21-5f0e-ecc9-7ee0f0c5ee36/886443702530.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Taylor Swift",
+     "song": "I Knew You Were Trouble",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/25/0d/7e/250d7e42-3a2f-19ac-f865-f1e04a4a1f97/12UMDIM01007.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Mariah Carey",
+     "song": "Almost Home",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/54/1f/cb/541fcb97-fe52-7173-b4ef-9f884712ae5b/00602537335954.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Miley Cyrus",
+     "song": "We Can't Stop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Ariana Grande",
+     "song": "Almost Is Never Enough (feat. Nathan Sykes)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/19/23/0a19235d-8bcc-76d4-58ca-61a65d928587/13UAAIM68293.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Calvin Harris",
+     "song": "I Need Your Love (feat. Ellie Goulding)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ab/af/22/abaf2296-ed4d-6da2-c24d-503cfdfa4c1f/0617465356858.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Taylor Swift",
+     "song": "All Too Well",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/15/38/9b/15389bf4-8074-06c3-11ee-655b5453af68/21UM1IM25046.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Ke$ha",
+     "song": "Crazy Kids",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/b0/b8/b0/b0b8b015-2a06-2533-536e-50d8d8b96a8a/886447561225.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "The Cranberries",
+     "song": "Ode To My Family",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b6/c8/85/b6c885de-fde6-d40d-c95a-d89ede4270ae/06UMGIM09433.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "190": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "J. Cole, Miguel",
+     "song": "Power Trip",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/da/52/41/da52415b-d0ac-d61f-422c-e84bf5ef8162/20UMGIM66000.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Kendrick Lamar, Drake",
+     "song": "Poetic Justice",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/36/86/ec/3686ec99-dec4-0a01-8b74-2d8a9a0263a7/12UMGIM52988.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Miguel",
+     "song": "Adorn",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a1/56/ac/a156acb2-068e-a616-3e56-86ca656c14ce/886443632943.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Kendrick Lamar",
+     "song": "Bitch Don't Kill My Vibe",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/36/86/ec/3686ec99-dec4-0a01-8b74-2d8a9a0263a7/12UMGIM52988.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "A$AP Rocky, Drake, Kendrick Lamar & 2 Chainz",
+     "song": "Fuckin' Problems",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/23/33/76/233376bf-d737-9438-e563-12c927c9cb7f/15UMGIM48241.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Chris Brown",
+     "song": "Fine China",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a3/3a/e3/a33ae3c7-821c-1531-0436-305fcd91f7fe/886444792073.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Drake",
+     "song": "Started From the Bottom",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/5f/30/6d/5f306d67-bff8-2595-9d41-51be895d3208/00602537542321.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Rihanna",
+     "song": "Pour It Up",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ef/3e/8a/ef3e8aaa-18b7-3ae3-8020-f5fc384b0bf2/12UMGIM59889.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Ciara",
+     "song": "Body Party",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/a1/93/97/a1939758-e087-cc96-340d-19b3cc8e5b3d/886443919754.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Wale, Tiara Thomas",
+     "song": "Bad",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/66/fb/9c/66fb9cd8-f05e-6ba9-c8a3-36bbfe7ef926/dj.zueykxuj.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "782": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 97,
+    "t200": 97
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "The Lonely Wild",
+     "song": "Buried In The Murder",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music69/v4/44/7f/9e/447f9eed-6ea0-244a-8531-de054b01a958/616892079545.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Ke$ha",
+     "song": "Die Young",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/52/e4/44/52e44453-abd4-6a0d-195e-7e339dea4525/886443748880.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Cro",
+     "song": "Whatever",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/43/e2/51/43e251e1-36ef-c9e9-abc8-225c46f647b8/4018939282684.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Phillip Phillips",
+     "song": "Gone, Gone, Gone",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/9a/72/eb/9a72eb50-97ad-9684-8f3b-46587ef81ac2/12UMGIM56926.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Lawson",
+     "song": "Learn To Love Again",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/cd/85/32/cd853233-efeb-a82a-e8e9-c7a6f1bd2284/00602537289844.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Hedley",
+     "song": "Kiss You Inside Out",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/25/a4/bd/25a4bd78-c586-0ae2-a29b-4341d037dc94/00602537064946.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Lady Gaga",
+     "song": "Applause",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Biffy Clyro",
+     "song": "Black Chandelier",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/3e/f7/83/3ef78363-b9f0-3ca6-b694-a548abf800c9/190295651589.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Capital Kings",
+     "song": "We Belong As One (feat. tobyMac)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/88/a0/57/88a057c9-65a5-06f3-ab34-76d3ed3723b0/669447004332.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Billy Talent",
+     "song": "Surprise Surprise",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a1/f1/3a/a1f13ab2-daca-a8a8-e16d-c0e888fce811/825646560998_DeadSilence.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "783": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 100,
+    "t200": 100
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Zedd, Hayley Williams",
+     "song": "Stay the Night",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3e/3c/e7/3e3ce786-bbce-133d-c72a-8bff584fd729/21UMGIM90453.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Avicii",
+     "song": "Hey Brother",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/18/5b/1e/185b1ef5-5d97-19d8-aebf-8e29e41874ef/13UAAIM59255.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Lady Gaga",
+     "song": "Applause",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Luke Bryan",
+     "song": "That's My Kind of Night",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/43/8f/14/438f14f0-6277-aa81-4624-8753b93c1fa9/13UAAIM59985.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Imagine Dragons",
+     "song": "Demons",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/1f/fa/09/1ffa092f-f52f-4a66-7d10-4cc5982dc747/12UMGIM46901.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Miley Cyrus",
+     "song": "Wrecking Ball",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Lady Gaga, R. Kelly or Christina Aguilera",
+     "song": "Do What U Want",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fd/05/0d/fd050d45-0c4d-2f00-b684-da0b4220bd4e/00602537715749.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Panic! at the Disco",
+     "song": "Vegas Lights",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a1/44/5d/a1445d43-e701-65a0-dad5-3bf04ad97a5d/075679950000.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Killian Wells",
+     "song": "V.I.P.",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/99/00/68/mzi.bqbmcxvr.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Zedd",
+     "song": "Spectrum (feat. Matthew Koma)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/d9/f2/2b/d9f22b74-8ef3-73d8-5da1-e5268c42f114/12UMGIM52120.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "789": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 50,
+    "t200": 50
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Katy Perry",
+     "song": "Roar",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "f(x)",
+     "song": "初智齿(Rum Pum Pum Pum)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d9/0e/1d/d90e1dd9-efb8-40a4-a553-4bad8fd8f81d/888735950780.png/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Lady Gaga",
+     "song": "Applause",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Chris Brown, Nicki Minaj",
+     "song": "Love More",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a6/2f/a7/a62fa746-9e76-0789-76b6-919019807d8a/828768451052.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "One Direction",
+     "song": "Best Song Ever",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/66/75/88/6675882c-3685-2b6b-f9de-c6d3e06602b5/dj.fuklqvvg.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Miley Cyrus",
+     "song": "We Can't Stop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Katy Perry",
+     "song": "Walking On Air",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Macklemore & Ryan Lewis, Wanz",
+     "song": "Thrift Shop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/44/40/83/44408300-636f-8cae-d508-9dd96db48cea/707541528191.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Katy Perry, Juicy J",
+     "song": "Dark Horse",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b4/d0/9a/b4d09a1e-c7f1-de72-bab3-ff2b2be3981b/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Miley Cyrus",
+     "song": "Wrecking Ball",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "790": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 42,
+    "t100": 42,
+    "t200": 42
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "India.Arie",
+     "song": "Just Do You",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/b0/ce/b1/b0ceb156-625e-e02c-5217-4256f45904b1/4050538314113.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "India.Arie",
+     "song": "Break the Shell",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/b0/ce/b1/b0ceb156-625e-e02c-5217-4256f45904b1/4050538314113.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Daft Punk",
+     "song": "Get Lucky (feat. Pharrell Williams)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/86/b1/92/86b192cf-ceb6-6e51-9361-dc4a35e95d22/196589921154.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Alicia Keys",
+     "song": "Girl On Fire",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a7/66/bd/a766bd53-e015-62e7-fbbc-ab7dd628a989/886443653634.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Lady Gaga",
+     "song": "Applause",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Alicia Keys",
+     "song": "B.N.M Part 2",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/b7/77/66/b77766d8-c73f-8a5d-376d-926db33475f7/884977002508.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Imagine Dragons",
+     "song": "Radioactive",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/1f/fa/09/1ffa092f-f52f-4a66-7d10-4cc5982dc747/12UMGIM46901.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "J. Cole, Miguel",
+     "song": "Power Trip",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/da/52/41/da52415b-d0ac-d61f-422c-e84bf5ef8162/20UMGIM66000.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Icona Pop, Charli XCX",
+     "song": "I Love It",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/30/cf/3a/30cf3aa0-f143-0c16-36a8-19021be6519f/5059460288799.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Muse",
+     "song": "Madness",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b8/50/04/b850045b-bfab-77de-040b-94b13c6f79ef/825646557646.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "791": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 50,
+    "t200": 50
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Calvin Harris",
+     "song": "I Need Your Love (feat. Ellie Goulding)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ab/af/22/abaf2296-ed4d-6da2-c24d-503cfdfa4c1f/0617465356858.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Katy Perry",
+     "song": "Roar",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Krewella",
+     "song": "Alive",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/dc/2c/dd/dc2cdd4b-b654-9de1-bbaa-ed7e35c735e9/886443490857.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Demi Lovato",
+     "song": "Heart Attack",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/17/80/d4/1780d447-2e6b-a0cd-d41f-fd20997682a0/13DMGIM03857.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "苏打绿",
+     "song": "我好想你",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/74/d2/d6/74d2d636-0a5a-3e71-5d06-0a598e1da123/196872607048.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "G.R.L.",
+     "song": "Vacation",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/63/ad/12/63ad12a5-31fd-53b6-a21e-cb2dcfaf5813/886444054775.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Miley Cyrus",
+     "song": "Wrecking Ball",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Katy Perry",
+     "song": "Unconditionally",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Lady Gaga",
+     "song": "Applause",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Avicii",
+     "song": "Wake Me Up",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/18/5b/1e/185b1ef5-5d97-19d8-aebf-8e29e41874ef/13UAAIM59255.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "792": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 50,
+    "t200": 50
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "TLC",
+     "song": "Creep",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/a8/69/14a86912-841d-3cb8-cf55-0439b15c6cab/dj.mjduepez.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Mariah Carey",
+     "song": "Always Be My Baby",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/78/4f/2c/784f2c84-b5ba-0e7e-58b1-715143b2f199/mzi.vippwwob.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Brandy & Monica",
+     "song": "The Boy Is Mine",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b1/52/c5/b152c569-f81f-4005-7b61-5b54b855564d/s06.hfdwpdak.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Boyz II Men",
+     "song": "End of the Road",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f7/b7/35/f7b7352e-3d60-0f2b-e7c1-d0e792ad2b14/06UMGIM04522.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Janet Jackson",
+     "song": "Got 'Til It's Gone (feat. Q-Tip & Joni Mitchell)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/21/ba/cf/21bacf43-5878-e76b-e018-ca936a8243a7/22UMGIM92303.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Mariah Carey",
+     "song": "Dreamlover",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/cf/f5/19/cff5191f-a668-2c7f-f73a-fe51f519b577/dj.yrzoirxd.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "TLC",
+     "song": "No Scrubs",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2d/19/0c/2d190ce6-a157-6364-b5b4-e9b00265d313/mzi.ucefobwj.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Whitney Houston",
+     "song": "Exhale (Shoop Shoop)",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/03/50/76/035076da-d210-c4e4-9385-d10ab37c7bc1/dj.frcjtlhl.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "Toni Braxton",
+     "song": "Let It Flow / You're Makin' Me High",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/fd/61/1f/fd611f8f-1edc-8c6a-ce32-2882441f5f82/886443468986.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Next",
+     "song": "Too Close",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/61/d8/1c/61d81c56-30d9-6a85-2765-68815c76d5a3/886446724393.jpg/600x600bb.jpg"
+    }
+   ]
+  },
+  "793": {
+   "assists": {
+    "t10": 10,
+    "t20": 20,
+    "t50": 50,
+    "t100": 50,
+    "t200": 50
+   },
+   "top10": [
+    {
+     "rank": 1,
+     "artist": "Katy Perry",
+     "song": "Roar",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 2,
+     "artist": "Avril Lavigne",
+     "song": "Rock 'N Roll",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/64/d4/71/64d47164-887b-d58e-1d68-11acfeacc73f/886445430844.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 3,
+     "artist": "Lady Gaga, R. Kelly or Christina Aguilera",
+     "song": "Do What U Want",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fd/05/0d/fd050d45-0c4d-2f00-b684-da0b4220bd4e/00602537715749.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 4,
+     "artist": "Miley Cyrus",
+     "song": "We Can't Stop",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 5,
+     "artist": "Taylor Swift",
+     "song": "We Are Never Ever Getting Back Together",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/25/0d/7e/250d7e42-3a2f-19ac-f865-f1e04a4a1f97/12UMDIM01007.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 6,
+     "artist": "Jennifer Lopez, Pitbull",
+     "song": "Live It Up",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/54/7e/cb/547ecbec-ad3f-4c33-f479-d797a8bdfa18/FIXIMG00602438537556.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 7,
+     "artist": "Lady Gaga",
+     "song": "Applause",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 8,
+     "artist": "Avril Lavigne",
+     "song": "17",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/6a/fa/53/6afa53eb-c09f-e4fc-9a69-06e84b72e04e/886444213653.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 9,
+     "artist": "浜崎あゆみ",
+     "song": "Feel the love",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music22/v4/b5/8f/e2/b58fe2ab-9b20-dd9b-48de-068222f958c6/ANTCD-18714.jpg/600x600bb.jpg"
+    },
+    {
+     "rank": 10,
+     "artist": "Nicole Scherzinger",
+     "song": "Boomerang",
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/39/3e/9b/393e9bbf-f8f6-0129-85d5-f1fabbe7b9f0/00602537285242.rgb.jpg/600x600bb.jpg"
+    }
+   ]
+  }
+ }
 }

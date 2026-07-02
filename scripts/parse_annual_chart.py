@@ -29,12 +29,11 @@ XLS_YEARS = {"2013"}
 # 且**明确不做个人 Top10 / 分档助攻**（数据质量问题），但主榜与四项年度看点仍可推算。
 # 见 NO_HEADER_YEARS（跳过表头读取）+ ANON_MEMBER_COLS（按固定列位置匿名统计，不产出可归因数据）。
 NO_HEADER_YEARS = {"2014"}
-# 2013：与 2014 不同，本身有表头（Rank/origin/Artist(s)/Title/<13 位成员>/SUM/COUNT()），
-# 成员列甚至有部分可辨认的网名/简称——但用户明确要求**按 2014 同规则处理**（不做身份归因、
-# 不产出个人 Top10/分档助攻），故仍归入 ANON_MEMBER_COLS，头部信息不用于身份解析。
+# 2013：与 2014 不同，本身有表头（Rank/origin/Artist(s)/Title/<13 位成员>/SUM/COUNT()）——
+# 用户后来发现表头本可辨认，改为**正常做身份归因**（不再匿名），见 BARE_COL_YEARS/ABBR_OVERRIDE。
 # 该年官方「10 榜合榜」与技术上 13 个非空成员列不一致（同 2014 21 vs 24 的情况），BOARD_COUNT 按官方数。
 # SUM/COUNT() 两列已是现成的点数/助攻数，直接走 FIXED_COLS，无需助攻数通用兜底。
-ANON_MEMBER_COLS = {"2014": list(range(5, 26)), "2013": list(range(4, 17))}
+ANON_MEMBER_COLS = {"2014": list(range(5, 26))}
 # 2015：唯一 sheet「Sheet1」列 Rank/Artist/-/Title/(无表头,=TOTAL 重复列)/<21 位成员各占 1 列>/TOTAL，
 # 官方总排名(Rank)已算好（该年为 Top 296，非常规 Top 200）、但**每位成员列存的是点数、不是名次**——
 # 与 BARE_COL_YEARS 的列识别方式相同（每人仅占 1 列、表头即网名本身），故把 "2015" 也加进 BARE_COL_YEARS
@@ -67,8 +66,8 @@ PAIR_COL_RANK_SECOND = {"2023", "2016"}
 # 与 PAIR_COL_YEARS（一列有表头一列无表头）不同，靠"_名次"后缀识别、忽略"_点数"列。
 SUFFIX_COL_YEARS = {"2019"}
 # 个人榜列格式为「每人仅占 1 列、表头即简称本身」的年份（如 2018："蛋妈"/"晕妈"…，列值直接是该成员对这首歌的名次）。
-# 2015 列结构相同（每人 1 列、表头即网名）但列值是点数而非名次，见 POINTS_NOT_RANK_YEARS。
-BARE_COL_YEARS = {"2018", "2015"}
+# 2015/2013 列结构相同（每人 1 列、表头即简称/网名）但列值是点数而非名次，见 POINTS_NOT_RANK_YEARS。
+BARE_COL_YEARS = {"2018", "2015", "2013"}
 # 源 sheet 是「转置」布局的年份（如 2018「综合点数整理」：行=字段(Rank/Artist/Title/...)+各成员，列=名次1..200）——
 # main() 读取后先转置成常规「行=一首歌」布局，再走通用管线，见 main() 内 TRANSPOSED_YEARS 分支。
 TRANSPOSED_YEARS = {"2018"}
@@ -87,7 +86,9 @@ _META_COLS = {"终名次", "名次", "排名", "艺人", "艺术家", "歌曲", 
               # 比其它年份的 "i<4" 起扫下标更靠后）
               "最终34榜排名", "30榜排名", "26榜排名", "22榜排名", "17榜排名", "10榜排名", "0 ARTIST", "0SONG", "#VALUE!",
               # 2015 表头全大写 ARTIST/TITLE/TOTAL（与其它年份的 Title-Case 不同，需单独登记）
-              "ARTIST", "TITLE", "TOTAL"}
+              "ARTIST", "TITLE", "TOTAL",
+              # 2013 表头额外的结构列（origin=原始序号、Artist(s)/SUM/COUNT() 均已被 FIXED_COLS 接管）
+              "origin", "Artist(s)", "SUM", "COUNT()"}
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "annual")
 MEMBERS_CSV = os.path.join(os.path.dirname(__file__), "..", "data", "members", "members.csv")
 # 修正表（歌手/歌名规范化的唯一维护源，见该文件顶部说明）
