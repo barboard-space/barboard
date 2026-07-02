@@ -8,8 +8,11 @@
 
 ### Fixed
 - 成员页「个人年榜」Top 10 手机端歌名→歌手间距从实测 7.4px 修正为 4px（后按反馈进一步收至 2px），与 BBL 榜单机制一致：根因是原 CSS grid 让名次/封面跨 2 行 spanning 撑大了文字行轨道；改为名次/封面 `position:absolute` 居中覆盖、歌名/歌手回归纯文档流 `margin-top` 控距，长歌名换行时行高自动适配。
-- 手机端排名数字框宽度一直被通用重置规则 `td{width:auto!important}` 悄悄压制（哪怕 `.rk` 自身选择器更具体，没带 `!important` 就会输），导致 `text-align:center` 从未真正生效——补 `!important` 抢回控制权，排名现在在自己的小框内真正居中。
-- 手机端排名/封面位置与字号按用户多轮实测反馈定稿：`.rk{left:20px;width:24px;font-size:21px}`、`.an-cover{left:54px;width/height:38px}`、`.an-title{font-size:13px}`、`.an-artist{font-size:11px}`。
+- 手机端排名数字框宽度一直被通用重置规则 `td{width:auto!important}` 悄悄压制（哪怕 `.rk` 自身选择器更具体，没带 `!important` 就会输），导致 `text-align:center` 从未真正生效——补 `!important` 抢回控制权。
+- 排名数字框宽度改为等于封面 `left` 值（贯穿"卡片左边缘→封面"整段可视空间），使数字相对这段空间真正居中，而不是在一个偏右的窄框内自娱自乐地居中。
+- 手机端 `.mp-an-tw{overflow:visible}`（原为取消横向滚动而设）会连带关掉圆角裁切，导致首尾行方形背景在容器圆角处露出直角——改 `overflow:hidden`，横向不溢出与圆角裁切两者兼得。
+- 封面与行上下净空不足：不改封面尺寸，改增大 `tr` 垂直 padding（6px→8px），封面靠居中定位自动获得更多净空。
+- 手机端排名/封面位置与字号按用户多轮实测反馈定稿：`.rk{left:0;width:54px;font-size:21px}`、`.an-cover{left:54px;width/height:38px}`、`.an-title{font-size:13px}`、`.an-artist{font-size:11px}`。
 
 ### Added
 - 封面缺失 placeholder（`.an-cover--ph`）：保留原背景色，叠加 `mask-image` 引入的榜吧 logo 水印（`--clr-text-4` 弱化色调 + 0.5 透明度），桌面/手机两种尺寸按比例适配。真实样例见 `member/127/`（苏妈）2021 年 Top10。

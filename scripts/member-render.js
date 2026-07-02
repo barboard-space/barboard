@@ -205,20 +205,20 @@
     '.mp-an-block .mp-an-tbl thead th:nth-child(2){padding-left:68px}',
     /* 手机端：前十表改 BBL 榜单式（名次 | 封面 | 歌名/歌手上下堆叠），不横滚、不显示右侧列 */
     '@media (max-width:768px){',
-    '  .mp-an-block .mp-an-tw{overflow:visible}',
+    '  .mp-an-block .mp-an-tw{overflow:hidden}',
     '  .mp-an-block .mp-an-tbl{display:block;min-width:0;width:100%;table-layout:auto}',
     '  .mp-an-block .mp-an-tbl thead{display:none}',
     '  .mp-an-block .mp-an-tbl tbody{display:block}',
     /* 注：不用 2 行 grid + rk/cover 跨行 spanning——42px 封面跨行会撑大行高（grid 轨道为容纳
        spanning 项的最小尺寸而增长），导致歌名→歌手间距比声明的 row-gap 明显更大。改用 BBL 同款
        机制：rk/封面脱离文档流用 position:absolute 居中覆盖，歌名/歌手回归纯文档流 margin-top 控距 */
-    '  .mp-an-block .mp-an-tbl tr{position:relative;display:block;padding:6px 14px 6px 108px;border-bottom:1px solid var(--clr-border)}',
+    '  .mp-an-block .mp-an-tbl tr{position:relative;display:block;padding:8px 14px 8px 108px;border-bottom:1px solid var(--clr-border)}',
     '  .mp-an-block .mp-an-tbl tr:last-child{border-bottom:none}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--1{background:rgba(212,168,50,.12)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--2{background:rgba(148,196,220,.11)}',
     '  .mp-an-block .mp-an-tbl .mp-an-row--3{background:rgba(224,160,100,.10)}',
     '  .mp-an-block .mp-an-tbl td{display:block;padding:0;border:none;width:auto!important;background:none!important}',
-    '  .mp-an-block .mp-an-tbl .rk{position:absolute;left:20px;top:50%;transform:translateY(-50%);width:24px!important;text-align:center;font-family:var(--font-display);font-size:21px;font-weight:400}',  /* 名次同 BBL .chart-rank；上一行 td 重置规则用 !important 强制 width:auto，此前一直悄悄覆盖本行的 width 声明使 text-align:center 从未真正生效（数字始终贴框左边）——补 !important 抢回控制权 */
+    '  .mp-an-block .mp-an-tbl .rk{position:absolute;left:0;top:50%;transform:translateY(-50%);width:54px!important;text-align:center;font-family:var(--font-display);font-size:21px;font-weight:400}',  /* 名次同 BBL .chart-rank；框宽=封面 left 值，使数字在「卡片左边缘→封面」整段可视空间内真正居中（此前框只有 24px 且偏右，数字看起来仍靠右）。上一行 td 重置规则用 !important 强制 width:auto，此前一直悄悄覆盖本行的 width 声明使 text-align:center 从未真正生效——补 !important 抢回控制权 */
     '  .mp-an-block .mp-an-tbl .an-name,.mp-an-block .mp-an-tbl .an-name-in{display:contents}',  /* 拆出封面，标题回归纯文档流 */
     '  .mp-an-block .mp-an-tbl .an-cover{position:absolute;left:54px;top:50%;transform:translateY(-50%);width:38px;height:38px;margin:0}',
     '  .mp-an-block .mp-an-tbl .an-title{display:block;font-size:13px;font-weight:600;line-height:1.2}',
