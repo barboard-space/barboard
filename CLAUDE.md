@@ -886,6 +886,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **封面与行上下净空**：不改封面尺寸，改增大 `tr` 的垂直 `padding`（6px→8px），封面仍靠 `top:50%+translateY(-50%)` 相对 `tr` 高度居中，行高变大后自动多出净空，无需重新计算封面尺寸。
     - **手机端排名/封面/间距最终定稿**：`.rk{left:0;width:54px}`（宽度=封面 left 值，整段居中）、`.an-cover{left:54px;width/height:38px}`、`.an-title{font-size:13px}`、`.an-artist{font-size:11px;margin-top:2px}`、`tr{padding:8px 14px 8px 108px}`（这些数值是用户多轮实测反馈微调出的，改动前建议先用下条的方法量出当前实际值，不要凭源码数字直接假设生效）。
     - **验证坑（预览缓存）**：`scripts/member-render.js` 无 `?v=` 版本号，预览里改完 `location.reload()` 常仍吃浏览器缓存的旧 JS（同 #139 bv-results-render.js 的教训）——验证时用 `fetch(url,{cache:'no-store'})` 取到新文本后 `eval()` 重跑一遍脚本（可靠但会重复渲染出重复 DOM，测量时要挑 `getBoundingClientRect().height>0` 的那份，忽略因去重逻辑冲突产生的 0 高度重复节点）。
+177. **⭐ 年榜详情页 eyebrow 改「← BARCHARTS」（本次，全局约定，5 个年份页统一）**：`archive/annual/<年>/index.html` 的 `.ac-eyebrow` 原写死 `href="/archive/"` + 文案「Archive」，与 #109 全站 eyebrow 约定（子页面指向**immediate 父级**，非顶层）不符——年份详情页的直接父级是 Hub 页 `/archive/annual/`，不是顶层 `/archive/`。已改为 `<a href="/archive/annual/"><span>←</span><span>BARCHARTS</span></a>`（2019/2020/2021/2022/2023 五页同步）。「BARCHARTS」是本功能的既定英文品牌名（`scripts/member-render.js` 个人主页板块标题即用此词，见 #174），与 BBL/Barvision 平级。**导入新年份时薄壳务必直接照抄此 eyebrow 行**，不要沿用旧的「Archive」版本。Hub 页 `archive/annual/index.html` 自身的 eyebrow 保持不变（仍是「← Archive」指向顶层 `/archive/`，因为 Hub 的直接父级就是顶层 Archive）。
 
 ## 对话交接工作流
 

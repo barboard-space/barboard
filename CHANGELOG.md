@@ -4,6 +4,11 @@
 
 ---
 
+## [2026-07-02] — 年榜详情页 eyebrow 修正
+
+### Fixed
+- `archive/annual/2019|2020|2021|2022|2023/` 五个年份详情页的 eyebrow（面包屑）由「← Archive」（指向顶层 `/archive/`）改为「← BARCHARTS」（指向 Hub 页 `/archive/annual/`），符合全站 eyebrow「指向直接父级」的约定。
+
 ## [2026-07-02] — 2019 年榜导入
 
 ### Added
