@@ -1084,6 +1084,21 @@ img {
   flex-shrink: 0;
 }
 
+/* 封面缺失通用 placeholder：保留背景色 + 榜吧 logo 水印（弱化色调，不抢视觉）。
+   加在任意方形封面容器上（如 .chart-cover / .ac-hl-card__cover / .ac-hub-card__cover）。 */
+.cover-ph { position: relative; overflow: hidden; }
+.cover-ph::before {
+  content: '';
+  position: absolute; inset: 20%;
+  background: var(--clr-text-4);
+  opacity: 0.5;
+  -webkit-mask-image: url(/assets/images/logo_hollow.svg);
+  mask-image: url(/assets/images/logo_hollow.svg);
+  -webkit-mask-size: contain; mask-size: contain;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  -webkit-mask-position: center; mask-position: center;
+}
+
 .chart-change {
   font-family: var(--font-mono);
   font-size: 10px;

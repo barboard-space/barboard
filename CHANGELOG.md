@@ -4,6 +4,46 @@
 
 ---
 
+## [2026-07-02] — 年榜并排名次排序修复 + 艺人名分隔符统一
+
+### Changed
+- `barvision/2026/events/` 参赛要求文案：「个人榜单助攻数」→「**BarboardLab 周榜** 助攻数」（BarboardLab 周榜加粗）。
+
+### Fixed
+- 年终榜同一名次下有多首「不占位曲」（华语/K-POP）时，排序错按星号数（隔了几首）而非点数排列，导致点数更高的条目排在后面。改为统一按点数降序——`scripts/parse_annual_chart.py` 写 JSON 时的排序，以及 2020/2021/2022/2023 四个年份页面各自前端 JS 的独立重排逻辑，两处都改（前端那份容易漏改，会让 JSON 顺序对了但页面上看到的还是错的）。
+- 星号数本身也重新计算：源表格的星号数按原表格顺序编号、不一定跟点数一致，改成按名次分组后按点数降序重新分配（点数越高星号越少），四年数据统一生效。
+- 艺人名分隔符统一：`裘德/魏如萱` → `裘德, 魏如萱`（2023 年榜，斜杠改为站内统一的逗号格式），主榜 + 6 位成员 Top10 一起生效。
+
+## [2026-07-02] — 2023 年榜导入 + archive 年份区间修正
+
+### Added
+- 2023 年榜（73 榜合榜、Top 200、34 首带星亚洲曲）导入 `/archive/annual/2023/`。冠军 SZA — Kill Bill。数据源是又一种「宽表」变体——与 2020 相比，每人 2 列的**顺序相反**（点数在前、名次在后）、表头是单字简称（如「狼」）而非完整昵称、排名列无表头。
+- `scripts/parse_annual_chart.py` 新增 `PAIR_COL_RANK_SECOND` 标记 + 排名列缺失时兜底用列 0，兼容这种新变体；`_META_COLS`/`_col()` 增加英文表头别名（`Song`/`Artists`/`In`/`Points`）。
+- 全局工具类 `.cover-ph`（`style.css`，`?v=3.0.15`）：任何方形封面容器追加此 class 即可获得「背景色 + 榜吧 logo 水印」的缺失占位效果（提炼自成员页 `.an-cover--ph`）。已用于年榜各年页面的主榜封面、年度看点卡封面，以及 Hub 页的年度冠军曲封面。
+
+### Changed
+- `archive/index.html`「榜吧年榜」卡片年份区间由「2013 — 2024」改为「2013 — 2023」。
+- Hub 页 + 2020/2021/2022/2023 四个年份页的 `YEARS` 常量同步，四年互链。
+
+### Fixed
+- 艺人大小写修正（`scripts/annual_corrections.py`）：`Anderson .paak`→`Anderson .Paak`、`Lana del rey`→`Lana Del Rey`、`YOUNG NUDY`/`21 SAVAGE`（源数据整行全大写）→ Title Case，配套歌名 `PEACHES & EGGPLANTS (FEAT. 21 SAVAGE)`→`Peaches & Eggplants (feat. 21 Savage)`。
+- 封面误配：`Lana Del Rey — A&W`（2023 第 3 名）曾显示 The Weeknd 的专辑封面——iTunes 搜索短歌名时把不相关曲目排到第一位。新增 `annual_corrections.py` 的 `COVER_OVERRIDE` 机制（手动指定封面 URL，查询优先级最高于缓存与搜索），用同专辑其它曲目的封面纠正。
+- iTunes 封面限流已解除，补跑后命中率回升至主榜 233/234、Top10 726/730（原 known issue 已解决，仅剩 1 首歌名带逗号+省略号的生僻曲目查无）。
+
+## [2026-07-02] — 2020 年榜导入
+
+### Added
+- 2020 年榜（55 榜合榜、Top 200、1 首带星亚洲曲）导入 `/archive/annual/2020/`，主榜封面 205/205、成员 Top10 封面 549/550。数据源为「宽表」格式（与 2021/2022 均不同：每位成员占 2 列，昵称整列=名次、下一列=点数，无「排名」后缀表头）。
+- `scripts/parse_annual_chart.py` 新增 `PAIR_COL_YEARS` 机制 + `find_member_cols()`，统一处理两种个人榜列表头格式（默认「简称+排名」单列 / 宽表「昵称+点数」双列），供主 sheet 与 FULL_SHEET 复用。
+- 新增成员「菜妈」（`data/members/members.csv` 追加一行），`space_id` 顺延当时最大 id 770 → `771`，自动生成个人主页 `/member/771/`。
+
+### Changed
+- `archive/annual/` Hub 页 + 2021/2022 两个年份页的 `YEARS` 常量同步加入 2020，三年互链。
+- `member/index.html` 的 `BUILT_PAGES` 集合加入 `771`。
+
+### Fixed
+- 艺人/歌名数据修正（`scripts/annual_corrections.py`）：`Zedd(ft.Katy Perry)` 拆分为艺人 `Zedd` + 歌名 `365 (feat. Katy Perry)`；`Earth, Wind, Fire` 补回 `&` 写成 `Earth, Wind & Fire`（乐队本名，误写逗号）；`Anderson ,Paak` 逗号改回句点 `Anderson .Paak`（本名误写，同表格其他处写法可交叉验证）；`My Name Ia Dark`→`My Name Is Dark`、`All Along The Wtachtower`→`All Along the Watchtower`（拼写错）。
+
 ## [2026-07-01] — 个人年榜手机端间距修复 + 封面缺失 placeholder + 前三名金银铜配色
 
 ### Fixed

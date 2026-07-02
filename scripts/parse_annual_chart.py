@@ -6,20 +6,32 @@
 import sys, os, json, time, re, urllib.parse, urllib.request
 
 SRC = {
+    "2023": r"D:\Genius\BarChart\吧榜文件\年终榜\2023吧榜正式版.xlsx",
     "2022": r"D:\Genius\BarChart\吧榜文件\年终榜\2022吧年榜.xlsx",
     "2021": r"D:\Genius\BarChart\吧榜文件\年终榜\2021年终榜\吧榜整理文件.xlsx",
+    "2020": r"D:\Genius\BarChart\吧榜文件\年终榜\2020年终榜\00 汇总榜.xlsx",
 }
 # 各年源 sheet（默认「总榜」）；列名也各年不同，用 _col() 兼容
-SHEET = {"2021": "吧榜豪华榜"}
+SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带"}
 # 个人榜 top10 用的「全量」sheet（含所有排过的曲 → 保证满 10 条）；未定义则用主 sheet 本身。
 # 2021：显示榜=豪华榜(亚洲不占位)，但 top10 从完全榜(2760 首全量)取，避免私榜曲缺失。
-FULL_SHEET = {"2021": "吧榜完全榜"}
+# 2020：显示榜=吧榜终版(300 首终版排名)，但 top10 从汇总表(2444 首全量)取，避免私榜曲缺失。
+# 2023：显示榜=星号带(300 首、含 "N*" 亚洲不占位星标)，但 top10 从 Sheet1(2781 首全量) 取，避免私榜曲缺失。
+FULL_SHEET = {"2021": "吧榜完全榜", "2020": "汇总表", "2023": "Sheet1"}
 # 无单张全量合表、但有各大妈独立个人 sheet（sheet 名=简称，列 排名/作品/艺术家）的年份 → top10 从个人 sheet 取（最权威、满 10）
 MEMBER_SHEETS = {"2022"}
+# 个人榜列格式为「每人占 2 列」的年份（如 2020/2023），与默认（2021 式）单列「简称+排名」表头（如 "波排名"）不同。
+# 两列顺序各年不同：2020＝(昵称整列=名次, 下一列无表头=点数)；2023＝(简称整列=点数, 下一列无表头=名次)，
+# 用 PAIR_COL_RANK_SECOND 标记「名次在第二列」的年份；两种列扫描逻辑见 find_member_cols()。
+PAIR_COL_YEARS = {"2020", "2023"}
+PAIR_COL_RANK_SECOND = {"2023"}
+# 宽表个人榜区之外的元信息列名（用于从 PAIR_COL_YEARS 的表头里排除，不误当成成员列）
+_META_COLS = {"终名次", "名次", "排名", "艺人", "艺术家", "歌曲", "作品", "总点数", "点数", "助攻数", "总助攻数", "前十助攻数",
+              "Song", "Artists", "In", "Points"}
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "annual")
 MEMBERS_CSV = os.path.join(os.path.dirname(__file__), "..", "data", "members", "members.csv")
 # 修正表（歌手/歌名规范化的唯一维护源，见该文件顶部说明）
-from annual_corrections import KEEP, ABBR_OVERRIDE, ARTIST_FIX, ARTIST_RAW_FIX, SONG_FIX_EXACT, SONG_FIX_SUB
+from annual_corrections import KEEP, ABBR_OVERRIDE, ARTIST_FIX, ARTIST_RAW_FIX, SONG_FIX_EXACT, SONG_FIX_SUB, COVER_OVERRIDE
 
 
 # Title-Case 修复：撇号后的英文缩写/所有格被误大写（'S 'T 'M 'D 'Re 'Ve 'Ll）→ 小写
@@ -103,6 +115,33 @@ def read_member_sheet(ws):
     return out
 
 
+def find_member_cols(header, year):
+    """从表头识别「个人榜简称 → 名次列下标」。两种格式：
+    - 默认（如 2021）：单列，表头「简称+排名」（如 "波排名"，可带 "求和项:" 前缀）。
+    - PAIR_COL_YEARS（如 2020/2023）：每人占 2 列，表头列非空、紧跟一列无表头；
+      名次在第一列还是第二列由 PAIR_COL_RANK_SECOND 决定（2020＝第一列，2023＝第二列）。
+    返回 (abbrs, col_of_abbr)，abbrs 已去除「妈」后缀（供 build_abbr2id 用统一规则匹配 members.csv；
+    本身已是单字简称的年份如 2023 不受影响，末字不是「妈」不会被误切）。
+    """
+    col_of = {}
+    if year in PAIR_COL_YEARS:
+        rank_second = year in PAIR_COL_RANK_SECOND
+        for i, h in enumerate(header):
+            if i < 4 or not h:
+                continue
+            hs = str(h).strip()
+            if hs in _META_COLS:
+                continue
+            a = hs[:-1] if hs.endswith("妈") else hs
+            col_of[a] = i + 1 if rank_second else i
+    else:
+        for i, h in enumerate(header):
+            if i >= 5 and h and str(h).endswith("排名"):
+                a = str(h).replace("求和项:", "").replace("排名", "")
+                col_of[a] = i
+    return list(col_of.keys()), col_of
+
+
 def build_abbr2id(abbrs, year=None):
     """把总榜里的个人榜简称（松/威/N/时…）映射到 space_id；ABBR_OVERRIDE 按年消歧。"""
     import csv as _csv
@@ -177,6 +216,9 @@ def _fetch_itunes(term, limit=5):
 
 def itunes_cover(artist, song, cache):
     key = ckey(artist, song)
+    if (artist, song) in COVER_OVERRIDE:
+        cache[key] = COVER_OVERRIDE[(artist, song)]
+        return cache[key]
     if key in cache:
         return cache[key]
     pa, sp = _primary_artist(artist), _strip_paren(song)
@@ -227,18 +269,14 @@ def main():
             if n in idx:
                 return idx[n]
         return None
-    ci = {"rank": _col("排名"), "artist": _col("艺术家", "艺人"), "song": _col("作品", "歌曲"),
-          "pts": _col("点数", "总点数"), "assist": _col("助攻数", "总助攻数")}
-    # 成员个人榜列（'求和项:<简称>排名' + 末尾 '盲排名'）→ col_index -> space_id
-    abbrs = [str(h).replace("求和项:", "").replace("排名", "")
-             for h in header[5:] if h and str(h).endswith("排名")]
+    ci = {"rank": _col("排名", "名次", "终名次"), "artist": _col("艺术家", "艺人", "Artists"), "song": _col("作品", "歌曲", "Song"),
+          "pts": _col("点数", "总点数", "Points"), "assist": _col("助攻数", "总助攻数", "In")}
+    if ci["rank"] is None:
+        ci["rank"] = 0  # 排名列无表头（如 2023，第 1 列即排名，无列名）
+    # 成员个人榜列 → col_index -> space_id（两种表头格式，见 find_member_cols）
+    abbrs, col_of_abbr = find_member_cols(header, year)
     abbr2id = build_abbr2id(abbrs, year)
-    rank_cols = {}
-    for i, h in enumerate(header):
-        if i >= 5 and h and str(h).endswith("排名"):
-            a = str(h).replace("求和项:", "").replace("排名", "")
-            if a in abbr2id:
-                rank_cols[i] = abbr2id[a]
+    rank_cols = {col: abbr2id[a] for a, col in col_of_abbr.items() if a in abbr2id}
     # 复用已有 JSON 里「已命中」的封面（不缓存 null）→ 每次重跑只重试缺封面项、不动已命中的
     fp = os.path.join(OUT_DIR, year + ".json")
     cache = {}
@@ -301,7 +339,19 @@ def main():
             e["cover"] = itunes_cover(artist, song, cache)
             sys.stderr.write("  %3d%s. %s — %s  %s\n" % (rk, "*" * star, artist, song, "✓" if e["cover"] else "—"))
         entries.append(e)
-    entries.sort(key=lambda x: (x["rank"], x.get("star", 0)))
+    # 同名次下多首不占位曲的星号数重新计算：源数据里的星号数是原表格顺序，不一定按点数——
+    # 按点数降序重新分配 1,2,3...（点数越高星号越少），与下面的显示排序（也按点数降序）保持一致
+    by_rank = {}
+    for e in entries:
+        if e.get("star"):
+            by_rank.setdefault(e["rank"], []).append(e)
+    for group in by_rank.values():
+        group.sort(key=lambda x: -x["points"])
+        for i, e in enumerate(group):
+            e["star"] = i + 1
+    # 同名次（并排名次相同）时按点数降序排——真实占位曲点数必然更高，天然排最前；
+    # 多首不占位曲并排同一名次时，点数高的排前面（而非按星号数排，星号数只表示"隔了几首不占位曲"，与排序先后无关）
+    entries.sort(key=lambda x: (x["rank"], -x["points"]))
     out = {"year": int(year), "title": "%s 榜吧年终榜" % year, "count": len(entries), "entries": entries}
     os.makedirs(OUT_DIR, exist_ok=True)
     with open(fp, "w", encoding="utf-8") as f:
@@ -355,14 +405,10 @@ def main():
         fit = fws.iter_rows(values_only=True)
         fh = next(fit)
         fidx = {h: i for i, h in enumerate(fh) if h}
-        fci = {"artist": next((fidx[n] for n in ("艺术家", "艺人") if n in fidx), None),
-               "song": next((fidx[n] for n in ("作品", "歌曲") if n in fidx), None)}
-        frcols = {}
-        for i, h in enumerate(fh):
-            if i >= 5 and h and str(h).endswith("排名"):
-                aa = str(h).replace("求和项:", "").replace("排名", "")
-                if aa in abbr2id:
-                    frcols[i] = abbr2id[aa]
+        fci = {"artist": next((fidx[n] for n in ("艺术家", "艺人", "Artists") if n in fidx), None),
+               "song": next((fidx[n] for n in ("作品", "歌曲", "Song") if n in fidx), None)}
+        _, fcol_of_abbr = find_member_cols(fh, year)
+        frcols = {col: abbr2id[a] for a, col in fcol_of_abbr.items() if a in abbr2id}
         top10 = collect_top10(list(fit), fci, frcols)
     else:
         top10 = collect_top10(all_rows, ci, rank_cols)

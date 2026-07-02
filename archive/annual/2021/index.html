@@ -8,7 +8,7 @@
   <meta name="description" content="榜吧 2021 年度单曲榜 Top 200——成员个人榜合并积分产生的年度歌曲榜单。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css?v=3.0.14" />
+  <link rel="stylesheet" href="/style.css?v=3.0.15" />
   <style>
     /* ── Hero ── */
     .ac-hero { position: relative; padding: calc(var(--nav-h) + 40px) 0 24px; overflow: hidden; }
@@ -229,7 +229,7 @@
     function chartItem(t){
       var cover = t.cover
         ? '<img class="chart-cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
-        : '<div class="chart-cover"></div>';
+        : '<div class="chart-cover cover-ph"></div>';
       var medal = (!t.star && t.rank===1)?'chart-item--top':(!t.star && t.rank===2)?'chart-item--silver':(!t.star && t.rank===3)?'chart-item--bronze':'';
       var star = t.star ? '<span class="ac-rank-star">' + new Array(t.star + 1).join('*') + '</span>' : '';
       return '<div class="chart-item ' + (medal?medal+' ':'') + (t.star?'chart-item--asian ':'') + 'fade-up" data-rank="' + itemKey(t) + '">' +
@@ -250,7 +250,7 @@
       var t = opts.track;
       var cover = t.cover
         ? '<img class="ac-hl-card__cover" src="' + esc(t.cover) + '" alt="" loading="lazy" onerror="this.style.opacity=0">'
-        : '<div class="ac-hl-card__cover"></div>';
+        : '<div class="ac-hl-card__cover cover-ph"></div>';
       var title = opts.titleText != null ? opts.titleText : t.song;
       var sub   = opts.subText   != null ? opts.subText   : t.artist;
       return '<div class="ac-hl-card ac-hl-card--clickable" data-rank="' + itemKey(t) + '">' +
@@ -382,7 +382,7 @@
 
     // 年份导航：已建年份列表（铺新年份时更新此处，或改 data 驱动）
     (function initYearNav(){
-      var YEAR = 2021, YEARS = [2021, 2022];
+      var YEAR = 2021, YEARS = [2020, 2021, 2022, 2023];
       var prevY = YEARS.filter(function(y){ return y<YEAR; }).sort(function(a,b){ return b-a; })[0];
       var nextY = YEARS.filter(function(y){ return y>YEAR; }).sort(function(a,b){ return a-b; })[0];
       var pb=document.getElementById('acNavPrev'), nb=document.getElementById('acNavNext');
@@ -396,7 +396,7 @@
       try { d = await fetch('/data/annual/2021.json').then(function(r){ return r.json(); }); }
       catch(e){ el.innerHTML = '<div class="ac-empty">榜单加载失败</div>'; return; }
       _all = d.entries || [];
-      _all.sort(function(a,b){ return (a.rank-b.rank) || ((a.star||0)-(b.star||0)); });
+      _all.sort(function(a,b){ return (a.rank-b.rank) || (b.points-a.points); });
       // 分差只在欧美占位曲（不带星）之间算——亚洲不占位曲不显示分差；末名无
       var slotted = _all.filter(function(e){ return !e.star; });
       for (var gi=0; gi<slotted.length; gi++) slotted[gi].gap = (gi+1<slotted.length) ? Math.round(slotted[gi].points)-Math.round(slotted[gi+1].points) : null;
