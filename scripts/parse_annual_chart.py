@@ -15,16 +15,33 @@ SRC = {
     "2016": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\2016吧单曲年榜汇总.xlsx",
     "2017": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\2017榜吧单曲年榜.xlsx",
     "2015": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\个人榜吧2015年吧友汇总榜.xlsx",
+    "2014": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\个人榜吧2014年吧友汇总榜(1).xlsx",
+    "2013": r"D:\Genius\BarChart\吧榜文件\年终榜\2013-2017贴吧年终榜\13年新版吧榜 - 副本.xls",
 }
 # 各年源 sheet（默认「总榜」）；列名也各年不同，用 _col() 兼容
-SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1", "2018": "综合点数整理", "2016": "汇总", "2017": "Sheet1", "2015": "Sheet1"}
+SHEET = {"2021": "吧榜豪华榜", "2020": "吧榜终版", "2023": "星号带", "2019": "Sheet1", "2018": "综合点数整理", "2016": "汇总", "2017": "Sheet1", "2015": "Sheet1", "2014": "Sheet1", "2013": "Sheet1"}
+# 老式二进制 .xls（openpyxl 不支持），main() 里改用 xlrd 单独读取分支。
+XLS_YEARS = {"2013"}
+# 2014：唯一 sheet「Sheet1」**完全无表头**（第一行即数据，rank 直接从 1 开始）；列固定为
+# rank(0)/artist(1)/-(2,分隔符无用)/title(3)/points(4,=后 21 列之和)/<21 个匿名成员列(5..25)>。
+# 21 个成员列**没有任何标签**（无表头/无注释/无 defined_names），无法确定身份——用户确认该年
+# 「24 榜合榜」（官方事实，与技术上能看到的 21 raw 列数不一致，只作 BOARD_COUNT 展示用，不影响管线）、
+# 且**明确不做个人 Top10 / 分档助攻**（数据质量问题），但主榜与四项年度看点仍可推算。
+# 见 NO_HEADER_YEARS（跳过表头读取）+ ANON_MEMBER_COLS（按固定列位置匿名统计，不产出可归因数据）。
+NO_HEADER_YEARS = {"2014"}
+# 2013：与 2014 不同，本身有表头（Rank/origin/Artist(s)/Title/<13 位成员>/SUM/COUNT()），
+# 成员列甚至有部分可辨认的网名/简称——但用户明确要求**按 2014 同规则处理**（不做身份归因、
+# 不产出个人 Top10/分档助攻），故仍归入 ANON_MEMBER_COLS，头部信息不用于身份解析。
+# 该年官方「10 榜合榜」与技术上 13 个非空成员列不一致（同 2014 21 vs 24 的情况），BOARD_COUNT 按官方数。
+# SUM/COUNT() 两列已是现成的点数/助攻数，直接走 FIXED_COLS，无需助攻数通用兜底。
+ANON_MEMBER_COLS = {"2014": list(range(5, 26)), "2013": list(range(4, 17))}
 # 2015：唯一 sheet「Sheet1」列 Rank/Artist/-/Title/(无表头,=TOTAL 重复列)/<21 位成员各占 1 列>/TOTAL，
 # 官方总排名(Rank)已算好（该年为 Top 296，非常规 Top 200）、但**每位成员列存的是点数、不是名次**——
 # 与 BARE_COL_YEARS 的列识别方式相同（每人仅占 1 列、表头即网名本身），故把 "2015" 也加进 BARE_COL_YEARS
 # 复用列定位逻辑；但取值语义不同，交由 POINTS_NOT_RANK_YEARS 分支处理（反推各成员个人 Top N，见 main()）。
 # 该年列头是英文/拼音网名（非"X妈"简称），ABBR_OVERRIDE 需为全部 21 人登记（build_abbr2id 默认按
 # 昵称去"妈"匹配，网名匹配不上）。无助攻数列，改用「该行有值的成员列数」通用兜底（见 main()）。
-POINTS_NOT_RANK_YEARS = {"2015"}
+POINTS_NOT_RANK_YEARS = {"2015", "2014", "2013"}
 # 2017：唯一 sheet「Sheet1」只有 5 列（排名/艺人/歌曲/入榜数/点数），无任何成员个人列——
 # 源数据本身就没有留存各大妈的详细个人提交榜单，故无法像其它年份一样从表里算出个人 Top10 /
 # 分档助攻明细 / 「最多榜冠」；下方 find_member_cols 对此年份天然返回空（无列名以"排名"结尾），
@@ -59,7 +76,9 @@ TRANSPOSED_YEARS = {"2018"}
 # 直接按列下标覆盖 rank/artist/song/pts/assist（优先于 _col() 结果）。
 # 2016「汇总」：col0=最终排名(已是 1..200 排好序)、col6="0 ARTIST"、col7="0SONG"、col8=纯数字 0（助攻数，
 # 因是 Python 假值被 `idx={h:i for...if h}` 过滤掉，必须用下标兜底）、col9="#VALUE!"（点数，表头是残留公式错误）。
-FIXED_COLS = {"2016": {"rank": 0, "artist": 6, "song": 7, "assist": 8, "pts": 9}}
+FIXED_COLS = {"2016": {"rank": 0, "artist": 6, "song": 7, "assist": 8, "pts": 9},
+              "2014": {"rank": 0, "artist": 1, "song": 3, "pts": 4},
+              "2013": {"rank": 0, "artist": 2, "song": 3, "pts": 17, "assist": 18}}
 # 宽表个人榜区之外的元信息列名（用于从 PAIR_COL_YEARS/BARE_COL_YEARS 的表头里排除，不误当成成员列）
 _META_COLS = {"终名次", "名次", "排名", "艺人", "艺术家", "歌曲", "作品", "总点数", "点数", "助攻数", "总助攻数", "前十助攻数",
               "Song", "Artist", "Artists", "In", "Points", "Rank", "Title", "Album", "Num. in Chart", "Total Points",
@@ -84,7 +103,10 @@ def fix_text(s):
     return _APOS_RE.sub(lambda m: "'" + m.group(1).lower(), s)
 
 
-_FEAT_RE = re.compile(r"\s+(?:feat|ft)\.?\s*", re.I)  # feat/ft → 逗号分隔
+_FEAT_RE = re.compile(r"\s+(?:featuring|feat|ft)\b\.?\s*", re.I)  # feat/ft/featuring → 逗号分隔
+# ⚠️ 曾无 "featuring" 分支 + 无 \b 词边界，"featuring" 会被误命中「feat」子串（"uring" 残留，
+# 如 "Iggy Azalea featuring Charli XCX" → "Iggy Azalea, uring Charli XCX"）；
+# 2014/2015 年榜已受影响并已重新生成修复，见 CLAUDE.md #182。
 
 
 def _keep_split(s):
@@ -430,20 +452,36 @@ def main():
     nocover = "--no-cover" in sys.argv
     if "--top" in sys.argv:
         top = int(sys.argv[sys.argv.index("--top") + 1])
-    import openpyxl
-    wb = openpyxl.load_workbook(SRC[year], read_only=True, data_only=True)
-    ws = wb[SHEET.get(year, "总榜")]
-    if year in TRANSPOSED_YEARS:
-        # 源 sheet 是转置布局（行=字段名/成员，列=名次1..N）——先转置成常规「行=一首歌」布局
-        # 再走通用管线：转置后第 0 行 = 原第 0 列 = ['Rank','Artist','Title',...,'蛋妈',...,'X妈']（新表头），
-        # 之后每行 = 一首歌（各字段 + 每位成员对这首歌的名次）
-        matrix = list(ws.iter_rows(values_only=True))
-        transposed = list(zip(*matrix))
-        rows = iter(transposed[1:])
-        header = transposed[0]
+    wb = None
+    if year in XLS_YEARS:
+        # 老式 .xls 二进制格式，openpyxl 不支持，改用 xlrd；空单元格 xlrd 给 ''，统一转 None
+        # 与 openpyxl 语义对齐，下游 isinstance/is None 判断无需为此年份特殊处理。
+        import xlrd
+        xwb = xlrd.open_workbook(SRC[year])
+        xws = xwb.sheet_by_name(SHEET.get(year, "Sheet1"))
+        _n = lambda v: None if v == "" else v
+        all_data_rows = [tuple(_n(v) for v in xws.row_values(r)) for r in range(xws.nrows)]
+        header = all_data_rows[0]
+        rows = iter(all_data_rows[1:])
     else:
-        rows = ws.iter_rows(values_only=True)
-        header = next(rows)
+        import openpyxl
+        wb = openpyxl.load_workbook(SRC[year], read_only=True, data_only=True)
+        ws = wb[SHEET.get(year, "总榜")]
+        if year in TRANSPOSED_YEARS:
+            # 源 sheet 是转置布局（行=字段名/成员，列=名次1..N）——先转置成常规「行=一首歌」布局
+            # 再走通用管线：转置后第 0 行 = 原第 0 列 = ['Rank','Artist','Title',...,'蛋妈',...,'X妈']（新表头），
+            # 之后每行 = 一首歌（各字段 + 每位成员对这首歌的名次）
+            matrix = list(ws.iter_rows(values_only=True))
+            transposed = list(zip(*matrix))
+            rows = iter(transposed[1:])
+            header = transposed[0]
+        elif year in NO_HEADER_YEARS:
+            # 完全无表头，第一行即数据——不消费首行，列全靠 FIXED_COLS 按下标定位
+            rows = ws.iter_rows(values_only=True)
+            header = []
+        else:
+            rows = ws.iter_rows(values_only=True)
+            header = next(rows)
     # 定位列（各年列名不同：艺术家/艺人、作品/歌曲、点数/总点数、助攻数/总助攻数）
     idx = {h: i for i, h in enumerate(header) if h}
 
@@ -458,10 +496,15 @@ def main():
         ci["rank"] = 0  # 排名列无表头（如 2023，第 1 列即排名，无列名）
     if year in FIXED_COLS:
         ci.update(FIXED_COLS[year])  # 表头过烂，直接按列下标覆盖（见 FIXED_COLS 注释）
-    # 成员个人榜列 → col_index -> space_id（两种表头格式，见 find_member_cols）
-    abbrs, col_of_abbr = find_member_cols(header, year)
-    abbr2id = build_abbr2id(abbrs, year)
-    rank_cols = {col: abbr2id[a] for a, col in col_of_abbr.items() if a in abbr2id}
+    # 成员个人榜列 → col_index -> space_id（两种表头格式，见 find_member_cols）；
+    # ANON_MEMBER_COLS 年份无表头可用于身份识别，rank_cols 用「列下标=伪 id」仅供匿名聚合
+    # （助攻数/最多榜冠计数），伪 id 不写入任何输出、也不产出 member-annual-index.json 数据。
+    if year in ANON_MEMBER_COLS:
+        rank_cols = {c: c for c in ANON_MEMBER_COLS[year]}
+    else:
+        abbrs, col_of_abbr = find_member_cols(header, year)
+        abbr2id = build_abbr2id(abbrs, year)
+        rank_cols = {col: abbr2id[a] for a, col in col_of_abbr.items() if a in abbr2id}
     # 复用已有 JSON 里「已命中」的封面（不缓存 null）→ 每次重跑只重试缺封面项、不动已命中的
     fp = os.path.join(OUT_DIR, year + ".json")
     cache = {}
@@ -550,7 +593,8 @@ def main():
                             if isinstance(row[col], (int, float)) and int(row[col]) == 1)
         if no1_by:
             e["no1"] = len(no1_by)
-            e["no1_by"] = no1_by
+            if year not in ANON_MEMBER_COLS:  # 伪 id 不是真实 space_id，不能对外暴露
+                e["no1_by"] = no1_by
         # 「最多榜冠」人工覆盖（源数据缺个人榜逐曲名次、无法自动统计的年份，见 CHAMP_OVERRIDE）
         co = CHAMP_OVERRIDE.get(year)
         if co and co["artist"] == artist and co["song"] == song:
@@ -583,17 +627,19 @@ def main():
 
     # ── 成员年榜聚合 → data/annual/member-annual-index.json（个人主页「个人年榜」板块）──
     TIERS = [10, 20, 50, 100, 200]
-    sids = sorted(set(rank_cols.values()))
+    # ANON_MEMBER_COLS 年份：伪 id 不对应真实成员，个人 Top10/分档助攻不产出（用户确认，数据质量问题）——
+    # sids 置空即可让下方 assist/top10/magg 全部自然产出空结果，personal_rank（供 no1 匿名判定用）不受影响
+    sids = [] if year in ANON_MEMBER_COLS else sorted(set(rank_cols.values()))
     assist = {s: {t: 0 for t in TIERS} for s in sids}     # 助攻分档（占位/欧美曲）：按年榜名次累计（前 N）
     assist_sh = {s: {t: 0 for t in TIERS} for s in sids}  # 助攻分档（亚洲不占位曲）：单独统计、括号标注
-    if year in POINTS_NOT_RANK_YEARS:
+    if sids and year in POINTS_NOT_RANK_YEARS:
         # 用反推名次（personal_rank，见上）分档，而非直接读列值——该年无亚洲不占位曲概念，assist_sh 全 0
         for sid, rankmap in personal_rank.items():
             for (a, s), rk in rankmap.items():
                 for t in TIERS:
                     if rk <= t:
                         assist[sid][t] += 1
-    else:
+    elif sids:
         for row in all_rows:                                  # 助攻分档 = 主显示榜（豪华榜）
             rk_raw = row[ci["rank"]]
             star = 0

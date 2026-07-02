@@ -225,6 +225,11 @@ ARTIST_FIX = {
     "Pablo Alboran": "Pablo Alborán",             # 缺重音
     "Marc E.bassy": "Marc E. Bassy",              # 句点误代空格 + 大小写
     "Odesza": "ODESZA",                           # 官方全大写风格化
+    # 2013 年榜
+    "Charlie XCX": "Charli XCX",                  # 拼写错
+    "the Weekend": "The Weeknd",                  # 拼写错（Weeknd 官方无 The Weekend 这个名字）
+    "the Neighborhood": "The Neighbourhood",      # 大小写 + 官方英式拼写
+    "Emeli Sande": "Emeli Sandé",                 # 缺重音
 }
 
 # ── 艺人整串预修正（在按逗号拆分前替换）：修名字内含逗号的写法 → 统一规范，再靠 KEEP 保护不被拆 ──
@@ -267,6 +272,11 @@ ARTIST_RAW_FIX = {
     "Justin Bieber(feat. Big Sean)": "Justin Bieber (feat. Big Sean)",  # 补空格
     # 2015 年榜：无逗号的整串组合
     "Ariana Grande & The Weekend": "Ariana Grande & The Weeknd",  # Weeknd 拼写错（另有正确的 Vampire Weekend 乐队名，不可混淆）
+    # 2014 年榜：feat 前无空格（_FEAT_RE 需要前置空格才能识别，故此类需手动整串修正）
+    "Ariana Grande(Feat,The Weeknd)": "Ariana Grande (feat. The Weeknd)",  # 缺空格 + 逗号误代句点
+    "Disclosure(Feat.Sam Smith)": "Disclosure (feat. Sam Smith)",  # 缺空格
+    # 2013 年榜
+    "Pet Shop Boys ＆ Dusty Springfield": "Pet Shop Boys & Dusty Springfield",  # 全角 &
 }
 
 # ── 歌名：整首替换（键 = 完整错误歌名，值 = 完整正确歌名）──────────
@@ -305,6 +315,13 @@ SONG_FIX_EXACT = {
     "I’m Yours": "I'm Yours",  # 弯引号规范
     "Should’ve Been Us": "Should've Been Us",  # 弯引号规范
     "You Should Know Where I’m Coming From": "You Should Know Where I'm Coming From",  # 弯引号规范
+    # 2014 年榜
+    "Don't Be Gone Too Long (feat.Ariana Grande)": "Don't Be Gone Too Long (feat. Ariana Grande)",  # 补空格
+    "Somebody To You(feat.Demi Lovato)": "Somebody to You (feat. Demi Lovato)",  # 补空格 + To→to
+    "Prayer In C(Remix)": "Prayer in C (Remix)",  # 补空格 + In→in
+    # 2013 年榜
+    "Can’t Hold Us": "Can't Hold Us",  # 弯引号规范
+    "Almost Is Never Enough(feat. Nathan Sykes)": "Almost Is Never Enough (feat. Nathan Sykes)",  # 补空格
 }
 
 # ── 歌名：子串替换（品牌/缩写/加空格；对任意歌名生效）──────────────
@@ -339,6 +356,11 @@ CHAMP_OVERRIDE = {
 BOARD_COUNT = {
     "2016": 34,
     "2017": 43,
+    # 2014：用户确认官方 24 榜合榜；源表实际可辨识的匿名成员列只有 21 个（无表头，见 ANON_MEMBER_COLS），
+    # 两者不一致按用户提供的官方数字为准，纯展示用，不影响管线（该年本就不产出可归因的成员数据）。
+    "2014": 24,
+    # 2013：用户确认官方 10 榜合榜；源表实际有 13 个非空成员列（同类不一致，见 2014 先例）。
+    "2013": 10,
 }
 
 # ── 成员年榜聚合人工覆盖：源数据缺各成员详细个人榜（见上 CHAMP_OVERRIDE 同一根因），

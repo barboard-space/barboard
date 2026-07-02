@@ -29359,9 +29359,9 @@
     },
     {
      "rank": 4,
-     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "artist": "Wiz Khalifa, Charlie Puth",
      "song": "See You Again",
-     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ce/a5/06/cea50685-c7ed-335e-09d1-9aa55a83db72/075679928184.jpg/600x600bb.jpg"
     },
     {
      "rank": 5,
@@ -29430,9 +29430,9 @@
     },
     {
      "rank": 4,
-     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "artist": "Wiz Khalifa, Charlie Puth",
      "song": "See You Again",
-     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ce/a5/06/cea50685-c7ed-335e-09d1-9aa55a83db72/075679928184.jpg/600x600bb.jpg"
     },
     {
      "rank": 5,
@@ -29519,9 +29519,9 @@
     },
     {
      "rank": 7,
-     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "artist": "Wiz Khalifa, Charlie Puth",
      "song": "See You Again",
-     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ce/a5/06/cea50685-c7ed-335e-09d1-9aa55a83db72/075679928184.jpg/600x600bb.jpg"
     },
     {
      "rank": 8,
@@ -29732,9 +29732,9 @@
     },
     {
      "rank": 7,
-     "artist": "Wiz Khalifa, uring Charlie Puth",
+     "artist": "Wiz Khalifa, Charlie Puth",
      "song": "See You Again",
-     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/e6/8a/68/e68a688e-129e-cb9d-938f-bc3ee37059ae/075679930910.jpg/600x600bb.jpg"
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/ce/a5/06/cea50685-c7ed-335e-09d1-9aa55a83db72/075679928184.jpg/600x600bb.jpg"
     },
     {
      "rank": 8,
@@ -29941,7 +29941,7 @@
      "rank": 6,
      "artist": "Lana Del Rey",
      "song": "Music To Watch Boys To",
-     "cover": null
+     "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/a2/e1/35/a2e1350a-c739-dc75-93f5-b3e8b33d7d7e/15UMGIM44419.rgb.jpg/600x600bb.jpg"
     },
     {
      "rank": 7,
@@ -30821,5 +30821,7 @@
     }
    ]
   }
- }
+ },
+ "2014": {},
+ "2013": {}
 }

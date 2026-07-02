@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
-  <title>2018 榜吧年度单曲榜 | Barboard</title>
-  <meta name="description" content="榜吧 2018 年度单曲榜 Top 200——成员个人榜合并积分产生的年度歌曲榜单。" />
+  <title>2013 榜吧年度单曲榜 | Barboard</title>
+  <meta name="description" content="榜吧 2013 年度单曲榜 Top 200——成员个人榜合并积分产生的年度歌曲榜单。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
   <link rel="stylesheet" href="/style.css?v=3.0.15" />
@@ -27,7 +27,7 @@
     .ac-eyebrow:hover { color: var(--clr-white); }
     .ac-title { font-family: var(--font-display); font-size: clamp(48px, 7vw, 88px); line-height: 0.96; letter-spacing: 0.02em; color: var(--clr-text); }
     .ac-title .ac-board { color: var(--clr-board); }   /* 年终榜：榜吧蓝 */
-    .ac-title .ac-yr { color: var(--clr-accent); display: inline-block; margin-top: 4px; }   /* 2018：电蓝；两行间距 +4px */
+    .ac-title .ac-yr { color: var(--clr-accent); display: inline-block; margin-top: 4px; }   /* 2013：电蓝；两行间距 +4px */
     .ac-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin-top: 18px; }
     .ac-meta-item { font-size: 12px; color: var(--clr-text-3); padding-right: 14px; margin-right: 14px; border-right: 1px solid var(--clr-border); white-space: nowrap; }
     .ac-meta-item:last-child { border-right: none; }
@@ -146,7 +146,7 @@
       .ac-search__input { font-size: 16px; padding: 6px 30px 8px 12px; }
       .ac-search__input::placeholder { font-size: 12px; }
       #acHighlights { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-      /* 手机：meta 双行——第 1 行机构+榜名，第 2 行 TOP 200 · 54 榜合榜（"·" 分隔，无竖线） */
+      /* 手机：meta 双行——第 1 行机构+榜名，第 2 行 TOP 200 · 10 榜合榜（"·" 分隔，无竖线） */
       .ac-meta { row-gap: 4px; }
       .ac-meta-item { white-space: normal; border-right: none; padding-right: 0; margin-right: 0; }
       .ac-meta-item:first-child { flex-basis: 100%; }
@@ -167,11 +167,11 @@
     <div class="ac-hero__glow" aria-hidden="true"></div>
     <div class="section__inner ac-hero__inner">
       <a href="/archive/annual/" class="ac-eyebrow"><span>←</span><span>BARCHARTS</span></a>
-      <h1 class="ac-title"><span class="ac-board">年度</span>单曲<span class="ac-board">榜</span><br><span class="ac-yr">2018</span></h1>
+      <h1 class="ac-title"><span class="ac-board">年度</span>单曲<span class="ac-board">榜</span><br><span class="ac-yr">2013</span></h1>
       <div class="ac-meta">
-        <span class="ac-meta-item">欧美流行音乐个人榜吧 · 2018年度单曲榜</span>
+        <span class="ac-meta-item">欧美流行音乐个人榜吧 · 2013年度单曲榜</span>
         <span class="ac-meta-item">TOP 200</span>
-        <span class="ac-meta-item">54 榜合榜</span>
+        <span class="ac-meta-item">10 榜合榜</span>
       </div>
     </div>
   </section>
@@ -184,7 +184,7 @@
             <button class="ac-nav__btn" id="acNavPrev" aria-label="上一年"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 3L5 8l5 5"/></svg></button>
             <div class="ac-nav__label">
               <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="2.5" y="3.5" width="11" height="10" rx="1.5"/><path d="M2.5 6.5h11M5.5 2v3M10.5 2v3" stroke-linecap="round"/></svg>
-              <span id="acNavYear">2018</span>
+              <span id="acNavYear">2013</span>
             </div>
             <button class="ac-nav__btn" id="acNavNext" aria-label="下一年"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3l5 5-5 5"/></svg></button>
           </div>
@@ -269,7 +269,7 @@
       // 点数冠军（年度第一）
       var champ = counted.slice().sort(function(a,b){ return b.points-a.points; })[0];
       if (champ) cards.push(hlCard({ track: champ, kind: 'pts', label: '点数冠军', val: Math.round(champ.points), unit: '' }));
-      // 最多榜冠（登顶个人榜最多的单曲——被最多大妈排在其个人榜第 1；含亚洲曲）
+      // 最多榜冠（登顶个人榜最多的单曲——被最多大妈排在其个人榜第 1；本届由各匿名成员点数反推排名自动算出）
       var no1Top = entries.filter(function(e){ return e.no1; }).sort(function(a,b){ return b.no1-a.no1; })[0];
       if (no1Top) cards.push(hlCard({ track: no1Top, kind: 'no1', label: '最多榜冠', val: no1Top.no1, unit: ' 榜冠' }));
       // 助攻王（助攻数最多）
@@ -382,7 +382,7 @@
 
     // 年份导航：已建年份列表（铺新年份时更新此处，或改 data 驱动）
     (function initYearNav(){
-      var YEAR = 2018, YEARS = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
+      var YEAR = 2013, YEARS = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
       var prevY = YEARS.filter(function(y){ return y<YEAR; }).sort(function(a,b){ return b-a; })[0];
       var nextY = YEARS.filter(function(y){ return y>YEAR; }).sort(function(a,b){ return a-b; })[0];
       var pb=document.getElementById('acNavPrev'), nb=document.getElementById('acNavNext');
@@ -393,7 +393,7 @@
     (async function(){
       var el = document.getElementById('acChart');
       var d;
-      try { d = await fetch('/data/annual/2018.json').then(function(r){ return r.json(); }); }
+      try { d = await fetch('/data/annual/2013.json').then(function(r){ return r.json(); }); }
       catch(e){ el.innerHTML = '<div class="ac-empty">榜单加载失败</div>'; return; }
       _all = d.entries || [];
       _all.sort(function(a,b){ return (a.rank-b.rank) || (b.points-a.points); });

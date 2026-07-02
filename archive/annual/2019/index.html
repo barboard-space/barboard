@@ -382,7 +382,7 @@
 
     // 年份导航：已建年份列表（铺新年份时更新此处，或改 data 驱动）
     (function initYearNav(){
-      var YEAR = 2019, YEARS = [2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
+      var YEAR = 2019, YEARS = [2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023];
       var prevY = YEARS.filter(function(y){ return y<YEAR; }).sort(function(a,b){ return b-a; })[0];
       var nextY = YEARS.filter(function(y){ return y>YEAR; }).sort(function(a,b){ return a-b; })[0];
       var pb=document.getElementById('acNavPrev'), nb=document.getElementById('acNavNext');

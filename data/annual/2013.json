@@ -1,0 +1,1620 @@
+{
+ "year": 2013,
+ "title": "2013 榜吧年终榜",
+ "count": 200,
+ "entries": [
+  {
+   "rank": 1,
+   "artist": "Lady Gaga",
+   "song": "Applause",
+   "points": 1822.4,
+   "assists": 10,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 2,
+   "artist": "Katy Perry",
+   "song": "Roar",
+   "points": 1324.1,
+   "assists": 8,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg",
+   "no1": 2
+  },
+  {
+   "rank": 3,
+   "artist": "Miley Cyrus",
+   "song": "We Can't Stop",
+   "points": 1254.4,
+   "assists": 8,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 4,
+   "artist": "OneRepublic",
+   "song": "Counting Stars",
+   "points": 1097.0,
+   "assists": 9,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/25/46/a7/2546a71a-b2bb-b4c9-4c52-a4daa3ae23ca/13UMGIM15076.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 5,
+   "artist": "Robin Thicke, T.I. & Pharrell",
+   "song": "Blurred Lines",
+   "points": 952.9,
+   "assists": 7,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/38/4c/f1/384cf18e-adca-a05c-9ff9-175bc2595643/13UAAIM09921.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 6,
+   "artist": "Avicii",
+   "song": "Wake Me Up",
+   "points": 935.0,
+   "assists": 8,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/18/5b/1e/185b1ef5-5d97-19d8-aebf-8e29e41874ef/13UAAIM59255.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 7,
+   "artist": "Lorde",
+   "song": "Royals",
+   "points": 902.2,
+   "assists": 6,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/b9/e2/d0/b9e2d0af-8ce2-e078-d4e2-eccf24d7e206/12UMGIM55707.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 8,
+   "artist": "Lady Gaga, R. Kelly or Christina Aguilera",
+   "song": "Do What U Want",
+   "points": 896.7,
+   "assists": 6,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/fd/05/0d/fd050d45-0c4d-2f00-b684-da0b4220bd4e/00602537715749.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 9,
+   "artist": "Miley Cyrus",
+   "song": "Wrecking Ball",
+   "points": 849.8,
+   "assists": 6,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e3/e0/84/e3e08400-2d03-75f9-6b8b-a3345452aa98/886444197816.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 10,
+   "artist": "Imagine Dragons",
+   "song": "Demons",
+   "points": 849.8,
+   "assists": 6,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/1f/fa/09/1ffa092f-f52f-4a66-7d10-4cc5982dc747/12UMGIM46901.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 11,
+   "artist": "Taylor Swift",
+   "song": "I Knew You Were Trouble",
+   "points": 830.2,
+   "assists": 5,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/25/0d/7e/250d7e42-3a2f-19ac-f865-f1e04a4a1f97/12UMDIM01007.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 12,
+   "artist": "Pitbull, Ke$ha",
+   "song": "Timber",
+   "points": 797.1,
+   "assists": 7,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/13/38/42/133842a1-b1dd-20fd-642d-ee7b5fee0905/886444305723.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 13,
+   "artist": "Macklemore & Ryan Lewis, Wanz",
+   "song": "Thrift Shop",
+   "points": 781.8,
+   "assists": 6,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/44/40/83/44408300-636f-8cae-d508-9dd96db48cea/707541528191.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 14,
+   "artist": "Katy Perry",
+   "song": "Walking On Air",
+   "points": 736.8,
+   "assists": 6,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 15,
+   "artist": "Muse",
+   "song": "Madness",
+   "points": 736.5,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b8/50/04/b850045b-bfab-77de-040b-94b13c6f79ef/825646557646.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 16,
+   "artist": "P!nk",
+   "song": "Just Give Me a Reason",
+   "points": 680.5,
+   "assists": 5,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/4a/c9/7f/4ac97f30-465f-c85b-4dfd-d911a8750fa1/886443581159.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 17,
+   "artist": "Britney Spears",
+   "song": "Work Bitch",
+   "points": 665.5,
+   "assists": 6,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/74/b3/82/74b382c2-3458-2c23-d967-74b9f059c969/WorkB_tch2400.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 18,
+   "artist": "Justin Timberlake",
+   "song": "Mirrors",
+   "points": 659.1,
+   "assists": 5,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/53/74/c9/5374c99e-cff1-61a6-ca0f-fa1219d050a0/886443854406.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 19,
+   "artist": "Demi Lovato",
+   "song": "Heart Attack",
+   "points": 633.7,
+   "assists": 5,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/17/80/d4/1780d447-2e6b-a0cd-d41f-fd20997682a0/13DMGIM03857.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 20,
+   "artist": "Katy Perry",
+   "song": "Unconditionally",
+   "points": 590.2,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 21,
+   "artist": "Rihanna, Mikky Ekko",
+   "song": "Stay",
+   "points": 566.1,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/24/4f/99/244f99bf-4417-421e-0ee6-934b02ff4b1b/16UMGIM59235.rgb.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 22,
+   "artist": "Mariah Carey",
+   "song": "Almost Home",
+   "points": 560.9,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/54/1f/cb/541fcb97-fe52-7173-b4ef-9f884712ae5b/00602537335954.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 23,
+   "artist": "J. Cole, Miguel",
+   "song": "Power Trip",
+   "points": 559.3,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/da/52/41/da52415b-d0ac-d61f-422c-e84bf5ef8162/20UMGIM66000.rgb.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 24,
+   "artist": "Avril Lavigne",
+   "song": "Rock 'N Roll",
+   "points": 556.2,
+   "assists": 5,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/64/d4/71/64d47164-887b-d58e-1d68-11acfeacc73f/886445430844.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 25,
+   "artist": "Katy Perry, Juicy J",
+   "song": "Dark Horse",
+   "points": 549.5,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b4/d0/9a/b4d09a1e-c7f1-de72-bab3-ff2b2be3981b/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 26,
+   "artist": "Eminem",
+   "song": "The Monster (feat. Rihanna)",
+   "points": 531.6,
+   "assists": 5,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/f4/ae/5c/f4ae5c21-bfe1-e99e-4732-a2b6cf006848/00602537542727.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 27,
+   "artist": "Jennifer Lopez, Pitbull",
+   "song": "Live It Up",
+   "points": 503.0,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/54/7e/cb/547ecbec-ad3f-4c33-f479-d797a8bdfa18/FIXIMG00602438537556.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 28,
+   "artist": "Ke$ha",
+   "song": "C'Mon",
+   "points": 474.9,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/52/e4/44/52e44453-abd4-6a0d-195e-7e339dea4525/886443748880.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 29,
+   "artist": "TLC",
+   "song": "Creep",
+   "points": 465.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/a8/69/14a86912-841d-3cb8-cf55-0439b15c6cab/dj.mjduepez.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 30,
+   "artist": "Fall Out Boy",
+   "song": "My Songs Know What You Did in the Dark",
+   "points": 460.1,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/3c/55/ac/3c55acb6-3c72-b7a8-2b86-d8f028da3756/13UMGIM27299.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 31,
+   "artist": "Selena Gomez",
+   "song": "Come & Get It",
+   "points": 434.8,
+   "assists": 5,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/02/27/1e/02271e27-21e2-d044-1678-2644184681c9/13DMGIM03981.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 32,
+   "artist": "Florida Georgia Line",
+   "song": "Cruise",
+   "points": 434.1,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/18/37/69/18376949-c4f9-18bd-0adf-7a473df55a7b/12UMGIM58533.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 33,
+   "artist": "Mike-Will Made It, Miley Cyrus, Wiz Khalifa & Juicy J",
+   "song": "23",
+   "points": 433.2,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/89/af/6a/89af6a51-259d-5c33-5d60-559269be6c4b/00602537564620.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 34,
+   "artist": "Imagine Dragons",
+   "song": "Radioactive",
+   "points": 422.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/1f/fa/09/1ffa092f-f52f-4a66-7d10-4cc5982dc747/12UMGIM46901.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 35,
+   "artist": "Janet Jackson",
+   "song": "That's the Way Love Goes",
+   "points": 418.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b6/3a/15/b63a15ba-dd50-62b0-4054-03a81241774a/00602567743217.rgb.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 36,
+   "artist": "Daft Punk",
+   "song": "Get Lucky (feat. Pharrell Williams)",
+   "points": 412.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/86/b1/92/86b192cf-ceb6-6e51-9361-dc4a35e95d22/196589921154.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 37,
+   "artist": "Pet Shop Boys & Dusty Springfield",
+   "song": "What Have I Done To Deserve This?",
+   "points": 410.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/37/95/1a/37951a3d-6f9b-b5fc-fdac-e4818029ba00/5054197358579.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 38,
+   "artist": "The Wanted",
+   "song": "We Own The Night",
+   "points": 403.9,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/6a/ca/bd/6acabd76-3a7a-78dd-c896-c102736fc634/00602537528097.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 39,
+   "artist": "Calvin Harris",
+   "song": "I Need Your Love (feat. Ellie Goulding)",
+   "points": 403.1,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/ab/af/22/abaf2296-ed4d-6da2-c24d-503cfdfa4c1f/0617465356858.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 40,
+   "artist": "Krewella",
+   "song": "Alive",
+   "points": 402.3,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/dc/2c/dd/dc2cdd4b-b654-9de1-bbaa-ed7e35c735e9/886443490857.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 41,
+   "artist": "Bonnie McKee",
+   "song": "American Girl",
+   "points": 400.5,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/c8/b9/22/c8b92248-125a-dd58-f14c-4fcd4ae96496/886444131360.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 42,
+   "artist": "Lawson",
+   "song": "Learn To Love Again",
+   "points": 400.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/cd/85/32/cd853233-efeb-a82a-e8e9-c7a6f1bd2284/00602537289844.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 43,
+   "artist": "Ke$ha",
+   "song": "Crazy Kids",
+   "points": 399.8,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/b0/b8/b0/b0b8b015-2a06-2533-536e-50d8d8b96a8a/886447561225.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 44,
+   "artist": "Macklemore & Ryan Lewis, Mary Lambert",
+   "song": "Same Love",
+   "points": 399.5,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5e/5f/81/5e5f81c7-849e-63f6-6ffd-8801145bfd97/707541525398.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 45,
+   "artist": "Jay-Z",
+   "song": "Holy Grail (feat. Justin Timberlake)",
+   "points": 398.8,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/86/69/05/8669059c-ed98-2bd1-e6e8-9e6332556b28/00857018004113.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 46,
+   "artist": "Bruno Mars",
+   "song": "Treasure",
+   "points": 387.0,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/15/63/53/156353b8-d45b-a17d-f553-2d125aeb3cb3/075679957474.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 47,
+   "artist": "Lady Gaga",
+   "song": "Venus",
+   "points": 385.4,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/1b/98/88/1b9888da-6a1f-bff0-ec03-518f445019f6/19UMGIM73435.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 48,
+   "artist": "Lana Del Rey",
+   "song": "Young and Beautiful",
+   "points": 385.2,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/e3/e3/13/e3e31393-abf5-e9b1-edc4-20ede35d0c75/13UMGIM43701.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 49,
+   "artist": "Alicia Keys",
+   "song": "No One",
+   "points": 384.5,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/c7/88/df/c788dffe-d06f-8923-ad61-a6194daf6616/888880809919.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 50,
+   "artist": "Justin Timberlake, Jay-Z",
+   "song": "Suit & Tie",
+   "points": 376.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/54/d7/0f/54d70f0c-4c80-f66a-003e-980595d6a0d8/886443834668.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 51,
+   "artist": "Swedish House Mafia",
+   "song": "Don't You Worry Child (Radio Edit) [feat. John Martin]",
+   "points": 374.5,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/4c/b8/1b/4cb81b88-894c-b6cb-101a-047773f2efbf/13UADIM60721.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 52,
+   "artist": "Ellie Goulding",
+   "song": "Burn",
+   "points": 372.5,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/99/48/f6/9948f600-7cfb-1c09-b8f7-b390557f0e30/13UAAIM44623.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 53,
+   "artist": "Samantha Jade",
+   "song": "What You've Done to Me",
+   "points": 368.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/aa/3b/44/aa3b44e2-503b-4af5-218f-0c7ae5b8d919/886443770836.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 54,
+   "artist": "Macklemore & Ryan Lewis, Ray",
+   "song": "Can't Hold Us",
+   "points": 357.0,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/5e/5f/81/5e5f81c7-849e-63f6-6ffd-8801145bfd97/707541525398.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 55,
+   "artist": "Guy Sebastian",
+   "song": "Battle Scars (feat. Lupe Fiasco)",
+   "points": 353.9,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/00/b8/1b/00b81b7e-53be-856e-04d1-339a245b5672/075679958587.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 56,
+   "artist": "Jason Derulo",
+   "song": "The Other Side",
+   "points": 351.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/28/6f/7d/286f7df6-9da7-bdf5-5a66-b31f15583185/093624938699.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 57,
+   "artist": "Miguel",
+   "song": "Adorn",
+   "points": 349.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a1/56/ac/a156acb2-068e-a616-3e56-86ca656c14ce/886443632943.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 58,
+   "artist": "Rihanna",
+   "song": "Pour It Up",
+   "points": 343.0,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/ef/3e/8a/ef3e8aaa-18b7-3ae3-8020-f5fc384b0bf2/12UMGIM59889.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 59,
+   "artist": "Robin Thicke",
+   "song": "Give It 2 U (feat. Kendrick Lamar)",
+   "points": 339.7,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/6b/34/3b/6b343b0b-2aaa-fa98-4c8b-a8b9287b8efd/07UMGIM00995.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 60,
+   "artist": "Chris Brown",
+   "song": "Fine China",
+   "points": 337.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a3/3a/e3/a33ae3c7-821c-1531-0436-305fcd91f7fe/886444792073.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 61,
+   "artist": "Lana Del Rey & Cedric Gervais",
+   "song": "Summertime Sadness [Lana Del Rey vs. Cedric Gervais] [Cedric Gervais Remix]",
+   "points": 331.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/6f/60/9d/6f609df5-eada-7535-f683-d413f5544f6d/00602537763443.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 62,
+   "artist": "Taylor Swift",
+   "song": "All Too Well",
+   "points": 328.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/15/38/9b/15389bf4-8074-06c3-11ee-655b5453af68/21UM1IM25046.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 63,
+   "artist": "Zedd, Hayley Williams",
+   "song": "Stay the Night",
+   "points": 328.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/3e/3c/e7/3e3ce786-bbce-133d-c72a-8bff584fd729/21UMGIM90453.rgb.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 64,
+   "artist": "Chris Brown, Nicki Minaj",
+   "song": "Love More",
+   "points": 327.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a6/2f/a7/a62fa746-9e76-0789-76b6-919019807d8a/828768451052.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 65,
+   "artist": "Ke$ha",
+   "song": "Die Young",
+   "points": 323.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/52/e4/44/52e44453-abd4-6a0d-195e-7e339dea4525/886443748880.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 66,
+   "artist": "Lily Allen",
+   "song": "Hard Out Here",
+   "points": 322.4,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/c3/a4/9f/c3a49f7b-1944-d926-4b06-337eb84298df/825646296682.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 67,
+   "artist": "Miguel",
+   "song": "How Many Drinks? (feat. Kendrick Lamar)",
+   "points": 321.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music2/v4/ee/3a/ce/ee3ace69-0dc9-232f-f6ad-5c688c5db791/886443890886.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 68,
+   "artist": "Mariah Carey",
+   "song": "#Beautiful (feat. Miguel)",
+   "points": 318.2,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/4d/73/a0/4d73a0e8-06bc-451c-c55a-6a8dd69cb873/14UMGIM18604.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 69,
+   "artist": "Drake",
+   "song": "Started From the Bottom",
+   "points": 308.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/5f/30/6d/5f306d67-bff8-2595-9d41-51be895d3208/00602537542321.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 70,
+   "artist": "Selena Gomez",
+   "song": "Slow Down",
+   "points": 306.5,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/02/27/1e/02271e27-21e2-d044-1678-2644184681c9/13DMGIM03981.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 71,
+   "artist": "Phillip Phillips",
+   "song": "Gone, Gone, Gone",
+   "points": 300.9,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/9a/72/eb/9a72eb50-97ad-9684-8f3b-46587ef81ac2/12UMGIM56926.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 72,
+   "artist": "P!nk",
+   "song": "Try",
+   "points": 300.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2c/b0/de/2cb0de7b-4559-d885-36f8-271c950cba34/886443562097.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 73,
+   "artist": "Luke Bryan",
+   "song": "That's My Kind of Night",
+   "points": 300.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/43/8f/14/438f14f0-6277-aa81-4624-8753b93c1fa9/13UAAIM59985.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 74,
+   "artist": "Taylor Swift, Ed Sheeran",
+   "song": "Everything Has Changed",
+   "points": 296.8,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/15/38/9b/15389bf4-8074-06c3-11ee-655b5453af68/21UM1IM25046.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 75,
+   "artist": "Icona Pop, Charli XCX",
+   "song": "I Love It",
+   "points": 295.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/30/cf/3a/30cf3aa0-f143-0c16-36a8-19021be6519f/5059460288799.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 76,
+   "artist": "will.i.am",
+   "song": "Scream & Shout (feat. Britney Spears)",
+   "points": 290.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/84/6d/92/846d926b-8290-3855-b32b-dd903cc9b1ad/13UMGIM26867.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 77,
+   "artist": "Justin Timberlake",
+   "song": "TKO",
+   "points": 289.0,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/2f/81/fd/2f81fdd5-5e7f-098b-cce8-28c5481f727b/886444262149.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 78,
+   "artist": "Demi Lovato",
+   "song": "Let It Go (from \"Frozen\")",
+   "points": 287.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/4c/5d/31/4c5d3166-3a4b-fb3c-473e-1776ff947466/13DMGIM04437.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 79,
+   "artist": "Drake",
+   "song": "Hold On, We're Going Home (feat. Majid Jordan)",
+   "points": 286.5,
+   "assists": 4,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/51/61/f3/5161f3c4-2292-f035-eb68-6f95bbc9edd6/00602537542338.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 80,
+   "artist": "Michael Bublé",
+   "song": "It's a Beautiful Day",
+   "points": 283.3,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/v4/a8/51/a5/a851a57e-87c5-1264-83b9-2d2c1dc3fa79/093624944942.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 81,
+   "artist": "Passenger",
+   "song": "Let Her Go",
+   "points": 278.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/9b/7e/28/9b7e2896-e049-1663-6791-e0111690ffc1/067003051361.png/600x600bb.jpg"
+  },
+  {
+   "rank": 82,
+   "artist": "Zedd, Foxes",
+   "song": "Clarity",
+   "points": 268.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/ea/f9/5b/eaf95be3-d649-0a29-f3a8-1e81592d9c8c/00602537269150.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 83,
+   "artist": "Wale, Tiara Thomas",
+   "song": "Bad",
+   "points": 265.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/66/fb/9c/66fb9cd8-f05e-6ba9-c8a3-36bbfe7ef926/dj.zueykxuj.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 84,
+   "artist": "Katy Perry",
+   "song": "Love Me",
+   "points": 256.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 85,
+   "artist": "Kelly Clarkson",
+   "song": "People Like Us",
+   "points": 254.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a7/10/e0/a710e05f-e7f5-2ead-46c1-8b073b955bbc/886443702547.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 86,
+   "artist": "One Direction",
+   "song": "Best Song Ever",
+   "points": 253.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/66/75/88/6675882c-3685-2b6b-f9de-c6d3e06602b5/dj.fuklqvvg.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 87,
+   "artist": "Serena Ryder",
+   "song": "Stompa",
+   "points": 250.3,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/d6/40/12/d640129e-a20f-ef29-1ef3-bf636c670fb8/cover.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 88,
+   "artist": "The Lonely Wild",
+   "song": "Buried In The Murder",
+   "points": 250.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music69/v4/44/7f/9e/447f9eed-6ea0-244a-8531-de054b01a958/616892079545.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 89,
+   "artist": "Cyndi Lauper",
+   "song": "Girls Just Wanna Have Fun",
+   "points": 245.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/24/2b/17/242b174c-cd38-b06a-7f99-730709f3b676/mzi.ziiqrpeb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 90,
+   "artist": "The Weeknd",
+   "song": "Wicked Games",
+   "points": 242.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/4b/ab/3c/4bab3c0d-ea9a-ad8e-4229-b1e73cad0283/21UMGIM06668.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 91,
+   "artist": "Next",
+   "song": "Too Close",
+   "points": 240.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/61/d8/1c/61d81c56-30d9-6a85-2765-68815c76d5a3/886446724393.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 92,
+   "artist": "Emeli Sandé",
+   "song": "Clown",
+   "points": 239.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/6f/de/c7/6fdec7e8-1153-860a-4b2d-69b30c6e9fcc/19UMGIM71328.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 93,
+   "artist": "Eminem",
+   "song": "Berzerk",
+   "points": 239.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/f4/ae/5c/f4ae5c21-bfe1-e99e-4732-a2b6cf006848/00602537542727.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 94,
+   "artist": "Demi Lovato",
+   "song": "Made in the USA",
+   "points": 238.1,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/17/80/d4/1780d447-2e6b-a0cd-d41f-fd20997682a0/13DMGIM03857.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 95,
+   "artist": "杨丞琳",
+   "song": "被自己绑架",
+   "points": 234.8,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d1/62/0f/d1620f2b-b5a4-4ff2-2aa4-ef641107dfa4/886444155458.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 96,
+   "artist": "Kate Bush",
+   "song": "Wuthering Heights",
+   "points": 233.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/4f/a8/69/4fa8697c-baf0-8dc2-8609-190a50432952/cover.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 97,
+   "artist": "Kendrick Lamar, Drake",
+   "song": "Poetic Justice",
+   "points": 231.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/36/86/ec/3686ec99-dec4-0a01-8b74-2d8a9a0263a7/12UMGIM52988.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 98,
+   "artist": "India.Arie",
+   "song": "Just Do You",
+   "points": 230.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/b0/ce/b1/b0ceb156-625e-e02c-5217-4256f45904b1/4050538314113.jpg/600x600bb.jpg",
+   "no1": 1
+  },
+  {
+   "rank": 99,
+   "artist": "Mariah Carey",
+   "song": "Always Be My Baby",
+   "points": 230.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/78/4f/2c/784f2c84-b5ba-0e7e-58b1-715143b2f199/mzi.vippwwob.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 100,
+   "artist": "Patrick Swayze",
+   "song": "She's Like The Wind",
+   "points": 230.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/8c/f2/1f/8cf21f62-eed1-64c0-e710-df52dc3556c3/078635640823.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 101,
+   "artist": "Leona Lewis",
+   "song": "Lovebird",
+   "points": 227.4,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/70/8b/c3/708bc389-bc21-5f0e-ecc9-7ee0f0c5ee36/886443702530.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 102,
+   "artist": "Ricky Martin",
+   "song": "Come with Me",
+   "points": 226.8,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music4/v4/a1/5b/ab/a15babee-081c-359a-905e-234f5f09ada3/886444130547.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 103,
+   "artist": "Ariana Grande, Mac Miller",
+   "song": "The Way",
+   "points": 225.2,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/19/23/0a19235d-8bcc-76d4-58ca-61a65d928587/13UAAIM68293.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 104,
+   "artist": "Taylor Swift",
+   "song": "Begin Again",
+   "points": 224.9,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/25/0d/7e/250d7e42-3a2f-19ac-f865-f1e04a4a1f97/12UMDIM01007.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 105,
+   "artist": "Lady Gaga",
+   "song": "MANiCURE",
+   "points": 221.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/0c/33/64/0c336478-aaa9-95dc-d373-f6fb8510b170/13UAAIM69752.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 106,
+   "artist": "The Neighbourhood",
+   "song": "Sweater Weather",
+   "points": 220.3,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/28/71/00/287100fb-5c31-0195-5343-e6b3625886d0/886443969834.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 107,
+   "artist": "India.Arie",
+   "song": "Break the Shell",
+   "points": 220.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music123/v4/b0/ce/b1/b0ceb156-625e-e02c-5217-4256f45904b1/4050538314113.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 108,
+   "artist": "Lorde",
+   "song": "Tennis Court",
+   "points": 219.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/36/5f/ba/365fba1b-df9d-e243-2f16-bf58acb18a27/5063010967546_cover.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 109,
+   "artist": "Ylvis",
+   "song": "The Fox",
+   "points": 215.6,
+   "assists": 3,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/32/f5/b4/32f5b44a-6713-dfd4-e561-e40679bff318/825646409051.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 110,
+   "artist": "Brandy & Monica",
+   "song": "The Boy Is Mine",
+   "points": 215.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b1/52/c5/b152c569-f81f-4005-7b61-5b54b855564d/s06.hfdwpdak.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 111,
+   "artist": "Cro",
+   "song": "Whatever",
+   "points": 215.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/43/e2/51/43e251e1-36ef-c9e9-abc8-225c46f647b8/4018939282684.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 112,
+   "artist": "Fleetwood Mac",
+   "song": "Dreams",
+   "points": 215.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/d2/48/f4/d248f4ae-a7e4-a48e-1588-6617de3e8d76/mzi.izeorbmm.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 113,
+   "artist": "Alicia Keys",
+   "song": "New Day",
+   "points": 214.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ed/2f/0f/ed2f0fc2-9f20-dd60-fcff-712207d53f94/886443098961.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 114,
+   "artist": "2 Chainz",
+   "song": "We Own It (Fast & Furious) [feat. Wiz Khalifa]",
+   "points": 214.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/12/c2/28/12c228c9-b268-0432-b4a1-e475fba22c68/13UMGIM59022.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 115,
+   "artist": "Lorde",
+   "song": "Team",
+   "points": 212.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/96/a5/09/96a50916-169b-724c-b722-b8c474406352/13UAAIM68691.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 116,
+   "artist": "Tamar Braxton",
+   "song": "Love and War",
+   "points": 212.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/00/00/fa/0000fa5f-8094-916f-79ba-9a8230dc6230/886444168502.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 117,
+   "artist": "Alicia Keys",
+   "song": "Girl On Fire",
+   "points": 210.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/a7/66/bd/a766bd53-e015-62e7-fbbc-ab7dd628a989/886443653634.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 118,
+   "artist": "Carrie Underwood",
+   "song": "Two Black Cadillacs",
+   "points": 208.5,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/b6/eb/e6/b6ebe609-77fb-02ec-54e0-b06d91b441a5/886443417083.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 119,
+   "artist": "Alicia Keys",
+   "song": "Tears Always Win",
+   "points": 208.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/ed/2f/0f/ed2f0fc2-9f20-dd60-fcff-712207d53f94/886443098961.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 120,
+   "artist": "Avicii",
+   "song": "Hey Brother",
+   "points": 207.9,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/18/5b/1e/185b1ef5-5d97-19d8-aebf-8e29e41874ef/13UAAIM59255.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 121,
+   "artist": "Captain & Tennille",
+   "song": "Do That To Me One More Time",
+   "points": 207.8,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/9c/b2/62/9cb26276-59d1-3343-a6e8-41ea28ccec66/00602537747245.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 122,
+   "artist": "Owl City",
+   "song": "Gold",
+   "points": 206.4,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/37/dd/e6/37dde667-4cd5-e31a-5dff-30c84a0dd8cc/12UMGIM33874.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 123,
+   "artist": "Kelly Clarkson",
+   "song": "Catch My Breath",
+   "points": 205.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a7/10/e0/a710e05f-e7f5-2ead-46c1-8b073b955bbc/886443702547.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 124,
+   "artist": "Boyz II Men",
+   "song": "End of the Road",
+   "points": 205.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/f7/b7/35/f7b7352e-3d60-0f2b-e7c1-d0e792ad2b14/06UMGIM04522.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 125,
+   "artist": "Kendrick Lamar",
+   "song": "Bitch Don't Kill My Vibe",
+   "points": 205.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/36/86/ec/3686ec99-dec4-0a01-8b74-2d8a9a0263a7/12UMGIM52988.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 126,
+   "artist": "杨丞琳",
+   "song": "天使之翼",
+   "points": 204.9,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d1/62/0f/d1620f2b-b5a4-4ff2-2aa4-ef641107dfa4/886444155458.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 127,
+   "artist": "Britney Spears",
+   "song": "Ooh La La",
+   "points": 204.9,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features124/v4/e7/c7/c9/e7c7c953-49b6-202a-59ce-e2d289d9b41a/contsched.prlsffqa.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 128,
+   "artist": "f(x)",
+   "song": "初智齿(Rum Pum Pum Pum)",
+   "points": 204.6,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d9/0e/1d/d90e1dd9-efb8-40a4-a553-4bad8fd8f81d/888735950780.png/600x600bb.jpg"
+  },
+  {
+   "rank": 129,
+   "artist": "A$AP Rocky, Drake, Kendrick Lamar & 2 Chainz",
+   "song": "Fuckin' Problems",
+   "points": 200.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/23/33/76/233376bf-d737-9438-e563-12c927c9cb7f/15UMGIM48241.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 130,
+   "artist": "Blondie",
+   "song": "Call Me",
+   "points": 200.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/72/73/8f/72738f62-d8a1-f1f9-e84d-244ff697d1db/13UABIM56926.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 131,
+   "artist": "Janet Jackson",
+   "song": "Got 'Til It's Gone (feat. Q-Tip & Joni Mitchell)",
+   "points": 200.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/21/ba/cf/21bacf43-5878-e76b-e018-ca936a8243a7/22UMGIM92303.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 132,
+   "artist": "Taylor Swift",
+   "song": "We Are Never Ever Getting Back Together",
+   "points": 200.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/25/0d/7e/250d7e42-3a2f-19ac-f865-f1e04a4a1f97/12UMDIM01007.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 133,
+   "artist": "苏打绿",
+   "song": "我好想你",
+   "points": 200.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/74/d2/d6/74d2d636-0a5a-3e71-5d06-0a598e1da123/196872607048.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 134,
+   "artist": "Lana Del Rey",
+   "song": "Ride",
+   "points": 196.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/99/20/18/992018eb-25c1-5b88-733a-b2444eb20810/24UMGIM34897.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 135,
+   "artist": "Taylor Swift",
+   "song": "Red",
+   "points": 196.0,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/25/0d/7e/250d7e42-3a2f-19ac-f865-f1e04a4a1f97/12UMDIM01007.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 136,
+   "artist": "Alicia Keys",
+   "song": "B.N.M Part 2",
+   "points": 195.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/b7/77/66/b77766d8-c73f-8a5d-376d-926db33475f7/884977002508.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 137,
+   "artist": "Donna Summer",
+   "song": "Hot Stuff",
+   "points": 195.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/66/a7/b0/66a7b03a-c02c-73c2-c7f2-f2afdf05a8dc/06UMGIM04498.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 138,
+   "artist": "Hedley",
+   "song": "Kiss You Inside Out",
+   "points": 195.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/25/a4/bd/25a4bd78-c586-0ae2-a29b-4341d037dc94/00602537064946.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 139,
+   "artist": "Mariah Carey",
+   "song": "Dreamlover",
+   "points": 195.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/cf/f5/19/cff5191f-a668-2c7f-f73a-fe51f519b577/dj.yrzoirxd.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 140,
+   "artist": "Pet Shop Boys",
+   "song": "Suburbia",
+   "points": 195.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/3a/00/04/3a0004fb-5532-fa36-f7cd-01a2b3da8efd/190295758547.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 141,
+   "artist": "Katy Perry",
+   "song": "Birthday",
+   "points": 192.8,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/b4/d0/9a/b4d09a1e-c7f1-de72-bab3-ff2b2be3981b/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 142,
+   "artist": "Rihanna",
+   "song": "Diamonds",
+   "points": 192.3,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a0/1a/10/a01a1080-7b1d-e475-a03c-394e5cbba66c/12UMGIM53876.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 143,
+   "artist": "G.R.L.",
+   "song": "Vacation",
+   "points": 191.2,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/63/ad/12/63ad12a5-31fd-53b6-a21e-cb2dcfaf5813/886444054775.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 144,
+   "artist": "Backstreet Boys",
+   "song": "In a World Like This",
+   "points": 190.8,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/f6/d5/32/f6d532c4-8605-f144-4862-b7af8ab1b45c/0886444560528.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 145,
+   "artist": "Gotye, Kimbra",
+   "song": "Somebody that I Used to Know",
+   "points": 190.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/5d/4b/b0/5d4bb010-fbb5-3d6d-b355-d8074392e958/12UMGIM32418.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 146,
+   "artist": "Pet Shop Boys",
+   "song": "Opportunities(Let's Make Lots Of Money)",
+   "points": 190.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/3a/00/04/3a0004fb-5532-fa36-f7cd-01a2b3da8efd/190295758547.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 147,
+   "artist": "TLC",
+   "song": "No Scrubs",
+   "points": 190.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/2d/19/0c/2d190ce6-a157-6364-b5b4-e9b00265d313/mzi.ucefobwj.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 148,
+   "artist": "Toni Braxton",
+   "song": "Un-Break My Heart",
+   "points": 190.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/87/8d/72/mzi.baogxofm.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 149,
+   "artist": "One Direction",
+   "song": "Story of My Life",
+   "points": 187.1,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Features125/v4/73/f7/aa/73f7aa2b-bd94-a528-c42b-24a3e588e21b/dj.yyouuvfg.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 150,
+   "artist": "Ariana Grande",
+   "song": "Almost Is Never Enough (feat. Nathan Sykes)",
+   "points": 186.6,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/19/23/0a19235d-8bcc-76d4-58ca-61a65d928587/13UAAIM68293.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 151,
+   "artist": "Lady Gaga",
+   "song": "Gypsy",
+   "points": 186.6,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/2e/7c/89/2e7c89f2-f577-0039-52c7-bc3bb3850094/13UAAIM69753.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 152,
+   "artist": "Avril Lavigne",
+   "song": "17",
+   "points": 185.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/6a/fa/53/6afa53eb-c09f-e4fc-9a69-06e84b72e04e/886444213653.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 153,
+   "artist": "Biffy Clyro",
+   "song": "Black Chandelier",
+   "points": 185.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music128/v4/3e/f7/83/3ef78363-b9f0-3ca6-b694-a548abf800c9/190295651589.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 154,
+   "artist": "Guns n' Roses",
+   "song": "November Rain",
+   "points": 185.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/6a/e2/1f/6ae21fa9-c897-3be1-2967-50eefae22b93/06UMGIM05041.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 155,
+   "artist": "PJ Harvey",
+   "song": "Good Fortune",
+   "points": 185.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/4d/70/53/4d70536e-f463-3bfe-45e9-4274ce8bb33a/00731454814423.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 156,
+   "artist": "Whitney Houston",
+   "song": "Exhale (Shoop Shoop)",
+   "points": 185.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/03/50/76/035076da-d210-c4e4-9385-d10ab37c7bc1/dj.frcjtlhl.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 157,
+   "artist": "Capital Cities",
+   "song": "Safe and Sound",
+   "points": 184.9,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/d1/a1/54/d1a1545c-7fc7-1262-d65a-f7a9b0a3a5ca/602537370351_cover.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 158,
+   "artist": "Panic! at the Disco",
+   "song": "Vegas Lights",
+   "points": 184.8,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a1/44/5d/a1445d43-e701-65a0-dad5-3bf04ad97a5d/075679950000.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 159,
+   "artist": "Killian Wells",
+   "song": "V.I.P.",
+   "points": 182.8,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music/99/00/68/mzi.bqbmcxvr.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 160,
+   "artist": "Capital Kings",
+   "song": "We Belong As One (feat. tobyMac)",
+   "points": 180.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/88/a0/57/88a057c9-65a5-06f3-ab34-76d3ed3723b0/669447004332.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 161,
+   "artist": "Ciara",
+   "song": "Body Party",
+   "points": 180.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/a1/93/97/a1939758-e087-cc96-340d-19b3cc8e5b3d/886443919754.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 162,
+   "artist": "TLC",
+   "song": "Waterfalls",
+   "points": 180.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/14/a8/69/14a86912-841d-3cb8-cf55-0439b15c6cab/dj.mjduepez.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 163,
+   "artist": "Toni Braxton",
+   "song": "Let It Flow / You're Makin' Me High",
+   "points": 180.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/fd/61/1f/fd611f8f-1edc-8c6a-ce32-2882441f5f82/886443468986.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 164,
+   "artist": "浜崎あゆみ",
+   "song": "Feel the love",
+   "points": 180.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music22/v4/b5/8f/e2/b58fe2ab-9b20-dd9b-48de-068222f958c6/ANTCD-18714.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 165,
+   "artist": "Sara Bareilles",
+   "song": "Brave",
+   "points": 178.8,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8e/6d/82/8e6d82f3-b795-d68a-ecba-aebeec214b22/886443982444.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 166,
+   "artist": "Ariana Grande, Big Sean",
+   "song": "Right There",
+   "points": 175.9,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/19/23/0a19235d-8bcc-76d4-58ca-61a65d928587/13UAAIM68293.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 167,
+   "artist": "The Cranberries",
+   "song": "Ode To My Family",
+   "points": 175.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/b6/c8/85/b6c885de-fde6-d40d-c95a-d89ede4270ae/06UMGIM09433.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 168,
+   "artist": "Ariana Grande",
+   "song": "Tattooed Heart/Honeymoon Avenue",
+   "points": 175.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/0a/19/23/0a19235d-8bcc-76d4-58ca-61a65d928587/13UAAIM68293.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 169,
+   "artist": "Billy Talent",
+   "song": "Surprise Surprise",
+   "points": 175.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/a1/f1/3a/a1f13ab2-daca-a8a8-e16d-c0e888fce811/825646560998_DeadSilence.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 170,
+   "artist": "Nicole Scherzinger",
+   "song": "Boomerang",
+   "points": 175.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/39/3e/9b/393e9bbf-f8f6-0129-85d5-f1fabbe7b9f0/00602537285242.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 171,
+   "artist": "Zedd",
+   "song": "Spectrum (feat. Matthew Koma)",
+   "points": 175.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/d9/f2/2b/d9f22b74-8ef3-73d8-5da1-e5268c42f114/12UMGIM52120.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 172,
+   "artist": "The Script (feat. will.i.am)",
+   "song": "Hall of Fame",
+   "points": 175.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/bb/89/cd/bb89cdb5-4456-2b75-d1f9-e61009a4c8cc/886443609532.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 173,
+   "artist": "Boy In A Box",
+   "song": "Longest Road",
+   "points": 171.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/fe/ef/c5/feefc5d5-117c-544f-93c1-d7033e977bb1/196292144543.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 174,
+   "artist": "Carrie Underwood",
+   "song": "Before He Cheats",
+   "points": 171.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/e7/14/80/e714805d-8aff-9e66-b25f-c75e5683a130/mzi.omppwbeg.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 175,
+   "artist": "Katy Perry",
+   "song": "By the Grace of God",
+   "points": 171.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/36/21/81/36218129-51b4-df22-cafb-8e9503b53147/13UAAIM70445.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 176,
+   "artist": "Paramore",
+   "song": "Still Into You",
+   "points": 171.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/32/cb/9d/32cb9d04-ef0f-93bb-fd2f-19b395785025/075679956187.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 177,
+   "artist": "安室奈美恵",
+   "song": "Can You Feel This Love",
+   "points": 171.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/7d/32/43/7d324350-a471-3124-3eb7-c22ffbb50bca/ANTCD-A0000005749.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 178,
+   "artist": "Taylor Swift",
+   "song": "Sweeter Than Fiction",
+   "points": 170.7,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music118/v4/85/5a/6e/855a6e0e-1326-a3ad-e690-022fa4045128/00843930010936.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 179,
+   "artist": "Alicia Keys",
+   "song": "Un-Thinkable (I'm Ready)",
+   "points": 168.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/4d/5d/5d/4d5d5db9-94c5-8d29-22ab-23ab947e18ff/884977645149.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 180,
+   "artist": "At the Disco",
+   "song": "This Is Gospel",
+   "points": 168.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a1/44/5d/a1445d43-e701-65a0-dad5-3bf04ad97a5d/075679950000.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 181,
+   "artist": "Die Toten Hosen",
+   "song": "Alles was war",
+   "points": 168.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/7e/33/eb/7e33eb53-5f19-8134-00e4-b16577973a98/mzi.ngriuodg.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 182,
+   "artist": "Perfume",
+   "song": "FAKE IT",
+   "points": 168.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music112/v4/6e/f5/46/6ef54665-8d9c-1a5a-5059-21a43ed0bbaf/19UMGIM72320.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 183,
+   "artist": "顺子",
+   "song": "回家",
+   "points": 168.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music69/v4/65/9c/6d/659c6d29-49b8-9014-fc52-6ee3536691f5/ROD-5315.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 184,
+   "artist": "David Guetta, Ne-Yo & Akon",
+   "song": "Play Hard",
+   "points": 166.6,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music221/v4/c4/0a/07/c40a0738-b048-fc65-7ef9-18045a0868d5/5059460498815.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 185,
+   "artist": "Fall Out Boy",
+   "song": "The Phoenix",
+   "points": 166.4,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/3c/55/ac/3c55acb6-3c72-b7a8-2b86-d8f028da3756/13UMGIM27299.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 186,
+   "artist": "Sinéad O'Connor",
+   "song": "Nothing Compares 2 U",
+   "points": 165.9,
+   "assists": 2,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/fa/19/3f/fa193fc7-f9cf-c84e-c7ef-77b2fceb3a3e/5054526647565.png/600x600bb.jpg"
+  },
+  {
+   "rank": 187,
+   "artist": "Avicii",
+   "song": "Lay Me Down",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/18/5b/1e/185b1ef5-5d97-19d8-aebf-8e29e41874ef/13UAAIM59255.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 188,
+   "artist": "Capital Kings",
+   "song": "All The Way",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music114/v4/88/a0/57/88a057c9-65a5-06f3-ab34-76d3ed3723b0/669447004332.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 189,
+   "artist": "Chris Brown, Aaliyah",
+   "song": "Don't Think They Know",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/a3/3a/e3/a33ae3c7-821c-1531-0436-305fcd91f7fe/886444792073.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 190,
+   "artist": "Janet Jackson",
+   "song": "Together Again",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music122/v4/21/ba/cf/21bacf43-5878-e76b-e018-ca936a8243a7/22UMGIM92303.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 191,
+   "artist": "Kate Bush",
+   "song": "Babooshka",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/b9/c0/4f/b9c04f2d-8e7d-1ee3-f611-48a314ccda52/cover.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 192,
+   "artist": "M.I.A.",
+   "song": "Paper Planes",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/48/e8/17/48e81730-12af-700b-6ee5-f7a7d2fe959b/634904228163.png/600x600bb.jpg"
+  },
+  {
+   "rank": 193,
+   "artist": "Pablo Alborán",
+   "song": "Quién",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/5b/e4/3d/5be43d18-859a-221a-c4d0-f46a1516c688/825646367382.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 194,
+   "artist": "Sara Bareilles",
+   "song": "Manhattan",
+   "points": 164.5,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/8e/6d/82/8e6d82f3-b795-d68a-ecba-aebeec214b22/886443982444.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 195,
+   "artist": "Alesso & Calvin Harris",
+   "song": "Under Control (feat. Hurts)",
+   "points": 161.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music125/v4/5b/9a/52/5b9a52f0-ae0f-9236-8cf7-b5c1531cc179/886444257138.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 196,
+   "artist": "Cassadee Pope",
+   "song": "Wasting All These Tears",
+   "points": 161.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music211/v4/2a/5b/d9/2a5bd953-88c0-8671-934c-387e42c3bd43/13UAAIM69484.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 197,
+   "artist": "J. Cole, TLC",
+   "song": "Crooked Smile",
+   "points": 161.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music124/v4/da/52/41/da52415b-d0ac-d61f-422c-e84bf5ef8162/20UMGIM66000.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 198,
+   "artist": "Lawson",
+   "song": "Brokenhearted (feat. B.o.B)",
+   "points": 161.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/da/5f/8d/da5f8db5-452a-7d0e-fedf-6f64fcbbcaa3/23UMGIM36714.rgb.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 199,
+   "artist": "Mariah Carey",
+   "song": "Melt Away",
+   "points": 161.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/78/4f/2c/784f2c84-b5ba-0e7e-58b1-715143b2f199/mzi.vippwwob.jpg/600x600bb.jpg"
+  },
+  {
+   "rank": 200,
+   "artist": "P!nk",
+   "song": "So What",
+   "points": 161.0,
+   "assists": 1,
+   "cover": "https://is1-ssl.mzstatic.com/image/thumb/Music115/v4/e1/7e/ef/e17eef85-b93b-0451-1ba0-1c27f32c2143/mzi.soisqykd.jpg/600x600bb.jpg"
+  }
+ ],
+ "boards": 10
+}
