@@ -36,7 +36,7 @@
   { "role": "wildcard", "mode": "公开海选", "member": "白妈", "song": "Polje ruža (玫瑰花田)", "artist": "Jakov Jozinović", "genre": "Pop", "language": "克罗地亚语" },
   { "role": "wildcard", "mode": "公开海选", "member": "雨妈", "song": "THE MØURNING AFTER", "artist": "MØNØDREAM", "genre": "Rock", "language": "英语" },
   { "role": "wildcard", "mode": "公开海选", "member": "邓妈", "song": "Could Have Been Us", "artist": "Douwe Bob & SERA", "genre": "Pop", "language": "英语" },
-  { "role": "wildcard", "mode": "公开海选", "member": "猴妈", "song": "Hoe Dan Ook", "artist": "MAKSIM & Babet", "genre": "Pop", "language": "荷兰语" }
+  { "role": "wildcard", "mode": "公开海选", "member": "猴妈", "song": "Hoe Dan Ook (无论如何)", "artist": "MAKSIM & Babet", "genre": "Pop", "language": "荷兰语" }
  ],
  "auditions": {
   "note": "",
