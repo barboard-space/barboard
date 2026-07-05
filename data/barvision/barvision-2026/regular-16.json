@@ -24,6 +24,11 @@
   { "role": "candidate", "mode": "内部选送", "member": "海妈", "song": "cherry cola", "artist": "Devon Again", "genre": "Indie Rock", "language": "英语" },
   { "role": "candidate", "mode": "公开海选", "member": "邓妈", "song": "Body & Soul", "artist": "Chris De Sarandy", "genre": "Pop", "language": "英语" },
   { "role": "candidate", "mode": "公开海选", "member": "猴妈", "song": "I Got A Thing For Love", "artist": "Elle Coves", "genre": "Pop", "language": "英语" },
+  { "role": "candidate", "mode": "内部选送", "member": "城妈", "song": "1XTE1XME (你一个 我一个)", "artist": "Lorenzo Fragola", "genre": "Pop", "language": "意大利语" },
+  { "role": "candidate", "mode": "内部选送", "member": "吃妈", "song": "Stars Collide (feat. Carnie Reimers)", "artist": "MARK Harmony", "genre": "Pop", "language": "英语 马绍尔语" },
+  { "role": "candidate", "mode": "内部选送", "member": "团妈", "song": "Bounce House", "artist": "Gelli Haha", "genre": "Alternative Rock", "language": "英语" },
+  { "role": "candidate", "mode": "内部选送", "member": "S妈/鸽妈", "song": "H O M E", "artist": "HANRORO", "genre": "Pop Rock", "language": "韩语" },
+  { "role": "candidate", "mode": "内部选送", "member": "柴妈", "song": "Alive", "artist": "itsmync", "genre": "Pop", "language": "英语" },
 
   { "role": "wildcard", "mode": "公开海选", "member": "松妈", "song": "Starcrossed", "artist": "Kings Elliot", "genre": "Pop", "language": "英语" },
   { "role": "wildcard", "mode": "公开海选", "member": "XX妈", "song": "Giđa ávašta (春意渐浓)", "artist": "Emil Kárlsen & Elina Iijäs", "genre": "Folk", "language": "北萨米语" },
@@ -46,7 +51,8 @@
    { "name": "RollingGOAT 2026", "member": "羊妈", "period": "", "status": "进行中", "artist": "", "song": "" },
    { "name": "Starvision 2026", "member": "星妈", "period": "", "status": "进行中", "artist": "", "song": "" },
    { "name": "2026 BacUp", "member": "包妈", "period": "", "status": "进行中", "artist": "", "song": "" },
-   { "name": "Genius Genesis 2026", "member": "威妈", "period": "", "status": "进行中", "artist": "", "song": "" }
+   { "name": "Genius Genesis 2026", "member": "威妈", "period": "", "status": "进行中", "artist": "", "song": "" },
+   { "name": "Titancrazyland's Election 2026", "member": "泰妈", "period": "", "status": "进行中", "artist": "", "song": "" }
   ]
  },
  "info_sections": [
@@ -160,7 +166,14 @@
   "羊妈": { "id": 100, "handle": "SeafishYANG" },
   "星妈": { "id": 45, "handle": "白矮星爱吃东西" },
   "包妈": { "id": 20, "handle": "Jeremy_BAg" },
-  "威妈": { "id": 7, "handle": "williw_" }
+  "威妈": { "id": 7, "handle": "williw_" },
+  "城妈": { "id": 120, "handle": "MarekTotti" },
+  "吃妈": { "id": 126, "handle": "能吃的莉莉丝" },
+  "团妈": { "id": 68, "handle": "不动团子" },
+  "S妈": { "id": 27, "handle": "哈哈哈时光机" },
+  "鸽妈": { "id": 160, "handle": "EUGONDINE_" },
+  "柴妈": { "id": 51, "handle": "是柴柴呀" },
+  "泰妈": { "id": 131, "handle": "泰坦crazy" }
  },
  "matches": []
 }
