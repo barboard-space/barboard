@@ -188,7 +188,12 @@
     if (ci < 0) return '';
     var prev = ci > 0 ? eds[ci - 1] : null, next = ci < eds.length - 1 ? eds[ci + 1] : null;
     if (!prev && !next) return '';
-    function nm(e) { return esc(e.name || ('第' + e.no + '届')); }
+    function nm(e) {
+      var full = esc(e.name || ('第' + e.no + '届'));
+      if (!(e.year >= 2023)) return full;  // 2019–2020 届名本就短（The Nth Barvision），无需再省略
+      var short = esc('Barvision ' + e.year);  // 手机端省略地名，如 Barvision Qiqihar 2023 → Barvision 2023
+      return '<span class="bvr-nav__name-full">' + full + '</span><span class="bvr-nav__name-short">' + short + '</span>';
+    }
     var L = prev ? '<a class="bvr-nav__btn bvr-nav__btn--prev" href="' + prev.href + '"><span class="bvr-nav__arrow">←</span><span><span class="bvr-nav__lbl">上一届</span><span class="bvr-nav__name">' + nm(prev) + '</span></span></a>' : '<span class="bvr-nav__spacer"></span>';
     var R = next ? '<a class="bvr-nav__btn bvr-nav__btn--next" href="' + next.href + '"><span><span class="bvr-nav__lbl">下一届</span><span class="bvr-nav__name">' + nm(next) + '</span></span><span class="bvr-nav__arrow">→</span></a>' : '<span class="bvr-nav__spacer"></span>';
     return '<nav class="bvr-nav section__inner fade-up">' + L + R + '</nav>';
@@ -529,6 +534,8 @@
       .bvr-nav .bvr-nav__btn { min-width:0; gap:8px; justify-content:center; padding:11px 12px; }
       .bvr-nav .bvr-nav__btn > span:not(.bvr-nav__arrow) { min-width:0; }  /* 文本块可收缩 */
       .bvr-nav .bvr-nav__name { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }  /* 超长届名省略号兜底 */
+      .bvr-nav .bvr-nav__name-full { display:none; }
+      .bvr-nav .bvr-nav__name-short { display:inline; }
     }
     .bvr-mc-wrap { overflow-x:auto; border:1px solid var(--clr-border); border-radius:10px; margin-top:8px; scrollbar-width:none; }
     .bvr-mc-wrap::-webkit-scrollbar { display:none; }
@@ -554,6 +561,7 @@
     .bvr-nav__arrow { font-size:18px; color:var(--clr-text-3); transition:color .2s; }
     .bvr-nav__lbl { display:block; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:var(--clr-text-3); transition:color .2s; }
     .bvr-nav__name { display:block; font-size:13px; font-weight:600; color:var(--clr-text-3); transition:color .2s; }
+    .bvr-nav__name-short { display:none; }  /* 桌面端显示完整届名（含地名），仅手机端切换为省略地名的短版 */
 
     /* ===== 2023+ 主题届：海报作背景的 hero（经典模板 + 海报底图 + 渐变遮罩） ===== */
     .bvr-hero--bg { position:relative; overflow:hidden; padding:var(--nav-h) 0 48px;
