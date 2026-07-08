@@ -131,9 +131,10 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 3,
   "best": 1,
   "active_in": 15
@@ -180,9 +181,10 @@
    10,
    11,
    12,
-   14
+   14,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 14,
   "best": 6,
   "active_in": 14
@@ -229,9 +231,10 @@
    10,
    11,
    13,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 13,
   "best": 4,
   "active_in": 15
@@ -240,9 +243,10 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 3,
   "best": 8,
   "active_in": 15
@@ -323,9 +327,10 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 3,
   "best": 5,
   "active_in": 15
@@ -379,9 +384,10 @@
    11,
    12,
    14,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 29,
   "best": 1,
   "active_in": 15
@@ -431,9 +437,10 @@
  },
  "126": {
   "editions": [
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 1,
   "best": 14,
   "active_in": 15
@@ -483,9 +490,10 @@
    11,
    13,
    14,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 15,
   "best": 3,
   "active_in": 15
@@ -636,9 +644,10 @@
  },
  "160": {
   "editions": [
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 1,
   "best": 13,
   "active_in": 15
@@ -852,7 +861,25 @@
   "active_in": 12,
   "unclaimed": true
  },
+ "13": {
+  "editions": [
+   16
+  ],
+  "active": true,
+  "count": 0,
+  "best": null,
+  "active_in": 2026
+ },
  "33": {
+  "editions": [
+   16
+  ],
+  "active": true,
+  "count": 0,
+  "best": null,
+  "active_in": 2026
+ },
+ "51": {
   "editions": [
    16
   ],

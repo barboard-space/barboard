@@ -29,6 +29,10 @@
   { "role": "candidate", "mode": "内部选送", "member": "团妈", "song": "Bounce House", "artist": "Gelli Haha", "genre": "Alternative Rock", "language": "英语" },
   { "role": "candidate", "mode": "内部选送", "member": "S妈/鸽妈", "song": "H O M E", "artist": "HANRORO", "genre": "Pop Rock", "language": "韩语" },
   { "role": "candidate", "mode": "内部选送", "member": "柴妈", "song": "Alive", "artist": "itsmync", "genre": "Pop", "language": "英语" },
+  { "role": "candidate", "mode": "内部选送", "member": "汞妈", "song": "ポラリス (北极星)", "artist": "Aooo", "genre": "J-Pop", "language": "日语" },
+  { "role": "candidate", "mode": "内部选送", "member": "奶妈", "song": "Irresistible", "artist": "Luca Hänni", "genre": "Pop", "language": "英语" },
+  { "role": "candidate", "mode": "内部选送", "member": "叉妈", "song": "Middle Of Summer", "artist": "PONY", "genre": "Alternative", "language": "英语" },
+  { "role": "candidate", "mode": "内部选送", "member": "文妈", "song": "Grudge", "artist": "Carter Faith", "genre": "Country", "language": "英语" },
 
   { "role": "wildcard", "mode": "公开海选", "member": "松妈", "song": "Starcrossed", "artist": "Kings Elliot", "genre": "Pop", "language": "英语" },
   { "role": "wildcard", "mode": "公开海选", "member": "XX妈", "song": "Giđa ávašta (春意渐浓)", "artist": "Emil Kárlsen & Elina Iijäs", "genre": "Folk", "language": "北萨米语" },
@@ -173,7 +177,11 @@
   "S妈": { "id": 27, "handle": "哈哈哈时光机" },
   "鸽妈": { "id": 160, "handle": "EUGONDINE_" },
   "柴妈": { "id": 51, "handle": "是柴柴呀" },
-  "泰妈": { "id": 131, "handle": "泰坦crazy" }
+  "泰妈": { "id": 131, "handle": "泰坦crazy" },
+  "汞妈": { "id": 103, "handle": "Hg" },
+  "奶妈": { "id": 102, "handle": "奶儿少爷" },
+  "叉妈": { "id": 13, "handle": "PRONGS" },
+  "文妈": { "id": 116, "handle": "SummertimeDawns" }
  },
  "matches": []
 }
