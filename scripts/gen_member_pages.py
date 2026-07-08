@@ -36,6 +36,9 @@ def load_bv2026_ids(base):
     for a in (d.get("auditions", {}) or {}).get("list", []):
         if a.get("member"):
             add(a["member"])
+    # confirmed：已确认参与但歌曲尚未公开的成员（仅点亮 logo/徽章，不进选送表）
+    for nick in d.get("confirmed", []) or []:
+        add(nick)
     return ids
 
 

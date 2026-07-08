@@ -253,9 +253,10 @@
  },
  "104": {
   "editions": [
-   14
+   14,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 1,
   "best": 25,
   "active_in": 14
@@ -286,9 +287,10 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 3,
   "best": 4,
   "active_in": 15
@@ -306,9 +308,10 @@
   "editions": [
    13,
    14,
-   15
+   15,
+   16
   ],
-  "active": false,
+  "active": true,
   "count": 3,
   "best": 4,
   "active_in": 15

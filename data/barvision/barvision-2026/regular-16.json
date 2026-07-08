@@ -181,7 +181,11 @@
   "汞妈": { "id": 103, "handle": "Hg" },
   "奶妈": { "id": 102, "handle": "奶儿少爷" },
   "叉妈": { "id": 13, "handle": "PRONGS" },
-  "文妈": { "id": 116, "handle": "SummertimeDawns" }
+  "文妈": { "id": 116, "handle": "SummertimeDawns" },
+  "P妈": { "id": 104, "handle": "PROKING" },
+  "狼妈": { "id": 113, "handle": "Aaowu_" },
+  "芬妈": { "id": 110, "handle": "Stephen" }
  },
+ "confirmed": ["P妈", "狼妈/芬妈"],
  "matches": []
 }
