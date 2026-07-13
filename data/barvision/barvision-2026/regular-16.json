@@ -202,8 +202,9 @@
   "文妈": { "id": 116, "handle": "SummertimeDawns" },
   "P妈": { "id": 104, "handle": "PROKING" },
   "狼妈": { "id": 113, "handle": "Aaowu_" },
-  "芬妈": { "id": 110, "handle": "Stephen" }
+  "芬妈": { "id": 110, "handle": "Stephen" },
+  "K妈": { "id": 11, "handle": "SoyMarvin" }
  },
- "confirmed": ["P妈", "狼妈/芬妈"],
+ "confirmed": ["P妈", "狼妈/芬妈", "K妈"],
  "matches": []
 }
