@@ -30,9 +30,12 @@
   { "role": "candidate", "mode": "内部选送", "member": "S妈/鸽妈", "song": "H O M E", "artist": "HANRORO", "genre": "Pop Rock", "language": "韩语" },
   { "role": "candidate", "mode": "内部选送", "member": "柴妈", "song": "Alive", "artist": "itsmync", "genre": "Pop", "language": "英语" },
   { "role": "candidate", "mode": "内部选送", "member": "汞妈", "song": "ポラリス (北极星)", "artist": "Aooo", "genre": "J-Pop", "language": "日语" },
-  { "role": "candidate", "mode": "内部选送", "member": "奶妈", "song": "Irresistible", "artist": "Luca Hänni", "genre": "Pop", "language": "英语" },
   { "role": "candidate", "mode": "内部选送", "member": "叉妈", "song": "Middle Of Summer", "artist": "PONY", "genre": "Alternative", "language": "英语" },
   { "role": "candidate", "mode": "内部选送", "member": "文妈", "song": "Grudge", "artist": "Carter Faith", "genre": "Country", "language": "英语" },
+  { "role": "candidate", "mode": "内部选送", "member": "P妈", "song": "Bem no seu aniversário (就在你生日那天)", "artist": "Bella e o Olmo da Bruxa", "genre": "Alternative", "language": "葡萄牙语" },
+  { "role": "candidate", "mode": "内部选送", "member": "狼妈/芬妈", "song": "Nicht mit mir (别来这套)", "artist": "Betcha & J.Dutt", "genre": "Hip-Hop", "language": "德语" },
+  { "role": "candidate", "mode": "公开海选", "member": "星妈", "song": "Hey You", "artist": "The Belair Lip Bombs", "genre": "Alternative", "language": "英语" },
+  { "role": "candidate", "mode": "公开海选", "member": "羊妈", "song": "Country Road", "artist": "The Hellp", "genre": "Alternative", "language": "英语" },
 
   { "role": "wildcard", "mode": "公开海选", "member": "松妈", "song": "Starcrossed", "artist": "Kings Elliot", "genre": "Pop", "language": "英语" },
   { "role": "wildcard", "mode": "公开海选", "member": "XX妈", "song": "Giđa ávašta (春意渐浓)", "artist": "Emil Kárlsen & Elina Iijäs", "genre": "Folk", "language": "北萨米语" },
@@ -40,7 +43,9 @@
   { "role": "wildcard", "mode": "公开海选", "member": "白妈", "song": "Polje ruža (玫瑰花田)", "artist": "Jakov Jozinović", "genre": "Pop", "language": "克罗地亚语" },
   { "role": "wildcard", "mode": "公开海选", "member": "雨妈", "song": "THE MØURNING AFTER", "artist": "MØNØDREAM", "genre": "Rock", "language": "英语" },
   { "role": "wildcard", "mode": "公开海选", "member": "邓妈", "song": "Could Have Been Us", "artist": "Douwe Bob & SERA", "genre": "Pop", "language": "英语" },
-  { "role": "wildcard", "mode": "公开海选", "member": "猴妈", "song": "Hoe Dan Ook (无论如何)", "artist": "MAKSIM & Babet", "genre": "Pop", "language": "荷兰语" }
+  { "role": "wildcard", "mode": "公开海选", "member": "猴妈", "song": "Hoe Dan Ook (无论如何)", "artist": "MAKSIM & Babet", "genre": "Pop", "language": "荷兰语" },
+  { "role": "wildcard", "mode": "公开海选", "member": "星妈", "song": "Aralar", "artist": "Amaia", "genre": "Latin Pop", "language": "西班牙语" },
+  { "role": "wildcard", "mode": "公开海选", "member": "羊妈", "song": "That's Life", "artist": "Dead Dads Club", "genre": "Alternative", "language": "英语" }
  ],
  "auditions": {
   "note": "",
@@ -52,8 +57,8 @@
    { "name": "Rainfall Melody Festival 2026", "member": "雨妈", "period": "", "status": "已结束", "artist": "Brian Dunne", "song": "Clams Casino" },
    { "name": "European Fever", "member": "邓妈", "period": "", "status": "已结束", "artist": "Chris De Sarandy", "song": "Body & Soul" },
    { "name": "Voiizion Contest", "member": "猴妈", "period": "", "status": "已结束", "artist": "Elle Coves", "song": "I Got A Thing For Love" },
-   { "name": "RollingGOAT 2026", "member": "羊妈", "period": "", "status": "已结束", "artist": "", "song": "" },
-   { "name": "Starvision 2026", "member": "星妈", "period": "", "status": "已结束", "artist": "", "song": "" },
+   { "name": "RollingGOAT 2026", "member": "羊妈", "period": "", "status": "已结束", "artist": "The Hellp", "song": "Country Road" },
+   { "name": "Starvision 2026", "member": "星妈", "period": "", "status": "已结束", "artist": "The Belair Lip Bombs", "song": "Hey You" },
    { "name": "2026 BacUp", "member": "包妈", "period": "", "status": "进行中", "artist": "", "song": "" },
    { "name": "Genius Genesis 2026", "member": "威妈", "period": "", "status": "进行中", "artist": "", "song": "" },
    { "name": "Titancrazyland's Election 2026", "member": "泰妈", "period": "", "status": "进行中", "artist": "", "song": "" }
@@ -205,6 +210,6 @@
   "芬妈": { "id": 110, "handle": "Stephen" },
   "K妈": { "id": 11, "handle": "SoyMarvin" }
  },
- "confirmed": ["P妈", "狼妈/芬妈", "K妈"],
+ "confirmed": ["K妈", "奶妈"],
  "matches": []
 }
