@@ -110,19 +110,19 @@
                 <div class="season-card__body">
                   <div class="season-status">
                     <div class="season-status__dot"></div>
-                    歌曲征集正在进行中
+                    报名已结束 · 赛事进行中
                   </div>
                   <p style="font-size:13px;color:var(--clr-text-2);line-height:1.6;margin-top:2px;">
-                    歌曲提交通道现已开启，将于 <strong style="color:var(--clr-accent);">北京时间 2026 年 7 月 19 日 24:00</strong> 关闭。
+                    歌曲提交通道已于 <strong style="color:var(--clr-accent);">7 月 19 日</strong> 关闭，36 首正赛 + 12 首外卡曲目已确定。Allocation Draw 将于 <strong style="color:var(--clr-accent);">7 月 24 日晚</strong> 直播。
                   </p>
                   <div style="margin-top:14px;padding:14px;background:var(--clr-bg-2);border-radius:4px;border:1px solid var(--clr-border);text-align:center;">
-                    <div style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离歌曲提交通道关闭还有</div>
+                    <div id="cdLabel" style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离 Allocation Draw 直播还有</div>
                     <div id="countdown" style="font-family:var(--font-display);font-size:32px;color:var(--clr-accent);line-height:1;">— 天</div>
                   </div>
                   <div class="season-phases" style="margin-top:16px;">
-                    <div class="phase phase--active">
+                    <div class="phase">
                       <span class="phase__name">歌曲提交阶段</span>
-                      <span class="phase__status phase__status--live">正在进行</span>
+                      <span class="phase__status" style="color:var(--clr-text-3);">已结束</span>
                       <span class="phase__badge" aria-hidden="true" style="visibility:hidden;">投票</span>
                       <span class="phase__date">6/1 — 7/19</span>
                     </div>
@@ -171,7 +171,7 @@
                   </div>
                 </div>
                 <div class="season-card__footer">
-                  <a href="/barvision/2026/events/#submit" class="btn btn--primary" style="flex:1;justify-content:center;">歌曲报名</a>
+                  <a href="/barvision/2026/events/" class="btn btn--primary" style="flex:1;justify-content:center;">试听歌单</a>
                   <a href="/barvision/2026/" class="btn btn--outline">本届总览</a>
                 </div>
               </div>
@@ -505,13 +505,20 @@
       loadChart();
     });
 
-    // Countdown
+    // Countdown（提交已截止 → 倒数 Allocation Draw；抽签后 → 倒数半决赛投票）
     function updateCountdown() {
-      const target = new Date('2026-07-20T00:00:00+08:00');  // 提交通道关闭（= 7/19 24:00）
-      const diff = target - new Date();
+      const DRAW = new Date('2026-07-24T21:00:00+08:00');   // Allocation Draw 直播
+      const VOTE1 = new Date('2026-07-25T22:00:00+08:00');  // 半决赛 + 海选突围赛投票开启
+      const now = new Date();
       const el = document.getElementById('countdown');
+      const lbl = document.getElementById('cdLabel');
       if (!el) return;
-      if (diff <= 0) { el.innerHTML = '通道已关闭'; return; }
+      let target, ltext;
+      if (now < DRAW) { target = DRAW; ltext = '距离 Allocation Draw 直播还有'; }
+      else if (now < VOTE1) { target = VOTE1; ltext = '距离半决赛投票开启还有'; }
+      else { if (lbl) lbl.textContent = '半决赛投票'; el.innerHTML = '投票进行中'; return; }
+      if (lbl) lbl.textContent = ltext;
+      const diff = target - now;
       const d = Math.floor(diff / 86400000);
       const h = Math.floor((diff % 86400000) / 3600000);
       const m = Math.floor((diff % 3600000) / 60000);

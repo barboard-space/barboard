@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>Barvision Chongqing 2026 · 赛事详情 | Barboard</title>
+  <meta name="description" content="第十六届 Barvision Chongqing 2026 赛事详情、歌曲提交通道及完整赛程。歌曲提交于 2026 年 6 月 1 日 18:00 开启，7 月 19 日截止。" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    /* ═══ Hero ═══ */
+    .ev-hero {
+      position: relative;
+      padding: calc(var(--nav-h) + 64px) 0 80px;
+      overflow: hidden;
+    }
+    .ev-hero__glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 70% at 60% 0%,  rgba(168,85,247,0.26) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 0%  100%, rgba(224,64,160,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 40% at 100% 50%, rgba(0,180,255,0.06)  0%, transparent 50%);
+    }
+    /* 2026 主视觉海报作背景 + 渐变遮罩（左深右透出 logo，底部加深保证文字可读） */
+    .ev-hero__poster {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url('/assets/images/barvision/2026/poster.png');
+      background-size: cover; background-position: center;
+      opacity: 0; transition: opacity 0.55s ease;   /* 预解码完成后淡入，消除大图弹出/卡顿 */
+    }
+    .ev-hero__poster.loaded { opacity: 1; }
+    .ev-hero__scrim {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(8,8,18,0.88) 0%, rgba(8,8,18,0.72) 26%, rgba(8,8,18,0.18) 66%, rgba(8,8,18,0.05) 100%),
+        linear-gradient(0deg, rgba(8,8,18,0.72) 0%, transparent 40%);
+    }
+    .ev-hero__inner { position: relative; z-index: 2; }
+    .ev-hero__layout {
+      max-width: 620px; margin-top: 12px;
+    }
+    .ev-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--clr-violet-light);
+      text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 24px; transition: color 0.2s;
+    }
+    .ev-eyebrow:hover { color: var(--clr-white); }
+    .ev-title {
+      font-family: var(--font-display);
+      font-size: clamp(52px, 7vw, 96px);
+      line-height: 0.95; letter-spacing: 0.02em; text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .ev-title .ev-accent { color: var(--clr-violet-light); }
+    /* 中文大标题：Bebas Neue 无中文字形，改用正文字体 + 粗体（#13） */
+    .ev-title--cjk {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(40px, 6vw, 76px); line-height: 1.08;
+      letter-spacing: 0.04em; text-transform: none;
+    }
+    .ev-meta {
+      display: flex; flex-wrap: wrap; align-items: center;
+      gap: 0; margin-bottom: 20px;
+    }
+    .ev-meta-item {
+      font-size: 12px; color: var(--clr-text-3);
+      padding-right: 14px; margin-right: 14px;
+      border-right: 1px solid var(--clr-border); white-space: nowrap;
+    }
+    .ev-meta-item:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .ev-hero__desc {
+      font-size: 15px; color: var(--clr-text-2); line-height: 1.75;
+      max-width: 500px; margin-bottom: 32px;
+    }
+    .ev-hero__cta { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 36px; }
+    .ev-countdown {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--clr-surface); border: 1px solid var(--clr-border-2);
+      border-radius: 6px; padding: 12px 20px 14px;
+    }
+    .ev-countdown__label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--clr-text-3); white-space: nowrap;
+    }
+    .ev-countdown__digits {
+      font-family: var(--font-display); font-size: clamp(26px, 3.2vw, 40px);
+      color: var(--clr-pink-light); line-height: 1;
+    }
+    .ev-cd-unit { font-size: 12px; opacity: 0.55; margin: 0 1px; }
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes ev-hero-in {
+        from { opacity: 0; transform: translateY(20px); }
+        to   { opacity: 1; transform: translateY(0); }
+      }
+      .ev-eyebrow      { animation: ev-hero-in 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-title        { animation: ev-hero-in 0.70s 0.08s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-meta         { animation: ev-hero-in 0.50s 0.18s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-hero__desc   { animation: ev-hero-in 0.55s 0.26s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-hero__cta    { animation: ev-hero-in 0.55s 0.35s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-countdown    { animation: ev-hero-in 0.55s 0.44s cubic-bezier(0.22,1,0.36,1) both; }
+      .ev-updated      { animation: ev-hero-in 0.50s 0.53s cubic-bezier(0.22,1,0.36,1) both; }
+    }
+
+    /* ═══ Shared section chrome ═══ */
+    .ev-section { padding: 80px 0; border-top: 1px solid var(--clr-border); }
+    .ev-section__hd { margin-bottom: 48px; }
+    .ev-section__hd .section-label { margin-bottom: 16px; }
+    .ev-section__hd .section__title { margin-top: 24px; font-size: clamp(24px,3.5vw,48px); }
+    .ev-section__hd .section__subtitle { margin-top: 24px; max-width: 560px; font-size: 14px; }
+
+    /* ═══ Submit ═══ */
+    .ev-submit-layout {
+      display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(330px, 1fr);
+      gap: 56px; align-items: stretch;   /* 右栏单元格随左栏拉伸，submit-panel sticky 才能悬浮（#66） */
+    }
+    .ev-submit-main__elig { margin-top: 52px; }
+    .ev-req-block { margin-top: 24px; }
+    .ev-req-title {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--clr-text-3); margin-bottom: 10px;
+    }
+    .ev-req-list { display: flex; flex-direction: column; gap: 4px; }
+    .ev-req-item {
+      display: block;
+      padding: 6px 10px; background: var(--clr-surface);
+      border: 1px solid var(--clr-border); border-radius: 4px;
+      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.5;
+    }
+    .ev-req-item::before {
+      content: '· '; color: var(--clr-violet-light); margin-right: 3px;
+    }
+    .ev-req-item strong { color: var(--clr-text); }
+    .ev-req-item--plain { background: none; border: none; border-radius: 0; padding-left: 0; }
+    .ev-req-item--plain::before { display: none; }
+    /* 信息卡（报名须知 / 参赛要求 统一卡片 + 圆点列表样式，正文视觉翻新） */
+    .ev-info-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 8px; padding: 20px 22px;
+    }
+    .ev-info-card + .ev-info-card { margin-top: 14px; }
+    .ev-info-card__title {
+      display: flex; align-items: center; gap: 9px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.03em; color: var(--clr-text); margin-bottom: 14px;
+    }
+    .ev-info-list { display: flex; flex-direction: column; gap: 11px; }
+    .ev-info-item {
+      position: relative; padding-left: 16px;
+      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.65;
+    }
+    .ev-info-item::before {
+      content: ''; position: absolute; left: 1px; top: 7px;
+      width: 5px; height: 5px; border-radius: 50%; background: var(--clr-violet-light); opacity: 0.6;
+    }
+    .ev-info-item strong { color: var(--clr-text); }
+    .ev-info-card .ev-pt-wrap { margin-top: 2px; }
+    .ev-deadline-bar {
+      margin-top: 20px;
+      background: var(--clr-bg-2); border: 1px solid var(--clr-border);
+      border-radius: 6px; display: grid;
+      grid-template-columns: 1fr 1px 1fr;
+    }
+    .ev-deadline-bar__item {
+      padding: 14px 20px;
+    }
+    .ev-deadline-bar__divider {
+      background: var(--clr-border); align-self: stretch;
+    }
+    .ev-deadline-bar__label {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--clr-text-3); margin-bottom: 4px;
+    }
+    .ev-deadline-bar__val { font-family: var(--font-mono); font-size: 13px; color: var(--clr-text); }
+    /* Submit panel */
+    .submit-panel {
+      background: var(--clr-surface); border: 1px solid var(--clr-border-2);
+      border-radius: 8px; overflow: hidden;
+      position: relative; will-change: transform;   /* 悬浮由 JS 控制（CSS sticky 在此 grid 布局下不可靠，#67） */
+    }
+    .submit-panel__head {
+      padding: 20px 28px 18px; border-bottom: 1px solid var(--clr-border);
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      background: linear-gradient(135deg, rgba(168,85,247,0.07) 0%, transparent 60%);
+    }
+    .submit-panel__title { font-family: var(--font-display); font-size: 24px; letter-spacing: 0.04em; }
+    .sp-badge {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 3px;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .sp-badge--locked { color: var(--clr-text-3); border: 1px solid var(--clr-border); }
+    .sp-badge--open   { color: var(--clr-pink-light); border: 1px solid rgba(224,64,160,0.35); background: rgba(224,64,160,0.08); }
+    .sp-badge--closed { color: var(--clr-text-3); border: 1px solid var(--clr-border); background: rgba(255,255,255,0.03); }
+    .sp-badge__dot {
+      width: 6px; height: 6px; border-radius: 50%; background: var(--clr-pink-light); flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(240,96,184,0.6); animation: sp-badge-pulse 1.8s ease-out infinite;
+    }
+    @keyframes sp-badge-pulse {
+      0%   { box-shadow: 0 0 0 0 rgba(240,96,184,0.55); }
+      70%  { box-shadow: 0 0 0 6px rgba(240,96,184,0); }
+      100% { box-shadow: 0 0 0 0 rgba(240,96,184,0); }
+    }
+    .submit-panel__body { padding: 32px 28px; }
+    /* Locked state */
+    .sp-locked { text-align: center; padding: 8px 0; }
+    .sp-locked__icon { margin: 0 auto 16px; opacity: 0.15; color: var(--clr-violet-light); }
+    .sp-locked__heading {
+      font-family: var(--font-display); font-size: 22px; letter-spacing: 0.04em; margin-bottom: 8px;
+    }
+    .sp-locked__msg { font-size: 13px; color: var(--clr-text-2); line-height: 1.7; }
+    .sp-locked__msg strong { color: var(--clr-violet-light); }
+    .sp-locked__cd {
+      margin: 24px auto 0; padding: 18px 24px;
+      background: var(--clr-bg-2); border: 1px solid rgba(168,85,247,0.22);
+      border-radius: 6px; display: inline-block; min-width: 210px;
+    }
+    .sp-locked__cd-label {
+      font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--clr-text-3); margin-bottom: 8px;
+    }
+    .sp-locked__cd-digits { font-family: var(--font-display); font-size: 32px; color: var(--clr-pink-light); line-height: 1; }
+    .sp-locked__date { margin-top: 10px; font-size: 12px; color: var(--clr-text-3); font-family: var(--font-mono); }
+    /* Open state */
+    .sp-open { display: none; }
+    .sp-open__desc { font-size: 13px; color: var(--clr-text-2); line-height: 1.75; margin-bottom: 20px; }
+    .sp-open__deadline { font-size: 12px; color: var(--clr-text-3); margin-top: 12px; font-family: var(--font-mono); }
+
+    /* ── 自定义报名表单 ── */
+    .sub-form { margin-bottom: 4px; }
+    .sub-field { margin-bottom: 16px; }
+    .sub-label { display: block; font-size: 12px; color: var(--clr-text-2); margin-bottom: 6px; letter-spacing: 0.02em; }
+    .sub-req { color: var(--clr-pink-light); margin-left: 2px; }
+    .sub-hint { font-size: 11px; color: var(--clr-text-3); margin-top: 5px; line-height: 1.5; }
+    .sub-input {
+      width: 100%; box-sizing: border-box; background: var(--clr-bg-2);
+      border: 1px solid var(--clr-border); border-radius: 4px; padding: 9px 12px;
+      font-family: var(--font-body); font-size: 14px; color: var(--clr-text);
+      transition: border-color 0.2s; caret-color: var(--clr-violet);
+    }
+    .sub-input::placeholder { color: var(--clr-text-3); }
+    .sub-input[type="date"]::-webkit-datetime-edit { color: var(--clr-text-3); }
+    .sub-input:focus { outline: none; border-color: var(--clr-violet); }
+    .sub-input.sub-input--err { border-color: var(--clr-pink); }
+    .sub-textarea { resize: vertical; line-height: 1.6; }
+    .sub-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 16px; }
+    .sub-radio { display: flex; gap: 12px; flex-wrap: wrap; }
+    .sub-radio__opt {
+      flex: 1; min-width: 140px; display: flex; align-items: center; gap: 9px; cursor: pointer;
+      background: var(--clr-bg-2); border: 1px solid var(--clr-border); border-radius: 4px; padding: 11px 14px;
+      font-size: 13px; color: var(--clr-text); transition: border-color 0.2s, background 0.2s;
+    }
+    .sub-radio__opt:hover { border-color: var(--clr-border-2); }
+    .sub-radio__opt:has(input:checked) { border-color: var(--clr-violet); background: rgba(168,85,247,0.08); }
+    .sub-radio__opt input { accent-color: var(--clr-violet); }
+    .sub-radio__opt small { display: block; font-size: 11px; color: var(--clr-text-3); margin-top: 1px; }
+    .sub-song {
+      border: 1px solid var(--clr-border); border-radius: 6px; padding: 16px 16px 4px; margin-bottom: 18px;
+      background: rgba(180,160,255,0.02);
+    }
+    .sub-song__legend {
+      font-size: 12px; font-weight: 600; letter-spacing: 0.04em; color: var(--clr-violet-light);
+      padding: 0 8px;
+    }
+    .sub-song__legend small { color: var(--clr-text-3); font-weight: 400; letter-spacing: 0; }
+    .sub-err { font-size: 11px; color: var(--clr-pink-light); margin-top: 4px; min-height: 0; }
+    .sub-err:empty { display: none; }
+    .sub-err--form { margin: 4px 0 12px; text-align: center; }
+    .sub-submit { width: 100%; justify-content: center; margin-top: 6px; }
+    .sub-hp { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
+    .sub-success { text-align: center; padding: 16px 0 8px; }
+    .sub-success__icon {
+      width: 48px; height: 48px; margin: 0 auto 16px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 24px;
+      color: var(--clr-pink-light); border: 2px solid var(--clr-pink);
+      background: rgba(224,64,160,0.1);
+    }
+    .sub-success__title { font-size: 16px; font-weight: 600; color: var(--clr-text); margin-bottom: 8px; }
+    .sub-success__msg { font-size: 13px; color: var(--clr-text-2); line-height: 1.7; margin-bottom: 18px; }
+    .sub-success__btns { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+    .sub-recap { margin-top: 18px; text-align: left; background: var(--clr-bg-2); border: 1px solid var(--clr-border); border-radius: 6px; padding: 14px 16px; font-family: var(--font-body); font-size: 12.5px; color: var(--clr-text-2); line-height: 1.8; white-space: pre-wrap; }
+
+    /* ═══ Schedule ═══ */
+    .ev-phases { display: flex; flex-direction: column; gap: 52px; margin-top: 48px; }
+    .ev-phase__header {
+      display: flex; align-items: center; gap: 14px; margin-bottom: 16px;
+    }
+    .ev-phase__tag {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase;
+      padding: 3px 9px; border-radius: 2px;
+    }
+    .ev-phase__tag--submit { background: rgba(224,64,160,0.1); color: var(--clr-pink-light); border: 1px solid rgba(224,64,160,0.28); }
+    .ev-phase__tag--semi   { background: rgba(0,180,255,0.08); color: var(--clr-accent-light); border: 1px solid rgba(0,180,255,0.28); }
+    .ev-phase__tag--final  { background: rgba(212,168,50,0.1); color: var(--clr-gold-light); border: 1px solid rgba(212,168,50,0.3); }
+    .ev-phase__name {
+      font-family: var(--font-display); font-size: 21px; letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .ev-phase__line { flex: 1; height: 1px; background: var(--clr-border); }
+    /* Timeline table */
+    .ev-tl { border: 1px solid var(--clr-border); border-radius: 6px; overflow: hidden; }
+    .ev-tl-row {
+      display: grid; grid-template-columns: 144px 1fr;
+      border-bottom: 1px solid var(--clr-border);
+    }
+    .ev-tl-row:last-child { border-bottom: none; }
+    .ev-tl-row--hi   { background: rgba(168,85,247,0.04); }
+    .ev-tl-row--gold { background: rgba(212,168,50,0.04); }
+    .ev-tl-date {
+      padding: 14px 16px; font-family: var(--font-mono); font-size: 12px;
+      color: var(--clr-text-3); line-height: 1.45; word-spacing: -1px;
+      border-right: 1px solid var(--clr-border);
+      display: flex; align-items: center;
+    }
+    .ev-tl-row--hi   .ev-tl-date { color: var(--clr-violet); }
+    .ev-tl-row--gold .ev-tl-date { color: var(--clr-gold); }
+    .ev-tl-body { padding: 14px 18px; display: flex; flex-direction: column; justify-content: center; }
+    .ev-tl-name {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      font-size: 13.5px; font-weight: 600; color: var(--clr-text); line-height: 1.3;
+    }
+    .ev-tl-row--gold .ev-tl-name { color: var(--clr-gold-light); }
+    .ev-tl-desc { font-size: 12px; color: var(--clr-text-3); line-height: 1.6; margin-top: 5px; }
+    .tl-b {
+      font-size: 9px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 6px; border-radius: 2px; flex-shrink: 0;
+    }
+    .tl-b--sub  { background: rgba(224,64,160,0.1);  color: var(--clr-pink-light);   border: 1px solid rgba(224,64,160,0.3); }
+    .tl-b--vote { background: rgba(0,180,255,0.1);   color: var(--clr-accent-light); border: 1px solid rgba(0,180,255,0.3); }
+    .tl-b--live { background: rgba(168,85,247,0.1);  color: var(--clr-violet-light); border: 1px solid rgba(168,85,247,0.3); }
+    .tl-b--adm  { background: rgba(180,160,255,0.06); color: var(--clr-text-3);      border: 1px solid var(--clr-border); }
+    .tl-b--gold { background: rgba(212,168,50,0.12); color: var(--clr-gold-light);   border: 1px solid rgba(212,168,50,0.3); }
+
+    /* ═══ Voting ═══ */
+    .ev-vote-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 14px; margin-top: 40px;
+    }
+    .ev-vote-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 8px; padding: 28px; overflow: hidden;
+    }
+    .ev-vote-card--jury     { border-color: rgba(168,85,247,0.30); }
+    .ev-vote-card--tele     { border-color: rgba(0,180,255,0.28); }
+    .ev-vote-card--approval { border-color: rgba(212,168,50,0.28); grid-column: 1 / -1; }
+    .ev-vc-eyebrow {
+      font-size: 10px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin-bottom: 4px;
+    }
+    .ev-vote-card--jury     .ev-vc-eyebrow { color: var(--clr-violet-light); }
+    .ev-vote-card--tele     .ev-vc-eyebrow { color: var(--clr-accent); }
+    .ev-vote-card--approval .ev-vc-eyebrow { color: var(--clr-gold-light); }
+    .ev-vc-title { font-family: var(--font-display); font-size: 26px; letter-spacing: 0.04em; margin-bottom: 6px; }
+    .ev-vc-pct { font-family: var(--font-display); font-size: 64px; line-height: 1; margin-bottom: 14px; }
+    .ev-vote-card--jury     .ev-vc-pct { color: var(--clr-violet-light); }
+    .ev-vote-card--tele     .ev-vc-pct { color: var(--clr-accent); }
+    .ev-vote-card--approval .ev-vc-pct { color: var(--clr-gold-light); font-size: 40px; }
+    .ev-vc-desc { font-size: 13px; color: var(--clr-text-2); line-height: 1.75; }
+    .ev-vc-desc strong { color: var(--clr-text); }
+    /* Jury scoring grid */
+    .ev-jury-scores { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+    .ev-js-cell {
+      display: flex; flex-direction: column; align-items: center;
+      background: var(--clr-bg-2); border: 1px solid var(--clr-border);
+      border-radius: 4px; padding: 6px 10px; min-width: 40px;
+    }
+    .ev-js-cell--top { border-color: rgba(212,168,50,0.3); background: rgba(212,168,50,0.05); }
+    .ev-js-rank { font-size: 9px; color: var(--clr-text-3); letter-spacing: 0.08em; margin-bottom: 2px; }
+    .ev-js-cell--top .ev-js-rank { color: var(--clr-gold-light); opacity: 0.7; }
+    .ev-js-pts { font-family: var(--font-display); font-size: 20px; line-height: 1; color: var(--clr-violet-light); }
+    .ev-js-cell--top .ev-js-pts { color: var(--clr-gold-light); font-size: 24px; }
+    /* Approval layout */
+    .ev-approval-cols { display: grid; grid-template-columns: auto 1fr; gap: 36px; align-items: start; }
+    .ev-approval-rules { display: flex; flex-direction: column; gap: 7px; margin-top: 2px; }
+    .ev-approval-rule { display: flex; gap: 8px; font-size: 13px; color: var(--clr-text-2); line-height: 1.6; }
+    .ev-approval-rule::before { content: '·'; color: var(--clr-gold); flex-shrink: 0; font-size: 16px; line-height: 1.2; }
+    .ev-approval-rule strong { color: var(--clr-text); }
+
+    /* ═══ Eligibility ═══ */
+    .ev-elig-layout {
+      display: grid; grid-template-columns: 0.9fr 1fr;
+      gap: 48px 56px; margin-top: 48px; align-items: start;
+    }
+    .ev-elig-block__title {
+      font-weight: 700; font-size: 13px; color: var(--clr-text);
+      letter-spacing: 0.03em; margin-bottom: 12px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .ev-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+    .ev-dot--v { background: var(--clr-violet-light); }
+    .ev-dot--p { background: var(--clr-pink-light); }
+    .ev-dot--a { background: var(--clr-accent-light); }
+    .ev-dot--g { background: var(--clr-gold-light); }
+    /* Platform table */
+    .ev-pt-wrap { border: 1px solid var(--clr-border); border-radius: 6px; overflow: hidden; }
+    .ev-pt-table {
+      width: 100%; border-collapse: collapse; font-size: 12px;
+    }
+    .ev-pt-table th {
+      background: var(--clr-surface-2); padding: 8px 12px;
+      font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--clr-text-3); text-align: left; border-bottom: 1px solid var(--clr-border-2);
+    }
+    .ev-pt-table td { padding: 9px 12px; border-bottom: 1px solid var(--clr-border); color: var(--clr-text-2); vertical-align: middle; }
+    .ev-pt-table tr:last-child td { border-bottom: none; }
+    .ev-pt-table td:first-child { color: var(--clr-text); font-weight: 600; }
+    .ev-pt-table td:last-child { font-family: var(--font-mono); color: var(--clr-text); text-align: right; }
+    .ev-pt-note { margin-top: 8px; font-size: 11px; color: var(--clr-text-3); line-height: 1.55; }
+    /* Criteria list */
+    .ev-crit-list { display: flex; flex-direction: column; gap: 3px; }
+    .ev-crit-item {
+      display: block;
+      font-size: 12.5px; color: var(--clr-text-2); line-height: 1.5;
+      padding: 6px 10px; background: var(--clr-surface);
+      border: 1px solid var(--clr-border); border-radius: 4px;
+    }
+    .ev-crit-item::before { content: '· '; color: var(--clr-violet); }
+    .ev-crit-item strong { color: var(--clr-text); }
+
+    /* ═══ Rules ═══ */
+    .ev-rules-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 12px; margin-top: 40px;
+    }
+    .ev-rule-card {
+      background: var(--clr-surface); border: 1px solid var(--clr-border);
+      border-radius: 6px; padding: 22px 22px 20px;
+    }
+    .ev-rule-card__num {
+      font-family: var(--font-display); font-size: 28px; line-height: 1;
+      margin-bottom: 12px; opacity: 0.65; color: var(--clr-pink-light);
+    }
+    .ev-rule-card__title { font-weight: 600; font-size: 13px; color: var(--clr-text); margin-bottom: 8px; }
+    .ev-rule-card__body { font-size: 12px; color: var(--clr-text-2); line-height: 1.75; }
+    .ev-rule-card__body strong { color: var(--clr-text); }
+
+    .ev-about-btns .btn { padding: 8px 14px; font-size: 12px; }
+
+    /* ═══ Responsive ═══ */
+    @media (max-width: 960px) {
+      .ev-submit-layout   { grid-template-columns: 1fr; gap: 40px; }
+      .ev-submit-side     { order: -1; }   /* 手机端：报名表单优先，置于须知/参赛要求之上 */
+      .ev-submit-main__elig { margin-top: 40px; }
+      .submit-panel       { position: static; }
+      .ev-elig-layout     { grid-template-columns: 1fr; gap: 36px; }
+      .ev-vote-grid       { grid-template-columns: 1fr; }
+      .ev-vote-card--approval { grid-column: 1; }
+    }
+    @media (max-width: 768px) {
+      .ev-hero            { padding: calc(var(--nav-h) + 40px) 0 56px; }
+      .ev-hero__poster    { background-image: url('/assets/images/barvision/2026/bg.png'); }  /* 手机端用无 logo 底图 */
+      .ev-section         { padding: 60px 0; }
+      .ev-section__hd     { margin-bottom: 36px; }
+      .ev-section__hd .section__title { margin-top: 16px; }
+      .ev-hero__desc      { max-width: 100%; }
+      .ev-phases          { gap: 40px; }
+      .ev-vc-pct          { font-size: 52px; }
+      .ev-vote-card--approval .ev-vc-pct { font-size: 36px; }
+      .ev-hero__cta .btn  { flex: 1; min-width: calc(50% - 5px); justify-content: center; }
+    }
+    @media (max-width: 700px) {
+      .ev-rules-grid      { grid-template-columns: 1fr 1fr; }
+      .ev-tl-row          { grid-template-columns: 112px 1fr; }
+      .ev-tl-date         { font-size: 11px; padding: 12px 10px; }
+      .ev-pt-wrap         { overflow-x: auto; overflow-y: visible; }
+    }
+    @media (max-width: 480px) {
+      .ev-hero            { padding: calc(var(--nav-h) + 28px) 0 44px; }
+      .ev-section         { padding: 48px 0; }
+      .ev-section__hd     { margin-bottom: 26px; }
+      .ev-phases          { gap: 30px; }
+      .ev-submit-layout   { gap: 24px; }
+      .ev-vc-pct          { font-size: 44px; }
+      .ev-vote-card--approval .ev-vc-pct { font-size: 30px; }
+      .ev-vote-card       { padding: 22px 20px; }
+      .ev-hero__cta       { flex-direction: column; }
+      .ev-hero__cta .btn  { width: 100%; justify-content: center; }
+      .ev-countdown       { display: flex; width: 100%; box-sizing: border-box; }
+      .ev-deadline-bar    { grid-template-columns: 1fr; }
+      .ev-deadline-bar__divider { height: 1px; }
+      .submit-panel__head { padding: 16px 20px 14px; }
+      .submit-panel__body { padding: 24px 20px; }
+      .sp-locked__cd      { min-width: 0; width: 100%; box-sizing: border-box; }
+      .ev-rules-grid      { grid-template-columns: 1fr; }
+      .ev-tl-row          { grid-template-columns: 1fr; }
+      .ev-tl-date         { border-right: none; border-bottom: 1px solid var(--clr-border); padding: 10px 14px 6px; font-size: 11px; }
+      .ev-approval-cols   { grid-template-columns: 1fr; gap: 16px; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .ev-eyebrow:hover { color: var(--clr-violet-light); }
+    }
+
+    /* ═══ TOC ═══ */
+    .ev-toc {
+      position: fixed; right: 19px; bottom: 90px; z-index: 90;
+      display: flex; flex-direction: column; gap: 1px;
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.25s, visibility 0.25s;
+    }
+    .ev-toc--visible { opacity: 1; visibility: visible; }
+    .ev-toc__item {
+      font-family: var(--font-body); font-size: 11px;
+      color: var(--clr-text-3); cursor: pointer;
+      padding: 3px 13px 3px 0;
+      position: relative;
+      transition: color 0.15s;
+      line-height: 1.5; white-space: nowrap; user-select: none;
+      text-align: right;
+    }
+    .ev-toc__item::after {
+      content: ''; position: absolute; right: 3px; top: 50%;
+      transform: translateY(-50%); width: 5px; height: 5px;
+      border-radius: 50%; background: var(--clr-violet-light);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .ev-toc__item:not(.ev-toc__item--active):hover { color: var(--clr-text); }
+    .ev-toc__item--active { color: var(--clr-violet-light); }
+    .ev-toc__item--active::after { opacity: 1; animation: ev-toc-breathe 3s ease-in-out infinite; }
+    @keyframes ev-toc-breathe {
+      0%, 100% { opacity: 1; transform: translateY(-50%) scale(1); }
+      50%       { opacity: 0.35; transform: translateY(-50%) scale(0.65); }
+    }
+    @media (max-width: 960px) { .ev-toc { display: none; } }
+  </style>
+</head>
+<body>
+<div id="site-nav"></div>
+
+<!-- ═══ HERO ═══ -->
+<section class="ev-hero">
+  <div class="ev-hero__poster" aria-hidden="true"></div>
+  <div class="ev-hero__scrim" aria-hidden="true"></div>
+  <div class="ev-hero__glow" aria-hidden="true"></div>
+  <div class="section__inner ev-hero__inner">
+    <div class="ev-hero__layout">
+
+      <div>
+        <a href="/barvision/2026/" class="ev-eyebrow">
+          <span>←</span><span>Barvision Chongqing 2026</span>
+        </a>
+        <h1 class="ev-title ev-title--cjk">歌曲<br><span class="ev-accent">提交通道</span></h1>
+        <p class="ev-hero__desc">
+          请先阅读报名须知与参赛要求，确认歌曲符合资格后填写表单完成提交。
+          每位成员可选送一首参赛歌曲，本届办过海选的成员可报两首。
+        </p>
+        <div class="ev-countdown" id="heroCountdownWrap">
+          <span class="ev-countdown__label" id="heroCountdownLabel">距提交通道开启还有</span>
+          <span class="ev-countdown__digits" id="heroCountdown">—</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ 歌曲报名 ═══ -->
+<section class="ev-section" id="submit">
+  <div class="section__inner">
+    <div class="ev-submit-layout">
+
+      <!-- Left: 报名须知 + 参赛要求 -->
+      <div class="ev-submit-main">
+        <div class="ev-section__hd">
+          <p class="section-label fade-up">歌曲报名</p>
+          <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">SUBMIT <span style="color:var(--clr-violet-light);">YOUR</span> <span style="color:var(--clr-violet-light);">SONG</span></h2>
+          <p class="section__subtitle fade-up" style="margin-top:24px;max-width:460px;font-size:14px;">
+            每位榜吧成员可提交一首参赛歌曲。提交成功后自动成为本届评委，须在各阶段完成投票。
+          </p>
+        </div>
+
+        <div class="ev-info-card fade-up">
+          <div class="ev-info-card__title"><span class="ev-dot ev-dot--p"></span>提交方式</div>
+          <div class="ev-info-list">
+            <div class="ev-info-item">所有参赛歌曲均须通过本页 <strong>在线表单</strong> 提交</div>
+            <div class="ev-info-item"><strong>内部选择（内定）</strong>：经与主办方确认后，通过本页表单提交歌曲信息</div>
+            <div class="ev-info-item"><strong>公开选拔（海选）</strong>：由榜吧成员自行组织，获胜者通过本页表单代表参赛；须至少公布前两名以确认外卡突围赛资格，获胜者不得更换</div>
+            <div class="ev-info-item"><strong>合报（最多两人）</strong>：经主办方与双方同意，共同选送一首歌曲</div>
+          </div>
+        </div>
+
+        <div class="ev-info-card fade-up">
+          <div class="ev-info-card__title"><span class="ev-dot ev-dot--v"></span>提交须知</div>
+          <div class="ev-info-list">
+            <div class="ev-info-item"><strong>内定每人限报 1 首</strong>；本届办过海选的成员可报 <strong>2 首</strong>（海选冠军 + 亚军）</div>
+            <div class="ev-info-item">不接受代报，一首歌曲仅限一位选送者提交</div>
+            <div class="ev-info-item"><strong>一经提交不得更换</strong>（重复提交或资格被取消时除外）</div>
+            <div class="ev-info-item">完整参赛资格（歌曲 / 艺人 / 专辑 / 平台数据）详见下方 <strong>参赛要求</strong></div>
+          </div>
+        </div>
+
+        <div class="ev-deadline-bar fade-up">
+          <div class="ev-deadline-bar__item">
+            <div class="ev-deadline-bar__label">通道开启</div>
+            <div class="ev-deadline-bar__val"><span style="font-family:var(--font-body);">北京时间</span> 2026-06-01 18:00</div>
+          </div>
+          <div class="ev-deadline-bar__divider"></div>
+          <div class="ev-deadline-bar__item">
+            <div class="ev-deadline-bar__label">通道关闭</div>
+            <div class="ev-deadline-bar__val"><span style="font-family:var(--font-body);">北京时间</span> 2026-07-19 24:00</div>
+          </div>
+        </div>
+
+        <!-- 参赛要求 -->
+        <div class="ev-section__hd ev-submit-main__elig" id="eligibility" style="scroll-margin-top:calc(var(--nav-h) + 12px);">
+          <p class="section-label fade-up">参赛要求</p>
+          <h2 class="section__title fade-up" style="font-size:clamp(24px,3.5vw,48px);margin-top:24px;">ELIGIBILITY</h2>
+          <p class="section__subtitle fade-up" style="margin-top:24px;font-size:14px;">各项资格审查时限为 <strong style="color:var(--clr-text);">2026-07-19 24:00</strong>。以下任一平台指标超出上限，歌曲即失去参赛资格。</p>
+        </div>
+
+        <div class="ev-info-card fade-up">
+          <div class="ev-info-card__title"><span class="ev-dot ev-dot--v"></span>平台数据上限</div>
+          <div class="ev-pt-wrap"><table class="ev-pt-table">
+            <thead>
+              <tr><th>平台</th><th>指标项目</th><th style="text-align:right;">上限</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>网易云音乐</td><td>歌曲评论量</td><td>1,000</td></tr>
+              <tr><td>网易云音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
+              <tr style="border-top:1px solid var(--clr-border-2);"><td>QQ 音乐</td><td>歌曲评论量</td><td>1,000</td></tr>
+              <tr><td>QQ 音乐</td><td>艺人粉丝量</td><td>10,000</td></tr>
+              <tr style="border-top:1px solid var(--clr-border-2);"><td>Spotify</td><td>歌手月听众数</td><td>5,000,000</td></tr>
+              <tr><td>Spotify</td><td>单曲累计播放量</td><td>10,000,000</td></tr>
+              <tr style="border-top:1px solid var(--clr-border-2);"><td>YouTube</td><td>官方频道订阅数</td><td>5,000,000</td></tr>
+              <tr><td>YouTube</td><td>官方单曲 MV 播放量</td><td>10,000,000</td></tr>
+            </tbody>
+          </table></div>
+          <p class="ev-pt-note">* 若歌曲存在多个版本，以最早发行时间为准。审查时限均为 2026-07-19 24:00。</p>
+        </div>
+
+        <div class="ev-info-card fade-up">
+          <div class="ev-info-card__title"><span class="ev-dot ev-dot--p"></span>歌曲要求</div>
+          <div class="ev-info-list">
+            <div class="ev-info-item">发行日期在 <strong>2023-07-01 至 2026-06-30</strong> 之间</div>
+            <div class="ev-info-item">未被选送至 <strong>Eurovision Song Contest</strong> 参赛</div>
+            <div class="ev-info-item">未进入过任何 <strong>榜吧官方榜单</strong>（含全吧及各派季榜、周榜等）</div>
+            <div class="ev-info-item">未进入过任何 <strong>榜吧官方评比名单</strong>（含吧视、吧莱美等）</div>
+            <div class="ev-info-item"><strong>BarboardLab 周榜</strong> 助攻数 <strong>不超过 5 榜</strong>；单曲最高排名 <strong>不得高于第 50 名</strong>（单榜助攻除外）</div>
+            <div class="ev-info-item">未进入过除选送者外 <strong>2 位及以上</strong> 其他成员的个人年榜或半年榜（须自行举证）</div>
+          </div>
+        </div>
+
+        <div class="ev-info-card fade-up">
+          <div class="ev-info-card__title"><span class="ev-dot ev-dot--g"></span>专辑要求</div>
+          <div class="ev-info-list">
+            <div class="ev-info-item">未进入过 <strong>Billboard 200</strong></div>
+            <div class="ev-info-item">未获得过 <strong>格莱美奖提名</strong></div>
+            <div class="ev-info-item">未获得过 <strong>吧莱美奖提名</strong></div>
+          </div>
+        </div>
+
+        <div class="ev-info-card fade-up">
+          <div class="ev-info-card__title"><span class="ev-dot ev-dot--a"></span>艺人要求</div>
+          <div class="ev-info-list">
+            <div class="ev-info-item">累计参与 Barvision 次数 <strong>≤ 3 次</strong></div>
+            <div class="ev-info-item">在历届 Barvision 中 <strong>未获得前三名</strong></div>
+            <div class="ev-info-item">未进入过榜吧官方 <strong>年榜或半年榜 Top 100</strong></div>
+            <div class="ev-info-item">未进入过各大分派 <strong>年榜或半年榜 Top 50</strong></div>
+            <div class="ev-info-item">未获得过 <strong>Eurovision Song Contest 冠军</strong></div>
+            <div class="ev-info-item">未进入过 <strong>Billboard Artist 100</strong></div>
+            <div class="ev-info-item">Lead 单曲未进入过 <strong>Billboard Hot 100、Global 200 或 UK Official Singles Chart Top 100</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: 歌曲报名通道（sticky 悬浮；勿加 fade-up——其 transform:translateY(0) 会破坏后代 sticky） -->
+      <div class="ev-submit-side">
+        <div class="submit-panel">
+          <div class="submit-panel__head">
+            <span class="submit-panel__title">歌曲报名通道</span>
+            <span class="sp-badge sp-badge--locked" id="spBadge">即将开启</span>
+          </div>
+          <div class="submit-panel__body">
+
+            <!-- Locked -->
+            <div class="sp-locked" id="spLocked">
+              <svg class="sp-locked__icon" width="44" height="44" viewBox="0 0 44 44"
+                fill="none" stroke="currentColor" stroke-width="1.5"
+                stroke-linecap="round" stroke-linejoin="round">
+                <rect x="11" y="20" width="22" height="18" rx="3"/>
+                <path d="M15 20v-6a7 7 0 0114 0v6"/>
+              </svg>
+              <p class="sp-locked__heading">歌曲征集即将开启</p>
+              <p class="sp-locked__msg">提交通道将于<br><strong>北京时间 2026 年 6 月 1 日 18:00</strong><br>正式开启。</p>
+              <div class="sp-locked__cd">
+                <div class="sp-locked__cd-label">距开启还有</div>
+                <div class="sp-locked__cd-digits" id="panelCountdown">—</div>
+                <div class="sp-locked__date"><span style="font-family:var(--font-body);">北京时间</span> 2026-06-01 18:00</div>
+              </div>
+            </div>
+
+            <!-- Open -->
+            <div class="sp-open" id="spOpen">
+              <p class="sp-open__desc">提交通道现已开启。请填写以下信息完成歌曲报名。</p>
+
+              <form id="subForm" class="sub-form" novalidate>
+                <!-- 提交人 -->
+                <div class="sub-field">
+                  <label class="sub-label" for="subHandle">提交者<span class="sub-req">*</span></label>
+                  <input class="sub-input" type="text" id="subHandle" autocomplete="off" placeholder="榜吧昵称 或 B站ID名" />
+                  <p class="sub-err" id="errHandle"></p>
+                </div>
+
+                <!-- 联系方式 -->
+                <div class="sub-field">
+                  <label class="sub-label" for="subContact">联系方式（QQ号 / 微信号，选填）</label>
+                  <input class="sub-input" type="text" id="subContact" autocomplete="off" placeholder="QQ号 或 微信号" />
+                </div>
+
+                <!-- 报名方式 -->
+                <div class="sub-field">
+                  <label class="sub-label">报名方式 <span class="sub-req">*</span></label>
+                  <div class="sub-radio">
+                    <label class="sub-radio__opt"><input type="radio" name="subType" value="内定" /><span>内部选择（内定）<small>1 首</small></span></label>
+                    <label class="sub-radio__opt"><input type="radio" name="subType" value="海选" /><span>公开选拔（海选）<small>最多 2 首</small></span></label>
+                  </div>
+                  <p class="sub-err" id="errType"></p>
+                </div>
+
+                <!-- 海选名称（仅海选） -->
+                <div class="sub-field" id="auditionField" hidden>
+                  <label class="sub-label" for="subAudition">海选名称 <span class="sub-req">*</span></label>
+                  <input class="sub-input" type="text" id="subAudition" autocomplete="off" />
+                  <p class="sub-hint">填写海选名称后将解锁「第二首（海选亚军）」。</p>
+                  <p class="sub-err" id="errAudition"></p>
+                </div>
+
+                <!-- 歌曲① -->
+                <fieldset class="sub-song">
+                  <legend class="sub-song__legend" id="song1Legend">参赛歌曲</legend>
+                  <div class="sub-grid">
+                    <div class="sub-field"><label class="sub-label">歌曲名 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="1" data-key="title" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">艺人 <span class="sub-req">*</span></label><input class="sub-input" type="text" data-song="1" data-key="artist" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">发行国家（选填）</label><input class="sub-input" type="text" data-song="1" data-key="country" /></div>
+                    <div class="sub-field"><label class="sub-label">语种（选填）</label><input class="sub-input" type="text" data-song="1" data-key="language" /></div>
+                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="1" data-key="date" /><p class="sub-err"></p></div>
+                  </div>
+                </fieldset>
+
+                <!-- 歌曲②（仅海选·亚军） -->
+                <fieldset class="sub-song" id="song2" hidden>
+                  <legend class="sub-song__legend">歌曲二 · 海选亚军 <small>→ 海选突围赛</small></legend>
+                  <div class="sub-grid">
+                    <div class="sub-field"><label class="sub-label">歌曲名（选填）</label><input class="sub-input" type="text" data-song="2" data-key="title" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">艺人（选填）</label><input class="sub-input" type="text" data-song="2" data-key="artist" /><p class="sub-err"></p></div>
+                    <div class="sub-field"><label class="sub-label">发行国家（选填）</label><input class="sub-input" type="text" data-song="2" data-key="country" /></div>
+                    <div class="sub-field"><label class="sub-label">语种（选填）</label><input class="sub-input" type="text" data-song="2" data-key="language" /></div>
+                    <div class="sub-field"><label class="sub-label">发行日期（选填）</label><input class="sub-input" type="date" min="2023-07-01" max="2026-06-30" data-song="2" data-key="date" /><p class="sub-err"></p></div>
+                  </div>
+                </fieldset>
+
+                <!-- 备注（选填，给主办方的信息） -->
+                <div class="sub-field">
+                  <label class="sub-label" for="subNote">备注（选填）</label>
+                  <textarea class="sub-input sub-textarea" id="subNote" rows="3" autocomplete="off" placeholder="想要补充的报名信息，如：选送特定歌曲版本，展播时播放 MV 或 Live 等。"></textarea>
+                </div>
+
+                <!-- 蜜罐（防机器人，勿填） -->
+                <input type="text" id="subHp" class="sub-hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+                <p class="sub-err sub-err--form" id="errForm"></p>
+                <button type="submit" class="btn btn--primary sub-submit" id="subSubmit">提交歌曲</button>
+              </form>
+
+              <div class="sub-success" id="subSuccess" hidden>
+                <div class="sub-success__icon" aria-hidden="true">✓</div>
+                <p class="sub-success__title">歌曲提交成功</p>
+                <p class="sub-success__msg">我们已收到您的报名信息。如有问题会通过您留的联系方式与您联系。</p>
+                <div class="sub-success__btns">
+                  <button type="button" class="btn btn--outline" id="subView" style="font-size:12px;">查看报名详情</button>
+                  <button type="button" class="btn btn--outline" id="subAgain" style="font-size:12px;" data-tooltip="该操作将覆盖之前的提交记录">重新报名</button>
+                </div>
+                <div class="sub-recap" id="subRecap" hidden></div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<div id="site-footer"></div>
+<script src="/scripts/nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<script>
+  /* Hero 海报背景：预解码完成后淡入（消除大图弹出 / 主线程解码卡顿） */
+  (function () {
+    var el = document.querySelector('.ev-hero__poster');
+    if (!el) return;
+    var im = new Image();
+    function done() { el.classList.add('loaded'); }
+    im.onload = done; im.onerror = done;
+    // 按视口预解码实际显示的底图：手机端 bg.png（无 logo）/ 桌面端 poster.png
+    im.src = window.matchMedia('(max-width:768px)').matches
+      ? '/assets/images/barvision/2026/bg.png' : '/assets/images/barvision/2026/poster.png';
+    if (im.decode) { im.decode().then(done).catch(function () {}); }
+  })();
+
+  /* Fade-up observer */
+  if ('IntersectionObserver' in window) {
+    const fadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('visible'); fadeObs.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.08 });
+    document.querySelectorAll('.fade-up').forEach(el => fadeObs.observe(el));
+  } else {
+    document.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+  }
+
+  /* 右侧报名通道悬浮（JS 驱动；CSS sticky 在此 grid 布局下不可靠，#67）。
+     桌面端：随滚动以 transform 平移面板，使其保持在导航下方，并不超出左栏底部；手机端（≤960）关闭。 */
+  (function initStickyPanel() {
+    const side  = document.querySelector('.ev-submit-side');
+    const panel = side && side.querySelector('.submit-panel');
+    if (!side || !panel) return;
+    const GAP = 92;                 // 距视窗顶（nav-h 72 + 20）
+    const mq = window.matchMedia('(max-width: 960px)');
+    let ticking = false;
+    function compute() {
+      ticking = false;
+      if (mq.matches) { panel.style.transform = ''; return; }   // 手机端：恢复正常流
+      const max = side.offsetHeight - panel.offsetHeight;        // 面板底不超过左栏底
+      if (max <= 0) { panel.style.transform = ''; return; }
+      let ty = GAP - side.getBoundingClientRect().top;           // 让面板顶停在 GAP 处
+      ty = Math.max(0, Math.min(ty, max));
+      panel.style.transform = 'translateY(' + ty + 'px)';
+    }
+    function onScroll() { if (!ticking) { ticking = true; requestAnimationFrame(compute); } }
+    compute();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', compute);
+    if (mq.addEventListener) mq.addEventListener('change', compute);
+  })();
+
+  /* Countdown + form gate */
+  const OPEN_DATE  = new Date('2026-06-01T18:00:00+08:00');
+  const CLOSE_DATE = new Date('2026-07-20T00:00:00+08:00');  // = 北京时间 7/19 24:00
+  const VOTE1_DATE = new Date('2026-07-25T22:00:00+08:00');  // Semi-Final 1 + 海选突围赛投票开启
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function fmtCountdown(diff) {
+    if (diff <= 0) return '—';
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    return d + '<span class="ev-cd-unit">天</span>' +
+           pad(h) + '<span class="ev-cd-unit">时</span>' +
+           pad(m) + '<span class="ev-cd-unit">分</span>' +
+           pad(s) + '<span class="ev-cd-unit">秒</span>';
+  }
+
+  function updateAll() {
+    const now      = new Date();
+    const diff     = OPEN_DATE - now;
+    const isOpen   = diff <= 0 && now <= CLOSE_DATE;
+    const isClosed = now > CLOSE_DATE;
+
+    /* Hero countdown */
+    const heroEl    = document.getElementById('heroCountdown');
+    const heroLabel = document.getElementById('heroCountdownLabel');
+    if (heroEl) {
+      if (isClosed) {
+        if (now < VOTE1_DATE) {
+          heroLabel.textContent = '距 Semi-Final 1 和海选突围赛投票开启还有';
+          heroEl.innerHTML      = fmtCountdown(VOTE1_DATE - now);
+        } else {
+          heroLabel.textContent = 'Semi-Final 1 / 海选突围赛投票';
+          heroEl.textContent    = '投票进行中';
+        }
+      } else if (isOpen) {
+        heroLabel.textContent = '距提交通道关闭还有';
+        heroEl.innerHTML      = fmtCountdown(CLOSE_DATE - now);
+      } else {
+        heroLabel.textContent = '距提交通道开启还有';
+        heroEl.innerHTML      = fmtCountdown(diff);
+      }
+    }
+
+    /* Panel countdown */
+    const panelEl = document.getElementById('panelCountdown');
+    if (panelEl && !isOpen && !isClosed) panelEl.innerHTML = fmtCountdown(diff);
+
+    /* Show / hide submit panel */
+    const spLocked = document.getElementById('spLocked');
+    const spOpen   = document.getElementById('spOpen');
+    const spBadge  = document.getElementById('spBadge');
+
+    if (isOpen) {
+      if (spLocked) spLocked.style.display = 'none';
+      if (spOpen)   spOpen.style.display   = 'block';
+      if (spBadge)  { spBadge.innerHTML = '<span class="sp-badge__dot"></span>已开启'; spBadge.className = 'sp-badge sp-badge--open'; }
+    } else if (isClosed) {
+      if (spLocked) spLocked.style.display = '';
+      if (spOpen)   spOpen.style.display = 'none';
+      if (spLocked) {
+        spLocked.querySelector('.sp-locked__heading').textContent = '歌曲征集已结束';
+        spLocked.querySelector('.sp-locked__msg').innerHTML =
+          '歌曲提交通道已于 <strong style="color:var(--clr-text-2);">2026 年 7 月 19 日 24:00</strong> 关闭。';
+        const cdEl = spLocked.querySelector('.sp-locked__cd');
+        if (cdEl) cdEl.style.display = 'none';
+      }
+      if (spBadge)  { spBadge.textContent = '已关闭'; spBadge.className = 'sp-badge sp-badge--closed'; }
+    }
+  }
+
+  updateAll();
+  setInterval(updateAll, 1000);
+
+  /* ── 自定义报名表单 ── */
+  (function initSubmitForm() {
+    const form = document.getElementById('subForm');
+    if (!form) return;
+
+    // EmailJS 配置（Public Key 前端可见，配合成员校验 + 蜜罐 + 域名白名单防滥用）
+    const EMAILJS = { publicKey: 'M2tBv7vRh3TY2MAeA', serviceId: 'service_cqbstn7', templateId: 'template_d75xg0c' };
+    if (window.emailjs) emailjs.init({ publicKey: EMAILJS.publicKey });
+
+    const auditionField = document.getElementById('auditionField');
+    const auditionInput = document.getElementById('subAudition');
+    const song2         = document.getElementById('song2');
+    const song1Legend   = document.getElementById('song1Legend');
+
+    function getType() {
+      const c = form.querySelector('input[name="subType"]:checked');
+      return c ? c.value : '';
+    }
+    function syncConditional() {
+      const t = getType();
+      if (t === '海选') {
+        auditionField.hidden = false;
+        song1Legend.innerHTML = '歌曲一 · 海选冠军 <small>→ Semi-Final</small>';
+        song2.hidden = !auditionInput.value.trim();
+      } else {
+        auditionField.hidden = true;
+        song1Legend.textContent = '参赛歌曲';
+        song2.hidden = true;
+      }
+    }
+    form.querySelectorAll('input[name="subType"]').forEach(r => r.addEventListener('change', syncConditional));
+    auditionInput.addEventListener('input', syncConditional);
+
+    function fieldErr(input, msg) {
+      input.classList.toggle('sub-input--err', !!msg);
+      const err = input.closest('.sub-field').querySelector('.sub-err');
+      if (err) err.textContent = msg || '';
+    }
+    function validateSong(n, requireBasics) {
+      let ok = true;
+      ['title', 'artist'].forEach(key => {
+        const inp = form.querySelector('[data-song="' + n + '"][data-key="' + key + '"]');
+        if (requireBasics && !inp.value.trim()) { fieldErr(inp, '必填'); ok = false; } else fieldErr(inp, '');
+      });
+      const d = form.querySelector('[data-song="' + n + '"][data-key="date"]');
+      if (d.value && (d.value < '2023-07-01' || d.value > '2026-06-30')) {
+        fieldErr(d, '须在 2023-07-01 ～ 2026-06-30'); ok = false;
+      }
+      return ok;
+    }
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (document.getElementById('subHp').value) return;   // 蜜罐：机器人，静默丢弃
+
+      let ok = true;
+      const handleInput = document.getElementById('subHandle');
+      const handle = handleInput.value.trim();
+      if (!handle) { fieldErr(handleInput, '请填写提交者'); ok = false; } else fieldErr(handleInput, '');
+
+      const type = getType();
+      const errType = document.getElementById('errType');
+      if (!type) { errType.textContent = '请选择报名方式'; ok = false; } else errType.textContent = '';
+
+      if (type === '海选' && !auditionInput.value.trim()) { fieldErr(auditionInput, '海选报名须填写海选名称'); ok = false; }
+      else fieldErr(auditionInput, '');
+
+      if (!validateSong(1, true)) ok = false;
+      const hasSong2 = type === '海选' && !!auditionInput.value.trim();
+      if (hasSong2 && !validateSong(2, false)) ok = false;
+
+      const errForm = document.getElementById('errForm');
+      if (!ok) { errForm.textContent = '请检查标红的必填项。'; return; }
+      errForm.textContent = '';
+
+      submitSubmission(collectPayload(type, hasSong2));
+    });
+
+    function collectPayload(type, hasSong2) {
+      function song(n) {
+        const g = k => (form.querySelector('[data-song="' + n + '"][data-key="' + k + '"]') || {}).value || '';
+        return { title: g('title'), artist: g('artist'), country: g('country'), language: g('language'), date: g('date') };
+      }
+      const p = {
+        handle:   document.getElementById('subHandle').value.trim(),
+        contact:  document.getElementById('subContact').value.trim(),
+        type:     type,
+        audition: auditionInput.value.trim(),
+        note:     document.getElementById('subNote').value.trim(),
+        song1:    song(1)
+      };
+      if (hasSong2) {
+        const s2 = song(2);
+        if (s2.title || s2.artist || s2.country || s2.language || s2.date) p.song2 = s2;  // 空的歌曲二不计入
+      }
+      return p;
+    }
+
+    function buildMessage(d) {
+      function song(s, label) {
+        if (!s) return '';
+        return '\n【' + label + '】\n'
+          + '歌名：' + s.title + '\n'
+          + '艺人：' + s.artist + '\n'
+          + (s.country ? '发行国家：' + s.country + '\n' : '')
+          + (s.language ? '语种：' + s.language + '\n' : '')
+          + (s.date ? '发行日期：' + s.date + '\n' : '');
+      }
+      let txt = '提交者：' + d.handle + '\n'
+        + (d.contact ? '联系方式：' + d.contact + '\n' : '')
+        + '报名方式：' + d.type + (d.audition ? '（海选名称：' + d.audition + '）' : '') + '\n';
+      if (d.song2) {
+        txt += song(d.song1, '歌曲① · 海选冠军 → Semi-Final');
+        txt += song(d.song2, '歌曲② · 海选亚军 → 海选突围赛');
+      } else {
+        txt += song(d.song1, '参赛歌曲');
+      }
+      if (d.note) txt += '\n【备注】\n' + d.note + '\n';
+      txt += '\n—\n提交时间：' + new Date().toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai' }) + '（北京时间）';
+      return txt;
+    }
+
+    function submitSubmission(data) {
+      const btn = document.getElementById('subSubmit');
+      const errForm = document.getElementById('errForm');
+      if (!window.emailjs) { errForm.textContent = '邮件服务未加载，请刷新页面重试，或联系主办方。'; return; }
+      btn.disabled = true;
+      const orig = btn.textContent;
+      btn.textContent = '提交中…';
+      emailjs.send(EMAILJS.serviceId, EMAILJS.templateId, {
+        submitter: data.handle,
+        message:   buildMessage(data)
+      }).then(function () {
+        showSuccess(data);
+      }).catch(function (err) {
+        console.warn('EmailJS 发送失败', err);
+        errForm.textContent = '提交失败，请检查网络后重试；多次失败请联系主办方。';
+      }).finally(function () {
+        btn.disabled = false;
+        btn.textContent = orig;
+      });
+    }
+
+    const STORE_KEY = 'barvision2026_submission';
+    let lastPayload = null;
+    const spDesc  = form.previousElementSibling;  // .sp-open__desc（成功页隐藏）
+    const okTitle = document.querySelector('.sub-success__title');
+    const okMsg   = document.querySelector('.sub-success__msg');
+
+    function showSuccess(data, returning) {
+      lastPayload = data || null;
+      if (data && !returning) {                    // 新提交 → 覆盖本设备记录
+        try { localStorage.setItem(STORE_KEY, JSON.stringify(data)); } catch (e) {}
+      }
+      if (returning) {
+        okTitle.textContent = '您已提交报名';
+        okMsg.textContent   = '以下是您在本设备已提交的报名信息。如需修改，点「重新报名」覆盖。';
+      } else {
+        okTitle.textContent = '歌曲提交成功';
+        okMsg.textContent   = '我们已收到您的报名信息。如有问题会通过您留的联系方式与您联系。';
+      }
+      form.hidden = true;
+      if (spDesc && spDesc.classList.contains('sp-open__desc')) spDesc.hidden = true;
+      const recap = document.getElementById('subRecap');
+      recap.hidden = true; recap.textContent = '';
+      document.getElementById('subView').textContent = '查看报名详情';
+      document.getElementById('subSuccess').hidden = false;
+    }
+
+    // 查看自己的报名：回显本次提交内容（无后台，仅本次会话）
+    document.getElementById('subView').addEventListener('click', function () {
+      const recap = document.getElementById('subRecap');
+      if (recap.hidden) {
+        recap.textContent = lastPayload ? buildMessage(lastPayload) : '本次会话暂无报名记录。';
+        recap.hidden = false;
+        this.textContent = '收起报名详情';
+      } else {
+        recap.hidden = true;
+        this.textContent = '查看报名详情';
+      }
+    });
+
+    // 重新报名：清空表单，回到填写态
+    document.getElementById('subAgain').addEventListener('click', function () {
+      form.reset();
+      syncConditional();
+      form.querySelectorAll('.sub-input--err').forEach(el => el.classList.remove('sub-input--err'));
+      form.querySelectorAll('.sub-err').forEach(el => el.textContent = '');
+      document.getElementById('errForm').textContent = '';
+      document.getElementById('subView').textContent = '查看报名详情';
+      document.getElementById('subRecap').hidden = true;
+      document.getElementById('subSuccess').hidden = true;
+      if (spDesc && spDesc.classList.contains('sp-open__desc')) spDesc.hidden = false;
+      form.hidden = false;
+    });
+
+    // 本设备已提交过 → 加载时直接显示「已报名」态
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+      if (saved) showSuccess(saved, true);
+    } catch (e) {}
+  })();
+
+</script>
+</body>
+</html>
