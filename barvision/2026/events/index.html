@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 歌单 / 投票 | Barboard</title>
-  <meta name="description" content="第十六届 Barvision Chongqing 2026 参赛歌单——37 首正赛曲目 + 12 首外卡曲目，Spotify / 网易云音乐在线试听。投票将随半决赛开启。" />
+  <meta name="description" content="第十六届 Barvision Chongqing 2026 参赛歌单——38 首正赛曲目 + 12 首外卡曲目，Spotify / 网易云音乐在线试听。投票将随半决赛开启。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
   <link rel="stylesheet" href="/style.css" />
@@ -90,10 +90,8 @@
     }
     .pl-link:hover { border-color: var(--clr-violet-light); background: var(--clr-surface-2); }
     .pl-link__pf { display: flex; align-items: center; gap: 11px; }
-    .pl-link__dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
-    .pl-link__dot--sp { background: #1db954; box-shadow: 0 0 8px rgba(29,185,84,0.5); }
-    .pl-link__dot--ne { background: #c20c0c; box-shadow: 0 0 8px rgba(194,12,12,0.5); }
-    .pl-link__dot--qq { background: #f5c842; box-shadow: 0 0 8px rgba(245,200,66,0.5); }
+    .pl-link__logo { width: 18px; height: 18px; flex-shrink: 0; display: block; }
+    .pl-link__region { font-size: 10px; font-weight: 500; color: var(--clr-text-3); margin-left: 3px; letter-spacing: 0; }
     .pl-link__arrow { color: var(--clr-text-3); font-size: 13px; transition: transform 0.2s; }
     .pl-link:hover .pl-link__arrow { transform: translateX(3px); }
     .pl-note {
@@ -119,6 +117,28 @@
 <body>
   <div id="site-nav"></div>
 
+  <!-- 各音乐平台 logo（小图标，供歌单链接前缀，nominative 链接用途） -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="logo-sp" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="12" fill="#1db954"/>
+      <path d="M6 9.7c3.7-1.05 8.1-.8 11.5 1.3" stroke="#000" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+      <path d="M6.9 12.9c3-.85 6.5-.6 9.3 1.05" stroke="#000" stroke-width="1.35" stroke-linecap="round" fill="none"/>
+      <path d="M7.7 15.9c2.35-.65 5-.45 7.1.8" stroke="#000" stroke-width="1.15" stroke-linecap="round" fill="none"/>
+    </symbol>
+    <symbol id="logo-am" viewBox="0 0 24 24">
+      <rect width="24" height="24" rx="5.4" fill="#fa243c"/>
+      <path fill="#fff" d="M16 5.7l-6.6 1.42v7.33a2.15 2.15 0 1 0 1.3 1.97V9.6l4-.86v3.98a2.15 2.15 0 1 0 1.3 1.97z"/>
+    </symbol>
+    <symbol id="logo-ne" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="12" fill="#c20c0c"/>
+      <path fill="#fff" d="M15.2 6.9l-5.4 1.16v6.28a1.85 1.85 0 1 0 1.2 1.72V9.7l4.2-.9z"/>
+    </symbol>
+    <symbol id="logo-qq" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="12" fill="#31c27c"/>
+      <path fill="#fff" d="M15.2 6.9l-5.4 1.16v6.28a1.85 1.85 0 1 0 1.2 1.72V9.7l4.2-.9z"/>
+    </symbol>
+  </svg>
+
   <section class="ev-hero">
     <div class="ev-hero__poster" aria-hidden="true"></div>
     <div class="ev-hero__scrim" aria-hidden="true"></div>
@@ -129,7 +149,7 @@
         <h1 class="ev-title--cjk">歌单 <span class="ev-accent">／ 投票</span></h1>
         <div class="ev-meta">
           <span class="ev-meta-item">第十六届 · 重庆</span>
-          <span class="ev-meta-item">37 首正赛 + 12 首外卡</span>
+          <span class="ev-meta-item">38 首正赛 + 12 首外卡</span>
         </div>
         <p class="ev-hero__desc">本届全部参赛曲目已收录于下方歌单，先听为快。投票将随半决赛（7 月 25 日起）陆续开启，敬请关注本页与各场直播。</p>
       </div>
@@ -142,17 +162,20 @@
       <h2 class="section__title"><span style="color:var(--clr-text);">参赛</span>歌单</h2>
       <div class="pl-grid">
         <div class="pl-card">
-          <div class="pl-card__eyebrow">正赛 · 37 首</div>
+          <div class="pl-card__eyebrow">正赛 · 38 首</div>
           <h3 class="pl-card__title">Barvision Chongqing 2026</h3>
           <div class="pl-links">
             <a class="pl-link" href="https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><span class="pl-link__dot pl-link__dot--sp"></span>Spotify</span><span class="pl-link__arrow">↗</span>
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026/pl.u-XkD0vlEc2lZMVo" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-am"/></svg>Apple Music<span class="pl-link__region">美区</span></span><span class="pl-link__arrow">↗</span>
             </a>
             <a class="pl-link" href="https://163cn.tv/9vjQFlX" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><span class="pl-link__dot pl-link__dot--ne"></span>网易云音乐</span><span class="pl-link__arrow">↗</span>
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
             </a>
             <a class="pl-link" href="https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><span class="pl-link__dot pl-link__dot--qq"></span>QQ音乐</span><span class="pl-link__arrow">↗</span>
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
             </a>
           </div>
         </div>
@@ -161,13 +184,16 @@
           <h3 class="pl-card__title">Barvision Chongqing 2026 Wildcards</h3>
           <div class="pl-links">
             <a class="pl-link" href="https://open.spotify.com/playlist/1uRlN8naJK4Ofhn0UoMW7v?si=4c8fcf99cedf4a78" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><span class="pl-link__dot pl-link__dot--sp"></span>Spotify</span><span class="pl-link__arrow">↗</span>
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026-wildcards/pl.u-zPyLlyPTeDxVzE" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-am"/></svg>Apple Music<span class="pl-link__region">美区</span></span><span class="pl-link__arrow">↗</span>
             </a>
             <a class="pl-link" href="https://163cn.tv/9vjU0wc" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><span class="pl-link__dot pl-link__dot--ne"></span>网易云音乐</span><span class="pl-link__arrow">↗</span>
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
             </a>
             <a class="pl-link" href="https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749787000&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><span class="pl-link__dot pl-link__dot--qq"></span>QQ音乐</span><span class="pl-link__arrow">↗</span>
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
             </a>
           </div>
         </div>
