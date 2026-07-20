@@ -44,6 +44,7 @@
   { "role": "candidate", "mode": "内部选送", "member": "麦妈", "song": "Lifelike (feat. Midwife)", "artist": "Amulets", "genre": "Alternative", "language": "英语" },
   { "role": "candidate", "mode": "内部选送", "member": "T妈", "song": "Justin's Headed Out", "artist": "mercury", "genre": "Alternative", "language": "英语" },
   { "role": "candidate", "mode": "内部选送", "member": "锴妈", "song": "Show Me What Love Is", "artist": "Erik Segerstedt", "genre": "Pop", "language": "英语" },
+  { "role": "candidate", "mode": "内部选送", "member": "嘟妈", "song": "Perfect Design", "artist": "Duma", "genre": "Alternative R&B", "language": "英语" },
   { "role": "candidate", "mode": "公开海选", "member": "包妈", "song": "Where Has My Friend Gone?", "artist": "The Home Team", "genre": "Rock", "language": "英语" },
   { "role": "candidate", "mode": "公开海选", "member": "泰妈", "song": "BANG", "artist": "Unroyal", "genre": "Rock", "language": "英语" },
   { "role": "candidate", "mode": "公开海选", "member": "威妈", "song": "OK City Sun", "artist": "Walking On Rivers", "genre": "Alternative", "language": "英语" },
@@ -64,18 +65,18 @@
  "auditions": {
   "note": "",
   "list": [
-   { "name": "Marshmallow Festival 2026", "member": "松妈", "period": "", "status": "已结束", "artist": "We Three", "song": "Boyfriend" },
-   { "name": "XXXS Music audition", "member": "XX妈", "period": "", "status": "已结束", "artist": "Adam Doleac", "song": "Day One (feat. Madeline Merlo)" },
-   { "name": "Hanvision 2026: The second chances", "member": "韩妈", "period": "", "status": "已结束", "artist": "Agoney", "song": "Intacto (完好如初)" },
-   { "name": "Whitevision 2026", "member": "白妈", "period": "", "status": "已结束", "artist": "Robin Packalen", "song": "1001 tapaa (1001种方式)" },
-   { "name": "Rainfall Melody Festival 2026", "member": "雨妈", "period": "", "status": "已结束", "artist": "Brian Dunne", "song": "Clams Casino" },
-   { "name": "European Fever", "member": "邓妈", "period": "", "status": "已结束", "artist": "Chris De Sarandy", "song": "Body & Soul" },
-   { "name": "Voiizion Contest", "member": "猴妈", "period": "", "status": "已结束", "artist": "Elle Coves", "song": "I Got A Thing For Love" },
-   { "name": "RollingGOAT 2026", "member": "羊妈", "period": "", "status": "已结束", "artist": "The Hellp", "song": "Country Road" },
-   { "name": "Starvision 2026", "member": "星妈", "period": "", "status": "已结束", "artist": "The Belair Lip Bombs", "song": "Hey You" },
-   { "name": "2026 BacUp", "member": "包妈", "period": "", "status": "进行中", "artist": "", "song": "" },
-   { "name": "Genius Genesis 2026", "member": "威妈", "period": "", "status": "进行中", "artist": "", "song": "" },
-   { "name": "Titancrazyland's Election 2026", "member": "泰妈", "period": "", "status": "进行中", "artist": "", "song": "" }
+   { "name": "Marshmallow Festival 2026", "member": "松妈", "period": "", "artist": "We Three", "song": "Boyfriend" },
+   { "name": "XXXS Music audition", "member": "XX妈", "period": "", "artist": "Adam Doleac", "song": "Day One (feat. Madeline Merlo)" },
+   { "name": "Hanvision 2026: The second chances", "member": "韩妈", "period": "", "artist": "Agoney", "song": "Intacto (完好如初)" },
+   { "name": "Whitevision 2026", "member": "白妈", "period": "", "artist": "Robin Packalen", "song": "1001 tapaa (1001种方式)" },
+   { "name": "Rainfall Melody Festival 2026", "member": "雨妈", "period": "", "artist": "Brian Dunne", "song": "Clams Casino" },
+   { "name": "European Fever", "member": "邓妈", "period": "", "artist": "Chris De Sarandy", "song": "Body & Soul" },
+   { "name": "Voiizion Contest", "member": "猴妈", "period": "", "artist": "Elle Coves", "song": "I Got A Thing For Love" },
+   { "name": "RollingGOAT 2026", "member": "羊妈", "period": "", "artist": "The Hellp", "song": "Country Road" },
+   { "name": "Starvision 2026", "member": "星妈", "period": "", "artist": "The Belair Lip Bombs", "song": "Hey You" },
+   { "name": "2026 BacUp", "member": "包妈", "period": "", "artist": "The Home Team", "song": "Where Has My Friend Gone?" },
+   { "name": "Genius Genesis 2026", "member": "威妈", "period": "", "artist": "Walking On Rivers", "song": "OK City Sun" },
+   { "name": "Titancrazyland's Election 2026", "member": "泰妈", "period": "", "artist": "Unroyal", "song": "BANG" }
   ]
  },
  "info_sections": [
@@ -187,6 +188,13 @@
      { "label": "Barvision Chongqing 2026", "url": "https://163cn.tv/9vjQFlX" },
      { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://163cn.tv/9vjU0wc" }
     ]
+   },
+   {
+    "platform": "QQ音乐",
+    "items": [
+     { "label": "Barvision Chongqing 2026", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" },
+     { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749787000&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" }
+    ]
    }
   ]
  },
@@ -228,7 +236,8 @@
   "杰妈": { "id": 156, "handle": "jh201013" },
   "麦妈": { "id": 130, "handle": "Tandiny" },
   "T妈": { "id": 115, "handle": "iTAP_II" },
-  "锴妈": { "id": 12, "handle": "WillKris锴" }
+  "锴妈": { "id": 12, "handle": "WillKris锴" },
+  "嘟妈": { "id": 190, "handle": "DDDDDope" }
  },
  "confirmed": [],
  "matches": []
