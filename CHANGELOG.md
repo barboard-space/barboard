@@ -4,6 +4,24 @@
 
 ---
 
+## [2026-07-20] — Barvision 2026 报名截止：终版名单 / events 改歌单页 / 抽签器上线
+
+### Added
+- **半决赛分组抽签器 v1 上线** `barvision/2026/draw/`（密码锁 + noindex，不进导航）：Eurovision 式 SF1/SF2 分组，16:9 等比缩放（2K OBS 采集）、纯 JS SHA-256 可复现随机、2020 式归并 final pot、上/下半场抽、威妈 recap、POT 现场可编辑。详见 CLAUDE.md #184。
+- 第 16 届**终版名单**：正赛 38 首 + wildcard 12 首；新成员 K妈（id 11）入 members.csv。全体参赛者点亮 member 实心 icon + 第16届徽章。
+- 歌单新增 **Apple Music（美区）**；`confirmed` 名单机制（已确认参与、歌曲未公开的成员仅点亮 icon/徽章、不进选送表）。
+- 赛程新增「07-24 晚 · Allocation Draw 直播」（主页 + 2026 页）。
+
+### Changed
+- `/barvision/2026/events/` 由 EmailJS 歌曲提交表单页**改为歌单/投票专属页**（Spotify / Apple Music / 网易云 / QQ 四平台，链接前用各平台 SVG logo，顺序 Spotify > Apple Music > 网易云 > QQ）；原提交页存档至 `/barvision/2026/submit/`。
+- 报名截止状态切换：主页 season-card + 2026 hero（状态/按钮/倒计时/歌曲提交阶段），倒计时目标改为 Allocation Draw（北京时间 07-24 21:00）。
+- auditions 表删除「状态」列（移除 `status` 字段，渲染器数据驱动自动隐藏），12 场海选回填获胜曲。
+- 第 15 届相关链接补全（GF 直播回放/歌曲展播 + 各平台 GF/整体歌单）。
+- 手机端上下届导航：2023+ 届名省略地名（Barvision Qiqihar 2023 → Barvision 2023）。
+
+### Style
+- `archive` / 年榜 Hub 卡片入场动画对齐 members 卡片（12px 轻微位移，去除明显向上浮动）。
+
 ## [2026-07-02] — 2013+2014 年榜导入，2013–2023 全系列完成
 
 ### Added

@@ -30,7 +30,7 @@
 - `style.css` — 全站样式（含完整设计系统）
 - `fonts.css` — 本地字体声明
 - `CHANGELOG.md` — 版本更新日志
-- `barvision/2026/events.html` — **Barvision 2026 歌曲提交通道（专用页，已重构为只管提交，见 #164）**：hero（中文标题「歌曲 / 提交通道」`.ev-title--cjk` + 倒计时；已去 meta 三标签 / CTA 按钮 / 更新日期）+ 两栏布局（左：报名须知 + 参赛要求，统一信息卡 `.ev-info-card`；右：EmailJS 报名表单面板，**JS 驱动悬浮** initStickyPanel）；EmailJS 详见 #127；eyebrow ← 回 `2026.html`（events 为本届主页的子页）。原 赛程/投票/规则/关于 已迁入 2026.html。**⚠️ 路径方案已改（见 #165）：本届主页 = `barvision/2026.html`，events 子页仍 `barvision/2026/events.html`**
+- `barvision/2026/events/index.html` — **Barvision 2026 歌单/投票专属页（报名截止后已重构，见 #185）**：报名于 7/19 截止后，原 EmailJS 歌曲提交表单页**存档**至 `barvision/2026/submit/index.html`（三态 JS 自动显示征集已结束）；本地址改为歌单页（ev-hero 海报风格 + 4 平台歌单卡 Spotify/Apple Music美区/网易云/QQ，链接前用各平台内联 SVG logo）。~~原提交页(EmailJS，见 #127/#164)~~ 现存于 submit/。另 `barvision/2026/draw/index.html` = 半决赛分组抽签器 v1（密码锁/noindex，见 #184）。
 - `barvision/2026.html`（曾名 `2026/16.html`，路径方案见 #165）— **第 16 届 Chongqing 2026「本届实时更新页」（已完成，见 #164）**：薄壳复用 `bv-results-render.js` 的 **live 分支**（`regular-16.json` 顶层 `live:true`）；events 风格静态 hero（渲染器对 live 跳过自带 hero）+ 选送名单（Candidates/Wildcards 两表）+ 海选进展（11 场含 status，未公布获胜曲显「等待宣布/—」）+ info_sections（赛程/投票/规则/关于，数据驱动结构化 rules）；barvision XVI 当届卡 + 首页 XVI 卡/「本届总览」CTA 均指向此页；feed→首页同步机制已建但 hold（脚本 `sync_bv2026_live.py`）
 - `member.html` — Members 总览页（119位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
@@ -961,6 +961,16 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **POT 划分（用户 2026-07-07 定的暂定版,报名未结束会变）**:5 个 POT,7,7,7,7,6=34。P1 欧视派(雨韩邓白松XX野) / P2 摇滚派+(泰包星羊P T团) / P3 四人组+(汞 S鸽 狼芬 奶 文A波) / P4 老将(猴城萌柠田锴杰) / P5 中立新人(海叉笃吃X柴)。**数据佐证/隐患见下方 scratchpad 分析**:①用户三派别数据基本坐实(摇滚派 包↔泰67 等最实);②**跨 POT hub 对漏出**(雨↔萌109、雨↔田98、雨↔包116、锴↔雨92、猴↔松 均跨 POT,≈随机同场,一人只能进一个 POT 的结构代价,不可解);③老将簇是全场最大最实的 bloc(锴↔猴138 为全场第一对)。互挺分析脚本思路:遍历各届 JSON 的 `matches[].votes.voters[]` jury 逐票(=选送者互投)、限定 2026 参赛者、min(A→B,B→A) 为当届互挺分、近期加权(2025×3/24·23×2/20·19×1)、跨≥2届为候选铁对。⚠️分数是"当届支持总量"排名可信、跨届绝对值不可比(东道主选2首/早期跨组累加会放大)。
     - **v1 已实现 + 已验证**:密码锁(sessionStorage 记住)、⚙设置抽屉(POT 名单 textarea 可现场改 + 时刻 + 5个2位数 + 生成种子显示)、生成种子&开始、下一个▸逐首落位(中央霓虹聚光卡显示 →SFx+上/下半场)、自动播放(1.5s)、复制结果(含种子串+哈希)。**算法验证全绿**:34→严格17/17、每7-POT劈3/4或4/3、6-POT劈3/3、归并4 leftover→2/2、半场9/8、recap;SHA-256 标准(测试向量abc/空串过)、可复现、种子敏感。**已修 bug**:密码框 `<div class="row">` 与半决赛结果行 `.row{opacity:0}` 类名冲突致密码行被透明化 → 改类名 `.gaterow`。
     - **待细化（用户说"后面再细化"）**:① 是否 push 上线(给 `https://barboard.space/barvision/2026/draw/` 正式网址,锁着 noindex);② 最终密码;③ **种子显示样式**(用户要确认:直播时哈希/种子串怎么露、露多大);④ 配色/动画/字号/聚光卡视觉精修(v1 是初版);⑤ 成员显示用简称还是「X妈」全称;⑥ 弹幕:真抓 B 站弹幕流(WebSocket) vs 主办方手动读前5条打进去(当前=手动输入框);⑦ 报名结束后锁定最终 POT/人数/每场名额;⑧ anchor 是否升级为不可控信标;⑨（可选）导出图片/更完整的仪式引导画面。**完整讨论过程(pot 分析/种子/仪式流程 Eurovision 2020 vs 2025 差异)在本 session 对话里,scratchpad 有互挺分析产物**。
+    - **⭐ v1 已 push 上线**（`barvision/2026/draw/index.html`，commit `051cf7a`；密码锁 + noindex + 不进导航；`DRAW_PASS` 仍为占位 `barvision2026`，正式直播前须改）。
+    - **⚠️⚠️ 与终版名单的重大冲突（下一步开发必先与用户厘清）**：抽签器 v1 按「**34 首进半决赛 + 威妈=东道主直通、只抽 recap**」设计（POT 7,7,7,7,6=34、SF1 17/SF2 17）；但第 16 届**终版正赛为 38 首，且威妈已是普通公开海选候选（#38「OK City Sun」）、不再直通**（见 #185）。→ 须先确认：38 首是否全进半决赛（则 SF1/SF2≈19/19）、是否仍保留东道主直通、每场晋级名额、POT 重新划分。抽签器 POT/人数现场可编辑，但归并轮 + 上下半场配平的数字逻辑需按最终结构复核。
+
+185. **⭐ 第 16 届报名截止批次（2026-07-19/20，全部已上线）**：报名于 7/19 24:00 截止后的一次性状态切换 + 名单终版化 + events 页重构。
+    - **终版名单**：`regular-16.json` 正赛 **38 首** + wildcard **12 首**（含合报 S妈/鸽妈、狼妈/芬妈；东道主威妈亦作普通海选候选 #38）；`confirmed` 清空（人人入正式 signups）。全体参赛者已点亮 member 实心 icon + 第16届徽章。**新成员 K妈(id 11)** 已加入 members.csv（顺延范式）。wildcard = 各场公开海选亚军曲（12 场海选各出 1 首）。
+    - **⭐ `confirmed` 名单机制**（`regular-16.json` 顶层 `confirmed:[...]`）：已确认参与但歌曲未公开的成员放此列表，`gen_member_pages.load_bv2026_ids()` 读 **signups + auditions + confirmed** 三处点亮 icon/徽章，**但 confirmed 成员不进选送表**（避免空行）。歌曲公开后从 confirmed 移入 signups。（终版已全转入 signups，confirmed 现空。）
+    - **⭐ events 页重构（结构变更）**：`/barvision/2026/events/` 由「EmailJS 歌曲提交表单页」**改为歌单/投票专属页**（Spotify / Apple Music / 网易云 / QQ 四平台歌单卡，链接前用各平台内联 SVG logo `#logo-sp/am/ne/qq`；平台顺序 **Spotify > Apple Music > 网易云 > QQ**；Apple Music 标「美区」）；原提交表单页**存档**至 `/barvision/2026/submit/index.html`（其三态 JS 自动显示「征集已结束」，无需改）。主页「歌曲报名」按钮 + 2026 hero CTA 均改「**试听歌单**」→ `/barvision/2026/events/`。
+    - **报名截止状态切换**：主页 season-card（状态「报名已结束·赛事进行中」、歌曲提交阶段→「已结束」用 base `.phase__status`+inline 灰、按钮、倒计时）+ 2026 hero（desc/CTA/倒计时/更新日期）均更新。**倒计时目标改为 Allocation Draw（北京时间 2026-07-24 21:00）**，抽签后自动接续倒数半决赛投票（7-25 22:00）。赛程新增「**07-24 晚 · Allocation Draw 直播**」（主页 phase 列 + 2026 STAGE 2 首行）；原 07-24「名单锁定」行删除、并入 07-22「公示期结束，名单正式确定」。
+    - **auditions 删「状态」列**：移除所有 audition 条目的 `status` 字段 → `auditionsBlock` 的 `hasStatus` 判 false 自动隐藏该列（数据驱动，渲染器零改）；12 场海选均回填获胜曲。
+    - **Apple Music 歌单**：美区 playlist（2026 + Wildcards）已加入 events 页 + 2026 `links`（linksBlock 平台分组，任意届 `d.links` 存在即渲染）。events 页 4 平台 logo 用内联 `<symbol>`+`<use>`（简化品牌图标、nominative 链接用途）。
 
 ## 对话交接工作流
 
