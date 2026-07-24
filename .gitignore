@@ -1,3 +1,11 @@
 __pycache__/
 *.pyc
 .claude/
+
+# Barvision 2026 抽签/直播播控系统 —— 纯本地运行 + OBS 录制，不上前端
+barvision/2026/draw/
+assets/videos/barvision/2026/
+assets/audio/barvision/2026/
+assets/fonts/ITCAvantGardeGothicStd/
+assets/fonts/SourceHanSansSC/
+assets/images/barvision/2026/barvision-2026-allocation-draw-poster.png

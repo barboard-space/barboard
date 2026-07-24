@@ -4,6 +4,21 @@
 
 ---
 
+## [2026-07-24] — 半决赛分组抽签：改为纯本地直播播控页（已下架公开站）
+
+### Changed
+- **抽签系统整体改为纯本地运行 + OBS 录制，从仓库移除**（commit 517faac，`git rm --cached barvision/2026/draw/`）：draw 目录、抽签直播视频/音频、allocation-draw 海报、商用字体（ITC Avant Garde）均已 gitignore，不再上前端；`barboard.space/barvision/2026/draw/` 已失效。已取消密码锁（本地跑）。
+- 抽签机制按第 16 届终版重定（取代旧 34 首 / 2020 式归并假设）：**37 首入围**（东道主威直通 GF、SF2 展播、不进抽签）；5 池 → 前 6 轮分池轮抽（奇数轮→SF1、偶数轮→SF2）→ **第 7 轮 5 池合并为 FINAL POT** 交替抽；**SF1 19（上10/下9）、SF2 18（上下各9）**。
+
+### Added
+- **整场直播 show-runner**（单页、键盘/点击推进）：暖场→海报→credits→开场表演(Indochine)→opening loop→参赛 recap→opening loop→抽签→收尾。黑场过渡、隐藏光标、OTP 式种子输入（时/分/弹幕×5 → SHA-256 可复现）、POT 轮抽 + iOS 式上下半场滚动选择、大 tooltip、第 7 轮合并动画、收尾（POT 淡出 / SF 竖向居中 / SF·半场转白 / 标题下移 / 黑场）并**自动记录结果**（下载 txt + localStorage + 剪贴板 + 控制台）。4 段背景音乐（0.12 低音量、随环节切换、循环）。
+- **`barvision/2026/draw/result.html`**：4K（3840×2160）canvas 结果公示页，一键导出 4K PNG。
+
+### Docs
+- CLAUDE.md #184 重写为当前状态；详细开发状态见本地 `barvision/2026/draw/index.html` + memory `project-draw-tool`。
+
+---
+
 ## [2026-07-20] — Barvision 2026 报名截止：终版名单 / events 改歌单页 / 抽签器上线
 
 ### Added
