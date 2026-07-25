@@ -8,7 +8,7 @@
   <meta name="description" content="欧美流行音乐个人榜吧（Barboard），成立于2013年的欧美流行音乐爱好者社区。旗下设有 BarboardLab 每周合榜活动与 Barvision 年度歌曲大赛。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css?v=3.0.15" />
+  <link rel="stylesheet" href="/style.css?v=3.0.16" />
 </head>
 <body>
 
@@ -128,25 +128,25 @@
                     </div>
                     <div class="phase">
                       <span class="phase__name">Allocation Draw</span>
-                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__status" style="color:var(--clr-text-3);">已结束</span>
                       <span class="phase__badge phase__badge--live">直播</span>
                       <span class="phase__date">7/24 晚</span>
                     </div>
                     <div class="phase">
                       <span class="phase__name">海选突围赛</span>
-                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__status phase__status--live">正在进行</span>
                       <span class="phase__badge phase__badge--vote">投票</span>
                       <span class="phase__date">7/25 — 8/7</span>
                     </div>
                     <div class="phase">
                       <span class="phase__name">Semi Final 1</span>
-                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__status phase__status--live">正在进行</span>
                       <span class="phase__badge phase__badge--vote">投票</span>
                       <span class="phase__date">7/25 — 7/31</span>
                     </div>
                     <div class="phase">
                       <span class="phase__name">Semi Final 2</span>
-                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__status" style="color:var(--clr-accent-light);">即将开启</span>
                       <span class="phase__badge phase__badge--vote">投票</span>
                       <span class="phase__date">8/1 — 8/7</span>
                     </div>
@@ -516,7 +516,7 @@
       let target, ltext;
       if (now < DRAW) { target = DRAW; ltext = '距离 Allocation Draw 直播还有'; }
       else if (now < VOTE1) { target = VOTE1; ltext = '距离半决赛投票开启还有'; }
-      else { if (lbl) lbl.textContent = '半决赛投票'; el.innerHTML = '投票进行中'; return; }
+      else { if (lbl) lbl.textContent = '半决赛投票'; el.innerHTML = '<span style="font-family:var(--font-body);font-size:16px;font-weight:700;letter-spacing:0.03em;">投票进行中</span>'; return; }
       if (lbl) lbl.textContent = ltext;
       const diff = target - now;
       const d = Math.floor(diff / 86400000);

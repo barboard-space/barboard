@@ -4,6 +4,17 @@
 
 ---
 
+## [2026-07-25 · 赛后 2] — 状态标注 + 文案/字号微调
+
+### Changed
+- **首页 season-card 阶段状态**：Allocation Draw → **已结束**；海选突围赛 / Semi Final 1 → **正在进行**（`.phase__status--live` 粉）；Semi Final 2 → **即将开启**（accent-light 蓝）。
+- **「投票进行中」字号**（原沿用倒计时大数字）改小：`/barvision/2026/` hero 40→**18px**（body 字体，`.ev-countdown__digits.is-text`，JS 切换）、首页 season-card 32→**16px**（内联 span）。
+- **nav CTA「Barvision 2026」字号** 10→**13px**（与其它 nav 项一致，`.nav__cta-title`）→ `style.css?v=3.0.16`（16 处引用同步）。
+- **events hero H1**「听歌投票」→**「赛事专区」**。
+- **合报规则文案**（`regular-16.json`）：改为「…投票时，合报者需共同提交一份投票计入总分。」（删去「或分别投票 50% 计入」旧表述）。
+
+---
+
 ## [2026-07-25 · 赛后] — events 页视频卡 + 页内目录 + 歌单顺序调整
 
 ### Changed

@@ -63,6 +63,7 @@
     }
     .ev-countdown__label { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--clr-text-3); white-space: nowrap; }
     .ev-countdown__digits { font-family: var(--font-display); font-size: clamp(26px, 3.2vw, 40px); color: var(--clr-pink-light); line-height: 1; }
+    .ev-countdown__digits.is-text { font-family: var(--font-body); font-size: clamp(15px, 2.2vw, 18px); font-weight: 700; letter-spacing: 0.03em; }
     .ev-cd-unit { font-size: 12px; opacity: 0.55; margin: 0 1px; }
     @media (prefers-reduced-motion: no-preference) {
       @keyframes ev-hero-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
@@ -162,10 +163,11 @@
         var now = new Date(), diff = OPEN_DATE - now, isOpen = diff <= 0 && now <= CLOSE_DATE, isClosed = now > CLOSE_DATE;
         var el = document.getElementById('heroCountdown'), lbl = document.getElementById('heroCountdownLabel');
         if (!el) return;
+        el.classList.remove('is-text');
         if (isClosed) {
           if (now < DRAW_DATE) { lbl.textContent = '距 Allocation Draw 直播还有'; el.innerHTML = fmtCountdown(DRAW_DATE - now); }
           else if (now < VOTE1_DATE) { lbl.textContent = '距 Semi-Final 1 和海选突围赛投票开启还有'; el.innerHTML = fmtCountdown(VOTE1_DATE - now); }
-          else { lbl.textContent = 'Semi-Final 1 / 海选突围赛投票'; el.textContent = '投票进行中'; }
+          else { lbl.textContent = 'Semi-Final 1 / 海选突围赛投票'; el.textContent = '投票进行中'; el.classList.add('is-text'); }
         } else if (isOpen) { lbl.textContent = '距提交通道关闭还有'; el.innerHTML = fmtCountdown(CLOSE_DATE - now); }
         else { lbl.textContent = '距提交通道开启还有'; el.innerHTML = fmtCountdown(diff); }
       }
