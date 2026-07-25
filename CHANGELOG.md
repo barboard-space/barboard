@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-07-25 · 22:00 launch] — 抽签结果上线：SF1/Wildcard Running Order + 歌单/视频
+
+> 定于北京时间 7/25 22:00 上线（Semi-Final Allocation Draw 后首场公布）。
+
+### Added
+- **`regular-16.json`**：38 首 Candidates 按歌手首字母重排；19 首 SF1 候选加 `sf:"SF1"`+`ro`（出场序）；12 首 Wildcards 加 `ro`（Wildcard Round 出场序）。
+- **相关链接**：新增 `showcase`（歌曲展播：All 38 Songs / Wildcards B 站视频）+ `replays`（Allocation Draw 直播回放）；`playlists` 各平台加 **Semi-Final 1** 歌单（Spotify/Apple/网易/QQ）。SF1 Running Order 视频待 B 站发布后补。
+- **`events/`**：新增 **Semi-Final 1** 歌单卡（三卡：全部 38 / SF1 19 / Wildcard Round 12）。
+
+### Changed
+- **`bv-results-render.js`**：报名名单拆为三表——「参赛名单 · Candidates」（38，无序号）/「Semi-Final 1 · Running Order」（19，带 # 出场序）/「Wildcard Round · Running Order」（12，带 #）；`signupTable` 支持出场序列（`.bvr-su--ro` 7 列宽 + `.bvr-su__ro`）；`linksBlock` 新增「歌曲展播」组。
+
+---
+
 ## [2026-07-25] — 投票通道上线 + events 歌单页重构 + 详细规则补全
 
 ### Added
@@ -12,12 +26,13 @@
 
 ### Changed
 - **`barvision/2026/` hero 入口按钮**：「试听歌单」→**「投票链接」**（→ events `#voting`）；新增**「参赛曲目」**按钮（→ events `#playlists`，样式同「赛程安排」outline）；顺序 = 投票链接 · 参赛曲目 · 赛程安排。
-- **`barvision/2026/events/` hero**：meta「第十六届 · 重庆 / 38 首正赛 + 12 首外卡」→**「第十六届欧美流行歌曲个人榜吧歌曲大赛 / 重声交响 Echoing Confluence」**；desc 改为投票+歌单双导向；H1「歌单 ／ 投票」→**「投票 ／ 歌单」**（呼应投票优先）。
+- **`barvision/2026/events/` hero**：meta「第十六届 · 重庆 / 38 首正赛 + 12 首外卡」→**「第十六届欧美流行歌曲个人榜吧歌曲大赛 / 重声交响 Echoing Confluence」**；desc 改为投票+歌单双导向；H1「歌单 ／ 投票」→**「听歌投票」**（原「投票 ／ 歌单」偏生硬，改为自然动词短语）。
 - **卡片眉标**：「正赛 · 38 首」→**「Semi-Final · 38 首」**、「外卡 · 12 首」→**「Wildcard Round · 12 首」**。
 - **两轮突围赛英文名对齐**：海选突围赛 = **Wildcard Round**、外卡突围赛 = **Playoff**（详细规则 k 标签 + 投票方式标题 + events 正文引用处统一标注）。
 
 ### Style
 - **`barvision/2026/events/` 正文改用 archive 版式**：section-label + 两色 `section__title`（clamp 字号）；卡片改为 archive `.arc-card` 视觉语言（8px 圆角 + 3px 顶部色条 `::before` + hover 上浮/color-mix 辉光 + fade-up 入场，投票卡/歌单卡分别紫/粉主题色）。
+- **投票卡「前往投票」按钮底部对齐**：`.vt-btn { margin-top: auto }` + `.vt-notes` 底部固定间距，使两卡（等高 grid）按钮底边齐平，不再一高一低。
 
 ---
 

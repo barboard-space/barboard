@@ -108,12 +108,12 @@
     /* ═══ 投票卡专属 ═══ */
     .vt-deadline { margin-top: 14px; font-size: 12.5px; color: var(--clr-text-3); }
     .vt-deadline b { color: var(--card-c, var(--clr-violet-light)); font-weight: 600; font-family: var(--font-body); }
-    .vt-notes { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-top: 18px; }
+    .vt-notes { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-top: 18px; margin-bottom: 22px; }
     .vt-notes li { position: relative; padding-left: 16px; font-size: 13px; color: var(--clr-text-2); line-height: 1.62; }
     .vt-notes li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--card-c, var(--clr-violet-light)); }
     .vt-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      margin-top: 22px; padding: 12px 18px; border-radius: 6px;
+      margin-top: auto; padding: 12px 18px; border-radius: 6px;
       font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; color: var(--clr-white);
       background: color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 20%, var(--clr-surface));
       border: 1px solid color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 50%, transparent);
@@ -194,7 +194,7 @@
     <div class="section__inner ev-hero__inner">
       <div class="ev-hero__layout">
         <a href="/barvision/2026/" class="ev-eyebrow"><span>←</span><span>Barvision Chongqing 2026</span></a>
-        <h1 class="ev-title--cjk">投票 <span class="ev-accent">／ 歌单</span></h1>
+        <h1 class="ev-title--cjk">听歌<span class="ev-accent">投票</span></h1>
         <div class="ev-meta">
           <span class="ev-meta-item">第十六届欧美流行歌曲个人榜吧歌曲大赛</span>
           <span class="ev-meta-item">重声交响 Echoing Confluence</span>
@@ -273,7 +273,25 @@
             </a>
           </div>
         </div>
-        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
+        <div class="ev-card fade-up" style="transition-delay:0.21s;">
+          <div class="ev-card__eyebrow">Semi-Final 1 · 19 首</div>
+          <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 1</h3>
+          <div class="pl-links">
+            <a class="pl-link" href="https://open.spotify.com/playlist/3IDgAqm6Iaw9nbihOfbHzE?si=770b0c77e2434535" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-1/pl.u-MDAWkgNtAVq1y2" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-am"/></svg>Apple Music<span class="pl-link__region">美区</span></span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://163cn.tv/bbJhKNb9" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9752478305&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.28s;">
           <div class="ev-card__eyebrow">Wildcard Round · 12 首</div>
           <h3 class="ev-card__title">Barvision Chongqing 2026 Wildcards</h3>
           <div class="pl-links">
