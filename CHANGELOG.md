@@ -14,6 +14,7 @@
 - **`barvision/2026/` hero 入口按钮**：「试听歌单」→**「投票链接」**（→ events `#voting`）；新增**「参赛曲目」**按钮（→ events `#playlists`，样式同「赛程安排」outline）；顺序 = 投票链接 · 参赛曲目 · 赛程安排。
 - **`barvision/2026/events/` hero**：meta「第十六届 · 重庆 / 38 首正赛 + 12 首外卡」→**「第十六届欧美流行歌曲个人榜吧歌曲大赛 / 重声交响 Echoing Confluence」**；desc 改为投票+歌单双导向；H1「歌单 ／ 投票」→**「投票 ／ 歌单」**（呼应投票优先）。
 - **卡片眉标**：「正赛 · 38 首」→**「Semi-Final · 38 首」**、「外卡 · 12 首」→**「Wildcard Round · 12 首」**。
+- **两轮突围赛英文名对齐**：海选突围赛 = **Wildcard Round**、外卡突围赛 = **Playoff**（详细规则 k 标签 + 投票方式标题 + events 正文引用处统一标注）。
 
 ### Style
 - **`barvision/2026/events/` 正文改用 archive 版式**：section-label + 两色 `section__title`（clamp 字号）；卡片改为 archive `.arc-card` 视觉语言（8px 圆角 + 3px 顶部色条 `::before` + hover 上浮/color-mix 辉光 + fade-up 入场，投票卡/歌单卡分别紫/粉主题色）。
