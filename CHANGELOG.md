@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-07-25 · 22:00 launch] — 抽签结果上线：SF1/Wildcard Running Order + 歌单/视频
+
+> 定于北京时间 7/25 22:00 上线（Semi-Final Allocation Draw 后首场公布）。
+
+### Added
+- **`regular-16.json`**：38 首 Candidates 按歌手首字母重排；19 首 SF1 候选加 `sf:"SF1"`+`ro`（出场序）；12 首 Wildcards 加 `ro`（Wildcard Round 出场序）。
+- **相关链接**：新增 `showcase`（歌曲展播：All 38 Songs / Wildcards B 站视频）+ `replays`（Allocation Draw 直播回放）；`playlists` 各平台加 **Semi-Final 1** 歌单（Spotify/Apple/网易/QQ）。SF1 Running Order 视频待 B 站发布后补。
+- **`events/`**：新增 **Semi-Final 1** 歌单卡（三卡：全部 38 / SF1 19 / Wildcard Round 12）。
+
+### Changed
+- **`bv-results-render.js`**：报名名单拆为三表——「参赛名单 · Candidates」（38，无序号）/「Semi-Final 1 · Running Order」（19，带 # 出场序）/「Wildcard Round · Running Order」（12，带 #）；`signupTable` 支持出场序列（`.bvr-su--ro` 7 列宽 + `.bvr-su__ro`）；`linksBlock` 新增「歌曲展播」组。
+
+---
+
 ## [2026-07-25] — 投票通道上线 + events 歌单页重构 + 详细规则补全
 
 ### Added

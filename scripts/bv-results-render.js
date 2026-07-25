@@ -666,6 +666,15 @@
     .bvr-su th:nth-child(4) { width:9%; }   /* 语言 */
     .bvr-su th:nth-child(5) { width:14%; }  /* 流派 */
     .bvr-su th:nth-child(6) { width:15%; }  /* 报名方式 */
+    /* Running Order 表（Semi-Final 1 / Wildcard Round）：首列出场序号 + 7 列宽 */
+    .bvr-su__ro { text-align:center; font-family:var(--font-mono); color:var(--clr-text-3); }
+    .bvr-su--ro th:nth-child(1) { width:6%;  text-align:center; }  /* # */
+    .bvr-su--ro th:nth-child(2) { width:14%; }  /* 选送者 */
+    .bvr-su--ro th:nth-child(3) { width:20%; }  /* 歌手 */
+    .bvr-su--ro th:nth-child(4) { width:25%; }  /* 歌曲名 */
+    .bvr-su--ro th:nth-child(5) { width:8%;  }  /* 语言 */
+    .bvr-su--ro th:nth-child(6) { width:13%; }  /* 流派 */
+    .bvr-su--ro th:nth-child(7) { width:14%; }  /* 报名方式 */
     /* 结构化规则：纯项目符号列表（资格/投票条目） */
     .bvr-rule__items { margin:10px 0 0; padding-left:20px; list-style:disc; }
     .bvr-rule__items li { font-size:13.5px; line-height:1.7; color:var(--clr-text-2); margin:5px 0; }
@@ -1274,33 +1283,38 @@
 
   // ── 进行中（live）报名 ─────────────────────────────────────────
   // 报名名单：Candidates（直通半决赛）+ Wildcards（海选突围赛）两组表；按 JSON 顺序呈现（= 报名顺序）
-  function signupRow(s) {
+  function signupRow(s, idx, showOrder) {
     var joint = s.member.indexOf('/') > -1;
     var by = joint
       ? '<span class="bvr-joint">' + s.member.split('/').map(function (n) { return memberLink(n.trim()); }).join('') + '</span>'
       : memberLink(s.member);
     var modeCls = s.mode === '内部选送' ? 'bvr-mode--internal' : 'bvr-mode--open';
-    return '<tr><td class="bvr-su__by">' + by + '</td>' +
+    return '<tr>' +
+      (showOrder ? '<td class="bvr-su__ro">' + (idx + 1) + '</td>' : '') +
+      '<td class="bvr-su__by">' + by + '</td>' +
       '<td class="artist">' + esc(fmtArtist(s.artist)) + '</td>' +
       '<td class="song">' + esc(s.song) + (joint ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
       '<td class="lang">' + esc(s.language || '') + '</td>' +
       '<td class="bvr-su__genre">' + esc(s.genre || '') + '</td>' +
       '<td>' + (s.mode ? '<span class="bvr-mode ' + modeCls + '">' + esc(s.mode) + '</span>' : '') + '</td></tr>';
   }
-  function signupTable(list) {
+  function signupTable(list, showOrder) {
     return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整名单</div>' +
-      '<div class="bvr-tw fade-up"><table class="bvr-tbl bvr-su"><thead><tr>' +
+      '<div class="bvr-tw fade-up"><table class="bvr-tbl bvr-su' + (showOrder ? ' bvr-su--ro' : '') + '"><thead><tr>' +
+      (showOrder ? '<th>#</th>' : '') +
       '<th>选送者</th><th>歌手</th><th>歌曲名</th><th>语言</th><th>流派</th><th>报名方式</th>' +
-      '</tr></thead><tbody>' + list.map(signupRow).join('') + '</tbody></table></div>';
+      '</tr></thead><tbody>' + list.map(function (s, i) { return signupRow(s, i, showOrder); }).join('') + '</tbody></table></div>';
   }
   function signupListBlock(d) {
     var su = d.signups || [];
     if (!su.length) return '';
     var cand = su.filter(function (s) { return s.role === 'candidate'; });
-    var wild = su.filter(function (s) { return s.role === 'wildcard'; });
+    var wild = su.filter(function (s) { return s.role === 'wildcard'; }).slice().sort(function (a, b) { return (a.ro || 0) - (b.ro || 0); });
+    var sf1 = cand.filter(function (s) { return s.sf === 'SF1'; }).slice().sort(function (a, b) { return (a.ro || 0) - (b.ro || 0); });
     var out = '';
-    if (cand.length) out += '<div class="bvr-dvr-sub fade-up">Candidates · Semi-Final</div>' + signupTable(cand);
-    if (wild.length) out += '<div class="bvr-dvr-sub fade-up">Wildcards · 海选突围赛</div>' + signupTable(wild);
+    if (cand.length) out += '<div class="bvr-dvr-sub fade-up">参赛名单 · Candidates</div>' + signupTable(cand, false);
+    if (sf1.length) out += '<div class="bvr-dvr-sub fade-up">Semi-Final 1 · Running Order</div>' + signupTable(sf1, true);
+    if (wild.length) out += '<div class="bvr-dvr-sub fade-up">Wildcard Round · Running Order</div>' + signupTable(wild, true);
     return out;
   }
   // 相关链接（直播回放 + 歌单链接，分平台）；任意届 d.links 存在即渲染
@@ -1311,6 +1325,10 @@
       return '<a class="bvr-link" href="' + esc(it.url) + '" target="_blank" rel="noopener">' + esc(it.label) + '</a>';
     }
     var out = '';
+    if (L.showcase && L.showcase.length) {
+      out += '<div class="bvr-links__grp fade-up"><h3 class="bvr-links__h">歌曲展播</h3>' +
+        '<div class="bvr-links__list">' + L.showcase.map(row).join('') + '</div></div>';
+    }
     if (L.replays && L.replays.length) {
       out += '<div class="bvr-links__grp fade-up"><h3 class="bvr-links__h">直播回放</h3>' +
         '<div class="bvr-links__list">' + L.replays.map(row).join('') + '</div></div>';
