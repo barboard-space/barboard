@@ -4,6 +4,17 @@
 
 ---
 
+## [2026-07-26] — 时间节点推进：抽签完成 / SF1 RO 已公布 / 投票进行中
+
+### Changed
+- **首页 season-card 描述**改过去式：「Allocation Draw 将于 7/24 直播」→「半决赛分组抽签已于 7 月 24 日晚 完成，Semi Final 1 与海选突围赛投票现已开启」。
+- **`/barvision/2026/` hero 描述**更新为当前节点：抽签完成、SF1 出场顺序已公布（SF2 将于 8/1 公布）、SF1 与海选突围赛投票已开启；「本页上次更新于」→ **2026-07-26**。
+
+### Added
+- **`bv-results-render.js` signupListBlock**：SF1 Running Order 后新增「Semi-Final 2 出场顺序将于 8 月 1 日展播时公布」占位说明（`sf2` 数据一旦录入即自动替换为 SF2 Running Order 表）。
+
+---
+
 ## [2026-07-25 · 赛后 2] — 状态标注 + 文案/字号微调
 
 ### Changed
