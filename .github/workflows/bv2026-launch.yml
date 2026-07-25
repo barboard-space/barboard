@@ -1,0 +1,58 @@
+name: Barvision 2026 · SF1 定时上线
+
+# 北京时间 2026-07-25 22:00 (= 14:00 UTC) 把 launch-sf1 分支（抽签结果 / SF1·Wildcard Running Order /
+# 歌单 / 视频）合并进 main 发布。提前触发 + 内部 sleep 到 22:00:00，补偿 GitHub cron 抖动。
+# workflow_dispatch 为手动兜底（现在或任意时间点触发都会 sleep 到 22:00 才发布）。
+# ⚠️ 上线成功后请删除本 workflow 文件与 launch-sf1 分支。
+
+on:
+  schedule:
+    - cron: '43 13 25 7 *'   # 21:43 北京时间（13:43 UTC）
+    - cron: '52 13 25 7 *'   # 21:52 北京时间（冗余，防单次丢触发）
+  workflow_dispatch:
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout main
+        uses: actions/checkout@v4.2.2
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Wait until 22:00 Beijing, then merge & publish
+        run: |
+          set -e
+          TARGET=$(date -u -d '2026-07-25T14:00:00' +%s)
+          NOW=$(date -u +%s)
+          if [ "$NOW" -lt "$TARGET" ]; then
+            echo "Now $(date -u '+%Y-%m-%d %H:%M:%S UTC'); sleeping $((TARGET-NOW))s until 22:00 Beijing (14:00 UTC)..."
+            sleep $((TARGET-NOW))
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git fetch origin main launch-sf1
+          git reset --hard origin/main
+          if git merge-base --is-ancestor origin/launch-sf1 HEAD; then
+            echo "launch-sf1 already merged — nothing to do."
+            exit 0
+          fi
+          git merge --no-edit origin/launch-sf1
+          if git push origin main; then
+            echo "Published at $(date -u '+%Y-%m-%d %H:%M:%S UTC')."
+          else
+            echo "Push failed; checking whether a concurrent run already published..."
+            git fetch origin main
+            if git merge-base --is-ancestor origin/launch-sf1 origin/main; then
+              echo "Already published by a concurrent run — OK."
+              exit 0
+            fi
+            exit 1
+          fi
