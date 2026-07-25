@@ -4,6 +4,22 @@
 
 ---
 
+## [2026-07-25] — 投票通道上线 + events 歌单页重构 + 详细规则补全
+
+### Added
+- **`barvision/2026/events/` 新增「投票通道」section**（置于歌单前，`id="voting"`）：发布各场投票链接卡片——Semi-Final 1（截止 7/31 24:00，wjx）+ Wildcard Round / 海选突围赛（截止 8/7 24:00，wjx），含截止时间徽章 + 简要投票注意事项（评委票 Top 10 / 观众票 20 票 / 认可票 12 选 3）+「前往投票」按钮；附 SF2 与外卡突围赛后续说明。
+- **`data/barvision/barvision-2026/regular-16.json` 详细规则补全**：「规则摘要」→「详细规则」，由 6 条概括扩为 7 节结构化赛制规则（投票人资格 / 半决赛[含 SF1 19·SF2 18 席位、前 12 晋级] / 海选突围赛+外卡突围赛[12 选 3·16 选 3] / 决赛[26 首] / 平局判定 / 合报 / 冠军承办权），全部按新赛制转换。
+
+### Changed
+- **`barvision/2026/` hero 入口按钮**：「试听歌单」→**「投票链接」**（→ events `#voting`）；新增**「参赛曲目」**按钮（→ events `#playlists`，样式同「赛程安排」outline）；顺序 = 投票链接 · 参赛曲目 · 赛程安排。
+- **`barvision/2026/events/` hero**：meta「第十六届 · 重庆 / 38 首正赛 + 12 首外卡」→**「第十六届欧美流行歌曲个人榜吧歌曲大赛 / 重声交响 Echoing Confluence」**；desc 改为投票+歌单双导向；H1「歌单 ／ 投票」→**「投票 ／ 歌单」**（呼应投票优先）。
+- **卡片眉标**：「正赛 · 38 首」→**「Semi-Final · 38 首」**、「外卡 · 12 首」→**「Wildcard Round · 12 首」**。
+
+### Style
+- **`barvision/2026/events/` 正文改用 archive 版式**：section-label + 两色 `section__title`（clamp 字号）；卡片改为 archive `.arc-card` 视觉语言（8px 圆角 + 3px 顶部色条 `::before` + hover 上浮/color-mix 辉光 + fade-up 入场，投票卡/歌单卡分别紫/粉主题色）。
+
+---
+
 ## [2026-07-24] — 赛制更新（前12晋级/决赛26首）+ nav CTA 改名
 
 ### Changed

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 歌单 / 投票 | Barboard</title>
-  <meta name="description" content="第十六届 Barvision Chongqing 2026 参赛歌单——38 首正赛曲目 + 12 首外卡曲目，Spotify / 网易云音乐在线试听。投票将随半决赛开启。" />
+  <meta name="description" content="第十六届 Barvision Chongqing 2026 · 各场投票链接与参赛歌单——Semi-Final 38 首 + Wildcard Round 12 首，Spotify / Apple Music / 网易云 / QQ 在线试听，半决赛与海选突围赛投票进行中。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
   <link rel="stylesheet" href="/style.css" />
@@ -64,31 +64,74 @@
       .ev-hero__desc { animation: ev-hero-in 0.55s 0.26s cubic-bezier(0.22,1,0.36,1) both; }
     }
 
-    /* ═══ 歌单卡片 ═══ */
-    .pl-section { padding: 72px 0 96px; border-top: 1px solid var(--clr-border); }
-    .pl-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: var(--gap-md); }
-    .pl-card {
-      background: var(--clr-surface); border: 1px solid var(--clr-border);
-      border-top: 2px solid var(--clr-violet-light); border-radius: 12px;
-      padding: 28px 26px; transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+    /* ═══ 正文 section（参考 archive 版式：section-label + 两色 section__title）═══ */
+    .ev-sec { padding: 72px 0 96px; border-top: 1px solid var(--clr-border); }
+    .ev-sec .section__title { color: var(--clr-violet-light); font-size: clamp(24px, 3.5vw, 48px); }
+    .ev-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: var(--gap-md); }
+
+    /* ═══ 卡片外壳（参考 archive .arc-card：8px 圆角 + 3px 顶部色条 + hover 上浮/辉光）═══ */
+    .ev-card {
+      position: relative; background: var(--clr-surface);
+      border: 1px solid var(--clr-border); border-radius: 8px;
+      padding: 28px 28px 24px; overflow: hidden;
+      display: flex; flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
     }
-    .pl-card:hover { border-color: var(--clr-border-2); transform: translateY(-3px); box-shadow: 0 14px 32px rgba(168,85,247,0.14); }
-    .pl-card--wild { border-top-color: var(--clr-pink-light); }
-    .pl-card--wild:hover { box-shadow: 0 14px 32px rgba(224,64,160,0.14); }
-    .pl-card__eyebrow {
+    .ev-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      border-radius: 8px 8px 0 0; pointer-events: none;
+      background: var(--card-c, var(--clr-violet-light));
+    }
+    .ev-card:hover {
+      border-color: var(--clr-border-2); transform: translateY(-3px);
+      box-shadow: 0 14px 32px color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 22%, transparent);
+    }
+    /* .fade-up.visible（3 类）比 :hover（2 类）更具体会盖掉 hover transform——提权恢复（同 archive #64）*/
+    .ev-card.fade-up.visible:hover { transform: translateY(-3px); }
+    .ev-card--wild { --card-c: var(--clr-pink-light); }
+
+    /* 卡片头部：eyebrow + 标题 + 徽章 */
+    .ev-card__hd { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .ev-card__eyebrow {
       font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--clr-violet-light); margin-bottom: 10px;
+      color: var(--card-c, var(--clr-violet-light)); margin-bottom: 10px;
     }
-    .pl-card--wild .pl-card__eyebrow { color: var(--clr-pink-light); }
-    .pl-card__title { font-size: 21px; font-weight: 700; color: var(--clr-text); line-height: 1.25; margin-bottom: 22px; }
-    .pl-links { display: flex; flex-direction: column; gap: 10px; }
+    .ev-card__title { font-size: 20px; font-weight: 700; color: var(--clr-text); line-height: 1.28; }
+    .ev-badge {
+      flex-shrink: 0; font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 4px 10px; border-radius: 3px; white-space: nowrap;
+      color: var(--card-c, var(--clr-violet-light));
+      background: color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 9%, transparent);
+      border: 1px solid color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 30%, transparent);
+    }
+
+    /* ═══ 投票卡专属 ═══ */
+    .vt-deadline { margin-top: 14px; font-size: 12.5px; color: var(--clr-text-3); }
+    .vt-deadline b { color: var(--card-c, var(--clr-violet-light)); font-weight: 600; font-family: var(--font-body); }
+    .vt-notes { list-style: none; display: flex; flex-direction: column; gap: 9px; margin-top: 18px; }
+    .vt-notes li { position: relative; padding-left: 16px; font-size: 13px; color: var(--clr-text-2); line-height: 1.62; }
+    .vt-notes li::before { content: ''; position: absolute; left: 0; top: 8px; width: 5px; height: 5px; border-radius: 50%; background: var(--card-c, var(--clr-violet-light)); }
+    .vt-btn {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      margin-top: 22px; padding: 12px 18px; border-radius: 6px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.04em; text-decoration: none; color: var(--clr-white);
+      background: color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 20%, var(--clr-surface));
+      border: 1px solid color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 50%, transparent);
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .vt-btn:hover { background: color-mix(in srgb, var(--card-c, var(--clr-violet-light)) 32%, var(--clr-surface)); border-color: var(--card-c, var(--clr-violet-light)); }
+    .vt-btn__arrow { transition: transform 0.2s; }
+    .vt-btn:hover .vt-btn__arrow { transform: translateX(3px); }
+
+    /* ═══ 歌单卡专属（平台链接行）═══ */
+    .pl-links { display: flex; flex-direction: column; gap: 10px; margin-top: 22px; }
     .pl-link {
       display: flex; align-items: center; justify-content: space-between; gap: 12px;
       padding: 13px 16px; border: 1px solid var(--clr-border); border-radius: 8px;
       text-decoration: none; color: var(--clr-text); font-size: 14px; font-weight: 600;
       transition: border-color 0.2s, background 0.2s;
     }
-    .pl-link:hover { border-color: var(--clr-violet-light); background: var(--clr-surface-2); }
+    .pl-link:hover { border-color: var(--card-c, var(--clr-violet-light)); background: var(--clr-surface-2); }
     .pl-link__pf { display: flex; align-items: center; gap: 11px; }
     .pl-link__logo { width: 18px; height: 18px; flex-shrink: 0; display: block; }
     .pl-link__region { font-size: 10px; font-weight: 500; color: var(--clr-text-3); margin-left: 3px; letter-spacing: 0; }
@@ -101,16 +144,21 @@
     }
     .pl-note b { color: var(--clr-violet-light); font-weight: 600; }
 
+    @media (prefers-reduced-motion: no-preference) {
+      .ev-card.fade-up { transform: translateY(12px); transition: opacity 0.55s cubic-bezier(0.22,1,0.36,1), transform 0.55s cubic-bezier(0.22,1,0.36,1); }
+      .ev-card.fade-up.visible { opacity: 1; transform: translateY(0); }
+    }
+
     @media (max-width: 768px) {
       .ev-hero { padding: calc(var(--nav-h) + 40px) 0 56px; }
       .ev-hero__poster { background-image: url('/assets/images/barvision/2026/bg.png'); }
       .ev-hero__desc { max-width: 100%; }
-      .pl-grid { grid-template-columns: 1fr; }
-      .pl-section { padding: 56px 0 72px; }
+      .ev-grid { grid-template-columns: 1fr; }
+      .ev-sec { padding: 56px 0 72px; }
     }
     @media (hover: none), (pointer: coarse) {
-      .pl-card:hover { transform: none; box-shadow: none; border-color: var(--clr-border); }
-      .pl-card--wild:hover { box-shadow: none; }
+      .ev-card:hover { transform: none; box-shadow: none; border-color: var(--clr-border); }
+      .ev-card.fade-up.visible:hover { transform: none; }
     }
   </style>
 </head>
@@ -146,24 +194,70 @@
     <div class="section__inner ev-hero__inner">
       <div class="ev-hero__layout">
         <a href="/barvision/2026/" class="ev-eyebrow"><span>←</span><span>Barvision Chongqing 2026</span></a>
-        <h1 class="ev-title--cjk">歌单 <span class="ev-accent">／ 投票</span></h1>
+        <h1 class="ev-title--cjk">投票 <span class="ev-accent">／ 歌单</span></h1>
         <div class="ev-meta">
-          <span class="ev-meta-item">第十六届 · 重庆</span>
-          <span class="ev-meta-item">38 首正赛 + 12 首外卡</span>
+          <span class="ev-meta-item">第十六届欧美流行歌曲个人榜吧歌曲大赛</span>
+          <span class="ev-meta-item">重声交响 Echoing Confluence</span>
         </div>
-        <p class="ev-hero__desc">本届全部参赛曲目已收录于下方歌单，先听为快。投票将随半决赛（7 月 25 日起）陆续开启，敬请关注本页与各场直播。</p>
+        <p class="ev-hero__desc">本届参赛曲目已收录于下方歌单，各场投票链接也已陆续公布。请在对应截止时间前完成投票，并留意本页与各场直播了解最新进展。</p>
       </div>
     </div>
   </section>
 
-  <section class="pl-section">
+  <!-- ═══ 投票通道 ═══ -->
+  <section class="ev-sec" id="voting" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
     <div class="section__inner">
-      <p class="section-label">PLAYLISTS</p>
-      <h2 class="section__title"><span style="color:var(--clr-text);">参赛</span>歌单</h2>
-      <div class="pl-grid">
-        <div class="pl-card">
-          <div class="pl-card__eyebrow">正赛 · 38 首</div>
-          <h3 class="pl-card__title">Barvision Chongqing 2026</h3>
+      <p class="section-label fade-up">VOTING</p>
+      <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">投票</span>通道</h2>
+      <div class="ev-grid">
+        <!-- Semi-Final 1 -->
+        <div class="ev-card fade-up" style="transition-delay:0.14s;">
+          <div class="ev-card__hd">
+            <div>
+              <div class="ev-card__eyebrow">Semi-Final 1</div>
+              <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 1</h3>
+            </div>
+            <span class="ev-badge">投票进行中</span>
+          </div>
+          <div class="vt-deadline">投票截止 <b>7 月 31 日 24:00</b></div>
+          <ul class="vt-notes">
+            <li>评委票（Top 10）：为本场歌曲评选你心中的前 10 名，依次赋 12·10·8·7·6·5·4·3·2·1 分。</li>
+            <li>观众票（20 票）：将 20 票自由分配给本场歌曲，同一首歌最多投 10 票。</li>
+            <li>非选送成员须先完成观众票方可参与评委票；不得投给自己选送的歌曲。</li>
+          </ul>
+          <a class="vt-btn" href="https://v.wjx.cn/vm/OtbDVbt.aspx#" target="_blank" rel="noopener">前往投票 <span class="vt-btn__arrow">→</span></a>
+        </div>
+        <!-- Wildcard Round（海选突围赛）-->
+        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
+          <div class="ev-card__hd">
+            <div>
+              <div class="ev-card__eyebrow">Wildcard Round · 海选突围赛</div>
+              <h3 class="ev-card__title">Barvision Chongqing 2026 Wildcard Round</h3>
+            </div>
+            <span class="ev-badge">投票进行中</span>
+          </div>
+          <div class="vt-deadline">投票截止 <b>8 月 7 日 24:00</b></div>
+          <ul class="vt-notes">
+            <li>认可票（12 选 3）：从 12 首外卡曲目中选出 1–3 首，每人至多投 3 票、每首至多 1 票。</li>
+            <li>不得投给自己选送的歌曲。</li>
+            <li>票数前 3 名晋级外卡突围赛，冲击决赛席位。</li>
+          </ul>
+          <a class="vt-btn" href="https://v.wjx.cn/vm/OtVPtbD.aspx#" target="_blank" rel="noopener">前往投票 <span class="vt-btn__arrow">→</span></a>
+        </div>
+      </div>
+      <p class="pl-note fade-up">Semi-Final 2 投票将于 <b>8 月 1 日晚</b> 开启（截止 8 月 7 日 24:00），外卡突围赛于 <b>8 月 8 日</b> Semi-Final 直播现场实时进行——相应投票链接届时在此更新。完整赛程见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
+    </div>
+  </section>
+
+  <!-- ═══ 参赛歌单 ═══ -->
+  <section class="ev-sec" id="playlists" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+    <div class="section__inner">
+      <p class="section-label fade-up">PLAYLISTS</p>
+      <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">参赛</span>歌单</h2>
+      <div class="ev-grid">
+        <div class="ev-card fade-up" style="transition-delay:0.14s;">
+          <div class="ev-card__eyebrow">Semi-Final · 38 首</div>
+          <h3 class="ev-card__title">Barvision Chongqing 2026</h3>
           <div class="pl-links">
             <a class="pl-link" href="https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d" target="_blank" rel="noopener">
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
@@ -179,9 +273,9 @@
             </a>
           </div>
         </div>
-        <div class="pl-card pl-card--wild">
-          <div class="pl-card__eyebrow">外卡 · 12 首</div>
-          <h3 class="pl-card__title">Barvision Chongqing 2026 Wildcards</h3>
+        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
+          <div class="ev-card__eyebrow">Wildcard Round · 12 首</div>
+          <h3 class="ev-card__title">Barvision Chongqing 2026 Wildcards</h3>
           <div class="pl-links">
             <a class="pl-link" href="https://open.spotify.com/playlist/1uRlN8naJK4Ofhn0UoMW7v?si=4c8fcf99cedf4a78" target="_blank" rel="noopener">
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
@@ -198,7 +292,7 @@
           </div>
         </div>
       </div>
-      <p class="pl-note">歌曲提交通道已于 <b>7 月 19 日</b> 关闭。半决赛分组抽签（Allocation Draw）将于 <b>7 月 24 日晚</b> 直播，半决赛投票自 <b>7 月 25 日</b> 起陆续开启——完整赛程与实时进展见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
+      <p class="pl-note fade-up">歌曲提交通道已于 <b>7 月 19 日</b> 关闭，半决赛分组抽签（Allocation Draw）已于 <b>7 月 24 日晚</b> 完成。各场投票已陆续开启，请前往上方投票通道参与——完整赛程与实时进展见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
     </div>
   </section>
 
@@ -216,6 +310,24 @@
       img.onload = function () { (img.decode ? img.decode().then(show).catch(show) : show()); };
       img.onerror = show;
       img.src = src;
+    })();
+
+    // 正文 fade-up 入场（同 archive 版式）
+    (function () {
+      if ('IntersectionObserver' in window) {
+        var fadeObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) { e.target.classList.add('visible'); fadeObserver.unobserve(e.target); clearDelayAfterAnim(e.target); }
+          });
+        }, { threshold: 0.08 });
+        document.querySelectorAll('.fade-up').forEach(function (el) { fadeObserver.observe(el); });
+      } else {
+        document.querySelectorAll('.fade-up').forEach(function (el) { el.classList.add('visible'); });
+      }
+      function clearDelayAfterAnim(el) {
+        var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
+        setTimeout(function () { el.style.transitionDelay = '0s'; }, ms);
+      }
     })();
   </script>
 </body>
