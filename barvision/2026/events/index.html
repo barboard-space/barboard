@@ -160,6 +160,47 @@
       .ev-card:hover { transform: none; box-shadow: none; border-color: var(--clr-border); }
       .ev-card.fade-up.visible:hover { transform: none; }
     }
+
+    /* ═══ 回顾视频 section：卡片顶对齐（各卡视频条数不同，避免拉伸空白）═══ */
+    .ev-grid--top { align-items: start; }
+
+    /* ═══ 页内目录（Notion 风格右侧缩略目录 + 移动端悬浮按钮，参考本届总览页）═══ */
+    .ev-toc { position:fixed; right:14px; top:50%; transform:translateY(-50%); z-index:90;
+      display:flex; flex-direction:column; align-items:flex-end; gap:0;
+      opacity:0; visibility:hidden; transition:opacity 0.25s,visibility 0.25s; }
+    .ev-toc--visible { opacity:1; visibility:visible; }
+    .ev-toc__toggle { display:none; }
+    .ev-toc__list { display:flex; flex-direction:column; align-items:flex-end; gap:2px;
+      padding:8px 10px; border-radius:8px; background:transparent;
+      transition:background 0.25s, -webkit-backdrop-filter 0.25s, backdrop-filter 0.25s; }
+    .ev-toc:hover .ev-toc__list { background:rgba(20,20,34,0.55); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px); }
+    .ev-toc__item { display:flex; align-items:center; justify-content:flex-end; gap:9px; cursor:pointer; user-select:none; padding:2px 0; }
+    .ev-toc__dash { flex:none; width:14px; height:2px; border-radius:2px; background:var(--clr-text-3); opacity:0.4; transition:width 0.25s, background 0.25s, opacity 0.25s; }
+    .ev-toc__label { order:-1; font-family:var(--font-body); font-size:10.5px; letter-spacing:0.01em; color:var(--clr-text-3); white-space:nowrap; max-width:0; opacity:0; transform:translateX(6px); overflow:hidden; transition:max-width 0.3s ease, opacity 0.25s, transform 0.3s ease, color 0.15s; }
+    .ev-toc:hover .ev-toc__label { max-width:220px; opacity:1; transform:translateX(0); }
+    .ev-toc__item:hover .ev-toc__dash { opacity:0.85; background:var(--clr-text-2); }
+    .ev-toc__item:hover .ev-toc__label { color:var(--clr-text); }
+    .ev-toc__item--active .ev-toc__dash { width:22px; background:var(--clr-violet-light); opacity:1; }
+    .ev-toc__item--active .ev-toc__label { color:var(--clr-violet-light); }
+    @media (max-width:768px) {
+      .ev-toc { right:20px; bottom:66px; top:auto; transform:none; z-index:210; gap:10px; }
+      .ev-toc__toggle { display:flex; align-items:center; justify-content:center; width:42px; height:42px;
+        background:rgba(20,20,34,0.5); -webkit-backdrop-filter:blur(12px); backdrop-filter:blur(12px);
+        border:1px solid var(--clr-border-2); border-radius:4px; color:rgba(192,132,252,0.65); cursor:pointer;
+        padding:0; transition:color 0.25s,border-color 0.25s; }
+      .ev-toc__toggle svg { width:18px; height:18px; }
+      .ev-toc--open .ev-toc__toggle { color:var(--clr-violet-light); border-color:var(--clr-violet-light); }
+      .ev-toc__list { display:none; gap:1px; min-width:132px; max-height:62vh; overflow-y:auto;
+        background:rgba(20,20,34,0.72); -webkit-backdrop-filter:blur(14px); backdrop-filter:blur(14px);
+        border:1px solid var(--clr-border-2); border-radius:6px; padding:6px; box-shadow:0 8px 28px rgba(0,0,0,0.4); }
+      .ev-toc:hover .ev-toc__list { background:rgba(20,20,34,0.72); }
+      .ev-toc--open .ev-toc__list { display:flex; }
+      .ev-toc__item { justify-content:flex-start; gap:0; padding:9px 13px; border-radius:4px; }
+      .ev-toc__item:hover { background:rgba(255,255,255,0.04); }
+      .ev-toc__dash { display:none; }
+      .ev-toc__label { order:0; max-width:none; opacity:1; transform:none; overflow:visible; font-size:13px; }
+      .ev-toc__item--active { background:rgba(168,85,247,0.12); }
+    }
   </style>
 </head>
 <body>
@@ -184,6 +225,12 @@
     <symbol id="logo-qq" viewBox="0 0 24 24">
       <circle cx="12" cy="12" r="12" fill="#31c27c"/>
       <path fill="#fff" d="M15.2 6.9l-5.4 1.16v6.28a1.85 1.85 0 1 0 1.2 1.72V9.7l4.2-.9z"/>
+    </symbol>
+    <symbol id="logo-bili" viewBox="0 0 24 24">
+      <rect x="3" y="6" width="18" height="13" rx="3.2" fill="#00aeec"/>
+      <path d="M7.5 3.2 10 5.7M16.5 3.2 14 5.7" stroke="#00aeec" stroke-width="1.7" stroke-linecap="round" fill="none"/>
+      <circle cx="9.2" cy="12.6" r="1.15" fill="#fff"/>
+      <circle cx="14.8" cy="12.6" r="1.15" fill="#fff"/>
     </symbol>
   </svg>
 
@@ -249,6 +296,40 @@
     </div>
   </section>
 
+  <!-- ═══ 回顾视频 ═══ -->
+  <section class="ev-sec" id="videos" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+    <div class="section__inner">
+      <p class="section-label fade-up">VIDEOS</p>
+      <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">回顾</span>视频</h2>
+      <div class="ev-grid ev-grid--top">
+        <div class="ev-card fade-up" style="transition-delay:0.14s;">
+          <div class="ev-card__eyebrow">SHOWCASE</div>
+          <h3 class="ev-card__title">歌曲展播</h3>
+          <div class="pl-links">
+            <a class="pl-link" href="https://www.bilibili.com/video/BV18egC6NEx4/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>All 38 Songs</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://www.bilibili.com/video/BV18egC6NEAr/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>Wildcards</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://www.bilibili.com/video/BV1vT3u6UEyu/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>First Semi-Final Running Order</span><span class="pl-link__arrow">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
+          <div class="ev-card__eyebrow">REPLAY</div>
+          <h3 class="ev-card__title">直播回放</h3>
+          <div class="pl-links">
+            <a class="pl-link" href="https://www.bilibili.com/video/BV1Qage6yEY9/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>Allocation Draw 分组抽签</span><span class="pl-link__arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ═══ 参赛歌单 ═══ -->
   <section class="ev-sec" id="playlists" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
     <div class="section__inner">
@@ -256,24 +337,6 @@
       <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">参赛</span>歌单</h2>
       <div class="ev-grid">
         <div class="ev-card fade-up" style="transition-delay:0.14s;">
-          <div class="ev-card__eyebrow">Semi-Final · 38 首</div>
-          <h3 class="ev-card__title">Barvision Chongqing 2026</h3>
-          <div class="pl-links">
-            <a class="pl-link" href="https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
-            </a>
-            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026/pl.u-XkD0vlEc2lZMVo" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-am"/></svg>Apple Music<span class="pl-link__region">美区</span></span><span class="pl-link__arrow">↗</span>
-            </a>
-            <a class="pl-link" href="https://163cn.tv/9vjQFlX" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
-            </a>
-            <a class="pl-link" href="https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
-            </a>
-          </div>
-        </div>
-        <div class="ev-card fade-up" style="transition-delay:0.21s;">
           <div class="ev-card__eyebrow">Semi-Final 1 · 19 首</div>
           <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 1</h3>
           <div class="pl-links">
@@ -291,7 +354,7 @@
             </a>
           </div>
         </div>
-        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.28s;">
+        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
           <div class="ev-card__eyebrow">Wildcard Round · 12 首</div>
           <h3 class="ev-card__title">Barvision Chongqing 2026 Wildcards</h3>
           <div class="pl-links">
@@ -305,6 +368,24 @@
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
             </a>
             <a class="pl-link" href="https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749787000&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
+            </a>
+          </div>
+        </div>
+        <div class="ev-card fade-up" style="transition-delay:0.28s;">
+          <div class="ev-card__eyebrow">Semi-Final · 38 首</div>
+          <h3 class="ev-card__title">Barvision Chongqing 2026</h3>
+          <div class="pl-links">
+            <a class="pl-link" href="https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026/pl.u-XkD0vlEc2lZMVo" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-am"/></svg>Apple Music<span class="pl-link__region">美区</span></span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://163cn.tv/9vjQFlX" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
             </a>
           </div>
@@ -346,6 +427,55 @@
         var ms = (parseFloat(el.style.transitionDelay) || 0) * 1000 + 250;
         setTimeout(function () { el.style.transitionDelay = '0s'; }, ms);
       }
+    })();
+
+    // 页内目录（Notion 风格右侧缩略目录 + 移动端悬浮按钮，参考本届总览页）
+    (function () {
+      var items = [
+        { id: 'voting', label: '投票' },
+        { id: 'videos', label: '视频' },
+        { id: 'playlists', label: '歌单' }
+      ];
+      var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
+      var nav = document.createElement('nav');
+      nav.className = 'ev-toc';
+      nav.setAttribute('aria-label', '页内目录');
+      nav.innerHTML = '<div class="ev-toc__list">' + items.map(function (it) {
+        return '<div class="ev-toc__item" data-target="' + it.id + '"><span class="ev-toc__dash"></span><span class="ev-toc__label">' + it.label + '</span></div>';
+      }).join('') + '</div><button class="ev-toc__toggle" type="button" aria-label="页内目录">' + ICON + '</button>';
+      document.body.appendChild(nav);
+      var toggle = nav.querySelector('.ev-toc__toggle');
+      toggle.addEventListener('click', function (e) { e.stopPropagation(); nav.classList.toggle('ev-toc--open'); });
+      document.addEventListener('click', function (e) { if (!nav.contains(e.target)) nav.classList.remove('ev-toc--open'); });
+      var els = Array.prototype.slice.call(nav.querySelectorAll('.ev-toc__item'));
+      var navH = 72, suppress = false, timer = null;
+      function updateVisible() { nav.classList.toggle('ev-toc--visible', window.scrollY > 300); }
+      updateVisible();
+      window.addEventListener('scroll', function () {
+        updateVisible();
+        if (suppress) { clearTimeout(timer); timer = setTimeout(function () { suppress = false; }, 200); }
+      }, { passive: true });
+      if ('IntersectionObserver' in window) {
+        var obs = new IntersectionObserver(function (entries) {
+          if (suppress) return;
+          entries.forEach(function (e) {
+            if (e.isIntersecting) els.forEach(function (it) {
+              it.classList.toggle('ev-toc__item--active', it.dataset.target === e.target.id);
+            });
+          });
+        }, { rootMargin: '-' + navH + 'px 0px -55% 0px' });
+        els.forEach(function (it) { var t = document.getElementById(it.dataset.target); if (t) obs.observe(t); });
+      }
+      els.forEach(function (it) {
+        it.addEventListener('click', function () {
+          var t = document.getElementById(it.dataset.target);
+          if (!t) return;
+          nav.classList.remove('ev-toc--open');
+          suppress = true; clearTimeout(timer);
+          els.forEach(function (x) { x.classList.toggle('ev-toc__item--active', x === it); });
+          window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - navH + 2, behavior: 'smooth' });
+        });
+      });
     })();
   </script>
 </body>

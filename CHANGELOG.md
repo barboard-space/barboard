@@ -4,6 +4,17 @@
 
 ---
 
+## [2026-07-25 · 赛后] — events 页视频卡 + 页内目录 + 歌单顺序调整
+
+### Changed
+- **歌单顺序全站调整为 SF1 → Wildcards → 全部 38**（正在投票的两场置顶）：`regular-16.json` 各平台 `playlists` items + events 页三张歌单卡同步。
+
+### Added
+- **events 页新增「回顾视频」section**（位于投票与歌单之间）：歌曲展播（All 38 / Wildcards / First Semi-Final Running Order）+ 直播回放（Allocation Draw），B 站链接前置 Bilibili 图标（新增 `#logo-bili`）。
+- **events 页新增页内目录**（Notion 风格右侧缩略目录 + 移动端悬浮按钮，`ev-toc`，投票/视频/歌单三项，scrollspy + 平滑跳转，样式移植自本届总览页）。
+
+---
+
 ## [2026-07-25 · 22:00 launch] — 抽签结果上线：SF1/Wildcard Running Order + 歌单/视频
 
 > 定于北京时间 7/25 22:00 上线（Semi-Final Allocation Draw 后首场公布）。
