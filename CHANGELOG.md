@@ -4,6 +4,14 @@
 
 ---
 
+## [2026-08-01 · SF2 RO] — SF2 出场顺序 + Second SF RO 视频公布
+
+### Added
+- **SF2 Running Order 上线**：`regular-16.json` 18 首 SF2 candidate 加 `sf:"SF2"`+`ro`（1–18）→ `/barvision/2026/` 自动在 SF1 后渲染「Semi-Final 2 · Running Order」表（取代「即将公布」占位）。
+- **Second Semi-Final Running Order B 站视频**：events 页「回顾视频」占位（待发布）→ 实链接 `b23.tv/lf0QqOp`；`links.showcase` 同步新增该视频（现 4 条）。
+
+---
+
 ## [2026-08-01] — SF2 投票开启 / SF1 结束：events 页重排 + 状态推进
 
 ### Changed
