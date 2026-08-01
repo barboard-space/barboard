@@ -232,33 +232,37 @@
    {
     "platform": "Spotify",
     "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://open.spotify.com/playlist/3IDgAqm6Iaw9nbihOfbHzE?si=770b0c77e2434535" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://open.spotify.com/playlist/05v61FU0fsRxs9uUMPWtqh?si=fiKEFkwoQ2WmxOHEdBKCFA" },
      { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://open.spotify.com/playlist/1uRlN8naJK4Ofhn0UoMW7v?si=4c8fcf99cedf4a78" },
-     { "label": "Barvision Chongqing 2026", "url": "https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d" }
+     { "label": "Barvision Chongqing 2026", "url": "https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://open.spotify.com/playlist/3IDgAqm6Iaw9nbihOfbHzE?si=770b0c77e2434535" }
     ]
    },
    {
     "platform": "Apple Music（美区）",
     "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-1/pl.u-MDAWkgNtAVq1y2" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-2/pl.u-06oxpzbCY8okd2" },
      { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-wildcards/pl.u-zPyLlyPTeDxVzE" },
-     { "label": "Barvision Chongqing 2026", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026/pl.u-XkD0vlEc2lZMVo" }
+     { "label": "Barvision Chongqing 2026", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026/pl.u-XkD0vlEc2lZMVo" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-1/pl.u-MDAWkgNtAVq1y2" }
     ]
    },
    {
     "platform": "网易云音乐",
     "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://163cn.tv/bbJhKNb9" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://163cn.tv/bccfbMPy" },
      { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://163cn.tv/9vjU0wc" },
-     { "label": "Barvision Chongqing 2026", "url": "https://163cn.tv/9vjQFlX" }
+     { "label": "Barvision Chongqing 2026", "url": "https://163cn.tv/9vjQFlX" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://163cn.tv/bbJhKNb9" }
     ]
    },
    {
     "platform": "QQ音乐",
     "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9752478305&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9753789344&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" },
      { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749787000&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" },
-     { "label": "Barvision Chongqing 2026", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" }
+     { "label": "Barvision Chongqing 2026", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" },
+     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9752478305&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" }
     ]
    }
   ]

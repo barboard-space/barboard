@@ -109,7 +109,7 @@
           <span class="ev-meta-item">主办：<a class="member" href="/member/7/" data-nickname="威妈">@williw_</a></span>
         </div>
         <p class="ev-hero__desc">
-          Barvision Chongqing 2026 分组抽签已完成，Semi-Final 1 出场顺序已公布（Semi-Final 2 将于 8 月 1 日展播时公布）。Semi-Final 1 与海选突围赛投票现已开启，本页实时汇总名单、赛程、投票方式与规则。
+          Barvision Chongqing 2026 半决赛进行中——Semi-Final 1 投票已结束，Semi-Final 2 与海选突围赛投票正在进行。本页实时汇总名单、出场顺序、赛程、投票方式与规则。
         </p>
         <div class="ev-hero__cta">
           <a href="/barvision/2026/events/#voting" class="btn btn--primary">投票链接</a>
@@ -120,7 +120,7 @@
           <span class="ev-countdown__label" id="heroCountdownLabel">距 Allocation Draw 直播还有</span>
           <span class="ev-countdown__digits" id="heroCountdown">—</span>
         </div>
-        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-07-26</span></p>
+        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-08-01</span></p>
       </div>
     </div>
   </section>
@@ -167,7 +167,7 @@
         if (isClosed) {
           if (now < DRAW_DATE) { lbl.textContent = '距 Allocation Draw 直播还有'; el.innerHTML = fmtCountdown(DRAW_DATE - now); }
           else if (now < VOTE1_DATE) { lbl.textContent = '距 Semi-Final 1 和海选突围赛投票开启还有'; el.innerHTML = fmtCountdown(VOTE1_DATE - now); }
-          else { lbl.textContent = 'Semi-Final 1 / 海选突围赛投票'; el.textContent = '投票进行中'; el.classList.add('is-text'); }
+          else { lbl.textContent = 'Semi-Final 2 / 海选突围赛投票'; el.textContent = '投票进行中'; el.classList.add('is-text'); }
         } else if (isOpen) { lbl.textContent = '距提交通道关闭还有'; el.innerHTML = fmtCountdown(CLOSE_DATE - now); }
         else { lbl.textContent = '距提交通道开启还有'; el.innerHTML = fmtCountdown(diff); }
       }

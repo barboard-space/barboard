@@ -1316,7 +1316,7 @@
     if (cand.length) out += '<div class="bvr-dvr-sub fade-up">参赛名单 · Candidates</div>' + signupTable(cand, false);
     if (sf1.length) out += '<div class="bvr-dvr-sub fade-up">Semi-Final 1 · Running Order</div>' + signupTable(sf1, true);
     if (sf2.length) out += '<div class="bvr-dvr-sub fade-up">Semi-Final 2 · Running Order</div>' + signupTable(sf2, true);
-    else if (sf1.length) out += '<p class="bvr-tbl-note fade-up">Semi-Final 2 出场顺序将于 8 月 1 日展播时公布。</p>';
+    else if (sf1.length) out += '<p class="bvr-tbl-note fade-up">Semi-Final 2 出场顺序即将公布。</p>';
     if (wild.length) out += '<div class="bvr-dvr-sub fade-up">Wildcard Round · Running Order</div>' + signupTable(wild, true);
     return out;
   }

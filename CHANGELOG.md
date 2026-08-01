@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-08-01] — SF2 投票开启 / SF1 结束：events 页重排 + 状态推进
+
+### Changed
+- **`events/` 页 section 顺序**：投票通道>回顾视频>参赛歌单 → **参赛歌单 > 回顾视频 > 投票通道**（TOC 同步为 歌单/视频/投票）。
+- **投票通道**：移除 SF1（已结束），新增 **Semi-Final 2** 投票卡（`v.wjx.cn/vm/mHRoyRs`，截止 8/7 24:00，置于 Wildcard Round 前）；note 改「SF1 投票已于 7/31 结束」。
+- **参赛歌单**：新增 **Semi-Final 2 · 18 首** 歌单卡（4 平台）；卡片顺序 **SF2 > Wildcard Round > 全部38 > SF1**；`regular-16.json` 各平台 `playlists` 同序。
+- **首页 season-card**：Semi Final 1 → **已结束**、Semi Final 2 → **正在进行**；描述改「SF1 投票已结束，SF2 与海选突围赛投票正在进行」。
+- **`/barvision/2026/`**：hero 描述更新（半决赛进行中）、倒计时标签 SF1→**SF2**、更新日期 **2026-08-01**；`bv-results-render.js` SF2 出场顺序占位改为日期中性「即将公布」。
+
+### Added
+- **回顾视频**新增 **Second Semi-Final Running Order** 占位（`.pl-link--soon`，标「待发布」，视频发布后替换为链接）。
+
+---
+
 ## [2026-07-26] — 时间节点推进：抽签完成 / SF1 RO 已公布 / 投票进行中
 
 ### Changed

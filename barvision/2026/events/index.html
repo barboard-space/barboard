@@ -137,6 +137,9 @@
     .pl-link__region { font-size: 10px; font-weight: 500; color: var(--clr-text-3); margin-left: 3px; letter-spacing: 0; }
     .pl-link__arrow { color: var(--clr-text-3); font-size: 13px; transition: transform 0.2s; }
     .pl-link:hover .pl-link__arrow { transform: translateX(3px); }
+    .pl-link--soon { opacity: 0.55; cursor: default; }
+    .pl-link--soon:hover { border-color: var(--clr-border); background: transparent; }
+    .pl-link__soon { font-size: 10px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--clr-text-3); }
     .pl-note {
       margin-top: 30px; font-size: 13px; color: var(--clr-text-3); line-height: 1.7;
       padding: 14px 18px; border: 1px solid var(--clr-border); border-radius: 8px;
@@ -251,85 +254,6 @@
     </div>
   </section>
 
-  <!-- ═══ 投票通道 ═══ -->
-  <section class="ev-sec" id="voting" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
-    <div class="section__inner">
-      <p class="section-label fade-up">VOTING</p>
-      <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">投票</span>通道</h2>
-      <div class="ev-grid">
-        <!-- Semi-Final 1 -->
-        <div class="ev-card fade-up" style="transition-delay:0.14s;">
-          <div class="ev-card__hd">
-            <div>
-              <div class="ev-card__eyebrow">Semi-Final 1</div>
-              <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 1</h3>
-            </div>
-            <span class="ev-badge">投票进行中</span>
-          </div>
-          <div class="vt-deadline">投票截止 <b>7 月 31 日 24:00</b></div>
-          <ul class="vt-notes">
-            <li>评委票（Top 10）：为本场歌曲评选你心中的前 10 名，依次赋 12·10·8·7·6·5·4·3·2·1 分。</li>
-            <li>观众票（20 票）：将 20 票自由分配给本场歌曲，同一首歌最多投 10 票。</li>
-            <li>非选送成员须先完成观众票方可参与评委票；不得投给自己选送的歌曲。</li>
-          </ul>
-          <a class="vt-btn" href="https://v.wjx.cn/vm/OtbDVbt.aspx#" target="_blank" rel="noopener">前往投票 <span class="vt-btn__arrow">→</span></a>
-        </div>
-        <!-- Wildcard Round（海选突围赛）-->
-        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
-          <div class="ev-card__hd">
-            <div>
-              <div class="ev-card__eyebrow">Wildcard Round · 海选突围赛</div>
-              <h3 class="ev-card__title">Barvision Chongqing 2026 Wildcard Round</h3>
-            </div>
-            <span class="ev-badge">投票进行中</span>
-          </div>
-          <div class="vt-deadline">投票截止 <b>8 月 7 日 24:00</b></div>
-          <ul class="vt-notes">
-            <li>认可票（12 选 3）：从 12 首外卡曲目中选出 1–3 首，每人至多投 3 票、每首至多 1 票。</li>
-            <li>不得投给自己选送的歌曲。</li>
-            <li>票数前 3 名晋级外卡突围赛（Playoff），冲击决赛席位。</li>
-          </ul>
-          <a class="vt-btn" href="https://v.wjx.cn/vm/OtVPtbD.aspx#" target="_blank" rel="noopener">前往投票 <span class="vt-btn__arrow">→</span></a>
-        </div>
-      </div>
-      <p class="pl-note fade-up">Semi-Final 2 投票将于 <b>8 月 1 日晚</b> 开启（截止 8 月 7 日 24:00），外卡突围赛（Playoff）于 <b>8 月 8 日</b> Semi-Final 直播现场实时进行——相应投票链接届时在此更新。完整赛程见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
-    </div>
-  </section>
-
-  <!-- ═══ 回顾视频 ═══ -->
-  <section class="ev-sec" id="videos" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
-    <div class="section__inner">
-      <p class="section-label fade-up">VIDEOS</p>
-      <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">回顾</span>视频</h2>
-      <div class="ev-grid ev-grid--top">
-        <div class="ev-card fade-up" style="transition-delay:0.14s;">
-          <div class="ev-card__eyebrow">RECAP</div>
-          <h3 class="ev-card__title">歌曲展播</h3>
-          <div class="pl-links">
-            <a class="pl-link" href="https://www.bilibili.com/video/BV18egC6NEx4/" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>All 38 Songs</span><span class="pl-link__arrow">↗</span>
-            </a>
-            <a class="pl-link" href="https://www.bilibili.com/video/BV18egC6NEAr/" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>Wildcards</span><span class="pl-link__arrow">↗</span>
-            </a>
-            <a class="pl-link" href="https://www.bilibili.com/video/BV1vT3u6UEyu/" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>First Semi-Final Running Order</span><span class="pl-link__arrow">↗</span>
-            </a>
-          </div>
-        </div>
-        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
-          <div class="ev-card__eyebrow">REPLAY</div>
-          <h3 class="ev-card__title">直播回放</h3>
-          <div class="pl-links">
-            <a class="pl-link" href="https://www.bilibili.com/video/BV1Qage6yEY9/" target="_blank" rel="noopener">
-              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>Allocation Draw 分组抽签</span><span class="pl-link__arrow">↗</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- ═══ 参赛歌单 ═══ -->
   <section class="ev-sec" id="playlists" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
     <div class="section__inner">
@@ -337,19 +261,19 @@
       <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">参赛</span>歌单</h2>
       <div class="ev-grid">
         <div class="ev-card fade-up" style="transition-delay:0.14s;">
-          <div class="ev-card__eyebrow">Semi-Final 1 · 19 首</div>
-          <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 1</h3>
+          <div class="ev-card__eyebrow">Semi-Final 2 · 18 首</div>
+          <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 2</h3>
           <div class="pl-links">
-            <a class="pl-link" href="https://open.spotify.com/playlist/3IDgAqm6Iaw9nbihOfbHzE?si=770b0c77e2434535" target="_blank" rel="noopener">
+            <a class="pl-link" href="https://open.spotify.com/playlist/05v61FU0fsRxs9uUMPWtqh?si=fiKEFkwoQ2WmxOHEdBKCFA" target="_blank" rel="noopener">
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
             </a>
-            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-1/pl.u-MDAWkgNtAVq1y2" target="_blank" rel="noopener">
+            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-2/pl.u-06oxpzbCY8okd2" target="_blank" rel="noopener">
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-am"/></svg>Apple Music<span class="pl-link__region">美区</span></span><span class="pl-link__arrow">↗</span>
             </a>
-            <a class="pl-link" href="https://163cn.tv/bbJhKNb9" target="_blank" rel="noopener">
+            <a class="pl-link" href="https://163cn.tv/bccfbMPy" target="_blank" rel="noopener">
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
             </a>
-            <a class="pl-link" href="https://y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9752478305&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
+            <a class="pl-link" href="https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9753789344&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
               <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
             </a>
           </div>
@@ -390,8 +314,108 @@
             </a>
           </div>
         </div>
+        <div class="ev-card fade-up" style="transition-delay:0.35s;">
+          <div class="ev-card__eyebrow">Semi-Final 1 · 19 首</div>
+          <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 1</h3>
+          <div class="pl-links">
+            <a class="pl-link" href="https://open.spotify.com/playlist/3IDgAqm6Iaw9nbihOfbHzE?si=770b0c77e2434535" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-sp"/></svg>Spotify</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-1/pl.u-MDAWkgNtAVq1y2" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-am"/></svg>Apple Music<span class="pl-link__region">美区</span></span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://163cn.tv/bbJhKNb9" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-ne"/></svg>网易云音乐</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9752478305&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-qq"/></svg>QQ音乐</span><span class="pl-link__arrow">↗</span>
+            </a>
+          </div>
+        </div>
       </div>
-      <p class="pl-note fade-up">歌曲提交通道已于 <b>7 月 19 日</b> 关闭，半决赛分组抽签（Allocation Draw）已于 <b>7 月 24 日晚</b> 完成。各场投票已陆续开启，请前往上方投票通道参与——完整赛程与实时进展见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
+      <p class="pl-note fade-up">歌曲提交通道已于 <b>7 月 19 日</b> 关闭，分组抽签已于 <b>7 月 24 日晚</b> 完成。Semi-Final 1 投票已结束，Semi-Final 2 与海选突围赛投票进行中——完整赛程与实时进展见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
+    </div>
+  </section>
+
+  <!-- ═══ 回顾视频 ═══ -->
+  <section class="ev-sec" id="videos" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+    <div class="section__inner">
+      <p class="section-label fade-up">VIDEOS</p>
+      <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">回顾</span>视频</h2>
+      <div class="ev-grid ev-grid--top">
+        <div class="ev-card fade-up" style="transition-delay:0.14s;">
+          <div class="ev-card__eyebrow">RECAP</div>
+          <h3 class="ev-card__title">歌曲展播</h3>
+          <div class="pl-links">
+            <a class="pl-link" href="https://www.bilibili.com/video/BV18egC6NEx4/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>All 38 Songs</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://www.bilibili.com/video/BV18egC6NEAr/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>Wildcards</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <a class="pl-link" href="https://www.bilibili.com/video/BV1vT3u6UEyu/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>First Semi-Final Running Order</span><span class="pl-link__arrow">↗</span>
+            </a>
+            <span class="pl-link pl-link--soon">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>Second Semi-Final Running Order</span><span class="pl-link__soon">待发布</span>
+            </span>
+          </div>
+        </div>
+        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
+          <div class="ev-card__eyebrow">REPLAY</div>
+          <h3 class="ev-card__title">直播回放</h3>
+          <div class="pl-links">
+            <a class="pl-link" href="https://www.bilibili.com/video/BV1Qage6yEY9/" target="_blank" rel="noopener">
+              <span class="pl-link__pf"><svg class="pl-link__logo"><use href="#logo-bili"/></svg>Allocation Draw 分组抽签</span><span class="pl-link__arrow">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 投票通道 ═══ -->
+  <section class="ev-sec" id="voting" style="scroll-margin-top:calc(var(--nav-h) - 2px)">
+    <div class="section__inner">
+      <p class="section-label fade-up">VOTING</p>
+      <h2 class="section__title fade-up" style="transition-delay:0.08s;"><span style="color:var(--clr-text);">投票</span>通道</h2>
+      <div class="ev-grid">
+        <!-- Semi-Final 2 -->
+        <div class="ev-card fade-up" style="transition-delay:0.14s;">
+          <div class="ev-card__hd">
+            <div>
+              <div class="ev-card__eyebrow">Semi-Final 2</div>
+              <h3 class="ev-card__title">Barvision Chongqing 2026 Semi-Final 2</h3>
+            </div>
+            <span class="ev-badge">投票进行中</span>
+          </div>
+          <div class="vt-deadline">投票截止 <b>8 月 7 日 24:00</b></div>
+          <ul class="vt-notes">
+            <li>评委票（Top 10）：为本场歌曲评选你心中的前 10 名，依次赋 12·10·8·7·6·5·4·3·2·1 分。</li>
+            <li>观众票（20 票）：将 20 票自由分配给本场歌曲，同一首歌最多投 10 票。</li>
+            <li>非选送成员须先完成观众票方可参与评委票；不得投给自己选送的歌曲。</li>
+          </ul>
+          <a class="vt-btn" href="https://v.wjx.cn/vm/mHRoyRs.aspx#" target="_blank" rel="noopener">前往投票 <span class="vt-btn__arrow">→</span></a>
+        </div>
+        <!-- Wildcard Round（海选突围赛）-->
+        <div class="ev-card ev-card--wild fade-up" style="transition-delay:0.21s;">
+          <div class="ev-card__hd">
+            <div>
+              <div class="ev-card__eyebrow">Wildcard Round · 海选突围赛</div>
+              <h3 class="ev-card__title">Barvision Chongqing 2026 Wildcard Round</h3>
+            </div>
+            <span class="ev-badge">投票进行中</span>
+          </div>
+          <div class="vt-deadline">投票截止 <b>8 月 7 日 24:00</b></div>
+          <ul class="vt-notes">
+            <li>认可票（12 选 3）：从 12 首外卡曲目中选出 1–3 首，每人至多投 3 票、每首至多 1 票。</li>
+            <li>不得投给自己选送的歌曲。</li>
+            <li>票数前 3 名晋级外卡突围赛（Playoff），冲击决赛席位。</li>
+          </ul>
+          <a class="vt-btn" href="https://v.wjx.cn/vm/OtVPtbD.aspx#" target="_blank" rel="noopener">前往投票 <span class="vt-btn__arrow">→</span></a>
+        </div>
+      </div>
+      <p class="pl-note fade-up">Semi-Final 1 投票已于 <b>7 月 31 日</b> 结束。外卡突围赛（Playoff）将于 <b>8 月 8 日</b> Semi-Final 直播现场实时进行——相应投票链接届时在此更新。完整赛程见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
     </div>
   </section>
 
@@ -432,9 +456,9 @@
     // 页内目录（Notion 风格右侧缩略目录 + 移动端悬浮按钮，参考本届总览页）
     (function () {
       var items = [
-        { id: 'voting', label: '投票' },
+        { id: 'playlists', label: '歌单' },
         { id: 'videos', label: '视频' },
-        { id: 'playlists', label: '歌单' }
+        { id: 'voting', label: '投票' }
       ];
       var ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 6h12M8 12h12M8 18h12"/><circle cx="4" cy="6" r="1"/><circle cx="4" cy="12" r="1"/><circle cx="4" cy="18" r="1"/></svg>';
       var nav = document.createElement('nav');
