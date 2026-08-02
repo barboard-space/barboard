@@ -4,6 +4,31 @@
 
 ---
 
+## [2026-08-02] — 新增「赔率预测」板块 /barvision/2026/odds/
+
+### Added
+- **赔率预测榜 `/barvision/2026/odds/`**（`barvision/2026/odds/index.html`）：整页数据驱动，读 `/data/barvision/odds/odds.json`（`events[] → markets[] → {bookmakers[], rows[]}`），有几个赛事/盘口/行就渲染几个，加盘口或 GF 38→26 切换前端零改动。
+  - **两级按钮切换、绝不上下滚动**：一级=赛事（SF1/SF2/Wildcard/GF）紫色 pill，二级=盘口（Winner/To qualify/Top 3/Top 10）电蓝 pill；任一时刻只显示一张榜；移动端两级按钮均横滑；控制栏 sticky 于 nav 下方。
+  - **表格**：名次+趋势 ｜ 卡片[source 徽章 + 歌曲粗体 + 艺人灰] ｜ chance（列头 `chanceLabel`、格值直接用 `chanceText` 不重算）｜ 各 bookmaker 赔率（去尾零、`null` 留空、`99` 灰淡排除）。
+  - **两套独立高亮**（并列组阈值规则：整组累计 ≤阈值则整组亮并继续，否则整组不亮打住）：①卡片=模型预测前 `highlightTop` 名（紫）；②赔率=每家 bookmaker 列内最优前 3（蓝，排除 99）。
+  - **排名趋势** `row.trend` → ▲绿/▼红/–灰/NEW；**每张榜「下载高清图」** html2canvas（本地 vendor）导出 `barvision2026-{event}-{market}.png`（榜内自带标题/图例/免责声明）；**免责声明**展示于 hero 副标题 + 榜脚。
+- **入口**：首页 season-card（赔率预测，独占一行）+ `/barvision/2026/` hero 按钮组（赔率预测）。
+- **数据/工程**：`data/barvision/odds/{odds.json,odds_prev.json,barvision_2026_odds.xlsx}` + `scripts/build_odds_json.py`（引擎，默认路径已指向 data/barvision/odds/）+ `assets/vendor/html2canvas.min.js`（v1.4.1，MIT，本地 vendor）。
+
+### Changed（同日微调，用户反馈）
+- **赛事顺序 + GF 改名**：Grand Final 置于最前、显示名 **`Grand Final` → `Barvision 2026`**（= 总冠军预测榜，站上决赛演出阵容仍 26 首、38 为总冠军预测池）；引擎 `EVENTS` 与 shipped JSON 均同步。
+- **盘口顺序**：SF1/SF2/Wildcard 二级按钮 **To qualify 置于最前**（GF 无 qualify、不变）。
+- **整体字号 ~2 号收窄 + 行高压紧**：表格 13→11.5px（歌名 14→12.5、艺人 12→11、赔率 13→11.5、名次 19→15、bookmaker 10.5→9.5）、`border-spacing 4/5→3/3`、单元格 `line-height:1.2` + 竖 padding 收紧 → 行高 29→**24px**，19 行 SF 榜一屏可容（GF 38 行为总冠军全池、天然最长）。hero/控制栏同步收窄。
+- **文案**：下载按钮 **「下载高清图」→「下载赔率图」**；图例 **「各公司最优赔率」→「各预测最优赔率」**；免责声明改单行 **「本赔率由成员预测投票与BarboardLab 历史人气数据生成，仅供娱乐，请以实际晋级结果为准。」**（去英文行，引擎删 `DISCLAIMER_EN` + meta `disclaimer_en`）。
+- **二轮微调**：① **一屏可容 = 无横向滚动**——表格改 `width:100%` 铺满容器 + **歌名列 `white-space:normal` 可换行**（数字列仍 nowrap）+ **`.odds-board` 自身作横滑视口**（`overflow-x:auto`，桌面 ≥~950px 全表无横滑、窄屏歌名换行收缩，移动端卡内横滑且卡背景始终覆盖、页面无横向溢出；导出态 `overflow:visible` 不裁切）；② **两级按钮 + 行内卡片圆角统一 5px**（tab 由 pill 999→5、subtab 6→5、song/ch/od/bk 7/6→5、下载按钮 6→5）；③ 按钮再小一号（tab 12→11.5、subtab 11.5→11、下载 11.5→11）；④ 行高由 24 回调到 **27px**（`line-height:1.3` + 竖 padding 5px）。
+- **四轮微调**：① 「99」长赔更淡（`.is-long` 色 → `rgba(106,100,136,.6)`）；② 卡片内歌名/歌手整体下移 1px（`.odds-song__in{position:relative;top:1px}`）；③ **控制栏上端加空**（`.odds-ctrl` padding-top 10→16）+ **本页入场动画**（`.odds-tabs/.odds-bar/.odds-scroll` 复用 hero `odds-hero-in` 错落，匹配全站过渡）；④ 移动端文字过大 → 表格/正文加 `text-size-adjust:100%`（`.odds-main`/`.odds-hero`，见 #139）；⑤ 赔率值字重 600→**500**、is-hi 700→**600**、chance 值 800→**700**（各降一级）；⑥ chanceLabel `top-3/top-10 chance`→`top 3/top 10 chance`（连字符→空格，引擎 `CHL` + JSON 同步）；⑦ **横纵间距等量**（`border-spacing:3px 5px`→`5px 5px`）；⑧ 免责声明 → 「本赔率由成员预测投票与BarboardLab历史数据生成，仅供娱乐，请以实际晋级结果为准。」（去空格 + 去「人气」，引擎 + JSON + hero 兜底同步）。
+- **三轮微调**：① **行高 28px + 行间距 5px**（`border-spacing:3px 5px`，解决行挨得挤）；② **歌名/歌手左对齐**——选送者徽章放进固定 26px 槽位（`.odds-song__in` flex + `.odds-src{width:26px}` + `.odds-song__txt`），歌名文本各行始终对齐同一 x（不再随徽章宽度参差）；③ 歌名 12.5→11.5px、字重 700→**600**（原过粗）；NEW 8→7px；④ **bookmaker 列固定 48px**（恰好放下 99.99，`th.odds-bk/td.odds-od width:48`），表头写不下则换行、组合词在词缝插零宽空格（`BK_WRAP` 表：BETS​WORLD/CROWN​PLAY/…）优先断行，其余靠 `overflow-wrap:anywhere` 兜底；⑤ **高亮更醒目**——`.odds-ch.is-card` 由浅紫值改 **强紫底 `rgba(168,85,247,.34)` + 亮白值**（原浅紫比默认白更暗、反不像高亮），`.odds-song.is-card` 底 0.15→0.24、`.odds-od.is-hi` 底 0.16→0.26。
+
+### Fixed
+- `build_odds_json.py` 末尾 `print("✓ …")` 在 Windows GBK 控制台 `UnicodeEncodeError`（JSON 已写出、但 SOP 命令每次报 traceback）→ `main()` 开头 `sys.stdout.reconfigure(encoding="utf-8")`，现干净 exit 0。
+
+---
+
 ## [2026-08-01 · 截止提前] — SF2 / 海选突围赛投票截止 8/7 → 8/6
 
 ### Changed

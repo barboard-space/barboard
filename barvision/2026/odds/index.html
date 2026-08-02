@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
+  <title>Barvision Chongqing 2026 · 赔率预测 | Barboard</title>
+  <meta name="description" content="第十六届 Barvision Chongqing 2026 · 赔率预测榜——由成员预测投票 + BarboardLab 历史人气数据生成的各场（Semi-Final / Wildcard / Grand Final）晋级、冠军、Top 3 赔率，仅供娱乐。" />
+  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
+  <link rel="stylesheet" href="/fonts.css" />
+  <link rel="stylesheet" href="/style.css" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       赔率预测板块（页面独有组件，odds- 前缀；不动 style.css）
+       ⚠️ 导出 PNG 用 html2canvas 1.4.1——它不解析 color-mix()/oklab；
+          因此「被捕获的 .odds-board 内部」一律用 hex/rgba 显式色（勿用 color-mix、
+          勿依赖 box-shadow 做视觉，改用 border）；hero/按钮等未捕获区可用 color-mix。
+       ═══════════════════════════════════════════════════════════ */
+
+    /* ── Hero（复用 2026 主视觉海报 + 遮罩，紧凑版）── */
+    .odds-hero { position: relative; padding: calc(var(--nav-h) + 28px) 0 26px; overflow: hidden; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    .odds-hero__glow {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        radial-gradient(ellipse 80% 70% at 55% 0%,  rgba(168,85,247,0.26) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 60% at 0%  100%, rgba(0,180,255,0.10) 0%, transparent 55%),
+        radial-gradient(ellipse 35% 40% at 100% 50%, rgba(224,64,160,0.06) 0%, transparent 50%);
+    }
+    .odds-hero__poster {
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url('/assets/images/barvision/2026/poster.png');
+      background-size: cover; background-position: right center;
+      opacity: 0; transition: opacity 0.55s ease;
+    }
+    .odds-hero__poster.loaded { opacity: 1; }
+    .odds-hero__scrim {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(8,8,18,0.90) 0%, rgba(8,8,18,0.76) 26%, rgba(8,8,18,0.24) 66%, rgba(8,8,18,0.08) 100%),
+        linear-gradient(0deg, rgba(8,8,18,0.78) 0%, transparent 42%);
+    }
+    .odds-hero__inner { position: relative; z-index: 2; }
+    .odds-hero__layout { max-width: 660px; }
+    .odds-eyebrow {
+      font-size: 11px; font-weight: 600; letter-spacing: 0.28em;
+      text-transform: uppercase; color: var(--clr-violet-light);
+      text-shadow: 0 0 12px rgba(192,132,252,0.4);
+      display: inline-flex; align-items: center; gap: 8px;
+      margin-bottom: 16px; transition: color 0.2s;
+    }
+    .odds-eyebrow:hover { color: var(--clr-white); }
+    .odds-title {
+      font-family: var(--font-body); font-weight: 800;
+      font-size: clamp(28px, 4.2vw, 46px); line-height: 1.06;
+      letter-spacing: 0.04em; margin-bottom: 10px;
+    }
+    .odds-title .odds-accent { color: var(--clr-violet-light); }
+    .odds-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0; margin-bottom: 10px; }
+    .odds-meta__i {
+      font-size: 11px; color: var(--clr-text-3);
+      padding-right: 12px; margin-right: 12px;
+      border-right: 1px solid var(--clr-border); white-space: nowrap;
+    }
+    .odds-meta__i:last-child { border-right: none; margin-right: 0; padding-right: 0; }
+    .odds-hero__desc { font-size: 12.5px; color: var(--clr-text-2); line-height: 1.6; max-width: 560px; }
+    @media (prefers-reduced-motion: no-preference) {
+      @keyframes odds-hero-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+      .odds-eyebrow    { animation: odds-hero-in 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+      .odds-title      { animation: odds-hero-in 0.65s 0.07s cubic-bezier(0.22,1,0.36,1) both; }
+      .odds-meta       { animation: odds-hero-in 0.50s 0.16s cubic-bezier(0.22,1,0.36,1) both; }
+      .odds-hero__desc { animation: odds-hero-in 0.55s 0.24s cubic-bezier(0.22,1,0.36,1) both; }
+      /* 控制栏 + 榜单入场（与 hero 同款错落，匹配全站过渡动画）*/
+      .odds-tabs   { animation: odds-hero-in 0.50s 0.30s cubic-bezier(0.22,1,0.36,1) both; }
+      .odds-bar    { animation: odds-hero-in 0.50s 0.36s cubic-bezier(0.22,1,0.36,1) both; }
+      .odds-scroll { animation: odds-hero-in 0.55s 0.42s cubic-bezier(0.22,1,0.36,1) both; }
+    }
+
+    /* ── 主体 ──（text-size-adjust:100% 禁移动端文字自动膨胀，见 #139/#148；text-size-adjust 可继承→覆盖全表/正文） */
+    .odds-main { padding: 0 0 96px; -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+    /* 两级按钮控制栏（sticky 于 nav 下方；不透明底、无 backdrop-filter，避开 stacking 陷阱）── */
+    .odds-ctrl {
+      position: sticky; top: calc(var(--nav-h) - 1px); z-index: 40;
+      background: var(--clr-bg); border-bottom: 1px solid var(--clr-border);
+      padding: 16px 0 10px;
+    }
+    .odds-tabs, .odds-subtabs {
+      display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .odds-tabs::-webkit-scrollbar, .odds-subtabs::-webkit-scrollbar { display: none; }
+    .odds-bar { display: flex; align-items: center; gap: 12px; margin-top: 8px; }
+    .odds-bar .odds-subtabs { flex: 1 1 auto; min-width: 0; }
+
+    .odds-tab {
+      flex: none; font-family: var(--font-body); font-size: 11.5px; font-weight: 600;
+      letter-spacing: 0.04em; padding: 5px 13px; border-radius: 5px;
+      border: 1px solid var(--clr-border-2); background: transparent; color: var(--clr-text-3);
+      white-space: nowrap; cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .odds-tab:hover { color: var(--clr-text); border-color: var(--clr-text-3); }
+    .odds-tab.is-active {
+      color: var(--clr-white); background: var(--clr-violet); border-color: var(--clr-violet);
+      box-shadow: 0 0 16px var(--clr-violet-glow);
+    }
+    .odds-subtab {
+      flex: none; font-family: var(--font-body); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.03em; padding: 4px 11px; border-radius: 5px;
+      border: 1px solid var(--clr-border); background: transparent; color: var(--clr-text-3);
+      white-space: nowrap; cursor: pointer; transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+    }
+    .odds-subtab:hover { color: var(--clr-text); border-color: var(--clr-text-3); }
+    .odds-subtab.is-active {
+      color: var(--clr-white); border-color: var(--clr-accent);
+      background: color-mix(in srgb, var(--clr-accent) 20%, var(--clr-surface));
+      box-shadow: 0 0 14px var(--clr-accent-dim);
+    }
+
+    .odds-dl {
+      flex: none; display: inline-flex; align-items: center; gap: 7px;
+      font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
+      padding: 5px 11px; border-radius: 5px; cursor: pointer;
+      border: 1px solid var(--clr-border-2); background: transparent; color: var(--clr-text-2);
+      transition: color 0.2s, border-color 0.2s, background 0.2s;
+    }
+    .odds-dl:hover { color: var(--clr-white); border-color: var(--clr-violet-light); background: var(--clr-violet-dim); }
+    .odds-dl svg { width: 13px; height: 13px; flex: none; }
+    .odds-dl[disabled] { opacity: 0.5; cursor: default; }
+
+    /* ── 榜单（.odds-board = html2canvas 捕获目标，内部仅用 hex/rgba）── */
+    .odds-scroll { margin-top: 16px; }
+    /* 榜卡自身即横向滚动视口：桌面 width:100% 铺满容器→歌名列自动换行、表格恰好塞进一屏不横滑；
+       仅当内容 min-content 超容器(移动端 9 列)时卡内横滑，卡背景始终覆盖视口 */
+    .odds-board {
+      width: 100%; overflow-x: auto; scrollbar-width: thin;
+      background: var(--clr-bg);
+      padding: 15px 15px 13px; border-radius: 12px;
+      border: 1px solid var(--clr-border);
+    }
+    /* 捕获态：去掉圆角/边框 + overflow:visible（导出时不裁切完整表格），PNG 边缘干净 */
+    .odds-board.is-exporting { border-radius: 0; border-color: transparent; overflow: visible; }
+
+    .odds-board__cap { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 11px; }
+    .odds-board__ttl { display: flex; flex-direction: column; gap: 2px; }
+    .odds-board__event { font-family: var(--font-display); font-size: 21px; letter-spacing: 0.02em; color: var(--clr-text); line-height: 1; }
+    .odds-board__mk { font-size: 10.5px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--clr-violet-light); }
+    .odds-board__brand { text-align: right; flex: none; }
+    .odds-board__brand-1 { font-family: var(--font-display); font-size: 13px; letter-spacing: 0.04em; color: var(--clr-text-2); line-height: 1.1; }
+    .odds-board__brand-2 { font-size: 9.5px; color: var(--clr-text-3); letter-spacing: 0.02em; }
+
+    table.odds-table { border-collapse: separate; border-spacing: 5px 5px; width: 100%; }
+    .odds-table th, .odds-table td { font-size: 11.5px; line-height: 1.35; text-align: center; white-space: nowrap; vertical-align: middle; }
+
+    th.odds-rkh { width: 38px; color: var(--clr-text-3); font-size: 9.5px; font-weight: 700; }
+    th.odds-songh { text-align: left; color: var(--clr-text-3); font-size: 9.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding-left: 10px; min-width: 180px; }
+    th.odds-chh { width: 62px; color: var(--clr-text-3); font-size: 9.5px; font-weight: 700; letter-spacing: 0.02em; vertical-align: bottom; padding-bottom: 4px; line-height: 1.2; white-space: normal; }
+    /* bookmaker 列固定宽度（恰好放下 99.99）；表头写不下则换行，组合词按 ​(零宽空格)在词缝断行 */
+    th.odds-bk {
+      width: 48px; padding: 5px 4px; border-radius: 5px;
+      background: var(--clr-surface-2); color: var(--clr-text-2);
+      font-size: 9px; font-weight: 700; letter-spacing: 0.02em;
+      white-space: normal; overflow-wrap: anywhere; line-height: 1.12;
+    }
+
+    td.odds-rk { width: 38px; }
+    .odds-rk__box { display: inline-flex; flex-direction: column; align-items: center; gap: 1px; line-height: 1; }
+    .odds-rk__n { font-family: var(--font-display); font-size: 15px; color: var(--clr-text-2); letter-spacing: 0.02em; }
+    .odds-tr { font-size: 9px; font-weight: 700; letter-spacing: 0.02em; line-height: 1; }
+    .odds-tr--up   { color: var(--clr-up); }
+    .odds-tr--down { color: var(--clr-down); }
+    .odds-tr--same { color: var(--clr-text-4); }
+    .odds-tr--new  { color: var(--clr-violet-light); font-size: 7px; letter-spacing: 0.05em; }
+
+    /* 歌名/歌手：选送者徽章固定 26px 槽位 → 歌名文本始终左对齐同一 x（不再随徽章宽度参差） */
+    td.odds-song {
+      text-align: left; background: var(--clr-surface); border-radius: 5px;
+      padding: 6px 9px; border-left: 3px solid transparent;
+    }
+    td.odds-song.is-card { background: rgba(168,85,247,0.24); border-left-color: var(--clr-violet-light); }
+    .odds-song__in { display: flex; align-items: baseline; gap: 8px; position: relative; top: 1px; }
+    .odds-src {
+      flex: none; width: 26px; text-align: center;
+      font-size: 10px; font-weight: 700; line-height: 1.2;
+      padding: 1px 2px; border-radius: 4px;
+      color: var(--clr-violet-light); background: rgba(168,85,247,0.16);
+      border: 1px solid rgba(168,85,247,0.32);
+    }
+    .odds-song__txt { flex: 1 1 auto; min-width: 0; white-space: normal; }
+    .odds-song__b { font-size: 11.5px; font-weight: 600; color: var(--clr-text); }
+    .odds-art { color: var(--clr-text-3); font-size: 11px; margin-left: 4px; }
+
+    td.odds-ch {
+      width: 62px; background: var(--clr-surface); border-radius: 5px;
+      font-family: var(--font-body); font-weight: 700; font-size: 12.5px; color: var(--clr-text);
+    }
+    /* 高亮更醒目：强紫底 + 保持亮白值（原浅紫值比默认白更暗、反而不像高亮） */
+    td.odds-ch.is-card { background: rgba(168,85,247,0.34); color: var(--clr-white); }
+
+    td.odds-od {
+      padding: 6px 4px; border-radius: 5px; width: 48px;
+      background: var(--clr-bg-3); color: var(--clr-text-3);
+      font-family: var(--font-body); font-weight: 500;
+    }
+    td.odds-od.is-hi { background: rgba(0,180,255,0.26); color: var(--clr-accent-light); font-weight: 600; }
+    td.odds-od.is-long { color: rgba(106,100,136,0.6); font-weight: 500; }
+    td.odds-od.is-empty { background: transparent; }
+
+    /* 榜脚：图例 + 免责声明（随 PNG 一起导出，自带说明）*/
+    .odds-board__foot { margin-top: 12px; }
+    .odds-legend { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 7px; }
+    .odds-legend__i { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; color: var(--clr-text-3); }
+    .odds-legend__sw { width: 12px; height: 12px; border-radius: 3px; flex: none; }
+    .odds-legend__sw--card { background: rgba(168,85,247,0.35); border-left: 3px solid var(--clr-violet-light); }
+    .odds-legend__sw--odd  { background: rgba(0,180,255,0.32); }
+    .odds-disc { font-size: 11px; color: var(--clr-text-4); line-height: 1.55; }
+    .odds-disc__en { display: block; margin-top: 2px; opacity: 0.85; }
+
+    .odds-scroll-hint { display: none; }
+    .odds-loading { padding: 60px 0; text-align: center; color: var(--clr-text-3); font-size: 14px; }
+
+    @media (max-width: 768px) {
+      .odds-hero { padding: calc(var(--nav-h) + 22px) 0 24px; }
+      .odds-hero__poster { background-image: url('/assets/images/barvision/2026/bg.png'); }
+      .odds-hero__desc { max-width: 100%; }
+      .odds-main { padding-bottom: 64px; }
+      .odds-board { padding: 14px 13px 12px; }
+      .odds-board__event { font-size: 19px; }
+      .odds-scroll-hint { display: block; margin: 4px 0 -6px; font-size: 11px; color: var(--clr-text-4); text-align: center; }
+    }
+    @media (hover: none), (pointer: coarse) {
+      .odds-tab:hover { color: var(--clr-text-3); border-color: var(--clr-border-2); }
+      .odds-tab.is-active:hover { color: var(--clr-white); border-color: var(--clr-violet); }
+      .odds-subtab:hover { color: var(--clr-text-3); border-color: var(--clr-border); }
+      .odds-subtab.is-active:hover { color: var(--clr-white); border-color: var(--clr-accent); }
+    }
+  </style>
+</head>
+<body>
+  <div id="site-nav"></div>
+
+  <section class="odds-hero">
+    <div class="odds-hero__poster" aria-hidden="true"></div>
+    <div class="odds-hero__scrim" aria-hidden="true"></div>
+    <div class="odds-hero__glow" aria-hidden="true"></div>
+    <div class="section__inner odds-hero__inner">
+      <div class="odds-hero__layout">
+        <a href="/barvision/2026/" class="odds-eyebrow"><span>←</span><span>Barvision Chongqing 2026</span></a>
+        <h1 class="odds-title">赔率<span class="odds-accent">预测</span></h1>
+        <div class="odds-meta">
+          <span class="odds-meta__i">第十六届欧美流行歌曲个人榜吧歌曲大赛</span>
+          <span class="odds-meta__i">重声交响 Echoing Confluence</span>
+        </div>
+        <p class="odds-hero__desc" id="oddsHeroDesc">本赔率由成员预测投票与BarboardLab历史数据生成，仅供娱乐，请以实际晋级结果为准。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="odds-main">
+    <div class="section__inner">
+      <div class="odds-ctrl">
+        <div class="odds-tabs" id="oddsTabs" role="tablist" aria-label="赛事"></div>
+        <div class="odds-bar">
+          <div class="odds-subtabs" id="oddsSubtabs" role="tablist" aria-label="盘口"></div>
+          <button class="odds-dl" id="oddsDownload" type="button" aria-label="下载当前赔率图">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
+            <span>下载赔率图</span>
+          </button>
+        </div>
+      </div>
+
+      <p class="odds-scroll-hint" id="oddsScrollHint">← 左右滑动查看各家赔率 →</p>
+      <div class="odds-scroll" id="oddsScroll">
+        <div class="odds-loading" id="oddsBoardHost">加载赔率数据…</div>
+      </div>
+    </div>
+  </section>
+
+  <div id="site-footer"></div>
+  <script src="/assets/vendor/html2canvas.min.js"></script>
+  <script src="/scripts/nav.js"></script>
+  <script>
+  (function () {
+    'use strict';
+    var DATA = null, curEvent = 0, curMarket = 0;
+    var $tabs = document.getElementById('oddsTabs');
+    var $sub  = document.getElementById('oddsSubtabs');
+    var $host = document.getElementById('oddsBoardHost');
+    var $dl   = document.getElementById('oddsDownload');
+    var $hint = document.getElementById('oddsScrollHint');
+    var $scroll = document.getElementById('oddsScroll');
+
+    function esc(s) {
+      return String(s == null ? '' : s)
+        .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+    // 赔率去尾零：1 / 1.01 / 1.5 / 99；null → 空
+    function fmtOdd(v) {
+      if (v == null) return '';
+      return (Math.round(v * 100) / 100).toString();
+    }
+    // bookmaker 表头：固定窄列放不下时换行；组合词在词缝插零宽空格 ​ 使其优先在此处断行（更短更整齐）。
+    // 表内未列出的名字：靠 CSS overflow-wrap:anywhere 兜底断行。新增庄家如需美观断点，往此表加一行即可。
+    var Z = String.fromCharCode(0x200B); // 零宽空格（断行机会），组合词表头在词缝优先断行
+    var BK_WRAP = {
+      BETSWORLD: 'BETS' + Z + 'WORLD', ODDSMAX: 'ODDS' + Z + 'MAX', CROWNPLAY: 'CROWN' + Z + 'PLAY',
+      MERIDIAN: 'MERI' + Z + 'DIAN', KESTREL: 'KES' + Z + 'TREL',
+      STAKEHAUS: 'STAKE' + Z + 'HAUS', EMBERBET: 'EMBER' + Z + 'BET', KINGFISHER: 'KING' + Z + 'FISHER',
+      HOLLOWAY: 'HOLLO' + Z + 'WAY', IRONCLAD: 'IRON' + Z + 'CLAD', GALEBET: 'GALE' + Z + 'BET'
+    };
+    function bkWrap(bk) { return BK_WRAP[bk] || bk; }
+    // 并列组阈值高亮：val 越小越优；从优到劣累加，整组算进 ≤N 则整组亮并继续，否则整组不亮打住
+    function tieHighlight(entries, N) {
+      var s = entries.slice().sort(function (a, b) { return a.val - b.val; });
+      var win = {}, cum = 0, i = 0;
+      while (i < s.length) {
+        var j = i;
+        while (j < s.length && s[j].val === s[i].val) j++;
+        var sz = j - i;
+        if (cum + sz <= N) { for (var k = i; k < j; k++) win[s[k].key] = 1; cum += sz; i = j; }
+        else break;
+      }
+      return win;
+    }
+    function trendHTML(t) {
+      if (!t) return '';
+      if (t.dir === 'new')  return '<span class="odds-tr odds-tr--new">NEW</span>';
+      if (t.dir === 'up')   return '<span class="odds-tr odds-tr--up">▲' + (t.delta || '') + '</span>';
+      if (t.dir === 'down') return '<span class="odds-tr odds-tr--down">▼' + (t.delta || '') + '</span>';
+      return '<span class="odds-tr odds-tr--same">–</span>';
+    }
+
+    function renderTabs() {
+      $tabs.innerHTML = DATA.events.map(function (ev, i) {
+        return '<button class="odds-tab' + (i === curEvent ? ' is-active' : '') +
+          '" type="button" role="tab" data-i="' + i + '">' + esc(ev.name) + '</button>';
+      }).join('');
+    }
+    function renderSubtabs() {
+      var mkts = DATA.events[curEvent].markets;
+      $sub.innerHTML = mkts.map(function (m, i) {
+        return '<button class="odds-subtab' + (i === curMarket ? ' is-active' : '') +
+          '" type="button" role="tab" data-i="' + i + '">' + esc(m.label) + '</button>';
+      }).join('');
+    }
+
+    function renderBoard() {
+      var ev = DATA.events[curEvent], mk = ev.markets[curMarket];
+      var rows = mk.rows || [], bks = mk.bookmakers || [];
+
+      // ① 卡片高亮：本盘口 highlightTop 名内（并列超 N 整组不亮），val=-chance（chance 越大越优）
+      var cardWin = tieHighlight(rows.map(function (r, i) {
+        return { key: i, val: -(r.chance || 0) };
+      }), mk.highlightTop || 0);
+
+      // ② 赔率高亮：每家 bookmaker 列内最优（最低）前 3，排除 99/空，并列超 3 整组不亮
+      var oddsWin = {};
+      bks.forEach(function (bk) {
+        var ent = [];
+        rows.forEach(function (r, i) {
+          var v = r.odds ? r.odds[bk] : null;
+          if (v != null && v < 99) ent.push({ key: i, val: v });
+        });
+        oddsWin[bk] = tieHighlight(ent, 3);
+      });
+
+      var head = '<tr>' +
+        '<th class="odds-rkh">#</th>' +
+        '<th class="odds-songh">参赛作品</th>' +
+        '<th class="odds-chh">' + esc(mk.chanceLabel || '') + '</th>' +
+        bks.map(function (bk) { return '<th class="odds-bk">' + esc(bkWrap(bk)) + '</th>'; }).join('') +
+        '</tr>';
+
+      var body = rows.map(function (r, i) {
+        var isCard = !!cardWin[i];
+        var cardCls = isCard ? ' is-card' : '';
+        var songCell = '<td class="odds-song' + cardCls + '">' +
+          '<span class="odds-song__in">' +
+            '<span class="odds-src">' + esc(r.source) + '</span>' +
+            '<span class="odds-song__txt"><span class="odds-song__b">' + esc(r.song) + '</span> ' +
+            '<span class="odds-art">' + esc(r.artist) + '</span></span>' +
+          '</span></td>';
+        var chCell = '<td class="odds-ch' + cardCls + '">' + esc(r.chanceText || '') + '</td>';
+        var odCells = bks.map(function (bk) {
+          var v = r.odds ? r.odds[bk] : null;
+          if (v == null) return '<td class="odds-od is-empty"></td>';
+          var cls = 'odds-od';
+          if (v >= 99) cls += ' is-long';
+          else if (oddsWin[bk] && oddsWin[bk][i]) cls += ' is-hi';
+          return '<td class="' + cls + '">' + fmtOdd(v) + '</td>';
+        }).join('');
+        return '<tr>' +
+          '<td class="odds-rk"><span class="odds-rk__box"><span class="odds-rk__n">' + r.rank + '</span>' + trendHTML(r.trend) + '</span></td>' +
+          songCell + chCell + odCells + '</tr>';
+      }).join('');
+
+      var m = DATA.meta || {};
+      var cap =
+        '<div class="odds-board__cap">' +
+          '<div class="odds-board__ttl">' +
+            '<span class="odds-board__event">' + esc(ev.name) + '</span>' +
+            '<span class="odds-board__mk">' + esc(mk.label) + '</span>' +
+          '</div>' +
+          '<div class="odds-board__brand">' +
+            '<div class="odds-board__brand-1">BARVISION 2026</div>' +
+            '<div class="odds-board__brand-2">barboard.space · 赔率预测</div>' +
+          '</div>' +
+        '</div>';
+
+      var foot =
+        '<div class="odds-board__foot">' +
+          '<div class="odds-legend">' +
+            '<span class="odds-legend__i"><span class="odds-legend__sw odds-legend__sw--card"></span>模型预测' +
+              (mk.highlightTop > 1 ? ('前 ' + mk.highlightTop + ' 名') : '夺魁') + '</span>' +
+            '<span class="odds-legend__i"><span class="odds-legend__sw odds-legend__sw--odd"></span>各预测最优赔率</span>' +
+          '</div>' +
+          '<p class="odds-disc">' + esc(m.disclaimer || '') + '</p>' +
+        '</div>';
+
+      $host.className = 'odds-board';
+      $host.id = 'oddsBoardHost';
+      $host.innerHTML = cap + '<table class="odds-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table>' + foot;
+
+      updateHint();
+      $dl.disabled = false;
+    }
+
+    function updateHint() {
+      if (!$hint) return;
+      var board = document.getElementById('oddsBoardHost');
+      var over = board && board.scrollWidth > board.clientWidth + 2;
+      $hint.style.display = (over && window.matchMedia('(max-width:768px)').matches) ? 'block' : '';
+    }
+
+    function selectEvent(i) {
+      curEvent = i; curMarket = 0;
+      renderTabs(); renderSubtabs(); renderBoard();
+    }
+    function selectMarket(i) {
+      curMarket = i; renderSubtabs(); renderBoard();
+    }
+
+    $tabs.addEventListener('click', function (e) {
+      var b = e.target.closest('.odds-tab'); if (!b) return;
+      var i = +b.dataset.i; if (i !== curEvent) selectEvent(i);
+    });
+    $sub.addEventListener('click', function (e) {
+      var b = e.target.closest('.odds-subtab'); if (!b) return;
+      var i = +b.dataset.i; if (i !== curMarket) selectMarket(i);
+    });
+    window.addEventListener('resize', updateHint, { passive: true });
+
+    // ── 下载当前榜单高清图 ──
+    $dl.addEventListener('click', function () {
+      if (!DATA || typeof html2canvas === 'undefined') return;
+      var board = document.getElementById('oddsBoardHost');
+      if (!board) return;
+      var ev = DATA.events[curEvent], mk = ev.markets[curMarket];
+      var scale = Math.max(2, (window.devicePixelRatio || 1) * 2);
+      $dl.disabled = true;
+      board.classList.add('is-exporting');
+      html2canvas(board, {
+        scale: scale,
+        backgroundColor: '#080812',
+        useCORS: true,
+        logging: false,
+        windowWidth: board.scrollWidth,
+        width: board.scrollWidth,
+        height: board.scrollHeight
+      }).then(function (canvas) {
+        board.classList.remove('is-exporting');
+        canvas.toBlob(function (blob) {
+          var a = document.createElement('a');
+          a.href = URL.createObjectURL(blob);
+          a.download = 'barvision2026-' + ev.id + '-' + mk.id + '.png';
+          document.body.appendChild(a); a.click(); a.remove();
+          setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+          $dl.disabled = false;
+        }, 'image/png');
+      }).catch(function () {
+        board.classList.remove('is-exporting');
+        $dl.disabled = false;
+      });
+    });
+
+    // 海报大图预解码后淡入（消除弹出/解码卡顿，见 #166）
+    (function () {
+      var poster = document.querySelector('.odds-hero__poster');
+      if (!poster) return;
+      var mobile = window.matchMedia('(max-width:768px)').matches;
+      var src = mobile ? '/assets/images/barvision/2026/bg.png' : '/assets/images/barvision/2026/poster.png';
+      var img = new Image();
+      var show = function () { poster.classList.add('loaded'); };
+      img.onload = function () { (img.decode ? img.decode().then(show).catch(show) : show()); };
+      img.onerror = show;
+      img.src = src;
+    })();
+
+    // 拉数据渲染
+    $dl.disabled = true;
+    fetch('/data/barvision/odds/odds.json', { cache: 'no-cache' })
+      .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
+      .then(function (d) {
+        DATA = d;
+        if (d.meta && d.meta.disclaimer) {
+          var hd = document.getElementById('oddsHeroDesc');
+          if (hd) hd.textContent = d.meta.disclaimer;
+        }
+        if (!d.events || !d.events.length) { $host.className = 'odds-loading'; $host.textContent = '暂无赔率数据。'; return; }
+        selectEvent(0);
+      })
+      .catch(function () { $host.className = 'odds-loading'; $host.textContent = '赔率数据加载失败，请稍后重试。'; });
+  })();
+  </script>
+</body>
+</html>
