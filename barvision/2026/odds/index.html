@@ -12,9 +12,6 @@
   <style>
     /* ═══════════════════════════════════════════════════════════
        赔率预测板块（页面独有组件，odds- 前缀；不动 style.css）
-       ⚠️ 导出 PNG 用 html2canvas 1.4.1——它不解析 color-mix()/oklab；
-          因此「被捕获的 .odds-board 内部」一律用 hex/rgba 显式色（勿用 color-mix、
-          勿依赖 box-shadow 做视觉，改用 border）；hero/按钮等未捕获区可用 color-mix。
        ═══════════════════════════════════════════════════════════ */
 
     /* ── Hero（复用 2026 主视觉海报 + 遮罩，紧凑版）── */
@@ -116,18 +113,7 @@
       box-shadow: 0 0 14px var(--clr-accent-dim);
     }
 
-    .odds-dl {
-      flex: none; display: inline-flex; align-items: center; gap: 7px;
-      font-family: var(--font-body); font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
-      padding: 5px 11px; border-radius: 5px; cursor: pointer;
-      border: 1px solid var(--clr-border-2); background: transparent; color: var(--clr-text-2);
-      transition: color 0.2s, border-color 0.2s, background 0.2s;
-    }
-    .odds-dl:hover { color: var(--clr-white); border-color: var(--clr-violet-light); background: var(--clr-violet-dim); }
-    .odds-dl svg { width: 13px; height: 13px; flex: none; }
-    .odds-dl[disabled] { opacity: 0.5; cursor: default; }
-
-    /* ── 榜单（.odds-board = html2canvas 捕获目标，内部仅用 hex/rgba）── */
+    /* ── 榜单 ── */
     .odds-scroll { margin-top: 16px; }
     /* 榜卡自身即横向滚动视口：桌面 width:100% 铺满容器→歌名列自动换行、表格恰好塞进一屏不横滑；
        仅当内容 min-content 超容器(移动端 9 列)时卡内横滑，卡背景始终覆盖视口 */
@@ -137,8 +123,6 @@
       padding: 15px 15px 13px; border-radius: 12px;
       border: 1px solid var(--clr-border);
     }
-    /* 捕获态：去掉圆角/边框 + overflow:visible（导出时不裁切完整表格），PNG 边缘干净 */
-    .odds-board.is-exporting { border-radius: 0; border-color: transparent; overflow: visible; }
 
     .odds-board__cap { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 11px; }
     .odds-board__ttl { display: flex; flex-direction: column; gap: 2px; }
@@ -261,10 +245,6 @@
         <div class="odds-tabs" id="oddsTabs" role="tablist" aria-label="赛事"></div>
         <div class="odds-bar">
           <div class="odds-subtabs" id="oddsSubtabs" role="tablist" aria-label="盘口"></div>
-          <button class="odds-dl" id="oddsDownload" type="button" aria-label="下载当前赔率图">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></svg>
-            <span>下载赔率图</span>
-          </button>
         </div>
       </div>
 
@@ -276,7 +256,6 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="/assets/vendor/html2canvas.min.js"></script>
   <script src="/scripts/nav.js"></script>
   <script>
   (function () {
@@ -285,7 +264,6 @@
     var $tabs = document.getElementById('oddsTabs');
     var $sub  = document.getElementById('oddsSubtabs');
     var $host = document.getElementById('oddsBoardHost');
-    var $dl   = document.getElementById('oddsDownload');
     var $hint = document.getElementById('oddsScrollHint');
     var $scroll = document.getElementById('oddsScroll');
 
@@ -422,7 +400,6 @@
       $host.innerHTML = cap + '<table class="odds-table"><thead>' + head + '</thead><tbody>' + body + '</tbody></table>' + foot;
 
       updateHint();
-      $dl.disabled = false;
     }
 
     function updateHint() {
@@ -450,59 +427,6 @@
     });
     window.addEventListener('resize', updateHint, { passive: true });
 
-    // ⚠️ html2canvas 1.4.1 不按浏览器算法排 `table-layout:auto` 的表——会把表排窄、列左移、右侧列缺失/错位。
-    // 导出前把当前实际列宽用 table-layout:fixed 钉死（像素级不变），html2canvas 即按此确定布局渲染；导出后还原。
-    function pinTableWidths(board) {
-      var table = board.querySelector('.odds-table');
-      if (!table) return function () {};
-      var ths = [].slice.call(table.querySelectorAll('thead th'));
-      var tw = table.getBoundingClientRect().width;
-      var ws = ths.map(function (th) { return th.getBoundingClientRect().width; });
-      var prev = { tl: table.style.tableLayout, w: table.style.width, th: ths.map(function (th) { return th.style.width; }) };
-      table.style.tableLayout = 'fixed';
-      table.style.width = tw + 'px';
-      ths.forEach(function (th, i) { th.style.width = ws[i] + 'px'; });
-      return function revert() {
-        table.style.tableLayout = prev.tl; table.style.width = prev.w;
-        ths.forEach(function (th, i) { th.style.width = prev.th[i]; });
-      };
-    }
-
-    // ── 下载当前榜单赔率图 ──
-    $dl.addEventListener('click', function () {
-      if (!DATA || typeof html2canvas === 'undefined') return;
-      var board = document.getElementById('oddsBoardHost');
-      if (!board) return;
-      var ev = DATA.events[curEvent], mk = ev.markets[curMarket];
-      var scale = Math.max(2, (window.devicePixelRatio || 1) * 2);
-      $dl.disabled = true;
-      board.classList.add('is-exporting');
-      var unpin = pinTableWidths(board);
-      function cleanup() { unpin(); board.classList.remove('is-exporting'); }
-      html2canvas(board, {
-        scale: scale,
-        backgroundColor: '#080812',
-        useCORS: true,
-        logging: false,
-        windowWidth: board.scrollWidth,
-        width: board.scrollWidth,
-        height: board.scrollHeight
-      }).then(function (canvas) {
-        cleanup();
-        canvas.toBlob(function (blob) {
-          var a = document.createElement('a');
-          a.href = URL.createObjectURL(blob);
-          a.download = 'barvision2026-' + ev.id + '-' + mk.id + '.png';
-          document.body.appendChild(a); a.click(); a.remove();
-          setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
-          $dl.disabled = false;
-        }, 'image/png');
-      }).catch(function () {
-        cleanup();
-        $dl.disabled = false;
-      });
-    });
-
     // 海报大图预解码后淡入（消除弹出/解码卡顿，见 #166）
     (function () {
       var poster = document.querySelector('.odds-hero__poster');
@@ -517,7 +441,6 @@
     })();
 
     // 拉数据渲染
-    $dl.disabled = true;
     fetch('/data/barvision/odds/odds.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
       .then(function (d) {
