@@ -450,7 +450,25 @@
     });
     window.addEventListener('resize', updateHint, { passive: true });
 
-    // ── 下载当前榜单高清图 ──
+    // ⚠️ html2canvas 1.4.1 不按浏览器算法排 `table-layout:auto` 的表——会把表排窄、列左移、右侧列缺失/错位。
+    // 导出前把当前实际列宽用 table-layout:fixed 钉死（像素级不变），html2canvas 即按此确定布局渲染；导出后还原。
+    function pinTableWidths(board) {
+      var table = board.querySelector('.odds-table');
+      if (!table) return function () {};
+      var ths = [].slice.call(table.querySelectorAll('thead th'));
+      var tw = table.getBoundingClientRect().width;
+      var ws = ths.map(function (th) { return th.getBoundingClientRect().width; });
+      var prev = { tl: table.style.tableLayout, w: table.style.width, th: ths.map(function (th) { return th.style.width; }) };
+      table.style.tableLayout = 'fixed';
+      table.style.width = tw + 'px';
+      ths.forEach(function (th, i) { th.style.width = ws[i] + 'px'; });
+      return function revert() {
+        table.style.tableLayout = prev.tl; table.style.width = prev.w;
+        ths.forEach(function (th, i) { th.style.width = prev.th[i]; });
+      };
+    }
+
+    // ── 下载当前榜单赔率图 ──
     $dl.addEventListener('click', function () {
       if (!DATA || typeof html2canvas === 'undefined') return;
       var board = document.getElementById('oddsBoardHost');
@@ -459,6 +477,8 @@
       var scale = Math.max(2, (window.devicePixelRatio || 1) * 2);
       $dl.disabled = true;
       board.classList.add('is-exporting');
+      var unpin = pinTableWidths(board);
+      function cleanup() { unpin(); board.classList.remove('is-exporting'); }
       html2canvas(board, {
         scale: scale,
         backgroundColor: '#080812',
@@ -468,7 +488,7 @@
         width: board.scrollWidth,
         height: board.scrollHeight
       }).then(function (canvas) {
-        board.classList.remove('is-exporting');
+        cleanup();
         canvas.toBlob(function (blob) {
           var a = document.createElement('a');
           a.href = URL.createObjectURL(blob);
@@ -478,7 +498,7 @@
           $dl.disabled = false;
         }, 'image/png');
       }).catch(function () {
-        board.classList.remove('is-exporting');
+        cleanup();
         $dl.disabled = false;
       });
     });
