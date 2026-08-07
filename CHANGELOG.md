@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-08-03] — 赔率板块：数据刷新 + 导出修复 + 取消截图 + 工作流定稿
+
+### Changed
+- **赔率数据刷新**（`data/barvision/odds/odds.json`）：换用用户新版数据（SF1 11 家 / SF2 9 家 / Wildcard 8 家 bookmaker、排名与赔率更新），走势(trend)由脚本对比上一发布版排名重算（非全 NEW）。
+- **更新工作流定稿**（CLAUDE.md #190）：用户以后**发我 JSON**（旧引擎约定版），我负责①算走势②套现行约定（GF「Barvision 2026」置首 / To qualify 置首 / `top N chance` / 单行免责声明无 EN）③发布——**不再跑 `build_odds_json.py`**（会用过时 xlsx 覆盖）；引擎 + xlsx 留仓库仅作参考。
+
+### Fixed
+- **赔率图导出错位**（后已随「取消截图」移除）：html2canvas 1.4.1 不按浏览器排 `table-layout:auto` 的表 → 表排窄、右侧列缺失/错位（活体 DOM 对齐、仅导出错）。当时以 `pinTableWidths()`（导出前 `table-layout:fixed` 钉死实际列宽）修复，像素级复验对齐。
+
+### Removed
+- **取消「下载赔率图」/ 保存截图功能**：移除 `.odds-dl` 按钮 + html2canvas 导出逻辑（`pinTableWidths`/`is-exporting`）+ `<script html2canvas>` + `assets/vendor/html2canvas.min.js`（`git rm`，全站无其他引用）。页面其余（两级切换/两套高亮/趋势/免责声明）不变。html2canvas 两个坑已存档于 CLAUDE.md #190 备日后恢复。
+
+---
+
 ## [2026-08-02] — 新增「赔率预测」板块 /barvision/2026/odds/
 
 ### Added
