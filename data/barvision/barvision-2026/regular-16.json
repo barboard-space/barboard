@@ -1,315 +1,1502 @@
 {
- "year": 2026,
- "edition_no": 16,
- "version": "regular",
- "edition_name": "Barvision Chongqing 2026",
- "cn_name": "第十六届",
- "city": "Chongqing",
- "host": "威妈",
- "motto": "重声交响 Echoing Confluence",
- "live": true,
- "submit_url": "/barvision/2026/events.html#submit",
- "summary": "第十六届 Barvision 落地山城重庆，以「重声交响 Echoing Confluence」为主题。本届赛事正在进行中——内部选送与公开海选并行展开，多位成员举办的海选陆续选出晋级曲目。\n\n本页实时记录本届最新的报名情况与海选进展，将随赛事推进持续更新。",
- "signups": [
-  {"role": "candidate", "mode": "内部选送", "member": "笃妈", "song": "Hurricane", "artist": "2AM-DM", "genre": "Pop", "language": "英语", "sf": "SF2", "ro": 15},
-  {"role": "candidate", "mode": "公开海选", "member": "XX妈", "song": "Day One (feat. Madeline Merlo)", "artist": "Adam Doleac", "genre": "Country", "language": "英语", "sf": "SF2", "ro": 10},
-  {"role": "candidate", "mode": "公开海选", "member": "韩妈", "song": "Intacto (完好如初)", "artist": "Agoney", "genre": "Latin Pop", "language": "西班牙语", "sf": "SF1", "ro": 9},
-  {"role": "candidate", "mode": "内部选送", "member": "奶妈", "song": "ONLY MY HANDS", "artist": "AJ Vitanza", "genre": "R&B", "language": "英语", "sf": "SF1", "ro": 6},
-  {"role": "candidate", "mode": "内部选送", "member": "麦妈", "song": "Lifelike (feat. Midwife)", "artist": "Amulets", "genre": "Alternative", "language": "英语", "sf": "SF1", "ro": 8},
-  {"role": "candidate", "mode": "内部选送", "member": "汞妈", "song": "ポラリス (北极星)", "artist": "Aooo", "genre": "J-Pop", "language": "日语", "sf": "SF2", "ro": 4},
-  {"role": "candidate", "mode": "内部选送", "member": "杰妈", "song": "Feel The Rush", "artist": "Asha Banks", "genre": "Folk", "language": "英语", "sf": "SF2", "ro": 5},
-  {"role": "candidate", "mode": "内部选送", "member": "P妈", "song": "Bem no seu aniversário (就在你生日那天)", "artist": "Bella e o Olmo da Bruxa", "genre": "Alternative", "language": "葡萄牙语", "sf": "SF2", "ro": 17},
-  {"role": "candidate", "mode": "内部选送", "member": "狼妈/芬妈", "song": "Nicht mit mir (别来这套)", "artist": "Betcha & J.Dutt", "genre": "Hip-Hop", "language": "德语", "sf": "SF2", "ro": 9},
-  {"role": "candidate", "mode": "公开海选", "member": "雨妈", "song": "Clams Casino", "artist": "Brian Dunne", "genre": "Indie Rock", "language": "英语", "sf": "SF2", "ro": 16},
-  {"role": "candidate", "mode": "内部选送", "member": "文妈", "song": "Grudge", "artist": "Carter Faith", "genre": "Country", "language": "英语", "sf": "SF2", "ro": 12},
-  {"role": "candidate", "mode": "公开海选", "member": "邓妈", "song": "Body & Soul", "artist": "Chris De Sarandy", "genre": "Pop", "language": "英语", "sf": "SF1", "ro": 17},
-  {"role": "candidate", "mode": "内部选送", "member": "X妈", "song": "Always On My Mind", "artist": "幕后来电CurtainCalls", "genre": "Pop", "language": "英语", "sf": "SF2", "ro": 3},
-  {"role": "candidate", "mode": "内部选送", "member": "海妈", "song": "cherry cola", "artist": "Devon Again", "genre": "Indie Rock", "language": "英语", "sf": "SF2", "ro": 13},
-  {"role": "candidate", "mode": "内部选送", "member": "嘟妈", "song": "Perfect Design", "artist": "Duma", "genre": "Alternative R&B", "language": "英语", "sf": "SF2", "ro": 1},
-  {"role": "candidate", "mode": "公开海选", "member": "猴妈", "song": "I Got A Thing For Love", "artist": "Elle Coves", "genre": "Pop", "language": "英语", "sf": "SF1", "ro": 14},
-  {"role": "candidate", "mode": "内部选送", "member": "锴妈", "song": "Show Me What Love Is", "artist": "Erik Segerstedt", "genre": "Pop", "language": "英语", "sf": "SF1", "ro": 1},
-  {"role": "candidate", "mode": "内部选送", "member": "田妈", "song": "The Wild", "artist": "Gabe Lee", "genre": "Country", "language": "英语", "sf": "SF1", "ro": 15},
-  {"role": "candidate", "mode": "内部选送", "member": "团妈", "song": "Bounce House", "artist": "Gelli Haha", "genre": "Alternative Rock", "language": "英语", "sf": "SF1", "ro": 5},
-  {"role": "candidate", "mode": "内部选送", "member": "S妈/鸽妈", "song": "H O M E", "artist": "HANRORO", "genre": "Pop Rock", "language": "韩语", "sf": "SF1", "ro": 16},
-  {"role": "candidate", "mode": "内部选送", "member": "柴妈", "song": "Alive", "artist": "itsmync", "genre": "Pop", "language": "英语", "sf": "SF2", "ro": 7},
-  {"role": "candidate", "mode": "内部选送", "member": "A妈", "song": "Running To Pain", "artist": "Kelsey Lu", "genre": "Alternative Pop", "language": "英语", "sf": "SF1", "ro": 4},
-  {"role": "candidate", "mode": "内部选送", "member": "城妈", "song": "1XTE1XME (你一个 我一个)", "artist": "Lorenzo Fragola", "genre": "Pop", "language": "意大利语", "sf": "SF1", "ro": 18},
-  {"role": "candidate", "mode": "内部选送", "member": "吃妈", "song": "Stars Collide (feat. Carnie Reimers)", "artist": "MARK Harmony", "genre": "Pop", "language": "英语 马绍尔语", "sf": "SF1", "ro": 13},
-  {"role": "candidate", "mode": "内部选送", "member": "T妈", "song": "Justin's Headed Out", "artist": "mercury", "genre": "Alternative", "language": "英语", "sf": "SF2", "ro": 14},
-  {"role": "candidate", "mode": "内部选送", "member": "萌妈", "song": "Do it all again", "artist": "MICO", "genre": "Pop", "language": "英语", "sf": "SF1", "ro": 2},
-  {"role": "candidate", "mode": "内部选送", "member": "K妈", "song": "storm", "artist": "Night Tapes", "genre": "Alternative", "language": "英语", "sf": "SF2", "ro": 6},
-  {"role": "candidate", "mode": "内部选送", "member": "野妈", "song": "POLIZEI", "artist": "Nova May", "genre": "Electro", "language": "英语", "sf": "SF2", "ro": 11},
-  {"role": "candidate", "mode": "内部选送", "member": "柠妈", "song": "Too Good to be Bad", "artist": "Olivia Marsh", "genre": "Pop", "language": "英语", "sf": "SF1", "ro": 11},
-  {"role": "candidate", "mode": "内部选送", "member": "叉妈", "song": "Middle Of Summer", "artist": "PONY", "genre": "Alternative", "language": "英语", "sf": "SF1", "ro": 10},
-  {"role": "candidate", "mode": "内部选送", "member": "波妈", "song": "Shimmer (feat. Kinoko)", "artist": "RabbitJ", "genre": "Soundtrack", "language": "英语", "sf": "SF1", "ro": 3},
-  {"role": "candidate", "mode": "公开海选", "member": "白妈", "song": "1001 tapaa (1001种方式)", "artist": "Robin Packalen", "genre": "Pop", "language": "芬兰语", "sf": "SF1", "ro": 12},
-  {"role": "candidate", "mode": "公开海选", "member": "星妈", "song": "Hey You", "artist": "The Belair Lip Bombs", "genre": "Alternative", "language": "英语", "sf": "SF2", "ro": 18},
-  {"role": "candidate", "mode": "公开海选", "member": "羊妈", "song": "Country Road", "artist": "The Hellp", "genre": "Alternative", "language": "英语", "sf": "SF2", "ro": 8},
-  {"role": "candidate", "mode": "公开海选", "member": "包妈", "song": "Where Has My Friend Gone?", "artist": "The Home Team", "genre": "Rock", "language": "英语", "sf": "SF1", "ro": 7},
-  {"role": "candidate", "mode": "公开海选", "member": "泰妈", "song": "BANG", "artist": "Unroyal", "genre": "Rock", "language": "英语", "sf": "SF2", "ro": 2},
-  {"role": "candidate", "mode": "公开海选", "member": "威妈", "song": "OK City Sun", "artist": "Walking On Rivers", "genre": "Alternative", "language": "英语"},
-  {"role": "candidate", "mode": "公开海选", "member": "松妈", "song": "Boyfriend", "artist": "We Three", "genre": "Alternative Pop", "language": "英语", "sf": "SF1", "ro": 19},
-
-  {"role": "wildcard", "mode": "公开海选", "member": "威妈", "song": "ricochet", "artist": "Aidan Bissett", "genre": "Alternative", "language": "英语", "ro": 1},
-  {"role": "wildcard", "mode": "公开海选", "member": "星妈", "song": "Aralar", "artist": "Amaia", "genre": "Latin Pop", "language": "西班牙语", "ro": 2},
-  {"role": "wildcard", "mode": "公开海选", "member": "泰妈", "song": "Deadmau5", "artist": "BESTIES", "genre": "Indie Rock", "language": "英语", "ro": 3},
-  {"role": "wildcard", "mode": "公开海选", "member": "羊妈", "song": "That's Life", "artist": "Dead Dads Club", "genre": "Alternative", "language": "英语", "ro": 4},
-  {"role": "wildcard", "mode": "公开海选", "member": "邓妈", "song": "Could Have Been Us", "artist": "Douwe Bob & SERA", "genre": "Pop", "language": "英语", "ro": 5},
-  {"role": "wildcard", "mode": "公开海选", "member": "XX妈", "song": "Giđa ávašta (春意渐浓)", "artist": "Emil Kárlsen & Elina Ijäs", "genre": "Folk", "language": "北萨米语", "ro": 6},
-  {"role": "wildcard", "mode": "公开海选", "member": "白妈", "song": "Polje ruža (玫瑰花田)", "artist": "Jakov Jozinović", "genre": "Pop", "language": "克罗地亚语", "ro": 7},
-  {"role": "wildcard", "mode": "公开海选", "member": "松妈", "song": "Starcrossed", "artist": "Kings Elliot", "genre": "Pop", "language": "英语", "ro": 8},
-  {"role": "wildcard", "mode": "公开海选", "member": "猴妈", "song": "Hoe Dan Ook (无论如何)", "artist": "MAKSIM & Babet", "genre": "Pop", "language": "荷兰语", "ro": 9},
-  {"role": "wildcard", "mode": "公开海选", "member": "雨妈", "song": "THE MØURNING AFTER", "artist": "MØNØDREAM", "genre": "Rock", "language": "英语", "ro": 10},
-  {"role": "wildcard", "mode": "公开海选", "member": "包妈", "song": "THE DEEP", "artist": "Telenova", "genre": "Alternative", "language": "英语", "ro": 11},
-  {"role": "wildcard", "mode": "公开海选", "member": "韩妈", "song": "Цілую малинові (树莓之吻)", "artist": "YAKTAK", "genre": "Pop", "language": "乌克兰语", "ro": 12}
- ],
- "auditions": {
-  "note": "",
-  "list": [
-   { "name": "Marshmallow Festival 2026", "member": "松妈", "period": "", "artist": "We Three", "song": "Boyfriend" },
-   { "name": "XXXS Music audition", "member": "XX妈", "period": "", "artist": "Adam Doleac", "song": "Day One (feat. Madeline Merlo)" },
-   { "name": "Hanvision 2026: The second chances", "member": "韩妈", "period": "", "artist": "Agoney", "song": "Intacto (完好如初)" },
-   { "name": "Whitevision 2026", "member": "白妈", "period": "", "artist": "Robin Packalen", "song": "1001 tapaa (1001种方式)" },
-   { "name": "Rainfall Melody Festival 2026", "member": "雨妈", "period": "", "artist": "Brian Dunne", "song": "Clams Casino" },
-   { "name": "European Fever", "member": "邓妈", "period": "", "artist": "Chris De Sarandy", "song": "Body & Soul" },
-   { "name": "Voiizion Contest", "member": "猴妈", "period": "", "artist": "Elle Coves", "song": "I Got A Thing For Love" },
-   { "name": "RollingGOAT 2026", "member": "羊妈", "period": "", "artist": "The Hellp", "song": "Country Road" },
-   { "name": "Starvision 2026", "member": "星妈", "period": "", "artist": "The Belair Lip Bombs", "song": "Hey You" },
-   { "name": "2026 BacUp", "member": "包妈", "period": "", "artist": "The Home Team", "song": "Where Has My Friend Gone?" },
-   { "name": "Genius Genesis 2026", "member": "威妈", "period": "", "artist": "Walking On Rivers", "song": "OK City Sun" },
-   { "name": "Titancrazyland's Election 2026", "member": "泰妈", "period": "", "artist": "Unroyal", "song": "BANG" }
-  ]
- },
- "info_sections": [
-  {
-   "id": "schedule", "cn": "赛程安排", "en": "Schedule",
-   "subtitle": "完整赛程时间表，具体安排以后续公告为准。",
-   "sections": [
+  "year": 2026,
+  "edition_no": 16,
+  "version": "regular",
+  "edition_name": "Barvision Chongqing 2026",
+  "cn_name": "第十六届",
+  "city": "Chongqing",
+  "host": "威妈",
+  "motto": "重声交响 Echoing Confluence",
+  "live": true,
+  "submit_url": "/barvision/2026/events.html#submit",
+  "summary": "第十六届 Barvision 落地山城重庆，以「重声交响 Echoing Confluence」为主题。本届赛事正在进行中——内部选送与公开海选并行展开，多位成员举办的海选陆续选出晋级曲目。\n\n本页实时记录本届最新的报名情况与海选进展，将随赛事推进持续更新。",
+  "signups": [
     {
-     "title": "STAGE 1 · 歌曲提交",
-     "table": { "rows": [
-      ["06-01 18:00", "歌曲提交通道开启 — 榜吧成员可通过内定或组织海选的方式提交参赛歌曲"],
-      ["07-19 24:00", "提交通道关闭 · 歌曲名单公示 — 提交截止，所有参赛曲目公开公示，进入 72 小时异议期（至 7/22 24:00）"],
-      ["07-22 24:00", "歌曲公示期结束，参赛歌曲名单正式确定 — 公示期内可对参赛资格提出异议并举证，逾期无效"]
-     ] }
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "笃妈",
+      "song": "Hurricane",
+      "artist": "2AM-DM",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 15,
+      "result": "Q"
     },
     {
-     "title": "STAGE 2 · 半决赛 Semi-Finals",
-     "table": { "rows": [
-      ["07-24 晚间", "半决赛分组抽签直播（Allocation Draw）— 抽签决定各参赛歌曲进入 Semi-Final 1 或 Semi-Final 2"],
-      ["07-25 晚间", "海选突围赛展播 · 投票开启"],
-      ["07-25 晚间", "Semi-Final 1 展播 · 投票开启 — SF1 参赛歌曲展播，评委票与观众票通道同步开启"],
-      ["07-31 24:00", "Semi-Final 1 投票截止"],
-      ["08-01 晚间", "Semi-Final 2 展播 · 投票开启 — SF2 参赛歌曲展播，评委票与观众票通道同步开启"],
-      ["08-06 24:00", "Semi-Final 2 投票截止"],
-      ["08-06 24:00", "海选突围赛投票截止"],
-      ["08-08 晚间", "Semi-Final 暨外卡突围赛直播 — 公布两场半决赛结果及晋级名单；外卡突围赛现场实时 Approval Vote；赛后公布 Grand Final Running Order"]
-     ] }
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "XX妈",
+      "song": "Day One (feat. Madeline Merlo)",
+      "artist": "Adam Doleac",
+      "genre": "Country",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 10,
+      "result": "Q"
     },
     {
-     "title": "STAGE 3 · 决赛 Grand Final",
-     "table": { "rows": [
-      ["08-08 晚间", "决赛展播 · 投票通道开启 — 共 26 首参赛歌曲；评委票与观众票通道同步开启"],
-      ["08-16 晚间", "决赛投票通道关闭"],
-      ["08-18 24:00", "决赛票数统计结束"],
-      ["08-22 晚间", "Grand Final 直播 — 公布最终赛果，揭晓 Barvision Chongqing 2026 年度冠军"]
-     ] }
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "韩妈",
+      "song": "Intacto (完好如初)",
+      "artist": "Agoney",
+      "genre": "Latin Pop",
+      "language": "西班牙语",
+      "sf": "SF1",
+      "ro": 9,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "奶妈",
+      "song": "ONLY MY HANDS",
+      "artist": "AJ Vitanza",
+      "genre": "R&B",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 6,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "麦妈",
+      "song": "Lifelike (feat. Midwife)",
+      "artist": "Amulets",
+      "genre": "Alternative",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 8,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "汞妈",
+      "song": "ポラリス (北极星)",
+      "artist": "Aooo",
+      "genre": "J-Pop",
+      "language": "日语",
+      "sf": "SF2",
+      "ro": 4,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "杰妈",
+      "song": "Feel The Rush",
+      "artist": "Asha Banks",
+      "genre": "Folk",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 5,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "P妈",
+      "song": "Bem no seu aniversário (就在你生日那天)",
+      "artist": "Bella e o Olmo da Bruxa",
+      "genre": "Alternative",
+      "language": "葡萄牙语",
+      "sf": "SF2",
+      "ro": 17,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "狼妈/芬妈",
+      "song": "Nicht mit mir (别来这套)",
+      "artist": "Betcha & J.Dutt",
+      "genre": "Hip-Hop",
+      "language": "德语",
+      "sf": "SF2",
+      "ro": 9,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "雨妈",
+      "song": "Clams Casino",
+      "artist": "Brian Dunne",
+      "genre": "Indie Rock",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 16,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "文妈",
+      "song": "Grudge",
+      "artist": "Carter Faith",
+      "genre": "Country",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 12,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "邓妈",
+      "song": "Body & Soul",
+      "artist": "Chris De Sarandy",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 17,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "X妈",
+      "song": "Always On My Mind",
+      "artist": "幕后来电CurtainCalls",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 3,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "海妈",
+      "song": "cherry cola",
+      "artist": "Devon Again",
+      "genre": "Indie Rock",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 13,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "嘟妈",
+      "song": "Perfect Design",
+      "artist": "Duma",
+      "genre": "Alternative R&B",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 1,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "猴妈",
+      "song": "I Got A Thing For Love",
+      "artist": "Elle Coves",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 14,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "锴妈",
+      "song": "Show Me What Love Is",
+      "artist": "Erik Segerstedt",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 1,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "田妈",
+      "song": "The Wild",
+      "artist": "Gabe Lee",
+      "genre": "Country",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 15,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "团妈",
+      "song": "Bounce House",
+      "artist": "Gelli Haha",
+      "genre": "Alternative Rock",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 5,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "S妈/鸽妈",
+      "song": "H O M E",
+      "artist": "HANRORO",
+      "genre": "Pop Rock",
+      "language": "韩语",
+      "sf": "SF1",
+      "ro": 16,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "柴妈",
+      "song": "Alive",
+      "artist": "itsmync",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 7,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "A妈",
+      "song": "Running To Pain",
+      "artist": "Kelsey Lu",
+      "genre": "Alternative Pop",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 4,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "城妈",
+      "song": "1XTE1XME (你一个 我一个)",
+      "artist": "Lorenzo Fragola",
+      "genre": "Pop",
+      "language": "意大利语",
+      "sf": "SF1",
+      "ro": 18,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "吃妈",
+      "song": "Stars Collide (feat. Carnie Reimers)",
+      "artist": "MARK Harmony",
+      "genre": "Pop",
+      "language": "英语 马绍尔语",
+      "sf": "SF1",
+      "ro": 13,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "T妈",
+      "song": "Justin's Headed Out",
+      "artist": "mercury",
+      "genre": "Alternative",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 14,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "萌妈",
+      "song": "Do it all again",
+      "artist": "MICO",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 2,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "K妈",
+      "song": "storm",
+      "artist": "Night Tapes",
+      "genre": "Alternative",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 6,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "野妈",
+      "song": "POLIZEI",
+      "artist": "Nova May",
+      "genre": "Electro",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 11,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "柠妈",
+      "song": "Too Good to be Bad",
+      "artist": "Olivia Marsh",
+      "genre": "Pop",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 11,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "叉妈",
+      "song": "Middle Of Summer",
+      "artist": "PONY",
+      "genre": "Alternative",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 10,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "内部选送",
+      "member": "波妈",
+      "song": "Shimmer (feat. Kinoko)",
+      "artist": "RabbitJ",
+      "genre": "Soundtrack",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 3,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "白妈",
+      "song": "1001 tapaa (1001种方式)",
+      "artist": "Robin Packalen",
+      "genre": "Pop",
+      "language": "芬兰语",
+      "sf": "SF1",
+      "ro": 12,
+      "result": "NQ"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "星妈",
+      "song": "Hey You",
+      "artist": "The Belair Lip Bombs",
+      "genre": "Alternative",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 18,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "羊妈",
+      "song": "Country Road",
+      "artist": "The Hellp",
+      "genre": "Alternative",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 8,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "包妈",
+      "song": "Where Has My Friend Gone?",
+      "artist": "The Home Team",
+      "genre": "Rock",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 7,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "泰妈",
+      "song": "BANG",
+      "artist": "Unroyal",
+      "genre": "Rock",
+      "language": "英语",
+      "sf": "SF2",
+      "ro": 2,
+      "result": "Q"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "威妈",
+      "song": "OK City Sun",
+      "artist": "Walking On Rivers",
+      "genre": "Alternative",
+      "language": "英语"
+    },
+    {
+      "role": "candidate",
+      "mode": "公开海选",
+      "member": "松妈",
+      "song": "Boyfriend",
+      "artist": "We Three",
+      "genre": "Alternative Pop",
+      "language": "英语",
+      "sf": "SF1",
+      "ro": 19,
+      "result": "Q"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "威妈",
+      "song": "ricochet",
+      "artist": "Aidan Bissett",
+      "genre": "Alternative",
+      "language": "英语",
+      "ro": 1,
+      "result": "Q"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "星妈",
+      "song": "Aralar",
+      "artist": "Amaia",
+      "genre": "Latin Pop",
+      "language": "西班牙语",
+      "ro": 2,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "泰妈",
+      "song": "Deadmau5",
+      "artist": "BESTIES",
+      "genre": "Indie Rock",
+      "language": "英语",
+      "ro": 3,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "羊妈",
+      "song": "That's Life",
+      "artist": "Dead Dads Club",
+      "genre": "Alternative",
+      "language": "英语",
+      "ro": 4,
+      "result": "Q"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "邓妈",
+      "song": "Could Have Been Us",
+      "artist": "Douwe Bob & SERA",
+      "genre": "Pop",
+      "language": "英语",
+      "ro": 5,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "XX妈",
+      "song": "Giđa ávašta (春意渐浓)",
+      "artist": "Emil Kárlsen & Elina Ijäs",
+      "genre": "Folk",
+      "language": "北萨米语",
+      "ro": 6,
+      "result": "Q"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "白妈",
+      "song": "Polje ruža (玫瑰花田)",
+      "artist": "Jakov Jozinović",
+      "genre": "Pop",
+      "language": "克罗地亚语",
+      "ro": 7,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "松妈",
+      "song": "Starcrossed",
+      "artist": "Kings Elliot",
+      "genre": "Pop",
+      "language": "英语",
+      "ro": 8,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "猴妈",
+      "song": "Hoe Dan Ook (无论如何)",
+      "artist": "MAKSIM & Babet",
+      "genre": "Pop",
+      "language": "荷兰语",
+      "ro": 9,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "雨妈",
+      "song": "THE MØURNING AFTER",
+      "artist": "MØNØDREAM",
+      "genre": "Rock",
+      "language": "英语",
+      "ro": 10,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "包妈",
+      "song": "THE DEEP",
+      "artist": "Telenova",
+      "genre": "Alternative",
+      "language": "英语",
+      "ro": 11,
+      "result": "NQ"
+    },
+    {
+      "role": "wildcard",
+      "mode": "公开海选",
+      "member": "韩妈",
+      "song": "Цілую малинові (树莓之吻)",
+      "artist": "YAKTAK",
+      "genre": "Pop",
+      "language": "乌克兰语",
+      "ro": 12,
+      "result": "NQ"
     }
-   ]
-  },
-  {
-   "id": "voting", "cn": "投票方式", "en": "Voting",
-   "subtitle": "半决赛与决赛均采用评委票与观众票，各占 50%。外卡突围赛采用认可票（Approval Vote）。",
-   "sections": [
-    {
-     "title": "评委票 Jury Vote（50%）",
-     "body": ["每位评委从参赛歌曲中选出 Top 10 排名，按以下标准赋分（不得为自己的参赛歌曲投票）："],
-     "scoring": { "ranks": ["#1", "#2", "#3", "#4", "#5", "#6", "#7", "#8", "#9", "#10"], "scores": [12, 10, 8, 7, 6, 5, 4, 3, 2, 1] }
-    },
-    {
-     "title": "观众票 Tele Vote（50%）",
-     "items": [
-      "每位观众拥有 20 票，可自由分配给该场任意参赛歌曲。同一首歌最多可投 10 票。",
-      "所有观众票按比例换算为与评委票等值的总分池，再按比例分配给各参赛歌曲。",
-      "非选送者的榜吧成员须先完成观众票投票，方可参与评委票投票。选送者须同时完成两种投票，不得缺席。",
-      "投票人不得将票数投给自己所选送的参赛歌曲。"
-     ]
-    },
-    {
-     "title": "认可票 Approval Vote · 海选突围赛 / 外卡突围赛",
-     "items": [
-      "海选突围赛与半决赛投票同步进行（07-25 至 08-06），参赛歌曲为本届 12 场公开海选的亚军曲目（共 12 首），采用认可票（12 选 3），票数前 3 名晋级外卡突围赛。",
-      "外卡突围赛在 Semi-Final 直播现场（08-08 晚）实时进行，参赛歌曲为两场半决赛未晋级的全部歌曲（共 13 首）及海选突围赛晋级的 3 首，合计 16 首，采用认可票（16 选 3），得票最高者晋级决赛。",
-      "每位投票者拥有 3 票，须至少投出 1 票，至多 3 票。",
-      "可分配给 1 至 3 首不同歌曲，每首最多获得 1 票。",
-      "不得将票数投给自己所选送的参赛歌曲。",
-      "结果即时统计并公布，胜者 1 名直接晋级决赛。"
-     ]
-    }
-   ]
-  },
-  {
-   "id": "rules", "cn": "详细规则", "en": "Rulebook",
-   "subtitle": "本届核心赛制规则如下。投票类型与计分方式详见「投票方式」；完整章程以主办方发布的 Rulebook 为准，最终解释权归主办方所有。",
-   "sections": [
-    {
-     "title": "投票人资格",
-     "list": [
-      { "k": "选送者", "v": "成功提交参赛歌曲者自动成为本届评委，须在其参赛场次中同时完成评委票与观众票，不得缺席。" },
-      { "k": "普通成员", "v": "非选送成员可参与观众票；如希望参与评委票，须先完成该场观众票方可获得资格。为完整表达支持，建议同时完成两种投票。" }
-     ]
-    },
-    {
-     "title": "半决赛 Semi-Finals",
-     "list": [
-      { "k": "适用范围", "v": "除东道主（主办方 威妈）选送歌曲外的所有参赛歌曲均须经历半决赛；东道主歌曲直通决赛，不参与半决赛评比。" },
-      { "k": "分组抽签", "v": "非东道主歌曲均分至两场半决赛，参赛场次与出场顺序均由抽签（Allocation Draw，7 月 24 日晚直播）决定。" },
-      { "k": "席位分布", "v": "Semi-Final 1 共 19 首、Semi-Final 2 共 18 首。" },
-      { "k": "投票机制", "v": "每场采用评委票 50% + 观众票 50% 的综合评分，合并计算最终排名。" },
-      { "k": "晋级规则", "v": "每场排名前 12 名晋级决赛，两场合计 24 首直接晋级。" }
-     ]
-    },
-    {
-     "title": "海选突围赛 & 外卡突围赛",
-     "list": [
-      { "k": "海选突围赛 Wildcard Round", "v": "参赛曲目为本届 12 场公开海选的亚军曲目（共 12 首），与半决赛投票同期进行（07-25 至 08-06）；采用认可票（12 选 3），票数前 3 名晋级外卡突围赛。" },
-      { "k": "外卡突围赛 Playoff", "v": "在 Semi-Final 直播现场（08-08 晚）实时进行，参赛曲目为两场半决赛未晋级的全部歌曲（共 13 首）与海选突围赛晋级的 3 首，合计 16 首；采用认可票（16 选 3），得票最高者 1 名晋级决赛。" }
-     ]
-    },
-    {
-     "title": "决赛 Grand Final",
-     "list": [
-      { "k": "参赛构成", "v": "共 26 首——半决赛晋级 24 首、东道主直通 1 首、外卡突围赛胜者 1 首。" },
-      { "k": "投票机制", "v": "评委票 50% + 观众票 50% 的加权总分决出年度冠军。" },
-      { "k": "投票时限", "v": "投票通道 08-16 晚关闭；已确认投票意向的成员如遇特殊情况，可延至 08-18 24:00 前补投，确保计入统计。" }
-     ]
-    },
-    {
-     "title": "平局判定",
-     "body": ["名次相同时，依次比较以下各项，直至分出先后："],
-     "list": [
-      { "k": "①", "v": "观众票得分更高者靠前。" },
-      { "k": "②", "v": "总票源数（评委与观众投票人数之和）更多者靠前。" },
-      { "k": "③", "v": "从 12 分起，依次比较最高单项得分的次数。" },
-      { "k": "④", "v": "出场顺序靠前者获胜。" }
-     ]
-    },
-    {
-     "title": "合报规则",
-     "body": ["经主办方与合报双方同意，最多两人可共同选送一首歌曲。投票时，合报者需共同提交一份投票计入总分。"]
-    },
-    {
-     "title": "冠军与承办权",
-     "body": ["获得冠军的歌曲选送方成为本届最终胜者，将获得 Barvision 2027 的主办权，负责组织和举办下一届大赛。"],
-     "foot": "本章程的最终解释权归 Barvision Chongqing 2026 主办方所有。"
-    }
-   ]
-  },
-  {
-   "id": "about", "cn": "关于活动", "en": "About Barvision",
-   "subtitle": "",
-   "sections": [
-    {
-     "body": [
-      "Barvision 是欧美流行音乐个人榜吧（Barboard）举办的年度歌曲大赛，灵感来自 Eurovision Song Contest。成员自行选送小众歌曲参赛，经半决赛投票后晋级决赛，最终通过评委票与观众票的合并计分决出年度冠军。",
-      "Barvision 始于 2019 年，由 萌妈 创立，历经数年停办后于 2023 年恢复，现已举办至第十六届。本届 Barvision Chongqing 2026 以重庆为举办城市，主题为「重声交响 Echoing Confluence」。"
-     ]
-    }
-   ]
-  }
- ],
- "feed": [],
- "links": {
-  "showcase": [
-   { "label": "Barvision Chongqing 2026: All 38 Songs", "url": "https://www.bilibili.com/video/BV18egC6NEx4/" },
-   { "label": "Barvision Chongqing 2026: Wildcards", "url": "https://www.bilibili.com/video/BV18egC6NEAr/" },
-   { "label": "Barvision Chongqing 2026: First Semi-Final Running Order", "url": "https://www.bilibili.com/video/BV1vT3u6UEyu/" },
-   { "label": "Barvision Chongqing 2026: Second Semi-Final Running Order", "url": "https://b23.tv/lf0QqOp" }
   ],
-  "replays": [
-   { "label": "Barvision 2026 Allocation Draw 直播回放", "url": "https://www.bilibili.com/video/BV1Qage6yEY9/" }
+  "auditions": {
+    "note": "",
+    "list": [
+      {
+        "name": "Marshmallow Festival 2026",
+        "member": "松妈",
+        "period": "",
+        "artist": "We Three",
+        "song": "Boyfriend"
+      },
+      {
+        "name": "XXXS Music audition",
+        "member": "XX妈",
+        "period": "",
+        "artist": "Adam Doleac",
+        "song": "Day One (feat. Madeline Merlo)"
+      },
+      {
+        "name": "Hanvision 2026: The second chances",
+        "member": "韩妈",
+        "period": "",
+        "artist": "Agoney",
+        "song": "Intacto (完好如初)"
+      },
+      {
+        "name": "Whitevision 2026",
+        "member": "白妈",
+        "period": "",
+        "artist": "Robin Packalen",
+        "song": "1001 tapaa (1001种方式)"
+      },
+      {
+        "name": "Rainfall Melody Festival 2026",
+        "member": "雨妈",
+        "period": "",
+        "artist": "Brian Dunne",
+        "song": "Clams Casino"
+      },
+      {
+        "name": "European Fever",
+        "member": "邓妈",
+        "period": "",
+        "artist": "Chris De Sarandy",
+        "song": "Body & Soul"
+      },
+      {
+        "name": "Voiizion Contest",
+        "member": "猴妈",
+        "period": "",
+        "artist": "Elle Coves",
+        "song": "I Got A Thing For Love"
+      },
+      {
+        "name": "RollingGOAT 2026",
+        "member": "羊妈",
+        "period": "",
+        "artist": "The Hellp",
+        "song": "Country Road"
+      },
+      {
+        "name": "Starvision 2026",
+        "member": "星妈",
+        "period": "",
+        "artist": "The Belair Lip Bombs",
+        "song": "Hey You"
+      },
+      {
+        "name": "2026 BacUp",
+        "member": "包妈",
+        "period": "",
+        "artist": "The Home Team",
+        "song": "Where Has My Friend Gone?"
+      },
+      {
+        "name": "Genius Genesis 2026",
+        "member": "威妈",
+        "period": "",
+        "artist": "Walking On Rivers",
+        "song": "OK City Sun"
+      },
+      {
+        "name": "Titancrazyland's Election 2026",
+        "member": "泰妈",
+        "period": "",
+        "artist": "Unroyal",
+        "song": "BANG"
+      }
+    ]
+  },
+  "info_sections": [
+    {
+      "id": "schedule",
+      "cn": "赛程安排",
+      "en": "Schedule",
+      "subtitle": "完整赛程时间表，具体安排以后续公告为准。",
+      "sections": [
+        {
+          "title": "STAGE 1 · 歌曲提交",
+          "table": {
+            "rows": [
+              [
+                "06-01 18:00",
+                "歌曲提交通道开启 — 榜吧成员可通过内定或组织海选的方式提交参赛歌曲"
+              ],
+              [
+                "07-19 24:00",
+                "提交通道关闭 · 歌曲名单公示 — 提交截止，所有参赛曲目公开公示，进入 72 小时异议期（至 7/22 24:00）"
+              ],
+              [
+                "07-22 24:00",
+                "歌曲公示期结束，参赛歌曲名单正式确定 — 公示期内可对参赛资格提出异议并举证，逾期无效"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "STAGE 2 · 半决赛 Semi-Finals",
+          "table": {
+            "rows": [
+              [
+                "07-24 晚间",
+                "半决赛分组抽签直播（Allocation Draw）— 抽签决定各参赛歌曲进入 Semi-Final 1 或 Semi-Final 2"
+              ],
+              [
+                "07-25 晚间",
+                "海选突围赛展播 · 投票开启"
+              ],
+              [
+                "07-25 晚间",
+                "Semi-Final 1 展播 · 投票开启 — SF1 参赛歌曲展播，评委票与观众票通道同步开启"
+              ],
+              [
+                "07-31 24:00",
+                "Semi-Final 1 投票截止"
+              ],
+              [
+                "08-01 晚间",
+                "Semi-Final 2 展播 · 投票开启 — SF2 参赛歌曲展播，评委票与观众票通道同步开启"
+              ],
+              [
+                "08-06 24:00",
+                "Semi-Final 2 投票截止"
+              ],
+              [
+                "08-06 24:00",
+                "海选突围赛投票截止"
+              ],
+              [
+                "08-08 晚间",
+                "Semi-Final 暨外卡突围赛直播 — 公布两场半决赛结果及晋级名单；外卡突围赛现场实时 Approval Vote；赛后公布 Grand Final Running Order"
+              ]
+            ]
+          }
+        },
+        {
+          "title": "STAGE 3 · 决赛 Grand Final",
+          "table": {
+            "rows": [
+              [
+                "08-08 晚间",
+                "决赛展播 · 投票通道开启 — 共 26 首参赛歌曲；评委票与观众票通道同步开启"
+              ],
+              [
+                "08-16 晚间",
+                "决赛投票通道关闭"
+              ],
+              [
+                "08-18 24:00",
+                "决赛票数统计结束"
+              ],
+              [
+                "08-22 晚间",
+                "Grand Final 直播 — 公布最终赛果，揭晓 Barvision Chongqing 2026 年度冠军"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "voting",
+      "cn": "投票方式",
+      "en": "Voting",
+      "subtitle": "半决赛与决赛均采用评委票与观众票，各占 50%。外卡突围赛采用认可票（Approval Vote）。",
+      "sections": [
+        {
+          "title": "评委票 Jury Vote（50%）",
+          "body": [
+            "每位评委从参赛歌曲中选出 Top 10 排名，按以下标准赋分（不得为自己的参赛歌曲投票）："
+          ],
+          "scoring": {
+            "ranks": [
+              "#1",
+              "#2",
+              "#3",
+              "#4",
+              "#5",
+              "#6",
+              "#7",
+              "#8",
+              "#9",
+              "#10"
+            ],
+            "scores": [
+              12,
+              10,
+              8,
+              7,
+              6,
+              5,
+              4,
+              3,
+              2,
+              1
+            ]
+          }
+        },
+        {
+          "title": "观众票 Tele Vote（50%）",
+          "items": [
+            "每位观众拥有 20 票，可自由分配给该场任意参赛歌曲。同一首歌最多可投 10 票。",
+            "所有观众票按比例换算为与评委票等值的总分池，再按比例分配给各参赛歌曲。",
+            "非选送者的榜吧成员须先完成观众票投票，方可参与评委票投票。选送者须同时完成两种投票，不得缺席。",
+            "投票人不得将票数投给自己所选送的参赛歌曲。"
+          ]
+        },
+        {
+          "title": "认可票 Approval Vote · 海选突围赛 / 外卡突围赛",
+          "items": [
+            "海选突围赛与半决赛投票同步进行（07-25 至 08-06），参赛歌曲为本届 12 场公开海选的亚军曲目（共 12 首），采用认可票（12 选 3），票数前 3 名晋级外卡突围赛。",
+            "外卡突围赛在 Semi-Final 直播现场（08-08 晚）实时进行，参赛歌曲为两场半决赛未晋级的全部歌曲（共 13 首）及海选突围赛晋级的 3 首，合计 16 首，采用认可票（16 选 3），得票最高者晋级决赛。",
+            "每位投票者拥有 3 票，须至少投出 1 票，至多 3 票。",
+            "可分配给 1 至 3 首不同歌曲，每首最多获得 1 票。",
+            "不得将票数投给自己所选送的参赛歌曲。",
+            "结果即时统计并公布，胜者 1 名直接晋级决赛。"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rules",
+      "cn": "详细规则",
+      "en": "Rulebook",
+      "subtitle": "本届核心赛制规则如下。投票类型与计分方式详见「投票方式」；完整章程以主办方发布的 Rulebook 为准，最终解释权归主办方所有。",
+      "sections": [
+        {
+          "title": "投票人资格",
+          "list": [
+            {
+              "k": "选送者",
+              "v": "成功提交参赛歌曲者自动成为本届评委，须在其参赛场次中同时完成评委票与观众票，不得缺席。"
+            },
+            {
+              "k": "普通成员",
+              "v": "非选送成员可参与观众票；如希望参与评委票，须先完成该场观众票方可获得资格。为完整表达支持，建议同时完成两种投票。"
+            }
+          ]
+        },
+        {
+          "title": "半决赛 Semi-Finals",
+          "list": [
+            {
+              "k": "适用范围",
+              "v": "除东道主（主办方 威妈）选送歌曲外的所有参赛歌曲均须经历半决赛；东道主歌曲直通决赛，不参与半决赛评比。"
+            },
+            {
+              "k": "分组抽签",
+              "v": "非东道主歌曲均分至两场半决赛，参赛场次与出场顺序均由抽签（Allocation Draw，7 月 24 日晚直播）决定。"
+            },
+            {
+              "k": "席位分布",
+              "v": "Semi-Final 1 共 19 首、Semi-Final 2 共 18 首。"
+            },
+            {
+              "k": "投票机制",
+              "v": "每场采用评委票 50% + 观众票 50% 的综合评分，合并计算最终排名。"
+            },
+            {
+              "k": "晋级规则",
+              "v": "每场排名前 12 名晋级决赛，两场合计 24 首直接晋级。"
+            }
+          ]
+        },
+        {
+          "title": "海选突围赛 & 外卡突围赛",
+          "list": [
+            {
+              "k": "海选突围赛 Wildcard Round",
+              "v": "参赛曲目为本届 12 场公开海选的亚军曲目（共 12 首），与半决赛投票同期进行（07-25 至 08-06）；采用认可票（12 选 3），票数前 3 名晋级外卡突围赛。"
+            },
+            {
+              "k": "外卡突围赛 Second Chance",
+              "v": "在 Semi-Final 直播现场（08-08 晚）实时进行，参赛曲目为两场半决赛未晋级的全部歌曲（共 13 首）与海选突围赛晋级的 3 首，合计 16 首；采用认可票（16 选 3），得票最高者 1 名晋级决赛。"
+            }
+          ]
+        },
+        {
+          "title": "决赛 Grand Final",
+          "list": [
+            {
+              "k": "参赛构成",
+              "v": "共 26 首——半决赛晋级 24 首、东道主直通 1 首、外卡突围赛胜者 1 首。"
+            },
+            {
+              "k": "投票机制",
+              "v": "评委票 50% + 观众票 50% 的加权总分决出年度冠军。"
+            },
+            {
+              "k": "投票时限",
+              "v": "投票通道 08-16 晚关闭；已确认投票意向的成员如遇特殊情况，可延至 08-18 24:00 前补投，确保计入统计。"
+            }
+          ]
+        },
+        {
+          "title": "平局判定",
+          "body": [
+            "名次相同时，依次比较以下各项，直至分出先后："
+          ],
+          "list": [
+            {
+              "k": "①",
+              "v": "观众票得分更高者靠前。"
+            },
+            {
+              "k": "②",
+              "v": "总票源数（评委与观众投票人数之和）更多者靠前。"
+            },
+            {
+              "k": "③",
+              "v": "从 12 分起，依次比较最高单项得分的次数。"
+            },
+            {
+              "k": "④",
+              "v": "出场顺序靠前者获胜。"
+            }
+          ]
+        },
+        {
+          "title": "合报规则",
+          "body": [
+            "经主办方与合报双方同意，最多两人可共同选送一首歌曲。投票时，合报者需共同提交一份投票计入总分。"
+          ]
+        },
+        {
+          "title": "冠军与承办权",
+          "body": [
+            "获得冠军的歌曲选送方成为本届最终胜者，将获得 Barvision 2027 的主办权，负责组织和举办下一届大赛。"
+          ],
+          "foot": "本章程的最终解释权归 Barvision Chongqing 2026 主办方所有。"
+        }
+      ]
+    },
+    {
+      "id": "about",
+      "cn": "关于活动",
+      "en": "About Barvision",
+      "subtitle": "",
+      "sections": [
+        {
+          "body": [
+            "Barvision 是欧美流行音乐个人榜吧（Barboard）举办的年度歌曲大赛，灵感来自 Eurovision Song Contest。成员自行选送小众歌曲参赛，经半决赛投票后晋级决赛，最终通过评委票与观众票的合并计分决出年度冠军。",
+            "Barvision 始于 2019 年，由 萌妈 创立，历经数年停办后于 2023 年恢复，现已举办至第十六届。本届 Barvision Chongqing 2026 以重庆为举办城市，主题为「重声交响 Echoing Confluence」。"
+          ]
+        }
+      ]
+    }
   ],
-  "playlists": [
-   {
-    "platform": "Spotify",
-    "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://open.spotify.com/playlist/05v61FU0fsRxs9uUMPWtqh?si=fiKEFkwoQ2WmxOHEdBKCFA" },
-     { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://open.spotify.com/playlist/1uRlN8naJK4Ofhn0UoMW7v?si=4c8fcf99cedf4a78" },
-     { "label": "Barvision Chongqing 2026", "url": "https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d" },
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://open.spotify.com/playlist/3IDgAqm6Iaw9nbihOfbHzE?si=770b0c77e2434535" }
+  "feed": [],
+  "links": {
+    "showcase": [
+      {
+        "label": "Barvision Chongqing 2026: All 38 Songs",
+        "url": "https://www.bilibili.com/video/BV18egC6NEx4/"
+      },
+      {
+        "label": "Barvision Chongqing 2026: Wildcards",
+        "url": "https://www.bilibili.com/video/BV18egC6NEAr/"
+      },
+      {
+        "label": "Barvision Chongqing 2026: First Semi-Final Running Order",
+        "url": "https://www.bilibili.com/video/BV1vT3u6UEyu/"
+      },
+      {
+        "label": "Barvision Chongqing 2026: Second Semi-Final Running Order",
+        "url": "https://b23.tv/lf0QqOp"
+      }
+    ],
+    "replays": [
+      {
+        "label": "Barvision 2026 Allocation Draw 直播回放",
+        "url": "https://www.bilibili.com/video/BV1Qage6yEY9/"
+      }
+    ],
+    "playlists": [
+      {
+        "platform": "Spotify",
+        "items": [
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 2",
+            "url": "https://open.spotify.com/playlist/05v61FU0fsRxs9uUMPWtqh?si=fiKEFkwoQ2WmxOHEdBKCFA"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Wildcards",
+            "url": "https://open.spotify.com/playlist/1uRlN8naJK4Ofhn0UoMW7v?si=4c8fcf99cedf4a78"
+          },
+          {
+            "label": "Barvision Chongqing 2026",
+            "url": "https://open.spotify.com/playlist/4IcnnekaODJgB84iiXRNwy?si=a6c9262a8a71466d"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 1",
+            "url": "https://open.spotify.com/playlist/3IDgAqm6Iaw9nbihOfbHzE?si=770b0c77e2434535"
+          }
+        ]
+      },
+      {
+        "platform": "Apple Music（美区）",
+        "items": [
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 2",
+            "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-2/pl.u-06oxpzbCY8okd2"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Wildcards",
+            "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-wildcards/pl.u-zPyLlyPTeDxVzE"
+          },
+          {
+            "label": "Barvision Chongqing 2026",
+            "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026/pl.u-XkD0vlEc2lZMVo"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 1",
+            "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-1/pl.u-MDAWkgNtAVq1y2"
+          }
+        ]
+      },
+      {
+        "platform": "网易云音乐",
+        "items": [
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 2",
+            "url": "https://163cn.tv/bccfbMPy"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Wildcards",
+            "url": "https://163cn.tv/9vjU0wc"
+          },
+          {
+            "label": "Barvision Chongqing 2026",
+            "url": "https://163cn.tv/9vjQFlX"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 1",
+            "url": "https://163cn.tv/bbJhKNb9"
+          }
+        ]
+      },
+      {
+        "platform": "QQ音乐",
+        "items": [
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 2",
+            "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9753789344&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Wildcards",
+            "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749787000&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx"
+          },
+          {
+            "label": "Barvision Chongqing 2026",
+            "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx"
+          },
+          {
+            "label": "Barvision Chongqing 2026 Semi-Final 1",
+            "url": "https://y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9752478305&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx"
+          }
+        ]
+      }
     ]
-   },
-   {
-    "platform": "Apple Music（美区）",
-    "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-2/pl.u-06oxpzbCY8okd2" },
-     { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-wildcards/pl.u-zPyLlyPTeDxVzE" },
-     { "label": "Barvision Chongqing 2026", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026/pl.u-XkD0vlEc2lZMVo" },
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://music.apple.com/us/playlist/barvision-chongqing-2026-semi-final-1/pl.u-MDAWkgNtAVq1y2" }
-    ]
-   },
-   {
-    "platform": "网易云音乐",
-    "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://163cn.tv/bccfbMPy" },
-     { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://163cn.tv/9vjU0wc" },
-     { "label": "Barvision Chongqing 2026", "url": "https://163cn.tv/9vjQFlX" },
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://163cn.tv/bbJhKNb9" }
-    ]
-   },
-   {
-    "platform": "QQ音乐",
-    "items": [
-     { "label": "Barvision Chongqing 2026 Semi-Final 2", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9753789344&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" },
-     { "label": "Barvision Chongqing 2026 Wildcards", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749787000&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" },
-     { "label": "Barvision Chongqing 2026", "url": "https://i2.y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9749179572&appversion=200600&ADTAG=wxfshare&appshare=iphone_wx" },
-     { "label": "Barvision Chongqing 2026 Semi-Final 1", "url": "https://y.qq.com/n3/other/pages/details/playlist.html?hosteuin=NKSqNe6PNecA&id=9752478305&appversion=200605&ADTAG=wxfshare&appshare=iphone_wx" }
-    ]
-   }
+  },
+  "members": {
+    "X妈": {
+      "id": 195,
+      "handle": "没有XX不科学"
+    },
+    "松妈": {
+      "id": 105,
+      "handle": "Squirrel松鼠"
+    },
+    "XX妈": {
+      "id": 88,
+      "handle": "xjebs"
+    },
+    "韩妈": {
+      "id": 67,
+      "handle": "SouthkoreaBall"
+    },
+    "白妈": {
+      "id": 77,
+      "handle": "白哼唧"
+    },
+    "波妈": {
+      "id": 101,
+      "handle": "微波子"
+    },
+    "雨妈": {
+      "id": 17,
+      "handle": "Lee翼雨"
+    },
+    "笃妈": {
+      "id": 33,
+      "handle": "吃辣喝香"
+    },
+    "柠妈": {
+      "id": 19,
+      "handle": "LemonSheeran"
+    },
+    "A妈": {
+      "id": 132,
+      "handle": "AloneAlien_"
+    },
+    "海妈": {
+      "id": 119,
+      "handle": "Ocean"
+    },
+    "邓妈": {
+      "id": 31,
+      "handle": "DuncanLee"
+    },
+    "猴妈": {
+      "id": 18,
+      "handle": "Voiiz"
+    },
+    "羊妈": {
+      "id": 100,
+      "handle": "SeafishYANG"
+    },
+    "星妈": {
+      "id": 45,
+      "handle": "白矮星爱吃东西"
+    },
+    "包妈": {
+      "id": 20,
+      "handle": "Jeremy_BAg"
+    },
+    "威妈": {
+      "id": 7,
+      "handle": "williw_"
+    },
+    "城妈": {
+      "id": 120,
+      "handle": "MarekTotti"
+    },
+    "吃妈": {
+      "id": 126,
+      "handle": "能吃的莉莉丝"
+    },
+    "团妈": {
+      "id": 68,
+      "handle": "不动团子"
+    },
+    "S妈": {
+      "id": 27,
+      "handle": "哈哈哈时光机"
+    },
+    "鸽妈": {
+      "id": 160,
+      "handle": "EUGONDINE_"
+    },
+    "柴妈": {
+      "id": 51,
+      "handle": "是柴柴呀"
+    },
+    "泰妈": {
+      "id": 131,
+      "handle": "泰坦crazy"
+    },
+    "汞妈": {
+      "id": 103,
+      "handle": "Hg"
+    },
+    "奶妈": {
+      "id": 102,
+      "handle": "奶儿少爷"
+    },
+    "叉妈": {
+      "id": 13,
+      "handle": "PRONGS"
+    },
+    "文妈": {
+      "id": 116,
+      "handle": "SummertimeDawns"
+    },
+    "P妈": {
+      "id": 104,
+      "handle": "PROKING"
+    },
+    "狼妈": {
+      "id": 113,
+      "handle": "Aaowu_"
+    },
+    "芬妈": {
+      "id": 110,
+      "handle": "Stephen"
+    },
+    "K妈": {
+      "id": 11,
+      "handle": "SoyMarvin"
+    },
+    "野妈": {
+      "id": 196,
+      "handle": "Tye"
+    },
+    "萌妈": {
+      "id": 125,
+      "handle": "绿荫夏语"
+    },
+    "杰妈": {
+      "id": 156,
+      "handle": "jh201013"
+    },
+    "麦妈": {
+      "id": 130,
+      "handle": "Tandiny"
+    },
+    "T妈": {
+      "id": 115,
+      "handle": "iTAP_II"
+    },
+    "锴妈": {
+      "id": 12,
+      "handle": "WillKris锴"
+    },
+    "嘟妈": {
+      "id": 190,
+      "handle": "DDDDDope"
+    },
+    "田妈": {
+      "id": 295,
+      "handle": "FREEMAN"
+    }
+  },
+  "confirmed": [],
+  "matches": [],
+  "grand_final": [
+    {
+      "ro": 1,
+      "member": "韩妈",
+      "song": "Intacto",
+      "artist": "Agoney"
+    },
+    {
+      "ro": 2,
+      "member": "A妈",
+      "song": "Running To Pain",
+      "artist": "Kelsey Lu"
+    },
+    {
+      "ro": 3,
+      "member": "XX妈",
+      "song": "Day One (feat. Madeline Merlo)",
+      "artist": "Adam Doleac"
+    },
+    {
+      "ro": 4,
+      "member": "海妈",
+      "song": "cherry cola",
+      "artist": "Devon Again"
+    },
+    {
+      "ro": 5,
+      "member": "星妈",
+      "song": "Hey You",
+      "artist": "The Belair Lip Bombs"
+    },
+    {
+      "ro": 6,
+      "member": "柠妈",
+      "song": "Too Good to be Bad",
+      "artist": "Olivia Marsh"
+    },
+    {
+      "ro": 7,
+      "member": "威妈",
+      "song": "OK City Sun",
+      "artist": "Walking On Rivers"
+    },
+    {
+      "ro": 8,
+      "member": "文妈",
+      "song": "Grudge",
+      "artist": "Carter Faith"
+    },
+    {
+      "ro": 9,
+      "member": "猴妈",
+      "song": "I Got A Thing For Love",
+      "artist": "Elle Coves"
+    },
+    {
+      "ro": 10,
+      "member": "包妈",
+      "song": "Where Has My Friend Gone?",
+      "artist": "The Home Team"
+    },
+    {
+      "ro": 11,
+      "member": "S妈/鸽妈",
+      "song": "H O M E",
+      "artist": "HANRORO"
+    },
+    {
+      "ro": 12,
+      "member": "狼妈/芬妈",
+      "song": "Nicht mit mir",
+      "artist": "Betcha & J.Dutt"
+    },
+    {
+      "ro": 13,
+      "member": "雨妈",
+      "song": "Clams Casino",
+      "artist": "Brian Dunne"
+    },
+    {
+      "ro": 14,
+      "member": "汞妈",
+      "song": "ポラリス",
+      "artist": "Aooo"
+    },
+    {
+      "ro": 15,
+      "member": "K妈",
+      "song": "storm",
+      "artist": "Night Tapes"
+    },
+    {
+      "ro": 16,
+      "member": "团妈",
+      "song": "Bounce House",
+      "artist": "Gelli Haha"
+    },
+    {
+      "ro": 17,
+      "member": "城妈",
+      "song": "1XTE1XME",
+      "artist": "Lorenzo Fragola"
+    },
+    {
+      "ro": 18,
+      "member": "邓妈",
+      "song": "Body & Soul",
+      "artist": "Chris De Sarandy"
+    },
+    {
+      "ro": 19,
+      "member": "羊妈",
+      "song": "That's Life",
+      "artist": "Dead Dads Club"
+    },
+    {
+      "ro": 20,
+      "member": "松妈",
+      "song": "Boyfriend",
+      "artist": "We Three"
+    },
+    {
+      "ro": 21,
+      "member": "麦妈",
+      "song": "Lifelike (feat. Midwife)",
+      "artist": "Amulets"
+    },
+    {
+      "ro": 22,
+      "member": "P妈",
+      "song": "Bem no seu aniversário",
+      "artist": "Bella e o Olmo da Bruxa"
+    },
+    {
+      "ro": 23,
+      "member": "泰妈",
+      "song": "BANG",
+      "artist": "Unroyal"
+    },
+    {
+      "ro": 24,
+      "member": "笃妈",
+      "song": "Hurricane",
+      "artist": "2AM-DM"
+    },
+    {
+      "ro": 25,
+      "member": "羊妈",
+      "song": "Country Road",
+      "artist": "The Hellp"
+    },
+    {
+      "ro": 26,
+      "member": "锴妈",
+      "song": "Show Me What Love Is",
+      "artist": "Erik Segerstedt"
+    }
+  ],
+  "second_chance": [
+    {
+      "ro": 1,
+      "member": "萌妈",
+      "song": "Do it all again",
+      "artist": "MICO",
+      "result": "NQ"
+    },
+    {
+      "ro": 2,
+      "member": "嘟妈",
+      "song": "Perfect Design",
+      "artist": "Duma",
+      "result": "NQ"
+    },
+    {
+      "ro": 3,
+      "member": "波妈",
+      "song": "Shimmer (feat. Kinoko)",
+      "artist": "RabbitJ",
+      "result": "NQ"
+    },
+    {
+      "ro": 4,
+      "member": "X妈",
+      "song": "Always On My Mind",
+      "artist": "幕后来电CurtainCalls",
+      "result": "NQ"
+    },
+    {
+      "ro": 5,
+      "member": "奶妈",
+      "song": "ONLY MY HANDS",
+      "artist": "AJ Vitanza",
+      "result": "NQ"
+    },
+    {
+      "ro": 6,
+      "member": "柴妈",
+      "song": "Alive",
+      "artist": "itsmync",
+      "result": "NQ"
+    },
+    {
+      "ro": 7,
+      "member": "叉妈",
+      "song": "Middle Of Summer",
+      "artist": "PONY",
+      "result": "NQ"
+    },
+    {
+      "ro": 8,
+      "member": "野妈",
+      "song": "POLIZEI",
+      "artist": "Nova May",
+      "result": "NQ"
+    },
+    {
+      "ro": 9,
+      "member": "白妈",
+      "song": "1001 tapaa",
+      "artist": "Robin Packalen",
+      "result": "NQ"
+    },
+    {
+      "ro": 10,
+      "member": "T妈",
+      "song": "Justin's Headed Out",
+      "artist": "mercury",
+      "result": "NQ"
+    },
+    {
+      "ro": 11,
+      "member": "吃妈",
+      "song": "Stars Collide (feat. Carnie Reimers)",
+      "artist": "MARK Harmony",
+      "result": "NQ"
+    },
+    {
+      "ro": 12,
+      "member": "威妈",
+      "song": "ricochet",
+      "artist": "Aidan Bissett",
+      "result": "NQ"
+    },
+    {
+      "ro": 13,
+      "member": "羊妈",
+      "song": "That's Life",
+      "artist": "Dead Dads Club",
+      "result": "Q"
+    },
+    {
+      "ro": 14,
+      "member": "XX妈",
+      "song": "Giđa ávašta",
+      "artist": "Emil Kárlsen & Elina Ijäs",
+      "result": "NQ"
+    }
   ]
- },
- "members": {
-  "X妈": { "id": 195, "handle": "没有XX不科学" },
-  "松妈": { "id": 105, "handle": "Squirrel松鼠" },
-  "XX妈": { "id": 88, "handle": "xjebs" },
-  "韩妈": { "id": 67, "handle": "SouthkoreaBall" },
-  "白妈": { "id": 77, "handle": "白哼唧" },
-  "波妈": { "id": 101, "handle": "微波子" },
-  "雨妈": { "id": 17, "handle": "Lee翼雨" },
-  "笃妈": { "id": 33, "handle": "吃辣喝香" },
-  "柠妈": { "id": 19, "handle": "LemonSheeran" },
-  "A妈": { "id": 132, "handle": "AloneAlien_" },
-  "海妈": { "id": 119, "handle": "Ocean" },
-  "邓妈": { "id": 31, "handle": "DuncanLee" },
-  "猴妈": { "id": 18, "handle": "Voiiz" },
-  "羊妈": { "id": 100, "handle": "SeafishYANG" },
-  "星妈": { "id": 45, "handle": "白矮星爱吃东西" },
-  "包妈": { "id": 20, "handle": "Jeremy_BAg" },
-  "威妈": { "id": 7, "handle": "williw_" },
-  "城妈": { "id": 120, "handle": "MarekTotti" },
-  "吃妈": { "id": 126, "handle": "能吃的莉莉丝" },
-  "团妈": { "id": 68, "handle": "不动团子" },
-  "S妈": { "id": 27, "handle": "哈哈哈时光机" },
-  "鸽妈": { "id": 160, "handle": "EUGONDINE_" },
-  "柴妈": { "id": 51, "handle": "是柴柴呀" },
-  "泰妈": { "id": 131, "handle": "泰坦crazy" },
-  "汞妈": { "id": 103, "handle": "Hg" },
-  "奶妈": { "id": 102, "handle": "奶儿少爷" },
-  "叉妈": { "id": 13, "handle": "PRONGS" },
-  "文妈": { "id": 116, "handle": "SummertimeDawns" },
-  "P妈": { "id": 104, "handle": "PROKING" },
-  "狼妈": { "id": 113, "handle": "Aaowu_" },
-  "芬妈": { "id": 110, "handle": "Stephen" },
-  "K妈": { "id": 11, "handle": "SoyMarvin" },
-  "野妈": { "id": 196, "handle": "Tye" },
-  "萌妈": { "id": 125, "handle": "绿荫夏语" },
-  "杰妈": { "id": 156, "handle": "jh201013" },
-  "麦妈": { "id": 130, "handle": "Tandiny" },
-  "T妈": { "id": 115, "handle": "iTAP_II" },
-  "锴妈": { "id": 12, "handle": "WillKris锴" },
-  "嘟妈": { "id": 190, "handle": "DDDDDope" },
-  "田妈": { "id": 295, "handle": "FREEMAN" }
- },
- "confirmed": [],
- "matches": []
 }

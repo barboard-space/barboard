@@ -675,6 +675,10 @@
     .bvr-su--ro th:nth-child(5) { width:8%;  }  /* 语言 */
     .bvr-su--ro th:nth-child(6) { width:13%; }  /* 流派 */
     .bvr-su--ro th:nth-child(7) { width:14%; }  /* 报名方式 */
+    /* 晋级/止步 结果标（live 结果展示：SF1/SF2/Wildcard/Second Chance）*/
+    .bvr-su-res { display:inline-block; margin-left:8px; font-size:9px; font-weight:700; padding:1px 6px; border-radius:3px; vertical-align:middle; white-space:nowrap; }
+    .bvr-su-res--q { color:#3ddc84; background:rgba(61,220,132,.16); border:1px solid rgba(61,220,132,.42); }
+    .bvr-su-res--nq { color:var(--clr-text-4); background:rgba(255,255,255,.04); border:1px solid var(--clr-border); }
     /* 结构化规则：纯项目符号列表（资格/投票条目） */
     .bvr-rule__items { margin:10px 0 0; padding-left:20px; list-style:disc; }
     .bvr-rule__items li { font-size:13.5px; line-height:1.7; color:var(--clr-text-2); margin:5px 0; }
@@ -1293,7 +1297,8 @@
       (showOrder ? '<td class="bvr-su__ro">' + (idx + 1) + '</td>' : '') +
       '<td class="bvr-su__by">' + by + '</td>' +
       '<td class="artist">' + esc(fmtArtist(s.artist)) + '</td>' +
-      '<td class="song">' + esc(s.song) + (joint ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
+      '<td class="song">' + esc(s.song) + (joint ? '<span class="bvr-joint-tag">合报</span>' : '') +
+        (s.result === 'Q' ? '<span class="bvr-su-res bvr-su-res--q">晋级</span>' : (s.result === 'NQ' ? '<span class="bvr-su-res bvr-su-res--nq">止步</span>' : '')) + '</td>' +
       '<td class="lang">' + esc(s.language || '') + '</td>' +
       '<td class="bvr-su__genre">' + esc(s.genre || '') + '</td>' +
       '<td>' + (s.mode ? '<span class="bvr-mode ' + modeCls + '">' + esc(s.mode) + '</span>' : '') + '</td></tr>';
@@ -1313,11 +1318,15 @@
     var sf1 = cand.filter(function (s) { return s.sf === 'SF1'; }).slice().sort(function (a, b) { return (a.ro || 0) - (b.ro || 0); });
     var sf2 = cand.filter(function (s) { return s.sf === 'SF2'; }).slice().sort(function (a, b) { return (a.ro || 0) - (b.ro || 0); });
     var out = '';
+    // 决赛出场顺序（GF 名单）——置顶
+    if (d.grand_final && d.grand_final.length) out += '<div class="bvr-dvr-sub fade-up">Grand Final · Running Order</div>' + signupTable(d.grand_final, true);
     if (cand.length) out += '<div class="bvr-dvr-sub fade-up">参赛名单 · Candidates</div>' + signupTable(cand, false);
     if (sf1.length) out += '<div class="bvr-dvr-sub fade-up">Semi-Final 1 · Running Order</div>' + signupTable(sf1, true);
     if (sf2.length) out += '<div class="bvr-dvr-sub fade-up">Semi-Final 2 · Running Order</div>' + signupTable(sf2, true);
     else if (sf1.length) out += '<p class="bvr-tbl-note fade-up">Semi-Final 2 出场顺序即将公布。</p>';
     if (wild.length) out += '<div class="bvr-dvr-sub fade-up">Wildcard Round · Running Order</div>' + signupTable(wild, true);
+    // 外卡突围赛 Second Chance（14 → 1）
+    if (d.second_chance && d.second_chance.length) out += '<div class="bvr-dvr-sub fade-up">外卡突围赛 Second Chance · Running Order</div>' + signupTable(d.second_chance, true);
     return out;
   }
   // 相关链接（直播回放 + 歌单链接，分平台）；任意届 d.links 存在即渲染
