@@ -24,7 +24,7 @@
               "source": "邓",
               "song": "Body & Soul",
               "artist": "Chris De Sarandy",
-              "chance": 0.2908,
+              "chance": 0.2906,
               "chanceText": "29%",
               "odds": {
                 "BETSWORLD": 17.24,
@@ -40,7 +40,7 @@
               "source": "松",
               "song": "Boyfriend",
               "artist": "We Three",
-              "chance": 0.1472,
+              "chance": 0.1471,
               "chanceText": "15%",
               "odds": {
                 "BETSWORLD": 20.0,
@@ -104,7 +104,7 @@
               "source": "锴",
               "song": "Show Me What Love Is",
               "artist": "Erik Segerstedt",
-              "chance": 0.0393,
+              "chance": 0.0392,
               "chanceText": "4%",
               "odds": {
                 "BETSWORLD": 21.74,
@@ -280,7 +280,7 @@
               "source": "S鸽",
               "song": "H O M E",
               "artist": "HANRORO",
-              "chance": 0.0133,
+              "chance": 0.0139,
               "chanceText": "1%",
               "odds": {
                 "BETSWORLD": 62.5,
@@ -452,7 +452,7 @@
               "source": "邓",
               "song": "Body & Soul",
               "artist": "Chris De Sarandy",
-              "chance": 0.3705,
+              "chance": 0.3703,
               "chanceText": "37%",
               "odds": {
                 "BETSWORLD": 6.26,
@@ -468,7 +468,7 @@
               "source": "松",
               "song": "Boyfriend",
               "artist": "We Three",
-              "chance": 0.3052,
+              "chance": 0.305,
               "chanceText": "31%",
               "odds": {
                 "BETSWORLD": 7.18,
@@ -484,7 +484,7 @@
               "source": "雨",
               "song": "Clams Casino",
               "artist": "Brian Dunne",
-              "chance": 0.2768,
+              "chance": 0.2766,
               "chanceText": "28%",
               "odds": {
                 "BETSWORLD": 10.92,
@@ -500,7 +500,7 @@
               "source": "A",
               "song": "Running To Pain",
               "artist": "Kelsey Lu",
-              "chance": 0.1486,
+              "chance": 0.1485,
               "chanceText": "15%",
               "odds": {
                 "BETSWORLD": 6.47,
@@ -516,7 +516,7 @@
               "source": "羊",
               "song": "Country Road",
               "artist": "The Hellp",
-              "chance": 0.1459,
+              "chance": 0.1458,
               "chanceText": "15%",
               "odds": {
                 "BETSWORLD": 14.39,
@@ -532,7 +532,7 @@
               "source": "羊",
               "song": "That's Life",
               "artist": "Dead Dads Club",
-              "chance": 0.1407,
+              "chance": 0.1406,
               "chanceText": "14%",
               "odds": {
                 "BETSWORLD": 10.31,
@@ -548,7 +548,7 @@
               "source": "笃",
               "song": "Hurricane",
               "artist": "2AM-DM",
-              "chance": 0.1038,
+              "chance": 0.1037,
               "chanceText": "10%",
               "odds": {
                 "BETSWORLD": 7.76,
@@ -564,7 +564,7 @@
               "source": "韩",
               "song": "Intacto",
               "artist": "Agoney",
-              "chance": 0.0872,
+              "chance": 0.0871,
               "chanceText": "9%",
               "odds": {
                 "BETSWORLD": 19.02,
@@ -580,7 +580,7 @@
               "source": "泰",
               "song": "BANG",
               "artist": "Unroyal",
-              "chance": 0.0735,
+              "chance": 0.0734,
               "chanceText": "7%",
               "odds": {
                 "BETSWORLD": 11.62,
@@ -625,6 +625,22 @@
             },
             {
               "rank": 12,
+              "source": "S鸽",
+              "song": "H O M E",
+              "artist": "HANRORO",
+              "chance": 0.0611,
+              "chanceText": "6%",
+              "odds": {
+                "BETSWORLD": 21.34,
+                "ODDSMAX": 11.62
+              },
+              "trend": {
+                "dir": "down",
+                "delta": 4
+              }
+            },
+            {
+              "rank": 13,
               "source": "汞",
               "song": "ポラリス",
               "artist": "Aooo",
@@ -636,23 +652,7 @@
               },
               "trend": {
                 "dir": "down",
-                "delta": 3
-              }
-            },
-            {
-              "rank": 13,
-              "source": "S鸽",
-              "song": "H O M E",
-              "artist": "HANRORO",
-              "chance": 0.0598,
-              "chanceText": "6%",
-              "odds": {
-                "BETSWORLD": 21.34,
-                "ODDSMAX": 11.62
-              },
-              "trend": {
-                "dir": "down",
-                "delta": 5
+                "delta": 4
               }
             },
             {
@@ -676,7 +676,7 @@
               "source": "狼芬",
               "song": "Nicht mit mir",
               "artist": "Betcha & J.Dutt",
-              "chance": 0.0556,
+              "chance": 0.0555,
               "chanceText": "6%",
               "odds": {
                 "BETSWORLD": 5.42,
@@ -708,7 +708,7 @@
               "source": "包",
               "song": "Where Has My Friend Gone?",
               "artist": "The Home Team",
-              "chance": 0.0469,
+              "chance": 0.0468,
               "chanceText": "5%",
               "odds": {
                 "BETSWORLD": 8.09,
@@ -772,7 +772,7 @@
               "source": "星",
               "song": "Hey You",
               "artist": "The Belair Lip Bombs",
-              "chance": 0.0277,
+              "chance": 0.0276,
               "chanceText": "3%",
               "odds": {
                 "BETSWORLD": 28.28,

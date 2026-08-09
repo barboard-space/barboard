@@ -4,6 +4,30 @@
 
 ---
 
+## [2026-08-09] — Barvision 2026 决赛阶段上线：结果展示 + 歌单/投票/赔率更新 + Playoff 改名
+
+半决赛暨外卡突围赛直播（8/8）结束、进入 Grand Final 阶段（决赛投票 8/8–8/16、决赛直播 8/22）；公开站点全面切至决赛阶段。
+
+### Added
+- **`barvision/2026/` 本届页 · 决赛结果展示**（`regular-16.json` 新增 `grand_final`[26 首出场顺序]、`second_chance`[14 首]、`signups[].result`(Q/NQ)；`scripts/bv-results-render.js` 的 live 分支 `signupListBlock` 新增：**Grand Final · Running Order** 段置顶、SF1/SF2/Wildcard/Second Chance 表加 **晋级(绿)/止步(灰)** 徽章、**外卡突围赛 Second Chance · Running Order** 段）。晋级：SF1 12·SF2 12·Wildcard 3(威/羊/XX)·Second Chance 1(羊 Dead Dads Club)；GF 26 含羊两首、威 OK City Sun 东道主直通。
+- **`barvision/2026/events/` · 决赛歌单卡（Grand Final，4 平台）+ 回顾视频（Grand Final Running Order，b23.tv/51QWm3t）+ 决赛投票卡（wjx hh8xouS）+ 赔率预测卡（wjx PlGbSBa）**。
+
+### Changed
+- **歌单顺序** → 决赛 → All Songs(38，原「Semi-Final · 38 首」改名) → SF1 → SF2 → Wildcards；**回顾视频顺序** → All Songs → Grand Final → SF1 → SF2 → Wildcards（events 页）。
+- **投票通道** → 决赛投票 + 赔率预测（SF1/SF2/海选/外卡投票均已完赛的文案）。
+- **首页 season 卡 + `barvision/2026/` hero** → 决赛阶段：状态「决赛进行中」、各轮标已结束、Grand Final 投票「正在进行」、倒计时→决赛投票关闭(8/16)→决赛直播(8/22)；`barvision/2026/` 更新日期 08-09。
+- **head nav「Barvision 2026」** 跳转 `/barvision/2026/events/` → `/barvision/2026/`（`scripts/nav.js` + `partials/nav.html`）。
+- **赔率 `data/barvision/odds/odds.json`**：Grand Final 榜换为 **26 强正式阵容**（原 38 池）winner/top3/top10；走势对比上一正确版（38 池）；套现行约定（gf 置首「Barvision 2026」/`top 3·10 chance` 空格/单行免责声明无 EN）。
+
+### Content
+- **Playoff → Second Chance**（英文改名；中文「外卡突围赛」保留）：`regular-16.json` info_sections + events 脚注同步。
+
+### Fixed
+- **赔率 GF 数据更正**：先前一版 GF 赔率（部分 bookmaker 数值 + top3 内 H O M E/ポラリス 排序）有误，已用更正版覆盖，走势重新对比 38 池基准计算。
+
+### Docs
+- 引擎新增 `loop` 循环背景类型 + 跨页续播 + `ASSETS_READY` 开关等属**半决赛直播播放系统**（`barvision/2026/broadcast/`，纯本地 gitignore、未入库），详见 memory `project-semifinal-live`；CLAUDE.md #192。
+
 ## [2026-08-03] — 赔率板块：数据刷新 + 导出修复 + 取消截图 + 工作流定稿
 
 ### Changed
