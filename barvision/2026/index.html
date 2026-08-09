@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 本届实时更新 | Barvision</title>
-  <meta name="description" content="Barvision Chongqing 2026（第十六届，重庆）本届实时更新：报名情况（Candidates / Wildcards 名单）、各成员海选进展，以及赛程、投票方式、参赛要求与规则摘要。" />
+  <meta name="description" content="Barvision Chongqing 2026（第十六届，重庆）本届实时更新：决赛进行中——参赛名单与出场顺序、赛程、投票方式（决赛投票 + 赔率预测）、参赛要求与规则摘要。" />
   <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
   <link rel="stylesheet" href="/fonts.css" />
   <link rel="stylesheet" href="/style.css" />
@@ -109,7 +109,7 @@
           <span class="ev-meta-item">主办：<a class="member" href="/member/7/" data-nickname="威妈">@williw_</a></span>
         </div>
         <p class="ev-hero__desc">
-          Barvision Chongqing 2026 半决赛进行中——Semi-Final 1 投票已结束，Semi-Final 2 与海选突围赛投票正在进行。本页实时汇总名单、出场顺序、赛程、投票方式与规则。
+          Barvision Chongqing 2026 决赛进行中——半决赛与海选、外卡突围赛均已完赛，26 首晋级决赛，Grand Final 投票进行中（截止 8 月 16 日），决赛直播定于 8 月 22 日晚。本页汇总名单、出场顺序、赛程、投票方式与规则。
         </p>
         <div class="ev-hero__cta">
           <a href="/barvision/2026/events/#voting" class="btn btn--primary">投票链接</a>
@@ -118,10 +118,10 @@
           <a href="#schedule" class="btn btn--outline">赛程安排</a>
         </div>
         <div class="ev-countdown" id="heroCountdownWrap">
-          <span class="ev-countdown__label" id="heroCountdownLabel">距 Allocation Draw 直播还有</span>
+          <span class="ev-countdown__label" id="heroCountdownLabel">距 Grand Final 投票关闭还有</span>
           <span class="ev-countdown__digits" id="heroCountdown">—</span>
         </div>
-        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-08-01</span></p>
+        <p class="ev-updated" style="margin-top:10px;font-size:11px;color:var(--clr-text-3);"><span style="font-family:var(--font-body);">本页上次更新于</span> <span style="font-family:var(--font-mono);">2026-08-09</span></p>
       </div>
     </div>
   </section>
@@ -146,12 +146,10 @@
       if (im.decode) { im.decode().then(done).catch(function () {}); }
     })();
 
-    /* Hero 倒计时（与 events.html 同步：开启前→倒数开启 / 开启中→倒数关闭 / 关闭后→倒数半决赛+海选突围赛投票） */
+    /* Hero 倒计时（决赛阶段：倒数决赛投票关闭 → 倒数 Grand Final 直播） */
     (function () {
-      var OPEN_DATE  = new Date('2026-06-01T18:00:00+08:00');
-      var CLOSE_DATE = new Date('2026-07-20T00:00:00+08:00');   // = 北京时间 7/19 24:00
-      var VOTE1_DATE = new Date('2026-07-25T22:00:00+08:00');   // Semi-Final 1 + 海选突围赛投票开启
-      var DRAW_DATE  = new Date('2026-07-24T21:00:00+08:00');   // Allocation Draw 半决赛分组抽签直播
+      var GF_CLOSE = new Date('2026-08-17T00:00:00+08:00');   // 决赛投票关闭 = 北京时间 8/16 24:00
+      var GF_LIVE  = new Date('2026-08-22T20:00:00+08:00');   // Grand Final 决赛直播
       function pad(n) { return String(n).padStart(2, '0'); }
       function fmtCountdown(diff) {
         if (diff <= 0) return '—';
@@ -161,16 +159,13 @@
                pad(m) + '<span class="ev-cd-unit">分</span>' + pad(s) + '<span class="ev-cd-unit">秒</span>';
       }
       function tick() {
-        var now = new Date(), diff = OPEN_DATE - now, isOpen = diff <= 0 && now <= CLOSE_DATE, isClosed = now > CLOSE_DATE;
+        var now = new Date();
         var el = document.getElementById('heroCountdown'), lbl = document.getElementById('heroCountdownLabel');
         if (!el) return;
         el.classList.remove('is-text');
-        if (isClosed) {
-          if (now < DRAW_DATE) { lbl.textContent = '距 Allocation Draw 直播还有'; el.innerHTML = fmtCountdown(DRAW_DATE - now); }
-          else if (now < VOTE1_DATE) { lbl.textContent = '距 Semi-Final 1 和海选突围赛投票开启还有'; el.innerHTML = fmtCountdown(VOTE1_DATE - now); }
-          else { lbl.textContent = 'Semi-Final 2 / 海选突围赛投票'; el.textContent = '投票进行中'; el.classList.add('is-text'); }
-        } else if (isOpen) { lbl.textContent = '距提交通道关闭还有'; el.innerHTML = fmtCountdown(CLOSE_DATE - now); }
-        else { lbl.textContent = '距提交通道开启还有'; el.innerHTML = fmtCountdown(diff); }
+        if (now < GF_CLOSE) { lbl.textContent = '距 Grand Final 投票关闭还有'; el.innerHTML = fmtCountdown(GF_CLOSE - now); }
+        else if (now < GF_LIVE) { lbl.textContent = '距 Grand Final 直播还有'; el.innerHTML = fmtCountdown(GF_LIVE - now); }
+        else { lbl.textContent = 'Grand Final'; el.textContent = '直播已结束'; el.classList.add('is-text'); }
       }
       tick(); setInterval(tick, 1000);
     })();

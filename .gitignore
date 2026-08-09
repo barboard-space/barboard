@@ -2,10 +2,9 @@ __pycache__/
 *.pyc
 .claude/
 
-# Barvision 2026 抽签/直播播控系统 —— 纯本地运行 + OBS 录制，不上前端
-barvision/2026/draw/
-assets/videos/barvision/2026/
-assets/audio/barvision/2026/
+# Barvision 2026 直播播放系统 —— 纯本地运行 + OBS 录制，不上前端
+# 三场直播(allocation-draw / semi-final / grand-final) + general 共用库均在此目录下
+barvision/2026/broadcast/
+# broadcast 用的大/商用字体原件（已 copy 进 broadcast/general/fonts/）
 assets/fonts/ITCAvantGardeGothicStd/
 assets/fonts/SourceHanSansSC/
-assets/images/barvision/2026/barvision-2026-allocation-draw-poster.png
