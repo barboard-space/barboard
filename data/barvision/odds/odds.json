@@ -21,7 +21,8 @@
             "VANTA",
             "NORDIQ",
             "LUMEN",
-            "APEX"
+            "APEX",
+            "KESTREL"
           ],
           "rows": [
             {
@@ -29,8 +30,8 @@
               "source": "邓",
               "song": "Body & Soul",
               "artist": "Chris De Sarandy",
-              "chance": 0.5718,
-              "chanceText": "57%",
+              "chance": 0.5495,
+              "chanceText": "55%",
               "odds": {
                 "BETSWORLD": 62.5,
                 "ODDSMAX": 99,
@@ -38,7 +39,8 @@
                 "VANTA": 5.0,
                 "NORDIQ": 3.12,
                 "LUMEN": 2.59,
-                "APEX": 4.55
+                "APEX": 4.55,
+                "KESTREL": 5.0
               },
               "trend": {
                 "dir": "same",
@@ -50,8 +52,8 @@
               "source": "松",
               "song": "Boyfriend",
               "artist": "We Three",
-              "chance": 0.1621,
-              "chanceText": "16%",
+              "chance": 0.169,
+              "chanceText": "17%",
               "odds": {
                 "BETSWORLD": 50.0,
                 "ODDSMAX": 71.43,
@@ -59,7 +61,8 @@
                 "VANTA": 6.67,
                 "NORDIQ": 16.67,
                 "LUMEN": 99,
-                "APEX": 6.25
+                "APEX": 6.25,
+                "KESTREL": 5.0
               },
               "trend": {
                 "dir": "same",
@@ -71,8 +74,8 @@
               "source": "雨",
               "song": "Clams Casino",
               "artist": "Brian Dunne",
-              "chance": 0.1057,
-              "chanceText": "11%",
+              "chance": 0.1196,
+              "chanceText": "12%",
               "odds": {
                 "BETSWORLD": 99,
                 "ODDSMAX": 99,
@@ -80,7 +83,8 @@
                 "VANTA": 6.67,
                 "NORDIQ": 4.17,
                 "LUMEN": 6.67,
-                "APEX": 16.67
+                "APEX": 16.67,
+                "KESTREL": 5.0
               },
               "trend": {
                 "dir": "same",
@@ -90,18 +94,19 @@
             {
               "rank": 4,
               "source": "羊",
-              "song": "That's Life",
-              "artist": "Dead Dads Club",
-              "chance": 0.0239,
-              "chanceText": "2%",
+              "song": "Country Road",
+              "artist": "The Hellp",
+              "chance": 0.0306,
+              "chanceText": "3%",
               "odds": {
                 "BETSWORLD": 99,
-                "ODDSMAX": 99,
+                "ODDSMAX": 41.67,
                 "CROWNPLAY": 99,
-                "VANTA": 10.0,
-                "NORDIQ": 99,
-                "LUMEN": 5.38,
-                "APEX": 71.43
+                "VANTA": 20.0,
+                "NORDIQ": 16.67,
+                "LUMEN": 11.9,
+                "APEX": 20.0,
+                "KESTREL": 5.0
               },
               "trend": {
                 "dir": "up",
@@ -111,22 +116,23 @@
             {
               "rank": 5,
               "source": "羊",
-              "song": "Country Road",
-              "artist": "The Hellp",
-              "chance": 0.0213,
+              "song": "That's Life",
+              "artist": "Dead Dads Club",
+              "chance": 0.0208,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 99,
-                "ODDSMAX": 41.67,
+                "ODDSMAX": 99,
                 "CROWNPLAY": 99,
-                "VANTA": 20.0,
-                "NORDIQ": 16.67,
-                "LUMEN": 11.9,
-                "APEX": 20.0
+                "VANTA": 10.0,
+                "NORDIQ": 99,
+                "LUMEN": 5.38,
+                "APEX": 71.43,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 2
+                "dir": "down",
+                "delta": 1
               }
             },
             {
@@ -134,7 +140,7 @@
               "source": "韩",
               "song": "Intacto",
               "artist": "Agoney",
-              "chance": 0.0209,
+              "chance": 0.0181,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 99,
@@ -143,11 +149,12 @@
                 "VANTA": 10.0,
                 "NORDIQ": 10.0,
                 "LUMEN": 9.43,
-                "APEX": 33.33
+                "APEX": 33.33,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 4
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -155,7 +162,7 @@
               "source": "A",
               "song": "Running To Pain",
               "artist": "Kelsey Lu",
-              "chance": 0.018,
+              "chance": 0.0157,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 38.46,
@@ -164,19 +171,42 @@
                 "VANTA": 99,
                 "NORDIQ": 12.5,
                 "LUMEN": 55.56,
-                "APEX": 10.0
+                "APEX": 10.0,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 3
+                "dir": "same",
+                "delta": 0
               }
             },
             {
               "rank": 8,
+              "source": "威",
+              "song": "OK City Sun",
+              "artist": "Walking On Rivers",
+              "chance": 0.0139,
+              "chanceText": "1%",
+              "odds": {
+                "BETSWORLD": 71.43,
+                "ODDSMAX": 99,
+                "CROWNPLAY": 99,
+                "VANTA": 20.0,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 20.83,
+                "KESTREL": 5.0
+              },
+              "trend": {
+                "dir": "up",
+                "delta": 3
+              }
+            },
+            {
+              "rank": 9,
               "source": "猴",
               "song": "I Got A Thing For Love",
               "artist": "Elle Coves",
-              "chance": 0.0122,
+              "chance": 0.0107,
               "chanceText": "1%",
               "odds": {
                 "BETSWORLD": 83.33,
@@ -185,20 +215,21 @@
                 "VANTA": 20.0,
                 "NORDIQ": 10.0,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 5
+                "dir": "down",
+                "delta": 1
               }
             },
             {
-              "rank": 9,
+              "rank": 10,
               "source": "锴",
               "song": "Show Me What Love Is",
               "artist": "Erik Segerstedt",
-              "chance": 0.0104,
-              "chanceText": "1%",
+              "chance": 0.0092,
+              "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
                 "ODDSMAX": 99,
@@ -206,20 +237,21 @@
                 "VANTA": 10.0,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "down",
-                "delta": 3
+                "delta": 1
               }
             },
             {
-              "rank": 10,
+              "rank": 11,
               "source": "S鸽",
               "song": "H O M E",
               "artist": "HANRORO",
-              "chance": 0.0103,
-              "chanceText": "1%",
+              "chance": 0.009,
+              "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 83.33,
                 "ODDSMAX": 99,
@@ -227,32 +259,12 @@
                 "VANTA": 20.0,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 7.94
+                "APEX": 7.94,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 7
-              }
-            },
-            {
-              "rank": 11,
-              "source": "威",
-              "song": "OK City Sun",
-              "artist": "Walking On Rivers",
-              "chance": 0.0067,
-              "chanceText": "<1%",
-              "odds": {
-                "BETSWORLD": 71.43,
-                "ODDSMAX": 99,
-                "CROWNPLAY": 99,
-                "VANTA": 20.0,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 20.83
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 5
+                "dir": "down",
+                "delta": 1
               }
             },
             {
@@ -260,7 +272,7 @@
               "source": "汞",
               "song": "ポラリス",
               "artist": "Aooo",
-              "chance": 0.004,
+              "chance": 0.0036,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -269,7 +281,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 16.67
+                "APEX": 16.67,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -281,7 +294,7 @@
               "source": "团",
               "song": "Bounce House",
               "artist": "Gelli Haha",
-              "chance": 0.0037,
+              "chance": 0.0034,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -290,11 +303,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 26.32
+                "APEX": 26.32,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -302,7 +316,7 @@
               "source": "狼芬",
               "song": "Nicht mit mir",
               "artist": "Betcha & J.Dutt",
-              "chance": 0.0036,
+              "chance": 0.0033,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -311,11 +325,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 38.46,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 3
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -323,7 +338,7 @@
               "source": "泰",
               "song": "BANG",
               "artist": "Unroyal",
-              "chance": 0.0034,
+              "chance": 0.0031,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 62.5,
@@ -332,7 +347,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 50.0
+                "APEX": 50.0,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -344,7 +360,7 @@
               "source": "城",
               "song": "1XTE1XME",
               "artist": "Lorenzo Fragola",
-              "chance": 0.0031,
+              "chance": 0.0028,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 83.33,
@@ -353,19 +369,42 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 71.43,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 4
+                "dir": "same",
+                "delta": 0
               }
             },
             {
               "rank": 17,
+              "source": "P",
+              "song": "Bem no seu aniversário",
+              "artist": "Bella e o Olmo da Bruxa",
+              "chance": 0.0026,
+              "chanceText": "<1%",
+              "odds": {
+                "BETSWORLD": 99,
+                "ODDSMAX": 99,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 99,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "up",
+                "delta": 1
+              }
+            },
+            {
+              "rank": 18,
               "source": "星",
               "song": "Hey You",
               "artist": "The Belair Lip Bombs",
-              "chance": 0.0028,
+              "chance": 0.0025,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -374,32 +413,12 @@
                 "VANTA": 99,
                 "NORDIQ": 25.0,
                 "LUMEN": 99,
-                "APEX": 99
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 8
-              }
-            },
-            {
-              "rank": 18,
-              "source": "P",
-              "song": "Bem no seu aniversário",
-              "artist": "Bella e o Olmo da Bruxa",
-              "chance": 0.0027,
-              "chanceText": "<1%",
-              "odds": {
-                "BETSWORLD": 99,
-                "ODDSMAX": 99,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "down",
-                "delta": 10
+                "delta": 1
               }
             },
             {
@@ -407,7 +426,7 @@
               "source": "文",
               "song": "Grudge",
               "artist": "Carter Faith",
-              "chance": 0.0022,
+              "chance": 0.0021,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -416,11 +435,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 3
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -428,27 +448,6 @@
               "source": "笃",
               "song": "Hurricane",
               "artist": "2AM-DM",
-              "chance": 0.002,
-              "chanceText": "<1%",
-              "odds": {
-                "BETSWORLD": 99,
-                "ODDSMAX": 99,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 99
-              },
-              "trend": {
-                "dir": "down",
-                "delta": 11
-              }
-            },
-            {
-              "rank": 21,
-              "source": "包",
-              "song": "Where Has My Friend Gone?",
-              "artist": "The Home Team",
               "chance": 0.0019,
               "chanceText": "<1%",
               "odds": {
@@ -458,40 +457,20 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 3
+                "dir": "same",
+                "delta": 0
               }
             },
             {
-              "rank": 22,
-              "source": "海",
-              "song": "cherry cola",
-              "artist": "Devon Again",
+              "rank": 21,
+              "source": "包",
+              "song": "Where Has My Friend Gone?",
+              "artist": "The Home Team",
               "chance": 0.0018,
-              "chanceText": "<1%",
-              "odds": {
-                "BETSWORLD": 45.45,
-                "ODDSMAX": 50.0,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 99
-              },
-              "trend": {
-                "dir": "down",
-                "delta": 1
-              }
-            },
-            {
-              "rank": 23,
-              "source": "XX",
-              "song": "Day One (feat. Madeline Merlo)",
-              "artist": "Adam Doleac",
-              "chance": 0.0017,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -500,11 +479,56 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
+              }
+            },
+            {
+              "rank": 22,
+              "source": "海",
+              "song": "cherry cola",
+              "artist": "Devon Again",
+              "chance": 0.0016,
+              "chanceText": "<1%",
+              "odds": {
+                "BETSWORLD": 45.45,
+                "ODDSMAX": 50.0,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 99,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "same",
+                "delta": 0
+              }
+            },
+            {
+              "rank": 23,
+              "source": "XX",
+              "song": "Day One (feat. Madeline Merlo)",
+              "artist": "Adam Doleac",
+              "chance": 0.0016,
+              "chanceText": "<1%",
+              "odds": {
+                "BETSWORLD": 99,
+                "ODDSMAX": 99,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 99,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -512,7 +536,7 @@
               "source": "柠",
               "song": "Too Good to be Bad",
               "artist": "Olivia Marsh",
-              "chance": 0.0015,
+              "chance": 0.0014,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 55.56,
@@ -521,11 +545,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 5
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -542,11 +567,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 2
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -554,7 +580,7 @@
               "source": "麦",
               "song": "Lifelike (feat. Midwife)",
               "artist": "Amulets",
-              "chance": 0.0008,
+              "chance": 0.0007,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -563,7 +589,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -584,7 +611,8 @@
             "VANTA",
             "NORDIQ",
             "LUMEN",
-            "APEX"
+            "APEX",
+            "KESTREL"
           ],
           "rows": [
             {
@@ -592,8 +620,8 @@
               "source": "邓",
               "song": "Body & Soul",
               "artist": "Chris De Sarandy",
-              "chance": 0.7581,
-              "chanceText": "76%",
+              "chance": 0.7341,
+              "chanceText": "73%",
               "odds": {
                 "BETSWORLD": 21.34,
                 "ODDSMAX": 83.83,
@@ -601,7 +629,8 @@
                 "VANTA": 2.22,
                 "NORDIQ": 1.62,
                 "LUMEN": 1.46,
-                "APEX": 2.07
+                "APEX": 2.07,
+                "KESTREL": 2.22
               },
               "trend": {
                 "dir": "same",
@@ -613,8 +642,8 @@
               "source": "松",
               "song": "Boyfriend",
               "artist": "We Three",
-              "chance": 0.4833,
-              "chanceText": "48%",
+              "chance": 0.4884,
+              "chanceText": "49%",
               "odds": {
                 "BETSWORLD": 17.17,
                 "ODDSMAX": 24.31,
@@ -622,7 +651,8 @@
                 "VANTA": 2.76,
                 "NORDIQ": 6.07,
                 "LUMEN": 33.84,
-                "APEX": 2.62
+                "APEX": 2.62,
+                "KESTREL": 2.22
               },
               "trend": {
                 "dir": "same",
@@ -634,8 +664,8 @@
               "source": "雨",
               "song": "Clams Casino",
               "artist": "Brian Dunne",
-              "chance": 0.3496,
-              "chanceText": "35%",
+              "chance": 0.3783,
+              "chanceText": "38%",
               "odds": {
                 "BETSWORLD": 99,
                 "ODDSMAX": 42.17,
@@ -643,7 +673,8 @@
                 "VANTA": 2.76,
                 "NORDIQ": 1.95,
                 "LUMEN": 2.76,
-                "APEX": 6.07
+                "APEX": 6.07,
+                "KESTREL": 2.22
               },
               "trend": {
                 "dir": "same",
@@ -652,32 +683,11 @@
             },
             {
               "rank": 4,
-              "source": "韩",
-              "song": "Intacto",
-              "artist": "Agoney",
-              "chance": 0.1419,
-              "chanceText": "14%",
-              "odds": {
-                "BETSWORLD": 99,
-                "ODDSMAX": 15.66,
-                "CROWNPLAY": 99,
-                "VANTA": 3.86,
-                "NORDIQ": 3.86,
-                "LUMEN": 3.67,
-                "APEX": 11.62
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 4
-              }
-            },
-            {
-              "rank": 5,
               "source": "羊",
               "song": "Country Road",
               "artist": "The Hellp",
-              "chance": 0.1281,
-              "chanceText": "13%",
+              "chance": 0.1732,
+              "chanceText": "17%",
               "odds": {
                 "BETSWORLD": 42.17,
                 "ODDSMAX": 14.39,
@@ -685,11 +695,34 @@
                 "VANTA": 7.18,
                 "NORDIQ": 6.07,
                 "LUMEN": 4.49,
-                "APEX": 7.18
+                "APEX": 7.18,
+                "KESTREL": 2.22
               },
               "trend": {
-                "dir": "same",
-                "delta": 0
+                "dir": "up",
+                "delta": 1
+              }
+            },
+            {
+              "rank": 5,
+              "source": "韩",
+              "song": "Intacto",
+              "artist": "Agoney",
+              "chance": 0.1185,
+              "chanceText": "12%",
+              "odds": {
+                "BETSWORLD": 99,
+                "ODDSMAX": 15.66,
+                "CROWNPLAY": 99,
+                "VANTA": 3.86,
+                "NORDIQ": 3.86,
+                "LUMEN": 3.67,
+                "APEX": 11.62,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
+                "delta": 1
               }
             },
             {
@@ -697,8 +730,8 @@
               "source": "羊",
               "song": "That's Life",
               "artist": "Dead Dads Club",
-              "chance": 0.1216,
-              "chanceText": "12%",
+              "chance": 0.1026,
+              "chanceText": "10%",
               "odds": {
                 "BETSWORLD": 99,
                 "ODDSMAX": 99,
@@ -706,7 +739,8 @@
                 "VANTA": 3.86,
                 "NORDIQ": 99,
                 "LUMEN": 2.34,
-                "APEX": 24.31
+                "APEX": 24.31,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -715,74 +749,11 @@
             },
             {
               "rank": 7,
-              "source": "A",
-              "song": "Running To Pain",
-              "artist": "Kelsey Lu",
-              "chance": 0.0789,
-              "chanceText": "8%",
-              "odds": {
-                "BETSWORLD": 13.33,
-                "ODDSMAX": 83.83,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 4.69,
-                "LUMEN": 19.02,
-                "APEX": 3.86
-              },
-              "trend": {
-                "dir": "down",
-                "delta": 3
-              }
-            },
-            {
-              "rank": 8,
-              "source": "S鸽",
-              "song": "H O M E",
-              "artist": "HANRORO",
-              "chance": 0.0739,
-              "chanceText": "7%",
-              "odds": {
-                "BETSWORLD": 28.28,
-                "ODDSMAX": 42.17,
-                "CROWNPLAY": 99,
-                "VANTA": 7.18,
-                "NORDIQ": 99,
-                "LUMEN": 33.84,
-                "APEX": 3.18
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 4
-              }
-            },
-            {
-              "rank": 9,
-              "source": "猴",
-              "song": "I Got A Thing For Love",
-              "artist": "Elle Coves",
-              "chance": 0.0606,
-              "chanceText": "6%",
-              "odds": {
-                "BETSWORLD": 28.28,
-                "ODDSMAX": 42.17,
-                "CROWNPLAY": 99,
-                "VANTA": 7.18,
-                "NORDIQ": 3.86,
-                "LUMEN": 99,
-                "APEX": 56.06
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 5
-              }
-            },
-            {
-              "rank": 10,
               "source": "威",
               "song": "OK City Sun",
               "artist": "Walking On Rivers",
-              "chance": 0.0426,
-              "chanceText": "4%",
+              "chance": 0.084,
+              "chanceText": "8%",
               "odds": {
                 "BETSWORLD": 24.31,
                 "ODDSMAX": 56.06,
@@ -790,10 +761,77 @@
                 "VANTA": 7.18,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 7.46
+                "APEX": 7.46,
+                "KESTREL": 2.22
               },
               "trend": {
                 "dir": "up",
+                "delta": 3
+              }
+            },
+            {
+              "rank": 8,
+              "source": "A",
+              "song": "Running To Pain",
+              "artist": "Kelsey Lu",
+              "chance": 0.0664,
+              "chanceText": "7%",
+              "odds": {
+                "BETSWORLD": 13.33,
+                "ODDSMAX": 83.83,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 4.69,
+                "LUMEN": 19.02,
+                "APEX": 3.86,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
+                "delta": 1
+              }
+            },
+            {
+              "rank": 9,
+              "source": "S鸽",
+              "song": "H O M E",
+              "artist": "HANRORO",
+              "chance": 0.0625,
+              "chanceText": "6%",
+              "odds": {
+                "BETSWORLD": 28.28,
+                "ODDSMAX": 42.17,
+                "CROWNPLAY": 99,
+                "VANTA": 7.18,
+                "NORDIQ": 99,
+                "LUMEN": 33.84,
+                "APEX": 3.18,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
+                "delta": 1
+              }
+            },
+            {
+              "rank": 10,
+              "source": "猴",
+              "song": "I Got A Thing For Love",
+              "artist": "Elle Coves",
+              "chance": 0.0513,
+              "chanceText": "5%",
+              "odds": {
+                "BETSWORLD": 28.28,
+                "ODDSMAX": 42.17,
+                "CROWNPLAY": 99,
+                "VANTA": 7.18,
+                "NORDIQ": 3.86,
+                "LUMEN": 99,
+                "APEX": 56.06,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
                 "delta": 1
               }
             },
@@ -802,7 +840,7 @@
               "source": "锴",
               "song": "Show Me What Love Is",
               "artist": "Erik Segerstedt",
-              "chance": 0.025,
+              "chance": 0.0213,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 42.17,
@@ -811,11 +849,12 @@
                 "VANTA": 3.86,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 56.06
+                "APEX": 56.06,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 5
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -823,7 +862,7 @@
               "source": "汞",
               "song": "ポラリス",
               "artist": "Aooo",
-              "chance": 0.0244,
+              "chance": 0.0211,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 83.83,
@@ -832,11 +871,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 6.07
+                "APEX": 6.07,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -844,7 +884,7 @@
               "source": "泰",
               "song": "BANG",
               "artist": "Unroyal",
-              "chance": 0.0229,
+              "chance": 0.0202,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 21.34,
@@ -853,11 +893,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 17.17
+                "APEX": 17.17,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 4
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -865,7 +906,7 @@
               "source": "星",
               "song": "Hey You",
               "artist": "The Belair Lip Bombs",
-              "chance": 0.0216,
+              "chance": 0.0189,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 99,
@@ -874,11 +915,12 @@
                 "VANTA": 99,
                 "NORDIQ": 8.84,
                 "LUMEN": 99,
-                "APEX": 56.06
+                "APEX": 56.06,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 7
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -886,8 +928,8 @@
               "source": "团",
               "song": "Bounce House",
               "artist": "Gelli Haha",
-              "chance": 0.0168,
-              "chanceText": "2%",
+              "chance": 0.0149,
+              "chanceText": "1%",
               "odds": {
                 "BETSWORLD": 83.83,
                 "ODDSMAX": 99,
@@ -895,11 +937,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 9.28
+                "APEX": 9.28,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 3
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -907,8 +950,8 @@
               "source": "狼芬",
               "song": "Nicht mit mir",
               "artist": "Betcha & J.Dutt",
-              "chance": 0.0156,
-              "chanceText": "2%",
+              "chance": 0.0136,
+              "chanceText": "1%",
               "odds": {
                 "BETSWORLD": 56.06,
                 "ODDSMAX": 14.39,
@@ -916,11 +959,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 13.33,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -928,7 +972,7 @@
               "source": "笃",
               "song": "Hurricane",
               "artist": "2AM-DM",
-              "chance": 0.0121,
+              "chance": 0.011,
               "chanceText": "1%",
               "odds": {
                 "BETSWORLD": 83.83,
@@ -937,11 +981,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 33.84,
-                "APEX": 56.06
+                "APEX": 56.06,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 10
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -949,7 +994,7 @@
               "source": "包",
               "song": "Where Has My Friend Gone?",
               "artist": "The Home Team",
-              "chance": 0.0117,
+              "chance": 0.0108,
               "chanceText": "1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -958,49 +1003,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 56.06
-              },
-              "trend": {
-                "dir": "down",
-                "delta": 1
-              }
-            },
-            {
-              "rank": 19,
-              "source": "城",
-              "song": "1XTE1XME",
-              "artist": "Lorenzo Fragola",
-              "chance": 0.0103,
-              "chanceText": "1%",
-              "odds": {
-                "BETSWORLD": 28.28,
-                "ODDSMAX": 15.66,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 99,
-                "LUMEN": 24.31,
-                "APEX": 83.83
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 5
-              }
-            },
-            {
-              "rank": 20,
-              "source": "海",
-              "song": "cherry cola",
-              "artist": "Devon Again",
-              "chance": 0.0103,
-              "chanceText": "1%",
-              "odds": {
-                "BETSWORLD": 15.66,
-                "ODDSMAX": 17.17,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 56.06
+                "APEX": 56.06,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -1008,12 +1012,12 @@
               }
             },
             {
-              "rank": 21,
+              "rank": 19,
               "source": "P",
               "song": "Bem no seu aniversário",
               "artist": "Bella e o Olmo da Bruxa",
-              "chance": 0.0101,
-              "chanceText": "1%",
+              "chance": 0.0094,
+              "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 42.17,
                 "ODDSMAX": 83.83,
@@ -1021,19 +1025,20 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 83.83
+                "APEX": 83.83,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 11
+                "dir": "up",
+                "delta": 2
               }
             },
             {
-              "rank": 22,
+              "rank": 20,
               "source": "文",
               "song": "Grudge",
               "artist": "Carter Faith",
-              "chance": 0.0099,
+              "chance": 0.0092,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 83.83,
@@ -1042,11 +1047,56 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 56.06
+                "APEX": 56.06,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "up",
-                "delta": 1
+                "delta": 2
+              }
+            },
+            {
+              "rank": 21,
+              "source": "城",
+              "song": "1XTE1XME",
+              "artist": "Lorenzo Fragola",
+              "chance": 0.0091,
+              "chanceText": "<1%",
+              "odds": {
+                "BETSWORLD": 28.28,
+                "ODDSMAX": 15.66,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 99,
+                "LUMEN": 24.31,
+                "APEX": 83.83,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
+                "delta": 2
+              }
+            },
+            {
+              "rank": 22,
+              "source": "海",
+              "song": "cherry cola",
+              "artist": "Devon Again",
+              "chance": 0.009,
+              "chanceText": "<1%",
+              "odds": {
+                "BETSWORLD": 15.66,
+                "ODDSMAX": 17.17,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 56.06,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
+                "delta": 2
               }
             },
             {
@@ -1054,7 +1104,7 @@
               "source": "K",
               "song": "storm",
               "artist": "Night Tapes",
-              "chance": 0.0083,
+              "chance": 0.0077,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 99,
@@ -1063,11 +1113,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 56.06
+                "APEX": 56.06,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 4
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1075,7 +1126,7 @@
               "source": "柠",
               "song": "Too Good to be Bad",
               "artist": "Olivia Marsh",
-              "chance": 0.0058,
+              "chance": 0.0053,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 19.02,
@@ -1084,11 +1135,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 56.06
+                "APEX": 56.06,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 2
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1096,7 +1148,7 @@
               "source": "XX",
               "song": "Day One (feat. Madeline Merlo)",
               "artist": "Adam Doleac",
-              "chance": 0.0045,
+              "chance": 0.0042,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 42.17,
@@ -1105,7 +1157,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 42.17
+                "APEX": 42.17,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -1117,7 +1170,7 @@
               "source": "麦",
               "song": "Lifelike (feat. Midwife)",
               "artist": "Amulets",
-              "chance": 0.002,
+              "chance": 0.0018,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 42.17,
@@ -1126,7 +1179,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 99
+                "APEX": 99,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -1147,7 +1201,8 @@
             "VANTA",
             "NORDIQ",
             "LUMEN",
-            "APEX"
+            "APEX",
+            "KESTREL"
           ],
           "rows": [
             {
@@ -1164,11 +1219,12 @@
                 "VANTA": 1.43,
                 "NORDIQ": 1.17,
                 "LUMEN": 1.11,
-                "APEX": 1.36
+                "APEX": 1.36,
+                "KESTREL": 1.43
               },
               "trend": {
-                "dir": "up",
-                "delta": 2
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1176,7 +1232,7 @@
               "source": "松",
               "song": "Boyfriend",
               "artist": "We Three",
-              "chance": 0.9887,
+              "chance": 0.99,
               "chanceText": "99%",
               "odds": {
                 "BETSWORLD": 8.84,
@@ -1185,11 +1241,12 @@
                 "VANTA": 1.69,
                 "NORDIQ": 3.31,
                 "LUMEN": 17.17,
-                "APEX": 1.62
+                "APEX": 1.62,
+                "KESTREL": 1.43
               },
               "trend": {
-                "dir": "down",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1197,8 +1254,8 @@
               "source": "雨",
               "song": "Clams Casino",
               "artist": "Brian Dunne",
-              "chance": 0.9458,
-              "chanceText": "95%",
+              "chance": 0.967,
+              "chanceText": "97%",
               "odds": {
                 "BETSWORLD": 83.83,
                 "ODDSMAX": 21.34,
@@ -1206,41 +1263,21 @@
                 "VANTA": 1.69,
                 "NORDIQ": 1.31,
                 "LUMEN": 1.69,
-                "APEX": 3.31
+                "APEX": 3.31,
+                "KESTREL": 1.43
               },
               "trend": {
-                "dir": "down",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
               "rank": 4,
-              "source": "韩",
-              "song": "Intacto",
-              "artist": "Agoney",
-              "chance": 0.845,
-              "chanceText": "85%",
-              "odds": {
-                "BETSWORLD": 83.83,
-                "ODDSMAX": 8.09,
-                "CROWNPLAY": 99,
-                "VANTA": 2.22,
-                "NORDIQ": 2.22,
-                "LUMEN": 2.12,
-                "APEX": 6.07
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 4
-              }
-            },
-            {
-              "rank": 5,
               "source": "羊",
               "song": "Country Road",
               "artist": "The Hellp",
-              "chance": 0.7692,
-              "chanceText": "77%",
+              "chance": 0.8818,
+              "chanceText": "88%",
               "odds": {
                 "BETSWORLD": 21.34,
                 "ODDSMAX": 7.46,
@@ -1248,7 +1285,30 @@
                 "VANTA": 3.86,
                 "NORDIQ": 3.31,
                 "LUMEN": 2.53,
-                "APEX": 3.86
+                "APEX": 3.86,
+                "KESTREL": 1.43
+              },
+              "trend": {
+                "dir": "up",
+                "delta": 1
+              }
+            },
+            {
+              "rank": 5,
+              "source": "韩",
+              "song": "Intacto",
+              "artist": "Agoney",
+              "chance": 0.7949,
+              "chanceText": "79%",
+              "odds": {
+                "BETSWORLD": 83.83,
+                "ODDSMAX": 8.09,
+                "CROWNPLAY": 99,
+                "VANTA": 2.22,
+                "NORDIQ": 2.22,
+                "LUMEN": 2.12,
+                "APEX": 6.07,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "down",
@@ -1260,8 +1320,8 @@
               "source": "羊",
               "song": "That's Life",
               "artist": "Dead Dads Club",
-              "chance": 0.69,
-              "chanceText": "69%",
+              "chance": 0.639,
+              "chanceText": "64%",
               "odds": {
                 "BETSWORLD": 99,
                 "ODDSMAX": 99,
@@ -1269,20 +1329,43 @@
                 "VANTA": 2.22,
                 "NORDIQ": 99,
                 "LUMEN": 1.49,
-                "APEX": 12.41
+                "APEX": 12.41,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
               "rank": 7,
+              "source": "威",
+              "song": "OK City Sun",
+              "artist": "Walking On Rivers",
+              "chance": 0.6331,
+              "chanceText": "63%",
+              "odds": {
+                "BETSWORLD": 12.41,
+                "ODDSMAX": 28.28,
+                "CROWNPLAY": 99,
+                "VANTA": 3.86,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 4.0,
+                "KESTREL": 1.43
+              },
+              "trend": {
+                "dir": "up",
+                "delta": 3
+              }
+            },
+            {
+              "rank": 8,
               "source": "S鸽",
               "song": "H O M E",
               "artist": "HANRORO",
-              "chance": 0.613,
-              "chanceText": "61%",
+              "chance": 0.5643,
+              "chanceText": "56%",
               "odds": {
                 "BETSWORLD": 14.39,
                 "ODDSMAX": 21.34,
@@ -1290,28 +1373,8 @@
                 "VANTA": 3.86,
                 "NORDIQ": 99,
                 "LUMEN": 17.17,
-                "APEX": 1.89
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 4
-              }
-            },
-            {
-              "rank": 8,
-              "source": "A",
-              "song": "Running To Pain",
-              "artist": "Kelsey Lu",
-              "chance": 0.4653,
-              "chanceText": "47%",
-              "odds": {
-                "BETSWORLD": 6.92,
-                "ODDSMAX": 42.17,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 2.62,
-                "LUMEN": 9.77,
-                "APEX": 2.22
+                "APEX": 1.89,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "down",
@@ -1320,103 +1383,20 @@
             },
             {
               "rank": 9,
-              "source": "猴",
-              "song": "I Got A Thing For Love",
-              "artist": "Elle Coves",
-              "chance": 0.4138,
-              "chanceText": "41%",
+              "source": "A",
+              "song": "Running To Pain",
+              "artist": "Kelsey Lu",
+              "chance": 0.4188,
+              "chanceText": "42%",
               "odds": {
-                "BETSWORLD": 14.39,
-                "ODDSMAX": 21.34,
-                "CROWNPLAY": 99,
-                "VANTA": 3.86,
-                "NORDIQ": 2.22,
-                "LUMEN": 99,
-                "APEX": 28.28
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 4
-              }
-            },
-            {
-              "rank": 10,
-              "source": "威",
-              "song": "OK City Sun",
-              "artist": "Walking On Rivers",
-              "chance": 0.3741,
-              "chanceText": "37%",
-              "odds": {
-                "BETSWORLD": 12.41,
-                "ODDSMAX": 28.28,
-                "CROWNPLAY": 99,
-                "VANTA": 3.86,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 4.0
-              },
-              "trend": {
-                "dir": "same",
-                "delta": 0
-              }
-            },
-            {
-              "rank": 11,
-              "source": "星",
-              "song": "Hey You",
-              "artist": "The Belair Lip Bombs",
-              "chance": 0.2494,
-              "chanceText": "25%",
-              "odds": {
-                "BETSWORLD": 83.83,
+                "BETSWORLD": 6.92,
                 "ODDSMAX": 42.17,
                 "CROWNPLAY": 99,
                 "VANTA": 99,
-                "NORDIQ": 4.69,
-                "LUMEN": 99,
-                "APEX": 28.28
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 5
-              }
-            },
-            {
-              "rank": 12,
-              "source": "泰",
-              "song": "BANG",
-              "artist": "Unroyal",
-              "chance": 0.2331,
-              "chanceText": "23%",
-              "odds": {
-                "BETSWORLD": 10.92,
-                "ODDSMAX": 14.39,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 8.84
-              },
-              "trend": {
-                "dir": "down",
-                "delta": 3
-              }
-            },
-            {
-              "rank": 13,
-              "source": "汞",
-              "song": "ポラリス",
-              "artist": "Aooo",
-              "chance": 0.223,
-              "chanceText": "22%",
-              "odds": {
-                "BETSWORLD": 42.17,
-                "ODDSMAX": 14.39,
-                "CROWNPLAY": 99,
-                "VANTA": 99,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 3.31
+                "NORDIQ": 2.62,
+                "LUMEN": 9.77,
+                "APEX": 2.22,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "down",
@@ -1424,12 +1404,100 @@
               }
             },
             {
+              "rank": 10,
+              "source": "猴",
+              "song": "I Got A Thing For Love",
+              "artist": "Elle Coves",
+              "chance": 0.3743,
+              "chanceText": "37%",
+              "odds": {
+                "BETSWORLD": 14.39,
+                "ODDSMAX": 21.34,
+                "CROWNPLAY": 99,
+                "VANTA": 3.86,
+                "NORDIQ": 2.22,
+                "LUMEN": 99,
+                "APEX": 28.28,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
+                "delta": 1
+              }
+            },
+            {
+              "rank": 11,
+              "source": "星",
+              "song": "Hey You",
+              "artist": "The Belair Lip Bombs",
+              "chance": 0.2317,
+              "chanceText": "23%",
+              "odds": {
+                "BETSWORLD": 83.83,
+                "ODDSMAX": 42.17,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 4.69,
+                "LUMEN": 99,
+                "APEX": 28.28,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "same",
+                "delta": 0
+              }
+            },
+            {
+              "rank": 12,
+              "source": "泰",
+              "song": "BANG",
+              "artist": "Unroyal",
+              "chance": 0.2169,
+              "chanceText": "22%",
+              "odds": {
+                "BETSWORLD": 10.92,
+                "ODDSMAX": 14.39,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 8.84,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "same",
+                "delta": 0
+              }
+            },
+            {
+              "rank": 13,
+              "source": "汞",
+              "song": "ポラリス",
+              "artist": "Aooo",
+              "chance": 0.2044,
+              "chanceText": "20%",
+              "odds": {
+                "BETSWORLD": 42.17,
+                "ODDSMAX": 14.39,
+                "CROWNPLAY": 99,
+                "VANTA": 99,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 3.31,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "same",
+                "delta": 0
+              }
+            },
+            {
               "rank": 14,
               "source": "团",
               "song": "Bounce House",
               "artist": "Gelli Haha",
-              "chance": 0.1211,
-              "chanceText": "12%",
+              "chance": 0.1125,
+              "chanceText": "11%",
               "odds": {
                 "BETSWORLD": 42.17,
                 "ODDSMAX": 83.83,
@@ -1437,11 +1505,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 4.9
+                "APEX": 4.9,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 4
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1449,8 +1518,8 @@
               "source": "笃",
               "song": "Hurricane",
               "artist": "2AM-DM",
-              "chance": 0.117,
-              "chanceText": "12%",
+              "chance": 0.112,
+              "chanceText": "11%",
               "odds": {
                 "BETSWORLD": 42.17,
                 "ODDSMAX": 28.28,
@@ -1458,11 +1527,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 17.17,
-                "APEX": 28.28
+                "APEX": 28.28,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 9
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1470,7 +1540,7 @@
               "source": "包",
               "song": "Where Has My Friend Gone?",
               "artist": "The Home Team",
-              "chance": 0.1118,
+              "chance": 0.1084,
               "chanceText": "11%",
               "odds": {
                 "BETSWORLD": 83.83,
@@ -1479,11 +1549,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 28.28
+                "APEX": 28.28,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 2
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1491,8 +1562,8 @@
               "source": "狼芬",
               "song": "Nicht mit mir",
               "artist": "Betcha & J.Dutt",
-              "chance": 0.1076,
-              "chanceText": "11%",
+              "chance": 0.0981,
+              "chanceText": "10%",
               "odds": {
                 "BETSWORLD": 28.28,
                 "ODDSMAX": 7.46,
@@ -1500,41 +1571,21 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 6.92,
-                "APEX": 83.83
+                "APEX": 83.83,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 2
+                "dir": "same",
+                "delta": 0
               }
             },
             {
               "rank": 18,
-              "source": "锴",
-              "song": "Show Me What Love Is",
-              "artist": "Erik Segerstedt",
-              "chance": 0.0972,
-              "chanceText": "10%",
-              "odds": {
-                "BETSWORLD": 21.34,
-                "ODDSMAX": 28.28,
-                "CROWNPLAY": 99,
-                "VANTA": 2.22,
-                "NORDIQ": 99,
-                "LUMEN": 99,
-                "APEX": 28.28
-              },
-              "trend": {
-                "dir": "up",
-                "delta": 4
-              }
-            },
-            {
-              "rank": 19,
               "source": "海",
               "song": "cherry cola",
               "artist": "Devon Again",
-              "chance": 0.0955,
-              "chanceText": "10%",
+              "chance": 0.0876,
+              "chanceText": "9%",
               "odds": {
                 "BETSWORLD": 8.09,
                 "ODDSMAX": 8.84,
@@ -1542,10 +1593,33 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 28.28
+                "APEX": 28.28,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "up",
+                "delta": 1
+              }
+            },
+            {
+              "rank": 19,
+              "source": "锴",
+              "song": "Show Me What Love Is",
+              "artist": "Erik Segerstedt",
+              "chance": 0.0873,
+              "chanceText": "9%",
+              "odds": {
+                "BETSWORLD": 21.34,
+                "ODDSMAX": 28.28,
+                "CROWNPLAY": 99,
+                "VANTA": 2.22,
+                "NORDIQ": 99,
+                "LUMEN": 99,
+                "APEX": 28.28,
+                "KESTREL": 99
+              },
+              "trend": {
+                "dir": "down",
                 "delta": 1
               }
             },
@@ -1554,7 +1628,7 @@
               "source": "K",
               "song": "storm",
               "artist": "Night Tapes",
-              "chance": 0.0823,
+              "chance": 0.0802,
               "chanceText": "8%",
               "odds": {
                 "BETSWORLD": 83.83,
@@ -1563,11 +1637,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 28.28
+                "APEX": 28.28,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1575,7 +1650,7 @@
               "source": "文",
               "song": "Grudge",
               "artist": "Carter Faith",
-              "chance": 0.0744,
+              "chance": 0.0725,
               "chanceText": "7%",
               "odds": {
                 "BETSWORLD": 42.17,
@@ -1584,7 +1659,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 28.28
+                "APEX": 28.28,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -1596,7 +1672,7 @@
               "source": "P",
               "song": "Bem no seu aniversário",
               "artist": "Bella e o Olmo da Bruxa",
-              "chance": 0.0622,
+              "chance": 0.0606,
               "chanceText": "6%",
               "odds": {
                 "BETSWORLD": 21.34,
@@ -1605,11 +1681,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 42.17
+                "APEX": 42.17,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 5
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1617,8 +1694,8 @@
               "source": "城",
               "song": "1XTE1XME",
               "artist": "Lorenzo Fragola",
-              "chance": 0.0558,
-              "chanceText": "6%",
+              "chance": 0.0514,
+              "chanceText": "5%",
               "odds": {
                 "BETSWORLD": 14.39,
                 "ODDSMAX": 8.09,
@@ -1626,11 +1703,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 12.41,
-                "APEX": 42.17
+                "APEX": 42.17,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "up",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1638,8 +1716,8 @@
               "source": "柠",
               "song": "Too Good to be Bad",
               "artist": "Olivia Marsh",
-              "chance": 0.0365,
-              "chanceText": "4%",
+              "chance": 0.0347,
+              "chanceText": "3%",
               "odds": {
                 "BETSWORLD": 9.77,
                 "ODDSMAX": 42.17,
@@ -1647,11 +1725,12 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 28.28
+                "APEX": 28.28,
+                "KESTREL": 99
               },
               "trend": {
-                "dir": "down",
-                "delta": 1
+                "dir": "same",
+                "delta": 0
               }
             },
             {
@@ -1659,7 +1738,7 @@
               "source": "XX",
               "song": "Day One (feat. Madeline Merlo)",
               "artist": "Adam Doleac",
-              "chance": 0.0199,
+              "chance": 0.0191,
               "chanceText": "2%",
               "odds": {
                 "BETSWORLD": 21.34,
@@ -1668,7 +1747,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 21.34
+                "APEX": 21.34,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
@@ -1680,7 +1760,7 @@
               "source": "麦",
               "song": "Lifelike (feat. Midwife)",
               "artist": "Amulets",
-              "chance": 0.0082,
+              "chance": 0.008,
               "chanceText": "<1%",
               "odds": {
                 "BETSWORLD": 21.34,
@@ -1689,7 +1769,8 @@
                 "VANTA": 99,
                 "NORDIQ": 99,
                 "LUMEN": 99,
-                "APEX": 83.83
+                "APEX": 83.83,
+                "KESTREL": 99
               },
               "trend": {
                 "dir": "same",
