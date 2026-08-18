@@ -4,6 +4,20 @@
 
 ---
 
+## [2026-08-17] — Barvision 2026 决赛赔率三连更（26 强 · 庄家 2→8 家）
+
+### Changed
+- **`data/barvision/odds/odds.json` · Grand Final 段三次更新**：
+  - `9e144e0` 庄家 2→4（+CROWNPLAY/VANTA）—— 事后发现所发数据不全；
+  - `861aaaa` **更正版**，庄家 7（+NORDIQ/LUMEN/APEX），**走势基准回退到推送前的正确版**重算；
+  - `06d55b2` 庄家 8（+KESTREL），走势对比上一发布版：winner ▲3▼5–18 / top3 ▲4▼6–16 / top10 ▲3▼5–18。
+- 三次均只替换 `gf` 赛事，sf1/sf2/wildcard 历史数据与走势原样保留；`odds_prev.json` 未动；套现行约定（gf 置首显示「Barvision 2026」、`top 3` / `top 10 chance` 空格写法、单行中文免责声明）。
+
+### Docs
+- **决赛直播播控页**（`barvision/2026/broadcast/grand-final/`，纯本地 gitignore、未入库）本次建成，25 环节 / 275 步跑通；目录内新增 `环节对照表.md`（每个 cue 的背景/动画/垫乐/音量，自动生成）。详见 CLAUDE.md #193。
+- ⚠️ **决赛赛果（冠军 / 分数 / 最终排名 / 下届主办城市）在 8/22 直播前一律不写入本仓库**，届时再补记并按 SOP 导入公开站。
+
+---
 ## [2026-08-09] — Barvision 2026 决赛阶段上线：结果展示 + 歌单/投票/赔率更新 + Playoff 改名
 
 半决赛暨外卡突围赛直播（8/8）结束、进入 Grand Final 阶段（决赛投票 8/8–8/16、决赛直播 8/22）；公开站点全面切至决赛阶段。
