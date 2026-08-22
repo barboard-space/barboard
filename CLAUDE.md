@@ -32,7 +32,7 @@
 - `CHANGELOG.md` — 版本更新日志
 - `barvision/2026/events/index.html` — **Barvision 2026 歌单/投票专属页（报名截止后已重构，见 #185）**：报名于 7/19 截止后，原 EmailJS 歌曲提交表单页**存档**至 `barvision/2026/submit/index.html`（三态 JS 自动显示征集已结束）；本地址改为歌单页（ev-hero 海报风格 + 4 平台歌单卡 Spotify/Apple Music美区/网易云/QQ，链接前用各平台内联 SVG logo）。~~原提交页(EmailJS，见 #127/#164)~~ 现存于 submit/。另 `barvision/2026/draw/index.html` = 半决赛分组抽签器 v1（密码锁/noindex，见 #184）。
 - `barvision/2026/odds/index.html` — **赔率预测板块（已完成，见 #190）**：整页数据驱动读 `data/barvision/odds/odds.json`；两级按钮切换赛事×盘口（绝不滚动）；两套高亮（模型预测卡片 紫 / 各家最优赔率 蓝，并列组阈值规则）+ 趋势；入口在首页 season 卡 + 2026 hero。（~~下载截图~~ 用户已取消，见 #190 末。数据以后由用户发 JSON、我算走势+套约定，勿跑引擎。）
-- `barvision/2026.html`（曾名 `2026/16.html`，路径方案见 #165）— **第 16 届 Chongqing 2026「本届实时更新页」（已完成，见 #164）**：薄壳复用 `bv-results-render.js` 的 **live 分支**（`regular-16.json` 顶层 `live:true`）；events 风格静态 hero（渲染器对 live 跳过自带 hero）+ 选送名单（Candidates/Wildcards 两表）+ 海选进展（11 场含 status，未公布获胜曲显「等待宣布/—」）+ info_sections（赛程/投票/规则/关于，数据驱动结构化 rules）；barvision XVI 当届卡 + 首页 XVI 卡/「本届总览」CTA 均指向此页；feed→首页同步机制已建但 hold（脚本 `sync_bv2026_live.py`）
+- `barvision/2026/index.html` — **第 16 届 Chongqing 2026 正式届次详情页（赛果已导入，见 #201）**：决赛 2026-08-22 播完后已由「本届实时更新页」转正式届——摘掉 `live`、`matches` 填入 SF1/SF2/**WC**/**SC**/GF 五场逐票，薄壳与 13–15 届同构（渲染器自建主题 hero）。以下为 live 时期的历史记述（#164）：薄壳复用 `bv-results-render.js` 的 **live 分支**（`regular-16.json` 顶层 `live:true`）；events 风格静态 hero（渲染器对 live 跳过自带 hero）+ 选送名单（Candidates/Wildcards 两表）+ 海选进展（11 场含 status，未公布获胜曲显「等待宣布/—」）+ info_sections（赛程/投票/规则/关于，数据驱动结构化 rules）；barvision XVI 当届卡 + 首页 XVI 卡/「本届总览」CTA 均指向此页；feed→首页同步机制已建但 hold（脚本 `sync_bv2026_live.py`）
 - `member.html` — Members 总览页（119位成员，**动态 fetch `data/members/members.csv`** 渲染，4档过滤 + 名称搜索框，卡片含 Bilibili·Musictrack 外链，hover 紫色光效，完整入场动画序列）
 - `member/7.html` — @williw_（威妈）成员主页（头像"威"占位、BarboardLab+村摇欧共体标签、Bilibili/Musictrack 右上角竖排按钮、"代表成绩"区）
 - `member/N.html``member/N.html`（119个）— 全体成员个人主页，由 `scripts/gen_member_pages.py` 从 CSV 批量生成，每页仅含 `MEMBER_DATA` 数据对象，样式与逻辑全部由 `scripts/member-render.js` 注入
@@ -56,8 +56,8 @@
 
 ### 待建页面（按优先级）
 - **✅ Barvision 数据库化（已完成，见 #167/#168）**：数据基座 `bv-stats.json`（`gen_bv_stats.py`，含 pioneer/overview/members/entries/podium/records/season/**awards** 11 项趣味奖项）+ **重做 `barvision/hof.html`**（读 bv-stats，先锋奖/领奖台/数据纪录/赛季纪录/趣味奖项，金/紫 hero + Notion 目录）+ **新建 `barvision/stats.html`**（历届总览/可排序选送排行/四维查询）+ nav 互链。剩余：娱乐版 HOF（暂缓）、全量数据核对。改任意届 JSON 后重跑 `gen_bv_stats.py`。
-- **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**下一步：第 16 届（Chongqing 2026，进行中）赛后导入**——同年度制（SF1/SF2/GF），渲染已通用，`BV_THEME[2026]`/`BV_STRIPE[2026]` 已随 live 页建好（#164），按 BARVISION_MEMBER.md §二 SOP + #161 走（产契约 JSON + parser 设 qualified + GF `tele_mode='votes'` 无 top + 跑 recompute/number_anon/gen 管线）；**2025 起观众分每首≤10 票**（见 #161）；intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
-- ~~第 16 届「本届实时更新页」~~ **已完成**（见 #164，页面 URL `/barvision/2026/`）。**剩余**：报名/海选实时数据随进展更新（直接编辑 `regular-16.json` 的 `signups`/`auditions`，无需跑脚本）；首页 feed 同步功能**用户已 hold**（脚本就绪、`feed:[]`）。海选已陆续出结果（邓妈 European Fever、猴妈 Voiizion 等已录入）。
+- **Barvision 历史成绩数据体系（进行中，见 #129–#163）**：**第 1–15 届已全部导入**（2019 五届 + 2020 七届 + 2023 第十三 + 2024 第十四 + 2025 第十五届「年度制」全部完成，见 #157–#163）。第 15 届（Jinzhong 2025）赛果数据/详情页/成员页/总成绩单已完成并对齐官方成绩单（#163：半决赛 20 票观众制 + 海选阶段 section + 东道主直通 + 三态排序 + 实心 logo 2026 名单）。**✅ 第 16 届（Chongqing 2026）已于 2026-08-22 决赛后导入完毕（见 #201）——1–16 届全部齐备**；**2025 起观众分每首≤10 票**（见 #161）；intro 备稿见 `data/barvision/edition-intros-2023-2025.md`。剩余：HOF 历届前三改版 + 全量数据核对
+- ~~第 16 届「本届实时更新页」~~ **已于赛后转为正式届次详情页**（见 #201）。首页 feed 同步功能**用户已 hold**（脚本就绪）。
 - `about.html` — 关于榜吧完整历史
 - `barvision/2026/results.html` — 2026届赛果（赛后填充）
 - `barvision/2026/news.html` — 2026届公告
@@ -131,7 +131,7 @@ barboard-space/
 │   ├── index.html          ← Barvision 总览（原 barvision.html）
 │   ├── hof/index.html      ← Hall of Fame（见 #168/#170）
 │   ├── stats/index.html    ← 数据中心 Stats（见 #168）
-│   ├── 2026/index.html     ← 第16届本届实时更新页（live，见 #164）
+│   ├── 2026/index.html     ← 第16届详情页（赛果已导入，见 #201）
 │   │   └── events/index.html ← 2026 歌曲提交通道（见 #127/#164）
 │   ├── 2023/index.html … 2025/index.html ← 13–15 届年度详情页
 │   ├── 2019/<NN>/index.html ← 1–5 届详情页薄壳（NN=01..05）
@@ -758,7 +758,7 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **城市改名**（hand-edit JSON + ed14 parser 同步）：ed14 通化→**吉林通化**、ed13 齐齐哈尔→**黑龙江齐齐哈尔**（summary 正文 + city 字段；hero meta 用英文城市不变）。
     - **手机端 hero scrim 调浅**（2023+ 主题届通用，超越 #159 旧值）：移动端 `.bvr-hero__scrim` 由 `0.86/0.76/0.90` → **`0.7/0.52/0.8`**——原值太重把 bg 主视觉压成近黑（尤其 2025 `bg-orange`「像没有背景图」）；调浅后三届（2023 红 / 2024 粉 / 2025 橙）手机端主视觉都透出、文字仍可读。⚠️ bg-orange.png 配置/文件本就正确，问题纯在 scrim。
     - **barvision.html 近届年度大卡遮罩调浅**：`.bv-arch-card--recent .bv-arch-card__logo--img::before` 由 `0.40/0.58` → **`0.4/0.3`**（顶 0.4 保白 logo 对比 / 底 0.3），XV/XIV/XIII 年度卡主视觉更鲜亮；满宽 XVI 当届大卡 `.bv-current-card::before`(0.85→0.40 左深右浅渐变) **不动**（左侧文字需深底）。
-    - **下一步：第 16 届（Chongqing 2026，进行中）赛果待赛后导**；HOF 历届前三改版 + 全量数据核对仍待办。
+    - ~~下一步：第 16 届赛果待赛后导~~ **已完成（见 #201）**；HOF 历届前三改版 + 全量数据核对仍待办。
 164. **第 16 届「本届实时更新页」(`barvision/2026/16.html`) + events 重构为提交专用页（本次，进行中届的两页拆分）**：
     - **架构**：16.html = **薄壳**（`EDITION_SRC=regular-16.json`），复用 `bv-results-render.js`，新增 **live 分支**（顶层 `live:true`）；events.html = **歌曲提交专用子页**。两页 nav：barvision XVI 当届卡（整卡点击）+ index XVI 卡 + index 季卡「本届总览」按钮 → 均指向 `16.html`；index/各处「歌曲报名」→ `events.html#submit`；events eyebrow ← 回 16.html。
     - **`regular-16.json`（进行中契约，手工维护）**：`live:true` + `submit_url` + hero meta（year/edition_no/edition_name/cn_name/city/host/motto/summary）+ `signups[]`（每条 `role:candidate|wildcard`、`mode:内部选送|公开海选`、member/song/artist/genre(Title-Case)/language）+ `auditions{note,list[{name,member,period,status:进行中|已结束|筹备中,artist,song}]}` + `info_sections[]`（赛程/投票/规则/关于，每项 `{id,cn,en,subtitle,sections:[...rulesSection契约...]}`）+ `feed:[]`（首页同步源，**用户已 hold**）+ `members{}` + `matches:[]`。**必含 `version:"regular"`**（gen_bv_editions_index 要求）。
@@ -1022,6 +1022,108 @@ python scripts/sync_hof_data.py --write   # 写入 hof_data.json
     - **调试键**（长素材不用看完）：`S`/`]` 跳过本环节 · `[` 上一环节 · `E` 本段末 · `R` 重播本段 · `⇧→`/`⇧←` 视频 ±30s/−10s · `⇧↑` 跳视频尾 · `P` 暂停 · `V` 轻量模式（不加载 GB 级视频、出占位卡）。⚠️ **视频 seek 需服务器支持 HTTP Range，`python -m http.server` 不支持**（拖动弹回 0）→ 直接双击 `player.html` 走 file://，或用 `tools/serve.py 8014`。
     - **⚠️ 预览端测量坑**：跨环节跳转有 840ms 黑场延迟，`jumpCue` 后**必须等 >900ms 再测量**，否则量到的是上一节画面（我因此误判过「bg 没循环」）；同步 `while` 循环里连调 `advance()` 会被 `fading` 锁挡住变成**死循环**（要 async + await）；Browser 面板隐藏时媒体不解码、`currentTime` 恒 0，别据此判断音乐没播；改 `data/*.js` 后必须重新导航页面（无版本号、吃缓存）。
     - **⚠️⚠️ 剧透事故教训（本次真实发生）**：交接文档里把冠军与最终分数写进 CLAUDE.md #193 并 push 到公开仓库，随后 `git reset --hard <上一 commit>` + `git push --force-with-lease` 撤回（远端分支已回退、`broadcast/` 本就未跟踪、工作区无残留）。**通则：赛事播出前，任何进 git 的文件（CLAUDE.md / CHANGELOG / commit message / 公开数据）都不能出现未播出的赛果、冠军、最终排名、下届主办城市等信息**；写交接文档时先自问「这条会不会剧透」。⚠️ force-push 只是从分支移除，GitHub 上该 commit 对象在 GC 前理论上仍可按 SHA 取到，**最好的办法是一开始就别写**。
+
+194. **⭐ 决赛播控页 grand-final/ 版式与动效定稿（2026-08-19；纯本地 gitignore、不入库；无赛果内容）**：本轮全部围绕**播控页的视觉与性能**，未触碰任何公开站文件。**细节以 memory `project-grand-final-live` 为准**（含全部常量、坑位、工具用法），此处只留索引：
+    - **卡片图体系**：cue 5 三块 + cue 6/8 改用 Figma 出的整行卡片图（`assets/cards/card-*/`，`overview-banner[-N].png`，**0 起编号**）；行格式全站统一**高 60 / 间距 7 / 列距 40**，x·y 自动居中（band = 抬头底~logo 顶）。**总结页（cue 10/13/15/17/20/24）必须代码渲染**——五个 cue 五套运行时数字，出图会变成 130 张且一改就废。
+    - **入退场编排**（`engine.js` 的 `SEQ`）：标题 750ms 起淡入 500 → 1250ms 起条目 rise 入场（错峰 50、单条 720、上浮 60px、曲线 `cubic-bezier(.20,.06,.16,1)`）→ 结束即刻 logo 淡入。**退场 = 继续上浮 −0.7×rise + 淡出**（380ms/错峰 18）。`trans:'xfade'` 让 cue 5→6 **不走黑场**（内容退场 + 背景交叉淡化 700ms）。
+    - **抬头/logo 全站统一**：抬头框 top 66 / max-height 120，logo 283×120 距底 66。`data/images.js` 的 `src` **只影响抬头**，整屏叠加用 `overlaySrc`（曾因不分 kind 把抬头图当 1920×1080 叠加拉满）。
+    - **性能**：卡片/抬头图重导 @2x（解码 604→151 MB）；背景底重编码 813 MB/32–41 Mbps → **222 MB/4.4–12.2 Mbps**，5 条降 30fps（原重复率 43–68%）。工具 `tools/optimize_bg.py`（母版在 `assets/bg/_orig/`，可 `--revert`）。
+    - **乒乓伪 loop → 钟摆循环**（`tools/pendulum_loop.py`）：用户给单边源，往返 + **只在 apex 前后 ±0.5s 降速到 0.35×、其余全程原速**、apex 区光流补帧。interval-4/5/6/7 已全部换。两个坑：尾段密集帧必须提取到文件末尾、往返端点各内缩 2 帧（否则 apex 连停 12 帧/400ms）。另有 `tools/find_loop.py`（搜内部循环点，这批夜景素材未命中）、`tools/bgm_loop.py`（垫乐 in/out/整数拍淡化）。
+    - **垫乐交叉淡化循环**：素材硬切结尾，改双 `<audio>` 接力 + 逐条 `BGM_LOOP`（跳首尾静音、淡化取整数拍——110 BPM 取 5 拍 2.73s）。
+    - **下一步**：jury/tele 计分板构造；总结页在重庆夜景底上的可读性（**已定分工：用户出 Figma 参考图，我对 CSS**，重点是 `backdrop-filter` 背景模糊）。
+
+195. **⭐ 决赛播控页 grand-final/ 总结页定稿（2026-08-19 下半场；纯本地 gitignore、未入库；无赛果内容）**：本轮只动**播控页的总结类页面**（cue 10/13/15/17/20/24），公开站零改动。**细节以 memory `project-grand-final-live` 与目录内 `README.md` 为准**，此处只留跨会话要点：
+    - **版式照 cue 5 卡片实测复刻**（行 560×60 = 卡片 1120×120 的正好半尺）；字号为用户逐轮定稿值（排名 29 / 简称四档 28·30·24·22 / 歌手 17 / 歌名 13 / 得分 26），歌名 `margin-top` 与 `.gr__txt` 的 `padding-top` 需按基线公式随字号重算。
+    - **⚠ `backdrop-filter` 对硬件合成的 `<video>` 无效**（Chrome）→ 行上的 backdrop-filter 全删，改用「**把背景再解码一份 + `filter:blur()` + `clip-path` 裁成榜单形状**」的 `#bgBlur` 层；模糊在 1/4 分辨率上做。**这条是通用坑**，以后任何「玻璃压在视频上」的需求都按此办。
+    - **⚠ `fitText()` 写内联 font-size**（优先级高于 CSS）→ 改 CSS 字号「不生效」时先查它；它必须在皮肤类挂上、字体加载完之后才量，否则会把每一行都缩到下限。
+    - **⚠ 带 `both` 填充的入场类不会摘 → `will-change` 会永久提层、把文字栅格化倍数钉死**（发虚）。静止元素不要留 `will-change`；HUD 的 `密度 X.XX×` <1 时先全屏再排查。
+    - **⚠ 绝对定位元素比流内 flex 项后画**：往 `.gr__fx` 这类叠层加不透明内容会盖住分数；层序现固定为 底 < fx(1) < 内容(2) < 描边/glow(3) < 压暗 scrim(4)。
+    - **⚠ 逐帧重建带全屏模糊层的 `clip-path`、以及 `background-position` 扫光都是掉帧大户**；沿路径的匀速彗尾最后用 canvas 逐段画（SVG dash 有台阶、conic 按角度推进速度不均）。
+    - 冠军 highlight 由 `DECO1` 开关 + `--hl-in`（入场编排总时长）推导三拍时间轴；抬头文案在最终成绩单与过程页分别为 WINNER / CURRENT LEADER。
+    - 本地预览用**用户自己的 VS Code Live Server（127.0.0.1:5500）**，Claude 侧不另起服务器（两边同开会两路声音重音）；`engine.js`/`reveal.css` 无 `?v=`，「改了没变化」先 Ctrl+F5。
+    - **⚠ 全屏尺寸的模糊层（`#bgBlur`）绝不能出现「无裁剪 + 可见」的一瞬**（会整屏糊掉）：出生即裁成空、换源即复位、只有裁剪落位后才允许显形；裁剪矩形要按版面常量解析式算，**别量 DOM**（窗口被遮挡/后台/容器 0 尺寸时会全量到 0，磨砂静默消失）。冷加载时它比背景视频晚出帧，需兜底底色 + 就绪后补显。
+    - **素材清单 `data/manifest.js`**（`tools/gen_manifest.py` 生成）：把「可选出图覆盖位」的主动探测改成查清单，控制台 404 归零；**放完新素材要重跑脚本**。
+    - **下一阶段**：评委分报分板 **cue 8/9/12**（另一套皮肤 `.gf--live`），之后再做观众票 **cue 15/16/19**。
+
+196. **⭐ 决赛播控页 grand-final/ —— Jury 报分板（cue 9/12）版式与动画定稿（2026-08-20；纯本地 gitignore、未入库；无赛果内容）**：本轮只动**播控页的 Jury 报分板 + 总结页两处修正**，公开站零改动。**细节以 memory `project-grand-final-live` 与目录内 `README.md`「报分板」一节为准**，此处只留跨会话要点：
+    - **行版式**照 Figma 姓名条（`card-nametag-regular`，@2x 逐像素量过）：`本轮得分 60 ┃7┃ 简称 60 ┃ 照片 90 ┃ 信息条 283 ┃ 累计 60 = 560`，与总结页同一套几何；两级读法 = 得分行主色实心 / 未得分同色相压暗。
+    - **⭐ 分档方块 = 左侧「本轮得分块」本体**：待取 → 变色 → 飞到左侧那一行的得分位 → **停在那儿**，`sort` 那步跟着行一起重排，下一位评委复位。静态态只由状态推导（回退/跳转一致）、坐标按解析式算**不量 DOM**。
+    - **面板五段 = 整数张卡片**（1+3+5+1+3 = 13 = 左侧 13 行总高 864）；入场自上而下、Top10 逐条 rise、方块右→左逐格亮、STARTS NOW 整段最后淡入；退场由 `seqFadeOut` 统一 → 回退对称。
+    - **⚠ 本轮踩到的通用坑（值得全站记住）**：① **新建元素当帧加 class → CSS transition 不触发**，必须用 animation；延迟用 `fill-mode:backwards`（`both` 会永久顶死后续 transition）。② 用 `opacity` 表达「暗态」的元素**不能再加淡入动画**（动画末态 opacity 1 永久顶掉暗态）。③ 一个元素只能有一个 `font-weight` → 想「中文比拉丁粗一号」只能用 `unicode-range` 分出一个 CJK 专用 `@font-face` 族。④ 渐变字要按**每行文字宽度**铺满就得每行包一个 `width:fit-content` 的 span（`<br>` 会按容器宽算）。⑤ 双路视频交叉淡化要**只淡入新的一路**（两路各半时合成覆盖率只有 0.75，底色会透上来 → 中间发亮）。⑥ 半透明层压在**分数宽**（57.7px）的格子上会**底色透边**，把底色换深 + 内容 `scale(1.04)`。⑦ 误留的 v1 金色规则（`.gf--full .gr.is-win .gr__bar`）特异度高于皮肤 → 让 cue 20/24 第一名入场即带金调，已删勿加回。⑧ CSS 变量别叫 `--plate`（总结页皮肤已占用）。
+    - **调试切换键 A/N/K/C 已取消**（样式定稿 → 常量 `CARD_ANIM/NAME_ANIM='rise'`、`FULL_SKIN='star'`、`HL='ring'`，备选预设 CSS 仍留）。
+    - **下一步**：Jury Vote 动画精修（节奏/手感）→ 观众票报分板 cue 15/16/19（Tele 面板仍是旧结构）。
+
+197. **⭐⭐ 决赛播控页 grand-final/ —— Jury 报分板右半边（侧栏）改版定稿 + 两次文件清空事故（2026-08-20 晚；纯本地 gitignore、未入库；无赛果内容）**：本轮只动**播控页**，公开站零改动。**细节以目录内 `README.md`（已重建，19 章）与 memory `project-grand-final-live` 为准**，此处只留跨 session 有价值的部分：
+    - **⚠⚠⚠ 两次「补丁脚本清空文件」事故（最重要的一条）**：Python 补丁脚本里放 emoji 且写成**成对代理转义**（`🔔`）→ 编码异常；而 `open(path,'w')` **先截断再写** → 文件内容全丢。先清空 `js/engine.js`（靠 scratchpad 里的补丁脚本按序重放 + `/tmp` 备份恢复），**十分钟后同一错误清空了 `README.md`**（无备份、VS Code Local History 无记录 → 只能重建）。**`node --check` 对空文件返回 OK**，语法检查给了假绿。
+      **从此的规矩（全项目适用）**：① 补丁脚本一律「写 `.tmp` → `os.replace()`」原子写；② 脚本里**不放 emoji**（要写就写中文词）；③ 批量改动前先快照；④ 完整性检查**不能只看语法**，要同时看字节数/行数，0 字节报警；⑤ **长文档优先用 Write 工具直接写**，别用 Python 脚本拼字符串。
+    - **⭐ `broadcast/` 已建独立本地 git 仓库**（`grand-final/` 内，不进项目仓库、不上传；父仓库 `.gitignore:7` 已忽略整个 `broadcast/`，含这个 `.git`）。`.gitignore` 排除 `assets/`（GB 级）与 `_bak/`，跟踪 29 个文件。**以后每次改完 commit 一次**，这类事故就是一条 `git checkout` 的事。
+    - **侧栏由五段改四段**：**分档条整段取消**，10 个方块**并进 Top10 的数字格**；腾出的 1 张卡片给评委横幅（3 → 4 卡）。纵向仍是 13 卡 = 864。**面板加宽**：左侧两列的列距 `gx` 40 → **24**，面板 640 → **672**（外边距仍 40、行宽 560 是卡片几何不能动）；数字格 `--lcw` 从推导值 57.7 改**写死 60**。→ 出图规格随之变：**抬头 @2x 1344×120、评委横幅 @2x 1344×522**。
+    - **Jury 揭晓 = 两段式**（右段点亮 → 左段计分），飞入动画与「用掉变暗」两代旧实现已全部删除：右段 **1 分 → 8 分依次点亮** Top10（`REV={gap:200,stag:330}`），10/12 各自一步手动；左段等右段走完 + `JR.hold` 才动左侧计分栏。**第一位评委另有一套首次出场动画**（十个数字方块按 1→12 逐格淡入，`AUTO_FIRST=3500` 才开始 1→8），靠 `wasPts` 闸门只播一次。评委登场后 `AUTO_LOW=2000` **自动接** 8→1（省一次按键，HUD 出 `AUTO` 徽标）。
+    - **音量体系**：`BGMVOL 40%`（垫乐）· `SFXVOL 80%`（音效）· **`BGMDUCK 20%`**（12 分音效播放期间压低垫乐，140ms 进 / 700ms 抬回）· 内容视频 100%。**ducking 只改 `bgmTarget()` 一个出口**（五条路径全调它）；恢复靠 `ended` + 定时器双保险。
+    - **⚠ 本轮踩到的通用坑（值得全站记住）**：
+      ① **`var` 提升**：函数里多处共用的时间量必须写在**函数开头** —— 曾把 `var lag` 留在后面的 if 里 → 提升但值 `undefined` → 延迟算成 **NaN** → `animation-delay:NaNms` 无效（**错峰失效、十格一起出**）+ `setTimeout(NaN)` 当 0（**停顿完全消失**）。**症状识别：这两件事同时出现，基本就是某个延迟算成了 NaN。**
+      ② **「某一刻才解码」= 那一帧掉帧**：`sting()` 原来每次 `setAttribute('src',…)`，重设 src 会让浏览器**当场重新加载 + 解码** → 正好压在 12 分揭晓的动画上、画面抽一下（10 分不放音效 → 只有 12 分能看出来）。改成**每个音效一个常驻 `<audio>` + 开场预热**。同理首屏大图要 `Image.decode()` 预解码。
+      ③ **`transition:background` 在两条 `linear-gradient` 之间插值 = 每帧重绘、不走合成层** → 8 档连点会掉帧。改「**叠一层 + 只动 opacity**」（`.jl::before`）。`box-shadow` 呼吸同理搬到 `::after` 动 opacity。
+      ④ **CSS Grid `1fr` 的自动最小值是 min-content** → nowrap 长文本会撑开轨道、把后面的列挤出容器（「超界」）。要用 **`minmax(0,1fr)`**；在 item 上写 `min-width:0` **不能**代替轨道的 minmax。
+      ⑤ **带 `fill-mode:both` 的一次性动画类播完不摘 = 元素永久留在合成层里** → 此后任何内部改动（换文本 / 增删类 / `replay()` 的强制 flush）都要整层重栅格化 → **步进时闪一下**。修法：`replay(el,cls,delay,clearAfter)` **播完即摘**（末态等于自然状态时都可以摘）。这与 #195 的「文字发虚」是同一个成因的两种表现。
+      ⑥ **每步重复写同样的 DOM 也会闪**：渲染函数每步都跑，对没变化的行也「清空 textContent → 重写 → 摘/加类」。一律加「值没变就不动」的短路。
+      ⑦ 用 MutationObserver 统计「每一步到底改了哪些 DOM」是定位这类闪烁最快的手段（本轮实测：`sort` 步从 ~60 次写入降到 **0**）。
+    - **待办**：**① 精修 Jury Vote 左半边（计分栏）② 之后做 Tele Vote（cue 15/16/19，面板仍是旧结构）**。
+
+198. **⭐ 2026-08-21：公开站赔率更新 + 决赛播控页 Jury 报分板定稿（播控页纯本地 gitignore、无赛果）**
+    - **公开站（已 push `ddddb03`）**：`data/barvision/odds/odds.json` 全盘口刷新。严格按 #190 工作流 —— 用户发 JSON，我 ①算走势（基准 = 当前线上版，`odds_prev.json` 不动）②套约定（gf 置首且显示名 `Barvision 2026`、非 gf 盘口序 `To qualify` 置首、`top 3/10 chance` 带空格、单行免责声明无 `disclaimer_en`）③预览端独立复算高亮零 mismatch 后发布，**不跑引擎**。本次 **77 处走势变化**。
+      ⚠ **GF 庄家 8 → 7（少了 KESTREL），而 SF1/SF2/Wildcard 仍含 KESTREL** —— 与 #193「用户所发数据不全」同形态。**发布前先问了用户**，用户确认按这份发。**以后遇到「某个赛事的庄家数突然少一家、别的赛事却还在」，一律先问再发。**
+    - **决赛播控页**（`barvision/2026/broadcast/grand-final/`，细节见 memory `project-grand-final-live` 与目录内 `README.md`）：
+      · **步骤结构变了**：排序**并进揭晓步**，每位评委 **5 步 → 4 步**（登场 / 1→8 / 10 / 12），cue 9 步数 **101 → 81**。
+      · 排序改**三拍「重力堆」编排**（抽出 / 下坠含跨堆 / 从下往上插入），12 分那一行改版，新增**评委口播**（两位大妈自录整段报分），三条背景底从乒乓换成**钟摆**。
+    - **⭐ 两类可复用的通用坑（值得项目级记住）**：
+      ① **元素闪烁**的两个根因 —— **带 `fill:both` 的一次性动画类播完不摘 = 元素永久留在合成层里**；以及**每步往已提层的元素里做无谓 DOM 写入**（`textContent` 的 setter **即使值相同也会换掉文本节点**）。定位手段 = `MutationObserver` 数每步写入 + 扫「还挂着 fill:both 的一次性动画」的元素。实测一步写入 98 → 39。
+      ② **画面「突然抖一下」= 合成层重配** —— 场景里第二路 `<video>` 首次需要被合成时，Chrome 会重新配置合成（背景视频常从硬件 overlay 掉回普通纹理）。修法：给相关 `<video>` 上 **`will-change:transform`**；⚠ **老写法 `translateZ(0)` 会被现代 Chrome 压平成 2D 单位矩阵、不再保证建层**（实测 computed 就是 `matrix(1,0,0,1,0,0)`）。
+    - **⚠ 补丁脚本红线再次确认**（#197 那两次清空文件的同款）：本次给 HUD 徽标想用 `🎙`（非 BMP）→ Python 里变成孤立代理码位、脚本抛 `UnicodeEncodeError`。**因为坚持了「先写 `.tmp` 再 `os.replace`」，异常发生时文件没被写、零损失**。规矩不变：原子写、脚本里不放 emoji、改前 commit、完整性看字节数、长文档用 Write 工具。
+    - **下一步 = Tele Vote（cue 15 / 16 / 19）**：侧栏仍是旧兜底结构。已敲定「观众分大数字从 0 涨到目标值、与左侧同一套 `tickTo` 同一时长」，**左段时序与侧栏分区未定**，开工前要问。
+
+199. **⭐ 2026-08-21 晚：决赛播控页 —— 掉帧/闪烁三连修 + 背景底重做 + 口播补齐（播控页纯本地 gitignore、未入库、无赛果）**：本轮全在**播控页**（`barvision/2026/broadcast/grand-final/`），公开站零改动。**细节以目录内 `README.md`（约 76KB，权威）与 memory `project-grand-final-live` 为准**，此处只留跨会话有价值的通用结论：
+    - **⭐⭐⭐ 三条动画/性能红线（做任何「揭晓/入场」动效前先过一遍）**：
+      ① **同时被绘制的「视频路数」越少越好**。为「避开 overlay 路径切换」而把闲置视频层**保活**（`opacity:.01` 而非 0）是**反向优化** —— 真机二分（做成 `Shift+P` 可切的 P0–P4 四个开关，让用户在真机上两分钟定位）证明它把「偶发一帧抖」变成了**稳定 1s 抽搐**；`#bg video{opacity:.999}`（钉死非 overlay 路径）与给呼吸外发光伪元素加 `will-change:opacity` **均无收益**，都已删。**凡是预览里摸不准的合成/帧率问题 → 先做成可切开关交真机二分，别硬推。**
+      ② **带文字的元素别用 `opacity` 淡入**：会把它提成合成层、动画结束再拆掉，一进一出**换一次文字抗锯齿方式**（层内灰度 AA ↔ 层外 LCD AA）→ 读起来是「字重跳一下 / 闪一下」；而提不提层由浏览器**临场**判断 → **随机出现**。修法：改用**颜色补间** `@keyframes X{from{background-color:transparent;color:transparent}}`，**故意不写 `to`** → CSS 自动补到元素**自己的**颜色（十几种配色变体全自动适配、零素材维护）。颜色补间是 paint-only：不提层、不换 AA、无合成 churn。（用户曾提「把方块做成图片」也能除掉 AA 那一半，但图片若仍用 opacity 淡入则合成 churn 依旧，且颜色会从 CSS 令牌跑进图里。）
+      ③ **想用 `animation-delay` 控「何时出现」，动画必须在那一刻才被创建**。声明在伪元素上的动画**元素一建好就在跑**；等待机站过它的时长后动画已播完（`fill:both` 停在末值）/ 循环动画已在跑，此时父元素 `opacity:0→1`，它就**立刻整个出现** —— `--var` 改延迟只能「重定时」、救不了已跑完的动画。正解：用 `:not(.已揭晓)` 之类把动画**掐到那一刻才生成**（类名/选择器切换会新建动画，只改 CSS 变量不会）。
+    - **强制回流批处理（layout thrash）**：`replay()`/`snapTo()` 各含一次 `void offsetWidth` = 同步强制全文档 recalc+layout；三拍排序逐行调 → 一步 **~30 次**且「写→读→写→读」交替。改成 `replayBatch` / `snapMany`（**一次** `offsetWidth` 读取即 flush 整个文档 → 摘类对所有元素都已生效）+ `getComputedStyle` 只读一次缓存 → **≤8 次**、先读后写。通则：同一帧要给多个元素重放动画/瞬移，先读完再批量写，别在 `forEach` 里逐个 `replay`/`snapTo`/`getComputedStyle`。
+    - **循环底素材的三种做法与判据（可复用到任何「不循环的 AE 导出」）**：先把素材降采样成 128×72 灰度、穷举两帧距离，**用数据选路**——① 若存在「间隔够大且距离≈相邻帧差」的一对 → **硬切**；② 若尾段与头前段足够像 → **交叉淡化**（`out = in[a,b) ++ dissolve(in[b,b+f), in[a-f,a))`，溶解必须放**末尾**，方向极易搞反；工具 `tools/bake_loop_xfade.py` 会自动搜最佳循环点）；③ 都不行 → **恒速往返**（`tools/bake_pingpong.py`：正放 + 倒放、**两端各去一帧**防连续重复帧、**不慢放不补帧不重采样**）。本届三条背景底属 ③（间隔≥200 帧的最相似一对仍是相邻帧差的 **41–45 倍**）；此前的「钟摆」版为柔化转向在 apex 降速到 0.35× + 光流补帧，用户实测正是那段慢放**读成掉帧**、且最坏连续停帧 2 帧 → 换成恒速往返后**零冻结帧、最大帧差仅中位 1.7 倍**（钟摆 2.5 倍）。小尺寸装饰循环则用 `tools/bake_seamless_loop.py` 烘成无缝 → 每段只需一个 `<video loop>`；**更进一步：60×60 那种小方块的底可以直接用 animated WebP `<img>`**（299KB / 99 帧，GIF 兜底）→ **彻底退出视频路数统计**，代价只是主线程解码一小块。
+    - **验证手段（预览端 `document.hidden` 恒 true、动画/rAF 全冻结时）**：① **Web Animations API 手动 seek**（`el.getAnimations()` → `a.currentTime = t`）可读**真实时间线**上的 computed 值 —— 这次就是靠它证明 glow 的延迟没生效；② MutationObserver 数每步 DOM 写入；③ 掉帧/合成类问题**测不出来**，只能真机二分。
+    - **ffmpeg 客观判据（别靠眼睛猜素材）**：逐帧灰度帧差 `-vf "scale=480:270,format=gray,tblend=all_mode=difference,signalstats,metadata=print:key=lavfi.signalstats.YAVG:file=…"`（⚠ 必须写 `file=`，`-v error` 会把 metadata 打印吞掉），拿「接缝/最大值 vs 相邻帧中位」判是否看得出；`ffprobe` **读不了 animated WebP**（报 image data not found）**不代表文件坏**，直接读 RIFF chunk 数 `ANMF` 更可靠。
+    - 其他（细节见 README）：排序**层序四档**（12 分行 > **正在移动的行** > 得分但静止 > 其余）+「得分但名次没变**不抽出**」；口播补到**五位**（`JURY_VOX` 加一行即可，预热/关自动接/HUD 倒计时/垫乐压低全自动）、**口播期间垫乐 25%**（`DUCK_LV` 按来源分开、多路取更低）；计数器序号 rise 三轮定稿（**位移要看得见就不能与淡入同起同收；淡入不想像闪就不短于 ~150ms**）；`BG_FIT` 按**文件名**给背景底 `{scale,dy}` 盖 AE 黑边（只对主背景，`#bgBlur` 那一路自己有 `scale(4.32)` 别套）；**保命档 `Shift+P`**（P0 正常 ↔ P1 装饰底全关，记 `localStorage`、刷新不退回、HUD 橙色徽标）。
+    - **下一步 = Tele Vote（cue 15/16/19）**：侧栏仍是旧兜底 `.jp--tele`；左侧计分栏已通用。已敲定「观众分大数字从 0 涨到目标值（与左侧同一套 `tickTo`、同一时长）」，**左段时序与侧栏分区未定，开工前必须问**。
+
+200. **⭐ 2026-08-21（第二段）：决赛播控页 —— Tele Vote 报分板建成 + 全场响度归一 + 代码/素材审计（播控页纯本地 gitignore、未入库、无赛果内容）**：本轮全在**播控页**（`barvision/2026/broadcast/grand-final/`），公开站零改动。**细节以该目录 `交接-下一节.md`（新增，接手第一份读它）与 `README.md`（约 90KB，权威）为准**，memory `project-grand-final-live` 已同步；此处只留跨会话索引与通用结论：
+    - **Tele Vote 侧栏按「4 列 × 9 行」建成**（cue 16/19）：分数上涨区（左上 2×4）+ 本曲评委分 + 计数器 + 26 张观众分实时排行卡；主题色 `#315AFF`、高光仍纯青。每首两步的时序、涨分时长按揭晓序动态给。**cue 15 改成整行卡片页**（`card-cue-15`，版式同 cue 8），卡片目录改成按 cue 取。
+    - **⭐⭐ 通用结论一（动效）：想让一个「带文字」的元素在状态切换时不闪，最彻底的办法是让它在切换时 CSS 侧一动不动** —— 本项目最终用「点亮态覆盖图 + `transition:none`，只动覆盖层 opacity」解决数字方块闪烁：文字全程不重绘，兄弟元素提层引起的重栅格化再也换不到它的抗锯齿。次优解是「颜色补间」（paint-only）。**opacity 淡入 + 文字 = 随机闪**，这条已反复验证。
+    - **⭐⭐ 通用结论二（顺序）：状态切换要放在一段同步任务的最后** —— 过渡在切类那一刻创建，之后任何同步强制回流（`offsetWidth`/`scrollWidth` 读取）都会打断它。「先读后写」+ `replayBatch` 合并回流，是本项目治闪烁的通用手法。
+    - **⭐ 通用结论三（响度）：素材响度差要烘进文件、别指望运行时**（`HTMLMediaElement.volume` 上限 1.0，调不上去）。算法 = **固定增益 + 限幅器 + 迭代收敛**；⚠ 别用 loudnorm 的 `linear=true`（峰值贴顶而平均很轻的素材上它会自己退回动态模式、补不满）。目标 **−12 LUFS**（用户定「响度大的不用削」）：口播极差 11.05→0.92 dB、内容视频 8.7→2.2 dB。音乐侧要给「最多削 3 dB 峰」的保护，否则会听出抽气/泵动。
+    - **⭐ 审计手段（值得复用）**：`node --check` **查不出「改名漏改」**（用到但未声明）—— 本轮靠自写的 `tools/lint_consts.py` 抓到一处 ReferenceError（致整段卡片预载中断）；另有 `tools/audit_assets.py` 做素材引用双向对照 + 磁盘占用。**大改之后跑一遍。**
+    - **⚠ 新增预览端陷阱**：`Image.decode()` 在 `document.hidden` 的标签页里**永久挂起**（既不 resolve 也不 reject）→ 所有等整套图 decode 的卡片页在预览里都会退回兜底版式。判据：网络请求全 200 但目标元素为 0。真机无此问题。另：**Live Server 监听整个根目录**，改任何文件（含 .md/.py）都会刷新页面、冲掉测试上下文。
+    - **⚠ 工具链坑**：`python -c "…"` 与 heredoc 里的**反斜杠/反引号都不可靠**（本轮被吞过正则的 `\\]`、字符串里的 `\n`，以及反引号被当命令替换执行）。**含正则/反斜杠/反引号的脚本一律用 Write 工具写文件。**
+    - **下一步（用户已指定）**：① **Tele Vote 内部精修**（手感/版式，等用户指名，别替他猜）；② **「N 分镜」= 欧视式「决战分屏」全屏接管画面**（用户 8/21 末给了三张参考图并确认）：快要揭晓冠军时，把镜头对准**当前最高分** + **还没报观众分、但极可能夺冠的 1–3 名候选**；元素 = 竖版画面框 ×2–3、旗标+名字药丸、中间**分数对比柱**、`CURRENT LEADER`、**`NEEDS N POINTS TO WIN`**；揭晓时分数跳新值**转金** + `RECEIVED N POINTS FROM THE AUDIENCE VOTE`。**数据全现成**（`st.order[0]` / `st.tot` / `TELE_ORDER.slice(st.tdone)`；needs = leader−cand+1），但**竖版框里放什么画面（我们没机位，只有 360×240 横版头像三套）/ 触发形态 / 候选人数**三件要先问。
+    - ⚠⚠ **播出前红线不变**：任何进 git 的文件（CLAUDE.md / CHANGELOG / commit message / 公开数据）都不得出现赛果、冠军、最终排名、下届主办城市。
+
+201. **⭐⭐ 第十六届（Barvision Chongqing 2026）赛果导入 —— 1–16 届全部齐备（2026-08-22 决赛播完后，已上线）**：把 SF1 / SF2 / 海选突围赛 / 外卡突围赛 / GF 五场逐票导入公开站，`/barvision/2026/` 从「本届实时更新页」转为与 13–15 届同构的正式届次详情页。**冠军＝柠妈选送、Olivia Marsh《Too Good to be Bad》291 分**（评委 117 + 观众 174）；亚军松妈《Boyfriend》287、季军雨妈《Clams Casino》276；**Barvision 2027 由柠妈承办、移师苏州**。
+    - **唯一数据源** `C:\Users\William Liu\Downloads\Barvision Chongqing 2026 Results.xlsx`（用户提供的最终版，13 sheet）。解析脚本 `scripts/parse_bv_edition16.py`（幂等可重跑）。**与官方 `Scoreboard` sheet 逐项交叉校验：39 行 × GF/SF 的 Total·Jury·Tele·Vote 全部一致；`overall_rank` 39/39 与官方完全一致**（无需为本届给 `derive_overall` 开例外——全局 Eurovision 级联算法自然复现官方序）。
+    - **⭐⭐ 投票模型：全员双投（评委票 + 观众票）**——每位成员在同一场次同时投「评委票」和「观众票」，不是 2019–2023 的「选送者＝评委 / 其余＝观众」两拨人；故 `votes.voters[]` 里**同一个人有两条记录**（`type:'jury'` 一条、`type:'tele'` 一条）。⚠ **这不是本届才有的**：实测 **ed14 GF 已有 22 人重叠、ed15 三场几乎全重叠**（#163 把 ed15 描述成两拨人是不准确的），ed16 只是三场全员整齐。凡是要按「投票人数」统计的地方，**一律按 `voter` 名去重**，别数 `voters.length`。三场都 `tele_mode:'votes'`（评委 Top 10 的 1-12 制 + 观众 20 票自由分配、每首≤10 票）。观众分 = 票数 × (本场评委总分 ÷ 本场总票数)，系数 SF1 2.9 / SF2 ≈2.7389 / GF 2.9 ——**即评委分池 ≡ 观众分池，天然 50/50**。渲染端本就对 `tele_mode==='votes'` 拆 Jury / Tele 两张计分板，故这套「同一人两条记录」零改动即可工作。
+    - **⚠ 两条踩过的数据坑（新届照抄这两条判断）**：
+      · **`tele_vote` / `score` 一律取源表已发布的整数，不要自己按系数重算** —— 源表的四舍五入有 6 处（SF2 三处 x.50~x.51 向下、GF 一处 x.5 向下）不是任何统一规则能复现的浮点/人工痕迹，自己算会让 6 首歌的总分与官方公布值差 1 分。逐票和只用来校验 `Jury` 列。
+      · **选送者本场一票未投 → 该曲总分按 50% 计**（田妈 SF1《The Wild》75→37.5、杰妈 SF2《Feel The Rush》144→72；这两人也因此未参加外卡突围赛，故该轮实际 14 首而非规则书写的 16 首）。沿用历史折算写法：`jury_vote`/`tele_vote` 存**折算前**原始分、`score` 存折算后，`match.note` 用 `{m:昵称}` token 说明。检出方法＝该曲选送者不在本场任何投票人列。
+    - **⭐ 新增两个 match 场次码 `WC`（海选突围赛 Wildcard Round，12 选 3）/ `SC`（外卡突围赛 Second Chance，14 选 1）**，采用**认可票**（每人至多 3 票、每首至多 1 票；未投票者其作品扣 1 分 → SC 有 `Total / Penalty / Pts` 三列）。数据层用 **match 级标记 `"format": "approval"`** 统一分流：
+      · `recompute_bv_ranks.py` **跳过重算**（保留官方名次，含并列——Eurovision 级联对 1 分制没有意义，只会按 eid 强行拆开并列）；parser 里 entries 按 `(rank, ro)` 排好展示序。
+      · `bv-results-render.js`：`matchEng` / `ANNUAL_TOC` 补 WC/SC；结果概览**只显 PTS + PLACE**（有扣分的 SC 另加一列 `VOTES` = 原始认可票数），用「晋级」紫色高亮而非金银铜；计分板小计列改称 `Votes`、分组表头改称 `Approval Vote`，无扣分时该列整列隐藏；**跳过 12 Points 板块**。
+      · **`gen_bv_stats.py`：认可票场次一律不进 HOF（用户明确「突围赛也建成 match，但不计入 HOF」）** —— `build_entries` 给每条带上 `format`，`main()` 里派生 `hof_entries = [e for e in entries if e['format'] != 'approval']` 传给 `build_records` / `build_champ_share` / `build_awards`；`build_overview` 的 `mlist` 同样过滤（故 ed16 的 参赛成员 40 / 曲目数 **39** / 场次数 3，与 13–15 届同口径，**39 正好等于官方总成绩单的 39 行**）。**扁平 `entries` 仍全量输出** → Stats 大数据查询照样能搜到 12 首 wildcard 曲（场次显示「海选突围赛」）。若不这么挡：「最高单场得票占比」会被 25.71%（羊妈 WC，18/70 张认可票）顶掉真正的 12.23%（城妈 ed12），冠军得票率表被两行认可票冠军压在最前，赛季纪录「单届最多参赛曲目」变 50。**#169 的 28 场模型不受影响**（年度制单届仍折叠为 1 场 → 现 29 场）。
+      · `gen_member_pages.py` 的年度制聚合本来就只读 GF + SF1/SF2 → WC/SC **不进成员页吧视记录**（羊妈 ed16 仍是 Country Road #5 + That's Life #24 两条）。
+    - **JSON 结构转正式届**（去 `live` / `submit_url` / `signups` / `info_sections` / `feed` / `confirmed` / `grand_final` / `second_chance`；留 `auditions`）：`info_sections` 的「投票方式」3 节 +「详细规则」7 节 +「赛程安排」3 节 → 合并为 `rules.sections`（13 节，顺序＝投票人资格 → 三种票制 → 各阶段 → 平局/合报/承办权 → 赛程）；新写 `summary`（**两段**叙事 intro，#141 约定——曾写过第三段讲投票制度，用户嫌长删了；该信息在 `vote_rule.note` 与赛制「评委票/观众票」两节里都有）、`visual_design`（用户提供，两江交汇 / 液态霓虹 / 赛段配色系统；文中成员写「威妈」由 `linkMentions` 自动转 @handle，引号按 #141 用中文双引号）、`vote_rule`、`source`。
+    - **薄壳** `barvision/2026/index.html` 由「events 风格静态 hero + 倒计时 + live 分支」**换成 13–15 届同款 20 行薄壳**（否则摘掉 `live` 后渲染器自建 hero 会与静态 hero 并存出两个）。
+    - **⭐ `bv-results-render.js` 的「总投票人数」改为去重人数（顺带修好 ed14 / ed15 的老 bug）**：`scoreboardBlock` 原本直接数 `votes.voters.length`，在全员双投下会翻倍 —— ed16 显示 80/72/70（实为 40/36/36）、**ed15 GF 显示 62（实为 31）、ed14 GF 显示 49（实为 27）**。改为按 `voter` 名去重后三届都对。ed13 及更早两拨人不重叠，去重前后一致。
+    - **⭐ `gen_member_pages.py` 两处随赛果切换**：① `load_bv2026_ids()` 加「`matches` 非空则返回空集」—— 该函数是**赛果公布前**的手工参赛名单（点亮 member.html 实心 logo + 第 16 届徽章），赛后必须让位给 entries 派生，否则有赛果的成员会被叠上第二枚第 16 届徽章；② `bv_index[].active` 由手工 `in26` 改为 `LATEST_ED in eds`（＝参加了最新一届，`LATEST_ED` 从已加载的各届 JSON 取 max）——**这条以后每届自动生效，不用再维护名单**。⚠ 注意 `overview.active_in` 是**届号**不是年份，别拿它跟 `BV_ACTIVE_SINCE_YEAR`（年份）比。
+    - **站点状态同步（赛后一次性）**：首页 season-card（状态「第十六届已完赛」+ 倒计时框换成金色**冠军框** + GF 两行阶段改「已结束」+ 按钮改 完整赛果/参赛歌单/赔率预测 + **删掉倒计时 JS**）、`barvision/index.html`（XVI 当届卡 徽章「进行中」→ 金色「已完赛」并补冠军行、hero meta「第十六届正在进行中」→「最新一届 Chongqing 2026」、hero 首按钮指向 `/barvision/2026/`、`BUILT_EDITIONS` 补 `/barvision/2026/`）、`barvision/2026/events/`（**删「投票通道」整节** + TOC 去「投票」+ hero 描述/标题/description 改存档口径，歌单与回顾视频保留）、`ticker.json` / `updates.json`（冠军条目）、`partials/footer.html`（与 `nav.js` 同步为 `/barvision/2026/`）。**赔率页 `/barvision/2026/odds/` 按用户决定原样存档**（其文案本就中性，无「投票进行中」字样）。
+    - **⚠ 已知与官方公布值的唯一出入：SF2 的「得票率」（用户已确认「用你的」，不改）**。官方 Scoreboard 的 SF2 `Rate` 列用的分母对应 33 位评委 / 35 位观众（1914 / 700），而 SF2 的逐票表实为 34 / 36（1972 / 720）——`Total` 列两处一致、只有 `Rate`/`Avg` 的分母没跟着最后一次补票重算（对比更早的工作簿可见 SF2 评委分整体 +4）。我们按逐票表计算（雨妈 11.74% vs 官方 12.08%），**SF1 / GF 与官方逐位吻合**，且由于是同一场内的等比缩放，跨半决赛的淘汰曲排序（overall 27–39）不受影响、与官方完全一致。
+    - **口径与文案备注**：本届无混淆单曲、无匿名选送；合报 S妈/鸽妈、狼妈/芬妈（下游按 `/` 拆分计入两人）；外部投票人无（40 位 GF 评委全是在册成员，其中米/瑞/风/圈/L 五位只投票未参赛，已补进 `members` 但不获第 16 届徽章）。**50% 折算与「未投票扣 1 分」两条罚则未见于站上记录的规则书**（只在 Rulebook PDF 里，本地无 PDF 解析库未能提取），note 措辞是按数据事实写的，用户可校正。
+    - **管线（顺序不能换）**：`parse_bv_edition16.py` → `recompute_bv_ranks.py --write` → `number_anon.py --write` → `gen_member_pages.py` → `gen_bv_editions_index.py` → `gen_bv_stats.py`。⚠ `recompute --write` 会重排版**所有**届 JSON（幂等、纯格式 churn），跑完必须 `git checkout` 还原非本届的那些（本次 reg-13 的手工压缩 `links` 格式被展开、reg-15 被 CRLF 化）。
 
 ## 对话交接工作流
 
