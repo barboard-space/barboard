@@ -1376,13 +1376,23 @@
       if (m.match === 'GF') gf = m; else if (m.match === 'SF1' || m.match === 'SF2') sf[m.match] = m;
     });
     if (!gf || !sf.SF1 || !sf.SF2) return '';
-    var semiOf = {};  // 选送者 → {code, e}（其半决赛场次 + 该场名次/数据）
+    // ⚠ 按「选送者+歌手+歌名」作键，不能只按选送者——同一人可能有多首决赛曲
+    // （ed16 羊妈 Country Road 走半决赛、That's Life 走外卡突围赛），只按人会把半决赛数据串到另一首上
+    function songKey(e) { return e.member + '|' + e.artist + '|' + e.song; }
+    var semiOf = {};  // 歌曲 → {code, e}（其半决赛场次 + 该场名次/数据）
     ['SF1', 'SF2'].forEach(function (code) {
-      sf[code].entries.forEach(function (e) { semiOf[e.member] = { code: code, e: e }; });
+      sf[code].entries.forEach(function (e) { semiOf[songKey(e)] = { code: code, e: e }; });
+    });
+    // 经突围赛（认可票）晋级决赛的歌曲 → 半决赛列标「外卡」而非「直通」
+    var wildIn = {};
+    (d.matches || []).forEach(function (m) {
+      if (m.format !== 'approval') return;
+      (m.entries || []).forEach(function (e) { if (e.qualified) wildIn[songKey(e)] = true; });
     });
     var rows = [];
     gf.entries.forEach(function (e) {
-      rows.push({ ov: e.overall_rank, member: e.member, song: e.song, artist: e.artist, gf: e, sf: semiOf[e.member] });
+      rows.push({ ov: e.overall_rank, member: e.member, song: e.song, artist: e.artist, gf: e,
+                  sf: semiOf[songKey(e)], wild: !!wildIn[songKey(e)] });
     });
     ['SF1', 'SF2'].forEach(function (code) {
       sf[code].entries.forEach(function (e) {
@@ -1448,7 +1458,7 @@
       if (r.sf) sfb = '<span class="bvr-sb-badge bvr-sb-badge--' + r.sf.code.toLowerCase() + '">' +
         '<span class="bvr-sb-badge__n">' + r.sf.e.rank + '</span>' +
         '<span class="bvr-sb-badge__t">' + r.sf.code + '</span></span>';
-      else sfb = '<span class="bvr-sb-direct">直通</span>';  // 东道主/协办直通决赛、无半决赛
+      else sfb = '<span class="bvr-sb-direct">' + (r.wild ? '外卡' : '直通') + '</span>';  // 外卡突围赛晋级 / 东道主直通
       return '<tr class="bvr-sb-row' + medal + '">' +
         '<td class="bvr-sb-rank">' + r.ov + '</td>' +
         '<td class="bvr-sb-by">' + memberLink(r.member, { nick: true }) + '</td>' +

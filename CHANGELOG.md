@@ -30,6 +30,10 @@
 - `barvision/2026/events/`：**删除「投票通道」整节**（各阶段投票均已关闭），改为歌单 + 回顾视频的存档页；TOC、hero 描述、`<title>`、`description` 同步
 - `partials/footer.html` 的 Barvision 2026 链接与 `nav.js` 同步为 `/barvision/2026/`
 
+### Fixed
+- **总成绩单 `semiOf` 键错导致同人多曲串台**：键由「选送者」改为「选送者+歌手+歌名」—— 羊妈 That's Life 原先把 Country Road 的整段半决赛数据（3·SF2 / 341 / 8.65%）抄了过去
+- **总成绩单半决赛列区分「直通」与「外卡」**：经突围赛（认可票 `qualified`）晋级决赛的曲目标「外卡」（羊妈 That's Life），东道主才是「直通」（威妈 OK City Sun），与官方总成绩单一致
+
 ### Data
 - 与官方 `Scoreboard` 交叉校验：39 行 × GF/SF 的 Total·Jury·Tele·Vote **全部一致**；`overall_rank` **39/39 与官方完全一致**（全局 Eurovision 级联算法自然复现，无需为本届开例外）
 - **投票模型：全员双投** —— 每位成员在同一场次同时投评委票（Top 10，1-12 制）与观众票（20 票自由分配、每首≤10 票）；三场均 `tele_mode:'votes'`，观众分池 ≡ 评委分池（天然 50/50）。实测该模型 **ed14 决赛起就已出现、ed15 三场几乎全员重叠**，并非本届首创
