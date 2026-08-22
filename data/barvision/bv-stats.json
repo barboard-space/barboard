@@ -1,5 +1,5 @@
 {
- "data_through": 15,
+ "data_through": 16,
  "pioneer": {
   "nickname": "萌妈",
   "member_id": 125,
@@ -618,13 +618,23 @@
    "cn_name": "第十六届",
    "city": "Chongqing",
    "host": "威妈",
-   "format": "grouped",
-   "members": 0,
-   "songs": 0,
-   "matches": 0,
-   "champ_rows": [],
+   "format": "annual",
+   "members": 40,
+   "songs": 39,
+   "matches": 3,
+   "champ_rows": [
+    {
+     "ids": [
+      "19"
+     ],
+     "nickname": "柠妈",
+     "artist": "Olivia Marsh",
+     "song": "Too Good to be Bad",
+     "label": ""
+    }
+   ],
    "song_rows": [],
-   "in_progress": true
+   "in_progress": false
   }
  ],
  "members": {
@@ -634,19 +644,19 @@
    "handle": "Voiiz",
    "overview": {
     "best": 1,
-    "avg": 10.56,
+    "avg": 10.71,
     "top1": 3,
     "top1_shadow": 0,
     "top3": 4,
     "top3_shadow": 0,
     "top10": 15,
     "top10_shadow": 1,
-    "entries": 27,
+    "entries": 28,
     "shadow": 3,
-    "twelve": 26,
-    "jury_avg": 2.86,
+    "twelve": 27,
+    "jury_avg": 2.83,
     "debut": 1,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -656,20 +666,20 @@
    "handle": "没有XX不科学",
    "overview": {
     "best": 2,
-    "avg": 10.5,
+    "avg": 12.46,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 2,
     "top3_shadow": 0,
     "top10": 6,
     "top10_shadow": 0,
-    "entries": 12,
+    "entries": 13,
     "shadow": 1,
     "twelve": 12,
-    "jury_avg": 3.02,
+    "jury_avg": 2.86,
     "debut": 1,
-    "active_in": 8,
-    "active": false
+    "active_in": 16,
+    "active": true
    }
   },
   "20": {
@@ -678,19 +688,19 @@
    "handle": "Jeremy_BAg",
    "overview": {
     "best": 1,
-    "avg": 9.15,
+    "avg": 9.54,
     "top1": 3,
     "top1_shadow": 0,
     "top3": 7,
     "top3_shadow": 0,
     "top10": 17,
     "top10_shadow": 2,
-    "entries": 27,
+    "entries": 28,
     "shadow": 4,
     "twelve": 38,
-    "jury_avg": 3.32,
+    "jury_avg": 3.27,
     "debut": 1,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -700,19 +710,19 @@
    "handle": "DDDDDope",
    "overview": {
     "best": 1,
-    "avg": 12.15,
+    "avg": 13.5,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 2,
     "top3_shadow": 0,
     "top10": 5,
     "top10_shadow": 0,
-    "entries": 13,
+    "entries": 14,
     "shadow": 1,
     "twelve": 12,
-    "jury_avg": 2.74,
+    "jury_avg": 2.61,
     "debut": 1,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -744,20 +754,20 @@
    "handle": "LemonSheeran",
    "overview": {
     "best": 1,
-    "avg": 8.5,
-    "top1": 1,
+    "avg": 8.17,
+    "top1": 2,
     "top1_shadow": 0,
-    "top3": 3,
+    "top3": 4,
     "top3_shadow": 0,
-    "top10": 14,
+    "top10": 15,
     "top10_shadow": 0,
-    "entries": 22,
+    "entries": 23,
     "shadow": 0,
-    "twelve": 25,
-    "jury_avg": 3.19,
+    "twelve": 28,
+    "jury_avg": 3.18,
     "debut": 1,
-    "active_in": 13,
-    "active": false
+    "active_in": 16,
+    "active": true
    }
   },
   "125": {
@@ -766,19 +776,19 @@
    "handle": "绿荫夏语",
    "overview": {
     "best": 1,
-    "avg": 9.91,
+    "avg": 10.96,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 8,
     "top3_shadow": 0,
     "top10": 13,
     "top10_shadow": 0,
-    "entries": 22,
+    "entries": 23,
     "shadow": 0,
     "twelve": 30,
-    "jury_avg": 3.19,
+    "jury_avg": 3.09,
     "debut": 1,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -788,19 +798,19 @@
    "handle": "Lee翼雨",
    "overview": {
     "best": 1,
-    "avg": 6.0,
+    "avg": 5.9,
     "top1": 3,
     "top1_shadow": 1,
-    "top3": 11,
+    "top3": 12,
     "top3_shadow": 1,
-    "top10": 23,
+    "top10": 24,
     "top10_shadow": 2,
-    "entries": 28,
+    "entries": 29,
     "shadow": 5,
-    "twelve": 50,
-    "jury_avg": 3.81,
+    "twelve": 52,
+    "jury_avg": 3.8,
     "debut": 1,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -810,19 +820,19 @@
    "handle": "WillKris锴",
    "overview": {
     "best": 1,
-    "avg": 10.39,
+    "avg": 10.9,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 2,
     "top3_shadow": 0,
     "top10": 14,
     "top10_shadow": 1,
-    "entries": 28,
+    "entries": 29,
     "shadow": 2,
     "twelve": 26,
-    "jury_avg": 2.9,
+    "jury_avg": 2.86,
     "debut": 1,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -832,19 +842,19 @@
    "handle": "MarekTotti",
    "overview": {
     "best": 1,
-    "avg": 9.41,
+    "avg": 9.82,
     "top1": 2,
     "top1_shadow": 0,
     "top3": 6,
     "top3_shadow": 0,
     "top10": 16,
     "top10_shadow": 0,
-    "entries": 27,
+    "entries": 28,
     "shadow": 2,
     "twelve": 24,
-    "jury_avg": 3.24,
+    "jury_avg": 3.19,
     "debut": 1,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -920,20 +930,20 @@
    "handle": "FREEMAN",
    "overview": {
     "best": 1,
-    "avg": 10.12,
+    "avg": 11.28,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 5,
     "top3_shadow": 1,
     "top10": 12,
     "top10_shadow": 1,
-    "entries": 24,
+    "entries": 25,
     "shadow": 1,
     "twelve": 27,
-    "jury_avg": 2.91,
+    "jury_avg": 2.82,
     "debut": 1,
-    "active_in": 12,
-    "active": false
+    "active_in": 16,
+    "active": true
    }
   },
   "176": {
@@ -986,20 +996,20 @@
    "handle": "Tandiny",
    "overview": {
     "best": 1,
-    "avg": 9.47,
+    "avg": 10.0,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 4,
     "top3_shadow": 0,
     "top10": 12,
     "top10_shadow": 0,
-    "entries": 17,
+    "entries": 18,
     "shadow": 0,
-    "twelve": 31,
-    "jury_avg": 3.37,
+    "twelve": 33,
+    "jury_avg": 3.25,
     "debut": 2,
-    "active_in": 13,
-    "active": false
+    "active_in": 16,
+    "active": true
    }
   },
   "770": {
@@ -1074,19 +1084,19 @@
    "handle": "jh201013",
    "overview": {
     "best": 1,
-    "avg": 12.74,
+    "avg": 13.75,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 2,
     "top3_shadow": 0,
     "top10": 10,
     "top10_shadow": 0,
-    "entries": 23,
+    "entries": 24,
     "shadow": 1,
     "twelve": 21,
-    "jury_avg": 2.42,
+    "jury_avg": 2.37,
     "debut": 3,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1140,19 +1150,19 @@
    "handle": "泰坦crazy",
    "overview": {
     "best": 3,
-    "avg": 12.27,
+    "avg": 12.94,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 1,
     "top3_shadow": 0,
     "top10": 6,
     "top10_shadow": 0,
-    "entries": 15,
+    "entries": 16,
     "shadow": 0,
     "twelve": 12,
-    "jury_avg": 2.44,
+    "jury_avg": 2.39,
     "debut": 3,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1228,19 +1238,19 @@
    "handle": "奶儿少爷",
    "overview": {
     "best": 4,
-    "avg": 14.08,
+    "avg": 15.07,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 5,
     "top10_shadow": 0,
-    "entries": 13,
+    "entries": 14,
     "shadow": 0,
     "twelve": 11,
-    "jury_avg": 2.21,
+    "jury_avg": 2.15,
     "debut": 6,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1250,19 +1260,19 @@
    "handle": "williw_",
    "overview": {
     "best": 1,
-    "avg": 10.4,
+    "avg": 10.0,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 2,
     "top3_shadow": 0,
-    "top10": 2,
+    "top10": 3,
     "top10_shadow": 0,
-    "entries": 5,
+    "entries": 6,
     "shadow": 0,
-    "twelve": 12,
-    "jury_avg": 2.88,
+    "twelve": 14,
+    "jury_avg": 2.9,
     "debut": 7,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1316,19 +1326,19 @@
    "handle": "不动团子",
    "overview": {
     "best": 6,
-    "avg": 11.92,
+    "avg": 12.69,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 4,
     "top10_shadow": 0,
-    "entries": 12,
+    "entries": 13,
     "shadow": 2,
     "twelve": 5,
-    "jury_avg": 2.55,
+    "jury_avg": 2.46,
     "debut": 7,
-    "active_in": 14,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1426,19 +1436,19 @@
    "handle": "AloneAlien_",
    "overview": {
     "best": 1,
-    "avg": 11.25,
+    "avg": 9.8,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 2,
     "top3_shadow": 0,
-    "top10": 2,
+    "top10": 3,
     "top10_shadow": 0,
-    "entries": 4,
+    "entries": 5,
     "shadow": 0,
-    "twelve": 4,
-    "jury_avg": 2.74,
+    "twelve": 7,
+    "jury_avg": 2.76,
     "debut": 11,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1492,19 +1502,19 @@
    "handle": "SeafishYANG",
    "overview": {
     "best": 1,
-    "avg": 8.67,
+    "avg": 7.75,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 1,
     "top3_shadow": 0,
-    "top10": 2,
+    "top10": 3,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 4,
-    "jury_avg": 4.21,
+    "twelve": 8,
+    "jury_avg": 3.89,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1536,19 +1546,19 @@
    "handle": "Stephen",
    "overview": {
     "best": 4,
-    "avg": 4.67,
+    "avg": 6.5,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 3,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 5,
-    "jury_avg": 3.54,
+    "twelve": 7,
+    "jury_avg": 3.22,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1558,19 +1568,19 @@
    "handle": "哈哈哈时光机",
    "overview": {
     "best": 1,
-    "avg": 2.67,
+    "avg": 3.5,
     "top1": 1,
     "top1_shadow": 0,
     "top3": 2,
     "top3_shadow": 0,
-    "top10": 3,
+    "top10": 4,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 9,
-    "jury_avg": 4.38,
+    "twelve": 11,
+    "jury_avg": 3.91,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1587,12 +1597,12 @@
     "top3_shadow": 0,
     "top10": 1,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 0,
-    "jury_avg": 2.31,
+    "twelve": 1,
+    "jury_avg": 2.18,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1602,19 +1612,19 @@
    "handle": "SouthkoreaBall",
    "overview": {
     "best": 7,
-    "avg": 12.0,
+    "avg": 11.75,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 1,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 1,
-    "jury_avg": 2.61,
+    "twelve": 3,
+    "jury_avg": 2.5,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1624,19 +1634,19 @@
    "handle": "Hg",
    "overview": {
     "best": 8,
-    "avg": 10.67,
+    "avg": 10.5,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
-    "top10": 2,
+    "top10": 3,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 2,
-    "jury_avg": 2.72,
+    "twelve": 6,
+    "jury_avg": 2.58,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1646,19 +1656,19 @@
    "handle": "Aaowu_",
    "overview": {
     "best": 4,
-    "avg": 8.0,
+    "avg": 9.0,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 2,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 6,
-    "jury_avg": 3.73,
+    "twelve": 8,
+    "jury_avg": 3.37,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1690,19 +1700,19 @@
    "handle": "SummertimeDawns",
    "overview": {
     "best": 5,
-    "avg": 16.0,
+    "avg": 18.5,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 1,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
     "twelve": 2,
-    "jury_avg": 2.46,
+    "jury_avg": 2.16,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1711,20 +1721,20 @@
    "nickname": "松妈",
    "handle": "Squirrel松鼠",
    "overview": {
-    "best": 8,
-    "avg": 14.0,
+    "best": 2,
+    "avg": 11.0,
     "top1": 0,
     "top1_shadow": 0,
-    "top3": 0,
+    "top3": 1,
     "top3_shadow": 0,
-    "top10": 1,
+    "top10": 2,
     "top10_shadow": 0,
-    "entries": 3,
+    "entries": 4,
     "shadow": 0,
-    "twelve": 1,
-    "jury_avg": 2.84,
+    "twelve": 6,
+    "jury_avg": 3.06,
     "debut": 13,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1778,19 +1788,19 @@
    "handle": "微波子",
    "overview": {
     "best": 9,
-    "avg": 17.0,
+    "avg": 24.0,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 1,
     "top10_shadow": 0,
-    "entries": 2,
+    "entries": 3,
     "shadow": 0,
     "twelve": 2,
-    "jury_avg": 2.13,
+    "jury_avg": 1.6,
     "debut": 14,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1800,19 +1810,19 @@
    "handle": "iTAP_II",
    "overview": {
     "best": 12,
-    "avg": 13.0,
+    "avg": 18.33,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 0,
     "top10_shadow": 0,
-    "entries": 2,
+    "entries": 3,
     "shadow": 0,
     "twelve": 2,
-    "jury_avg": 2.99,
+    "jury_avg": 2.39,
     "debut": 14,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1865,20 +1875,20 @@
    "nickname": "P妈",
    "handle": "PROKING",
    "overview": {
-    "best": 25,
-    "avg": 25.0,
+    "best": 14,
+    "avg": 19.5,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 0,
     "top10_shadow": 0,
-    "entries": 1,
+    "entries": 2,
     "shadow": 0,
-    "twelve": 0,
-    "jury_avg": 1.82,
+    "twelve": 2,
+    "jury_avg": 1.87,
     "debut": 14,
-    "active_in": 14,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1888,19 +1898,19 @@
    "handle": "DuncanLee",
    "overview": {
     "best": 4,
-    "avg": 4.0,
+    "avg": 6.5,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
-    "top10": 1,
+    "top10": 2,
     "top10_shadow": 0,
-    "entries": 1,
+    "entries": 2,
     "shadow": 0,
-    "twelve": 3,
-    "jury_avg": 4.74,
+    "twelve": 5,
+    "jury_avg": 3.71,
     "debut": 15,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1910,19 +1920,19 @@
    "handle": "xjebs",
    "overview": {
     "best": 11,
-    "avg": 11.0,
+    "avg": 14.5,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
     "top3_shadow": 0,
     "top10": 0,
     "top10_shadow": 0,
-    "entries": 1,
+    "entries": 2,
     "shadow": 0,
     "twelve": 1,
-    "jury_avg": 2.68,
+    "jury_avg": 2.11,
     "debut": 15,
-    "active_in": 15,
+    "active_in": 16,
     "active": true
    }
   },
@@ -1930,6 +1940,72 @@
    "id": 160,
    "nickname": "鸽妈",
    "handle": "EUGONDINE_",
+   "overview": {
+    "best": 6,
+    "avg": 9.5,
+    "top1": 0,
+    "top1_shadow": 0,
+    "top3": 0,
+    "top3_shadow": 0,
+    "top10": 1,
+    "top10_shadow": 0,
+    "entries": 2,
+    "shadow": 0,
+    "twelve": 2,
+    "jury_avg": 2.2,
+    "debut": 15,
+    "active_in": 16,
+    "active": true
+   }
+  },
+  "126": {
+   "id": 126,
+   "nickname": "吃妈",
+   "handle": "能吃的莉莉丝",
+   "overview": {
+    "best": 14,
+    "avg": 22.0,
+    "top1": 0,
+    "top1_shadow": 0,
+    "top3": 0,
+    "top3_shadow": 0,
+    "top10": 0,
+    "top10_shadow": 0,
+    "entries": 2,
+    "shadow": 0,
+    "twelve": 0,
+    "jury_avg": 1.73,
+    "debut": 15,
+    "active_in": 16,
+    "active": true
+   }
+  },
+  "33": {
+   "id": 33,
+   "nickname": "笃妈",
+   "handle": "吃辣喝香",
+   "overview": {
+    "best": 7,
+    "avg": 7.0,
+    "top1": 0,
+    "top1_shadow": 0,
+    "top3": 0,
+    "top3_shadow": 0,
+    "top10": 1,
+    "top10_shadow": 0,
+    "entries": 1,
+    "shadow": 0,
+    "twelve": 2,
+    "jury_avg": 2.58,
+    "debut": 16,
+    "active_in": 16,
+    "active": true
+   }
+  },
+  "11": {
+   "id": 11,
+   "nickname": "K妈",
+   "handle": "SoyMarvin",
    "overview": {
     "best": 13,
     "avg": 13.0,
@@ -1941,20 +2017,20 @@
     "top10_shadow": 0,
     "entries": 1,
     "shadow": 0,
-    "twelve": 0,
-    "jury_avg": 1.9,
-    "debut": 15,
-    "active_in": 15,
+    "twelve": 1,
+    "jury_avg": 2.83,
+    "debut": 16,
+    "active_in": 16,
     "active": true
    }
   },
-  "126": {
-   "id": 126,
-   "nickname": "吃妈",
-   "handle": "能吃的莉莉丝",
+  "119": {
+   "id": 119,
+   "nickname": "海妈",
+   "handle": "Ocean",
    "overview": {
-    "best": 14,
-    "avg": 14.0,
+    "best": 16,
+    "avg": 16.0,
     "top1": 0,
     "top1_shadow": 0,
     "top3": 0,
@@ -1964,9 +2040,97 @@
     "entries": 1,
     "shadow": 0,
     "twelve": 0,
-    "jury_avg": 2.39,
-    "debut": 15,
-    "active_in": 15,
+    "jury_avg": 1.75,
+    "debut": 16,
+    "active_in": 16,
+    "active": true
+   }
+  },
+  "13": {
+   "id": 13,
+   "nickname": "叉妈",
+   "handle": "PRONGS",
+   "overview": {
+    "best": 27,
+    "avg": 27.0,
+    "top1": 0,
+    "top1_shadow": 0,
+    "top3": 0,
+    "top3_shadow": 0,
+    "top10": 0,
+    "top10_shadow": 0,
+    "entries": 1,
+    "shadow": 0,
+    "twelve": 0,
+    "jury_avg": 1.5,
+    "debut": 16,
+    "active_in": 16,
+    "active": true
+   }
+  },
+  "77": {
+   "id": 77,
+   "nickname": "白妈",
+   "handle": "白哼唧",
+   "overview": {
+    "best": 32,
+    "avg": 32.0,
+    "top1": 0,
+    "top1_shadow": 0,
+    "top3": 0,
+    "top3_shadow": 0,
+    "top10": 0,
+    "top10_shadow": 0,
+    "entries": 1,
+    "shadow": 0,
+    "twelve": 0,
+    "jury_avg": 1.01,
+    "debut": 16,
+    "active_in": 16,
+    "active": true
+   }
+  },
+  "51": {
+   "id": 51,
+   "nickname": "柴妈",
+   "handle": "是柴柴呀",
+   "overview": {
+    "best": 33,
+    "avg": 33.0,
+    "top1": 0,
+    "top1_shadow": 0,
+    "top3": 0,
+    "top3_shadow": 0,
+    "top10": 0,
+    "top10_shadow": 0,
+    "entries": 1,
+    "shadow": 0,
+    "twelve": 0,
+    "jury_avg": 0.87,
+    "debut": 16,
+    "active_in": 16,
+    "active": true
+   }
+  },
+  "196": {
+   "id": 196,
+   "nickname": "野妈",
+   "handle": "Tye",
+   "overview": {
+    "best": 35,
+    "avg": 35.0,
+    "top1": 0,
+    "top1_shadow": 0,
+    "top3": 0,
+    "top3_shadow": 0,
+    "top10": 0,
+    "top10_shadow": 0,
+    "entries": 1,
+    "shadow": 0,
+    "twelve": 0,
+    "jury_avg": 0.81,
+    "debut": 16,
+    "active_in": 16,
     "active": true
    }
   },
@@ -2000,6 +2164,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -2026,6 +2191,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -2052,6 +2218,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -2078,6 +2245,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -2104,6 +2272,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "肥妈",
    "ids": [
     "174"
@@ -2130,6 +2299,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -2156,6 +2326,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -2182,6 +2353,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -2208,6 +2380,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -2234,6 +2407,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -2260,6 +2434,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -2286,6 +2461,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -2312,6 +2488,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -2338,6 +2515,7 @@
    "edition_name": "The 1st Barvision",
    "match": "",
    "venue": "",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -2364,6 +2542,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -2390,6 +2569,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -2416,6 +2596,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -2442,6 +2623,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -2468,6 +2650,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -2494,6 +2677,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -2520,6 +2704,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -2546,6 +2731,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -2572,6 +2758,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -2598,6 +2785,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "肥妈",
    "ids": [
     "174"
@@ -2624,6 +2812,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -2650,6 +2839,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -2676,6 +2866,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -2702,6 +2893,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -2728,6 +2920,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -2754,6 +2947,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "SF",
    "venue": "半决赛",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -2780,6 +2974,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -2806,6 +3001,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -2832,6 +3028,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -2858,6 +3055,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -2884,6 +3082,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -2910,6 +3109,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -2936,6 +3136,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -2962,6 +3163,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -2988,6 +3190,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "肥妈",
    "ids": [
     "174"
@@ -3014,6 +3217,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -3040,6 +3244,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -3066,6 +3271,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -3092,6 +3298,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -3118,6 +3325,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -3144,6 +3352,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -3170,6 +3379,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -3196,6 +3406,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -3222,6 +3433,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -3248,6 +3460,7 @@
    "edition_name": "The 2nd Barvision",
    "match": "GF",
    "venue": "决赛",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -3274,6 +3487,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -3300,6 +3514,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -3326,6 +3541,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -3352,6 +3568,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -3378,6 +3595,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -3404,6 +3622,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -3430,6 +3649,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -3456,6 +3676,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -3482,6 +3703,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -3508,6 +3730,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -3534,6 +3757,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -3560,6 +3784,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -3586,6 +3811,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -3612,6 +3838,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -3638,6 +3865,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -3664,6 +3892,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -3690,6 +3919,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -3716,6 +3946,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -3742,6 +3973,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "N妈",
    "ids": [
     "133"
@@ -3768,6 +4000,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -3794,6 +4027,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -3820,6 +4054,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -3846,6 +4081,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -3872,6 +4108,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -3898,6 +4135,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -3924,6 +4162,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -3950,6 +4189,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "匿名",
    "ids": [
     "0"
@@ -3976,6 +4216,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -4002,6 +4243,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -4028,6 +4270,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -4054,6 +4297,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -4080,6 +4324,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -4106,6 +4351,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -4132,6 +4378,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -4158,6 +4405,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -4184,6 +4432,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -4210,6 +4459,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -4236,6 +4486,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -4262,6 +4513,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -4288,6 +4540,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -4314,6 +4567,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -4340,6 +4594,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -4366,6 +4621,7 @@
    "edition_name": "The 3rd Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -4392,6 +4648,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -4418,6 +4675,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -4444,6 +4702,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -4470,6 +4729,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -4496,6 +4756,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -4522,6 +4783,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -4548,6 +4810,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -4574,6 +4837,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -4600,6 +4864,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -4626,6 +4891,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -4652,6 +4918,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -4678,6 +4945,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -4704,6 +4972,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -4730,6 +4999,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -4756,6 +5026,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -4782,6 +5053,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -4808,6 +5080,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -4834,6 +5107,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -4860,6 +5134,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -4886,6 +5161,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -4912,6 +5188,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -4938,6 +5215,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -4964,6 +5242,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -4990,6 +5269,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -5016,6 +5296,7 @@
    "edition_name": "The 4th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "N妈",
    "ids": [
     "133"
@@ -5042,6 +5323,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -5068,6 +5350,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -5094,6 +5377,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -5120,6 +5404,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -5146,6 +5431,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "麦妈/苏妈",
    "ids": [
     "130",
@@ -5173,6 +5459,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -5199,6 +5486,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -5225,6 +5513,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -5251,6 +5540,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -5277,6 +5567,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -5303,6 +5594,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -5329,6 +5621,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -5355,6 +5648,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -5381,6 +5675,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -5407,6 +5702,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -5433,6 +5729,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -5459,6 +5756,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -5485,6 +5783,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -5511,6 +5810,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -5537,6 +5837,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -5563,6 +5864,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -5589,6 +5891,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -5615,6 +5918,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -5641,6 +5945,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -5667,6 +5972,7 @@
    "edition_name": "The 4th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -5693,6 +5999,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -5719,6 +6026,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -5745,6 +6053,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -5771,6 +6080,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -5797,6 +6107,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -5823,6 +6134,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -5849,6 +6161,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -5875,6 +6188,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -5901,6 +6215,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -5927,6 +6242,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -5953,6 +6269,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -5979,6 +6296,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -6005,6 +6323,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -6031,6 +6350,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -6057,6 +6377,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -6083,6 +6404,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -6109,6 +6431,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -6135,6 +6458,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -6161,6 +6485,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -6187,6 +6512,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -6213,6 +6539,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -6239,6 +6566,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -6265,6 +6593,7 @@
    "edition_name": "The 5th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -6291,6 +6620,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -6317,6 +6647,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -6343,6 +6674,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -6369,6 +6701,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -6395,6 +6728,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -6421,6 +6755,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -6447,6 +6782,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -6473,6 +6809,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -6499,6 +6836,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -6525,6 +6863,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -6551,6 +6890,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -6577,6 +6917,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -6603,6 +6944,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -6629,6 +6971,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -6655,6 +6998,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -6681,6 +7025,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -6707,6 +7052,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -6733,6 +7079,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -6759,6 +7106,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -6785,6 +7133,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -6811,6 +7160,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -6837,6 +7187,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -6863,6 +7214,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -6889,6 +7241,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -6915,6 +7268,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -6941,6 +7295,7 @@
    "edition_name": "The 5th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -6967,6 +7322,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -6993,6 +7349,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -7019,6 +7376,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -7045,6 +7403,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -7071,6 +7430,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -7097,6 +7457,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -7123,6 +7484,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -7149,6 +7511,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -7175,6 +7538,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -7201,6 +7565,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -7227,6 +7592,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -7253,6 +7619,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -7279,6 +7646,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -7305,6 +7673,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -7331,6 +7700,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -7357,6 +7727,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -7383,6 +7754,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -7409,6 +7781,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -7435,6 +7808,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -7461,6 +7835,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -7487,6 +7862,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -7513,6 +7889,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -7539,6 +7916,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -7565,6 +7943,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -7591,6 +7970,7 @@
    "edition_name": "The 5th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -7617,6 +7997,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -7643,6 +8024,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -7669,6 +8051,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -7695,6 +8078,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -7721,6 +8105,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -7747,6 +8132,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -7773,6 +8159,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -7799,6 +8186,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -7825,6 +8213,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -7851,6 +8240,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -7877,6 +8267,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -7903,6 +8294,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -7929,6 +8321,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -7955,6 +8348,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -7981,6 +8375,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -8007,6 +8402,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -8033,6 +8429,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -8059,6 +8456,7 @@
    "edition_name": "The 6th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -8085,6 +8483,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -8111,6 +8510,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -8137,6 +8537,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -8163,6 +8564,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -8189,6 +8591,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -8215,6 +8618,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -8241,6 +8645,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -8267,6 +8672,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -8293,6 +8699,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -8319,6 +8726,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -8345,6 +8753,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -8371,6 +8780,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -8397,6 +8807,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -8423,6 +8834,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -8449,6 +8861,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -8475,6 +8888,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -8501,6 +8915,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -8527,6 +8942,7 @@
    "edition_name": "The 6th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -8553,6 +8969,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -8579,6 +8996,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -8605,6 +9023,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -8631,6 +9050,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -8657,6 +9077,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -8683,6 +9104,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -8709,6 +9131,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -8735,6 +9158,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -8761,6 +9185,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -8787,6 +9212,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -8813,6 +9239,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -8839,6 +9266,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -8865,6 +9293,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -8891,6 +9320,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -8917,6 +9347,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -8943,6 +9374,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -8969,6 +9401,7 @@
    "edition_name": "The 6th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -8995,6 +9428,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -9021,6 +9455,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -9047,6 +9482,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -9073,6 +9509,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -9099,6 +9536,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "蛋妈",
    "ids": [
     "185"
@@ -9125,6 +9563,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -9151,6 +9590,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -9177,6 +9617,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -9203,6 +9644,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -9229,6 +9671,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -9255,6 +9698,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -9281,6 +9725,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -9307,6 +9752,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -9333,6 +9779,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -9359,6 +9806,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -9385,6 +9833,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -9411,6 +9860,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -9437,6 +9887,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -9463,6 +9914,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -9489,6 +9941,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -9515,6 +9968,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -9541,6 +9995,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -9567,6 +10022,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -9593,6 +10049,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -9619,6 +10076,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -9645,6 +10103,7 @@
    "edition_name": "The 7th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -9671,6 +10130,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -9697,6 +10157,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -9723,6 +10184,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -9749,6 +10211,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -9775,6 +10238,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -9801,6 +10265,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -9827,6 +10292,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -9853,6 +10319,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -9879,6 +10346,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -9905,6 +10373,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -9931,6 +10400,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -9957,6 +10427,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -9983,6 +10454,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -10009,6 +10481,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -10035,6 +10508,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -10061,6 +10535,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -10087,6 +10562,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -10113,6 +10589,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -10139,6 +10616,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -10165,6 +10643,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "蛋妈",
    "ids": [
     "185"
@@ -10191,6 +10670,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -10217,6 +10697,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -10243,6 +10724,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -10269,6 +10751,7 @@
    "edition_name": "The 7th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -10295,6 +10778,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -10321,6 +10805,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "雨妈/布妈",
    "ids": [
     "17",
@@ -10348,6 +10833,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -10374,6 +10860,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -10400,6 +10887,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -10426,6 +10914,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -10452,6 +10941,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -10478,6 +10968,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "蛋妈",
    "ids": [
     "185"
@@ -10504,6 +10995,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -10530,6 +11022,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -10556,6 +11049,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -10582,6 +11076,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -10608,6 +11103,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "草妈",
    "ids": [
     "141"
@@ -10634,6 +11130,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -10660,6 +11157,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -10686,6 +11184,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -10712,6 +11211,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -10738,6 +11238,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -10764,6 +11265,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -10790,6 +11292,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -10816,6 +11319,7 @@
    "edition_name": "The 7th Barvision",
    "match": "C",
    "venue": "大众组",
+   "format": "",
    "member": "音妈",
    "ids": [
     "770"
@@ -10842,6 +11346,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -10868,6 +11373,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -10894,6 +11400,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -10920,6 +11427,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -10946,6 +11454,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -10972,6 +11481,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -10998,6 +11508,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -11024,6 +11535,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -11050,6 +11562,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -11076,6 +11589,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "匿名#1",
    "ids": [
     "0"
@@ -11102,6 +11616,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "匿名#1",
    "ids": [
     "0"
@@ -11128,6 +11643,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -11154,6 +11670,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "清妈",
    "ids": [
     "172"
@@ -11180,6 +11697,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -11206,6 +11724,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -11232,6 +11751,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -11258,6 +11778,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -11284,6 +11805,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -11310,6 +11832,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -11336,6 +11859,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -11362,6 +11886,7 @@
    "edition_name": "The 8th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -11388,6 +11913,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -11414,6 +11940,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -11440,6 +11967,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "匿名#2",
    "ids": [
     "0"
@@ -11466,6 +11994,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "清妈",
    "ids": [
     "172"
@@ -11492,6 +12021,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈/兔妈",
    "ids": [
     "17",
@@ -11519,6 +12049,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -11545,6 +12076,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -11571,6 +12103,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -11597,6 +12130,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -11623,6 +12157,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -11649,6 +12184,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -11675,6 +12211,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "X妈",
    "ids": [
     "195"
@@ -11701,6 +12238,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -11727,6 +12265,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -11753,6 +12292,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -11779,6 +12319,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -11805,6 +12346,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -11831,6 +12373,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -11857,6 +12400,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -11883,6 +12427,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -11909,6 +12454,7 @@
    "edition_name": "The 8th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈/泰妈",
    "ids": [
     "20",
@@ -11936,6 +12482,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -11962,6 +12509,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "匿名#3",
    "ids": [
     "0"
@@ -11988,6 +12536,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -12014,6 +12563,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "奶妈/雨妈",
    "ids": [
     "102",
@@ -12041,6 +12591,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -12067,6 +12618,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -12093,6 +12645,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -12119,6 +12672,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -12145,6 +12699,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -12171,6 +12726,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -12197,6 +12753,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -12223,6 +12780,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -12249,6 +12807,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -12275,6 +12834,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -12301,6 +12861,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -12327,6 +12888,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -12353,6 +12915,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -12379,6 +12942,7 @@
    "edition_name": "The 9th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "季妈",
    "ids": [
     "170"
@@ -12405,6 +12969,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -12431,6 +12996,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -12457,6 +13023,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -12483,6 +13050,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -12509,6 +13077,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "匿名#4",
    "ids": [
     "0"
@@ -12535,6 +13104,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -12561,6 +13131,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -12587,6 +13158,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -12613,6 +13185,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -12639,6 +13212,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -12665,6 +13239,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -12691,6 +13266,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -12717,6 +13293,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -12743,6 +13320,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -12769,6 +13347,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -12795,6 +13374,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -12821,6 +13401,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -12847,6 +13428,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -12873,6 +13455,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "季妈",
    "ids": [
     "170"
@@ -12899,6 +13482,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -12925,6 +13509,7 @@
    "edition_name": "The 9th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -12951,6 +13536,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -12977,6 +13563,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -13003,6 +13590,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -13029,6 +13617,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈/包妈",
    "ids": [
     "17",
@@ -13056,6 +13645,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈/包妈",
    "ids": [
     "17",
@@ -13083,6 +13673,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -13109,6 +13700,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -13135,6 +13727,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -13161,6 +13754,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "季妈",
    "ids": [
     "170"
@@ -13187,6 +13781,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -13213,6 +13808,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -13239,6 +13835,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -13265,6 +13862,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -13291,6 +13889,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -13317,6 +13916,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -13343,6 +13943,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -13369,6 +13970,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -13395,6 +13997,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -13421,6 +14024,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -13447,6 +14051,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -13473,6 +14078,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -13499,6 +14105,7 @@
    "edition_name": "The 10th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -13525,6 +14132,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "匿名#5",
    "ids": [
     "0"
@@ -13551,6 +14159,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -13577,6 +14186,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -13603,6 +14213,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -13629,6 +14240,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -13655,6 +14267,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -13681,6 +14294,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -13707,6 +14321,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -13733,6 +14348,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -13759,6 +14375,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -13785,6 +14402,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -13811,6 +14429,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -13837,6 +14456,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -13863,6 +14483,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -13889,6 +14510,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "季妈",
    "ids": [
     "170"
@@ -13915,6 +14537,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -13941,6 +14564,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -13967,6 +14591,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -13993,6 +14618,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -14019,6 +14645,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -14045,6 +14672,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -14071,6 +14699,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -14097,6 +14726,7 @@
    "edition_name": "The 10th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -14123,6 +14753,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "匿名#7",
    "ids": [
     "0"
@@ -14149,6 +14780,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -14175,6 +14807,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -14201,6 +14834,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -14227,6 +14861,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "季妈",
    "ids": [
     "170"
@@ -14253,6 +14888,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -14279,6 +14915,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -14305,6 +14942,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -14331,6 +14969,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "薯妈",
    "ids": [
     "191"
@@ -14357,6 +14996,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -14383,6 +15023,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "Z妈",
    "ids": [
     "138"
@@ -14409,6 +15050,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -14435,6 +15077,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "匿名#8",
    "ids": [
     "0"
@@ -14461,6 +15104,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -14487,6 +15131,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "布妈",
    "ids": [
     "157"
@@ -14513,6 +15158,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -14539,6 +15185,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -14565,6 +15212,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "兔妈",
    "ids": [
     "118"
@@ -14591,6 +15239,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雨妈/雀妈",
    "ids": [
     "17",
@@ -14618,6 +15267,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -14644,6 +15294,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -14670,6 +15321,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -14696,6 +15348,7 @@
    "edition_name": "The 11th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "乐妈",
    "ids": [
     "176"
@@ -14722,6 +15375,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "A妈",
    "ids": [
     "132"
@@ -14748,6 +15402,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -14774,6 +15429,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -14800,6 +15456,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "匿名#9",
    "ids": [
     "0"
@@ -14826,6 +15483,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -14852,6 +15510,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "鹿妈",
    "ids": [
     "165"
@@ -14878,6 +15537,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -14904,6 +15564,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -14930,6 +15591,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -14956,6 +15618,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -14982,6 +15645,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "匿名#10",
    "ids": [
     "0"
@@ -15008,6 +15672,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -15034,6 +15699,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雀妈",
    "ids": [
     "189"
@@ -15060,6 +15726,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -15086,6 +15753,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -15112,6 +15780,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "雪妈",
    "ids": [
     "109"
@@ -15138,6 +15807,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "季妈",
    "ids": [
     "170"
@@ -15164,6 +15834,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -15190,6 +15861,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -15216,6 +15888,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "虎妈",
    "ids": [
     "111"
@@ -15242,6 +15915,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "Z妈",
    "ids": [
     "138"
@@ -15268,6 +15942,7 @@
    "edition_name": "The 11th Barvision",
    "match": "B",
    "venue": "中众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -15294,6 +15969,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -15320,6 +15996,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "季妈",
    "ids": [
     "170"
@@ -15346,6 +16023,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "萌妈/雨妈",
    "ids": [
     "125",
@@ -15373,6 +16051,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "匿名#11",
    "ids": [
     "0"
@@ -15399,6 +16078,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -15425,6 +16105,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "Z妈",
    "ids": [
     "138"
@@ -15451,6 +16132,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -15477,6 +16159,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "小妈",
    "ids": [
     "153"
@@ -15503,6 +16186,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "雪妈",
    "ids": [
     "109"
@@ -15529,6 +16213,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "匿名#12",
    "ids": [
     "0"
@@ -15555,6 +16240,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "田妈",
    "ids": [
     "295"
@@ -15581,6 +16267,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "洛妈",
    "ids": [
     "124"
@@ -15607,6 +16294,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -15633,6 +16321,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -15659,6 +16348,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "苏妈",
    "ids": [
     "127"
@@ -15685,6 +16375,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -15711,6 +16402,7 @@
    "edition_name": "The 12th Barvision",
    "match": "A",
    "venue": "小众组",
+   "format": "",
    "member": "A妈",
    "ids": [
     "132"
@@ -15737,6 +16429,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -15763,6 +16456,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "汞妈",
    "ids": [
     "103"
@@ -15789,6 +16483,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "韩妈",
    "ids": [
     "67"
@@ -15815,6 +16510,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "S妈",
    "ids": [
     "27"
@@ -15841,6 +16537,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -15867,6 +16564,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "狼妈",
    "ids": [
     "113"
@@ -15893,6 +16591,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -15919,6 +16618,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -15945,6 +16645,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -15971,6 +16672,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "N妈",
    "ids": [
     "133"
@@ -15997,6 +16699,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "霜妈",
    "ids": [
     "121"
@@ -16023,6 +16726,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "麦妈",
    "ids": [
     "130"
@@ -16049,6 +16753,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -16075,6 +16780,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "羊妈",
    "ids": [
     "100"
@@ -16101,6 +16807,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -16127,6 +16834,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "风妈",
    "ids": [
     "154"
@@ -16153,6 +16861,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "芬妈",
    "ids": [
     "110"
@@ -16179,6 +16888,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "星妈",
    "ids": [
     "45"
@@ -16205,6 +16915,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -16231,6 +16942,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -16257,6 +16969,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -16283,6 +16996,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -16309,6 +17023,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "文妈",
    "ids": [
     "116"
@@ -16335,6 +17050,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "松妈",
    "ids": [
     "105"
@@ -16361,6 +17077,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "E妈",
    "ids": [
     "659"
@@ -16387,6 +17104,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "鲤妈",
    "ids": [
     "181"
@@ -16413,6 +17131,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -16439,6 +17158,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "羊妈",
    "ids": [
     "100"
@@ -16465,6 +17185,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -16491,6 +17212,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "风妈",
    "ids": [
     "154"
@@ -16517,6 +17239,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "芬妈",
    "ids": [
     "110"
@@ -16543,6 +17266,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "S妈",
    "ids": [
     "27"
@@ -16569,6 +17293,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "星妈",
    "ids": [
     "45"
@@ -16595,6 +17320,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "韩妈",
    "ids": [
     "67"
@@ -16621,6 +17347,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "汞妈",
    "ids": [
     "103"
@@ -16647,6 +17374,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -16673,6 +17401,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -16699,6 +17428,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "柠妈",
    "ids": [
     "19"
@@ -16725,6 +17455,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "瑞妈",
    "ids": [
     "135"
@@ -16751,6 +17482,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -16777,6 +17509,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "狼妈",
    "ids": [
     "113"
@@ -16803,6 +17536,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "晕妈",
    "ids": [
     "117"
@@ -16829,6 +17563,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -16855,6 +17590,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -16881,6 +17617,7 @@
    "edition_name": "Barvision Qiqihar 2023",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -16907,6 +17644,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "S妈",
    "ids": [
     "27"
@@ -16933,6 +17671,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "松妈",
    "ids": [
     "105"
@@ -16959,6 +17698,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -16985,6 +17725,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "文妈",
    "ids": [
     "116"
@@ -17011,6 +17752,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -17037,6 +17779,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "A妈",
    "ids": [
     "132"
@@ -17063,6 +17806,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -17089,6 +17833,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -17115,6 +17860,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -17141,6 +17887,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "插妈",
    "ids": [
     "145"
@@ -17167,6 +17914,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "羊妈",
    "ids": [
     "100"
@@ -17193,6 +17941,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -17219,6 +17968,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -17245,6 +17995,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "星妈",
    "ids": [
     "45"
@@ -17271,6 +18022,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -17297,6 +18049,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "汞妈",
    "ids": [
     "103"
@@ -17323,6 +18076,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "狼妈/芬妈",
    "ids": [
     "113",
@@ -17350,6 +18104,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "T妈",
    "ids": [
     "115"
@@ -17376,6 +18131,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -17402,6 +18158,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -17428,6 +18185,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "波妈",
    "ids": [
     "101"
@@ -17454,6 +18212,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "韩妈",
    "ids": [
     "67"
@@ -17480,6 +18239,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "饼妈",
    "ids": [
     "144"
@@ -17506,6 +18266,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -17532,6 +18293,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "羊妈",
    "ids": [
     "100"
@@ -17558,6 +18320,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "P妈",
    "ids": [
     "104"
@@ -17584,6 +18347,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "霜妈",
    "ids": [
     "121"
@@ -17610,6 +18374,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -17636,6 +18401,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "S妈",
    "ids": [
     "27"
@@ -17662,6 +18428,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -17688,6 +18455,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "A妈",
    "ids": [
     "132"
@@ -17714,6 +18482,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "狼妈/芬妈",
    "ids": [
     "113",
@@ -17741,6 +18510,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "文妈",
    "ids": [
     "116"
@@ -17767,6 +18537,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -17793,6 +18564,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "院妈",
    "ids": [
     "326"
@@ -17819,6 +18591,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "汞妈",
    "ids": [
     "103"
@@ -17845,6 +18618,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "波妈",
    "ids": [
     "101"
@@ -17871,6 +18645,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -17897,6 +18672,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "韩妈",
    "ids": [
     "67"
@@ -17923,6 +18699,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "松妈",
    "ids": [
     "105"
@@ -17949,6 +18726,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "团妈",
    "ids": [
     "68"
@@ -17975,6 +18753,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "T妈",
    "ids": [
     "115"
@@ -18001,6 +18780,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "饼妈",
    "ids": [
     "144"
@@ -18027,6 +18807,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -18053,6 +18834,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -18079,6 +18861,7 @@
    "edition_name": "Barvision Tonghua 2024",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -18105,6 +18888,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -18131,6 +18915,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "羊妈",
    "ids": [
     "100"
@@ -18157,6 +18942,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "邓妈",
    "ids": [
     "31"
@@ -18183,6 +18969,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "松妈",
    "ids": [
     "105"
@@ -18209,6 +18996,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "汞妈",
    "ids": [
     "103"
@@ -18235,6 +19023,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "吃妈",
    "ids": [
     "126"
@@ -18261,6 +19050,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -18287,6 +19077,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -18313,6 +19104,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "星妈",
    "ids": [
     "45"
@@ -18339,6 +19131,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "猴妈",
    "ids": [
     "18"
@@ -18365,6 +19158,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "文妈",
    "ids": [
     "116"
@@ -18391,6 +19185,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF1",
    "venue": "半决赛一",
+   "format": "",
    "member": "嘟妈",
    "ids": [
     "190"
@@ -18417,6 +19212,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -18443,6 +19239,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "狼妈/芬妈",
    "ids": [
     "113",
@@ -18470,6 +19267,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "XX妈",
    "ids": [
     "88"
@@ -18496,6 +19294,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -18522,6 +19321,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "T妈",
    "ids": [
     "115"
@@ -18548,6 +19348,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -18574,6 +19375,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "鸽妈",
    "ids": [
     "160"
@@ -18600,6 +19402,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "韩妈",
    "ids": [
     "67"
@@ -18626,6 +19429,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "锴妈",
    "ids": [
     "12"
@@ -18652,6 +19456,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "城妈",
    "ids": [
     "120"
@@ -18678,6 +19483,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "A妈",
    "ids": [
     "132"
@@ -18704,6 +19510,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "SF2",
    "venue": "半决赛二",
+   "format": "",
    "member": "波妈",
    "ids": [
     "101"
@@ -18730,6 +19537,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "威妈",
    "ids": [
     "7"
@@ -18756,6 +19564,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "S妈",
    "ids": [
     "27"
@@ -18782,6 +19591,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "雨妈",
    "ids": [
     "17"
@@ -18808,6 +19618,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "邓妈",
    "ids": [
     "31"
@@ -18834,6 +19645,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "羊妈",
    "ids": [
     "100"
@@ -18860,6 +19672,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "狼妈/芬妈",
    "ids": [
     "113",
@@ -18887,6 +19700,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "奶妈",
    "ids": [
     "102"
@@ -18913,6 +19727,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "松妈",
    "ids": [
     "105"
@@ -18939,6 +19754,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "萌妈",
    "ids": [
     "125"
@@ -18965,6 +19781,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "杰妈",
    "ids": [
     "156"
@@ -18991,6 +19808,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "XX妈",
    "ids": [
     "88"
@@ -19017,6 +19835,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "T妈",
    "ids": [
     "115"
@@ -19043,6 +19862,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "鸽妈",
    "ids": [
     "160"
@@ -19069,6 +19889,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "吃妈",
    "ids": [
     "126"
@@ -19095,6 +19916,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "包妈",
    "ids": [
     "20"
@@ -19121,6 +19943,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "汞妈",
    "ids": [
     "103"
@@ -19147,6 +19970,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "泰妈",
    "ids": [
     "131"
@@ -19173,6 +19997,7 @@
    "edition_name": "Barvision Jinzhong 2025",
    "match": "GF",
    "venue": "总决赛",
+   "format": "",
    "member": "韩妈",
    "ids": [
     "67"
@@ -19192,6 +20017,2413 @@
    "joint": false,
    "annual": true,
    "juryN": 31
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "松妈",
+   "ids": [
+    "105"
+   ],
+   "artist": "We Three",
+   "song": "Boyfriend",
+   "language": "英语",
+   "genre": "Alternative Pop",
+   "rank": 1,
+   "overall": null,
+   "score": 413.0,
+   "jury": 195.0,
+   "tele": 218.0,
+   "support_rate": 9.89,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "邓妈",
+   "ids": [
+    "31"
+   ],
+   "artist": "Chris De Sarandy",
+   "song": "Body & Soul",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 2,
+   "overall": null,
+   "score": 367.0,
+   "jury": 164.0,
+   "tele": 203.0,
+   "support_rate": 8.79,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "A妈",
+   "ids": [
+    "132"
+   ],
+   "artist": "Kelsey Lu",
+   "song": "Running To Pain",
+   "language": "英语",
+   "genre": "Alternative Pop",
+   "rank": 3,
+   "overall": null,
+   "score": 362.0,
+   "jury": 165.0,
+   "tele": 197.0,
+   "support_rate": 8.67,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "猴妈",
+   "ids": [
+    "18"
+   ],
+   "artist": "Elle Coves",
+   "song": "I Got A Thing For Love",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 4,
+   "overall": null,
+   "score": 294.0,
+   "jury": 146.0,
+   "tele": 148.0,
+   "support_rate": 7.04,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "韩妈",
+   "ids": [
+    "67"
+   ],
+   "artist": "Agoney",
+   "song": "Intacto",
+   "language": "西班牙语",
+   "genre": "Latin Pop",
+   "rank": 5,
+   "overall": null,
+   "score": 257.0,
+   "jury": 135.0,
+   "tele": 122.0,
+   "support_rate": 6.15,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "锴妈",
+   "ids": [
+    "12"
+   ],
+   "artist": "Erik Segerstedt",
+   "song": "Show Me What Love Is",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 6,
+   "overall": null,
+   "score": 232.0,
+   "jury": 125.0,
+   "tele": 107.0,
+   "support_rate": 5.56,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "S妈/鸽妈",
+   "ids": [
+    "27",
+    "160"
+   ],
+   "artist": "HANRORO",
+   "song": "H O M E",
+   "language": "韩语",
+   "genre": "Pop Rock",
+   "rank": 7,
+   "overall": null,
+   "score": 231.0,
+   "jury": 115.0,
+   "tele": 116.0,
+   "support_rate": 5.53,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": true,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "包妈",
+   "ids": [
+    "20"
+   ],
+   "artist": "The Home Team",
+   "song": "Where Has My Friend Gone?",
+   "language": "英语",
+   "genre": "Rock",
+   "rank": 8,
+   "overall": null,
+   "score": 229.0,
+   "jury": 125.0,
+   "tele": 104.0,
+   "support_rate": 5.48,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "城妈",
+   "ids": [
+    "120"
+   ],
+   "artist": "Lorenzo Fragola",
+   "song": "1XTE1XME",
+   "language": "意大利语",
+   "genre": "Pop",
+   "rank": 9,
+   "overall": null,
+   "score": 226.0,
+   "jury": 113.0,
+   "tele": 113.0,
+   "support_rate": 5.41,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "麦妈",
+   "ids": [
+    "130"
+   ],
+   "artist": "Amulets",
+   "song": "Lifelike (feat. Midwife)",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 10,
+   "overall": null,
+   "score": 223.0,
+   "jury": 87.0,
+   "tele": 136.0,
+   "support_rate": 5.34,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "团妈",
+   "ids": [
+    "68"
+   ],
+   "artist": "Gelli Haha",
+   "song": "Bounce House",
+   "language": "英语",
+   "genre": "Alternative Rock",
+   "rank": 11,
+   "overall": null,
+   "score": 214.0,
+   "jury": 101.0,
+   "tele": 113.0,
+   "support_rate": 5.12,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "柠妈",
+   "ids": [
+    "19"
+   ],
+   "artist": "Olivia Marsh",
+   "song": "Too Good to be Bad",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 12,
+   "overall": null,
+   "score": 205.0,
+   "jury": 109.0,
+   "tele": 96.0,
+   "support_rate": 4.91,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "叉妈",
+   "ids": [
+    "13"
+   ],
+   "artist": "PONY",
+   "song": "Middle Of Summer",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 13,
+   "overall": 27,
+   "score": 198.0,
+   "jury": 108.0,
+   "tele": 90.0,
+   "support_rate": 4.74,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "奶妈",
+   "ids": [
+    "102"
+   ],
+   "artist": "AJ Vitanza",
+   "song": "ONLY MY HANDS",
+   "language": "英语",
+   "genre": "R&B",
+   "rank": 14,
+   "overall": 28,
+   "score": 196.0,
+   "jury": 97.0,
+   "tele": 99.0,
+   "support_rate": 4.69,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "吃妈",
+   "ids": [
+    "126"
+   ],
+   "artist": "MARK Harmony",
+   "song": "Stars Collide (feat. Carnie Reimers)",
+   "language": "英语 马绍尔语",
+   "genre": "Pop",
+   "rank": 15,
+   "overall": 30,
+   "score": 150.0,
+   "jury": 77.0,
+   "tele": 73.0,
+   "support_rate": 3.59,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "白妈",
+   "ids": [
+    "77"
+   ],
+   "artist": "Robin Packalen",
+   "song": "1001 tapaa",
+   "language": "芬兰语",
+   "genre": "Pop",
+   "rank": 16,
+   "overall": 32,
+   "score": 137.0,
+   "jury": 73.0,
+   "tele": 64.0,
+   "support_rate": 3.28,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "萌妈",
+   "ids": [
+    "125"
+   ],
+   "artist": "MICO",
+   "song": "Do it all again",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 17,
+   "overall": 34,
+   "score": 106.0,
+   "jury": 60.0,
+   "tele": 46.0,
+   "support_rate": 2.54,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "波妈",
+   "ids": [
+    "101"
+   ],
+   "artist": "RabbitJ",
+   "song": "Shimmer (feat. Kinoko)",
+   "language": "英语",
+   "genre": "Soundtrack",
+   "rank": 18,
+   "overall": 38,
+   "score": 61.0,
+   "jury": 38.0,
+   "tele": 23.0,
+   "support_rate": 1.46,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF1",
+   "venue": "半决赛一",
+   "format": "",
+   "member": "田妈",
+   "ids": [
+    "295"
+   ],
+   "artist": "Gabe Lee",
+   "song": "The Wild",
+   "language": "英语",
+   "genre": "Country",
+   "rank": 19,
+   "overall": 39,
+   "score": 37.5,
+   "jury": 55.0,
+   "tele": 20.0,
+   "support_rate": 0.9,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 36
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "雨妈",
+   "ids": [
+    "17"
+   ],
+   "artist": "Brian Dunne",
+   "song": "Clams Casino",
+   "language": "英语",
+   "genre": "Indie Rock",
+   "rank": 1,
+   "overall": null,
+   "score": 463.0,
+   "jury": 208.0,
+   "tele": 255.0,
+   "support_rate": 11.74,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "笃妈",
+   "ids": [
+    "33"
+   ],
+   "artist": "2AM-DM",
+   "song": "Hurricane",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 2,
+   "overall": null,
+   "score": 359.0,
+   "jury": 156.0,
+   "tele": 203.0,
+   "support_rate": 9.1,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "羊妈",
+   "ids": [
+    "100"
+   ],
+   "artist": "The Hellp",
+   "song": "Country Road",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 3,
+   "overall": null,
+   "score": 341.0,
+   "jury": 179.0,
+   "tele": 162.0,
+   "support_rate": 8.65,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "海妈",
+   "ids": [
+    "119"
+   ],
+   "artist": "Devon Again",
+   "song": "cherry cola",
+   "language": "英语",
+   "genre": "Indie Rock",
+   "rank": 4,
+   "overall": null,
+   "score": 315.0,
+   "jury": 132.0,
+   "tele": 183.0,
+   "support_rate": 7.99,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "泰妈",
+   "ids": [
+    "131"
+   ],
+   "artist": "Unroyal",
+   "song": "BANG",
+   "language": "英语",
+   "genre": "Rock",
+   "rank": 5,
+   "overall": null,
+   "score": 272.0,
+   "jury": 146.0,
+   "tele": 126.0,
+   "support_rate": 6.9,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "K妈",
+   "ids": [
+    "11"
+   ],
+   "artist": "Night Tapes",
+   "song": "storm",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 6,
+   "overall": null,
+   "score": 242.0,
+   "jury": 127.0,
+   "tele": 115.0,
+   "support_rate": 6.14,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "星妈",
+   "ids": [
+    "45"
+   ],
+   "artist": "The Belair Lip Bombs",
+   "song": "Hey You",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 7,
+   "overall": null,
+   "score": 239.0,
+   "jury": 119.0,
+   "tele": 120.0,
+   "support_rate": 6.06,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "狼妈/芬妈",
+   "ids": [
+    "113",
+    "110"
+   ],
+   "artist": "Betcha & J.Dutt",
+   "song": "Nicht mit mir",
+   "language": "德语",
+   "genre": "Hip-Hop",
+   "rank": 8,
+   "overall": null,
+   "score": 233.0,
+   "jury": 104.0,
+   "tele": 129.0,
+   "support_rate": 5.91,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": true,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "XX妈",
+   "ids": [
+    "88"
+   ],
+   "artist": "Adam Doleac",
+   "song": "Day One (feat. Madeline Merlo)",
+   "language": "英语",
+   "genre": "Country",
+   "rank": 9,
+   "overall": null,
+   "score": 217.0,
+   "jury": 110.0,
+   "tele": 107.0,
+   "support_rate": 5.5,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "P妈",
+   "ids": [
+    "104"
+   ],
+   "artist": "Bella e o Olmo da Bruxa",
+   "song": "Bem no seu aniversário",
+   "language": "葡萄牙语",
+   "genre": "Alternative",
+   "rank": 10,
+   "overall": null,
+   "score": 208.0,
+   "jury": 88.0,
+   "tele": 120.0,
+   "support_rate": 5.27,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "汞妈",
+   "ids": [
+    "103"
+   ],
+   "artist": "Aooo",
+   "song": "ポラリス",
+   "language": "日语",
+   "genre": "J-Pop",
+   "rank": 11,
+   "overall": null,
+   "score": 193.0,
+   "jury": 92.0,
+   "tele": 101.0,
+   "support_rate": 4.89,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "文妈",
+   "ids": [
+    "116"
+   ],
+   "artist": "Carter Faith",
+   "song": "Grudge",
+   "language": "英语",
+   "genre": "Country",
+   "rank": 12,
+   "overall": null,
+   "score": 153.0,
+   "jury": 106.0,
+   "tele": 47.0,
+   "support_rate": 3.88,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "T妈",
+   "ids": [
+    "115"
+   ],
+   "artist": "mercury",
+   "song": "Justin's Headed Out",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 13,
+   "overall": 29,
+   "score": 142.0,
+   "jury": 82.0,
+   "tele": 60.0,
+   "support_rate": 3.6,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "嘟妈",
+   "ids": [
+    "190"
+   ],
+   "artist": "Duma",
+   "song": "Perfect Design",
+   "language": "英语",
+   "genre": "Alternative R&B",
+   "rank": 14,
+   "overall": 31,
+   "score": 131.0,
+   "jury": 65.0,
+   "tele": 66.0,
+   "support_rate": 3.32,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "柴妈",
+   "ids": [
+    "51"
+   ],
+   "artist": "itsmync",
+   "song": "Alive",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 15,
+   "overall": 33,
+   "score": 111.0,
+   "jury": 59.0,
+   "tele": 52.0,
+   "support_rate": 2.81,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "野妈",
+   "ids": [
+    "196"
+   ],
+   "artist": "Nova May",
+   "song": "POLIZEI",
+   "language": "英语",
+   "genre": "Electro",
+   "rank": 16,
+   "overall": 35,
+   "score": 93.0,
+   "jury": 55.0,
+   "tele": 38.0,
+   "support_rate": 2.36,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "X妈",
+   "ids": [
+    "195"
+   ],
+   "artist": "幕后来电CurtainCalls",
+   "song": "Always On My Mind",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 17,
+   "overall": 36,
+   "score": 88.0,
+   "jury": 63.0,
+   "tele": 25.0,
+   "support_rate": 2.23,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SF2",
+   "venue": "半决赛二",
+   "format": "",
+   "member": "杰妈",
+   "ids": [
+    "156"
+   ],
+   "artist": "Asha Banks",
+   "song": "Feel The Rush",
+   "language": "英语",
+   "genre": "Folk",
+   "rank": 18,
+   "overall": 37,
+   "score": 72.0,
+   "jury": 81.0,
+   "tele": 63.0,
+   "support_rate": 1.83,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 34
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "羊妈",
+   "ids": [
+    "100"
+   ],
+   "artist": "Dead Dads Club",
+   "song": "That's Life",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 1,
+   "overall": null,
+   "score": 18,
+   "jury": 18,
+   "tele": null,
+   "support_rate": 25.71,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "威妈",
+   "ids": [
+    "7"
+   ],
+   "artist": "Aidan Bissett",
+   "song": "ricochet",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 2,
+   "overall": null,
+   "score": 10,
+   "jury": 10,
+   "tele": null,
+   "support_rate": 14.29,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "XX妈",
+   "ids": [
+    "88"
+   ],
+   "artist": "Emil Kárlsen & Elina Ijäs",
+   "song": "Giđa ávašta",
+   "language": "北萨米语",
+   "genre": "Folk",
+   "rank": 3,
+   "overall": null,
+   "score": 7,
+   "jury": 7,
+   "tele": null,
+   "support_rate": 10.0,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "星妈",
+   "ids": [
+    "45"
+   ],
+   "artist": "Amaia",
+   "song": "Aralar",
+   "language": "西班牙语",
+   "genre": "Latin Pop",
+   "rank": 4,
+   "overall": null,
+   "score": 6,
+   "jury": 6,
+   "tele": null,
+   "support_rate": 8.57,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "包妈",
+   "ids": [
+    "20"
+   ],
+   "artist": "Telenova",
+   "song": "THE DEEP",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 4,
+   "overall": null,
+   "score": 6,
+   "jury": 6,
+   "tele": null,
+   "support_rate": 8.57,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "白妈",
+   "ids": [
+    "77"
+   ],
+   "artist": "Jakov Jozinović",
+   "song": "Polje ruža",
+   "language": "克罗地亚语",
+   "genre": "Pop",
+   "rank": 6,
+   "overall": null,
+   "score": 5,
+   "jury": 5,
+   "tele": null,
+   "support_rate": 7.14,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "雨妈",
+   "ids": [
+    "17"
+   ],
+   "artist": "MØNØDREAM",
+   "song": "THE MØURNING AFTER",
+   "language": "英语",
+   "genre": "Rock",
+   "rank": 6,
+   "overall": null,
+   "score": 5,
+   "jury": 5,
+   "tele": null,
+   "support_rate": 7.14,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "泰妈",
+   "ids": [
+    "131"
+   ],
+   "artist": "BESTIES",
+   "song": "Deadmau5",
+   "language": "英语",
+   "genre": "Indie Rock",
+   "rank": 8,
+   "overall": null,
+   "score": 3,
+   "jury": 3,
+   "tele": null,
+   "support_rate": 4.29,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "邓妈",
+   "ids": [
+    "31"
+   ],
+   "artist": "Douwe Bob & SERA",
+   "song": "Could Have Been Us",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 8,
+   "overall": null,
+   "score": 3,
+   "jury": 3,
+   "tele": null,
+   "support_rate": 4.29,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "猴妈",
+   "ids": [
+    "18"
+   ],
+   "artist": "MAKSIM & Babet",
+   "song": "Hoe Dan Ook",
+   "language": "荷兰语",
+   "genre": "Pop",
+   "rank": 8,
+   "overall": null,
+   "score": 3,
+   "jury": 3,
+   "tele": null,
+   "support_rate": 4.29,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "松妈",
+   "ids": [
+    "105"
+   ],
+   "artist": "Kings Elliot",
+   "song": "Starcrossed",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 11,
+   "overall": null,
+   "score": 2,
+   "jury": 2,
+   "tele": null,
+   "support_rate": 2.86,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "WC",
+   "venue": "海选突围赛",
+   "format": "approval",
+   "member": "韩妈",
+   "ids": [
+    "67"
+   ],
+   "artist": "YAKTAK",
+   "song": "Цілую малинові",
+   "language": "乌克兰语",
+   "genre": "Pop",
+   "rank": 11,
+   "overall": null,
+   "score": 2,
+   "jury": 2,
+   "tele": null,
+   "support_rate": 2.86,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 25
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "羊妈",
+   "ids": [
+    "100"
+   ],
+   "artist": "Dead Dads Club",
+   "song": "That's Life",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 1,
+   "overall": null,
+   "score": 10,
+   "jury": 10,
+   "tele": null,
+   "support_rate": 14.49,
+   "is_shadow": false,
+   "qualified": true,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "X妈",
+   "ids": [
+    "195"
+   ],
+   "artist": "幕后来电CurtainCalls",
+   "song": "Always On My Mind",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 2,
+   "overall": null,
+   "score": 8,
+   "jury": 9,
+   "tele": null,
+   "support_rate": 11.59,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "白妈",
+   "ids": [
+    "77"
+   ],
+   "artist": "Robin Packalen",
+   "song": "1001 tapaa",
+   "language": "芬兰语",
+   "genre": "Pop",
+   "rank": 2,
+   "overall": null,
+   "score": 8,
+   "jury": 8,
+   "tele": null,
+   "support_rate": 11.59,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "威妈",
+   "ids": [
+    "7"
+   ],
+   "artist": "Aidan Bissett",
+   "song": "ricochet",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 4,
+   "overall": null,
+   "score": 6,
+   "jury": 6,
+   "tele": null,
+   "support_rate": 8.7,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "XX妈",
+   "ids": [
+    "88"
+   ],
+   "artist": "Emil Kárlsen & Elina Ijäs",
+   "song": "Giđa ávašta",
+   "language": "北萨米语",
+   "genre": "Folk",
+   "rank": 4,
+   "overall": null,
+   "score": 6,
+   "jury": 6,
+   "tele": null,
+   "support_rate": 8.7,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "奶妈",
+   "ids": [
+    "102"
+   ],
+   "artist": "AJ Vitanza",
+   "song": "ONLY MY HANDS",
+   "language": "英语",
+   "genre": "R&B",
+   "rank": 6,
+   "overall": null,
+   "score": 5,
+   "jury": 6,
+   "tele": null,
+   "support_rate": 7.25,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "吃妈",
+   "ids": [
+    "126"
+   ],
+   "artist": "MARK Harmony",
+   "song": "Stars Collide (feat. Carnie Reimers)",
+   "language": "英语 马绍尔语",
+   "genre": "Pop",
+   "rank": 6,
+   "overall": null,
+   "score": 5,
+   "jury": 5,
+   "tele": null,
+   "support_rate": 7.25,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "萌妈",
+   "ids": [
+    "125"
+   ],
+   "artist": "MICO",
+   "song": "Do it all again",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 8,
+   "overall": null,
+   "score": 4,
+   "jury": 4,
+   "tele": null,
+   "support_rate": 5.8,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "波妈",
+   "ids": [
+    "101"
+   ],
+   "artist": "RabbitJ",
+   "song": "Shimmer (feat. Kinoko)",
+   "language": "英语",
+   "genre": "Soundtrack",
+   "rank": 9,
+   "overall": null,
+   "score": 3,
+   "jury": 3,
+   "tele": null,
+   "support_rate": 4.35,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "叉妈",
+   "ids": [
+    "13"
+   ],
+   "artist": "PONY",
+   "song": "Middle Of Summer",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 9,
+   "overall": null,
+   "score": 3,
+   "jury": 3,
+   "tele": null,
+   "support_rate": 4.35,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "野妈",
+   "ids": [
+    "196"
+   ],
+   "artist": "Nova May",
+   "song": "POLIZEI",
+   "language": "英语",
+   "genre": "Electro",
+   "rank": 9,
+   "overall": null,
+   "score": 3,
+   "jury": 3,
+   "tele": null,
+   "support_rate": 4.35,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "T妈",
+   "ids": [
+    "115"
+   ],
+   "artist": "mercury",
+   "song": "Justin's Headed Out",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 9,
+   "overall": null,
+   "score": 3,
+   "jury": 3,
+   "tele": null,
+   "support_rate": 4.35,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "嘟妈",
+   "ids": [
+    "190"
+   ],
+   "artist": "Duma",
+   "song": "Perfect Design",
+   "language": "英语",
+   "genre": "Alternative R&B",
+   "rank": 13,
+   "overall": null,
+   "score": 1,
+   "jury": 2,
+   "tele": null,
+   "support_rate": 1.45,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "SC",
+   "venue": "外卡突围赛",
+   "format": "approval",
+   "member": "柴妈",
+   "ids": [
+    "51"
+   ],
+   "artist": "itsmync",
+   "song": "Alive",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 14,
+   "overall": null,
+   "score": 0,
+   "jury": 1,
+   "tele": null,
+   "support_rate": 0.0,
+   "is_shadow": false,
+   "qualified": false,
+   "joint": false,
+   "annual": true,
+   "juryN": 26
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "柠妈",
+   "ids": [
+    "19"
+   ],
+   "artist": "Olivia Marsh",
+   "song": "Too Good to be Bad",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 1,
+   "overall": 1,
+   "score": 291.0,
+   "jury": 117.0,
+   "tele": 174.0,
+   "support_rate": 6.27,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "松妈",
+   "ids": [
+    "105"
+   ],
+   "artist": "We Three",
+   "song": "Boyfriend",
+   "language": "英语",
+   "genre": "Alternative Pop",
+   "rank": 2,
+   "overall": 2,
+   "score": 287.0,
+   "jury": 148.0,
+   "tele": 139.0,
+   "support_rate": 6.19,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "雨妈",
+   "ids": [
+    "17"
+   ],
+   "artist": "Brian Dunne",
+   "song": "Clams Casino",
+   "language": "英语",
+   "genre": "Indie Rock",
+   "rank": 3,
+   "overall": 3,
+   "score": 276.0,
+   "jury": 140.0,
+   "tele": 136.0,
+   "support_rate": 5.95,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "A妈",
+   "ids": [
+    "132"
+   ],
+   "artist": "Kelsey Lu",
+   "song": "Running To Pain",
+   "language": "英语",
+   "genre": "Alternative Pop",
+   "rank": 4,
+   "overall": 4,
+   "score": 273.0,
+   "jury": 114.0,
+   "tele": 159.0,
+   "support_rate": 5.88,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "羊妈",
+   "ids": [
+    "100"
+   ],
+   "artist": "The Hellp",
+   "song": "Country Road",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 5,
+   "overall": 5,
+   "score": 233.0,
+   "jury": 117.0,
+   "tele": 116.0,
+   "support_rate": 5.02,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "S妈/鸽妈",
+   "ids": [
+    "27",
+    "160"
+   ],
+   "artist": "HANRORO",
+   "song": "H O M E",
+   "language": "韩语",
+   "genre": "Pop Rock",
+   "rank": 6,
+   "overall": 6,
+   "score": 222.0,
+   "jury": 100.0,
+   "tele": 122.0,
+   "support_rate": 4.78,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": true,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "笃妈",
+   "ids": [
+    "33"
+   ],
+   "artist": "2AM-DM",
+   "song": "Hurricane",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 7,
+   "overall": 7,
+   "score": 219.0,
+   "jury": 103.0,
+   "tele": 116.0,
+   "support_rate": 4.72,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "威妈",
+   "ids": [
+    "7"
+   ],
+   "artist": "Walking On Rivers",
+   "song": "OK City Sun",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 8,
+   "overall": 8,
+   "score": 217.0,
+   "jury": 121.0,
+   "tele": 96.0,
+   "support_rate": 4.68,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "邓妈",
+   "ids": [
+    "31"
+   ],
+   "artist": "Chris De Sarandy",
+   "song": "Body & Soul",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 9,
+   "overall": 9,
+   "score": 214.0,
+   "jury": 107.0,
+   "tele": 107.0,
+   "support_rate": 4.61,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "汞妈",
+   "ids": [
+    "103"
+   ],
+   "artist": "Aooo",
+   "song": "ポラリス",
+   "language": "日语",
+   "genre": "J-Pop",
+   "rank": 10,
+   "overall": 10,
+   "score": 205.0,
+   "jury": 86.0,
+   "tele": 119.0,
+   "support_rate": 4.42,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "韩妈",
+   "ids": [
+    "67"
+   ],
+   "artist": "Agoney",
+   "song": "Intacto",
+   "language": "西班牙语",
+   "genre": "Latin Pop",
+   "rank": 11,
+   "overall": 11,
+   "score": 203.0,
+   "jury": 87.0,
+   "tele": 116.0,
+   "support_rate": 4.38,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "狼妈/芬妈",
+   "ids": [
+    "113",
+    "110"
+   ],
+   "artist": "Betcha & J.Dutt",
+   "song": "Nicht mit mir",
+   "language": "德语",
+   "genre": "Hip-Hop",
+   "rank": 12,
+   "overall": 12,
+   "score": 201.0,
+   "jury": 91.0,
+   "tele": 110.0,
+   "support_rate": 4.33,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": true,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "K妈",
+   "ids": [
+    "11"
+   ],
+   "artist": "Night Tapes",
+   "song": "storm",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 13,
+   "overall": 13,
+   "score": 200.0,
+   "jury": 113.0,
+   "tele": 87.0,
+   "support_rate": 4.31,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "P妈",
+   "ids": [
+    "104"
+   ],
+   "artist": "Bella e o Olmo da Bruxa",
+   "song": "Bem no seu aniversário",
+   "language": "葡萄牙语",
+   "genre": "Alternative",
+   "rank": 14,
+   "overall": 14,
+   "score": 176.0,
+   "jury": 77.0,
+   "tele": 99.0,
+   "support_rate": 3.79,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "猴妈",
+   "ids": [
+    "18"
+   ],
+   "artist": "Elle Coves",
+   "song": "I Got A Thing For Love",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 15,
+   "overall": 15,
+   "score": 146.0,
+   "jury": 85.0,
+   "tele": 61.0,
+   "support_rate": 3.15,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "海妈",
+   "ids": [
+    "119"
+   ],
+   "artist": "Devon Again",
+   "song": "cherry cola",
+   "language": "英语",
+   "genre": "Indie Rock",
+   "rank": 16,
+   "overall": 16,
+   "score": 143.0,
+   "jury": 70.0,
+   "tele": 73.0,
+   "support_rate": 3.08,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "星妈",
+   "ids": [
+    "45"
+   ],
+   "artist": "The Belair Lip Bombs",
+   "song": "Hey You",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 17,
+   "overall": 17,
+   "score": 139.0,
+   "jury": 72.0,
+   "tele": 67.0,
+   "support_rate": 3.0,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "XX妈",
+   "ids": [
+    "88"
+   ],
+   "artist": "Adam Doleac",
+   "song": "Day One (feat. Madeline Merlo)",
+   "language": "英语",
+   "genre": "Country",
+   "rank": 18,
+   "overall": 18,
+   "score": 135.0,
+   "jury": 62.0,
+   "tele": 73.0,
+   "support_rate": 2.91,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "麦妈",
+   "ids": [
+    "130"
+   ],
+   "artist": "Amulets",
+   "song": "Lifelike (feat. Midwife)",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 19,
+   "overall": 19,
+   "score": 126.0,
+   "jury": 48.0,
+   "tele": 78.0,
+   "support_rate": 2.72,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "包妈",
+   "ids": [
+    "20"
+   ],
+   "artist": "The Home Team",
+   "song": "Where Has My Friend Gone?",
+   "language": "英语",
+   "genre": "Rock",
+   "rank": 20,
+   "overall": 20,
+   "score": 125.0,
+   "jury": 79.0,
+   "tele": 46.0,
+   "support_rate": 2.69,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "城妈",
+   "ids": [
+    "120"
+   ],
+   "artist": "Lorenzo Fragola",
+   "song": "1XTE1XME",
+   "language": "意大利语",
+   "genre": "Pop",
+   "rank": 21,
+   "overall": 21,
+   "score": 123.0,
+   "jury": 68.0,
+   "tele": 55.0,
+   "support_rate": 2.65,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "团妈",
+   "ids": [
+    "68"
+   ],
+   "artist": "Gelli Haha",
+   "song": "Bounce House",
+   "language": "英语",
+   "genre": "Alternative Rock",
+   "rank": 22,
+   "overall": 22,
+   "score": 111.0,
+   "jury": 56.0,
+   "tele": 55.0,
+   "support_rate": 2.39,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "泰妈",
+   "ids": [
+    "131"
+   ],
+   "artist": "Unroyal",
+   "song": "BANG",
+   "language": "英语",
+   "genre": "Rock",
+   "rank": 23,
+   "overall": 23,
+   "score": 108.0,
+   "jury": 62.0,
+   "tele": 46.0,
+   "support_rate": 2.33,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "羊妈",
+   "ids": [
+    "100"
+   ],
+   "artist": "Dead Dads Club",
+   "song": "That's Life",
+   "language": "英语",
+   "genre": "Alternative",
+   "rank": 24,
+   "overall": 24,
+   "score": 107.0,
+   "jury": 81.0,
+   "tele": 26.0,
+   "support_rate": 2.31,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "锴妈",
+   "ids": [
+    "12"
+   ],
+   "artist": "Erik Segerstedt",
+   "song": "Show Me What Love Is",
+   "language": "英语",
+   "genre": "Pop",
+   "rank": 25,
+   "overall": 25,
+   "score": 95.0,
+   "jury": 66.0,
+   "tele": 29.0,
+   "support_rate": 2.05,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
+  },
+  {
+   "year": 2026,
+   "edition_no": 16,
+   "edition_name": "Barvision Chongqing 2026",
+   "match": "GF",
+   "venue": "决赛",
+   "format": "",
+   "member": "文妈",
+   "ids": [
+    "116"
+   ],
+   "artist": "Carter Faith",
+   "song": "Grudge",
+   "language": "英语",
+   "genre": "Country",
+   "rank": 26,
+   "overall": 26,
+   "score": 65.0,
+   "jury": 50.0,
+   "tele": 15.0,
+   "support_rate": 1.4,
+   "is_shadow": false,
+   "qualified": null,
+   "joint": false,
+   "annual": true,
+   "juryN": 40
   }
  ],
  "podium": [
@@ -20393,6 +23625,52 @@
      "score": 308.0
     }
    ]
+  },
+  {
+   "edition_no": 16,
+   "year": 2026,
+   "edition_name": "Barvision Chongqing 2026",
+   "rows": [
+    {
+     "group": "",
+     "venue": "",
+     "rank": 1,
+     "member": "柠妈",
+     "ids": [
+      "19"
+     ],
+     "nickname": "柠妈",
+     "artist": "Olivia Marsh",
+     "song": "Too Good to be Bad",
+     "score": 291.0
+    },
+    {
+     "group": "",
+     "venue": "",
+     "rank": 2,
+     "member": "松妈",
+     "ids": [
+      "105"
+     ],
+     "nickname": "松妈",
+     "artist": "We Three",
+     "song": "Boyfriend",
+     "score": 287.0
+    },
+    {
+     "group": "",
+     "venue": "",
+     "rank": 3,
+     "member": "雨妈",
+     "ids": [
+      "17"
+     ],
+     "nickname": "雨妈",
+     "artist": "Brian Dunne",
+     "song": "Clams Casino",
+     "score": 276.0
+    }
+   ]
   }
  ],
  "records": {
@@ -20422,39 +23700,39 @@
   "most_top3": {
    "title": "最多前三场数",
    "metric": "进入前三的场次",
-   "val": 11,
+   "val": 12,
    "unit": "场",
    "entries": [
     {
      "id": 17,
      "nickname": "雨妈",
-     "val": 11
+     "val": 12
     }
    ]
   },
   "most_top10": {
    "title": "最多前十场数",
    "metric": "进入前十的场次",
-   "val": 23,
+   "val": 24,
    "unit": "场",
    "entries": [
     {
      "id": 17,
      "nickname": "雨妈",
-     "val": 23
+     "val": 24
     }
    ]
   },
   "most_twelve": {
    "title": "最多累计 12 分次数",
    "metric": "累计获得 12 分次数",
-   "val": 50,
+   "val": 52,
    "unit": "次",
    "entries": [
     {
      "id": 17,
      "nickname": "雨妈",
-     "val": 50
+     "val": 52
     }
    ]
   },
@@ -20480,13 +23758,13 @@
   "highest_jury_avg": {
    "title": "最高 Jury 均分",
    "metric": "参赛曲目 12 分制平均分（2024 前广义 / 2024 起仅评委）",
-   "val": 4.74,
+   "val": 4.04,
    "unit": "",
    "entries": [
     {
-     "id": 31,
-     "nickname": "邓妈",
-     "val": 4.74
+     "id": 154,
+     "nickname": "风妈",
+     "val": 4.04
     }
    ]
   },
@@ -20527,23 +23805,23 @@
   "most_participations": {
    "title": "最多参与场数",
    "metric": "累计参赛场次",
-   "val": 28,
+   "val": 29,
    "unit": "场",
    "entries": [
     {
      "id": 20,
      "nickname": "包妈",
-     "val": 28
+     "val": 29
     },
     {
      "id": 17,
      "nickname": "雨妈",
-     "val": 28
+     "val": 29
     },
     {
      "id": 12,
      "nickname": "锴妈",
-     "val": 28
+     "val": 29
     }
    ]
   },
@@ -20571,19 +23849,17 @@
   "most_members_edition": {
    "title": "单届最多参赛成员",
    "unit": "人",
-   "val": 27,
+   "val": 40,
    "badges": [
-    "第 13 届",
-    "第 14 届",
-    "第 15 届"
+    "第 16 届"
    ]
   },
   "songs_edition_annual": {
    "title": "单届最多参赛曲目 · 年度制",
    "unit": "首",
-   "val": 28,
+   "val": 39,
    "badges": [
-    "第 14 届"
+    "第 16 届"
    ]
   },
   "songs_edition_grouped": {
@@ -20749,7 +24025,7 @@
   "longest_streak": {
    "title": "雨露均沾",
    "metric": "最长连续参赛届数",
-   "val": 15,
+   "val": 16,
    "unit": "届",
    "type": "max",
    "winners": [
@@ -20764,7 +24040,7 @@
        "t": "→"
       },
       {
-       "b": "第 15 届"
+       "b": "第 16 届"
       }
      ]
     },
@@ -20779,7 +24055,7 @@
        "t": "→"
       },
       {
-       "b": "第 15 届"
+       "b": "第 16 届"
       }
      ]
     },
@@ -20794,7 +24070,7 @@
        "t": "→"
       },
       {
-       "b": "第 15 届"
+       "b": "第 16 届"
       }
      ]
     }
@@ -20842,25 +24118,25 @@
   "biggest_drop": {
    "title": "跳水天后",
    "metric": "最大相邻两场名次跌幅",
-   "val": 24,
+   "val": 27,
    "unit": "名",
    "type": "max",
    "winners": [
     {
-     "id": 125,
-     "nickname": "萌妈",
+     "id": 156,
+     "nickname": "杰妈",
      "segs": [
       {
-       "b": "第 12 届小众组"
+       "b": "第 15 届"
       },
       {
-       "t": "第 3 名 →"
+       "t": "第 10 名 →"
       },
       {
-       "b": "第 13 届"
+       "b": "第 16 届"
       },
       {
-       "t": "第 27 名"
+       "t": "第 37 名"
       }
      ]
     }
@@ -21648,6 +24924,22 @@
    "score": 84,
    "pool": 1270,
    "rank": 28
+  },
+  {
+   "edition_no": 16,
+   "year": 2026,
+   "match": "GF",
+   "stage": "决赛",
+   "ids": [
+    "19"
+   ],
+   "nickname": "柠妈",
+   "artist": "Olivia Marsh",
+   "song": "Too Good to be Bad",
+   "share": 6.27,
+   "score": 291,
+   "pool": 4640,
+   "rank": 29
   }
  ]
 }

@@ -29,6 +29,9 @@ def rank_key(e, voters, ord_idx):
 
 def recompute(match):
     if match.get('canceled'): return []  # 取消的组（如 12B）：仅选送名单、无名次，跳过
+    # 认可票场次（ed16 海选突围赛 / 外卡突围赛）：每票 1 分、官方名次含并列，
+    # Eurovision 平局级联在这里无意义（tele=0、分布全空 → 只会按 eid 强行拆开并列），故保留官方名次。
+    if match.get('format') == 'approval': return []
     entries = match['entries']
     voters = match.get('votes', {}).get('voters', [])
     ordmap = {id(e): i for i, e in enumerate(entries)}  # ed1/2 无 eid 的 running-order 兜底

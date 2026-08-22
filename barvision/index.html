@@ -143,6 +143,7 @@
       text-transform: uppercase; color: var(--clr-violet-light);
       margin-bottom: 8px;
     }
+    .bv-live-badge--done { color: var(--clr-gold-light); }
     .bv-live-dot {
       width: 6px; height: 6px; border-radius: 50%;
       background: var(--clr-violet-light);
@@ -310,13 +311,13 @@
         <div class="bv-hero__meta lab__meta">
           <span class="lab__meta-item">欧美流行音乐个人榜吧歌曲大赛</span>
           <span class="lab__meta-item">始于 2019 年</span>
-          <span class="lab__meta-item">第十六届正在进行中</span>
+          <span class="lab__meta-item">最新一届 Chongqing 2026</span>
         </div>
         <p class="bv-hero__desc">
           Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。榜吧成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。2019 年由 <a class="member" href="/member/125/" data-nickname="萌妈">@绿荫夏语</a> 创立，历经两年停办后于 2023 年恢复，现已举办至第十六届。
         </p>
         <div class="bv-hero__actions">
-          <a href="/barvision/2026/events/" class="btn btn--primary">Barvision 2026</a>
+          <a href="/barvision/2026/" class="btn btn--primary">Barvision 2026</a>
           <a href="/barvision/stats/" class="btn btn--outline">数据中心</a>
           <a href="/barvision/hof/" class="btn btn--outline">名人堂</a>
         </div>
@@ -340,10 +341,10 @@
     <!-- XVI 当届卡片 -->
     <div class="bv-current-card" style="cursor:pointer;" onclick="location.href='/barvision/2026/'">
       <div class="bv-current-card__left fade-up" style="transition-delay:0.06s;">
-        <div class="bv-live-badge"><div class="bv-live-dot"></div>进行中</div>
+        <div class="bv-live-badge bv-live-badge--done">已完赛</div>
         <div class="season-card__edition">BARVISION CHONGQING 2026</div>
         <div class="season-card__name">重声交响 Echoing Confluence</div>
-        <div style="font-size:11px;color:var(--clr-text-3);margin-top:14px;letter-spacing:0.06em;line-height:1.7;position:relative;z-index:1;"><strong>第十六届欧美流行歌曲个人榜吧歌曲大赛</strong><br><span style="display:inline-block;margin-top:0;">主办：<a class="member" href="/member/7/" data-nickname="威妈" onclick="event.stopPropagation()">@williw_</a></span></div>
+        <div style="font-size:11px;color:var(--clr-text-3);margin-top:14px;letter-spacing:0.06em;line-height:1.7;position:relative;z-index:1;"><strong>第十六届欧美流行歌曲个人榜吧歌曲大赛</strong><br><span style="display:inline-block;margin-top:0;">主办：<a class="member" href="/member/7/" data-nickname="威妈" onclick="event.stopPropagation()">@williw_</a></span><br><span style="display:inline-block;margin-top:0;">冠军：<a class="member" href="/member/19/" data-nickname="柠妈" onclick="event.stopPropagation()">@LemonSheeran</a> — Olivia Marsh — Too Good to be Bad</span></div>
       </div>
       <div class="bv-current-card__right fade-up" style="transition-delay:0.20s;">
         <img src="/assets/images/barvision_logo_2026.svg" class="bv-current-logo" alt="Barvision Chongqing 2026">
@@ -463,6 +464,7 @@
     '/barvision/2023/',
     '/barvision/2024/',
     '/barvision/2025/',
+    '/barvision/2026/',
   ]);
   function romanToInt(r) {
     var map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 }, n = 0;

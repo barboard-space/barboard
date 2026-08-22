@@ -117,6 +117,7 @@ def build_entries(eds):
                 rows.append({
                     "year": ed["year"], "edition_no": ed["edition_no"], "edition_name": ed.get("edition_name", ""),
                     "match": code, "venue": m.get("venue", ""),
+                    "format": (m.get("format") or ""),
                     "member": nick, "ids": [i for i, _ in ids],
                     "artist": e.get("artist"), "song": e.get("song"),
                     "language": e.get("language"), "genre": e.get("genre"),
@@ -200,6 +201,9 @@ def build_records(eds, by_id, entries, meta):
 
     def gf_val(e, v):
         # 年度制(13+ SF1/SF2/GF)：单届=单场，HOF 只取决赛依据 → 半决赛条目不计入
+        # 认可票场次(ed16 WC/SC)：每票 1 分，与 12 分制不同量纲，一律不参与单曲类纪录
+        if e.get("format") == "approval":
+            return None
         return None if (e.get("annual") and (e.get("match") or "") in ("SF", "SF1", "SF2")) else v
 
     def entry_max(key, title, metric, valfn, unit=""):
@@ -280,6 +284,8 @@ def build_champ_share(entries, meta):
        返回按得票率降序、带 rank 的列表（供 stats.html「冠军得票率」表 + HOF highest_share 共用）。"""
     groups = {}  # (edition_no, match) -> [entries]
     for e in entries:
+        if e.get("format") == "approval":
+            continue  # 认可票场次（ed16 海选/外卡突围赛）：每票 1 分，得票率与 12 分制不可比
         if e.get("annual") and (e.get("match") or "") in ("SF", "SF1", "SF2"):
             continue  # 年度制单届=单场，只取决赛 GF（ed2 非年度制，SF/GF 各算一场）
         groups.setdefault((e["edition_no"], e.get("match") or ""), []).append(e)
@@ -421,7 +427,10 @@ def build_overview(eds, meta, podium):
             continue
         mm = ed.get("members", {}) or {}
         annual = is_annual_ed(ed.get("matches", []))
-        mlist = [m for m in ed.get("matches", []) if not m.get("canceled")]
+        # 认可票场次（ed16 WC/SC）不计入本届的 参赛成员 / 曲目数 / 场次数——
+        # 它们不是正赛，与 13–15 届的口径不可比（详见 CLAUDE.md #201）
+        mlist = [m for m in ed.get("matches", [])
+                 if not m.get("canceled") and m.get("format") != "approval"]
         members, songs, song_keys = set(), 0, set()
         for m in mlist:
             for e in m.get("entries", []):
@@ -790,9 +799,12 @@ def main():
                      "overview": ov["overview"]}
                for sid, ov in by_id.items()}
     entries = build_entries(eds)
+    # HOF（纪录 / 成就 / 冠军得票率）**不计认可票场次**（ed16 海选/外卡突围赛，每票 1 分与 12 分制不同量纲）；
+    # 扁平 entries 仍全量输出 → Stats 大数据查询照样能搜到这些曲目。
+    hof_entries = [e for e in entries if e.get("format") != "approval"]
     podium = build_podium(eds, meta)
-    records = build_records(eds, by_id, entries, meta)
-    champ_share = build_champ_share(entries, meta)  # 28 场冠军得票率（降序）
+    records = build_records(eds, by_id, hof_entries, meta)
+    champ_share = build_champ_share(hof_entries, meta)  # 各场冠军得票率（降序）
     # highest_share（HOF）：取得票率最高者（含并列），口径 = 冠军 score ÷ 该场正式曲 score 之和
     if champ_share:
         top = champ_share[0]["share"]
@@ -801,7 +813,7 @@ def main():
                    for r in champ_share if r["share"] == top]
         records["highest_share"] = {"title": "最高单场得票占比", "metric": "冠军单曲得分 ÷ 该场正式曲总分",
                                     "val": top, "unit": "%", "entries": hs_ents}
-    awards = build_awards(by_id, entries, meta)
+    awards = build_awards(by_id, hof_entries, meta)
     overview = build_overview(eds, meta, podium)
     season = build_season(eds, meta, overview)
 

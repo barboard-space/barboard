@@ -110,14 +110,15 @@
                 <div class="season-card__body">
                   <div class="season-status">
                     <div class="season-status__dot"></div>
-                    报名已结束 · 决赛进行中
+                    第十六届已完赛
                   </div>
                   <p style="font-size:13px;color:var(--clr-text-2);line-height:1.6;margin-top:2px;">
-                    半决赛与海选、外卡突围赛均已完赛，<strong style="color:var(--clr-accent);">26 首</strong>晋级决赛。<strong style="color:var(--clr-accent);">Grand Final</strong> 投票进行中（截止 8 月 16 日），决赛直播定于 8 月 22 日晚。
+                    38 首作品经两场半决赛、海选突围赛与外卡突围赛，<strong style="color:var(--clr-accent);">26 首</strong>进入决赛。8 月 22 日 <strong style="color:var(--clr-accent);">Grand Final</strong> 直播揭晓最终赛果，下届将由冠军承办、移师苏州。
                   </p>
-                  <div style="margin-top:14px;padding:14px;background:var(--clr-bg-2);border-radius:4px;border:1px solid var(--clr-border);text-align:center;">
-                    <div id="cdLabel" style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">距离决赛投票关闭还有</div>
-                    <div id="countdown" style="font-family:var(--font-display);font-size:32px;color:var(--clr-accent);line-height:1;">— 天</div>
+                  <div style="margin-top:14px;padding:14px;background:var(--clr-bg-2);border-radius:4px;border:1px solid rgba(245,200,64,0.28);text-align:center;">
+                    <div style="font-size:11px;color:var(--clr-text-3);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:6px;">Winner · 291 分</div>
+                    <div style="font-family:var(--font-display);font-size:28px;color:var(--clr-gold-light);line-height:1;letter-spacing:0.02em;">Too Good to be Bad</div>
+                    <div style="font-size:12px;color:var(--clr-text-2);margin-top:7px;">Olivia Marsh<span style="opacity:0.4;margin:0 6px;">·</span><a class="member" href="/member/19/" data-nickname="柠妈">@LemonSheeran</a></div>
                   </div>
                   <div class="season-phases" style="margin-top:16px;">
                     <div class="phase">
@@ -158,21 +159,21 @@
                     </div>
                     <div class="phase">
                       <span class="phase__name">Grand Final</span>
-                      <span class="phase__status phase__status--live">正在进行</span>
+                      <span class="phase__status" style="color:var(--clr-text-3);">已结束</span>
                       <span class="phase__badge phase__badge--vote">投票</span>
                       <span class="phase__date">8/8 — 8/16</span>
                     </div>
                     <div class="phase phase--gold">
                       <span class="phase__name">Grand Final</span>
-                      <span class="phase__status phase__status--pending">暂未开启</span>
+                      <span class="phase__status" style="color:var(--clr-text-3);">已结束</span>
                       <span class="phase__badge phase__badge--live">直播</span>
                       <span class="phase__date" style="color:var(--clr-gold);">8/22 晚</span>
                     </div>
                   </div>
                 </div>
                 <div class="season-card__footer" style="flex-wrap:wrap;">
-                  <a href="/barvision/2026/events/" class="btn btn--primary" style="flex:1;justify-content:center;">试听歌单</a>
-                  <a href="/barvision/2026/" class="btn btn--outline">本届总览</a>
+                  <a href="/barvision/2026/" class="btn btn--primary" style="flex:1;justify-content:center;">完整赛果</a>
+                  <a href="/barvision/2026/events/#playlists" class="btn btn--outline">参赛歌单</a>
                   <a href="/barvision/2026/odds/" class="btn btn--outline" style="flex:1 1 100%;justify-content:center;">赔率预测</a>
                 </div>
               </div>
@@ -506,29 +507,7 @@
       loadChart();
     });
 
-    // Countdown（决赛阶段：倒数决赛投票关闭 → 倒数 Grand Final 直播）
-    function updateCountdown() {
-      const GF_CLOSE = new Date('2026-08-17T00:00:00+08:00');  // 决赛投票关闭 = 北京时间 8/16 24:00
-      const GF_LIVE = new Date('2026-08-22T20:00:00+08:00');   // Grand Final 决赛直播
-      const now = new Date();
-      const el = document.getElementById('countdown');
-      const lbl = document.getElementById('cdLabel');
-      if (!el) return;
-      let target, ltext;
-      if (now < GF_CLOSE) { target = GF_CLOSE; ltext = '距离决赛投票关闭还有'; }
-      else if (now < GF_LIVE) { target = GF_LIVE; ltext = '距离 Grand Final 直播还有'; }
-      else { if (lbl) lbl.textContent = 'Grand Final'; el.innerHTML = '<span style="font-family:var(--font-body);font-size:16px;font-weight:700;letter-spacing:0.03em;">直播已结束</span>'; return; }
-      if (lbl) lbl.textContent = ltext;
-      const diff = target - now;
-      const d = Math.floor(diff / 86400000);
-      const h = Math.floor((diff % 86400000) / 3600000);
-      const m = Math.floor((diff % 3600000) / 60000);
-      const s = Math.floor((diff % 60000) / 1000);
-      const pad = n => String(n).padStart(2, '0');
-      el.innerHTML = `${d}<span style="font-size:16px;opacity:0.5;margin:0 2px;">天</span>${pad(h)}<span style="font-size:16px;opacity:0.5;margin:0 2px;">时</span>${pad(m)}<span style="font-size:16px;opacity:0.5;margin:0 2px;">分</span>${pad(s)}<span style="font-size:16px;opacity:0.5;margin:0 2px;">秒</span>`;
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+    // 第十六届已完赛——赛季卡改为「冠军」展示，不再需要倒计时（下届开赛时再加回）
   </script>
 
 

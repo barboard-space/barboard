@@ -871,7 +871,7 @@
   // 场次英文段名（用于 multi 场次的 section-label 前缀）
   function matchEng(m) {
     // 场次代码 → section-label 英文前缀（多场次时用）；新增组别在此补，保持「GROUP X」一致
-    var MAP = { SF: 'SEMI-FINAL', SF1: 'SEMI-FINAL 1', SF2: 'SEMI-FINAL 2', GF: 'GRAND FINAL', A: 'GROUP A', B: 'GROUP B', C: 'GROUP C', E: 'ENTERTAINMENT' };
+    var MAP = { SF: 'SEMI-FINAL', SF1: 'SEMI-FINAL 1', SF2: 'SEMI-FINAL 2', GF: 'GRAND FINAL', A: 'GROUP A', B: 'GROUP B', C: 'GROUP C', E: 'ENTERTAINMENT', WC: 'WILDCARD ROUND', SC: 'SECOND CHANCE' };
     return MAP[m.match] || m.match || esc(m.venue || '');
   }
   // 目录(TOC)用的场次名（SF1/SF2 用英文、GF 用「决赛」；其余用中文 venue）
@@ -954,12 +954,17 @@
   }
   function resultTableAnnual(m, pool, hasTele) {
     var isSF = m.match === 'SF1' || m.match === 'SF2';
+    // 认可票场次（ed16 海选/外卡突围赛）：每票 1 分、无评委/观众之分 → 只显 PTS（有扣分时另显原始 VOTES）
+    var appr = m.format === 'approval';
+    var isQual = isSF || appr;                       // 有晋级名额的场次：用「晋级」高亮，不用金银铜
+    var hasVotes = appr && m.entries.some(function (e) { return e.penalty; });
+    if (appr) hasTele = false;
     var roMap = bvRunningOrder(m);
     function roOf(e) { return roMap[e.eid]; }
-    // SF 晋级名额数（=该场 qualified 数，本届 9）→ JURY/TELE 列名次超出此数的分数弱化
+    // SF 晋级名额数（=该场 qualified 数）→ JURY/TELE 列名次超出此数的分数弱化
     var qCut = isSF ? m.entries.filter(function (e) { return e.qualified; }).length : null;
     var rows = m.entries.map(function (e) {
-      var cls = isSF ? (e.qualified ? 'bvr-row--q' : '') : (e.rank <= 3 ? 'bvr-row--' + e.rank : '');
+      var cls = isQual ? (e.qualified ? 'bvr-row--q' : '') : (e.rank <= 3 ? 'bvr-row--' + e.rank : '');
       var joint = e.member.indexOf('/') > -1;
       return '<tr class="' + cls + '">' +
         '<td class="ro" data-v="' + roOf(e) + '">' + roOf(e) + '</td>' +
@@ -967,17 +972,19 @@
         '<td class="artist">' + esc(fmtArtist(e.artist)) + '</td>' +
         '<td class="song">' + esc(e.song) + (joint ? '<span class="bvr-joint-tag">合报</span>' : '') + '</td>' +
         '<td class="lang">' + esc(e.language || '') + '</td>' +
-        ptsCell('pts--jury', e.jury_vote, pool, 'jury_vote', e, qCut) +
+        (appr ? (hasVotes ? '<td class="pts pts--jury" data-v="' + (e.jury_vote || 0) + '">' + fmtScore(e.jury_vote) + '</td>' : '')
+              : ptsCell('pts--jury', e.jury_vote, pool, 'jury_vote', e, qCut)) +
         (hasTele ? ptsCell('pts--tele', e.tele_vote, pool, 'tele_vote', e, qCut) : '') +
         '<td class="pts pts--total" data-v="' + (e.score == null ? -1 : e.score) + '">' + fmtScore(e.score) + '</td>' +
         '<td class="place" data-v="' + e.rank + '"><span>' + esc(e.rank) + '</span>' +
-          (isSF && e.qualified ? '<span class="place-q">晋级</span>' : '') + '</td>' +
+          (isQual && e.qualified ? '<span class="place-q">晋级</span>' : '') + '</td>' +
         '</tr>';
     }).join('');
     return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整结果</div>' +
       '<div class="bvr-tw fade-up"><table class="bvr-tbl bvr-tbl--annual"><thead><tr>' +
       '<th class="th-ro" style="text-align:center">R/O</th><th>选送者</th><th>歌手</th><th>歌名</th><th>语种</th>' +
-      '<th class="th-jury" style="text-align:center">JURY</th>' +
+      (appr ? (hasVotes ? '<th class="th-jury" style="text-align:center">VOTES</th>' : '')
+            : '<th class="th-jury" style="text-align:center">JURY</th>') +
       (hasTele ? '<th class="th-tele" style="text-align:center">TELE</th>' : '') +
       '<th class="th-pts" style="text-align:center">PTS</th>' +
       '<th class="th-place" style="text-align:center">PLACE</th>' +
@@ -985,7 +992,7 @@
   }
 
   // 合并矩阵：分组表头(Jury Vote/Tele Vote) + 可排序前 4 列；默认按选送者排（自投格成主对角线）
-  function votingMatrix(m, label, roMap) {  // roMap：年度制传入则加 R/O 列（可排序）、选送者列取消排序
+  function votingMatrix(m, label, roMap, skipNote) {  // roMap：年度制传入则加 R/O 列（可排序）、选送者列取消排序；skipNote：注释已由结果概览渲染（年度制）
     // 行顺序：正式曲按结果概览名次在前（m.entries 已按 total↓/tele↓ 排），混淆曲一律排其后、内部按总分降序
     var recips = m.entries.filter(function (e) { return !e.is_shadow; })
       .concat(m.entries.filter(function (e) { return e.is_shadow; })
@@ -1006,14 +1013,17 @@
     var teleN = voters.length - juryN;
     var firstTele = juryN;
     var hasTele = teleN > 0;  // 观众投票人数为 0 → 隐藏 Tele 列（计分板 + 结果概览）
+    // 认可票场次（ed16 海选/外卡突围赛）：小计列改称 Votes（原始票数），无扣分时与 Total 相同 → 整列隐藏
+    var appr = m.format === 'approval';
+    var hasSub = !appr || m.entries.some(function (e) { return e.penalty; });
     function vsep(i) { return (i === 0 || i === firstTele) ? ' vsep' : ''; }
     var grpRow = '<tr>' +
       (roMap ? '<th class="ro bvr-th-sort" rowspan="2" data-msort="ro">R/O</th>' : '') +
       '<th class="rcp' + (roMap ? '' : ' bvr-th-sort') + '" rowspan="2"' + (roMap ? '' : ' data-msort="rcp"') + '>' + esc(label) + '</th>' +
       '<th class="tot bvr-th-sort" rowspan="2" data-msort="tot">Total</th>' +
-      '<th class="sj bvr-th-sort" rowspan="2" data-msort="sj">Jury</th>' +
+      (hasSub ? '<th class="sj bvr-th-sort" rowspan="2" data-msort="sj">' + (appr ? 'Votes' : 'Jury') + '</th>' : '') +
       (hasTele ? '<th class="st bvr-th-sort" rowspan="2" data-msort="st">Tele</th>' : '') +
-      (juryN ? '<th class="mtx-grp mtx-grp--jury vsep" colspan="' + juryN + '">Jury Vote</th>' : '') +
+      (juryN ? '<th class="mtx-grp mtx-grp--jury vsep" colspan="' + juryN + '">' + (appr ? 'Approval Vote' : 'Jury Vote') + '</th>' : '') +
       (teleN ? '<th class="mtx-grp mtx-grp--tele vsep" colspan="' + teleN + '">Tele Vote</th>' : '') +
       '</tr>';
     var colRow = '<tr>' +
@@ -1040,11 +1050,11 @@
         (roMap ? '<td class="ro">' + (roMap[e.eid] != null ? roMap[e.eid] : '') + '</td>' : '') +
         '<td class="rcp">' + (e.is_shadow ? '<span class="bvr-anon">' + memberLink(e.member) + '</span>' : memberLink(e.member)) + '</td>' +
         '<td class="tot">' + fmtScore(e.score) + '</td>' +
-        '<td class="sj">' + fmtScore(e.jury_vote) + '</td>' +
+        (hasSub ? '<td class="sj">' + fmtScore(e.jury_vote) + '</td>' : '') +
         (hasTele ? '<td class="st">' + fmtScore(e.tele_vote) + '</td>' : '') + cells + '</tr>';
     }).join('');
     var notes = [];
-    if (m.note) notes.push(fmtNote(m.note));
+    if (m.note && !skipNote) notes.push(fmtNote(m.note));
     if (m.entries.some(function (e) { return e.is_shadow; })) notes.push('斜体昵称为混淆歌曲选送者');
     var noteHtml = notes.length === 1 ? '<p class="bvr-mtx-note fade-up">注：' + notes[0] + '</p>'
       : notes.length > 1 ? '<div class="bvr-mtx-note fade-up">' + notes.map(function (n, i) { return '注' + (i + 1) + '：' + n; }).join('<br>') + '</div>' : '';
@@ -1458,10 +1468,17 @@
     var t = theme(d) || {};
     var vars = '--bvt-c1:' + (t.c1 || '#f0609c') + ';--bvt-c2l:' + (t.c2l || '#fbb1a9') + ';';
     function pollItem(label, n) { return '<span class="bvr-sb-poll__it"><span class="bvr-sb-poll__t">' + esc(label) + '</span><span class="bvr-sb-poll__n">' + n + '</span></span>'; }
+    // 投票人数 = **去重后的人数**——2026 起同一位成员在同一场既投评委票又投观众票（voters 里有两条记录），
+    // 直接数记录会翻倍；2019–2025 两拨人不重叠，去重前后一致。
+    function pollN(m) {
+      var seen = {};
+      (m.votes.voters || []).forEach(function (v) { seen[v.voter] = 1; });
+      return Object.keys(seen).length;
+    }
     var poll = '<div class="bvr-sb-poll fade-up"><span class="bvr-sb-poll__lbl">总投票人数</span>' +
-      pollItem('Grand Final', gf.votes.voters.length) +
-      pollItem('Semi-Final 1', sf.SF1.votes.voters.length) +
-      pollItem('Semi-Final 2', sf.SF2.votes.voters.length) + '</div>';
+      pollItem('Grand Final', pollN(gf)) +
+      pollItem('Semi-Final 1', pollN(sf.SF1)) +
+      pollItem('Semi-Final 2', pollN(sf.SF2)) + '</div>';
     return '<div class="bvr-scroll-hint fade-up">左右滑动查看完整成绩单</div>' +
       '<div class="bvr-tw bvr-sb-tw fade-up" style="' + vars + '"><table class="bvr-sb">' + head + '<tbody>' + body + '</tbody></table></div>' +
       poll;
@@ -1691,7 +1708,7 @@
       var rt = stageIntro + resultTable(m, annual);
       if (annual && m.note) rt += '<p class="bvr-tbl-note fade-up">注：' + fmtNote(m.note) + '</p>';
       // 年度制 TOC：每场合并为一条（标题式英文），指向结果概览节；旧届保留「概览/详情」两条
-      var ANNUAL_TOC = { SF1: 'Semi-Final 1', SF2: 'Semi-Final 2', GF: 'Grand Final' };
+      var ANNUAL_TOC = { SF1: 'Semi-Final 1', SF2: 'Semi-Final 2', GF: 'Grand Final', WC: 'Wildcard Round', SC: 'Second Chance' };
       var rid = 'result' + (multi ? mi : '');
       html += section(rid, pfx + '结果概览', 'Results', '', rt);
       if (annual) toc.push({ id: rid, label: ANNUAL_TOC[m.match] || tv });
@@ -1706,10 +1723,11 @@
         if (mj) dvr += '<div class="bvr-dvr-sub fade-up">Jury Scoreboard</div>' + mj;
         if (mt) dvr += '<div class="bvr-dvr-sub fade-up">Tele Scoreboard</div>' + mt;
       } else {
-        var mtx = votingMatrix(m, '选送者', ro);
+        var mtx = votingMatrix(m, '选送者', ro, annual);  // 年度制的注释已随结果概览渲染，计分板不重复
         if (mtx) dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--matrix fade-up">Scoreboard</div>' + mtx;
       }
-      dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--12 fade-up">12 Points</div>' + twelveBlock(m);
+      // 认可票场次（ed16 海选/外卡突围赛）每票 1 分，无 12 分可言 → 跳过 12 Points
+      if (m.format !== 'approval') dvr += '<div class="bvr-dvr-sub bvr-dvr-sub--12 fade-up">12 Points</div>' + twelveBlock(m);
 
       var did = 'dvr' + (multi ? mi : '');
       html += section(did, pfx + '投票详情', 'Detailed Voting Results', '', dvr);

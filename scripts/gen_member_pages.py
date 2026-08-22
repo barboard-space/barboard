@@ -17,11 +17,16 @@ BV_TELE_SINCE_YEAR = 2024
 # ⭐ 第 16 届（2026）参赛者 = regular-16.json 的 signups 选送者 + auditions 海选举办者（自动推导，含进行中海选）。
 # 他们获得：member.html 实心 logo + 第十六届筛选 + 个人页第 16 届徽章（即便暂无赛果）。
 def load_bv2026_ids(base):
+    """第 16 届参赛者名单——**仅在该届尚无赛果（matches 为空）时使用**。
+    赛后 matches 已填，参赛者、徽章、实心 logo 一律由 entries 派生（与 13–15 届一致），
+    此处返回空集，否则会给有赛果的成员再叠一枚重复的第 16 届徽章。"""
     ids = set()
     p = os.path.join(base, "data", "barvision", "barvision-2026", "regular-16.json")
     try:
         d = json.load(open(p, encoding="utf-8"))
     except Exception:
+        return ids
+    if d.get("matches"):
         return ids
     mm = d.get("members", {}) or {}
 
@@ -247,7 +252,10 @@ def main():
     member_dir = os.path.join(base, "member")
     os.makedirs(member_dir, exist_ok=True)
 
-    bv_by_id = aggregate_barvision(load_bv_editions(base))  # 现按 space_id(字符串) 聚合
+    _bv_eds = load_bv_editions(base)
+    # 最新一届届号 —— member.html 的实心 logo = 参加了最新一届（取代 #163 起手工维护的 BV2026_ACTIVE 名单）
+    LATEST_ED = max([e.get("edition_no") or 0 for e in _bv_eds] or [0])
+    bv_by_id = aggregate_barvision(_bv_eds)  # 现按 space_id(字符串) 聚合
     bv2026 = load_bv2026_ids(base)  # 第 16 届参赛者（signups + 海选 host）
     annual_by_id = load_annual(base)  # 年榜聚合（个人榜前十 + 助攻分档）
     bv_index = {}  # space_id -> {editions, active, count, best}
@@ -299,7 +307,8 @@ def main():
                     eds.add(16)
                 bv_index[str(space_id)] = {
                     "editions": sorted(eds),
-                    "active": in26, "count": ov["entries"] + ov["shadow"],
+                    "active": in26 or (LATEST_ED in eds),
+                    "count": ov["entries"] + ov["shadow"],
                     "best": ov["best"], "active_in": ov["active_in"],
                 }
 

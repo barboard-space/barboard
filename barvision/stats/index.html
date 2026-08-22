@@ -675,7 +675,8 @@
     }
     var hits = STATS.entries.filter(function (e) { return String(e[curDim] || '').toLowerCase().indexOf(curQ) > -1; });
     // 同一届同一首歌的不同场次（半决赛 + 决赛）合并为一条，保留更后阶段（决赛优先）
-    var stageOf = function (e) { var m = e.match || ''; return m === 'GF' ? 3 : (m === 'SF' || m === 'SF1' || m === 'SF2') ? 2 : 1; };
+    // 阶段权重：决赛 > 半决赛 > 外卡突围赛 > 海选突围赛/分组（同一首歌保留最靠后、最具代表性的一场）
+    var stageOf = function (e) { var m = e.match || ''; return m === 'GF' ? 4 : (m === 'SF' || m === 'SF1' || m === 'SF2') ? 3 : m === 'SC' ? 2 : 1; };
     var grp = {}, order = [];
     hits.forEach(function (e) {
       var k = e.edition_no + '|' + e.member + '|' + e.artist + '|' + e.song;
