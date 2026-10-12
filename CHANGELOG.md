@@ -4,6 +4,29 @@
 
 ---
 
+## [2026-10-12] — 站内路径改为相对：兼容 GitHub Pages 子路径 /barboard/ 与根域名
+
+> barboard.space 的 DNS 暂停后，站点临时部署在 `https://barboard-space.github.io/barboard/`。原代码全用以 `/` 开头的根绝对路径，在子路径下全部指向 `barboard-space.github.io/` 根而 404（fonts.css、style.css、nav.js、logo、updates/ticker/bbl-latest 等），页面空白。
+> 现在所有站内引用都相对页面或站点根解析：子路径部署和以后恢复的根域名部署都**不需要再改代码**，也不使用写死的 `<base href>`。
+
+### Changed
+- **共享脚本按自身 src 推出站点根**：`scripts/nav.js`、`scripts/member-render.js`、`scripts/bv-results-render.js` 顶部新增 `SITE_ROOT`（`new URL('..', document.currentScript.src).pathname`，即 `/barboard/` 或 `/`，同时挂到 `window.BB_ROOT`）；这些脚本会被不同层级的页面加载，所以导航／页脚链接、logo、成员链接、届次链接、`editions-index.json` 的 fetch、走势图导出用的字体与 logo、注入 CSS 的 `url()` 都改为 `SITE_ROOT + '…'`
+- `bv-results-render.js` 新增 `siteUrl()`：`data/barvision/editions-index.json` 里的 `href` 仍是站点根逻辑路径（`/barvision/2025/`），上一届／下一届按钮用它换成实际站点根下的地址（数据文件不改）
+- **页面按层级改相对路径**：首页 `index.html`、`member/index.html`、`bbl/`、`bbl/hof/`、`barvision/` 下全部 22 个页面、145 个成员页 `member/<id>/`、`archive/` 下全部 13 个页面（Archive 总览、年榜 Hub、2013–2023 各年年榜）、`styleguide.html` —— `href`/`src`、内联 `url()`、`fetch()`、`EDITION_SRC`、JS 拼接链接（`'../member/' + id + '/'`）、`location.href` 跳转、`BUILT_EDITIONS` 等统一按页面深度写 `../`（首页 `bbl/`，一层 `../`，成员页 `../../`，2019–2020 届次页与各年年榜 `../../../`）；站点根链接 `href="/"` → `./` 或 `../`
+- `style.css`：`.cover-ph::before` 遮罩图 `url(/assets/images/logo_hollow.svg)` → `url(assets/images/logo_hollow.svg)`（相对样式表自身）
+- `partials/nav.html`、`partials/footer.html`（可读备份，运行时不加载）：路径改为相对站点根，并在文件头注明由 nav.js 加站点根前缀
+- `scripts/gen_member_pages.py`：成员页模板改为 `../../` 相对路径，以后重新生成不会带回根绝对路径；`scripts/gen_bv_editions_index.py` 注明 `href` 保持逻辑路径、由渲染器解析
+- `CLAUDE.md`：路径方案改为「相对路径 + 共享脚本 `SITE_ROOT`，禁止根绝对路径、写死域名与 `<base href>`」；#173 中要求「一律绝对 `/`」的三条旧注记标为已废止
+
+### Notes
+- 代码中没有写死 `https://barboard.space` 的跳转、iframe、canonical 或 `history.pushState`；`barboard.space` 只作为显示文字出现（赔率板品牌行、成员页走势图导出水印），保留不动。控制台的 `Unsafe attempt to load URL https://barboard.space/` 来自域名跳转失败后的浏览器错误页（当时仓库里还有 CNAME），不是页面代码发起的
+- 未改：`CNAME` 与 Pages 设置、`data/` 数据文件
+- 已有死链（与本次无关）：页脚「关于 Barboard」`about/` 页面尚未建；页脚隐藏项 `barvision/2025/events/` 不存在
+
+### Verified
+- 本地模拟两种部署（只绑定 127.0.0.1）：`/barboard/` 子路径与 `/` 根路径。静态检查 172 个非 archive 页面的 1011 处站内引用，两种部署下均能解析到存在的文件且不越出站点根；浏览器加载首页、Barvision 总览／历届／2026 子页／HOF／Stats、BBL 与 HOF、成员列表与成员页、styleguide 共 22 页，站内资源无 404，数据 JSON／CSV 均 200，导航与页脚注入正常；页面上收集到的 174 个站内链接除上述两个已有死链外全部 200；实际点击 首页 → BarboardLab → BBL HOF → 成员页 → 第 15 届 → 上一届 → logo 回首页，均停在 `/barboard/…` 下
+- 根域名回归：同样 16 个页面在 `/` 下与改动前代码（origin/main d5cc491）逐页对比，渲染文字量相同，页面链接集合相同（173 个）
+
 ## [2026-08-22] — Barvision Chongqing 2026 赛果导入：1–16 届全部齐备
 
 > 决赛于 2026-08-22 直播播完。`/barvision/2026/` 由「本届实时更新页」转为与 13–15 届同构的正式届次详情页。

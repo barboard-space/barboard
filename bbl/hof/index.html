@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>BBL Hall of Fame · BarboardLab | Barboard</title>
   <meta name="description" content="BarboardLab 荣誉殿堂 — 历届冠军单曲、在榜纪录、艺人成就与专辑上榜记录，数据截至第 124 期。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css?v=3.0.16" />
+  <link rel="icon" type="image/png" href="../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../fonts.css" />
+  <link rel="stylesheet" href="../../style.css?v=3.0.16" />
   <style>
     /* ── Hero ── */
     .hof-hero {
@@ -592,7 +592,7 @@
   <div class="hof-hero__grid"></div>
   <div class="hof-hero__watermark" aria-hidden="true">BARBOARDLAB</div>
   <div class="section__inner hof-hero__inner">
-    <a class="hof-eyebrow fade-up" href="/bbl/"><span>←</span><span>BarboardLab</span></a>
+    <a class="hof-eyebrow fade-up" href="../../bbl/"><span>←</span><span>BarboardLab</span></a>
     <h1 class="hof-hero__title fade-up" style="transition-delay:0.1s;">
       Hall <span style="opacity:0.65;">of</span> <span class="hof-accent">Fame</span>
     </h1>
@@ -724,7 +724,7 @@
 </nav>
 
 <div id="site-footer"></div>
-<script src="/scripts/nav.js"></script>
+<script src="../../scripts/nav.js"></script>
 <script>
   /* ─────────────────────────── DATA ──────────────────────────────────── */
 
@@ -1044,7 +1044,7 @@
     return str.split(' ').map(k => {
       const m = OWNER_MAP[k];
       if (!m) return '@' + k;
-      return `<a class="member" href="/member/${m.id}/" data-nickname="${m.nickname}">@${m.handle}</a>`;
+      return `<a class="member" href="../../member/${m.id}/" data-nickname="${m.nickname}">@${m.handle}</a>`;
     }).join(' ');
   }
 
@@ -1101,8 +1101,8 @@
     let volIndex, d;
     try {
       [volIndex, d] = await Promise.all([
-        fetch('/data/bbl/bbl-vol-index.json').then(r => r.json()),
-        fetch('/data/bbl/bbl-record/hof_data.json').then(r => r.json()),
+        fetch('../../data/bbl/bbl-vol-index.json').then(r => r.json()),
+        fetch('../../data/bbl/bbl-record/hof_data.json').then(r => r.json()),
       ]);
     } catch (e) {
       console.error('HOF: data load failed', e);

@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Hall of Fame | Barboard</title>
   <meta name="description" content="Barvision 荣誉殿堂——历届颁奖台、数据纪录、成就纪录与吧视先锋奖，记录 Barvision 年度歌曲大赛的高光时刻（数据截至第 15 届）。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../fonts.css" />
+  <link rel="stylesheet" href="../../style.css" />
   <style>
     /* ── Hero（金色主题） ── */
     .hof-hero { position: relative; padding: var(--nav-h) 0 64px; overflow: hidden; }
@@ -214,7 +214,7 @@
   <div class="hof-hero__grid" aria-hidden="true"></div>
   <div class="hof-hero__watermark" aria-hidden="true">BARVISION</div>
   <div class="hof-hero__inner section__inner">
-    <a class="hof-eyebrow fade-up" href="/barvision/"><span>←</span><span>Barvision</span></a>
+    <a class="hof-eyebrow fade-up" href="../../barvision/"><span>←</span><span>Barvision</span></a>
     <h1 class="hof-title fade-up" style="transition-delay:0.1s;">Hall <span class="dim">of</span> <span class="gold">Fame</span></h1>
     <p class="hof-desc fade-up" style="transition-delay:0.2s;">记录 Barvision 年度歌曲大赛历届高光时刻。数据统计截至第 <span id="hofThrough">15</span> 届。</p>
   </div>
@@ -266,7 +266,7 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="/scripts/nav.js"></script>
+<script src="../../scripts/nav.js"></script>
 <script>
   function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -281,7 +281,7 @@
     if (!info || !(parseInt(sid, 10) > 0))
       return '<span style="color:var(--clr-text-2);">' + esc(nick) + '</span>';
     var label = (info.handle && info.handle !== nick) ? '@' + esc(info.handle) : esc(nick);
-    return '<a class="member" href="/member/' + sid + '/" data-nickname="' + esc(nick) + '">' + label + '</a>';
+    return '<a class="member" href="../../member/' + sid + '/" data-nickname="' + esc(nick) + '">' + label + '</a>';
   }
   /* 一条记录/奖项的得主链接（支持单 id 或 ids 数组合报） */
   function whoLinks(e) {
@@ -291,15 +291,15 @@
   }
   /* 详情页路径（#165）：2023+ → /barvision/<年>.html；2019–2020 → /barvision/<年>/<两位届号>.html */
   function edHref(year, no) {
-    return year >= 2023 ? '/barvision/' + year + '/'
-      : '/barvision/' + year + '/' + String(no).padStart(2, '0') + '/';
+    return year >= 2023 ? '../../barvision/' + year + '/'
+      : '../../barvision/' + year + '/' + String(no).padStart(2, '0') + '/';
   }
 
   /* ── 先锋奖 ── */
   function buildPioneer(p) {
     var el = document.getElementById('bvPioneer');
     if (!el || !p) return;
-    var href = '/member/' + p.member_id + '/';
+    var href = '../../member/' + p.member_id + '/';
     var nameLink = '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '" style="color:var(--clr-text);">' + esc(p.handle) + '</a>';
     var descHtml = esc(p.desc).replace('@' + esc(p.handle),
       '<a class="member" href="' + href + '" data-nickname="' + esc(p.nickname) + '">@' + esc(p.handle) + '</a>');
@@ -460,7 +460,7 @@
   /* ── load + render ── */
   (async function () {
     try {
-      STATS = await fetch('/data/barvision/bv-stats.json').then(function (r) { return r.json(); });
+      STATS = await fetch('../../data/barvision/bv-stats.json').then(function (r) { return r.json(); });
     } catch (e) { console.error('BV HOF: data load failed', e); return; }
 
     var through = document.getElementById('hofThrough');

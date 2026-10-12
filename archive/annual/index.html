@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>榜吧年榜 | Barboard</title>
   <meta name="description" content="榜吧年榜历届存档总览——社区年度音乐盘点传统，含年度单曲榜及后续将扩展的专辑榜、艺人榜、冠单榜等分榜类型。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css?v=3.0.16" />
+  <link rel="icon" type="image/png" href="../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../fonts.css" />
+  <link rel="stylesheet" href="../../style.css?v=3.0.16" />
   <style>
     /* ── Hero（沿用年榜系统 ac- 配色：电蓝主色）── */
     .ac-hero { position: relative; padding: calc(var(--nav-h) + 40px) 0 24px; overflow: hidden; }
@@ -102,7 +102,7 @@
   <section class="ac-hero">
     <div class="ac-hero__glow" aria-hidden="true"></div>
     <div class="section__inner ac-hero__inner">
-      <a href="/archive/" class="ac-eyebrow fade-up"><span>←</span><span>Archive</span></a>
+      <a href="../../archive/" class="ac-eyebrow fade-up"><span>←</span><span>Archive</span></a>
       <h1 class="ac-title fade-up" style="transition-delay:0.1s;"><span class="ac-board">榜吧</span>年榜<br><span class="ac-yr">历届存档</span></h1>
       <div class="ac-meta fade-up" style="transition-delay:0.16s;">
         <span class="ac-meta-item">欧美流行音乐个人榜吧 · 年度音乐盘点</span>
@@ -122,7 +122,7 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="/scripts/nav.js"></script>
+  <script src="../../scripts/nav.js"></script>
   <script>
     function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
 
@@ -163,7 +163,7 @@
       ) : '';
       var metaParts = ['TOP 200'];
       if (sheets) metaParts.push(sheets + ' 榜合榜');
-      return '<a class="ac-hub-card fade-up" href="/archive/annual/' + y + '/" style="transition-delay:' + (i * 0.07) + 's;">' +
+      return '<a class="ac-hub-card fade-up" href="../../archive/annual/' + y + '/" style="transition-delay:' + (i * 0.07) + 's;">' +
         '<div class="ac-hub-card__top"><span class="ac-hub-card__year">' + y + '</span><span class="ac-hub-card__badge">年度单曲榜</span></div>' +
         champBlock +
         '<div class="ac-hub-card__meta">' + metaParts.map(function(m){ return '<span>' + esc(m) + '</span>'; }).join('') + '</div>' +
@@ -174,10 +174,10 @@
     (async function() {
       var grid = document.getElementById('acHubGrid');
       var idx = {};
-      try { idx = await fetch('/data/annual/member-annual-index.json').then(function(r){ return r.json(); }); } catch (e) {}
+      try { idx = await fetch('../../data/annual/member-annual-index.json').then(function(r){ return r.json(); }); } catch (e) {}
       var cards = await Promise.all(YEARS.map(async function(y, i) {
         try {
-          var d = await fetch('/data/annual/' + y + '.json').then(function(r){ return r.json(); });
+          var d = await fetch('../../data/annual/' + y + '.json').then(function(r){ return r.json(); });
           // boards = 官方合榜数（人工登记，见 BOARD_COUNT），未登记则退回按已识别成员数动态算
           var sheets = d.boards != null ? d.boards : (idx[String(y)] ? Object.keys(idx[String(y)]).length : null);
           return hubCard(y, d.entries || [], sheets, i);

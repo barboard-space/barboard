@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Archive | Barboard</title>
   <meta name="description" content="Barboard 活动总览——BarboardLab 单曲周榜、Barvision 年度歌曲大赛、吧年榜、吧莱美及 Eurovision China Voting Party 历届存档。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../fonts.css" />
+  <link rel="stylesheet" href="../style.css" />
   <style>
     /* ── Hero ── */
     .arc-hero {
@@ -255,7 +255,7 @@
   <div class="arc-hero__grid" aria-hidden="true"></div>
   <div class="arc-hero__watermark" aria-hidden="true">BARBOARD</div>
   <div class="arc-hero__inner section__inner">
-    <a class="arc-eyebrow fade-up" href="/"><span>←</span><span>Barboard</span></a>
+    <a class="arc-eyebrow fade-up" href="../"><span>←</span><span>Barboard</span></a>
     <h1 class="arc-title fade-up" style="transition-delay:0.1s;">Archive</h1>
     <p class="arc-desc fade-up" style="transition-delay:0.2s;">榜吧自 2013 年创立以来举办的各类活动总览，包含进行中的常规活动与 Legacy 的历届存档。</p>
   </div>
@@ -291,8 +291,8 @@
         </div>
         <p class="arc-card__desc">每周六更新的个人单曲周榜合榜活动，成员提交个人周榜，通过点数规则汇总生成合榜，完整榜单记录在 Musictrack。从 2024 年 3 月 13 日起，每周稳定更新至今。</p>
         <div class="arc-card__links">
-          <a href="/bbl/" class="arc-card__link arc-card__link--primary">了解 BBL</a>
-          <a href="/bbl/hof/" class="arc-card__link">Hall of Fame</a>
+          <a href="../bbl/" class="arc-card__link arc-card__link--primary">了解 BBL</a>
+          <a href="../bbl/hof/" class="arc-card__link">Hall of Fame</a>
           <a href="https://musictrack.cn/chart/3045/" class="arc-card__link" target="_blank" rel="noopener">Musictrack<svg class="ext-icon" xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 8L8 2M8 2H4M8 2v4"/></svg></a>
         </div>
       </div>
@@ -317,11 +317,11 @@
             <span class="arc-stat__label">创立年份</span>
           </div>
         </div>
-        <p class="arc-card__desc">灵感来自 Eurovision 的年度歌曲大赛，成员选送小众歌曲参赛。由 <a class="member" href="/member/125/" data-nickname="萌妈">@绿荫夏语</a> 在 2019 年发起，于 2021–2022 年停办，自 2023 年恢复后改为一年一届。</p>
+        <p class="arc-card__desc">灵感来自 Eurovision 的年度歌曲大赛，成员选送小众歌曲参赛。由 <a class="member" href="../member/125/" data-nickname="萌妈">@绿荫夏语</a> 在 2019 年发起，于 2021–2022 年停办，自 2023 年恢复后改为一年一届。</p>
         <div class="arc-card__links">
-          <a href="/barvision/" class="arc-card__link arc-card__link--primary">了解 Barvision</a>
-          <a href="/barvision/2026/events/" class="arc-card__link">Barvision 2026</a>
-          <a href="/barvision/hof/" class="arc-card__link">Hall of Fame</a>
+          <a href="../barvision/" class="arc-card__link arc-card__link--primary">了解 Barvision</a>
+          <a href="../barvision/2026/events/" class="arc-card__link">Barvision 2026</a>
+          <a href="../barvision/hof/" class="arc-card__link">Hall of Fame</a>
         </div>
       </div>
 
@@ -338,7 +338,7 @@
     <div class="arc-grid arc-grid--3">
 
       <!-- 榜吧年榜/半年榜（整卡可点击跳转） -->
-      <div class="arc-card arc-card--year arc-card--ended fade-up" style="transition-delay:0.07s;cursor:pointer;" onclick="location.href='/archive/annual/'">
+      <div class="arc-card arc-card--year arc-card--ended fade-up" style="transition-delay:0.07s;cursor:pointer;" onclick="location.href='../archive/annual/'">
         <div class="arc-card__header">
           <div>
             <p class="arc-card__eyebrow">音乐盘点活动</p>
@@ -388,7 +388,7 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="/scripts/nav.js"></script>
+<script src="../scripts/nav.js"></script>
 <script>
   if ('IntersectionObserver' in window) {
     var fadeObserver = new IntersectionObserver(function(entries) {
@@ -411,7 +411,7 @@
   }
 
   // 当前期数与 bbl/index.html 同源，动态 fetch 保持同步，不手动硬编码
-  fetch('/data/bbl/bbl-latest.json').then(function(r){ return r.json(); }).then(function(d){
+  fetch('../data/bbl/bbl-latest.json').then(function(r){ return r.json(); }).then(function(d){
     var el = document.getElementById('arcBblIssue');
     if (el && d.issue) el.textContent = d.issue;
   }).catch(function(){});

@@ -1,6 +1,11 @@
 (function () {
   'use strict';
 
+  /* 站点根路径：由本脚本自身的 src（…/scripts/*.js）推出，GitHub Pages 子路径（/barboard/）与根域名部署通用 */
+  var SITE_ROOT = window.BB_ROOT || (window.BB_ROOT = (function (s) {
+    return s && s.src ? new URL('..', s.src).pathname : '/';
+  })(document.currentScript));
+
   /* ── CSS ── */
   var css = [
     '.mp-hero{padding:calc(var(--nav-h) + 56px) 0 64px;position:relative;overflow:hidden}',
@@ -195,7 +200,7 @@
     '.mp-an-tbl .an-name-in{display:flex;align-items:center;gap:18px}',  /* 内层 flex：封面 + 标题 */
     '.an-cover{width:36px;height:36px;border-radius:3px;object-fit:cover;flex-shrink:0;background:var(--clr-surface-2);display:block}',
     '.an-cover--ph{display:inline-block;position:relative;overflow:hidden}',  /* 封面缺失兜底：沿用背景色 + 榜吧 logo 水印（弱化色调，不抢视觉） */
-    '.an-cover--ph::before{content:"";position:absolute;inset:20%;background:var(--clr-text-4);opacity:.5;-webkit-mask-image:url(/assets/images/logo_hollow.svg);mask-image:url(/assets/images/logo_hollow.svg);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
+    '.an-cover--ph::before{content:"";position:absolute;inset:20%;background:var(--clr-text-4);opacity:.5;-webkit-mask-image:url(' + SITE_ROOT + 'assets/images/logo_hollow.svg);mask-image:url(' + SITE_ROOT + 'assets/images/logo_hollow.svg);-webkit-mask-size:contain;mask-size:contain;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;-webkit-mask-position:center;mask-position:center}',
     '.mp-an-tbl .an-title{min-width:0}',
     /* 前十表：固定列宽（避免展开后歌手列因内容变化而横向移动）+ 歌名表头缩进到标题位置（td14 + 封面36 + 间距18 = 68）*/
     '.mp-an-block .mp-an-tbl{table-layout:fixed;min-width:600px}',
@@ -378,8 +383,8 @@
       var cls = (e.is_shadow || e.canceled) ? 'mp-bv-row--shadow' : (e.rank && e.rank <= 3 ? 'mp-bv-row--' + e.rank : '');
       // 详情页路径（clean URL 目录化）：2023 起一年一届 → /barvision/<年>/；2019–2020 一年多届 → /barvision/<年>/<两位届数>(e)/
       var href = (e.year >= 2023)
-        ? '/barvision/' + e.year + '/'
-        : '/barvision/' + e.year + '/' + ('0' + e.edition_no).slice(-2) + (e.version === 'unplugged' ? 'e' : '') + '/';
+        ? SITE_ROOT + 'barvision/' + e.year + '/'
+        : SITE_ROOT + 'barvision/' + e.year + '/' + ('0' + e.edition_no).slice(-2) + (e.version === 'unplugged' ? 'e' : '') + '/';
       var seriesLabel = /^[0-9]+$/.test(String(e.series)) ? '-' : esc(e.series);
       return '<tr class="' + cls + '">' +
         '<td class="rk">' + (e.rank == null ? '—' : (e.is_shadow ? '<span class="rk-sh">' + e.rank + '*</span>' : e.rank)) + '</td>' +
@@ -584,9 +589,9 @@
   function bvEmbedFontCss() {  // 把走势图用到的本地字体 base64 内嵌，导出时文字才保真；失败则优雅降级为系统字体
     if (_bvFontCssP) return _bvFontCssP;
     var fonts = [
-      ['DM Mono', '400', '/assets/fonts/DM_Mono/DMMono-Regular.ttf'],
-      ['DM Sans', '400', '/assets/fonts/DM_Sans/static/DMSans-Regular.ttf'],
-      ['DM Sans', '600', '/assets/fonts/DM_Sans/static/DMSans-SemiBold.ttf']
+      ['DM Mono', '400', SITE_ROOT + 'assets/fonts/DM_Mono/DMMono-Regular.ttf'],
+      ['DM Sans', '400', SITE_ROOT + 'assets/fonts/DM_Sans/static/DMSans-Regular.ttf'],
+      ['DM Sans', '600', SITE_ROOT + 'assets/fonts/DM_Sans/static/DMSans-SemiBold.ttf']
     ];
     _bvFontCssP = Promise.all(fonts.map(function (f) {
       return fetch(f[2]).then(function (r) { return r.arrayBuffer(); }).then(function (buf) {
@@ -604,7 +609,7 @@
       var im = new Image();
       im.onload = function () { res(im); };
       im.onerror = function () { res(null); };
-      im.src = '/assets/images/logo_center.png';
+      im.src = SITE_ROOT + 'assets/images/logo_center.png';
     });
     return _bvLogoP;
   }
@@ -1149,7 +1154,7 @@
   var heroHtml = d.unclaimed
     ? '<section class="mp-hero mp-hero--unclaimed">' +
         '<div class="mp-hero__inner section__inner">' +
-          '<a class="mp-eyebrow fade-up" href="/member/"><span>←</span><span>Members</span></a>' +
+          '<a class="mp-eyebrow fade-up" href="' + SITE_ROOT + 'member/"><span>←</span><span>Members</span></a>' +
           '<div class="mp-card fade-up"><div class="mp-info">' +
             '<div class="mp-nickname mp-nickname--unclaimed">匿名</div>' +
             '<div class="mp-handle">参赛歌曲匿名选送者</div>' +
@@ -1159,7 +1164,7 @@
     : '<section class="mp-hero">' +
         '<div class="mp-hero__glow" aria-hidden="true"></div>' +
         '<div class="mp-hero__inner section__inner">' +
-          '<a class="mp-eyebrow fade-up" href="/member/"><span>←</span><span>Members</span></a>' +
+          '<a class="mp-eyebrow fade-up" href="' + SITE_ROOT + 'member/"><span>←</span><span>Members</span></a>' +
           '<div class="mp-card fade-up">' +
             '<div style="position:relative;display:inline-block;margin-top:8px">' +
               '<div class="mp-avatar__ring" style="position:absolute;inset:-3px;border-radius:50%;background:linear-gradient(135deg,var(--clr-violet),var(--clr-accent));opacity:.5;z-index:0"></div>' +

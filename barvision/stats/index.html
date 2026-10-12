@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Stats | Barboard</title>
   <meta name="description" content="Barvision 数据中心——历届成绩总览、大妈选送排行榜与按成员 / 歌手 / 歌曲 / 语种的大数据查询（数据截至第 15 届）。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../fonts.css" />
+  <link rel="stylesheet" href="../../style.css" />
   <style>
     /* ── Hero（电蓝 / 紫 数据主题） ── */
     .st-hero { position: relative; padding: var(--nav-h) 0 64px; overflow: hidden; }
@@ -318,7 +318,7 @@
   <div class="st-hero__watermark" aria-hidden="true">BARVISION</div>
   <div class="st-hero__inner section__inner">
     <div class="st-finder__head">
-      <a class="st-eyebrow fade-up" href="/barvision/"><span>←</span><span>Barvision</span></a>
+      <a class="st-eyebrow fade-up" href="../../barvision/"><span>←</span><span>Barvision</span></a>
       <h1 class="st-title fade-up" style="transition-delay:0.1s;">Data <span class="ac">Center</span></h1>
       <p class="st-desc fade-up" style="transition-delay:0.2s;">按单曲 / 歌手 / 成员 / 语种检索 <span id="stTotal">—</span> 首历届参赛歌曲。<span id="stThrough">数据截至第 15 届</span>。</p>
       <div class="st-q fade-up" style="transition-delay:0.32s;">
@@ -368,7 +368,7 @@
 </section>
 
 <div id="site-footer"></div>
-<script src="/scripts/nav.js"></script>
+<script src="../../scripts/nav.js"></script>
 <script>
   function esc(s) { return String(s == null ? '' : s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
   var STATS = null;
@@ -381,7 +381,7 @@
     if (!info || !(parseInt(sid, 10) > 0))
       return '<span class="st-anon">' + esc(nick) + '</span>';
     var label = (info.handle && info.handle !== nick) ? '@' + esc(info.handle) : esc(nick);
-    return '<a class="member" href="/member/' + sid + '/" data-nickname="' + esc(nick) + '">' + label + '</a>';
+    return '<a class="member" href="../../member/' + sid + '/" data-nickname="' + esc(nick) + '">' + label + '</a>';
   }
   /* 选送者（合报含多 id），按昵称串拆链接 */
   function whoLinks(ids, nick) {
@@ -391,8 +391,8 @@
   }
   /* 详情页路径（#165）：2023+ → /barvision/<年>.html；2019–2020 → /barvision/<年>/<两位届号>.html */
   function edHref(year, no) {
-    return year >= 2023 ? '/barvision/' + year + '/'
-      : '/barvision/' + year + '/' + String(no).padStart(2, '0') + '/';
+    return year >= 2023 ? '../../barvision/' + year + '/'
+      : '../../barvision/' + year + '/' + String(no).padStart(2, '0') + '/';
   }
 
   /* ── 历届成绩总览 ── */
@@ -736,7 +736,7 @@
 
   /* ── load + render ── */
   (async function () {
-    try { STATS = await fetch('/data/barvision/bv-stats.json').then(function (r) { return r.json(); }); }
+    try { STATS = await fetch('../../data/barvision/bv-stats.json').then(function (r) { return r.json(); }); }
     catch (e) { console.error('BV Stats: data load failed', e); return; }
 
     if (STATS.data_through) document.getElementById('stThrough').textContent = '数据截至第 ' + STATS.data_through + ' 届';

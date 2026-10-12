@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision · 年度歌曲大赛 | Barboard</title>
   <meta name="description" content="Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。自 2019 年创立，成员选送小众歌曲参赛，现已举办至第十六届。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../fonts.css" />
+  <link rel="stylesheet" href="../style.css" />
   <style>
     /* ── Hero ── */
     .bv-hero {
@@ -89,7 +89,7 @@
       display: grid; grid-template-columns: 1fr auto;
       gap: 36px;
       /* 2026 主视觉 bg（无文字）作底图，铺满无边界；padding-box 防半透明 border 透出亮边 */
-      background: url('/assets/images/barvision/2026/bg.png') center / cover no-repeat;
+      background: url('../assets/images/barvision/2026/bg.png') center / cover no-repeat;
       background-clip: padding-box;
       border: 1px solid rgba(100,140,230,0.55);
       border-radius: 8px;
@@ -306,7 +306,7 @@
 
       <!-- 左列 -->
       <div class="bv-hero__info">
-        <a class="bv-eyebrow" href="/"><span>←</span><span>Barboard</span></a>
+        <a class="bv-eyebrow" href="../"><span>←</span><span>Barboard</span></a>
         <h1 class="bv-hero__title">Barvision</h1>
         <div class="bv-hero__meta lab__meta">
           <span class="lab__meta-item">欧美流行音乐个人榜吧歌曲大赛</span>
@@ -314,18 +314,18 @@
           <span class="lab__meta-item">最新一届 Chongqing 2026</span>
         </div>
         <p class="bv-hero__desc">
-          Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。榜吧成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。2019 年由 <a class="member" href="/member/125/" data-nickname="萌妈">@绿荫夏语</a> 创立，历经两年停办后于 2023 年恢复，现已举办至第十六届。
+          Barvision 是 Barboard 举办的年度歌曲大赛，灵感来自 Eurovision。榜吧成员自行选送小众歌曲参赛，经半决赛与决赛投票决出年度冠军。2019 年由 <a class="member" href="../member/125/" data-nickname="萌妈">@绿荫夏语</a> 创立，历经两年停办后于 2023 年恢复，现已举办至第十六届。
         </p>
         <div class="bv-hero__actions">
-          <a href="/barvision/2026/" class="btn btn--primary">Barvision 2026</a>
-          <a href="/barvision/stats/" class="btn btn--outline">数据中心</a>
-          <a href="/barvision/hof/" class="btn btn--outline">名人堂</a>
+          <a href="../barvision/2026/" class="btn btn--primary">Barvision 2026</a>
+          <a href="../barvision/stats/" class="btn btn--outline">数据中心</a>
+          <a href="../barvision/hof/" class="btn btn--outline">名人堂</a>
         </div>
       </div>
 
       <!-- 右列：logo -->
       <div class="bv-recent-card">
-        <img src="/assets/images/barvision_logo_2026.svg" class="bv-hero-logo" alt="Barvision Chongqing 2026">
+        <img src="../assets/images/barvision_logo_2026.svg" class="bv-hero-logo" alt="Barvision Chongqing 2026">
       </div>
 
     </div>
@@ -339,15 +339,15 @@
     <p class="section-label fade-up">历届大赛</p>
 
     <!-- XVI 当届卡片 -->
-    <div class="bv-current-card" style="cursor:pointer;" onclick="location.href='/barvision/2026/'">
+    <div class="bv-current-card" style="cursor:pointer;" onclick="location.href='../barvision/2026/'">
       <div class="bv-current-card__left fade-up" style="transition-delay:0.06s;">
         <div class="bv-live-badge bv-live-badge--done">已完赛</div>
         <div class="season-card__edition">BARVISION CHONGQING 2026</div>
         <div class="season-card__name">重声交响 Echoing Confluence</div>
-        <div style="font-size:11px;color:var(--clr-text-3);margin-top:14px;letter-spacing:0.06em;line-height:1.7;position:relative;z-index:1;"><strong>第十六届欧美流行歌曲个人榜吧歌曲大赛</strong><br><span style="display:inline-block;margin-top:0;">主办：<a class="member" href="/member/7/" data-nickname="威妈" onclick="event.stopPropagation()">@williw_</a></span><br><span style="display:inline-block;margin-top:0;">冠军：<a class="member" href="/member/19/" data-nickname="柠妈" onclick="event.stopPropagation()">@LemonSheeran</a> — Olivia Marsh — Too Good to be Bad</span></div>
+        <div style="font-size:11px;color:var(--clr-text-3);margin-top:14px;letter-spacing:0.06em;line-height:1.7;position:relative;z-index:1;"><strong>第十六届欧美流行歌曲个人榜吧歌曲大赛</strong><br><span style="display:inline-block;margin-top:0;">主办：<a class="member" href="../member/7/" data-nickname="威妈" onclick="event.stopPropagation()">@williw_</a></span><br><span style="display:inline-block;margin-top:0;">冠军：<a class="member" href="../member/19/" data-nickname="柠妈" onclick="event.stopPropagation()">@LemonSheeran</a> — Olivia Marsh — Too Good to be Bad</span></div>
       </div>
       <div class="bv-current-card__right fade-up" style="transition-delay:0.20s;">
-        <img src="/assets/images/barvision_logo_2026.svg" class="bv-current-logo" alt="Barvision Chongqing 2026">
+        <img src="../assets/images/barvision_logo_2026.svg" class="bv-current-logo" alt="Barvision Chongqing 2026">
       </div>
     </div>
 
@@ -368,7 +368,7 @@
 
 
 <div id="site-footer"></div>
-<script src="/scripts/nav.js"></script>
+<script src="../scripts/nav.js"></script>
 <script>
   function esc(s) {
     return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -449,22 +449,22 @@
   // ── 详情页链接 ───────────────────────────────────────────────
   // 已建好详情页的届次（href 形式）；建好新一届就把 href 加进来，对应卡片自动可点
   var BUILT_EDITIONS = new Set([
-    '/barvision/2019/01/',
-    '/barvision/2019/02/',
-    '/barvision/2019/03/',
-    '/barvision/2019/04/',
-    '/barvision/2019/05/',
-    '/barvision/2020/06/',
-    '/barvision/2020/07/',
-    '/barvision/2020/08/',
-    '/barvision/2020/09/',
-    '/barvision/2020/10/',
-    '/barvision/2020/11/',
-    '/barvision/2020/12/',
-    '/barvision/2023/',
-    '/barvision/2024/',
-    '/barvision/2025/',
-    '/barvision/2026/',
+    '../barvision/2019/01/',
+    '../barvision/2019/02/',
+    '../barvision/2019/03/',
+    '../barvision/2019/04/',
+    '../barvision/2019/05/',
+    '../barvision/2020/06/',
+    '../barvision/2020/07/',
+    '../barvision/2020/08/',
+    '../barvision/2020/09/',
+    '../barvision/2020/10/',
+    '../barvision/2020/11/',
+    '../barvision/2020/12/',
+    '../barvision/2023/',
+    '../barvision/2024/',
+    '../barvision/2025/',
+    '../barvision/2026/',
   ]);
   function romanToInt(r) {
     var map = { I:1, V:5, X:10, L:50, C:100, D:500, M:1000 }, n = 0;
@@ -477,9 +477,9 @@
   function editionHref(year, version, roman) {
     var n = romanToInt(roman);
     // 路径方案：2023 起一年一届 → /barvision/<年>.html；2019–2020 一年多届 → /barvision/<年>/<两位届数>(e).html
-    if (year >= 2023) return '/barvision/' + year + '/';
+    if (year >= 2023) return '../barvision/' + year + '/';
     var nn = n < 10 ? '0' + n : '' + n;
-    return '/barvision/' + year + '/' + nn + (version === 'unplugged' ? 'e' : '') + '/';
+    return '../barvision/' + year + '/' + nn + (version === 'unplugged' ? 'e' : '') + '/';
   }
 
   // ── Build functions ──────────────────────────────────────────
@@ -487,10 +487,10 @@
     var el = document.getElementById('bvRecentArchiveGrid');
     if (!el) return;
     var recent = EDITIONS.filter(function(ed) { return ed.year >= 2023; });
-    var RECENT_BG = { 2023: '/assets/images/barvision/2023/bg.png', 2024: '/assets/images/barvision/2024/bg-pink.png', 2025: '/assets/images/barvision/2025/bg.png' };  // 卡片上半部分主视觉背景（按届补充）
+    var RECENT_BG = { 2023: '../assets/images/barvision/2023/bg.png', 2024: '../assets/images/barvision/2024/bg-pink.png', 2025: '../assets/images/barvision/2025/bg.png' };  // 卡片上半部分主视觉背景（按届补充）
     var RECENT_BG_SIZE = { 2024: '128%' };  // 个别届主视觉在 cover 之上再放大（桌面+手机通用，inline 覆盖 background-size:cover）
     el.innerHTML = recent.map(function(ed, i) {
-      var logoSrc = '/assets/images/barvision_logo_' + ed.year + '.svg';
+      var logoSrc = '../assets/images/barvision_logo_' + ed.year + '.svg';
       var cityHtml = ed.city ? '<div class="edition-card__winner">' + esc(ed.city) + '</div>' : '';
       var href = editionHref(ed.year, 'regular', ed.roman);
       var link = BUILT_EDITIONS.has(href);
@@ -545,10 +545,10 @@
   }
 
   // 预解码卡片主视觉大图（off-main-thread），避免入场动画期间在主线程同步解码导致掉帧/卡顿
-  ['/assets/images/barvision/2026/bg.png',
-   '/assets/images/barvision/2023/bg.png',
-   '/assets/images/barvision/2024/bg-pink.png',
-   '/assets/images/barvision/2025/bg.png'].forEach(function (u) {
+  ['../assets/images/barvision/2026/bg.png',
+   '../assets/images/barvision/2023/bg.png',
+   '../assets/images/barvision/2024/bg-pink.png',
+   '../assets/images/barvision/2025/bg.png'].forEach(function (u) {
     var im = new Image(); im.src = u;
     if (im.decode) { im.decode().catch(function () {}); }
   });

@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 赔率预测 | Barboard</title>
   <meta name="description" content="第十六届 Barvision Chongqing 2026 · 赔率预测榜——由成员预测投票 + BarboardLab 历史人气数据生成的各场（Semi-Final / Wildcard / Grand Final）晋级、冠军、Top 3 赔率，仅供娱乐。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../../fonts.css" />
+  <link rel="stylesheet" href="../../../style.css" />
   <style>
     /* ═══════════════════════════════════════════════════════════
        赔率预测板块（页面独有组件，odds- 前缀；不动 style.css）
@@ -25,7 +25,7 @@
     }
     .odds-hero__poster {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: url('/assets/images/barvision/2026/poster.png');
+      background-image: url('../../../assets/images/barvision/2026/poster.png');
       background-size: cover; background-position: right center;
       opacity: 0; transition: opacity 0.55s ease;
     }
@@ -204,7 +204,7 @@
 
     @media (max-width: 768px) {
       .odds-hero { padding: calc(var(--nav-h) + 22px) 0 24px; }
-      .odds-hero__poster { background-image: url('/assets/images/barvision/2026/bg.png'); }
+      .odds-hero__poster { background-image: url('../../../assets/images/barvision/2026/bg.png'); }
       .odds-hero__desc { max-width: 100%; }
       .odds-main { padding-bottom: 64px; }
       .odds-board { padding: 14px 13px 12px; }
@@ -228,7 +228,7 @@
     <div class="odds-hero__glow" aria-hidden="true"></div>
     <div class="section__inner odds-hero__inner">
       <div class="odds-hero__layout">
-        <a href="/barvision/2026/" class="odds-eyebrow"><span>←</span><span>Barvision Chongqing 2026</span></a>
+        <a href="../../../barvision/2026/" class="odds-eyebrow"><span>←</span><span>Barvision Chongqing 2026</span></a>
         <h1 class="odds-title">赔率<span class="odds-accent">预测</span></h1>
         <div class="odds-meta">
           <span class="odds-meta__i">第十六届欧美流行歌曲个人榜吧歌曲大赛</span>
@@ -256,7 +256,7 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="/scripts/nav.js"></script>
+  <script src="../../../scripts/nav.js"></script>
   <script>
   (function () {
     'use strict';
@@ -432,7 +432,7 @@
       var poster = document.querySelector('.odds-hero__poster');
       if (!poster) return;
       var mobile = window.matchMedia('(max-width:768px)').matches;
-      var src = mobile ? '/assets/images/barvision/2026/bg.png' : '/assets/images/barvision/2026/poster.png';
+      var src = mobile ? '../../../assets/images/barvision/2026/bg.png' : '../../../assets/images/barvision/2026/poster.png';
       var img = new Image();
       var show = function () { poster.classList.add('loaded'); };
       img.onload = function () { (img.decode ? img.decode().then(show).catch(show) : show()); };
@@ -441,7 +441,7 @@
     })();
 
     // 拉数据渲染
-    fetch('/data/barvision/odds/odds.json', { cache: 'no-cache' })
+    fetch('../../../data/barvision/odds/odds.json', { cache: 'no-cache' })
       .then(function (r) { if (!r.ok) throw new Error('http ' + r.status); return r.json(); })
       .then(function (d) {
         DATA = d;

@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 歌单 / 回顾 | Barboard</title>
   <meta name="description" content="第十六届 Barvision Chongqing 2026 · 参赛歌单与回顾视频存档——决赛 26 首、Semi-Final 38 首、Wildcard Round 12 首，Spotify / Apple Music / 网易云 / QQ 在线试听。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../../fonts.css" />
+  <link rel="stylesheet" href="../../../style.css" />
   <style>
     /* ═══ Hero（复用 2026 主视觉海报 + 遮罩，同提交页风格）═══ */
     .ev-hero { position: relative; padding: calc(var(--nav-h) + 64px) 0 80px; overflow: hidden; }
@@ -21,7 +21,7 @@
     }
     .ev-hero__poster {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: url('/assets/images/barvision/2026/poster.png');
+      background-image: url('../../../assets/images/barvision/2026/poster.png');
       background-size: cover; background-position: center;
       opacity: 0; transition: opacity 0.55s ease;
     }
@@ -154,7 +154,7 @@
 
     @media (max-width: 768px) {
       .ev-hero { padding: calc(var(--nav-h) + 40px) 0 56px; }
-      .ev-hero__poster { background-image: url('/assets/images/barvision/2026/bg.png'); }
+      .ev-hero__poster { background-image: url('../../../assets/images/barvision/2026/bg.png'); }
       .ev-hero__desc { max-width: 100%; }
       .ev-grid { grid-template-columns: 1fr; }
       .ev-sec { padding: 56px 0 72px; }
@@ -243,13 +243,13 @@
     <div class="ev-hero__glow" aria-hidden="true"></div>
     <div class="section__inner ev-hero__inner">
       <div class="ev-hero__layout">
-        <a href="/barvision/2026/" class="ev-eyebrow"><span>←</span><span>Barvision Chongqing 2026</span></a>
+        <a href="../../../barvision/2026/" class="ev-eyebrow"><span>←</span><span>Barvision Chongqing 2026</span></a>
         <h1 class="ev-title--cjk">赛事<span class="ev-accent">专区</span></h1>
         <div class="ev-meta">
           <span class="ev-meta-item">第十六届欧美流行歌曲个人榜吧歌曲大赛</span>
           <span class="ev-meta-item">重声交响 Echoing Confluence</span>
         </div>
-        <p class="ev-hero__desc">第十六届已完赛，各阶段投票通道均已关闭。本页存档本届全部参赛曲目的歌单与回顾视频；完整赛果与逐票计分板见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
+        <p class="ev-hero__desc">第十六届已完赛，各阶段投票通道均已关闭。本页存档本届全部参赛曲目的歌单与回顾视频；完整赛果与逐票计分板见 <a href="../../../barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
       </div>
     </div>
   </section>
@@ -351,7 +351,7 @@
           </div>
         </div>
       </div>
-      <p class="pl-note fade-up">决赛已开赛，全部 38 首参赛曲目见上方各歌单，其中 26 首晋级决赛。Semi-Final 1 / 2 与海选、外卡突围赛均已完赛——完整赛程与实时进展见 <a href="/barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
+      <p class="pl-note fade-up">决赛已开赛，全部 38 首参赛曲目见上方各歌单，其中 26 首晋级决赛。Semi-Final 1 / 2 与海选、外卡突围赛均已完赛——完整赛程与实时进展见 <a href="../../../barvision/2026/" style="color:var(--clr-violet-light);">本届总览</a>。</p>
     </div>
   </section>
 
@@ -399,14 +399,14 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="/scripts/nav.js"></script>
+  <script src="../../../scripts/nav.js"></script>
   <script>
     // 海报大图预解码后淡入（消除弹出/解码卡顿，见 #166）
     (function () {
       var poster = document.querySelector('.ev-hero__poster');
       if (!poster) return;
       var mobile = window.matchMedia('(max-width:768px)').matches;
-      var src = mobile ? '/assets/images/barvision/2026/bg.png' : '/assets/images/barvision/2026/poster.png';
+      var src = mobile ? '../../../assets/images/barvision/2026/bg.png' : '../../../assets/images/barvision/2026/poster.png';
       var img = new Image();
       var show = function () { poster.classList.add('loaded'); };
       img.onload = function () { (img.decode ? img.decode().then(show).catch(show) : show()); };

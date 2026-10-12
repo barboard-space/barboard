@@ -203,6 +203,7 @@ def aggregate_barvision(eds):
         }
     return out
 
+# 成员页位于 member/<id>/index.html（两层目录）：站内路径相对页面写 ../../，GitHub Pages 子路径与根域名部署通用
 TEMPLATE = """\
 <!DOCTYPE html>
 <html lang="zh-CN">
@@ -212,17 +213,17 @@ TEMPLATE = """\
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barboard 成员</title>
   <meta name="description" content="Barboard 成员主页" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../fonts.css" />
+  <link rel="stylesheet" href="../../style.css" />
 </head>
 <body>
   <div id="site-nav"></div>
   <div id="mp-root"></div>
   <div id="site-footer"></div>
   <script>var MEMBER_DATA = PLACEHOLDER;</script>
-  <script src="/scripts/member-render.js"></script>
-  <script src="/scripts/nav.js"></script>
+  <script src="../../scripts/member-render.js"></script>
+  <script src="../../scripts/nav.js"></script>
 </body>
 </html>
 """

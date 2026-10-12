@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Members · 成员名录 | Barboard</title>
   <meta name="description" content="Barboard 榜吧全体成员名录，包含 BarboardLab、村摇欧共体、Indienation 等小组成员信息。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../fonts.css" />
+  <link rel="stylesheet" href="../style.css" />
   <style>
     /* ── Page hero ── */
     .ml-hero {
@@ -398,11 +398,11 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="/scripts/nav.js"></script>
+  <script src="../scripts/nav.js"></script>
   <script>
     /* 已废弃：成员数据现从 data/barboard_members.csv 动态加载
     var MEMBERS = [
-      ['威妈','williw_',['bbl','cun'],25,6594528,'/member/7/'],
+      ['威妈','williw_',['bbl','cun'],25,6594528,'../member/7/'],
       ['锴妈','WillKris锴',['bbl'],12,22061562,null],
       ['叉妈','PRONGS',['bbl','indie'],3139,345327392,null],
       ['雨妈','Lee翼雨',['bbl','cun'],11,2519003,null],
@@ -629,7 +629,7 @@
         var show = matchGroup && matchSearch;
         if (show) visible++;
 
-        var bvLogo = bv ? '<img class="ml-bv-logo' + (bv.active ? '' : ' ml-bv-logo--hollow') + '" src="' + (bv.active ? '/assets/images/logo_center.svg' : '/assets/images/logo_hollow.svg') +
+        var bvLogo = bv ? '<img class="ml-bv-logo' + (bv.active ? '' : ' ml-bv-logo--hollow') + '" src="' + (bv.active ? '../assets/images/logo_center.svg' : '../assets/images/logo_hollow.svg') +
           '" alt="Barvision" title="' + (bv.active ? '吧视活跃成员' : '参加过吧视') + '">' : '';
 
         var badges = groups.map(function(g) {
@@ -657,7 +657,7 @@
       var anonShow = filter === 'bv' && anonInfo &&
         (currentBvEdition == null || (anonInfo.editions || []).indexOf(currentBvEdition) !== -1) &&
         (!search || '匿名'.indexOf(search.toLowerCase()) !== -1);
-      gridHtml += '<div class="ml-card ml-card--anon ml-card--link ml-card-enter' + (anonShow ? '' : ' hidden') + '" onclick="location.href=\'/member/0/\'" tabindex="0" role="link">' +
+      gridHtml += '<div class="ml-card ml-card--anon ml-card--link ml-card-enter' + (anonShow ? '' : ' hidden') + '" onclick="location.href=\'../member/0/\'" tabindex="0" role="link">' +
         '<div class="ml-card__nickname">匿名</div>' +
         '<div class="ml-card__handle">参赛歌曲匿名选送者</div></div>';
       grid.innerHTML = gridHtml;
@@ -794,8 +794,8 @@
     });
 
     Promise.all([
-      fetch('/data/members/members.csv').then(function(r) { return r.text(); }),
-      fetch('/data/barvision/member-bv-index.json').then(function(r) { return r.json(); }).catch(function() { return {}; })
+      fetch('../data/members/members.csv').then(function(r) { return r.text(); }),
+      fetch('../data/barvision/member-bv-index.json').then(function(r) { return r.json(); }).catch(function() { return {}; })
     ])
       .then(function(res) {
         var text = res[0];
@@ -811,7 +811,7 @@
           var biliRaw = row[4] ? row[4].split(',')[0].trim() : '';
           var biliId = biliRaw || null;
           var mtId = row[6] ? parseInt(row[6]) || null : null;
-          var page = BUILT_PAGES.has(spaceId) ? '/member/' + spaceId + '/' : null;
+          var page = BUILT_PAGES.has(spaceId) ? '../member/' + spaceId + '/' : null;
           allMembers.push([name, bId, groups, mtId, biliId, page, spaceId]);
         }
         // 固定前四：雨妈-威妈-羊妈-S妈，其余按完善度得分排序

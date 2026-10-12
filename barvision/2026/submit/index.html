@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>Barvision Chongqing 2026 · 赛事详情 | Barboard</title>
   <meta name="description" content="第十六届 Barvision Chongqing 2026 赛事详情、歌曲提交通道及完整赛程。歌曲提交于 2026 年 6 月 1 日 18:00 开启，7 月 19 日截止。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css" />
+  <link rel="icon" type="image/png" href="../../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../../fonts.css" />
+  <link rel="stylesheet" href="../../../style.css" />
   <style>
     /* ═══ Hero ═══ */
     .ev-hero {
@@ -26,7 +26,7 @@
     /* 2026 主视觉海报作背景 + 渐变遮罩（左深右透出 logo，底部加深保证文字可读） */
     .ev-hero__poster {
       position: absolute; inset: 0; pointer-events: none;
-      background-image: url('/assets/images/barvision/2026/poster.png');
+      background-image: url('../../../assets/images/barvision/2026/poster.png');
       background-size: cover; background-position: center;
       opacity: 0; transition: opacity 0.55s ease;   /* 预解码完成后淡入，消除大图弹出/卡顿 */
     }
@@ -448,7 +448,7 @@
     }
     @media (max-width: 768px) {
       .ev-hero            { padding: calc(var(--nav-h) + 40px) 0 56px; }
-      .ev-hero__poster    { background-image: url('/assets/images/barvision/2026/bg.png'); }  /* 手机端用无 logo 底图 */
+      .ev-hero__poster    { background-image: url('../../../assets/images/barvision/2026/bg.png'); }  /* 手机端用无 logo 底图 */
       .ev-section         { padding: 60px 0; }
       .ev-section__hd     { margin-bottom: 36px; }
       .ev-section__hd .section__title { margin-top: 16px; }
@@ -535,7 +535,7 @@
     <div class="ev-hero__layout">
 
       <div>
-        <a href="/barvision/2026/" class="ev-eyebrow">
+        <a href="../../../barvision/2026/" class="ev-eyebrow">
           <span>←</span><span>Barvision Chongqing 2026</span>
         </a>
         <h1 class="ev-title ev-title--cjk">歌曲<br><span class="ev-accent">提交通道</span></h1>
@@ -783,7 +783,7 @@
 
 
 <div id="site-footer"></div>
-<script src="/scripts/nav.js"></script>
+<script src="../../../scripts/nav.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <script>
   /* Hero 海报背景：预解码完成后淡入（消除大图弹出 / 主线程解码卡顿） */
@@ -795,7 +795,7 @@
     im.onload = done; im.onerror = done;
     // 按视口预解码实际显示的底图：手机端 bg.png（无 logo）/ 桌面端 poster.png
     im.src = window.matchMedia('(max-width:768px)').matches
-      ? '/assets/images/barvision/2026/bg.png' : '/assets/images/barvision/2026/poster.png';
+      ? '../../../assets/images/barvision/2026/bg.png' : '../../../assets/images/barvision/2026/poster.png';
     if (im.decode) { im.decode().then(done).catch(function () {}); }
   })();
 

@@ -6,9 +6,9 @@
   <script>if(sessionStorage.getItem('barboard_dev')!=='1')document.documentElement.style.visibility='hidden'</script>
   <title>2013 榜吧年度单曲榜 | Barboard</title>
   <meta name="description" content="榜吧 2013 年度单曲榜 Top 200——成员个人榜合并积分产生的年度歌曲榜单。" />
-  <link rel="icon" type="image/png" href="/assets/images/logo_center.png" />
-  <link rel="stylesheet" href="/fonts.css" />
-  <link rel="stylesheet" href="/style.css?v=3.0.16" />
+  <link rel="icon" type="image/png" href="../../../assets/images/logo_center.png" />
+  <link rel="stylesheet" href="../../../fonts.css" />
+  <link rel="stylesheet" href="../../../style.css?v=3.0.16" />
   <style>
     /* ── Hero ── */
     .ac-hero { position: relative; padding: calc(var(--nav-h) + 40px) 0 24px; overflow: hidden; }
@@ -166,7 +166,7 @@
   <section class="ac-hero">
     <div class="ac-hero__glow" aria-hidden="true"></div>
     <div class="section__inner ac-hero__inner">
-      <a href="/archive/annual/" class="ac-eyebrow"><span>←</span><span>BARCHARTS</span></a>
+      <a href="../../../archive/annual/" class="ac-eyebrow"><span>←</span><span>BARCHARTS</span></a>
       <h1 class="ac-title"><span class="ac-board">年度</span>单曲<span class="ac-board">榜</span><br><span class="ac-yr">2013</span></h1>
       <div class="ac-meta">
         <span class="ac-meta-item">欧美流行音乐个人榜吧 · 2013年度单曲榜</span>
@@ -211,7 +211,7 @@
   </section>
 
   <div id="site-footer"></div>
-  <script src="/scripts/nav.js"></script>
+  <script src="../../../scripts/nav.js"></script>
   <script>
     function esc(s){ return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
     var _byKey = {}, _activeRankEl = null, _rankListenerAdded = false, _all = [], _io = null;
@@ -386,14 +386,14 @@
       var prevY = YEARS.filter(function(y){ return y<YEAR; }).sort(function(a,b){ return b-a; })[0];
       var nextY = YEARS.filter(function(y){ return y>YEAR; }).sort(function(a,b){ return a-b; })[0];
       var pb=document.getElementById('acNavPrev'), nb=document.getElementById('acNavNext');
-      if (prevY) pb.onclick=function(){ location.href='/archive/annual/'+prevY+'/'; }; else pb.disabled=true;
-      if (nextY) nb.onclick=function(){ location.href='/archive/annual/'+nextY+'/'; }; else nb.disabled=true;
+      if (prevY) pb.onclick=function(){ location.href='../../../archive/annual/'+prevY+'/'; }; else pb.disabled=true;
+      if (nextY) nb.onclick=function(){ location.href='../../../archive/annual/'+nextY+'/'; }; else nb.disabled=true;
     })();
 
     (async function(){
       var el = document.getElementById('acChart');
       var d;
-      try { d = await fetch('/data/annual/2013.json').then(function(r){ return r.json(); }); }
+      try { d = await fetch('../../../data/annual/2013.json').then(function(r){ return r.json(); }); }
       catch(e){ el.innerHTML = '<div class="ac-empty">榜单加载失败</div>'; return; }
       _all = d.entries || [];
       _all.sort(function(a,b){ return (a.rank-b.rank) || (b.points-a.points); });
